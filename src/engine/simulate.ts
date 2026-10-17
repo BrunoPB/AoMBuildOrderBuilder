@@ -163,6 +163,11 @@ function lowConfidence(entity: {
   return Object.values(entity.fieldMeta ?? {}).some((m) => m.confidence === "low");
 }
 
+/** Units with a gather rate act as workers; others (e.g. Norse infantry) stay in the army count. */
+function isGatherer(def: Unit | undefined): boolean {
+  return Object.keys(def?.worker?.gatherRates ?? {}).length > 0;
+}
+
 class Simulation {
   readonly p: PantheonIndex;
   readonly god: MajorGod;
@@ -397,7 +402,7 @@ class Simulation {
 
   spawn(unitId: string, rally: TaskTarget | undefined, origin?: number): void {
     const def = this.unit(unitId);
-    if (def?.worker) {
+    if (isGatherer(def)) {
       const w: Worker = {
         uid: ++this.uid,
         unit: unitId,
@@ -454,7 +459,15 @@ class Simulation {
         ? { key: "warn.waitingRequirement", level: "delay", params: { req: `age:${age}` } }
         : { key: "warn.missingRequirement", level: "error", params: { req: `age:${age}` } };
     }
+    const minorReqs = (ids ?? []).filter((id) => this.data.minors.has(id));
+    if (minorReqs.length > 0 && !minorReqs.some((id) => this.requirementOne(id) === null)) {
+      return (
+        minorReqs.map((id) => this.requirementOne(id)!).find((r) => r.level === "delay") ??
+        this.requirementOne(minorReqs[0]!)
+      );
+    }
     for (const id of ids ?? []) {
+      if (this.data.minors.has(id)) continue;
       const r = this.requirementOne(id);
       if (r) return r;
     }
@@ -1356,17 +1369,17 @@ class Simulation {
         job.held = true;
         return false;
       }
-      const rally = job.rally ?? (def?.worker ? "food" : undefined);
+      const rally = job.rally ?? (isGatherer(def) ? "food" : undefined);
       const origin =
         job.action ?? (job.rule !== undefined ? this.rules[job.rule]?.action : undefined);
       this.spawn(job.unit, rally, origin);
       this.produced.push({ t: round(this.t), unit: job.unit, action: origin, rule: job.rule });
-      if (job.action !== undefined || def?.worker) {
+      if (job.action !== undefined || isGatherer(def)) {
         this.emit({
           kind: "unitReady",
           unit: job.unit,
           count: 1,
-          to: def?.worker && rally ? this.targetResource(rally) : undefined,
+          to: isGatherer(def) && rally ? this.targetResource(rally) : undefined,
           action: job.action ?? (job.rule !== undefined ? this.rules[job.rule]?.action : undefined),
           t: this.t,
         });
@@ -1397,7 +1410,7 @@ class Simulation {
     }
     for (const [u, n] of Object.entries(free)) {
       for (let k = 0; k < n; k++) {
-        this.spawn(u, this.unit(u)?.worker ? "food" : undefined);
+        this.spawn(u, isGatherer(this.unit(u)) ? "food" : undefined);
         this.produced.push({ t: round(this.t), unit: u, action: job.action });
       }
     }

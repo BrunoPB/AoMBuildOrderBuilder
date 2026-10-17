@@ -1,0 +1,40 @@
+{
+  "format": "aomr-bob",
+  "version": 1,
+  "id": "example-egyptians",
+  "name": "Ra monuments (example)",
+  "createdAt": "2026-10-17T00:00:00Z",
+  "updatedAt": "2026-10-17T00:00:00Z",
+  "pantheon": "egyptians",
+  "god": "ra",
+  "type": "eco",
+  "actions": [
+    { "id": "s", "when": "0:00", "do": "move", "count": 3, "from": "idle", "to": "food" },
+    { "id": "l", "when": "0:00", "do": "train", "unit": "laborer", "count": 8, "rally": "gold" },
+    {
+      "id": "h",
+      "when": "0:00",
+      "do": "build",
+      "building": "house",
+      "builder": { "from": "food" },
+      "then": "food"
+    },
+    {
+      "id": "m",
+      "when": "1:00",
+      "do": "build",
+      "building": "monument-to-villagers",
+      "builder": { "from": "gold" },
+      "then": "gold"
+    },
+    {
+      "id": "t",
+      "when": "asap",
+      "do": "build",
+      "building": "temple",
+      "builder": { "same": "m" },
+      "then": "food"
+    },
+    { "id": "cl", "when": { "after": "t" }, "do": "age", "to": "classical", "minor": "bast" }
+  ]
+}

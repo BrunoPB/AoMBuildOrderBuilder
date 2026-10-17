@@ -1,0 +1,50 @@
+{
+  "format": "aomr-bob",
+  "version": 1,
+  "id": "example-greeks",
+  "name": "Zeus fast Classical (example)",
+  "createdAt": "2026-10-17T00:00:00Z",
+  "updatedAt": "2026-10-17T00:00:00Z",
+  "pantheon": "greeks",
+  "god": "zeus",
+  "type": "eco",
+  "settings": { "foodChain": ["berries", "hunt", "farm"] },
+  "actions": [
+    { "id": "s", "when": "0:00", "do": "move", "count": 4, "from": "idle", "to": "food" },
+    { "id": "v", "when": "0:00", "do": "train", "unit": "villager", "count": 8, "rally": "food" },
+    {
+      "id": "h1",
+      "when": "0:00",
+      "do": "build",
+      "building": "house",
+      "builder": { "from": "food" },
+      "then": "wood"
+    },
+    { "id": "g", "when": "0:40", "do": "move", "count": 2, "from": "food", "to": "gold" },
+    {
+      "id": "h2",
+      "when": "1:30",
+      "do": "build",
+      "building": "house",
+      "builder": { "same": "h1" },
+      "then": "wood"
+    },
+    {
+      "id": "t",
+      "when": "asap",
+      "do": "build",
+      "building": "temple",
+      "builder": { "from": "wood" },
+      "then": "favor"
+    },
+    {
+      "id": "f",
+      "when": { "after": "t" },
+      "do": "move",
+      "count": 1,
+      "from": "food",
+      "to": "favor"
+    },
+    { "id": "cl", "when": "asap", "do": "age", "to": "classical", "minor": "athena" }
+  ]
+}

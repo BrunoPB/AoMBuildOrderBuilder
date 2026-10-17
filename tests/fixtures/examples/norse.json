@@ -1,0 +1,34 @@
+{
+  "format": "aomr-bob",
+  "version": 1,
+  "id": "example-norse",
+  "name": "Thor dwarf start (example)",
+  "createdAt": "2026-10-17T00:00:00Z",
+  "updatedAt": "2026-10-17T00:00:00Z",
+  "pantheon": "norse",
+  "god": "thor",
+  "type": "rush",
+  "settings": { "norseFavorPerMinute": 3 },
+  "actions": [
+    { "id": "s", "when": "0:00", "do": "move", "count": 3, "from": "idle", "to": "gold" },
+    { "id": "g", "when": "0:00", "do": "train", "unit": "gatherer", "count": 6, "rally": "food" },
+    {
+      "id": "h",
+      "when": "0:30",
+      "do": "build",
+      "building": "house",
+      "builder": { "from": "food" },
+      "then": "wood"
+    },
+    {
+      "id": "t",
+      "when": "asap",
+      "do": "build",
+      "building": "temple",
+      "builder": { "from": "gold" },
+      "then": "gold"
+    },
+    { "id": "r", "when": "2:00", "do": "event", "gainFavor": 5, "note": "scouting fight" },
+    { "id": "cl", "when": { "after": "t" }, "do": "age", "to": "classical", "minor": "forseti" }
+  ]
+}

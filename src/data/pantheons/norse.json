@@ -752,7 +752,7 @@
       "trainTime": 20,
       "trainedAt": ["temple"],
       "age": "heroic",
-      "requires": ["skadi"],
+      "requires": ["skadi", "hel"],
       "meta": {
         "source": "https://aomr-analyzer.com/frise/pantheons + https://ageofempires.fandom.com/wiki/Frost_Giant",
         "checkedAt": "2026-10-17",
@@ -777,7 +777,7 @@
       "trainTime": 17,
       "trainedAt": ["temple"],
       "age": "heroic",
-      "requires": ["njord"],
+      "requires": ["njord", "hel"],
       "meta": {
         "source": "https://aomr-analyzer.com/frise/pantheons + https://ageofempires.fandom.com/wiki/Mountain_Giant",
         "checkedAt": "2026-10-17",
@@ -802,7 +802,7 @@
       "trainTime": 24,
       "trainedAt": ["temple"],
       "age": "mythic",
-      "requires": ["baldr"],
+      "requires": ["baldr", "hel"],
       "meta": {
         "source": "https://aomr-analyzer.com/frise/pantheons + https://ageofempires.fandom.com/wiki/Fire_Giant",
         "checkedAt": "2026-10-17",
