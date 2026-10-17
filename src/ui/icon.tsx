@@ -7,6 +7,19 @@ import { useApp } from "./context.tsx";
 
 const BASE = import.meta.env.BASE_URL;
 
+/** Keeps the tooltip bubble inside the viewport. */
+function clamp(host: HTMLElement): void {
+  requestAnimationFrame(() => {
+    const bubble = host.querySelector<HTMLElement>(":scope > .tip-bubble");
+    if (!bubble) return;
+    bubble.style.setProperty("--shift", "0px");
+    const r = bubble.getBoundingClientRect();
+    const max = document.documentElement.clientWidth - 8;
+    const shift = r.right > max ? max - r.right : r.left < 8 ? 8 - r.left : 0;
+    bubble.style.setProperty("--shift", `${Math.round(shift)}px`);
+  });
+}
+
 export function Tip({
   label,
   children,
@@ -25,7 +38,12 @@ export function Tip({
       class={`tip ${cls ?? ""}`}
       data-open={open}
       tabIndex={focusable ? 0 : undefined}
-      onTouchStart={() => setOpen((o) => !o)}
+      onMouseEnter={(e) => clamp(e.currentTarget)}
+      onFocusCapture={(e) => clamp(e.currentTarget as HTMLElement)}
+      onTouchStart={(e) => {
+        clamp(e.currentTarget);
+        setOpen((o) => !o);
+      }}
       onMouseLeave={() => setOpen(false)}
       onBlur={() => setOpen(false)}
     >

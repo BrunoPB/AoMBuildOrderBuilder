@@ -65,6 +65,14 @@ export function App({ data }: { data: GameData }) {
     else root.dataset.theme = prefs.theme;
   }, [prefs.theme]);
 
+  const latest = useRef(builds);
+  latest.current = builds;
+  useEffect(() => {
+    const flush = () => store.saveBuilds(latest.current);
+    window.addEventListener("pagehide", flush);
+    return () => window.removeEventListener("pagehide", flush);
+  }, [store]);
+
   useEffect(() => {
     window.clearTimeout(saveTimer.current);
     saveTimer.current = window.setTimeout(() => {

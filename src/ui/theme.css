@@ -127,8 +127,9 @@ body {
   line-height: 1.4;
 }
 
+html,
 body {
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 button,
@@ -416,16 +417,14 @@ label.field > * {
   line-height: 1.3;
   white-space: pre-line;
   pointer-events: none;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.12s;
+  display: none;
+  translate: var(--shift, 0) 0;
 }
 
 .tip:hover > .tip-bubble,
 .tip:focus-within > .tip-bubble,
 .tip[data-open="true"] > .tip-bubble {
-  opacity: 1;
-  visibility: visible;
+  display: block;
 }
 
 /* ---------- semantic colors ---------- */
@@ -1168,4 +1167,29 @@ details.collapsible > summary::-webkit-details-marker {
   min-height: 48px;
   min-width: 64px;
   font-size: 18px;
+}
+
+.action-label > .tip,
+.tl-chip .label-text {
+  min-width: 0;
+  overflow: hidden;
+}
+
+@media (max-width: 520px) {
+  main {
+    padding: 12px;
+  }
+  .tl-row {
+    grid-template-columns: 44px minmax(0, 1fr);
+  }
+  .tl-side {
+    grid-column: 2;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+  }
+  .brand span {
+    display: none;
+  }
 }

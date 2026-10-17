@@ -25,12 +25,11 @@ export function Palette({ build, onAdd }: { build: Build; onAdd: (a: Action) => 
   if (!p || !god) return null;
   const minors = Object.values(chosenMinors(build));
 
-  const allowed = (requires?: string[]) =>
-    (requires ?? []).every((r) => {
-      if (data.gods.has(r)) return r === build.god;
-      if (data.minors.has(r)) return minors.includes(r);
-      return true;
-    });
+  const allowed = (requires?: string[]) => {
+    const minorReqs = (requires ?? []).filter((r) => data.minors.has(r));
+    if (minorReqs.length && !minorReqs.some((r) => minors.includes(r))) return false;
+    return (requires ?? []).every((r) => !data.gods.has(r) || r === build.god);
+  };
 
   const options = (): Option[] => {
     switch (kind) {
