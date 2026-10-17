@@ -61,7 +61,12 @@ export const ActionSchema = z.discriminatedUnion("do", [
     then: TaskTargetSchema.optional(),
     nearManor: z.boolean().optional(),
   }),
-  z.strictObject({ ...base, do: z.literal("research"), research: z.string(), at: z.string().optional() }),
+  z.strictObject({
+    ...base,
+    do: z.literal("research"),
+    research: z.string(),
+    at: z.string().optional(),
+  }),
   z.strictObject({
     ...base,
     do: z.literal("age"),
@@ -76,7 +81,12 @@ export const ActionSchema = z.discriminatedUnion("do", [
     to: TaskTargetSchema,
     unit: z.string().optional(),
   }),
-  z.strictObject({ ...base, do: z.literal("power"), power: z.string(), target: z.string().optional() }),
+  z.strictObject({
+    ...base,
+    do: z.literal("power"),
+    power: z.string(),
+    target: z.string().optional(),
+  }),
   z.strictObject({ ...base, do: z.literal("timeShift"), building: z.string() }),
   z.strictObject({ ...base, do: z.literal("promote"), unit: z.string(), count }),
   z.strictObject({
@@ -94,7 +104,11 @@ export const ActionSchema = z.discriminatedUnion("do", [
     from: z.string().optional(),
     rally: TaskTargetSchema.optional(),
   }),
-  z.strictObject({ ...base, do: z.literal("stopTrainWhenAffordable"), unit: z.string().optional() }),
+  z.strictObject({
+    ...base,
+    do: z.literal("stopTrainWhenAffordable"),
+    unit: z.string().optional(),
+  }),
   z.strictObject({
     ...base,
     do: z.literal("event"),
@@ -153,7 +167,7 @@ export const MilestoneSchema = z.strictObject({
   label: LocalizedTextSchema.optional(),
 });
 
-export const BuildSchema = z.strictObject({
+export const BuildSchema = z.object({
   format: z.literal(BUILD_FORMAT),
   version: z.literal(BUILD_VERSION),
   id: z.string().min(1),

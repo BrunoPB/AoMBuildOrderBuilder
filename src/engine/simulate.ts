@@ -106,7 +106,14 @@ type Rule = {
   errorReported?: boolean;
 };
 
-type Promotion = { at: number; to: string; workers: number[]; others: number; from: string; action: number };
+type Promotion = {
+  at: number;
+  to: string;
+  workers: number[];
+  others: number;
+  from: string;
+  action: number;
+};
 
 export type ResolvedSettings = {
   efficiency: number;
@@ -143,11 +150,15 @@ function round(v: number, digits = 3): number {
 
 function addCost(a: Cost, b: Cost, times = 1): Cost {
   const out: Cost = { ...a };
-  for (const [r, v] of Object.entries(b) as [ResourceId, number][]) out[r] = (out[r] ?? 0) + v * times;
+  for (const [r, v] of Object.entries(b) as [ResourceId, number][])
+    out[r] = (out[r] ?? 0) + v * times;
   return out;
 }
 
-function lowConfidence(entity: { meta: Meta; fieldMeta?: Record<string, Meta> | undefined }): boolean {
+function lowConfidence(entity: {
+  meta: Meta;
+  fieldMeta?: Record<string, Meta> | undefined;
+}): boolean {
   if (entity.meta.confidence === "low") return true;
   return Object.values(entity.fieldMeta ?? {}).some((m) => m.confidence === "low");
 }
@@ -221,8 +232,7 @@ class Simulation {
     for (const r of RESOURCE_IDS) {
       this.res[r] = (start.resources[r] ?? 0) + (extras.resources?.[r] ?? 0);
     }
-    const units = { ...start.units };
-    for (const [u, n] of Object.entries(extras.units ?? {})) units[u] = (units[u] ?? 0) + n;
+    const units = { ...start.units, ...extras.units };
     for (const [u, n] of Object.entries(units)) {
       for (let i = 0; i < n; i++) this.spawn(u, "idle");
     }
@@ -296,7 +306,10 @@ class Simulation {
     let cap = this.p.def.start.popCap + (this.god.startExtras?.popCap ?? 0);
     for (const site of this.sites) {
       if (site.initial || site.state === "building" || !site.def.popCap) continue;
-      cap += applyModifiers(site.def.popCap, "popCap", mods, { id: site.def.id, tags: site.def.tags });
+      cap += applyModifiers(site.def.popCap, "popCap", mods, {
+        id: site.def.id,
+        tags: site.def.tags,
+      });
     }
     for (const m of mods) {
       if (m.target === "popCap" && !m.scope && m.op === "add") cap += m.value;
@@ -317,7 +330,9 @@ class Simulation {
   available(source: SourceId): boolean {
     const def = this.data.sources.get(source);
     if (!def) return false;
-    return def.infinite === true || (this.remaining.get(source) ?? 0) > EPS || !this.depletes(source);
+    return (
+      def.infinite === true || (this.remaining.get(source) ?? 0) > EPS || !this.depletes(source)
+    );
   }
 
   depletes(source: SourceId): boolean {
@@ -373,7 +388,8 @@ class Simulation {
 
   targetResource(target: TaskTarget): ResourceId | "idle" {
     if (target === "idle") return "idle";
-    if (target === "food" || target === "wood" || target === "gold" || target === "favor") return target;
+    if (target === "food" || target === "wood" || target === "gold" || target === "favor")
+      return target;
     return this.sourceResource(target);
   }
 
@@ -467,7 +483,9 @@ class Simulation {
     }
     if (this.p.units.has(id)) {
       if (this.unitCount(id) > 0) return null;
-      return missing(this.sites.some((s) => s.jobs.some((j) => j.kind === "unit" && j.unit === id)));
+      return missing(
+        this.sites.some((s) => s.jobs.some((j) => j.kind === "unit" && j.unit === id)),
+      );
     }
     return { key: "warn.unknownId", level: "error", params: { id } };
   }
@@ -538,7 +556,9 @@ class Simulation {
       const w = a.when;
       const due =
         this.eligible(i) ||
-        (typeof w === "string" && w !== "asap" && parseClock(w) <= this.t + this.s.affordableWindow);
+        (typeof w === "string" &&
+          w !== "asap" &&
+          parseClock(w) <= this.t + this.s.affordableWindow);
       if (due) total = addCost(total, this.actionCost(a, st));
     });
     return total;
@@ -611,7 +631,10 @@ class Simulation {
     if (st.completedAt === undefined) st.completedAt = round(this.t);
   }
 
-  flagLowConfidence(i: number, entity: { id: string; meta: Meta; fieldMeta?: Record<string, Meta> }): void {
+  flagLowConfidence(
+    i: number,
+    entity: { id: string; meta: Meta; fieldMeta?: Record<string, Meta> },
+  ): void {
     const st = this.states[i]!;
     if (st.reported.has("lowconf") || !lowConfidence(entity)) return;
     st.reported.add("lowconf");
@@ -633,11 +656,17 @@ class Simulation {
       return { key: "warn.noBuilding", level: "error", params: {} };
     }
     const ready = candidates.filter((s) => s.state === "ready");
-    if (ready.length === 0) return { key: "warn.buildingNotReady", level: "delay", params: { building: candidates[0]!.def.id } };
+    if (ready.length === 0)
+      return {
+        key: "warn.buildingNotReady",
+        level: "delay",
+        params: { building: candidates[0]!.def.id },
+      };
     const free = ready
       .filter((s) => s.jobs.length < s.slots && !this.claims.has(s.uid))
       .sort((a, b) => (a.uid === prefer ? -1 : b.uid === prefer ? 1 : a.uid - b.uid));
-    if (free.length === 0) return { key: "warn.queueBusy", level: "delay", params: { building: ready[0]!.def.id } };
+    if (free.length === 0)
+      return { key: "warn.queueBusy", level: "delay", params: { building: ready[0]!.def.id } };
     return free[0]!;
   }
 
@@ -653,14 +682,24 @@ class Simulation {
   /** Try to start one unit of `def`; returns a blocking reason, or null when started. */
   tryTrain(
     def: Unit,
-    opts: { at?: string; prefer?: number; action?: number; rule?: number; rally?: TaskTarget; reserved?: Cost },
+    opts: {
+      at?: string;
+      prefer?: number;
+      action?: number;
+      rule?: number;
+      rally?: TaskTarget;
+      reserved?: Cost;
+    },
   ): Reason | Site {
     const candidates = this.trainSites(def, opts.at);
     const req = this.requirement(def.requires, def.age);
     if (req) return req;
     const site = this.freeSite(candidates, opts.prefer);
     if (!("uid" in site)) return site;
-    if (this.s.popReservedAt === "start" && this.popUsed() + this.popReserved() + def.pop > this.popCap() + EPS) {
+    if (
+      this.s.popReservedAt === "start" &&
+      this.popUsed() + this.popReserved() + def.pop > this.popCap() + EPS
+    ) {
       this.claims.add(site.uid);
       return { key: "warn.popCapped", level: "delay", params: { unit: def.id } };
     }
@@ -692,7 +731,10 @@ class Simulation {
   }
 
   timeShiftPower(): Power | undefined {
-    const powers = [...this.god.powers, ...this.minors.flatMap((m) => this.data.minors.get(m)?.powers ?? [])];
+    const powers = [
+      ...this.god.powers,
+      ...this.minors.flatMap((m) => this.data.minors.get(m)?.powers ?? []),
+    ];
     for (const id of powers) {
       const p = this.data.powers.get(id);
       if (p?.effect.kind === "timeShift") return p;
@@ -748,7 +790,8 @@ class Simulation {
       case "autoTrain":
       case "trainWhenAffordable": {
         const def = this.unit(a.unit);
-        if (!def) return this.block(i, { key: "warn.unknownId", level: "error", params: { id: a.unit } });
+        if (!def)
+          return this.block(i, { key: "warn.unknownId", level: "error", params: { id: a.unit } });
         this.flagLowConfidence(i, def);
         this.rules.push({
           action: i,
@@ -789,13 +832,18 @@ class Simulation {
 
   actTrain(i: number, a: Extract<Action, { do: "train" }>, st: ActionState): void {
     const def = this.unit(a.unit);
-    if (!def) return this.block(i, { key: "warn.unknownId", level: "error", params: { id: a.unit } });
+    if (!def)
+      return this.block(i, { key: "warn.unknownId", level: "error", params: { id: a.unit } });
     if (st.status === "pending" || st.status === "blocked") st.left = a.count ?? 1;
     this.flagLowConfidence(i, def);
     while (st.left > 0) {
       const result = this.tryTrain(def, { at: a.at, prefer: st.site, action: i, rally: a.rally });
       if (!("uid" in result)) {
-        if (result.key !== "warn.queueBusy" || st.startedAt === undefined || st.site === undefined) {
+        if (
+          result.key !== "warn.queueBusy" ||
+          st.startedAt === undefined ||
+          st.site === undefined
+        ) {
           this.block(i, result);
         } else {
           this.block(i, { ...result, level: "info" });
@@ -807,7 +855,14 @@ class Simulation {
       st.left--;
       st.open++;
       if (st.startedAt === undefined) {
-        this.emit({ kind: "trainStart", unit: def.id, count: a.count ?? 1, rally: a.rally, action: i, t: this.t });
+        this.emit({
+          kind: "trainStart",
+          unit: def.id,
+          count: a.count ?? 1,
+          rally: a.rally,
+          action: i,
+          t: this.t,
+        });
       }
       this.start(i);
     }
@@ -819,8 +874,11 @@ class Simulation {
     const b = a.builder;
     if (b && "new" in b) {
       const target = this.idIndex.get(b.new);
-      if (target === undefined) return { key: "warn.unknownAction", level: "error", params: { id: b.new } };
-      const list = this.workers.filter((w) => w.origin === target && w.claimable && free(w)).reverse();
+      if (target === undefined)
+        return { key: "warn.unknownAction", level: "error", params: { id: b.new } };
+      const list = this.workers
+        .filter((w) => w.origin === target && w.claimable && free(w))
+        .reverse();
       if (list.length >= n) return list.slice(0, n);
       const done = this.states[target]!.status === "done";
       return done
@@ -829,7 +887,8 @@ class Simulation {
     }
     if (b && "same" in b) {
       const target = this.idIndex.get(b.same);
-      if (target === undefined) return { key: "warn.unknownAction", level: "error", params: { id: b.same } };
+      if (target === undefined)
+        return { key: "warn.unknownAction", level: "error", params: { id: b.same } };
       const list = this.workers.filter((w) => w.builtFor === target && free(w));
       if (list.length >= n) return list.slice(0, n);
       return { key: "warn.waitingBuilder", level: "info", params: { id: b.same } };
@@ -837,7 +896,9 @@ class Simulation {
     let from: TaskTarget[];
     if (b && "from" in b) from = [b.from];
     else {
-      const counts = GATHER.map((r) => [r, this.workers.filter((w) => this.matches(w, r)).length] as const);
+      const counts = GATHER.map(
+        (r) => [r, this.workers.filter((w) => this.matches(w, r)).length] as const,
+      );
       from = ["idle", ...counts.sort((x, y) => y[1] - x[1]).map(([r]) => r)];
     }
     const list: Worker[] = [];
@@ -857,12 +918,20 @@ class Simulation {
 
   actBuild(i: number, a: Extract<Action, { do: "build" }>): void {
     const def = this.p.buildings.get(a.building);
-    if (!def) return this.block(i, { key: "warn.unknownId", level: "error", params: { id: a.building } });
+    if (!def)
+      return this.block(i, { key: "warn.unknownId", level: "error", params: { id: a.building } });
     this.flagLowConfidence(i, def);
     const req = this.requirement(def.requires, def.age);
     if (req) return this.block(i, req);
-    if (def.limit !== undefined && this.sites.filter((s) => s.def.id === def.id).length >= def.limit) {
-      return this.block(i, { key: "warn.buildLimit", level: "error", params: { building: def.id } });
+    if (
+      def.limit !== undefined &&
+      this.sites.filter((s) => s.def.id === def.id).length >= def.limit
+    ) {
+      return this.block(i, {
+        key: "warn.buildLimit",
+        level: "error",
+        params: { building: def.id },
+      });
     }
     const builders = this.pickBuilders(i, a);
     if (!Array.isArray(builders)) return this.block(i, builders);
@@ -906,10 +975,15 @@ class Simulation {
 
   actResearch(i: number, a: Extract<Action, { do: "research" }>): void {
     const def = this.p.researches.get(a.research);
-    if (!def) return this.block(i, { key: "warn.unknownId", level: "error", params: { id: a.research } });
+    if (!def)
+      return this.block(i, { key: "warn.unknownId", level: "error", params: { id: a.research } });
     this.flagLowConfidence(i, def);
     if (this.researched.has(def.id)) {
-      return this.block(i, { key: "warn.alreadyResearched", level: "error", params: { id: def.id } });
+      return this.block(i, {
+        key: "warn.alreadyResearched",
+        level: "error",
+        params: { id: def.id },
+      });
     }
     const req = this.requirement(def.requires, def.age);
     if (req) return this.block(i, req);
@@ -932,11 +1006,20 @@ class Simulation {
 
   actAge(i: number, a: Extract<Action, { do: "age" }>): void {
     const def = this.p.ageUps.get(a.to);
-    if (!def) return this.block(i, { key: "warn.unknownId", level: "error", params: { id: `age:${a.to}` } });
+    if (!def)
+      return this.block(i, {
+        key: "warn.unknownId",
+        level: "error",
+        params: { id: `age:${a.to}` },
+      });
     this.flagLowConfidence(i, { id: `age-${a.to}`, meta: def.meta, fieldMeta: def.fieldMeta });
     const minor = this.data.minors.get(a.minor);
     if (!minor || !this.god.minors[a.to].includes(a.minor)) {
-      return this.block(i, { key: "warn.invalidMinor", level: "error", params: { minor: a.minor, age: a.to } });
+      return this.block(i, {
+        key: "warn.invalidMinor",
+        level: "error",
+        params: { minor: a.minor, age: a.to },
+      });
     }
     const target = this.ageIndex(a.to);
     if (this.ageIndex(this.age) >= target) {
@@ -951,7 +1034,9 @@ class Simulation {
       });
     }
     if (def.requiresAnyOf && def.requiresAnyOf.length > 0) {
-      const ok = def.requiresAnyOf.some((group) => group.every((id) => this.requirementOne(id) === null));
+      const ok = def.requiresAnyOf.some((group) =>
+        group.every((id) => this.requirementOne(id) === null),
+      );
       if (!ok) {
         const pending = def.requiresAnyOf.some((group) =>
           group.every((id) => {
@@ -974,7 +1059,10 @@ class Simulation {
       return this.block(i, this.noResource(def.cost, missing));
     }
     this.pay(def.cost);
-    const time = applyModifiers(def.time, "researchTime", this.mods(), { id: `age-${a.to}`, tags: ["age"] });
+    const time = applyModifiers(def.time, "researchTime", this.mods(), {
+      id: `age-${a.to}`,
+      tags: ["age"],
+    });
     site.jobs.push({ kind: "age", age: a.to, minor: a.minor, remaining: time, action: i });
     this.agingTo = { age: a.to, minor: a.minor };
     this.ageTimes[a.to] = { clicked: round(this.t) };
@@ -991,7 +1079,12 @@ class Simulation {
       if (this.matches(w, a.from)) picked.push(w);
     }
     if (picked.length < a.count) {
-      this.warn("delay", "warn.notEnoughWorkers", { wanted: a.count, moved: picked.length, from: a.from }, i);
+      this.warn(
+        "delay",
+        "warn.notEnoughWorkers",
+        { wanted: a.count, moved: picked.length, from: a.from },
+        i,
+      );
     }
     for (const w of picked) this.assign(w, a.to);
     this.start(i);
@@ -1009,9 +1102,15 @@ class Simulation {
 
   actPower(i: number, a: Extract<Action, { do: "power" }>): void {
     const power = this.data.powers.get(a.power);
-    if (!power) return this.block(i, { key: "warn.unknownId", level: "error", params: { id: a.power } });
+    if (!power)
+      return this.block(i, { key: "warn.unknownId", level: "error", params: { id: a.power } });
     if (power.effect.kind === "timeShift") {
-      if (!a.target) return this.block(i, { key: "warn.missingTarget", level: "error", params: { power: a.power } });
+      if (!a.target)
+        return this.block(i, {
+          key: "warn.missingTarget",
+          level: "error",
+          params: { power: a.power },
+        });
       return this.actTimeShift(i, a.target, power);
     }
     this.flagLowConfidence(i, power);
@@ -1023,19 +1122,30 @@ class Simulation {
       this.effects.push({ mods: effect.modifiers, until: this.t + (effect.duration ?? Infinity) });
       this.dirty();
     }
-    for (const [r, v] of Object.entries(effect.grant ?? {}) as [ResourceId, number][]) this.res[r] += v;
-    for (const [u, n] of Object.entries(effect.spawn ?? {})) for (let k = 0; k < n; k++) this.spawn(u, "food");
+    for (const [r, v] of Object.entries(effect.grant ?? {}) as [ResourceId, number][])
+      this.res[r] += v;
+    for (const [u, n] of Object.entries(effect.spawn ?? {}))
+      for (let k = 0; k < n; k++) this.spawn(u, "food");
     this.start(i);
     this.complete(i);
     this.emit({ kind: "power", power: power.id, target: a.target, action: i, t: this.t });
   }
 
   actTimeShift(i: number, buildingId: string, power = this.timeShiftPower()): void {
-    if (!power) return this.block(i, { key: "warn.powerUnavailable", level: "error", params: { power: "time-shift" } });
+    if (!power)
+      return this.block(i, {
+        key: "warn.powerUnavailable",
+        level: "error",
+        params: { power: "time-shift" },
+      });
     this.flagLowConfidence(i, power);
     const candidates = this.sites.filter((s) => s.def.id === buildingId);
     if (candidates.length === 0) {
-      return this.block(i, { key: "warn.missingRequirement", level: "error", params: { req: buildingId } });
+      return this.block(i, {
+        key: "warn.missingRequirement",
+        level: "error",
+        params: { req: buildingId },
+      });
     }
     const site = [...candidates].reverse().find((s) => s.state === "ready" && s.jobs.length === 0);
     if (!site) {
@@ -1054,7 +1164,13 @@ class Simulation {
     site.shiftUntil = this.t + duration;
     site.shiftAction = i;
     this.start(i);
-    this.emit({ kind: "timeShiftStart", building: buildingId, duration: round(duration, 1), action: i, t: this.t });
+    this.emit({
+      kind: "timeShiftStart",
+      building: buildingId,
+      duration: round(duration, 1),
+      action: i,
+      t: this.t,
+    });
   }
 
   actPromote(i: number, a: Extract<Action, { do: "promote" }>): void {
@@ -1067,9 +1183,18 @@ class Simulation {
     const workers = this.workers.filter((w) => w.unit === def.id).slice(-n);
     const others = Math.min(this.others.get(def.id) ?? 0, n - workers.length);
     if (workers.length + others < n) {
-      return this.block(i, { key: "warn.noUnitToPromote", level: "delay", params: { unit: def.id } });
+      return this.block(i, {
+        key: "warn.noUnitToPromote",
+        level: "delay",
+        params: { unit: def.id },
+      });
     }
-    const cost = addCost({}, def.promotion.cost, n);
+    const hero = this.unit(def.promotion.to);
+    const each = applyCostModifiers(def.promotion.cost, this.mods(), {
+      id: def.promotion.to,
+      tags: hero?.tags,
+    });
+    const cost = addCost({}, each, n);
     const missing = this.afford(cost);
     if (missing) return this.block(i, this.noResource(cost, missing));
     this.pay(cost);
@@ -1082,7 +1207,14 @@ class Simulation {
       action: i,
     });
     this.start(i);
-    this.emit({ kind: "promote", unit: def.id, to: def.promotion.to, count: n, action: i, t: this.t });
+    this.emit({
+      kind: "promote",
+      unit: def.id,
+      to: def.promotion.to,
+      count: n,
+      action: i,
+      t: this.t,
+    });
     this.finishPromotions();
   }
 
@@ -1092,7 +1224,8 @@ class Simulation {
       for (const [u, n] of Object.entries(a.lose)) {
         const removed = this.removeUnits(u, n);
         lost[u] = removed;
-        if (removed < n) this.warn("info", "warn.notEnoughUnits", { unit: u, wanted: n, removed }, i);
+        if (removed < n)
+          this.warn("info", "warn.notEnoughUnits", { unit: u, wanted: n, removed }, i);
       }
       this.emit({ kind: "lose", units: lost, action: i, t: this.t });
     }
@@ -1101,7 +1234,8 @@ class Simulation {
       this.emit({ kind: "gain", cost: { favor: a.gainFavor }, action: i, t: this.t });
     }
     if (a.gainResource) {
-      for (const [r, v] of Object.entries(a.gainResource) as [ResourceId, number][]) this.res[r] += v;
+      for (const [r, v] of Object.entries(a.gainResource) as [ResourceId, number][])
+        this.res[r] += v;
       this.emit({ kind: "gain", cost: a.gainResource, action: i, t: this.t });
     }
     if (a.note) this.emit({ kind: "note", text: a.note, action: i, t: this.t });
@@ -1163,9 +1297,18 @@ class Simulation {
   completions(): void {
     for (const site of this.sites) {
       if (site.state === "building" && site.progress >= 1 - EPS) this.finishSite(site);
-      if (site.state === "shifting" && site.shiftUntil !== undefined && this.t + EPS >= site.shiftUntil) {
+      if (
+        site.state === "shifting" &&
+        site.shiftUntil !== undefined &&
+        this.t + EPS >= site.shiftUntil
+      ) {
         site.state = "ready";
-        this.emit({ kind: "timeShiftDone", building: site.def.id, action: site.shiftAction, t: this.t });
+        this.emit({
+          kind: "timeShiftDone",
+          building: site.def.id,
+          action: site.shiftAction,
+          t: this.t,
+        });
         if (site.shiftAction !== undefined) this.complete(site.shiftAction);
       }
       const done: Job[] = [];
@@ -1195,7 +1338,14 @@ class Simulation {
       builderUnit ??= w.unit;
     }
     site.builders = [];
-    this.emit({ kind: "buildDone", building: site.def.id, builderTo, builderUnit, action: site.action, t: this.t });
+    this.emit({
+      kind: "buildDone",
+      building: site.def.id,
+      builderTo,
+      builderUnit,
+      action: site.action,
+      t: this.t,
+    });
     if (site.action !== undefined) this.complete(site.action);
   }
 
@@ -1207,8 +1357,10 @@ class Simulation {
         return false;
       }
       const rally = job.rally ?? (def?.worker ? "food" : undefined);
-      this.spawn(job.unit, rally, job.action);
-      this.produced.push({ t: round(this.t), unit: job.unit, action: job.action, rule: job.rule });
+      const origin =
+        job.action ?? (job.rule !== undefined ? this.rules[job.rule]?.action : undefined);
+      this.spawn(job.unit, rally, origin);
+      this.produced.push({ t: round(this.t), unit: job.unit, action: origin, rule: job.rule });
       if (job.action !== undefined || def?.worker) {
         this.emit({
           kind: "unitReady",
@@ -1237,13 +1389,12 @@ class Simulation {
     this.minors.push(job.minor);
     this.agingTo = undefined;
     this.dirty();
-    const free: Record<string, number> = {};
     const minor = this.data.minors.get(job.minor);
-    if (this.god.ageUpFreeUnits) {
+    const free: Record<string, number> = { ...minor?.freeUnitsOnAgeUp };
+    if (this.god.ageUpFreeUnits !== undefined) {
       const myth = this.mythUnitOf(job.minor);
-      if (myth) free[myth] = (free[myth] ?? 0) + this.god.ageUpFreeUnits;
+      if (myth) free[myth] = this.god.ageUpFreeUnits;
     }
-    for (const [u, n] of Object.entries(minor?.freeUnitsOnAgeUp ?? {})) free[u] = (free[u] ?? 0) + n;
     for (const [u, n] of Object.entries(free)) {
       for (let k = 0; k < n; k++) {
         this.spawn(u, this.unit(u)?.worker ? "food" : undefined);
@@ -1252,7 +1403,14 @@ class Simulation {
     }
     const times = this.ageTimes[job.age];
     if (times) times.reached = round(this.t);
-    this.emit({ kind: "ageDone", age: job.age, minor: job.minor, free, action: job.action, t: this.t });
+    this.emit({
+      kind: "ageDone",
+      age: job.age,
+      minor: job.minor,
+      free,
+      action: job.action,
+      t: this.t,
+    });
     this.complete(job.action);
     return true;
   }
@@ -1403,7 +1561,11 @@ class Simulation {
   run(): SimResult {
     const tick = this.s.tick;
     const fixed = this.build.actions
-      .map((a) => (typeof a.when === "string" && a.when !== "asap" && a.when !== "always" ? parseClock(a.when) : 0))
+      .map((a) =>
+        typeof a.when === "string" && a.when !== "asap" && a.when !== "always"
+          ? parseClock(a.when)
+          : 0,
+      )
       .reduce((m, v) => Math.max(m, v), 0);
     const hardCap = Math.min(fixed + 900, 3600);
     let settledAt: number | undefined;
@@ -1436,7 +1598,10 @@ class Simulation {
 
   allJobsIdle(): boolean {
     return this.sites.every(
-      (s) => s.state !== "building" && s.state !== "shifting" && s.jobs.every((j) => j.kind === "unit" && j.action === undefined),
+      (s) =>
+        s.state !== "building" &&
+        s.state !== "shifting" &&
+        s.jobs.every((j) => j.kind === "unit" && j.action === undefined),
     );
   }
 

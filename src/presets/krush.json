@@ -1,0 +1,324 @@
+{
+  "format": "aomr-bob",
+  "version": 1,
+  "id": "preset:krush",
+  "name": "Krush",
+  "author": "Bruno",
+  "createdAt": "2026-10-17T13:00:00Z",
+  "updatedAt": "2026-10-17T13:00:00Z",
+  "pantheon": "atlanteans",
+  "god": "kronos",
+  "type": "rush",
+  "objective": {
+    "pt-BR": "Clássica rápida com Prometeu, Contraquartel na frente com Time Shift e pressão de Turmas; Heroica com Rheia.",
+    "en": "Fast Classical with Prometheus, forward Counter-Barracks via Time Shift and Turma pressure; Heroic with Rheia."
+  },
+  "settings": {
+    "efficiency": 1,
+    "tick": 1,
+    "foodChain": ["hunt", "berries", "farm"],
+    "sourceAmounts": {
+      "hunt": 2000
+    }
+  },
+  "milestones": [
+    {
+      "id": "classical-click",
+      "atAction": "cl",
+      "label": {
+        "pt-BR": "Clique na Clássica",
+        "en": "Classical click"
+      }
+    },
+    {
+      "id": "counter-barracks",
+      "atAction": "cb",
+      "on": "end",
+      "label": {
+        "pt-BR": "Contraquartel pronto",
+        "en": "Counter-Barracks ready"
+      }
+    },
+    {
+      "id": "forward",
+      "atAction": "ts2",
+      "on": "end",
+      "label": {
+        "pt-BR": "Contraquartel na frente",
+        "en": "Forward Counter-Barracks"
+      }
+    },
+    {
+      "id": "heroic-click",
+      "atAction": "h1",
+      "label": {
+        "pt-BR": "Clique na Heroica",
+        "en": "Heroic click"
+      }
+    }
+  ],
+  "matchups": [
+    {
+      "god": "zeus",
+      "fit": "good"
+    },
+    {
+      "god": "ra",
+      "fit": "good"
+    },
+    {
+      "god": "isis",
+      "fit": "good"
+    },
+    {
+      "god": "set",
+      "fit": "good"
+    },
+    {
+      "god": "loki",
+      "fit": "neutral"
+    },
+    {
+      "god": "oranos",
+      "fit": "neutral"
+    },
+    {
+      "god": "gaia",
+      "fit": "neutral"
+    },
+    {
+      "god": "hades",
+      "fit": "bad"
+    },
+    {
+      "god": "poseidon",
+      "fit": "bad"
+    },
+    {
+      "god": "thor",
+      "fit": "bad"
+    },
+    {
+      "god": "odin",
+      "fit": "bad"
+    }
+  ],
+  "actions": [
+    {
+      "id": "g0",
+      "when": "0:00",
+      "do": "move",
+      "count": 2,
+      "from": "idle",
+      "to": "gold"
+    },
+    {
+      "id": "c1",
+      "when": "0:00",
+      "do": "train",
+      "unit": "citizen",
+      "count": 3,
+      "rally": "food"
+    },
+    {
+      "id": "t1",
+      "when": "0:35",
+      "do": "build",
+      "building": "temple",
+      "builder": {
+        "new": "c1"
+      },
+      "then": "food"
+    },
+    {
+      "id": "f1",
+      "when": "0:35",
+      "do": "move",
+      "count": 2,
+      "from": "gold",
+      "to": "food"
+    },
+    {
+      "id": "dc",
+      "when": "1:30",
+      "do": "power",
+      "power": "deconstruction",
+      "target": "temple"
+    },
+    {
+      "id": "cl",
+      "when": "1:55",
+      "do": "age",
+      "to": "classical",
+      "minor": "prometheus"
+    },
+    {
+      "id": "w1",
+      "when": "1:55",
+      "do": "move",
+      "count": 2,
+      "from": "hunt",
+      "to": "wood"
+    },
+    {
+      "id": "g1",
+      "when": "1:55",
+      "do": "move",
+      "count": 1,
+      "from": "hunt",
+      "to": "gold"
+    },
+    {
+      "id": "ts1",
+      "when": "2:00",
+      "do": "timeShift",
+      "building": "temple"
+    },
+    {
+      "id": "m1",
+      "when": "2:15",
+      "do": "build",
+      "building": "manor",
+      "builder": {
+        "from": "wood"
+      },
+      "then": "wood"
+    },
+    {
+      "id": "c2",
+      "when": {
+        "after": "cl"
+      },
+      "do": "train",
+      "unit": "citizen",
+      "count": 1,
+      "rally": "wood"
+    },
+    {
+      "id": "pr",
+      "when": {
+        "after": "cl"
+      },
+      "do": "trainWhenAffordable",
+      "unit": "promethean",
+      "from": "temple"
+    },
+    {
+      "id": "cb",
+      "when": "3:05",
+      "do": "build",
+      "building": "counter-barracks",
+      "builder": {
+        "from": "hunt"
+      },
+      "then": "food"
+    },
+    {
+      "id": "ts2",
+      "when": {
+        "after": "cb"
+      },
+      "do": "timeShift",
+      "building": "counter-barracks"
+    },
+    {
+      "id": "auto",
+      "when": "3:25",
+      "do": "autoTrain",
+      "unit": "citizen",
+      "rally": "food"
+    },
+    {
+      "id": "tu",
+      "when": {
+        "after": "ts2"
+      },
+      "do": "trainWhenAffordable",
+      "unit": "turma",
+      "from": "counter-barracks"
+    },
+    {
+      "id": "r1",
+      "when": "4:25",
+      "do": "event",
+      "lose": {
+        "turma": 2
+      },
+      "note": "raid"
+    },
+    {
+      "id": "m2",
+      "when": "5:00",
+      "do": "build",
+      "building": "manor",
+      "builder": {
+        "from": "hunt"
+      },
+      "then": "gold"
+    },
+    {
+      "id": "r2",
+      "when": "4:50",
+      "do": "event",
+      "lose": {
+        "turma": 2,
+        "promethean": 1
+      },
+      "note": "raid"
+    },
+    {
+      "id": "ar",
+      "when": "5:25",
+      "do": "build",
+      "building": "armory",
+      "builder": {
+        "new": "auto"
+      },
+      "then": "food"
+    },
+    {
+      "id": "g2",
+      "when": "5:40",
+      "do": "move",
+      "count": 1,
+      "from": "wood",
+      "to": "gold"
+    },
+    {
+      "id": "m3",
+      "when": "5:55",
+      "do": "build",
+      "building": "manor",
+      "builder": {
+        "new": "auto"
+      },
+      "then": "gold"
+    },
+    {
+      "id": "sp",
+      "when": "6:15",
+      "do": "stopTrainWhenAffordable"
+    },
+    {
+      "id": "g3",
+      "when": "7:25",
+      "do": "move",
+      "count": 1,
+      "from": "food",
+      "to": "gold"
+    },
+    {
+      "id": "sa",
+      "when": "7:25",
+      "do": "stopAutoTrain",
+      "unit": "citizen"
+    },
+    {
+      "id": "h1",
+      "when": "7:40",
+      "do": "age",
+      "to": "heroic",
+      "minor": "rheia"
+    }
+  ]
+}

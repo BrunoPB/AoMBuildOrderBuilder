@@ -37,7 +37,9 @@ describe("gathering", () => {
       ],
       { sourceAmounts: { hunt: 20 } },
     );
-    expect(r.warnings.some((w) => w.key === "warn.sourceDepleted" && w.params.source === "hunt")).toBe(true);
+    expect(
+      r.warnings.some((w) => w.key === "warn.sourceDepleted" && w.params.source === "hunt"),
+    ).toBe(true);
     expect(r.events.some((e) => e.kind === "sourceDepleted" && e.next === "berries")).toBe(true);
     expect(at(r, 20).resources.food).toBeCloseTo(240);
   });
@@ -102,7 +104,14 @@ describe("modifiers", () => {
     const r = run([
       { when: "0:00", do: "event", gainResource: { food: 300, wood: 100 } },
       { id: "cl", when: "0:00", do: "age", to: "classical", minor: "minor-a" },
-      { id: "ar", when: { after: "cl" }, do: "build", building: "armory", builder: { from: "idle" }, then: "idle" },
+      {
+        id: "ar",
+        when: { after: "cl" },
+        do: "build",
+        building: "armory",
+        builder: { from: "idle" },
+        then: "idle",
+      },
       { id: "ax", when: { after: "ar" }, do: "research", research: "axes" },
       { when: { after: "ax" }, do: "move", count: 2, from: "idle", to: "wood" },
       { when: { after: "ax", delay: 10 }, do: "event", note: "end" },
@@ -126,7 +135,13 @@ describe("age ups, powers and promotions", () => {
     const r = run([
       { when: "0:00", do: "event", gainResource: { food: 400, wood: 10 } },
       { id: "cl", when: "0:00", do: "age", to: "classical", minor: "minor-a" },
-      { id: "ar", when: { after: "cl" }, do: "build", building: "armory", builder: { from: "idle" } },
+      {
+        id: "ar",
+        when: { after: "cl" },
+        do: "build",
+        building: "armory",
+        builder: { from: "idle" },
+      },
       { when: { after: "ar" }, do: "age", to: "heroic", minor: "minor-b" },
     ]);
     const ageDone = r.events.filter((e) => e.kind === "ageDone");
@@ -204,6 +219,8 @@ describe("errors and determinism", () => {
     expect(run(actions)).toEqual(run(actions));
     const fine = run(actions, { tick: 0.1 });
     const coarse = run(actions);
-    expect(Math.abs(fine.ageTimes.classical!.clicked - coarse.ageTimes.classical!.clicked)).toBeLessThanOrEqual(1);
+    expect(
+      Math.abs(fine.ageTimes.classical!.clicked - coarse.ageTimes.classical!.clicked),
+    ).toBeLessThanOrEqual(1);
   });
 });
