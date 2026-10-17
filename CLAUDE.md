@@ -1,0 +1,33 @@
+# CLAUDE.md
+
+Build order builder/simulator for Age of Mythology: Retold. Full requirements: the owner's SPEC (v2); summary below.
+
+## Conventions
+
+- Code, file names, identifiers and commits in **English**; few comments. UI text only through `src/i18n/{pt-BR,en}.json` (same keys in both; test enforces it).
+- TypeScript strict, Vite, Preact, zod, Vitest, Playwright, ESLint + Prettier. npm. Default branch `master`.
+- Frontend-only static site: no backend, no accounts. Builds in `localStorage` (`aomr-bob:builds:v1`, prefs `aomr-bob:prefs:v1`), always via `src/storage` (try/catch, in-memory fallback).
+- Hash routing (`#/build/<id>`, `#/play/<id>`, `#/settings`) and relative base so the site works under any sub-folder (GitHub Pages).
+- Small commits per step.
+
+## Data rules
+
+- **Data first:** every game number lives in `src/data/*.json` with `meta { source, checkedAt, confidence }` (`fieldMeta` per field when it differs). No game numbers in code.
+- Source priority: measured by the owner > extracted game data > official > wikis > aomstats (metadata only). Prefer Retold/2024+ sources. Never invent: unknown → `confidence: "low"` + entry in `data-research/PENDING.md`.
+- Ids are kebab-case English. Unit/building/research ids are unique per pantheon; gods, minors and powers are global.
+- Say "unidade mitológica", never "mítica" ("Mítica" is only the age).
+- After data changes: `npm run check-data` and `npm test`; log the change in `data-research/changelog.md`.
+
+## Simulator (src/engine)
+
+- Pure, deterministic, tick 1 s (works with 0.1 s). Per tick: completions → scheduled actions (build order order; `asap` = after the previous action started) → continuous rules → snapshot.
+- Costs are paid when an action starts; never negative; waiting produces `delay` warnings. Missing requirements produce `error` warnings.
+- `trainWhenAffordable` only spends what is left after reserving the next fixed-time actions within `affordableWindow`.
+- Presets must simulate without `error` warnings. The Krush golden test (`tests/engine/krush.test.ts`) must stay within ±10 s of the measured times.
+
+## UI rules
+
+- Visual, not textual: game icons everywhere, short labels (1–3 words), explanations only in tooltips (hover, focus and touch).
+- Colors carry meaning (green ok, yellow attention, red problem) and are never the only signal. Numbers in monospace.
+- No horizontal scroll from 360 px up; keyboard navigation and visible focus; `alt`/`aria-label` on every icon.
+- Footer keeps the Microsoft fan-content notice.
