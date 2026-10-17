@@ -1,0 +1,31 @@
+{
+  "game": "aom-retold",
+  "patch": "unknown",
+  "checkedAt": "2026-10-17",
+  "ages": [
+    { "id": "archaic", "name": { "pt-BR": "Arcaica", "en": "Archaic" }, "icon": "ages/archaic" },
+    { "id": "classical", "name": { "pt-BR": "Clássica", "en": "Classical" }, "icon": "ages/classical" },
+    { "id": "heroic", "name": { "pt-BR": "Heroica", "en": "Heroic" }, "icon": "ages/heroic" },
+    { "id": "mythic", "name": { "pt-BR": "Mítica", "en": "Mythic" }, "icon": "ages/mythic" }
+  ],
+  "pantheons": [
+    { "id": "greeks", "name": { "pt-BR": "Gregos", "en": "Greeks" }, "icon": "ui/pantheon-greeks" },
+    { "id": "egyptians", "name": { "pt-BR": "Egípcios", "en": "Egyptians" }, "icon": "ui/pantheon-egyptians" },
+    { "id": "norse", "name": { "pt-BR": "Nórdicos", "en": "Norse" }, "icon": "ui/pantheon-norse" },
+    { "id": "atlanteans", "name": { "pt-BR": "Atlantes", "en": "Atlanteans" }, "icon": "ui/pantheon-atlanteans" }
+  ],
+  "defaults": {
+    "efficiency": 0.92,
+    "tick": 1,
+    "foodChain": ["hunt", "berries", "farm"],
+    "popReservedAt": "start",
+    "affordableWindow": 30,
+    "norseFavorPerMinute": 0
+  },
+  "meta": {
+    "source": "SPEC.md (project owner)",
+    "checkedAt": "2026-10-17",
+    "confidence": "medium",
+    "note": "Simulation defaults; popReservedAt is an open question."
+  }
+}

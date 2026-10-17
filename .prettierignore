@@ -1,0 +1,8 @@
+dist/
+node_modules/
+coverage/
+public/icons/
+test-results/
+playwright-report/
+package-lock.json
+data-research/kries-icons.txt

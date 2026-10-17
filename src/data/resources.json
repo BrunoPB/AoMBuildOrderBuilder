@@ -1,0 +1,6 @@
+[
+  { "id": "food", "name": { "pt-BR": "Comida", "en": "Food" }, "icon": "resources/food" },
+  { "id": "wood", "name": { "pt-BR": "Madeira", "en": "Wood" }, "icon": "resources/wood" },
+  { "id": "gold", "name": { "pt-BR": "Ouro", "en": "Gold" }, "icon": "resources/gold" },
+  { "id": "favor", "name": { "pt-BR": "Favor", "en": "Favor" }, "icon": "resources/favor" }
+]
