@@ -23,7 +23,9 @@ const schemas: Record<string, z.ZodType> = {
 const [kind, ...files] = process.argv.slice(2);
 const schema = kind ? schemas[kind] : undefined;
 if (!schema || files.length === 0) {
-  console.error(`usage: tsx scripts/validate-file.ts <${Object.keys(schemas).join("|")}> <file...>`);
+  console.error(
+    `usage: tsx scripts/validate-file.ts <${Object.keys(schemas).join("|")}> <file...>`,
+  );
   process.exit(2);
 }
 
