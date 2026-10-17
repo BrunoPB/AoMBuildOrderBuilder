@@ -1,0 +1,42 @@
+{
+  "id": "kronos",
+  "pantheon": "atlanteans",
+  "name": {
+    "pt-BR": "Kronos",
+    "en": "Kronos"
+  },
+  "icon": "gods/kronos",
+  "portrait": "gods/kronos-portrait",
+  "modifiers": [
+    {
+      "target": "buildRate",
+      "op": "mul",
+      "value": 1.25,
+      "condition": "nearManor",
+      "except": ["wonder"],
+      "note": "Temporal Scaffolding: buildings within 20 of a Manor build 25% faster, stacking per Manor (one Manor modelled). Measured by the owner."
+    }
+  ],
+  "ageUpFreeUnits": 2,
+  "powers": ["deconstruction", "time-shift"],
+  "minors": {
+    "classical": ["prometheus", "leto"],
+    "heroic": ["hyperion", "rheia"],
+    "mythic": ["atlas", "helios"]
+  },
+  "unlocks": ["temporal-chaos"],
+  "meta": {
+    "source": "https://ageofempires.fandom.com/wiki/Kronos; https://aomr-analyzer.com/gods/kronos; measured (build bonus, free units)",
+    "checkedAt": "2026-10-17",
+    "confidence": "high",
+    "note": "Not expressed as modifiers: can Time Shift own buildings (see powers 'time-shift'); lost siege and myth units refund 20% of their cost. Age up: 2 free myth units of the chosen minor god instead of 1."
+  },
+  "fieldMeta": {
+    "modifiers": {
+      "source": "measured",
+      "checkedAt": "2026-10-17",
+      "confidence": "high",
+      "note": "Expressed as buildRate x1.25 with condition nearManor (not as buildTime)."
+    }
+  }
+}

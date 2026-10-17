@@ -1,0 +1,22 @@
+{
+  "id": "anubis",
+  "pantheon": "egyptians",
+  "name": {
+    "pt-BR": "Anúbis",
+    "en": "Anubis"
+  },
+  "icon": "gods/anubis",
+  "portrait": "gods/anubis-portrait",
+  "age": "classical",
+  "freeUnitsOnAgeUp": {
+    "anubite": 1
+  },
+  "unlocks": ["anubite", "feet-of-the-jackal", "necropolis", "serpent-spear"],
+  "powers": ["plague-of-serpents"],
+  "meta": {
+    "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml) (tech ClassicalAgeAnubis); cross-checked: https://ageofempires.fandom.com/wiki/Anubis and the Ra/Isis/Set wiki pages (minor god lists)",
+    "checkedAt": "2026-10-17",
+    "confidence": "high",
+    "note": "God of judgment and the dead. Focus: Anubites and Monuments. Free unit(s) spawn at a Temple when the age-up completes. God power recharge 180 s."
+  }
+}

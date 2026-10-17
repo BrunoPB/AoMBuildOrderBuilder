@@ -1,0 +1,22 @@
+{
+  "id": "thoth",
+  "pantheon": "egyptians",
+  "name": {
+    "pt-BR": "Thoth",
+    "en": "Thoth"
+  },
+  "icon": "gods/thoth",
+  "portrait": "gods/thoth-portrait",
+  "age": "mythic",
+  "freeUnitsOnAgeUp": {
+    "phoenix": 1
+  },
+  "unlocks": ["phoenix", "book-of-thoth", "tusks-of-apedemak", "valley-of-the-kings"],
+  "powers": ["meteor"],
+  "meta": {
+    "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml) (tech MythicAgeThoth); cross-checked: https://ageofempires.fandom.com/wiki/Thoth and the Ra/Isis/Set wiki pages (minor god lists)",
+    "checkedAt": "2026-10-17",
+    "confidence": "high",
+    "note": "God of wisdom. Focus: Laborers and War Elephants. Free unit(s) spawn at a Temple when the age-up completes. God power recharge 240 s."
+  }
+}

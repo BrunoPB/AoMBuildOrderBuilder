@@ -1,0 +1,272 @@
+[
+  {
+    "id": "bolt",
+    "name": {
+      "pt-BR": "Raio",
+      "en": "Bolt"
+    },
+    "icon": "powers/bolt",
+    "pantheon": "greeks",
+    "cost": {
+      "favor": 55
+    },
+    "cooldown": 90,
+    "effect": {
+      "kind": "military"
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/Bolt",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "First cast is free; cost is the base re-cast favor cost, each further cast adds the ramp. Ramp +5. Zeus. 10,000 divine damage to one military unit (2,500 vs Titans)."
+    }
+  },
+  {
+    "id": "sentinel",
+    "name": {
+      "pt-BR": "Sentinela",
+      "en": "Sentinel"
+    },
+    "icon": "powers/sentinel",
+    "pantheon": "greeks",
+    "cost": {
+      "favor": 60
+    },
+    "cooldown": 90,
+    "effect": {
+      "kind": "military"
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/Sentinel_(Age_of_Mythology)",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "First cast is free; cost is the base re-cast favor cost, each further cast adds the ramp. Ramp +10. Hades. Summons 5 stone Sentinels around an own/allied Town Center, Village Center or Fortress."
+    }
+  },
+  {
+    "id": "lure",
+    "name": {
+      "pt-BR": "Isca",
+      "en": "Lure"
+    },
+    "icon": "powers/lure",
+    "pantheon": "greeks",
+    "cost": {
+      "favor": 20
+    },
+    "cooldown": 60,
+    "effect": {
+      "kind": "economy"
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/Lure",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "First cast is free; cost is the base re-cast favor cost, each further cast adds the ramp. Ramp +5. Poseidon. Creates a Lure (food drop site) that attracts huntables/herdables and spawns Chickens: 3/4/6/10 (Archaic/Classical/Heroic/Mythic); total food attracted incl. chickens capped at 1200/1300/1500/1900. Chickens are not Greek unit ids, so no 'spawn' is given."
+    }
+  },
+  {
+    "id": "restoration",
+    "name": {
+      "pt-BR": "Restauração",
+      "en": "Restoration"
+    },
+    "icon": "powers/restoration",
+    "pantheon": "greeks",
+    "cost": {
+      "favor": 125
+    },
+    "cooldown": 180,
+    "effect": {
+      "kind": "utility",
+      "duration": 6
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/Restoration",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "First cast is free; cost is the base re-cast favor cost, each further cast adds the ramp. Ramp +25. Athena. Heals friendly units and buildings in an area."
+    }
+  },
+  {
+    "id": "ceasefire",
+    "name": {
+      "pt-BR": "Cessar-Fogo",
+      "en": "Ceasefire"
+    },
+    "icon": "powers/ceasefire",
+    "pantheon": "greeks",
+    "cost": {
+      "favor": 75
+    },
+    "cooldown": 240,
+    "effect": {
+      "kind": "utility",
+      "duration": 30
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/Ceasefire",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "First cast is free; cost is the base re-cast favor cost, each further cast adds the ramp. Ramp +25. Hermes. Prevents combat map-wide; slows ranged fortification construction."
+    }
+  },
+  {
+    "id": "pestilence",
+    "name": {
+      "pt-BR": "Pestilência",
+      "en": "Pestilence"
+    },
+    "icon": "powers/pestilence",
+    "pantheon": "greeks",
+    "cost": {
+      "favor": 50
+    },
+    "cooldown": 120,
+    "effect": {
+      "kind": "military",
+      "duration": 60
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/Pestilence",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "First cast is free; cost is the base re-cast favor cost, each further cast adds the ramp. Ramp +10. Ares. Enemy buildings in area train slower and cannot attack (not Town Centers)."
+    }
+  },
+  {
+    "id": "underworld-passage",
+    "name": {
+      "pt-BR": "Passagem do Submundo",
+      "en": "Underworld Passage"
+    },
+    "icon": "powers/underworld-passage",
+    "pantheon": "greeks",
+    "cost": {
+      "favor": 200
+    },
+    "cooldown": 180,
+    "effect": {
+      "kind": "utility"
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/Underworld_Passage",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "First cast is free; cost is the base re-cast favor cost, each further cast adds the ramp. Ramp +25. Apollo. Two linked portals."
+    }
+  },
+  {
+    "id": "bronze",
+    "name": {
+      "pt-BR": "Bronze",
+      "en": "Bronze"
+    },
+    "icon": "powers/bronze",
+    "pantheon": "greeks",
+    "cost": {
+      "favor": 150
+    },
+    "cooldown": 150,
+    "effect": {
+      "kind": "military",
+      "duration": 40
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/Bronze",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "First cast is free; cost is the base re-cast favor cost, each further cast adds the ramp. Ramp +25. Dionysus. Own soldiers, myth units and ships in area -35% hack/pierce vulnerability."
+    }
+  },
+  {
+    "id": "curse",
+    "name": {
+      "pt-BR": "Maldição",
+      "en": "Curse"
+    },
+    "icon": "powers/curse",
+    "pantheon": "greeks",
+    "cost": {
+      "favor": 125
+    },
+    "cooldown": 150,
+    "effect": {
+      "kind": "military"
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/Curse",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "First cast is free; cost is the base re-cast favor cost, each further cast adds the ramp. Ramp +5. Aphrodite. Turns enemy units in area into Pigs."
+    }
+  },
+  {
+    "id": "plenty",
+    "name": {
+      "pt-BR": "Fartura",
+      "en": "Plenty"
+    },
+    "icon": "powers/plenty",
+    "pantheon": "greeks",
+    "cost": {
+      "favor": 300
+    },
+    "cooldown": 180,
+    "effect": {
+      "kind": "economy"
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/Plenty",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "First cast is free; cost is the base re-cast favor cost, each further cast adds the ramp. Ramp +200. Hephaestus. Creates an indestructible (capturable) Plenty Vault producing 3.5 food, 3.5 wood and 3.5 gold per second (= 210/min each, Plenty Vault page, since update 18.65484; the God power page still says 4). Trickle not expressible in schema."
+    }
+  },
+  {
+    "id": "lightning-storm",
+    "name": {
+      "pt-BR": "Tempestade de Raios",
+      "en": "Lightning Storm"
+    },
+    "icon": "powers/lightning-storm",
+    "pantheon": "greeks",
+    "cost": {
+      "favor": 350
+    },
+    "cooldown": 240,
+    "effect": {
+      "kind": "military",
+      "duration": 16.3
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/Lightning_Storm",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "First cast is free; cost is the base re-cast favor cost, each further cast adds the ramp. Ramp +5. Hera. Lightning strikes enemies in area."
+    }
+  },
+  {
+    "id": "earthquake",
+    "name": {
+      "pt-BR": "Terremoto",
+      "en": "Earthquake"
+    },
+    "icon": "powers/earthquake",
+    "pantheon": "greeks",
+    "cost": {
+      "favor": 350
+    },
+    "cooldown": 240,
+    "effect": {
+      "kind": "military",
+      "duration": 12
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/Earthquake",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "First cast is free; cost is the base re-cast favor cost, each further cast adds the ramp. Ramp +5. Artemis. Heavy damage to buildings in area."
+    }
+  }
+]

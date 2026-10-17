@@ -1,0 +1,1028 @@
+[
+  {
+    "id": "buildings/norse-armory",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/9/9c/AoMR_Armory_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Armory_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "buildings/norse-dock",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/a/a9/AoMR_Dock_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Dock_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "buildings/norse-dwarven-armory",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/dwarven_armory_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/dwarven_armory_icon.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "buildings/norse-farm",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/6/65/AoMR_Farm_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Farm_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "buildings/norse-great-hall",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/great_hall_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/great_hall_icon.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "buildings/norse-hill-fort",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/7/7e/AoMR_Hill_Fort_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Hill_Fort_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "buildings/norse-house",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/a/a3/AoMR_House_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_House_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "buildings/norse-longhouse",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/a/ae/AoMR_Longhouse_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Longhouse_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "buildings/norse-market",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/c/c9/AoMR_Market_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Market_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "buildings/norse-ox-cart",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/ox_cart.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/ox_cart.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "buildings/norse-sentry-tower",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/e/e6/AoMR_Sentry_Tower_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Sentry_Tower_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "buildings/norse-temple",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/d/d8/AoMR_Temple_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Temple_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "buildings/norse-town-center",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/f/f9/AoMR_Town_Center_Norse_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Town_Center_Norse_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "buildings/norse-village-center",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/f/f6/AoMR_Village_Center_Norse_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Village_Center_Norse_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "buildings/norse-wonder",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/f/fd/AoMR_Wonder_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Wonder_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "buildings/norse-wooden-wall",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/6/60/AoMR_Wooden_Wall_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Wooden_Wall_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "gods/baldr",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/baldr_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/baldr_icon.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "gods/baldr-portrait",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/baldr_portrait.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/baldr_portrait.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "gods/bragi",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/bragi_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/bragi_icon.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "gods/bragi-portrait",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/bragi_portrait.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/bragi_portrait.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "gods/forseti",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/forseti_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/forseti_icon.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "gods/forseti-portrait",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/forseti_portrait.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/forseti_portrait.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "gods/freyja",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/freyja_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/freyja_icon.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "gods/freyja-portrait",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/freyja_portrait.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/freyja_portrait.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "gods/heimdall",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/heimdall_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/heimdall_icon.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "gods/heimdall-portrait",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/heimdall_portrait.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/heimdall_portrait.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "gods/hel",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/hel_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/hel_icon.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "gods/hel-portrait",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/hel_portrait.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/hel_portrait.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "gods/loki",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/loki_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/loki_icon.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "gods/loki-portrait",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/loki_portrait.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/loki_portrait.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "gods/njord",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/njord_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/njord_icon.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "gods/njord-portrait",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/njord_portrait.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/njord_portrait.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "gods/odin",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/odin_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/odin_icon.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "gods/odin-portrait",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/odin_portrait.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/odin_portrait.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "gods/skadi",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/skadi_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/skadi_icon.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "gods/skadi-portrait",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/skadi_portrait.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/skadi_portrait.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "gods/thor",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/thor_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/thor_icon.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "gods/thor-portrait",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/thor_portrait.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/thor_portrait.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "gods/tyr",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/tyr_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/tyr_icon.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "gods/tyr-portrait",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/tyr_portrait.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/tyr_portrait.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "powers/dwarven-mine",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/dwarven_mine_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/dwarven_mine_icon.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "powers/fimbulwinter",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/8/8d/AoMR_Fimbulwinter_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Fimbulwinter_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "powers/flaming-weapons",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/4/41/AoMR_Flaming_Weapons_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Flaming_Weapons_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "powers/forest-fire",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/b/b2/AoMR_Forest_Fire_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Forest_Fire_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "powers/frost",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/8/81/AoMR_Frost_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Frost_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "powers/great-hunt",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/great_hunt_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/great_hunt_icon.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "powers/healing-spring",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/d/d9/AoMR_Healing_Spring_power_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Healing_Spring_power_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "powers/nidhogg",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/3/39/AoMR_Nidhogg_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Nidhogg_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "powers/ragnarok",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/d/d3/AoMR_Ragnarok_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Ragnarok_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "powers/spy",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/spy_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/spy_icon.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "powers/undermine",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/d/d2/AoMR_Undermine_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Undermine_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "powers/walking-woods",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/b/bf/AoMR_Walking_Woods_power_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Walking_Woods_power_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-advanced-fortifications",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/7/7d/AoMR_Advanced_Fortifications_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Advanced_Fortifications_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-ambassadors",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/b/b0/AoMR_Ambassadors_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Ambassadors_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-architects",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/8/89/AoMR_Architects_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Architects_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-arctic-winds",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/6/6c/AoMR_Arctic_Winds_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Arctic_Winds_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-ballistics",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/6/68/AoMR_Ballistics_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Ballistics_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-berserkergang",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/3/38/AoMR_Berserkergang_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Berserkergang_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-boiling-oil",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/3/33/AoMR_Boiling_Oil_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Boiling_Oil_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-bow-saw",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/bow_saw_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/bow_saw_icon.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "techs/norse-bravery",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/6/60/AoMR_Bravery_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Bravery_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-bronze-armor",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/b/b7/AoMR_Bronze_Armor_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Bronze_Armor_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-bronze-shields",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/4/41/AoMR_Bronze_Shields_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Bronze_Shields_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-bronze-weapons",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/c/c2/AoMR_Bronze_Weapons_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Bronze_Weapons_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-burning-pitch",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/d/df/AoMR_Burning_Pitch_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Burning_Pitch_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-call-of-valhalla",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/f/fe/AoMR_Call_of_Valhalla_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Call_of_Valhalla_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-carpenters",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/c/cd/AoMR_Carpenters_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Carpenters_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-carrier-pigeons",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/7/7a/AoMR_Carrier_Pigeons_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Carrier_Pigeons_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-cave-troll",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/2/2c/AoMR_Cave_Troll_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Cave_Troll_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-champion-cavalry",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/f/fc/AoMR_Champion_Cavalry_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Champion_Cavalry_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-champion-infantry",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/4/48/AoMR_Champion_Infantry_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Champion_Infantry_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-champion-warships",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/d/db/AoMR_Champion_Warships_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Champion_Warships_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-coinage",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/coinage_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/coinage_icon.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "techs/norse-conscript-great-hall-soldiers",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/b/bd/AoMR_Conscript_Great_Hall_Soldiers_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Conscript_Great_Hall_Soldiers_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-conscript-hill-fort-soldiers",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/b/b6/AoMR_Conscript_Hill_Fort_Soldiers_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Conscript_Hill_Fort_Soldiers_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-conscript-longhouse-soldiers",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/8/80/AoMR_Conscript_Longhouse_Soldiers_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Conscript_Longhouse_Soldiers_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-conscript-sailors",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/8/87/AoMR_Conscript_Sailors_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Conscript_Sailors_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-copper-armor",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/copper_armor_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/copper_armor_icon.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "techs/norse-copper-shields",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/copper_shields_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/copper_shields_icon.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "techs/norse-copper-weapons",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/copper_weapons_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/copper_weapons_icon.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "techs/norse-crenellations",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/b/bb/AoMR_Crenellations_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Crenellations_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-disablot",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/a/ae/AoMR_Disablot_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Disablot_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-draft-horses",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/5/58/AoMR_Draft_Horses_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Draft_Horses_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-dragonscale-shields",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/3/34/AoMR_Dragonscale_Shields_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Dragonscale_Shields_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-dwarven-auger",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/0/0b/AoMR_Dwarven_Auger_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Dwarven_Auger_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-dwarven-breastplate",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/dwarven_breastplate_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/dwarven_breastplate_icon.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "techs/norse-dwarven-weapons",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/f/f6/AoMR_Dwarven_Weapons_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Dwarven_Weapons_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-enclosed-deck",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/6/6d/AoMR_Enclosed_Deck_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Enclosed_Deck_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-engineers",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/d/da/AoMR_Engineers_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Engineers_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-eyes-in-the-forest",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/4/47/AoMR_Eyes_in_the_Forest_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Eyes_in_the_Forest_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-flood-control",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/5/5d/AoMR_Flood_Control_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Flood_Control_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-fortified-town-center",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/2/21/AoMR_Fortified_Town_Center_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Fortified_Town_Center_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-gjallarhorn",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/f/fe/AoMR_Gjallarhorn_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Gjallarhorn_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-granite-blood",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/5/51/AoMR_Granite_Blood_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Granite_Blood_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-hall-of-thanes",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/d/dc/AoMR_Hall_of_Thanes_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Hall_of_Thanes_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-hamask",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/3/3e/AoMR_Hamask_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Hamask_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-hammer-of-thunder",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/hammer_of_thunder_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/hammer_of_thunder_icon.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "techs/norse-hand-axe",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/hand_axe_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/hand_axe_icon.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "techs/norse-heavy-cavalry",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/heavy_cavalry_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/heavy_cavalry_icon.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "techs/norse-heavy-infantry",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/heavy_infantry_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/heavy_infantry_icon.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "techs/norse-heavy-warships",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/1/1e/AoMR_Heavy_Warships_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Heavy_Warships_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-heroic-fleet",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/1/16/AoMR_Heroic_Fleet_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Heroic_Fleet_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-huntress-axe",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/9/98/AoMR_Huntress_Axe_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Huntress_Axe_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-husbandry",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/husbandry_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/husbandry_icon.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "techs/norse-iron-armor",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/1/19/AoMR_Iron_Armor_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Iron_Armor_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-iron-shields",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/a/a9/AoMR_Iron_Shields_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Iron_Shields_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-iron-weapons",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/6/60/AoMR_Iron_Weapons_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Iron_Weapons_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-irrigation",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/5/52/AoMR_Irrigation_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Irrigation_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-jotuns",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/f/fa/AoMR_Jotuns_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Jotuns_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-levy-great-hall-soldiers",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/f/f4/AoMR_Levy_Great_Hall_Soldiers_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Levy_Great_Hall_Soldiers_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-levy-hill-fort-soldiers",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/f/f7/AoMR_Levy_Hill_Fort_Soldiers_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Levy_Hill_Fort_Soldiers_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-levy-longhouse-soldiers",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/e/e8/AoMR_Levy_Longhouse_Soldiers_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Levy_Longhouse_Soldiers_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-long-serpent",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/8/85/AoMR_Long_Serpent_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Long_Serpent_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-masons",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/d/dc/AoMR_Masons_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Masons_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-medium-cavalry",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/medium_cavalry_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/medium_cavalry_icon.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "techs/norse-medium-infantry",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/medium_infantry_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/medium_infantry_icon.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "techs/norse-meteoric-iron-armor",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/1/18/AoMR_Meteoric_Iron_Armor_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Meteoric_Iron_Armor_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-omniscience",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/8/88/AoMR_Omniscience_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Omniscience_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-pickaxe",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/pickaxe_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/pickaxe_icon.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "techs/norse-plow",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/a/a7/AoMR_Plow_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Plow_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-purse-seine",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/purse_seine_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/purse_seine_icon.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "techs/norse-quarry",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/quarry_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/quarry_icon.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "techs/norse-rampage",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/8/8d/AoMR_Rampage_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Rampage_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-rigsthula",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/rigsthula_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/rigsthula_icon.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "techs/norse-rime",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/4/40/AoMR_Rime_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Rime_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-ring-giver",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/2/25/AoMR_Ring_Giver_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Ring_Giver_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-safeguard",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/safeguard_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/safeguard_icon.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "techs/norse-salt-amphora",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/f/ff/AoMR_Salt_Amphora_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Salt_Amphora_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-sessrumnir",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/e/e1/AoMR_Sessrumnir_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Sessrumnir_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-shaft-mine",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/shaft_mine_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/shaft_mine_icon.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "techs/norse-signal-fires",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/0/09/AoMR_Signal_Fires_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Signal_Fires_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-sons-of-sleipnir",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/4/43/AoMR_Sons_of_Sleipnir_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Sons_of_Sleipnir_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-stone-wall",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/4/4e/AoMR_Stone_Wall_Norse_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Stone_Wall_Norse_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-survival-equipment",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/f/f9/AoMR_Survival_Equipment_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Survival_Equipment_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-swine-array",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/8/8d/AoMR_Swine_Array_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Swine_Array_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-tax-collectors",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/2/25/AoMR_Tax_Collectors_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Tax_Collectors_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-thundering-hooves",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/5/5f/AoMR_Thundering_Hooves_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Thundering_Hooves_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-thurisaz-rune",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/a/a0/AoMR_Thurisaz_Rune_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Thurisaz_Rune_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-vikings",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/1/1b/AoMR_Vikings_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Vikings_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-watch-tower",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/5/55/AoMR_Watch_Tower_Norse_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Watch_Tower_Norse_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "techs/norse-winter-harvest",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/winter_harvest_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/winter_harvest_icon.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "techs/norse-wrath-of-the-deep",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/a/aa/AoMR_Wrath_of_the_Deep_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Wrath_of_the_Deep_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "ui/pantheon-norse",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/UI_god_pantheon_Norse.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/UI_god_pantheon_Norse.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "units/norse-ballista",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/f/ff/AoMR_Ballista_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Ballista_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "units/norse-battle-boar",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/battle_boar_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/battle_boar_icon.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "units/norse-berserk",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/berserk_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/berserk_icon.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "units/norse-dragon-ship",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/a/aa/AoMR_Dragon_Ship_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Dragon_Ship_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "units/norse-dreki",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/dreki.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/dreki.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "units/norse-dwarf",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/villager_dwarf_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/villager_dwarf_icon.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "units/norse-einheri",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/einheri_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/einheri_icon.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "units/norse-fenris-wolf-brood",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/2/20/AoMR_Fenris_Wolf_Brood_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Fenris_Wolf_Brood_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "units/norse-fire-giant",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/3/30/AoMR_Fire_Giant_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Fire_Giant_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "units/norse-fishing-ship",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/fishing_ship_norse_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/fishing_ship_norse_icon.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "units/norse-frost-giant",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/3/3b/AoMR_Frost_Giant_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Frost_Giant_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "units/norse-gatherer",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/gatherer.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/gatherer.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "units/norse-godi",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/godi_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/godi_icon.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "units/norse-hersir",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/hersir_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/hersir_icon.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "units/norse-hirdman",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/2/27/AoMR_Hirdman_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Hirdman_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "units/norse-huskarl",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/huskarl_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/huskarl_icon.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "units/norse-jarl",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/jarl_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/jarl_icon.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "units/norse-jormun-elver",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/b/b2/AoMR_Jormun_Elver_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Jormun_Elver_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "units/norse-kraken",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/kraken_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/kraken_icon.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "units/norse-longboat",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/longboat_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/longboat_icon.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "units/norse-mountain-giant",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/mountain_giant_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/mountain_giant_icon.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "units/norse-ox-caravan",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/9/9e/AoMR_Caravan_Norse_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Caravan_Norse_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "units/norse-portable-ram",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/9/9e/AoMR_Portable_Ram_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Portable_Ram_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "units/norse-raiding-cavalry",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/raiding_cavalry_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/raiding_cavalry_icon.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "units/norse-throwing-axeman",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/throwing_axeman_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/throwing_axeman_icon.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "units/norse-transport-ship",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/e/ec/AoMR_Transport_Ship_Norse_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Transport_Ship_Norse_icon.png",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; hosted on Age of Empires Series Wiki (Fandom, CC-BY-SA page, image itself is a game asset)"
+  },
+  {
+    "id": "units/norse-troll",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/troll_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/troll_icon.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  },
+  {
+    "id": "units/norse-valkyrie",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/valkyrie_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/valkyrie_icon.png)",
+    "license": "Game asset © Microsoft (Age of Mythology: Retold), fan use per Microsoft Game Content Usage Rules; redistributed in Kries-Dev/BuildOrders"
+  }
+]

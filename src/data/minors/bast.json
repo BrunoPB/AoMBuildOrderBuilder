@@ -1,0 +1,22 @@
+{
+  "id": "bast",
+  "pantheon": "egyptians",
+  "name": {
+    "pt-BR": "Bast",
+    "en": "Bast"
+  },
+  "icon": "gods/bast",
+  "portrait": "gods/bast-portrait",
+  "age": "classical",
+  "freeUnitsOnAgeUp": {
+    "sphinx": 1
+  },
+  "unlocks": ["sphinx", "adze-of-wepwawet", "sacred-cats", "criosphinx", "hieracosphinx"],
+  "powers": ["eclipse"],
+  "meta": {
+    "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml) (tech ClassicalAgeBast); cross-checked: https://ageofempires.fandom.com/wiki/Bast and the Ra/Isis/Set wiki pages (minor god lists)",
+    "checkedAt": "2026-10-17",
+    "confidence": "high",
+    "note": "Goddess of protection and cats. Focus: Laborers. Free unit(s) spawn at a Temple when the age-up completes. God power recharge 150 s."
+  }
+}

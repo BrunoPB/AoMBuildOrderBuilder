@@ -1,0 +1,22 @@
+{
+  "id": "helios",
+  "pantheon": "atlanteans",
+  "name": {
+    "pt-BR": "Hélio",
+    "en": "Helios"
+  },
+  "icon": "gods/helios",
+  "portrait": "gods/helios-portrait",
+  "age": "mythic",
+  "freeUnitsOnAgeUp": {
+    "centimanus": 1
+  },
+  "unlocks": ["centimanus", "mirror-tower", "halo-of-the-sun", "petrification", "titanomachy"],
+  "powers": ["vortex"],
+  "meta": {
+    "source": "https://ageofempires.fandom.com/wiki/Helios; https://aomr-analyzer.com/gods/kronos (minor lists)",
+    "checkedAt": "2026-10-17",
+    "confidence": "high",
+    "note": "1 free centimanus on reaching the age through Helios (Kronos: 2). pt-BR name not verified against the official localization."
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "id": "oceanus",
+  "pantheon": "atlanteans",
+  "name": {
+    "pt-BR": "Oceano",
+    "en": "Oceanus"
+  },
+  "icon": "gods/oceanus",
+  "portrait": "gods/oceanus-portrait",
+  "age": "classical",
+  "freeUnitsOnAgeUp": {
+    "caladria": 1
+  },
+  "unlocks": ["caladria", "servant", "bite-of-the-shark", "weightless-mace", "frontline-heroics"],
+  "powers": ["carnivora"],
+  "meta": {
+    "source": "https://ageofempires.fandom.com/wiki/Oceanus; https://aomr-analyzer.com/gods/kronos (minor lists)",
+    "checkedAt": "2026-10-17",
+    "confidence": "high",
+    "note": "1 free caladria on reaching the age through Oceanus (Kronos: 2). pt-BR name not verified against the official localization."
+  }
+}

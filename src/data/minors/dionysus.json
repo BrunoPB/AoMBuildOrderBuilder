@@ -1,0 +1,19 @@
+{
+  "id": "dionysus",
+  "pantheon": "greeks",
+  "name": {
+    "pt-BR": "Dionísio",
+    "en": "Dionysus"
+  },
+  "icon": "gods/dionysus",
+  "portrait": "gods/dionysus-portrait",
+  "age": "heroic",
+  "unlocks": ["hydra", "chthonic-rites", "dionysia", "thracian-horses"],
+  "powers": ["bronze"],
+  "meta": {
+    "source": "https://ageofempires.fandom.com/wiki/Dionysus ; https://aomr-analyzer.com/gods/zeus ; https://aomr-analyzer.com/gods/hades ; https://aomr-analyzer.com/gods/poseidon",
+    "checkedAt": "2026-10-17",
+    "confidence": "high",
+    "note": "No free units on age-up for Greek minor gods. Scylla (formerly Dionysus) is available to all Greeks in Retold."
+  }
+}

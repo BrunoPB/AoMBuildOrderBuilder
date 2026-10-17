@@ -1,0 +1,43 @@
+{
+  "id": "loki",
+  "pantheon": "norse",
+  "name": {
+    "pt-BR": "Loki",
+    "en": "Loki"
+  },
+  "icon": "gods/loki",
+  "portrait": "gods/loki-portrait",
+  "modifiers": [
+    {
+      "target": "buildRate",
+      "op": "mul",
+      "value": 1.1,
+      "scope": {
+        "tags": ["infantry", "hero"]
+      },
+      "note": "Buildings (constructed by military units) built 10% faster."
+    },
+    {
+      "target": "cost",
+      "op": "mul",
+      "value": 0.5,
+      "scope": {
+        "ids": ["ox-cart"]
+      },
+      "note": "Ox Carts 50% cheaper (20 food + 20 wood)."
+    }
+  ],
+  "powers": ["spy"],
+  "minors": {
+    "classical": ["heimdall", "forseti"],
+    "heroic": ["bragi", "njord"],
+    "mythic": ["hel", "tyr"]
+  },
+  "unlocks": ["eyes-in-the-forest"],
+  "meta": {
+    "source": "https://aomr-analyzer.com/gods/loki + https://ageofempires.fandom.com/wiki/Loki",
+    "checkedAt": "2026-10-17",
+    "confidence": "high",
+    "note": "Not expressed as modifiers: damage by human soldiers (15%) and Hersirs (50%) fills a meter that spawns a random myth unit when it reaches its cost (favor x10); human soldiers and heroes +10% counter damage; transforming Gatherers/Dwarves into Berserks costs 50% less."
+  }
+}

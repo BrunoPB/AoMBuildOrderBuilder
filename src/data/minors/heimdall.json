@@ -1,0 +1,30 @@
+{
+  "id": "heimdall",
+  "pantheon": "norse",
+  "name": {
+    "pt-BR": "Heimdall",
+    "en": "Heimdall"
+  },
+  "icon": "gods/heimdall",
+  "portrait": "gods/heimdall-portrait",
+  "age": "classical",
+  "freeUnitsOnAgeUp": {
+    "einheri": 1
+  },
+  "unlocks": ["einheri", "gjallarhorn", "safeguard", "rigsthula"],
+  "powers": ["undermine"],
+  "meta": {
+    "source": "https://aomr-analyzer.com/frise/pantheons + https://ageofempires.fandom.com/wiki/Heimdall + https://ageofempires.fandom.com/wiki/Temple_(Age_of_Mythology)",
+    "checkedAt": "2026-10-17",
+    "confidence": "high",
+    "note": "Odin, Loki. Focus: buildings. Free unit on age up: one of each of the minor god's Temple myth units spawns at the Temple when the age-up completes (or when the next Temple is built if none exists)."
+  },
+  "fieldMeta": {
+    "freeUnitsOnAgeUp": {
+      "source": "https://ageofempires.fandom.com/wiki/Temple_(Age_of_Mythology)",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "Rule from the Temple page (since The Titans; still in Retold)."
+    }
+  }
+}

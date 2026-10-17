@@ -1,0 +1,1190 @@
+[
+  {
+    "id": "buildings/greeks-archery-range",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/3/33/AoMR_Archery_Range_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Archery_Range_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "buildings/greeks-armory",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/armory_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "buildings/greeks-dock",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/dock_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "buildings/greeks-farm",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/6/65/AoMR_Farm_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Farm_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "buildings/greeks-fortress",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/f/fb/AoMR_Fortress_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Fortress_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "buildings/greeks-gate",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/f/fd/AoMR_Gate_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Gate_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "buildings/greeks-granary",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/f/f7/AoMR_Granary_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Granary_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "buildings/greeks-house",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/house_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "buildings/greeks-market",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/market_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "buildings/greeks-military-academy",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/military_academy_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "buildings/greeks-sentry-tower",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/e/e6/AoMR_Sentry_Tower_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Sentry_Tower_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "buildings/greeks-stable",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/f/f9/AoMR_Stable_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Stable_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "buildings/greeks-storehouse",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/a/a8/AoMR_Storehouse_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Storehouse_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "buildings/greeks-temple",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/temple_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "buildings/greeks-town-center",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/c/cb/AoMR_Town_Center_Greek_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Town_Center_Greek_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "buildings/greeks-village-center",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/a/ae/AoMR_Village_Center_Greeks_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Village_Center_Greeks_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "buildings/greeks-wall",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/6/60/AoMR_Wooden_Wall_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Wooden_Wall_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "buildings/greeks-wonder",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/f/fd/AoMR_Wonder_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Wonder_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "gods/aphrodite",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/aphrodite_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "gods/aphrodite-portrait",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/aphrodite_portrait.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "gods/apollo",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/apollo_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "gods/apollo-portrait",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/apollo_portrait.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "gods/ares",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/ares_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "gods/ares-portrait",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/ares_portrait.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "gods/artemis",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/artemis_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "gods/artemis-portrait",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/artemis_portrait.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "gods/athena",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/athena_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "gods/athena-portrait",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/athena_portrait.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "gods/dionysus",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/dionysus_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "gods/dionysus-portrait",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/dionysus_portrait.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "gods/hades",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/hades_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "gods/hades-portrait",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/hades_portrait.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "gods/hephaestus",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/hephaestus_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "gods/hephaestus-portrait",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/hephaestus_portrait.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "gods/hera",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/hera_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "gods/hera-portrait",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/hera_portrait.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "gods/hermes",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/hermes_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "gods/hermes-portrait",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/hermes_portrait.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "gods/poseidon",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/poseidon_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "gods/poseidon-portrait",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/poseidon_portrait.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "gods/zeus",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/zeus_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "gods/zeus-portrait",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/zeus_breakoutportrait.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "powers/bolt",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/bolt_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "powers/bronze",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/b/b2/AoMR_Bronze_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Bronze_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "powers/ceasefire",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/e/e6/AoMR_Ceasefire_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Ceasefire_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "powers/curse",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/curse.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "powers/earthquake",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/8/8d/AoMR_Earthquake_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Earthquake_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "powers/lightning-storm",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/e/e6/AoMR_Lightning_Storm_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Lightning_Storm_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "powers/lure",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/lure_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "powers/pestilence",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/4/40/AoMR_Pestilence_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Pestilence_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "powers/plenty",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/2/2d/AoMR_Plenty_Vault_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Plenty_Vault_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "powers/restoration",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/7/7c/AoMR_Restoration_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Restoration_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "powers/sentinel",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/sentinel_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "powers/underworld-passage",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/e/e8/AoMR_Underworld_Passage_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Underworld_Passage_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-advanced-fortifications",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/7/7d/AoMR_Advanced_Fortifications_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Advanced_Fortifications_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-aegis-shield",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/6/68/AoMR_Aegis_Shield_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Aegis_Shield_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-ambassadors",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/b/b0/AoMR_Ambassadors_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Ambassadors_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-anastrophe",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/f/f5/AoMR_Anastrophe_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Anastrophe_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-architects",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/8/89/AoMR_Architects_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Architects_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-argive-patronage",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/e/ea/AoMR_Argive_Patronage_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Argive_Patronage_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-argonauts",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/b/b4/AoMR_Argonauts_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Argonauts_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-ballistics",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/6/68/AoMR_Ballistics_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Ballistics_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-beast-slayer",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/6/64/AoMR_Beast_Slayer_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Beast_Slayer_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-boiling-oil",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/3/33/AoMR_Boiling_Oil_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Boiling_Oil_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-bow-saw",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/bow_saw_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "techs/greeks-bronze-armor",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/b/b7/AoMR_Bronze_Armor_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Bronze_Armor_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-bronze-shields",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/4/41/AoMR_Bronze_Shields_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Bronze_Shields_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-bronze-weapons",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/c/c2/AoMR_Bronze_Weapons_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Bronze_Weapons_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-burning-pitch",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/d/df/AoMR_Burning_Pitch_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Burning_Pitch_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-carpenters",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/c/cd/AoMR_Carpenters_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Carpenters_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-carrier-pigeons",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/7/7a/AoMR_Carrier_Pigeons_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Carrier_Pigeons_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-champion-cavalry",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/f/fc/AoMR_Champion_Cavalry_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Champion_Cavalry_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-champion-infantry",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/4/48/AoMR_Champion_Infantry_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Champion_Infantry_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-champion-ranged-soldiers",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/2/2e/AoMR_Champion_Archers_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Champion_Archers_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-champion-warships",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/d/db/AoMR_Champion_Warships_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Champion_Warships_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-chthonic-rites",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/3/3b/AoMR_Chthonic_Rites_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Chthonic_Rites_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-coinage",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/coinage_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "techs/greeks-conscript-cavalry",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/6/6b/AoMR_Conscript_Cavalry_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Conscript_Cavalry_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-conscript-infantry",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/d/d3/AoMR_Conscript_Infantry_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Conscript_Infantry_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-conscript-ranged-soldiers",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/c/c7/AoMR_Conscript_Ranged_Soldiers_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Conscript_Ranged_Soldiers_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-conscript-sailors",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/8/87/AoMR_Conscript_Sailors_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Conscript_Sailors_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-copper-armor",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/copper_armor_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "techs/greeks-copper-shields",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/copper_shields_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "techs/greeks-copper-weapons",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/copper_weapons_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "techs/greeks-crenellations",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/b/bb/AoMR_Crenellations_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Crenellations_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-deimos-sword-of-dread",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/8/8b/AoMR_Deimos_Sword_of_Dread_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Deimos_Sword_of_Dread_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-dionysia",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/c/c6/AoMR_Dionysia_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Dionysia_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-divine-blood",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/2/2c/AoMR_Divine_Blood_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Divine_Blood_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-draft-horses",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/5/58/AoMR_Draft_Horses_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Draft_Horses_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-enclosed-deck",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/6/6d/AoMR_Enclosed_Deck_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Enclosed_Deck_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-engineers",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/d/da/AoMR_Engineers_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Engineers_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-enyos-bow-of-horror",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/0/08/AoMR_Enyos_Bow_of_Horror_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Enyos_Bow_of_Horror_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-face-of-the-gorgon",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/3/37/AoMR_Face_of_the_Gorgon_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Face_of_the_Gorgon_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-flames-of-typhon",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/8/81/AoMR_Flames_of_Typhon_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Flames_of_Typhon_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-flood-control",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/5/5d/AoMR_Flood_Control_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Flood_Control_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-forge-of-olympus",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/c/ce/AoMR_Forge_of_Olympus_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Forge_of_Olympus_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-fortified-town-center",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/2/21/AoMR_Fortified_Town_Center_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Fortified_Town_Center_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-fortified-wall",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/6/6d/AoMR_Fortified_Wall_Greek_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Fortified_Wall_Greek_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-golden-apples",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/1/13/AoMR_Golden_Apples_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Golden_Apples_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-guard-tower",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/c/c3/AoMR_Guard_Tower_Greek_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Guard_Tower_Greek_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-hand-axe",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/hand_axe_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "techs/greeks-hand-of-talos",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/2/2c/AoMR_Hand_of_Talos_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Hand_of_Talos_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-heavy-cavalry",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/heavy_cavalry_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "techs/greeks-heavy-infantry",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/heavy_infantry_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "techs/greeks-heavy-ranged-soldiers",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/heavy_archers_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "techs/greeks-heavy-warships",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/1/1e/AoMR_Heavy_Warships_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Heavy_Warships_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-heroic-fleet",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/1/16/AoMR_Heroic_Fleet_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Heroic_Fleet_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-husbandry",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/husbandry_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "techs/greeks-iron-armor",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/1/19/AoMR_Iron_Armor_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Iron_Armor_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-iron-shields",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/a/a9/AoMR_Iron_Shields_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Iron_Shields_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-iron-weapons",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/6/60/AoMR_Iron_Weapons_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Iron_Weapons_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-irrigation",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/5/52/AoMR_Irrigation_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Irrigation_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-labyrinth-of-minos",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/b/bd/AoMR_Labyrinth_of_Minos_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Labyrinth_of_Minos_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-levy-cavalry",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/5/51/AoMR_Levy_Cavalry_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Levy_Cavalry_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-levy-infantry",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/6/6e/AoMR_Levy_Infantry_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Levy_Infantry_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-levy-ranged-soldiers",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/5/53/AoMR_Levy_Ranged_Soldiers_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Levy_Ranged_Soldiers_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-lord-of-horses",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/d/dc/AoMR_Lord_of_Horses_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Lord_of_Horses_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-masons",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/d/dc/AoMR_Masons_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Masons_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-medium-cavalry",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/medium_cavalry_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "techs/greeks-medium-infantry",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/medium_infantry_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "techs/greeks-medium-ranged-soldiers",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/medium_archers_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "techs/greeks-monstrous-rage",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/d/da/AoMR_Monstrous_Rage_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Monstrous_Rage_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-olympian-parentage",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/3/3e/AoMR_Olympian_Parentage_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Olympian_Parentage_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-olympian-weapons",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/d/d4/AoMR_Olympian_Weapons_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Olympian_Weapons_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-omniscience",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/8/88/AoMR_Omniscience_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Omniscience_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-oracle",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/4/42/AoMR_Oracle_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Oracle_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-phobos-spear-of-panic",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/1/16/AoMR_Phobos_Spear_of_Panic_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Phobos_Spear_of_Panic_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-pickaxe",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/pickaxe_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "techs/greeks-plow",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/a/a7/AoMR_Plow_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Plow_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-purse-seine",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/purse_seine_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "techs/greeks-quarry",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/quarry_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "techs/greeks-roar-of-orthus",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/2/29/AoMR_Roar_of_Orthus_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Roar_of_Orthus_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-salt-amphora",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/f/ff/AoMR_Salt_Amphora_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Salt_Amphora_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-sarissa",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/sarissa_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "techs/greeks-shaft-mine",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/shaft_mine_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "techs/greeks-shafts-of-plague",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/d/d0/AoMR_Shafts_of_Plague_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Shafts_of_Plague_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-shoulder-of-talos",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/5/56/AoMR_Shoulder_of_Talos_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Shoulder_of_Talos_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-signal-fires",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/0/09/AoMR_Signal_Fires_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Signal_Fires_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-spirited-charge",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/3/31/AoMR_Spirited_Charge_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Spirited_Charge_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-stone-wall",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/3/38/AoMR_Stone_Wall_Greek_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Stone_Wall_Greek_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-sun-ray",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/1/11/AoMR_Sun_Ray_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Sun_Ray_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-survival-equipment",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/f/f9/AoMR_Survival_Equipment_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Survival_Equipment_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-sylvan-lore",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/e/e1/AoMR_Sylvan_Lore_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Sylvan_Lore_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-tax-collectors",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/2/25/AoMR_Tax_Collectors_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Tax_Collectors_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-temple-of-healing",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/7/7b/AoMR_Temple_of_Healing_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Temple_of_Healing_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-thracian-horses",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/4/4b/AoMR_Thracian_Horses_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Thracian_Horses_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-vaults-of-erebus",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/vaults_of_erebus_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "techs/greeks-watch-tower",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/7/71/AoMR_Watch_Tower_Greek_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Watch_Tower_Greek_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-will-of-kronos",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/9/9f/AoMR_Will_of_Kronos_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Will_of_Kronos_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "techs/greeks-winged-messenger",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/2/25/AoMR_Winged_Messenger_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Winged_Messenger_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "ui/pantheon-greeks",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/UI_god_pantheon_Greek.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "units/greeks-achilles",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/achilles_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "units/greeks-ajax",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/ajax_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "units/greeks-atalanta",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/atalanta_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "units/greeks-bellerophon",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/6/68/AoMR_Bellerophon_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Bellerophon_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "units/greeks-caravan",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/7/7c/AoMR_Caravan_Greek_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Caravan_Greek_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "units/greeks-carcinos",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/carcinos.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "units/greeks-centaur",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/centaur_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "units/greeks-chimera",
+    "url": "https://raw.githubusercontent.com/rupprath/aom-counters/main/public/images/units/gr_chimera.png",
+    "origin": "https://github.com/rupprath/aom-counters (public/images/units, MIT-licensed code; images are game assets)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (repo code MIT; art not covered by MIT)"
+  },
+  {
+    "id": "units/greeks-chiron",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/f/fe/AoMR_Chiron_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Chiron_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "units/greeks-colossus",
+    "url": "https://raw.githubusercontent.com/rupprath/aom-counters/main/public/images/units/gr_colossus.png",
+    "origin": "https://github.com/rupprath/aom-counters (public/images/units, MIT-licensed code; images are game assets)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (repo code MIT; art not covered by MIT)"
+  },
+  {
+    "id": "units/greeks-cyclops",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/cyclops_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "units/greeks-fishing-ship",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/3/3a/AoMR_Fishing_Ship_Greek_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Fishing_Ship_Greek_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "units/greeks-gastraphetoros",
+    "url": "https://raw.githubusercontent.com/rupprath/aom-counters/main/public/images/units/gr_gastraphetoros.png",
+    "origin": "https://github.com/rupprath/aom-counters (public/images/units, MIT-licensed code; images are game assets)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (repo code MIT; art not covered by MIT)"
+  },
+  {
+    "id": "units/greeks-helepolis",
+    "url": "https://raw.githubusercontent.com/rupprath/aom-counters/main/public/images/units/gr_helepolis.png",
+    "origin": "https://github.com/rupprath/aom-counters (public/images/units, MIT-licensed code; images are game assets)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (repo code MIT; art not covered by MIT)"
+  },
+  {
+    "id": "units/greeks-heracles",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/heracles_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "units/greeks-hetairos",
+    "url": "https://raw.githubusercontent.com/rupprath/aom-counters/main/public/images/units/gr_hetairos.png",
+    "origin": "https://github.com/rupprath/aom-counters (public/images/units, MIT-licensed code; images are game assets)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (repo code MIT; art not covered by MIT)"
+  },
+  {
+    "id": "units/greeks-hippeus",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/hippeus_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "units/greeks-hippocampus",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/6/6d/AoMR_Hippocampus_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Hippocampus_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "units/greeks-hippolyta",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/5/5b/AoMR_Hippolyta_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Hippolyta_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "units/greeks-hoplite",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/hoplite_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "units/greeks-hydra",
+    "url": "https://raw.githubusercontent.com/rupprath/aom-counters/main/public/images/units/gr_hydra.png",
+    "origin": "https://github.com/rupprath/aom-counters (public/images/units, MIT-licensed code; images are game assets)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (repo code MIT; art not covered by MIT)"
+  },
+  {
+    "id": "units/greeks-hypaspist",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/hypaspist_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "units/greeks-jason",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/jason_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "units/greeks-juggernaut",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/9/92/AoMR_Juggernaut_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Juggernaut_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "units/greeks-kataskopos",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/d/da/AoMR_Kataskopos_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Kataskopos_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "units/greeks-manticore",
+    "url": "https://raw.githubusercontent.com/rupprath/aom-counters/main/public/images/units/gr_manticore.png",
+    "origin": "https://github.com/rupprath/aom-counters (public/images/units, MIT-licensed code; images are game assets)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (repo code MIT; art not covered by MIT)"
+  },
+  {
+    "id": "units/greeks-medusa",
+    "url": "https://raw.githubusercontent.com/rupprath/aom-counters/main/public/images/units/gr_medusa.png",
+    "origin": "https://github.com/rupprath/aom-counters (public/images/units, MIT-licensed code; images are game assets)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (repo code MIT; art not covered by MIT)"
+  },
+  {
+    "id": "units/greeks-militia",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/a/af/AoMR_Militia_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Militia_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "units/greeks-minotaur",
+    "url": "https://raw.githubusercontent.com/rupprath/aom-counters/main/public/images/units/gr_minotaur.png",
+    "origin": "https://github.com/rupprath/aom-counters (public/images/units, MIT-licensed code; images are game assets)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (repo code MIT; art not covered by MIT)"
+  },
+  {
+    "id": "units/greeks-myrmidon",
+    "url": "https://raw.githubusercontent.com/rupprath/aom-counters/main/public/images/units/gr_myrmidon.png",
+    "origin": "https://github.com/rupprath/aom-counters (public/images/units, MIT-licensed code; images are game assets)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (repo code MIT; art not covered by MIT)"
+  },
+  {
+    "id": "units/greeks-nemean-lion",
+    "url": "https://raw.githubusercontent.com/rupprath/aom-counters/main/public/images/units/gr_nemean_lion.png",
+    "origin": "https://github.com/rupprath/aom-counters (public/images/units, MIT-licensed code; images are game assets)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (repo code MIT; art not covered by MIT)"
+  },
+  {
+    "id": "units/greeks-odysseus",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/9/9c/AoMR_Odysseus_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Odysseus_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "units/greeks-pegasus",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/pegasus_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "units/greeks-peltast",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/peltast_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "units/greeks-pentekonter",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/9/92/AoMR_Pentekonter_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Pentekonter_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "units/greeks-perseus",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/8/8c/AoMR_Perseus_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Perseus_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "units/greeks-petrobolos",
+    "url": "https://raw.githubusercontent.com/rupprath/aom-counters/main/public/images/units/gr_petrobolos.png",
+    "origin": "https://github.com/rupprath/aom-counters (public/images/units, MIT-licensed code; images are game assets)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (repo code MIT; art not covered by MIT)"
+  },
+  {
+    "id": "units/greeks-polyphemus",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/c/c1/AoMR_Polyphemus_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Polyphemus_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "units/greeks-prodromos",
+    "url": "https://raw.githubusercontent.com/rupprath/aom-counters/main/public/images/units/gr_prodromos.png",
+    "origin": "https://github.com/rupprath/aom-counters (public/images/units, MIT-licensed code; images are game assets)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (repo code MIT; art not covered by MIT)"
+  },
+  {
+    "id": "units/greeks-scylla",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/scylla_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "units/greeks-shade-of-hades",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/4/47/AoMR_Shade_of_Hades_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Shade_of_Hades_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "units/greeks-the-argo",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/1/17/AoMR_The_Argo_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_The_Argo_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "units/greeks-theseus",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/theseus_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "units/greeks-toxotes",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/toxotes_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (collected in Kries-Dev/BuildOrders)"
+  },
+  {
+    "id": "units/greeks-transport-ship",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/2/2f/AoMR_Transport_Ship_Greek_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Transport_Ship_Greek_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "units/greeks-trireme",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/2/2f/AoMR_Trireme_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Trireme_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  },
+  {
+    "id": "units/greeks-villager",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/0/00/AoMR_Villager_Greek_icon.png",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Villager_Greek_icon.png",
+    "license": "Game asset (c) Microsoft; fan use per Microsoft Game Content Usage Rules (hosted on Age of Empires Series Wiki, Fandom, CC BY-SA for wiki text only)"
+  }
+]

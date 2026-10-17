@@ -1,0 +1,43 @@
+{
+  "id": "poseidon",
+  "pantheon": "greeks",
+  "name": {
+    "pt-BR": "Poseidon",
+    "en": "Poseidon"
+  },
+  "icon": "gods/poseidon",
+  "portrait": "gods/poseidon-portrait",
+  "modifiers": [
+    {
+      "target": "cost",
+      "op": "mul",
+      "value": 0.7,
+      "scope": {
+        "ids": ["stable", "market"]
+      },
+      "note": "Stables and Markets are 30% cheaper."
+    }
+  ],
+  "powers": ["lure"],
+  "minors": {
+    "classical": ["hermes", "ares"],
+    "heroic": ["dionysus", "aphrodite"],
+    "mythic": ["artemis", "hephaestus"]
+  },
+  "unlocks": [
+    "hetairos",
+    "militia",
+    "hippocampus",
+    "theseus",
+    "atalanta",
+    "hippolyta",
+    "polyphemus",
+    "lord-of-horses"
+  ],
+  "meta": {
+    "source": "https://ageofempires.fandom.com/wiki/Poseidon ; https://aomr-analyzer.com/gods/poseidon",
+    "checkedAt": "2026-10-17",
+    "confidence": "high",
+    "note": "Not expressible: Militia spawn from razed buildings; cavalry, caravans and myth units +0.1/0.2/0.3/0.4 speed per age; market exchange rates +15%; free respawning Hippocampus at the first Dock."
+  }
+}

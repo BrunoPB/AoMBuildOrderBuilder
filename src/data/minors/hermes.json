@@ -1,0 +1,19 @@
+{
+  "id": "hermes",
+  "pantheon": "greeks",
+  "name": {
+    "pt-BR": "Hermes",
+    "en": "Hermes"
+  },
+  "icon": "gods/hermes",
+  "portrait": "gods/hermes-portrait",
+  "age": "classical",
+  "unlocks": ["centaur", "sylvan-lore", "winged-messenger", "spirited-charge"],
+  "powers": ["ceasefire"],
+  "meta": {
+    "source": "https://ageofempires.fandom.com/wiki/Hermes ; https://aomr-analyzer.com/gods/zeus ; https://aomr-analyzer.com/gods/hades ; https://aomr-analyzer.com/gods/poseidon",
+    "checkedAt": "2026-10-17",
+    "confidence": "high",
+    "note": "No free units on age-up for Greek minor gods."
+  }
+}

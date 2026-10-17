@@ -1,0 +1,22 @@
+{
+  "id": "horus",
+  "pantheon": "egyptians",
+  "name": {
+    "pt-BR": "Hórus",
+    "en": "Horus"
+  },
+  "icon": "gods/horus",
+  "portrait": "gods/horus-portrait",
+  "age": "mythic",
+  "freeUnitsOnAgeUp": {
+    "avenger": 1
+  },
+  "unlocks": ["avenger", "axe-of-vengeance", "greatest-of-fifty", "spear-of-horus"],
+  "powers": ["tornado"],
+  "meta": {
+    "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml) (tech MythicAgeHorus); cross-checked: https://ageofempires.fandom.com/wiki/Horus and the Ra/Isis/Set wiki pages (minor god lists)",
+    "checkedAt": "2026-10-17",
+    "confidence": "high",
+    "note": "God of vengeance. Focus: infantry. Free unit(s) spawn at a Temple when the age-up completes. God power recharge 240 s."
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "id": "prometheus",
+  "pantheon": "atlanteans",
+  "name": {
+    "pt-BR": "Prometeu",
+    "en": "Prometheus"
+  },
+  "icon": "gods/prometheus",
+  "portrait": "gods/prometheus-portrait",
+  "age": "classical",
+  "freeUnitsOnAgeUp": {
+    "promethean": 1
+  },
+  "unlocks": ["promethean", "alluvial-clay", "heart-of-the-titans", "theft-of-fire"],
+  "powers": ["valor"],
+  "meta": {
+    "source": "https://ageofempires.fandom.com/wiki/Prometheus; https://aomr-analyzer.com/gods/kronos (minor lists)",
+    "checkedAt": "2026-10-17",
+    "confidence": "high",
+    "note": "1 free promethean on reaching the age through Prometheus (Kronos: 2). pt-BR name not verified against the official localization."
+  }
+}

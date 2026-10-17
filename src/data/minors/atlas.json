@@ -1,0 +1,22 @@
+{
+  "id": "atlas",
+  "pantheon": "atlanteans",
+  "name": {
+    "pt-BR": "Atlas",
+    "en": "Atlas"
+  },
+  "icon": "gods/atlas",
+  "portrait": "gods/atlas-portrait",
+  "age": "mythic",
+  "freeUnitsOnAgeUp": {
+    "argus": 1
+  },
+  "unlocks": ["argus", "guardian-of-io", "devotees-of-atlas", "titan-shield"],
+  "powers": ["implode"],
+  "meta": {
+    "source": "https://ageofempires.fandom.com/wiki/Atlas_(god); https://aomr-analyzer.com/gods/kronos (minor lists)",
+    "checkedAt": "2026-10-17",
+    "confidence": "high",
+    "note": "1 free argus on reaching the age through Atlas (Kronos: 2). pt-BR name not verified against the official localization."
+  }
+}

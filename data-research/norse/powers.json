@@ -1,0 +1,271 @@
+[
+  {
+    "id": "great-hunt",
+    "name": {
+      "pt-BR": "Grande Caçada",
+      "en": "Great Hunt"
+    },
+    "icon": "powers/great-hunt",
+    "pantheon": "norse",
+    "cost": {
+      "favor": 25
+    },
+    "cooldown": 90,
+    "effect": {
+      "kind": "economy"
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/God_power + https://ageofempires.fandom.com/wiki/Great_Hunt",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "Odin (Archaic). Retold: first cast is free; cost is the base reuse cost, +5 favor per further reuse; infinite uses. Multiplies animals in the target area (stronger each age); spawns Elk if none. Food amount not modelled."
+    }
+  },
+  {
+    "id": "dwarven-mine",
+    "name": {
+      "pt-BR": "Mina Anã",
+      "en": "Dwarven Mine"
+    },
+    "icon": "powers/dwarven-mine",
+    "pantheon": "norse",
+    "cost": {
+      "favor": 75
+    },
+    "cooldown": 120,
+    "effect": {
+      "kind": "economy"
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/God_power + https://ageofempires.fandom.com/wiki/Dwarven_Mine",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "Thor (Archaic). Retold: first cast is free; cost is the base reuse cost, +50 favor per further reuse; infinite uses. Creates a Gold Mine whose size depends on the age; gathered faster in later ages (Dwarf: 64.7/73.5/88.2 gold/min Classical/Heroic/Mythic vs 58.8 on a normal mine). Not modelled as a modifier."
+    }
+  },
+  {
+    "id": "spy",
+    "name": {
+      "pt-BR": "Espião",
+      "en": "Spy"
+    },
+    "icon": "powers/spy",
+    "pantheon": "norse",
+    "cost": {
+      "favor": 30
+    },
+    "cooldown": 30,
+    "effect": {
+      "kind": "utility"
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/God_power + https://ageofempires.fandom.com/wiki/Spy_(Age_of_Mythology)",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "Loki (Archaic). Retold: first cast is free; cost is the base reuse cost, +5 favor per further reuse; infinite uses. Reveals an enemy unit's line of sight."
+    }
+  },
+  {
+    "id": "forest-fire",
+    "name": {
+      "pt-BR": "Incêndio Florestal",
+      "en": "Forest Fire"
+    },
+    "icon": "powers/forest-fire",
+    "pantheon": "norse",
+    "cost": {
+      "favor": 125
+    },
+    "cooldown": 180,
+    "effect": {
+      "kind": "military",
+      "duration": 30
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/God_power + https://ageofempires.fandom.com/wiki/Forest_Fire",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "Freyja (Classical). Retold: first cast is free; cost is the base reuse cost, +50 favor per further reuse; infinite uses."
+    }
+  },
+  {
+    "id": "undermine",
+    "name": {
+      "pt-BR": "Solapar",
+      "en": "Undermine"
+    },
+    "icon": "powers/undermine",
+    "pantheon": "norse",
+    "cost": {
+      "favor": 50
+    },
+    "cooldown": 150,
+    "effect": {
+      "kind": "military",
+      "duration": 14
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/God_power + https://ageofempires.fandom.com/wiki/Undermine",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "Heimdall (Classical). Retold: first cast is free; cost is the base reuse cost, +10 favor per further reuse; infinite uses."
+    }
+  },
+  {
+    "id": "healing-spring",
+    "name": {
+      "pt-BR": "Fonte Curativa",
+      "en": "Healing Spring"
+    },
+    "icon": "powers/healing-spring",
+    "pantheon": "norse",
+    "cost": {
+      "favor": 100
+    },
+    "cooldown": 150,
+    "effect": {
+      "kind": "utility"
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/God_power + https://ageofempires.fandom.com/wiki/Healing_Spring",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "Forseti (Classical). Retold: first cast is free; cost is the base reuse cost, +150 favor per further reuse; infinite uses. Heals idle units 2.5 HP/s; capturable."
+    }
+  },
+  {
+    "id": "frost",
+    "name": {
+      "pt-BR": "Congelamento",
+      "en": "Frost"
+    },
+    "icon": "powers/frost",
+    "pantheon": "norse",
+    "cost": {
+      "favor": 200
+    },
+    "cooldown": 240,
+    "effect": {
+      "kind": "military",
+      "duration": 45
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/God_power + https://ageofempires.fandom.com/wiki/Frost",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "Skadi (Heroic). Retold: first cast is free; cost is the base reuse cost, +15 favor per further reuse; infinite uses."
+    }
+  },
+  {
+    "id": "walking-woods",
+    "name": {
+      "pt-BR": "Floresta Ambulante",
+      "en": "Walking Woods"
+    },
+    "icon": "powers/walking-woods",
+    "pantheon": "norse",
+    "cost": {
+      "favor": 100
+    },
+    "cooldown": 180,
+    "effect": {
+      "kind": "military"
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/God_power + https://ageofempires.fandom.com/wiki/Walking_Woods",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "Njord (Heroic). Retold: first cast is free; cost is the base reuse cost, +50 favor per further reuse; infinite uses."
+    }
+  },
+  {
+    "id": "flaming-weapons",
+    "name": {
+      "pt-BR": "Armas Flamejantes",
+      "en": "Flaming Weapons"
+    },
+    "icon": "powers/flaming-weapons",
+    "pantheon": "norse",
+    "cost": {
+      "favor": 250
+    },
+    "cooldown": 210,
+    "effect": {
+      "kind": "military",
+      "duration": 45
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/God_power + https://ageofempires.fandom.com/wiki/Flaming_Weapons",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "Bragi (Heroic). Retold: first cast is free; cost is the base reuse cost, +50 favor per further reuse; infinite uses. +60% attack for human units, ships and heroes."
+    }
+  },
+  {
+    "id": "ragnarok",
+    "name": {
+      "pt-BR": "Ragnarök",
+      "en": "Ragnarok"
+    },
+    "icon": "powers/ragnarok",
+    "pantheon": "norse",
+    "cost": {
+      "favor": 250
+    },
+    "cooldown": 300,
+    "effect": {
+      "kind": "military"
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/God_power + https://ageofempires.fandom.com/wiki/Ragnarok",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "Baldr (Mythic). Retold: first cast is free; cost is the base reuse cost, +50 favor per further reuse; infinite uses. Converts all Gatherers and Dwarves into Heroes of Ragnarok (kills the economy)."
+    }
+  },
+  {
+    "id": "fimbulwinter",
+    "name": {
+      "pt-BR": "Fimbulwinter",
+      "en": "Fimbulwinter"
+    },
+    "icon": "powers/fimbulwinter",
+    "pantheon": "norse",
+    "cost": {
+      "favor": 350
+    },
+    "cooldown": 240,
+    "effect": {
+      "kind": "military",
+      "duration": 31
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/God_power + https://ageofempires.fandom.com/wiki/Fimbulwinter",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "Tyr (Mythic). Retold: first cast is free; cost is the base reuse cost, +55 favor per further reuse; infinite uses."
+    }
+  },
+  {
+    "id": "nidhogg",
+    "name": {
+      "pt-BR": "Nidhogg",
+      "en": "Nidhogg"
+    },
+    "icon": "powers/nidhogg",
+    "pantheon": "norse",
+    "cost": {
+      "favor": 350
+    },
+    "cooldown": 240,
+    "effect": {
+      "kind": "military"
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/God_power + https://ageofempires.fandom.com/wiki/Nidhogg",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "Hel (Mythic). Retold: first cast is free; cost is the base reuse cost, +50 favor per further reuse; infinite uses. Summons the Nidhogg dragon (unit not in this database)."
+    }
+  }
+]

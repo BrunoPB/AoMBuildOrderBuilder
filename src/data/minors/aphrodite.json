@@ -1,0 +1,26 @@
+{
+  "id": "aphrodite",
+  "pantheon": "greeks",
+  "name": {
+    "pt-BR": "Afrodite",
+    "en": "Aphrodite"
+  },
+  "icon": "gods/aphrodite",
+  "portrait": "gods/aphrodite-portrait",
+  "age": "heroic",
+  "unlocks": [
+    "nemean-lion",
+    "the-argo",
+    "argonauts",
+    "divine-blood",
+    "golden-apples",
+    "roar-of-orthus"
+  ],
+  "powers": ["curse"],
+  "meta": {
+    "source": "https://ageofempires.fandom.com/wiki/Aphrodite ; https://aomr-analyzer.com/gods/zeus ; https://aomr-analyzer.com/gods/hades ; https://aomr-analyzer.com/gods/poseidon",
+    "checkedAt": "2026-10-17",
+    "confidence": "high",
+    "note": "No free units on age-up for Greek minor gods."
+  }
+}

@@ -71,7 +71,11 @@ function parse<T>(schema: z.ZodType<T>, value: unknown, where: string, issues: s
   return null;
 }
 
-function byId<T extends { id: string }>(items: T[], where: string, issues: string[]): Map<string, T> {
+function byId<T extends { id: string }>(
+  items: T[],
+  where: string,
+  issues: string[],
+): Map<string, T> {
   const map = new Map<string, T>();
   for (const item of items) {
     if (map.has(item.id)) issues.push(`${where}: duplicate id "${item.id}"`);

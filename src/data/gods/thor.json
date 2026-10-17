@@ -1,0 +1,103 @@
+{
+  "id": "thor",
+  "pantheon": "norse",
+  "name": {
+    "pt-BR": "Thor",
+    "en": "Thor"
+  },
+  "icon": "gods/thor",
+  "portrait": "gods/thor-portrait",
+  "modifiers": [
+    {
+      "target": "cost",
+      "op": "add",
+      "value": -10,
+      "scope": {
+        "ids": ["dwarf"],
+        "resources": ["gold"]
+      },
+      "note": "Dwarves cost 50 gold."
+    },
+    {
+      "target": "gatherRate",
+      "op": "mul",
+      "value": 1.25,
+      "scope": {
+        "ids": ["dwarf"],
+        "sources": ["hunt", "herd", "berries", "farm", "wood"]
+      },
+      "note": "Dwarves gather food and wood 25% faster."
+    },
+    {
+      "target": "cost",
+      "op": "mul",
+      "value": 0.9,
+      "scope": {
+        "ids": [
+          "copper-weapons-thor",
+          "copper-armor-thor",
+          "copper-shields-thor",
+          "bronze-weapons-thor",
+          "bronze-armor-thor",
+          "bronze-shields-thor",
+          "iron-weapons-thor",
+          "iron-armor-thor",
+          "iron-shields-thor",
+          "ballistics-thor",
+          "burning-pitch-thor",
+          "dwarven-weapons",
+          "meteoric-iron-armor",
+          "dragonscale-shields",
+          "hammer-of-thunder",
+          "dwarven-breastplate-thor"
+        ]
+      },
+      "note": "Armory technologies 10% cheaper (favor too, e.g. Hammer of Thunder 113 gold + 9 favor)."
+    }
+  ],
+  "startExtras": {
+    "units": {
+      "gatherer": 0,
+      "dwarf": 3
+    }
+  },
+  "powers": ["dwarven-mine"],
+  "minors": {
+    "classical": ["freyja", "forseti"],
+    "heroic": ["skadi", "bragi"],
+    "mythic": ["baldr", "tyr"]
+  },
+  "unlocks": [
+    "dwarven-armory",
+    "copper-weapons-thor",
+    "copper-armor-thor",
+    "copper-shields-thor",
+    "bronze-weapons-thor",
+    "bronze-armor-thor",
+    "bronze-shields-thor",
+    "iron-weapons-thor",
+    "iron-armor-thor",
+    "iron-shields-thor",
+    "ballistics-thor",
+    "burning-pitch-thor",
+    "dwarven-weapons",
+    "meteoric-iron-armor",
+    "dragonscale-shields",
+    "hammer-of-thunder",
+    "dwarven-breastplate-thor"
+  ],
+  "meta": {
+    "source": "https://aomr-analyzer.com/gods/thor + https://ageofempires.fandom.com/wiki/Thor",
+    "checkedAt": "2026-10-17",
+    "confidence": "high",
+    "note": "startExtras replaces the 3 starting Gatherers with 3 Dwarves (units record is meant to override the pantheon start counts: gatherer 0, dwarf 3). Not expressed as modifiers: Dwarven Armory replaces the Armory, can be built and research in any age (slower in Archaic, faster later); each Dwarven Armory research spawns 1 free Dwarf (even above pop/villager limit); 3 extra armory techs."
+  },
+  "fieldMeta": {
+    "startExtras": {
+      "source": "https://ageofempires.fandom.com/wiki/Thor",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "Override semantics to be confirmed by the owner (see PENDING)."
+    }
+  }
+}

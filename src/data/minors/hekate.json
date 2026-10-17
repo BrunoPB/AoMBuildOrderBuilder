@@ -1,0 +1,22 @@
+{
+  "id": "hekate",
+  "pantheon": "atlanteans",
+  "name": {
+    "pt-BR": "Hécate",
+    "en": "Hekate"
+  },
+  "icon": "gods/hekate",
+  "portrait": "gods/hekate-portrait",
+  "age": "mythic",
+  "freeUnitsOnAgeUp": {
+    "lampades": 1
+  },
+  "unlocks": ["lampades", "asper-blood", "mythic-rejuvenation", "celerity"],
+  "powers": ["tartarian-gate"],
+  "meta": {
+    "source": "https://ageofempires.fandom.com/wiki/Hekate; https://aomr-analyzer.com/gods/kronos (minor lists)",
+    "checkedAt": "2026-10-17",
+    "confidence": "high",
+    "note": "1 free lampades on reaching the age through Hekate (Kronos: 2). pt-BR name not verified against the official localization."
+  }
+}

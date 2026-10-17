@@ -1,0 +1,1238 @@
+[
+  {
+    "id": "units/egyptians-laborer",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/units/villager_egyptian_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "units/egyptians-priest",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/priest_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "units/egyptians-pharaoh",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/pharaoh_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "units/egyptians-pharaoh-new-kingdom",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/pharaoh_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "units/egyptians-mercenary",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/units/mercenary_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "units/egyptians-mercenary-cavalry",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/units/mercenary_cavalry_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "units/egyptians-spearman",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/spearman_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "units/egyptians-axeman",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/axeman_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "units/egyptians-slinger",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/slinger_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "units/egyptians-chariot-archer",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/chariot_archer_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "units/egyptians-camel-rider",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/camel_rider_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "units/egyptians-war-elephant",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/war_elephant_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "units/egyptians-siege-tower",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/units/siege_tower_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "units/egyptians-catapult",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/units/catapult_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "units/egyptians-fishing-ship",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/units/fishing_ship_egyptian_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "units/egyptians-transport-ship",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/units/transport_ship_egyptian_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "units/egyptians-kebenit",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/units/kebenit_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "units/egyptians-ramming-galley",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/ramming_galley_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "units/egyptians-war-barge",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/units/war_barge_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "units/egyptians-camel-caravan",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/units/caravan_egyptian_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "units/egyptians-leviathan",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/leviathan_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "units/egyptians-war-turtle",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/units/war_turtle_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "units/egyptians-sphinx",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/sphinx_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "units/egyptians-wadjet",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/wadjet_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "units/egyptians-anubite",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/anubite_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "units/egyptians-petsuchos",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/units/petsuchos_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "units/egyptians-roc",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/units/roc_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "units/egyptians-scorpion-man",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/units/scorpion_man_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "units/egyptians-scarab",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/units/scarab_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "units/egyptians-mummy",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/units/mummy_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "units/egyptians-phoenix",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/units/phoenix_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "units/egyptians-avenger",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/units/avenger_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "units/egyptians-baboon-of-set",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/units/baboon_of_set_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "units/egyptians-hyena-of-set",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/units/hyena_of_set_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "units/egyptians-gazelle-of-set",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/units/gazelle_of_set_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "units/egyptians-giraffe-of-set",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/units/giraffe_of_set_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "units/egyptians-crocodile-of-set",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/units/crocodile_of_set_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "units/egyptians-hippopotamus-of-set",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/units/hippopotamus_of_set_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "units/egyptians-rhinoceros-of-set",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/units/rhinoceros_of_set_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "units/egyptians-elephant-of-set",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/units/elephant_of_set_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "buildings/egyptians-town-center",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/structures/town_center_egyptian_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "buildings/egyptians-village-center",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/structures/village_center_egyptian_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "buildings/egyptians-house",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/house_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "buildings/egyptians-granary",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/structures/granary_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "buildings/egyptians-mining-camp",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/structures/mining_camp_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "buildings/egyptians-lumber-camp",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/structures/lumber_camp_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "buildings/egyptians-temple",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/temple_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "buildings/egyptians-dock",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/dock_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "buildings/egyptians-farm",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/structures/farm_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "buildings/egyptians-obelisk",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/structures/obelisk_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "buildings/egyptians-monument-to-villagers",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/structures/monument_to_villagers_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "buildings/egyptians-monument-to-soldiers",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/structures/monument_to_soldiers_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "buildings/egyptians-monument-to-priests",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/structures/monument_to_priests_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "buildings/egyptians-monument-to-pharaohs",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/structures/monument_to_pharaohs_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "buildings/egyptians-monument-to-gods",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/structures/monument_to_gods_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "buildings/egyptians-wall",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/structures/wooden_wall_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "buildings/egyptians-barracks",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/barracks_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "buildings/egyptians-market",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/market_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "buildings/egyptians-armory",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/armory_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "buildings/egyptians-sentry-tower",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/structures/sentry_tower_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "buildings/egyptians-migdol-stronghold",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/migdol_stronghold.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "buildings/egyptians-siege-works",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/structures/siege_works_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "buildings/egyptians-lighthouse",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/structures/lighthouse_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "buildings/egyptians-wonder",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/structures/wonder_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-skin-of-the-rhino",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/skin_of_the_rhino_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-flood-of-the-nile",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/flood_of_the_nile_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "techs/egyptians-clairvoyance",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/clairvoyance_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-hands-of-the-pharaoh",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/hands_of_the_pharaoh_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-husbandry",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/husbandry_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "techs/egyptians-hand-axe",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/hand_axe_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "techs/egyptians-pickaxe",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/pickaxe_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "techs/egyptians-shaduf",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/shaduf_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "techs/egyptians-scalloped-axe",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/scalloped_axe_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-leather-frame-shield",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/leather_frame_shield_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-electrum-bullets",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/electrum_bullets_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "techs/egyptians-adze-of-wepwawet",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/adze_of_wepwawet_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "techs/egyptians-sacred-cats",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/sacred_cats_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "techs/egyptians-criosphinx",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/criosphinx_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "techs/egyptians-hieracosphinx",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/hieracosphinx_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "techs/egyptians-feet-of-the-jackal",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/feet_of_the_jackal_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "techs/egyptians-necropolis",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/necropolis_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-serpent-spear",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/serpent_spear_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "techs/egyptians-watch-tower",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/watch_tower_egyptian_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-medium-axemen",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/medium_axemen_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "techs/egyptians-medium-spearmen",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/medium_spearmen_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "techs/egyptians-medium-slingers",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/medium_slingers_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "techs/egyptians-stone-wall",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/stone_wall_egyptian_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-masons",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/masons_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-signal-fires",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/signal_fires_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-crenellations",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/crenellations_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-copper-weapons",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/copper_weapons_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "techs/egyptians-copper-armor",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/copper_armor_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "techs/egyptians-copper-shields",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/copper_shields_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "techs/egyptians-ballistics",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/ballistics_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-purse-seine",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/purse_seine_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "techs/egyptians-enclosed-deck",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/enclosed_deck_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-heroic-fleet",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/heroic_fleet_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-plow",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/plow_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-survival-equipment",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/hunting_equipment_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-crimson-linen",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/crimson_linen_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-force-of-the-west-wind",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/force_of_the_west_wind_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-bone-bow",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/bone_bow_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-slings-of-the-sun",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/slings_of_the_sun_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-solar-barque",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/solar_barque_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-sun-dried-mud-brick",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/sundried_mud_brick_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-crocodilopolis",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/crocodilopolis_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-dark-water",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/dark_water_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-funeral-barge",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/funeral_barge_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-spirit-of-maat",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/spirit_of_maat_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-funeral-rites",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/funeral_rites_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-nebty",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/nebty_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-heavy-axemen",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/heavy_axemen_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-heavy-spearmen",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/heavy_spearmen_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-heavy-slingers",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/heavy_slingers_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-levy-barracks-soldiers",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/levy_barracks_soldiers_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-heavy-chariots",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/heavy_chariot_archers_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "techs/egyptians-heavy-camel-riders",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/heavy_camel_riders_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-heavy-war-elephants",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/heavy_war_elephants_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-levy-migdol-soldiers",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/levy_migdol_soldiers_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "techs/egyptians-fortified-wall",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/fortified_wall_egyptian_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-architects",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/architects_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-fortified-town-center",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/fortified_town_center_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-guard-tower",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/guard_tower_egyptian_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-carrier-pigeons",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/carrier_pigeons_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-boiling-oil",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/boiling_oil_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-bronze-weapons",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/bronze_weapons_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-bronze-armor",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/bronze_armor_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-bronze-shields",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/bronze_shields_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-draft-horses",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/draft_horses_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-salt-amphora",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/salt_amphora_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-heavy-warships",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/heavy_warships_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-irrigation",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/irrigation_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-bow-saw",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/bow_saw_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "techs/egyptians-shaft-mine",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/shaft_mine_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "techs/egyptians-tax-collectors",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/tax_collectors_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-new-kingdom",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/new_kingdom_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-atef-crown",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/atef_crown_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-desert-wind",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/desert_wind_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-axe-of-vengeance",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/axe_of_vengeance_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-greatest-of-fifty",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/greatest_of_fifty_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-spear-of-horus",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/spear_of_horus_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-book-of-thoth",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/book_of_thoth_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-tusks-of-apedemak",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/tusks_of_apedemak_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-valley-of-the-kings",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/valley_of_the_kings_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-secrets-of-the-titans",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/secrets_of_the_titans_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-champion-axemen",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/champion_axemen_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-champion-spearmen",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/champion_spearmen_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-champion-slingers",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/champion_slingers_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-conscript-barracks-soldiers",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/conscript_barracks_soldiers_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-champion-chariots",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/champion_chariot_archers_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-champion-camel-riders",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/champion_camel_riders_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-champion-war-elephants",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/champion_war_elephants_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-conscript-migdol-soldiers",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/conscript_migdol_soldiers_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-ballista-tower",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/ballista_tower_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-citadel-wall",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/citadel_wall_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-omniscience",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/omniscience_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-iron-weapons",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/iron_weapons_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-iron-armor",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/iron_armor_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-iron-shields",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/iron_shields_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-burning-pitch",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/burning_pitch_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-engineers",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/engineers_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-advanced-fortifications",
+    "url": "https://raw.githubusercontent.com/12sg3/aom_tech_tree/main/docs/img/techs/1459.webp",
+    "origin": "https://github.com/12sg3/aom_tech_tree (docs/img/, MIT-licensed code; images are game assets)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "techs/egyptians-conscript-sailors",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/conscript_sailors_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-champion-warships",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/champion_warships_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-flood-control",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/flood_control_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-carpenters",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/carpenters_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-quarry",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/quarry_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "techs/egyptians-ambassadors",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/tech/ambassadors_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "techs/egyptians-coinage",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/coinage_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "powers/rain",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/rain_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "powers/prosperity",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/prosperity_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "powers/vision",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/vision_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "powers/eclipse",
+    "url": "https://raw.githubusercontent.com/12sg3/aom_tech_tree/main/docs/img/god_powers/1998.webp",
+    "origin": "https://github.com/12sg3/aom_tech_tree (docs/img/, MIT-licensed code; images are game assets)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "powers/shifting-sands",
+    "url": "https://raw.githubusercontent.com/12sg3/aom_tech_tree/main/docs/img/god_powers/1999.webp",
+    "origin": "https://github.com/12sg3/aom_tech_tree (docs/img/, MIT-licensed code; images are game assets)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "powers/plague-of-serpents",
+    "url": "https://raw.githubusercontent.com/12sg3/aom_tech_tree/main/docs/img/god_powers/2000.webp",
+    "origin": "https://github.com/12sg3/aom_tech_tree (docs/img/, MIT-licensed code; images are game assets)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "powers/locust-swarm",
+    "url": "https://raw.githubusercontent.com/12sg3/aom_tech_tree/main/docs/img/god_powers/2001.webp",
+    "origin": "https://github.com/12sg3/aom_tech_tree (docs/img/, MIT-licensed code; images are game assets)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "powers/ancestors",
+    "url": "https://raw.githubusercontent.com/12sg3/aom_tech_tree/main/docs/img/god_powers/2002.webp",
+    "origin": "https://github.com/12sg3/aom_tech_tree (docs/img/, MIT-licensed code; images are game assets)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "powers/citadel",
+    "url": "https://raw.githubusercontent.com/12sg3/aom_tech_tree/main/docs/img/god_powers/2003.webp",
+    "origin": "https://github.com/12sg3/aom_tech_tree (docs/img/, MIT-licensed code; images are game assets)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "powers/son-of-osiris",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/egipcios/units/son_of_osiris_icon.png",
+    "origin": "https://github.com/MiguelMG24/aom-retold-build-order (assets/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules; repo has no license file"
+  },
+  {
+    "id": "powers/meteor",
+    "url": "https://raw.githubusercontent.com/12sg3/aom_tech_tree/main/docs/img/god_powers/2005.webp",
+    "origin": "https://github.com/12sg3/aom_tech_tree (docs/img/, MIT-licensed code; images are game assets)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "powers/tornado",
+    "url": "https://raw.githubusercontent.com/12sg3/aom_tech_tree/main/docs/img/god_powers/2006.webp",
+    "origin": "https://github.com/12sg3/aom_tech_tree (docs/img/, MIT-licensed code; images are game assets)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "gods/ra",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/ra_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "gods/ra-portrait",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/ra_portrait.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "gods/isis",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/isis_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "gods/isis-portrait",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/isis_portrait.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "gods/set",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/set_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "gods/set-portrait",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/set_portrait.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "gods/bast",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/bast_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "gods/bast-portrait",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/bast_portrait.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "gods/ptah",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/ptah_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "gods/ptah-portrait",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/ptah_portrait.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "gods/anubis",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/anubis_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "gods/anubis-portrait",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/anubis_portrait.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "gods/sobek",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/sobek_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "gods/sobek-portrait",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/sobek_portrait.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "gods/nephthys",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/nephthys_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "gods/nephthys-portrait",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/nephthys_portrait.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "gods/sekhmet",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/sekhmet_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "gods/sekhmet-portrait",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/sekhmet_portrait.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "gods/osiris",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/osiris_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "gods/osiris-portrait",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/osiris_portrait.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "gods/thoth",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/thoth_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "gods/thoth-portrait",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/thoth_portrait.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "gods/horus",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/horus_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "gods/horus-portrait",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/horus_portrait.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  },
+  {
+    "id": "ui/pantheon-egyptians",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/UI_god_pantheon_egyptian.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders (Icons/)",
+    "license": "Game asset (c) Microsoft / World's Edge, fan use per Microsoft Game Content Usage Rules"
+  }
+]

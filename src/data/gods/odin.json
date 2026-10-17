@@ -1,0 +1,35 @@
+{
+  "id": "odin",
+  "pantheon": "norse",
+  "name": {
+    "pt-BR": "Odin",
+    "en": "Odin"
+  },
+  "icon": "gods/odin",
+  "portrait": "gods/odin-portrait",
+  "modifiers": [
+    {
+      "target": "gatherRate",
+      "op": "mul",
+      "value": 1.1,
+      "scope": {
+        "ids": ["gatherer", "dwarf"],
+        "sources": ["hunt"]
+      },
+      "note": "Hunters gather 10% faster."
+    }
+  ],
+  "powers": ["great-hunt"],
+  "minors": {
+    "classical": ["freyja", "heimdall"],
+    "heroic": ["skadi", "njord"],
+    "mythic": ["baldr", "tyr"]
+  },
+  "unlocks": ["hamask"],
+  "meta": {
+    "source": "https://aomr-analyzer.com/gods/odin + https://ageofempires.fandom.com/wiki/Odin",
+    "checkedAt": "2026-10-17",
+    "confidence": "high",
+    "note": "Not expressed as modifiers: Great Hall units (Hersir, Godi, Jarl, Raiding Cavalry) earn +25% combat favor (1 per 64 damage instead of 80); human soldiers and heroes regenerate 0.4 HP/s; 2 Raven scouts spawn when the first Temple is built and respawn when killed."
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "id": "oranos",
+  "pantheon": "atlanteans",
+  "name": {
+    "pt-BR": "Oranos",
+    "en": "Oranos"
+  },
+  "icon": "gods/oranos",
+  "portrait": "gods/oranos-portrait",
+  "modifiers": [
+    {
+      "target": "favorRate",
+      "op": "mul",
+      "value": 1.25,
+      "scope": {
+        "ids": ["oracle", "oracle-hero"]
+      },
+      "note": "Oracles +25% favor at full LOS (+4 max LOS). Wiki formula gives ~+28% at full LOS for a plain Oracle; less when LOS is not full."
+    }
+  ],
+  "powers": ["shockwave"],
+  "minors": {
+    "classical": ["prometheus", "oceanus"],
+    "heroic": ["hyperion", "theia"],
+    "mythic": ["hekate", "helios"]
+  },
+  "unlocks": ["sky-passage", "empyrian-speed"],
+  "meta": {
+    "source": "https://ageofempires.fandom.com/wiki/Oranos; https://aomr-analyzer.com/gods/oranos",
+    "checkedAt": "2026-10-17",
+    "confidence": "high",
+    "note": "Not expressed: all units +4 LOS; damaged enemy units stay visible 25 s; Sky Passages (one more per age) teleport units."
+  },
+  "fieldMeta": {
+    "modifiers": {
+      "source": "https://aomr-analyzer.com/gods/oranos; https://ageofempires.fandom.com/wiki/Oracle_(unit)",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "+25% from aomr-analyzer; applies only at full LOS."
+    }
+  }
+}

@@ -1,0 +1,119 @@
+[
+  {
+    "id": "hunt",
+    "name": {
+      "pt-BR": "Caça",
+      "en": "Hunt"
+    },
+    "icon": "resources/source-hunt",
+    "resource": "food",
+    "defaultAmount": 1400,
+    "fallback": "berries",
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/Deer; https://github.com/Skrylas/AoMR-RMS-SkirmishMapPack (map scripts)",
+      "checkedAt": "2026-10-17",
+      "confidence": "low",
+      "note": "Typical starting hunt ~7 Deer x 200 food (Deer/Gazelle/Elk 200 each, Aurochs 500, since update 18.27100). Varies by map; decay 12 food/min once killed is not modelled."
+    }
+  },
+  {
+    "id": "herd",
+    "name": {
+      "pt-BR": "Rebanho",
+      "en": "Herd"
+    },
+    "icon": "resources/source-herd",
+    "resource": "food",
+    "defaultAmount": 1000,
+    "fallback": "berries",
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/Goat; https://ageofempires.fandom.com/wiki/Pig; https://ageofempires.fandom.com/wiki/Chicken; https://github.com/Skrylas/AoMR-RMS-SkirmishMapPack (map scripts)",
+      "checkedAt": "2026-10-17",
+      "confidence": "low",
+      "note": "Typical start: 4-7 Chickens (100 food each) + 2-4 Goats/Pigs/Cows (50-100 when found, fatten to 300). Estimate ~1000. Chickens are gathered at the herd rate."
+    }
+  },
+  {
+    "id": "berries",
+    "name": {
+      "pt-BR": "Arbustos de frutas",
+      "en": "Berries"
+    },
+    "icon": "resources/source-berries",
+    "resource": "food",
+    "defaultAmount": 750,
+    "fallback": "farm",
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/Berry_Bush; https://github.com/Skrylas/AoMR-RMS-SkirmishMapPack (map scripts)",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "Patch total: typically 4-6 Berry Bushes x 150 food (5 x 150 = 750)."
+    }
+  },
+  {
+    "id": "farm",
+    "name": {
+      "pt-BR": "Fazenda",
+      "en": "Farm"
+    },
+    "icon": "resources/source-farm",
+    "resource": "food",
+    "defaultAmount": 1,
+    "infinite": true,
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/Farm_(Age_of_Mythology)",
+      "checkedAt": "2026-10-17",
+      "confidence": "high",
+      "note": "Infinite; defaultAmount is ignored."
+    }
+  },
+  {
+    "id": "fish",
+    "name": {
+      "pt-BR": "Peixe",
+      "en": "Fish"
+    },
+    "icon": "resources/source-fish",
+    "resource": "food",
+    "defaultAmount": 1,
+    "infinite": true,
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/Mahi; https://ageofempires.fandom.com/wiki/Fishing_Ship_(Age_of_Mythology)",
+      "checkedAt": "2026-10-17",
+      "confidence": "high",
+      "note": "In-game description (Retold): fish provide an unlimited supply of Food, one Fishing Ship per fish. defaultAmount is ignored."
+    }
+  },
+  {
+    "id": "wood",
+    "name": {
+      "pt-BR": "Madeira",
+      "en": "Wood"
+    },
+    "icon": "resources/source-wood",
+    "resource": "wood",
+    "defaultAmount": 200,
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/Tree",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "One tree: 200 wood (since update 17.27932). Gaia Trees: 250."
+    }
+  },
+  {
+    "id": "gold",
+    "name": {
+      "pt-BR": "Ouro",
+      "en": "Gold"
+    },
+    "icon": "resources/source-gold",
+    "resource": "gold",
+    "defaultAmount": 3000,
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/Gold_Mine; https://github.com/Skrylas/AoMR-RMS-SkirmishMapPack (map scripts)",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "Starting gold is a medium Gold Mine (3000); small 1500, large 6000."
+    }
+  }
+]

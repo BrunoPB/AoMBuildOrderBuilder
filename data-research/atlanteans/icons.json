@@ -1,0 +1,1178 @@
+[
+  {
+    "id": "buildings/atlanteans-armory",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/9/9c/AoMR_Armory_icon.png/revision/latest?cb=20240908065629",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Armory_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "buildings/atlanteans-counter-barracks",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/counter_barracks_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "buildings/atlanteans-dock",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/a/a9/AoMR_Dock_icon.png/revision/latest?cb=20240908070904",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Dock_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "buildings/atlanteans-economic-guild",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/economic_guild_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "buildings/atlanteans-farm",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/6/65/AoMR_Farm_icon.png/revision/latest?cb=20240908070952",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Farm_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "buildings/atlanteans-hesperides-tree",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/3/35/AoMR_Hesperides_Tree_building_icon.png/revision/latest?cb=20240908104533",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Hesperides_Tree_building_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "buildings/atlanteans-manor",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/manor_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "buildings/atlanteans-market",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/c/c9/AoMR_Market_icon.png/revision/latest?cb=20240908072100",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Market_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "buildings/atlanteans-military-barracks",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/military_barracks_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "buildings/atlanteans-mirror-tower",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/6/62/AoMR_Mirror_Tower_icon.png/revision/latest?cb=20240908104822",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Mirror_Tower_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "buildings/atlanteans-palace",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/a/aa/AoMR_Palace_icon.png/revision/latest?cb=20240908105007",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Palace_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "buildings/atlanteans-sentry-tower",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/e/e6/AoMR_Sentry_Tower_icon.png/revision/latest?cb=20240908074409",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Sentry_Tower_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "buildings/atlanteans-sky-passage",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/c/cd/AoMR_Sky_Passage_icon.png/revision/latest?cb=20240908105244",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Sky_Passage_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "buildings/atlanteans-temple",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/d/d8/AoMR_Temple_icon.png/revision/latest?cb=20240908074638",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Temple_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "buildings/atlanteans-town-center",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/8/82/AoMR_Town_Center_Atlantean_icon.png/revision/latest?cb=20240908105503",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Town_Center_Atlantean_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "buildings/atlanteans-village-center",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/6/66/AoMR_Village_Center_Atlanteans_icon.png/revision/latest?cb=20240908105606",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Village_Center_Atlanteans_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "buildings/atlanteans-wonder",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/f/fd/AoMR_Wonder_icon.png/revision/latest?cb=20240908083001",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Wonder_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "buildings/atlanteans-wooden-wall",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/6/60/AoMR_Wooden_Wall_icon.png/revision/latest?cb=20240908083011",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Wooden_Wall_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "gods/atlas",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/atlas_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "gods/atlas-portrait",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/atlas_portrait.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "gods/gaia",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/gaia_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "gods/gaia-portrait",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/gaia_portrait.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "gods/hekate",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/hekate_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "gods/hekate-portrait",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/hekate_portrait.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "gods/helios",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/helios_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "gods/helios-portrait",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/helios_portrait.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "gods/hyperion",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/hyperion_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "gods/hyperion-portrait",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/hyperion_portrait.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "gods/kronos",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/kronos_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "gods/kronos-portrait",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/kronos_portrait.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "gods/leto",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/leto_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "gods/leto-portrait",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/leto_portrait.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "gods/oceanus",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/oceanus_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "gods/oceanus-portrait",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/oceanus_portrait.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "gods/oranos",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/oranos_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "gods/oranos-portrait",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/oranos_portrait.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "gods/prometheus",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/prometheus_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "gods/prometheus-portrait",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/prometheus_portrait.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "gods/rheia",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/rheia_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "gods/rheia-portrait",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/rheia_portrait.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "gods/theia",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/theia_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "gods/theia-portrait",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/theia_portrait.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "powers/carnivora",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/7/7f/AoMR_Carnivora_power_icon.png/revision/latest?cb=20240908103919",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Carnivora_power_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "powers/chaos",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/5/5d/AoMR_Chaos_icon.png/revision/latest?cb=20240908103955",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Chaos_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "powers/deconstruction",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/deconstruction_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "powers/gaia-forest",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/5/5f/AoMR_Gaia_Forest_icon.png/revision/latest?cb=20240908104319",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Gaia_Forest_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "powers/hesperides",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/9/9b/AoMR_Hesperides_icon.png/revision/latest?cb=20240908104524",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Hesperides_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "powers/implode",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/f/f2/AoMR_Implode_icon.png/revision/latest?cb=20240908104606",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Implode_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "powers/shockwave",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/7/72/AoMR_Shockwave_icon.png/revision/latest?cb=20240908105225",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Shockwave_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "powers/spider-lair",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/b/b5/AoMR_Spider_Lair_icon.png/revision/latest?cb=20240908105306",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Spider_Lair_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "powers/tartarian-gate",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/9/9e/AoMR_Tartarian_Gate_power_icon.png/revision/latest?cb=20240908105340",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Tartarian_Gate_power_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "powers/time-shift",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/f/fc/Time_Shift_AoM.png/revision/latest?cb=20240911064132",
+    "origin": "https://ageofempires.fandom.com/wiki/File:Time_Shift_AoM.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom); original-game (2003) icon, no Retold icon found"
+  },
+  {
+    "id": "powers/traitor",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/3/3c/AoMR_Traitor_icon.png/revision/latest?cb=20240908105512",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Traitor_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "powers/valor",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/0/0a/AoMR_Valor_icon.png/revision/latest?cb=20240908105557",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Valor_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "powers/vortex",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/0/0e/AoMR_Vortex_icon.png/revision/latest?cb=20240908105641",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Vortex_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "resources/source-berries",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/1/11/AoMR_Berry_Bush_icon.png/revision/latest?cb=20240908065729",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Berry_Bush_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "resources/source-farm",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/6/65/AoMR_Farm_icon.png/revision/latest?cb=20240908070952",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Farm_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "resources/source-fish",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/7/79/AoMR_Fish_icon.png/revision/latest?cb=20240908071236",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Fish_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "resources/source-gold",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/1/17/AoMR_Gold_Mine_icon.png/revision/latest?cb=20240908071432",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Gold_Mine_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "resources/source-herd",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/goat_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "resources/source-hunt",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/3/37/AoMR_Deer_icon.png/revision/latest?cb=20240908070847",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Deer_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "resources/source-wood",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/f/f1/AoMR_Tree_Oak_icon.png/revision/latest?cb=20240908082033",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Tree_Oak_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-advanced-fortifications",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/7/7d/AoMR_Advanced_Fortifications_icon.png/revision/latest?cb=20250801082312",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Advanced_Fortifications_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-alluvial-clay",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/8/8f/AoMR_Alluvial_Clay_icon.png/revision/latest?cb=20240908103717",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Alluvial_Clay_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-ambassadors",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/b/b0/AoMR_Ambassadors_icon.png/revision/latest?cb=20240908065545",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Ambassadors_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-architects",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/8/89/AoMR_Architects_icon.png/revision/latest?cb=20240908065609",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Architects_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-asper-blood",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/e/e5/AoMR_Asper_Blood_icon.png/revision/latest?cb=20240908103756",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Asper_Blood_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-ballistics",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/6/68/AoMR_Ballistics_icon.png/revision/latest?cb=20240908065707",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Ballistics_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-bite-of-the-shark",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/e/eb/AoMR_Bite_of_the_Shark_icon.png/revision/latest?cb=20240908103846",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Bite_of_the_Shark_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-bow-saw",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/bow_saw_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "techs/atlanteans-bow-saw-gaia",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/bow_saw_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "techs/atlanteans-bronze-armor",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/b/b7/AoMR_Bronze_Armor_icon.png/revision/latest?cb=20240908070309",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Bronze_Armor_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-bronze-shields",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/4/41/AoMR_Bronze_Shields_icon.png/revision/latest?cb=20240908070316",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Bronze_Shields_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-bronze-weapons",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/c/c2/AoMR_Bronze_Weapons_icon.png/revision/latest?cb=20240908070322",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Bronze_Weapons_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-burning-pitch",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/d/df/AoMR_Burning_Pitch_icon.png/revision/latest?cb=20240908070330",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Burning_Pitch_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-carpenters",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/c/cd/AoMR_Carpenters_icon.png/revision/latest?cb=20240908070345",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Carpenters_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-carpenters-gaia",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/c/cd/AoMR_Carpenters_icon.png/revision/latest?cb=20240908070345",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Carpenters_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-celerity",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/8/8e/AoMR_Celerity_icon.png/revision/latest?cb=20240908103929",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Celerity_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-champion-cavalry",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/f/fc/AoMR_Champion_Cavalry_icon.png/revision/latest?cb=20240908070412",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Champion_Cavalry_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-champion-infantry",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/4/48/AoMR_Champion_Infantry_icon.png/revision/latest?cb=20240908070420",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Champion_Infantry_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-champion-ranged-soldiers",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/2/2e/AoMR_Champion_Archers_icon.png/revision/latest?cb=20240908070400",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Champion_Archers_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-champion-warships",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/d/db/AoMR_Champion_Warships_icon.png/revision/latest?cb=20240908070427",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Champion_Warships_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-channels",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/7/76/AoMR_Channels_icon.png/revision/latest?cb=20240908103947",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Channels_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-coinage",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/coinage_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "techs/atlanteans-conscript-counter-soldiers",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/2/2e/AoMR_Conscript_Counter_Soldiers_icon.png/revision/latest?cb=20240908104028",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Conscript_Counter_Soldiers_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-conscript-mainline-soldiers",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/1/1a/AoMR_Conscript_Mainline_Soldiers_icon.png/revision/latest?cb=20240908104034",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Conscript_Mainline_Soldiers_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-conscript-palace-soldiers",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/d/de/AoMR_Conscript_Palace_Soldiers_icon.png/revision/latest?cb=20240908104041",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Conscript_Palace_Soldiers_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-conscript-sailors",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/8/87/AoMR_Conscript_Sailors_icon.png/revision/latest?cb=20240908070753",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Conscript_Sailors_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-copper-armor",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/copper_armor_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "techs/atlanteans-copper-shields",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/copper_shields_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "techs/atlanteans-copper-weapons",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/copper_weapons_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "techs/atlanteans-daktyloi",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/8/8f/AoMR_Daktyloi_icon.png/revision/latest?cb=20240908104112",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Daktyloi_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-daughters-of-the-sea",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/5/5d/AoMR_Daughters_of_the_Sea_icon.png/revision/latest?cb=20240908104120",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Daughters_of_the_Sea_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-devotees-of-atlas",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/6/60/AoMR_Devotees_of_Atlas_icon.png/revision/latest?cb=20240908104156",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Devotees_of_Atlas_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-draft-horses",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/5/58/AoMR_Draft_Horses_icon.png/revision/latest?cb=20240908070913",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Draft_Horses_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-empyrian-speed",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/9/98/AoMR_Empyrian_Speed_icon.png/revision/latest?cb=20240911063816",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Empyrian_Speed_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-enclosed-deck",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/6/6d/AoMR_Enclosed_Deck_icon.png/revision/latest?cb=20240908070931",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Enclosed_Deck_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-engineers",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/d/da/AoMR_Engineers_icon.png/revision/latest?cb=20240908070938",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Engineers_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-flood-control",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/5/5d/AoMR_Flood_Control_icon.png/revision/latest?cb=20240908071248",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Flood_Control_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-flood-control-gaia",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/5/5d/AoMR_Flood_Control_icon.png/revision/latest?cb=20240908071248",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Flood_Control_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-fortified-town-center",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/2/21/AoMR_Fortified_Town_Center_icon.png/revision/latest?cb=20240908071330",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Fortified_Town_Center_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-frontline-heroics",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/5/59/AoMR_Frontline_Heroics_icon.png/revision/latest?cb=20240908104259",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Frontline_Heroics_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-gemini",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/4/48/AoMR_Gemini_icon.png/revision/latest?cb=20240908104343",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Gemini_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-guardian-of-io",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/9/92/AoMR_Guardian_of_Io_icon.png/revision/latest?cb=20240908104353",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Guardian_of_Io_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-halo-of-the-sun",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/e/ed/AoMR_Halo_of_the_Sun_icon.png/revision/latest?cb=20240908104400",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Halo_of_the_Sun_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-hand-axe",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/hand_axe_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "techs/atlanteans-heart-of-the-titans",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/3/31/AoMR_Heart_of_the_Titans_icon.png/revision/latest?cb=20240908104407",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Heart_of_the_Titans_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-heavy-cavalry",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/heavy_cavalry_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "techs/atlanteans-heavy-infantry",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/heavy_infantry_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "techs/atlanteans-heavy-ranged-soldiers",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/heavy_archers_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "techs/atlanteans-heavy-warships",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/1/1e/AoMR_Heavy_Warships_icon.png/revision/latest?cb=20240908071532",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Heavy_Warships_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-hephaestus-revenge",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/2/21/AoMR_Hephaestus_Revenge_icon.png/revision/latest?cb=20240908104504",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Hephaestus_Revenge_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-heroic-fleet",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/1/16/AoMR_Heroic_Fleet_icon.png/revision/latest?cb=20240908071600",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Heroic_Fleet_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-heroic-renewal",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/a/a2/AoMR_Heroic_Renewal_icon.png/revision/latest?cb=20240908104516",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Heroic_Renewal_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-horns-of-consecration",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/7/7c/AoMR_Horns_of_Consecration_icon.png/revision/latest?cb=20240908104541",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Horns_of_Consecration_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-husbandry",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/husbandry_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "techs/atlanteans-iron-armor",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/1/19/AoMR_Iron_Armor_icon.png/revision/latest?cb=20240908072013",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Iron_Armor_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-iron-shields",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/a/a9/AoMR_Iron_Shields_icon.png/revision/latest?cb=20240908072019",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Iron_Shields_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-iron-weapons",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/6/60/AoMR_Iron_Weapons_icon.png/revision/latest?cb=20240908072026",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Iron_Weapons_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-irrigation",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/5/52/AoMR_Irrigation_icon.png/revision/latest?cb=20240908072032",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Irrigation_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-irrigation-gaia",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/5/52/AoMR_Irrigation_icon.png/revision/latest?cb=20240908072032",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Irrigation_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-lance-of-stone",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/5/55/AoMR_Lance_of_Stone_icon.png/revision/latest?cb=20240908104712",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Lance_of_Stone_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-levy-counter-soldiers",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/e/e0/AoMR_Levy_Counter_Soldiers_icon.png/revision/latest?cb=20240908104736",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Levy_Counter_Soldiers_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-levy-mainline-soldiers",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/0/04/AoMR_Levy_Mainline_Soldiers_icon.png/revision/latest?cb=20240908104743",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Levy_Mainline_Soldiers_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-levy-palace-soldiers",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/8/88/AoMR_Levy_Palace_Soldiers_icon.png/revision/latest?cb=20240908104749",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Levy_Palace_Soldiers_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-masons",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/d/dc/AoMR_Masons_icon.png/revision/latest?cb=20240908072108",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Masons_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-medium-infantry",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/medium_infantry_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "techs/atlanteans-medium-ranged-soldiers",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/medium_archers_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "techs/atlanteans-mythic-rejuvenation",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/d/d9/AoMR_Mythic_Rejuvenation_icon.png/revision/latest?cb=20240908104848",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Mythic_Rejuvenation_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-orichalcum-mail",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/0/07/AoMR_Orichalcum_Mail_icon.png/revision/latest?cb=20240908104953",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Orichalcum_Mail_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-perception",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/8/83/AoMR_Perception_icon.png/revision/latest?cb=20240908105017",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Perception_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-petrification",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/b/bd/AoMR_Petrification_icon.png/revision/latest?cb=20240908105026",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Petrification_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-pickaxe",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/pickaxe_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "techs/atlanteans-pioneer-of-the-skies",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/3/3c/AoMR_Pioneer_of_the_Skies_icon.png/revision/latest?cb=20240908105035",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Pioneer_of_the_Skies_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-plow",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/a/a7/AoMR_Plow_icon.png/revision/latest?cb=20240908073615",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Plow_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-plow-gaia",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/a/a7/AoMR_Plow_icon.png/revision/latest?cb=20240908073615",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Plow_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-poseidons-secret",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/c/c6/AoMR_Poseidons_Secret_icon.png/revision/latest?cb=20240908105044",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Poseidons_Secret_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-prophetic-sight",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/9/9a/AoMR_Prophetic_Sight_icon.png/revision/latest?cb=20240908105132",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Prophetic_Sight_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-purse-seine",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/purse_seine_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "techs/atlanteans-quarry",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/quarry_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "techs/atlanteans-quarry-gaia",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/quarry_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "techs/atlanteans-rheias-gift",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/0/04/AoMR_Rheias_Gift_icon.png/revision/latest?cb=20240908105155",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Rheias_Gift_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-salt-amphora",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/f/ff/AoMR_Salt_Amphora_icon.png/revision/latest?cb=20240908074339",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Salt_Amphora_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-shaft-mine",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/shaft_mine_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "techs/atlanteans-shaft-mine-gaia",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/shaft_mine_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "techs/atlanteans-sons-of-the-sun",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/d/d1/AoMR_Sons_of_the_Sun_icon.png/revision/latest?cb=20240908105252",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Sons_of_the_Sun_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-survival-equipment",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/f/f9/AoMR_Survival_Equipment_icon.png/revision/latest?cb=20240908071953",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Survival_Equipment_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-survival-equipment-gaia",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/f/f9/AoMR_Survival_Equipment_icon.png/revision/latest?cb=20240908071953",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Survival_Equipment_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-tax-collectors",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/2/25/AoMR_Tax_Collectors_icon.png/revision/latest?cb=20240908074631",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Tax_Collectors_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-temporal-chaos",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/d/d6/AoMR_Temporal_Chaos_icon.png/revision/latest?cb=20240908105358",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Temporal_Chaos_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-theft-of-fire",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/c/c9/AoMR_Theft_of_Fire_icon.png/revision/latest?cb=20240908105409",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Theft_of_Fire_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-titan-shield",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/d/df/AoMR_Titan_Shield_icon.png/revision/latest?cb=20240908105446",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Titan_Shield_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-titanomachy",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/6/64/AoMR_Titanomachy_icon.png/revision/latest?cb=20240908105454",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Titanomachy_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-volcanic-forge",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/b/b4/AoMR_Volcanic_Forge_icon.png/revision/latest?cb=20240908105633",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Volcanic_Forge_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "techs/atlanteans-weightless-mace",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/7/7f/AoMR_Weightless_Mace_icon.png/revision/latest?cb=20240908105659",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Weightless_Mace_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "ui/pantheon-atlanteans",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/UI_god_pantheon_Atlantean.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "units/atlanteans-arcus",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/arcus_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "units/atlanteans-arcus-hero",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/f/ff/AoMR_Arcus_hero_icon.png/revision/latest?cb=20240908103724",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Arcus_hero_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "units/atlanteans-argus",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/4/44/AoMR_Argus_icon.png/revision/latest?cb=20240908103743",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Argus_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "units/atlanteans-automaton",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/automaton_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "units/atlanteans-behemoth",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/3/36/AoMR_Behemoth_icon.png/revision/latest?cb=20240908103830",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Behemoth_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "units/atlanteans-bireme",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/1/1d/AoMR_Bireme_icon.png/revision/latest?cb=20240908103839",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Bireme_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "units/atlanteans-caladria",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/9/90/AoMR_Caladria_icon.png/revision/latest?cb=20240908103859",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Caladria_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "units/atlanteans-centimanus",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/3/39/AoMR_Centimanus_icon.png/revision/latest?cb=20240908103936",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Centimanus_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "units/atlanteans-cheiroballista",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/6/6d/AoMR_Cheiroballista_icon.png/revision/latest?cb=20240908104008",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Cheiroballista_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "units/atlanteans-cheiroballista-hero",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/f/fd/AoMR_Cheiroballista_Hero_icon.png/revision/latest?cb=20240908104002",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Cheiroballista_Hero_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "units/atlanteans-citizen",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/villager_atlantean_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "units/atlanteans-citizen-hero",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/villager_atlantean_hero_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "units/atlanteans-contarius",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/contarius_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "units/atlanteans-contarius-hero",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/3/32/AoMR_Contarius_hero_icon.png/revision/latest?cb=20240908104048",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Contarius_hero_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "units/atlanteans-destroyer",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/2/25/AoMR_Destroyer_icon.png/revision/latest?cb=20240908104145",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Destroyer_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "units/atlanteans-destroyer-hero",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/e/e5/AoMR_Destroyer_hero_icon.png/revision/latest?cb=20240908104138",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Destroyer_hero_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "units/atlanteans-dryad",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/1/18/AoMR_Dryad_icon.png/revision/latest?cb=20240908104205",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Dryad_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "units/atlanteans-fanatic",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/2/28/AoMR_Fanatic_icon.png/revision/latest?cb=20240908104229",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Fanatic_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "units/atlanteans-fanatic-hero",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/9/9b/AoMR_Fanatic_hero_icon.png/revision/latest?cb=20240908104222",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Fanatic_hero_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "units/atlanteans-fire-ship",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/8/85/AoMR_Fire_Ship_icon.png/revision/latest?cb=20240908104237",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Fire_Ship_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "units/atlanteans-fire-siphon",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/f/f2/AoMR_Fire_Siphon_icon.png/revision/latest?cb=20240908104245",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Fire_Siphon_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "units/atlanteans-fishing-ship",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/b/b1/AoMR_Fishing_Ship_Atlantean_icon.png/revision/latest?cb=20240908104252",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Fishing_Ship_Atlantean_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "units/atlanteans-katapeltes",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/katapeltes_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "units/atlanteans-katapeltes-hero",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/a/ac/AoMR_Katapeltes_hero_icon.png/revision/latest?cb=20240908104621",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Katapeltes_hero_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "units/atlanteans-lampades",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/9/9b/AoMR_Lampades_icon.png/revision/latest?cb=20240908104702",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Lampades_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "units/atlanteans-llama-caravan",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/5/55/AoMR_Caravan_Atlantean_icon.png/revision/latest?cb=20240908103907",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Caravan_Atlantean_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "units/atlanteans-man-o-war",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/5/5d/AoMR_Man_O%27_War_icon.png/revision/latest?cb=20240908104755",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Man_O%27_War_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "units/atlanteans-murmillo",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/murmillo_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "units/atlanteans-murmillo-hero",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/3/33/AoMR_Murmillo_hero_icon.png/revision/latest?cb=20240908104831",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Murmillo_hero_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "units/atlanteans-nereid",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/4/45/AoMR_Nereid_icon.png/revision/latest?cb=20240908104856",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Nereid_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "units/atlanteans-oracle",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/oracle_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "units/atlanteans-oracle-hero",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/oracle_hero_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "units/atlanteans-promethean",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/promethean_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "units/atlanteans-satyr",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/a/a5/AoMR_Satyr_icon.png/revision/latest?cb=20240908105208",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Satyr_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "units/atlanteans-servant",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/2/2a/AoMR_Servant_icon.png/revision/latest?cb=20240908105216",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Servant_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "units/atlanteans-siege-bireme",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/f/f6/AoMR_Siege_Bireme_icon.png/revision/latest?cb=20240908105237",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Siege_Bireme_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "units/atlanteans-stymphalian-bird",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/d/d6/AoMR_Stymphalian_Bird_icon.png/revision/latest?cb=20240908105321",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Stymphalian_Bird_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "units/atlanteans-transport-ship",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/c/c0/AoMR_Transport_Ship_Atlantean_icon.png/revision/latest?cb=20240908105522",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Transport_Ship_Atlantean_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  },
+  {
+    "id": "units/atlanteans-turma",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/turma_icon.png",
+    "origin": "https://github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules"
+  },
+  {
+    "id": "units/atlanteans-turma-hero",
+    "url": "https://static.wikia.nocookie.net/ageofempires/images/8/81/AoMR_Turma_hero_icon.png/revision/latest?cb=20240908105527",
+    "origin": "https://ageofempires.fandom.com/wiki/File:AoMR_Turma_hero_icon.png",
+    "license": "Game asset © Microsoft, fan use per Game Content Usage Rules (via Age of Empires Series Wiki, Fandom)"
+  }
+]

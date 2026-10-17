@@ -1,0 +1,22 @@
+{
+  "id": "osiris",
+  "pantheon": "egyptians",
+  "name": {
+    "pt-BR": "Osíris",
+    "en": "Osiris"
+  },
+  "icon": "gods/osiris",
+  "portrait": "gods/osiris-portrait",
+  "age": "mythic",
+  "freeUnitsOnAgeUp": {
+    "mummy": 1
+  },
+  "unlocks": ["mummy", "new-kingdom", "atef-crown", "desert-wind", "pharaoh-new-kingdom"],
+  "powers": ["son-of-osiris"],
+  "meta": {
+    "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml) (tech MythicAgeOsiris); cross-checked: https://ageofempires.fandom.com/wiki/Osiris and the Ra/Isis/Set wiki pages (minor god lists)",
+    "checkedAt": "2026-10-17",
+    "confidence": "high",
+    "note": "God of life and resurrection. Focus: Camel Riders and Pharaohs. Free unit(s) spawn at a Temple when the age-up completes. God power recharge 240 s."
+  }
+}

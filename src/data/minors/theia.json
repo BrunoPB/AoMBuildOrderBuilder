@@ -1,0 +1,30 @@
+{
+  "id": "theia",
+  "pantheon": "atlanteans",
+  "name": {
+    "pt-BR": "Teia",
+    "en": "Theia"
+  },
+  "icon": "gods/theia",
+  "portrait": "gods/theia-portrait",
+  "age": "heroic",
+  "freeUnitsOnAgeUp": {
+    "stymphalian-bird": 1
+  },
+  "unlocks": [
+    "stymphalian-bird",
+    "dryad",
+    "hesperides-tree",
+    "daughters-of-the-sea",
+    "prophetic-sight",
+    "poseidons-secret",
+    "lance-of-stone"
+  ],
+  "powers": ["hesperides"],
+  "meta": {
+    "source": "https://ageofempires.fandom.com/wiki/Theia; https://aomr-analyzer.com/gods/kronos (minor lists)",
+    "checkedAt": "2026-10-17",
+    "confidence": "high",
+    "note": "1 free stymphalian-bird on reaching the age through Theia (Kronos: 2). pt-BR name not verified against the official localization."
+  }
+}

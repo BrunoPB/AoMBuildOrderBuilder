@@ -1,0 +1,36 @@
+{
+  "id": "zeus",
+  "pantheon": "greeks",
+  "name": {
+    "pt-BR": "Zeus",
+    "en": "Zeus"
+  },
+  "icon": "gods/zeus",
+  "portrait": "gods/zeus-portrait",
+  "modifiers": [
+    {
+      "target": "favorRate",
+      "op": "mul",
+      "value": 1.2,
+      "note": "Villagers gather favor 20% faster."
+    }
+  ],
+  "startExtras": {
+    "resources": {
+      "favor": 10
+    }
+  },
+  "powers": ["bolt"],
+  "minors": {
+    "classical": ["athena", "hermes"],
+    "heroic": ["apollo", "dionysus"],
+    "mythic": ["hera", "hephaestus"]
+  },
+  "unlocks": ["myrmidon", "jason", "heracles", "odysseus", "bellerophon", "olympian-parentage"],
+  "meta": {
+    "source": "https://ageofempires.fandom.com/wiki/Zeus ; https://aomr-analyzer.com/gods/zeus",
+    "checkedAt": "2026-10-17",
+    "confidence": "high",
+    "note": "Not expressible: myth units cost 1 less population; infantry +60% damage vs buildings; Hoplites +15% speed."
+  }
+}

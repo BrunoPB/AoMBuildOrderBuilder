@@ -1,0 +1,80 @@
+{
+  "id": "gaia",
+  "pantheon": "atlanteans",
+  "name": {
+    "pt-BR": "Gaia",
+    "en": "Gaia"
+  },
+  "icon": "gods/gaia",
+  "portrait": "gods/gaia-portrait",
+  "modifiers": [
+    {
+      "target": "cost",
+      "op": "mul",
+      "value": 0.65,
+      "scope": {
+        "ids": [
+          "economic-guild",
+          "husbandry",
+          "hand-axe",
+          "pickaxe",
+          "plow",
+          "survival-equipment",
+          "bow-saw",
+          "shaft-mine",
+          "irrigation",
+          "carpenters",
+          "quarry",
+          "flood-control",
+          "plow-gaia",
+          "survival-equipment-gaia",
+          "bow-saw-gaia",
+          "shaft-mine-gaia",
+          "irrigation-gaia",
+          "carpenters-gaia",
+          "quarry-gaia",
+          "flood-control-gaia"
+        ]
+      },
+      "note": "Economic Guild and its technologies -35% cost (update 18.7603 value)."
+    },
+    {
+      "target": "cost",
+      "op": "mul",
+      "value": 0.75,
+      "scope": {
+        "ids": ["citizen-hero"]
+      },
+      "note": "Promoting Citizens to Citizen Heroes costs -25% (applies to the promotion cost)."
+    }
+  ],
+  "startExtras": {
+    "units": {
+      "citizen": 0,
+      "citizen-hero": 2
+    }
+  },
+  "powers": ["gaia-forest"],
+  "minors": {
+    "classical": ["leto", "oceanus"],
+    "heroic": ["theia", "rheia"],
+    "mythic": ["atlas", "hekate"]
+  },
+  "unlocks": [
+    "channels",
+    "plow-gaia",
+    "survival-equipment-gaia",
+    "bow-saw-gaia",
+    "shaft-mine-gaia",
+    "irrigation-gaia",
+    "carpenters-gaia",
+    "quarry-gaia",
+    "flood-control-gaia"
+  ],
+  "meta": {
+    "source": "https://ageofempires.fandom.com/wiki/Gaia_(goddess); https://aomr-analyzer.com/gods/gaia",
+    "checkedAt": "2026-10-17",
+    "confidence": "high",
+    "note": "startExtras REPLACES the 2 starting Citizens with 2 Citizen Heroes (citizen: 0, citizen-hero: 2), it is not additive. Economic Guild techs one age earlier: modelled by the '*-gaia' research entries. Not expressed: economic buildings grow Lush (1 HP/s regeneration)."
+  }
+}

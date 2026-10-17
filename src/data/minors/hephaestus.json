@@ -1,0 +1,25 @@
+{
+  "id": "hephaestus",
+  "pantheon": "greeks",
+  "name": {
+    "pt-BR": "Hefesto",
+    "en": "Hephaestus"
+  },
+  "icon": "gods/hephaestus",
+  "portrait": "gods/hephaestus-portrait",
+  "age": "mythic",
+  "unlocks": [
+    "colossus",
+    "hand-of-talos",
+    "shoulder-of-talos",
+    "olympian-weapons",
+    "forge-of-olympus"
+  ],
+  "powers": ["plenty"],
+  "meta": {
+    "source": "https://ageofempires.fandom.com/wiki/Hephaestus ; https://aomr-analyzer.com/gods/zeus ; https://aomr-analyzer.com/gods/hades ; https://aomr-analyzer.com/gods/poseidon",
+    "checkedAt": "2026-10-17",
+    "confidence": "high",
+    "note": "No free units on age-up for Greek minor gods."
+  }
+}

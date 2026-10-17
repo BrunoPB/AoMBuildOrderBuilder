@@ -1,0 +1,34 @@
+{
+  "id": "ra",
+  "pantheon": "egyptians",
+  "name": {
+    "pt-BR": "Rá",
+    "en": "Ra"
+  },
+  "icon": "gods/ra",
+  "portrait": "gods/ra-portrait",
+  "modifiers": [
+    {
+      "target": "gatherRate",
+      "op": "mul",
+      "value": 1.3,
+      "scope": {
+        "sources": ["berries"]
+      },
+      "note": "Laborers gather from Berry Bushes 30% faster (BasePercent)."
+    }
+  ],
+  "powers": ["rain"],
+  "minors": {
+    "classical": ["bast", "ptah"],
+    "heroic": ["sekhmet", "sobek"],
+    "mythic": ["osiris", "horus"]
+  },
+  "unlocks": ["skin-of-the-rhino"],
+  "meta": {
+    "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml) (ArchaicAge<God> tech, STR_CIV_*_LR, string_replacement_values.xml); cross-checked: https://ageofempires.fandom.com/wiki/Ra , /Isis , /Set (Bonuses sections)",
+    "checkedAt": "2026-10-17",
+    "confidence": "high",
+    "note": "Other bonuses: +15% hitpoints for Camel Riders, Chariot Archers and War Elephants; Priests can empower (60% of Pharaoh efficiency: x1.45 build/research/train, x1.12 favor/dropsite); Pharaoh-empowered Monuments empower nearby buildings (30 range, Priest strength). Rain recharge 90 s."
+  }
+}

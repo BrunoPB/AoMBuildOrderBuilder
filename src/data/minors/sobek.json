@@ -1,0 +1,30 @@
+{
+  "id": "sobek",
+  "pantheon": "egyptians",
+  "name": {
+    "pt-BR": "Sobek",
+    "en": "Sobek"
+  },
+  "icon": "gods/sobek",
+  "portrait": "gods/sobek-portrait",
+  "age": "heroic",
+  "freeUnitsOnAgeUp": {
+    "petsuchos": 1,
+    "roc": 1
+  },
+  "unlocks": [
+    "petsuchos",
+    "roc",
+    "solar-barque",
+    "sun-dried-mud-brick",
+    "crocodilopolis",
+    "dark-water"
+  ],
+  "powers": ["locust-swarm"],
+  "meta": {
+    "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml) (tech HeroicAgeSobek); cross-checked: https://ageofempires.fandom.com/wiki/Sobek and the Ra/Isis/Set wiki pages (minor god lists)",
+    "checkedAt": "2026-10-17",
+    "confidence": "high",
+    "note": "God of kingship and defense. Focus: buildings and camel units. Free unit(s) spawn at a Temple when the age-up completes. God power recharge 150 s."
+  }
+}

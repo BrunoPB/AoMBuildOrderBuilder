@@ -1,0 +1,4554 @@
+{
+  "id": "atlanteans",
+  "name": {
+    "pt-BR": "Atlantes",
+    "en": "Atlanteans"
+  },
+  "icon": "ui/pantheon-atlanteans",
+  "workers": ["citizen", "citizen-hero"],
+  "townCenter": "town-center",
+  "start": {
+    "resources": {
+      "food": 275,
+      "wood": 250,
+      "gold": 75
+    },
+    "units": {
+      "citizen": 2,
+      "oracle": 3
+    },
+    "buildings": {
+      "town-center": 1
+    },
+    "popCap": 15
+  },
+  "favor": {
+    "type": "oracles",
+    "unit": "oracle",
+    "defaultRate": 2,
+    "min": 0.6,
+    "max": 3.4,
+    "heroMultiplier": 1.44,
+    "heroUnit": "oracle-hero",
+    "meta": {
+      "source": "project owner (sources); https://ageofempires.fandom.com/wiki/Oracle_(unit)",
+      "checkedAt": "2026-10-17",
+      "confidence": "high",
+      "note": "Per Oracle, favor/min 0.6 (moving/no LOS) to ~3.4 (full LOS 25, no overlap); hero ~4.9 max (+44%). Overlapping LOS counts once. Favor cap 200."
+    }
+  },
+  "gods": ["kronos", "oranos", "gaia"],
+  "ageUps": [
+    {
+      "pantheon": "atlanteans",
+      "to": "classical",
+      "cost": {
+        "food": 400
+      },
+      "time": 60,
+      "at": "town-center",
+      "requiresAnyOf": [["temple"]],
+      "meta": {
+        "source": "project owner (sources + measured); https://ageofempires.fandom.com/wiki/Classical_Age_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Requires a Temple."
+      }
+    },
+    {
+      "pantheon": "atlanteans",
+      "to": "heroic",
+      "cost": {
+        "food": 800,
+        "gold": 500
+      },
+      "time": 75,
+      "at": "town-center",
+      "requiresAnyOf": [["armory"], ["market"]],
+      "meta": {
+        "source": "project owner (sources + measured); https://ageofempires.fandom.com/wiki/Heroic_Age",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Requires an Armory or a Market."
+      }
+    },
+    {
+      "pantheon": "atlanteans",
+      "to": "mythic",
+      "cost": {
+        "food": 1200,
+        "gold": 1200
+      },
+      "time": 120,
+      "at": "town-center",
+      "requiresAnyOf": [["palace"]],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Mythic_Age",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Requires a fortress-type building (Atlanteans: Palace)."
+      }
+    }
+  ],
+  "units": [
+    {
+      "id": "citizen",
+      "name": {
+        "pt-BR": "Cidadão",
+        "en": "Citizen"
+      },
+      "icon": "units/atlanteans-citizen",
+      "pantheon": "atlanteans",
+      "tags": ["worker"],
+      "cost": {
+        "food": 85,
+        "wood": 15
+      },
+      "pop": 2,
+      "trainTime": 30,
+      "trainedAt": ["town-center", "village-center"],
+      "age": "archaic",
+      "worker": {
+        "gatherRates": {
+          "hunt": 93,
+          "herd": 84,
+          "berries": 65.4,
+          "farm": 65.4,
+          "wood": 93,
+          "gold": 79.2
+        },
+        "buildRate": 1.5,
+        "canBuild": true,
+        "needsDropsite": false
+      },
+      "promotion": {
+        "to": "citizen-hero",
+        "cost": {
+          "food": 65,
+          "wood": 10,
+          "favor": 2
+        },
+        "time": 7
+      },
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Citizen; https://aomr-analyzer.com/frise/civ/atlantean; measured (train time)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Build limit 50 (shared with Citizen Heroes). Gathers without drop sites. Gather rates from wiki (update 18.49472 values, unchanged since)."
+      },
+      "fieldMeta": {
+        "trainTime": {
+          "source": "measured",
+          "checkedAt": "2026-10-17",
+          "confidence": "high",
+          "note": "Measured ~30 s in game; wiki and aomr-analyzer list 28 s (28 since update 18.65484)."
+        },
+        "worker": {
+          "source": "https://ageofempires.fandom.com/wiki/Citizen",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "buildRate 1.5: Citizens build 50% faster than base build times (wiki). Consistent with the measured Krush Counter-Barracks (base 25 s, started 3:05 near a Manor, ready 3:20 = 25/1.5/1.25 ≈ 13 s) and the Temple (started 0:35, ready ~1:05 = 40/1.5 ≈ 27 s)."
+        },
+        "promotion": {
+          "source": "https://ageofempires.fandom.com/wiki/Citizen; https://aomr-analyzer.com/frise/civ/atlantean",
+          "checkedAt": "2026-10-17",
+          "confidence": "high",
+          "note": "Promotion cost 65f 10w 2 favor, 7 s (analyzer hero total 150f 25w 2fav = base + promotion). Gaia: -25%. Heart of the Titans: x0.25 time."
+        }
+      },
+      "plural": {
+        "pt-BR": "Cidadãos",
+        "en": "Citizens"
+      }
+    },
+    {
+      "id": "citizen-hero",
+      "name": {
+        "pt-BR": "Cidadão (Herói)",
+        "en": "Citizen (Hero)"
+      },
+      "icon": "units/atlanteans-citizen-hero",
+      "pantheon": "atlanteans",
+      "tags": ["worker", "hero"],
+      "cost": {
+        "food": 150,
+        "wood": 25,
+        "favor": 2
+      },
+      "pop": 2,
+      "trainTime": 0,
+      "trainedAt": [],
+      "age": "archaic",
+      "worker": {
+        "gatherRates": {
+          "hunt": 102.3,
+          "herd": 92.4,
+          "berries": 71.94,
+          "farm": 71.94,
+          "wood": 102.3,
+          "gold": 87.12
+        },
+        "buildRate": 1.65,
+        "canBuild": true,
+        "needsDropsite": false
+      },
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Citizen; https://aomr-analyzer.com/frise/civ/atlantean",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Not trained directly: obtained by promoting a Citizen (see citizen.promotion). Cost = Citizen cost + promotion cost. Works 10% faster than a Citizen (gather and build). Gaia starts with 2."
+      },
+      "plural": {
+        "pt-BR": "Cidadãos (Heróis)",
+        "en": "Citizens (Hero)"
+      }
+    },
+    {
+      "id": "oracle",
+      "name": {
+        "pt-BR": "Oráculo",
+        "en": "Oracle"
+      },
+      "icon": "units/atlanteans-oracle",
+      "pantheon": "atlanteans",
+      "tags": ["scout", "favor", "human"],
+      "cost": {
+        "food": 40,
+        "gold": 60
+      },
+      "pop": 1,
+      "trainTime": 11,
+      "trainedAt": ["temple"],
+      "age": "archaic",
+      "promotion": {
+        "to": "oracle-hero",
+        "cost": {
+          "food": 30,
+          "gold": 45,
+          "favor": 1
+        },
+        "time": 7
+      },
+      "favorRate": 2,
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Oracle_(unit); https://aomr-analyzer.com/frise/civ/atlantean",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Build limit 10. Generates favor while idle depending on its line of sight (0.6-3.4 favor/min, overlapping LOS counts once); favorRate is the planning default. 3 free Oracles spawn from the Town Center at 6, 10 and 14 s."
+      },
+      "fieldMeta": {
+        "favorRate": {
+          "source": "project owner (sources)",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Wiki formula: favor/s = 0.01 + 0.75*(bonusLOS/100)^2, bonusLOS 0..25 -> 0.6..3.4 favor/min. 2.0 is a planning default."
+        }
+      }
+    },
+    {
+      "id": "oracle-hero",
+      "name": {
+        "pt-BR": "Oráculo (Herói)",
+        "en": "Oracle (Hero)"
+      },
+      "icon": "units/atlanteans-oracle-hero",
+      "pantheon": "atlanteans",
+      "tags": ["scout", "favor", "hero"],
+      "cost": {
+        "food": 70,
+        "gold": 105,
+        "favor": 1
+      },
+      "pop": 1,
+      "trainTime": 0,
+      "trainedAt": [],
+      "age": "archaic",
+      "favorRate": 2.88,
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Oracle_(unit); https://aomr-analyzer.com/frise/civ/atlantean",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Obtained by promoting an Oracle (or via Sons of the Sun, Hyperion). Max favor ~4.9/min (+44% vs Oracle at full LOS); minimum doubled. Cost = Oracle + promotion."
+      },
+      "fieldMeta": {
+        "favorRate": {
+          "source": "project owner (sources)",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "2.0 default x 1.44 hero multiplier."
+        }
+      }
+    },
+    {
+      "id": "murmillo",
+      "name": {
+        "pt-BR": "Murmillo",
+        "en": "Murmillo"
+      },
+      "icon": "units/atlanteans-murmillo",
+      "pantheon": "atlanteans",
+      "tags": ["infantry", "human"],
+      "cost": {
+        "food": 55,
+        "gold": 30
+      },
+      "pop": 2,
+      "trainTime": 14,
+      "trainedAt": ["military-barracks"],
+      "age": "classical",
+      "promotion": {
+        "to": "murmillo-hero",
+        "cost": {
+          "food": 40,
+          "gold": 25,
+          "favor": 2
+        },
+        "time": 7
+      },
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Murmillo; https://aomr-analyzer.com/frise/civ/atlantean",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "murmillo-hero",
+      "name": {
+        "pt-BR": "Murmillo (Herói)",
+        "en": "Murmillo (Hero)"
+      },
+      "icon": "units/atlanteans-murmillo-hero",
+      "pantheon": "atlanteans",
+      "tags": ["infantry", "hero"],
+      "cost": {
+        "food": 95,
+        "gold": 55,
+        "favor": 2
+      },
+      "pop": 2,
+      "trainTime": 0,
+      "trainedAt": [],
+      "age": "classical",
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Murmillo; https://aomr-analyzer.com/frise/civ/atlantean",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Not trained directly: obtained by promoting a Murmillo (7 s). Cost = base unit + promotion cost.  pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "katapeltes",
+      "name": {
+        "pt-BR": "Katapeltes",
+        "en": "Katapeltes"
+      },
+      "icon": "units/atlanteans-katapeltes",
+      "pantheon": "atlanteans",
+      "tags": ["infantry", "human"],
+      "cost": {
+        "food": 60,
+        "gold": 35
+      },
+      "pop": 2,
+      "trainTime": 10.5,
+      "trainedAt": ["counter-barracks"],
+      "age": "classical",
+      "promotion": {
+        "to": "katapeltes-hero",
+        "cost": {
+          "food": 45,
+          "gold": 25,
+          "favor": 2
+        },
+        "time": 7
+      },
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Katapeltes; https://aomr-analyzer.com/frise/civ/atlantean",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "katapeltes-hero",
+      "name": {
+        "pt-BR": "Katapeltes (Herói)",
+        "en": "Katapeltes (Hero)"
+      },
+      "icon": "units/atlanteans-katapeltes-hero",
+      "pantheon": "atlanteans",
+      "tags": ["infantry", "hero"],
+      "cost": {
+        "food": 105,
+        "gold": 60,
+        "favor": 2
+      },
+      "pop": 2,
+      "trainTime": 0,
+      "trainedAt": [],
+      "age": "classical",
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Katapeltes; https://aomr-analyzer.com/frise/civ/atlantean",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Not trained directly: obtained by promoting a Katapeltes (7 s). Cost = base unit + promotion cost.  pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "turma",
+      "name": {
+        "pt-BR": "Turma",
+        "en": "Turma"
+      },
+      "icon": "units/atlanteans-turma",
+      "pantheon": "atlanteans",
+      "tags": ["cavalry", "archer", "human"],
+      "cost": {
+        "wood": 45,
+        "gold": 40
+      },
+      "pop": 2,
+      "trainTime": 10,
+      "trainedAt": ["counter-barracks"],
+      "age": "classical",
+      "promotion": {
+        "to": "turma-hero",
+        "cost": {
+          "wood": 35,
+          "gold": 30,
+          "favor": 2
+        },
+        "time": 7
+      },
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Turma; https://aomr-analyzer.com/frise/civ/atlantean",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "trainTime": {
+          "source": "measured",
+          "checkedAt": "2026-10-17",
+          "confidence": "high",
+          "note": "Owner: 10 s (sources + measured). Wiki and aomr-analyzer list 9.5 s."
+        }
+      }
+    },
+    {
+      "id": "turma-hero",
+      "name": {
+        "pt-BR": "Turma (Herói)",
+        "en": "Turma (Hero)"
+      },
+      "icon": "units/atlanteans-turma-hero",
+      "pantheon": "atlanteans",
+      "tags": ["cavalry", "archer", "hero"],
+      "cost": {
+        "wood": 80,
+        "gold": 70,
+        "favor": 2
+      },
+      "pop": 2,
+      "trainTime": 0,
+      "trainedAt": [],
+      "age": "classical",
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Turma; https://aomr-analyzer.com/frise/civ/atlantean",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Not trained directly: obtained by promoting a Turma (7 s). Cost = base unit + promotion cost. "
+      }
+    },
+    {
+      "id": "cheiroballista",
+      "name": {
+        "pt-BR": "Cheiroballista",
+        "en": "Cheiroballista"
+      },
+      "icon": "units/atlanteans-cheiroballista",
+      "pantheon": "atlanteans",
+      "tags": ["siege", "archer", "human"],
+      "cost": {
+        "wood": 115,
+        "gold": 100
+      },
+      "pop": 4,
+      "trainTime": 24,
+      "trainedAt": ["counter-barracks"],
+      "age": "classical",
+      "promotion": {
+        "to": "cheiroballista-hero",
+        "cost": {
+          "wood": 85,
+          "gold": 75,
+          "favor": 4
+        },
+        "time": 7
+      },
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Cheiroballista; https://aomr-analyzer.com/frise/civ/atlantean",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "cheiroballista-hero",
+      "name": {
+        "pt-BR": "Cheiroballista (Herói)",
+        "en": "Cheiroballista (Hero)"
+      },
+      "icon": "units/atlanteans-cheiroballista-hero",
+      "pantheon": "atlanteans",
+      "tags": ["siege", "archer", "hero"],
+      "cost": {
+        "wood": 200,
+        "gold": 175,
+        "favor": 4
+      },
+      "pop": 4,
+      "trainTime": 0,
+      "trainedAt": [],
+      "age": "classical",
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Cheiroballista; https://aomr-analyzer.com/frise/civ/atlantean",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Not trained directly: obtained by promoting a Cheiroballista (7 s). Cost = base unit + promotion cost.  pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "arcus",
+      "name": {
+        "pt-BR": "Arcus",
+        "en": "Arcus"
+      },
+      "icon": "units/atlanteans-arcus",
+      "pantheon": "atlanteans",
+      "tags": ["archer", "human"],
+      "cost": {
+        "wood": 60,
+        "gold": 35
+      },
+      "pop": 2,
+      "trainTime": 16,
+      "trainedAt": ["military-barracks"],
+      "age": "heroic",
+      "promotion": {
+        "to": "arcus-hero",
+        "cost": {
+          "wood": 45,
+          "gold": 25,
+          "favor": 2
+        },
+        "time": 7
+      },
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Arcus; https://aomr-analyzer.com/frise/civ/atlantean",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "arcus-hero",
+      "name": {
+        "pt-BR": "Arcus (Herói)",
+        "en": "Arcus (Hero)"
+      },
+      "icon": "units/atlanteans-arcus-hero",
+      "pantheon": "atlanteans",
+      "tags": ["archer", "hero"],
+      "cost": {
+        "wood": 105,
+        "gold": 60,
+        "favor": 2
+      },
+      "pop": 2,
+      "trainTime": 0,
+      "trainedAt": [],
+      "age": "heroic",
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Arcus; https://aomr-analyzer.com/frise/civ/atlantean",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Not trained directly: obtained by promoting a Arcus (7 s). Cost = base unit + promotion cost.  pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "contarius",
+      "name": {
+        "pt-BR": "Contarius",
+        "en": "Contarius"
+      },
+      "icon": "units/atlanteans-contarius",
+      "pantheon": "atlanteans",
+      "tags": ["cavalry", "human"],
+      "cost": {
+        "food": 75,
+        "gold": 40
+      },
+      "pop": 3,
+      "trainTime": 16.5,
+      "trainedAt": ["military-barracks"],
+      "age": "heroic",
+      "promotion": {
+        "to": "contarius-hero",
+        "cost": {
+          "food": 55,
+          "gold": 30,
+          "favor": 3
+        },
+        "time": 7
+      },
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Contarius; https://aomr-analyzer.com/frise/civ/atlantean",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "contarius-hero",
+      "name": {
+        "pt-BR": "Contarius (Herói)",
+        "en": "Contarius (Hero)"
+      },
+      "icon": "units/atlanteans-contarius-hero",
+      "pantheon": "atlanteans",
+      "tags": ["cavalry", "hero"],
+      "cost": {
+        "food": 130,
+        "gold": 70,
+        "favor": 3
+      },
+      "pop": 3,
+      "trainTime": 0,
+      "trainedAt": [],
+      "age": "heroic",
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Contarius; https://aomr-analyzer.com/frise/civ/atlantean",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Not trained directly: obtained by promoting a Contarius (7 s). Cost = base unit + promotion cost.  pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "destroyer",
+      "name": {
+        "pt-BR": "Destruidor",
+        "en": "Destroyer"
+      },
+      "icon": "units/atlanteans-destroyer",
+      "pantheon": "atlanteans",
+      "tags": ["infantry", "human"],
+      "cost": {
+        "food": 70,
+        "gold": 60
+      },
+      "pop": 3,
+      "trainTime": 7,
+      "trainedAt": ["palace"],
+      "age": "heroic",
+      "promotion": {
+        "to": "destroyer-hero",
+        "cost": {
+          "food": 55,
+          "gold": 45,
+          "favor": 3
+        },
+        "time": 7
+      },
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Destroyer; https://aomr-analyzer.com/frise/civ/atlantean",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "destroyer-hero",
+      "name": {
+        "pt-BR": "Destruidor (Herói)",
+        "en": "Destroyer (Hero)"
+      },
+      "icon": "units/atlanteans-destroyer-hero",
+      "pantheon": "atlanteans",
+      "tags": ["infantry", "hero"],
+      "cost": {
+        "food": 125,
+        "gold": 105,
+        "favor": 3
+      },
+      "pop": 3,
+      "trainTime": 0,
+      "trainedAt": [],
+      "age": "heroic",
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Destroyer; https://aomr-analyzer.com/frise/civ/atlantean",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Not trained directly: obtained by promoting a Destroyer (7 s). Cost = base unit + promotion cost.  pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "fanatic",
+      "name": {
+        "pt-BR": "Fanático",
+        "en": "Fanatic"
+      },
+      "icon": "units/atlanteans-fanatic",
+      "pantheon": "atlanteans",
+      "tags": ["infantry", "human"],
+      "cost": {
+        "food": 75,
+        "gold": 55
+      },
+      "pop": 3,
+      "trainTime": 7,
+      "trainedAt": ["palace"],
+      "age": "mythic",
+      "promotion": {
+        "to": "fanatic-hero",
+        "cost": {
+          "food": 55,
+          "gold": 40,
+          "favor": 3
+        },
+        "time": 7
+      },
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Fanatic; https://aomr-analyzer.com/frise/civ/atlantean",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "fanatic-hero",
+      "name": {
+        "pt-BR": "Fanático (Herói)",
+        "en": "Fanatic (Hero)"
+      },
+      "icon": "units/atlanteans-fanatic-hero",
+      "pantheon": "atlanteans",
+      "tags": ["infantry", "hero"],
+      "cost": {
+        "food": 130,
+        "gold": 95,
+        "favor": 3
+      },
+      "pop": 3,
+      "trainTime": 0,
+      "trainedAt": [],
+      "age": "mythic",
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Fanatic; https://aomr-analyzer.com/frise/civ/atlantean",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Not trained directly: obtained by promoting a Fanatic (7 s). Cost = base unit + promotion cost. With Horns of Consecration (Rheia) Fanatics are available in the Heroic Age. pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "fire-siphon",
+      "name": {
+        "pt-BR": "Sifão de Fogo",
+        "en": "Fire Siphon"
+      },
+      "icon": "units/atlanteans-fire-siphon",
+      "pantheon": "atlanteans",
+      "tags": ["siege"],
+      "cost": {
+        "wood": 275,
+        "gold": 180
+      },
+      "pop": 5,
+      "trainTime": 19,
+      "trainedAt": ["palace"],
+      "age": "mythic",
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Fire_Siphon; https://aomr-analyzer.com/frise/civ/atlantean",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "fishing-ship",
+      "name": {
+        "pt-BR": "Barco de Pesca",
+        "en": "Fishing Ship"
+      },
+      "icon": "units/atlanteans-fishing-ship",
+      "pantheon": "atlanteans",
+      "tags": ["ship", "worker"],
+      "cost": {
+        "wood": 50
+      },
+      "pop": 1,
+      "trainTime": 18,
+      "trainedAt": ["dock"],
+      "age": "archaic",
+      "worker": {
+        "gatherRates": {
+          "fish": 33
+        },
+        "canBuild": false,
+        "needsDropsite": true
+      },
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Fishing_Ship_(Age_of_Mythology); https://aomr-analyzer.com/frise/civ/atlantean",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Build limit 50. Gather rate 0.55 food/s (33/min), depends on distance to the Dock. pt-BR name not verified against the official localization."
+      },
+      "fieldMeta": {
+        "worker": {
+          "source": "https://ageofempires.fandom.com/wiki/Fishing_Ship_(Age_of_Mythology)",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "33 food/min (update 18.27100); single source."
+        }
+      }
+    },
+    {
+      "id": "transport-ship",
+      "name": {
+        "pt-BR": "Navio de Transporte",
+        "en": "Transport Ship"
+      },
+      "icon": "units/atlanteans-transport-ship",
+      "pantheon": "atlanteans",
+      "tags": ["ship"],
+      "cost": {
+        "wood": 110
+      },
+      "pop": 1,
+      "trainTime": 19,
+      "trainedAt": ["dock"],
+      "age": "classical",
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Transport_Ship_(Age_of_Mythology); https://aomr-analyzer.com/frise/civ/atlantean",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "bireme",
+      "name": {
+        "pt-BR": "Birreme",
+        "en": "Bireme"
+      },
+      "icon": "units/atlanteans-bireme",
+      "pantheon": "atlanteans",
+      "tags": ["ship", "archer"],
+      "cost": {
+        "wood": 100,
+        "gold": 50
+      },
+      "pop": 3,
+      "trainTime": 16.5,
+      "trainedAt": ["dock"],
+      "age": "classical",
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Bireme_(Age_of_Mythology); https://aomr-analyzer.com/frise/civ/atlantean",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "fire-ship",
+      "name": {
+        "pt-BR": "Navio de Fogo",
+        "en": "Fire Ship"
+      },
+      "icon": "units/atlanteans-fire-ship",
+      "pantheon": "atlanteans",
+      "tags": ["ship"],
+      "cost": {
+        "wood": 100,
+        "gold": 50
+      },
+      "pop": 3,
+      "trainTime": 16.5,
+      "trainedAt": ["dock"],
+      "age": "classical",
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Fire_Ship_(Age_of_Mythology); https://aomr-analyzer.com/frise/civ/atlantean",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "siege-bireme",
+      "name": {
+        "pt-BR": "Birreme de Cerco",
+        "en": "Siege Bireme"
+      },
+      "icon": "units/atlanteans-siege-bireme",
+      "pantheon": "atlanteans",
+      "tags": ["ship", "siege"],
+      "cost": {
+        "wood": 100,
+        "gold": 50
+      },
+      "pop": 3,
+      "trainTime": 16.5,
+      "trainedAt": ["dock"],
+      "age": "classical",
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Siege_Bireme; https://aomr-analyzer.com/frise/civ/atlantean",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "nereid",
+      "name": {
+        "pt-BR": "Nereida",
+        "en": "Nereid"
+      },
+      "icon": "units/atlanteans-nereid",
+      "pantheon": "atlanteans",
+      "tags": ["ship", "myth"],
+      "cost": {
+        "gold": 200,
+        "favor": 15
+      },
+      "pop": 2,
+      "trainTime": 12,
+      "trainedAt": ["dock"],
+      "age": "heroic",
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Nereid; https://aomr-analyzer.com/unit-comparison",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Available to all Atlanteans in the Heroic Age (Retold). pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "man-o-war",
+      "name": {
+        "pt-BR": "Man O' War",
+        "en": "Man O' War"
+      },
+      "icon": "units/atlanteans-man-o-war",
+      "pantheon": "atlanteans",
+      "tags": ["ship", "myth"],
+      "cost": {
+        "food": 250,
+        "favor": 15
+      },
+      "pop": 4,
+      "trainTime": 10,
+      "trainedAt": ["dock"],
+      "age": "mythic",
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Man_O'_War; https://aomr-analyzer.com/unit-comparison",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Available to all Atlanteans in the Mythic Age (Retold). pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "llama-caravan",
+      "name": {
+        "pt-BR": "Caravana de Lhama",
+        "en": "Llama Caravan"
+      },
+      "icon": "units/atlanteans-llama-caravan",
+      "pantheon": "atlanteans",
+      "tags": ["caravan"],
+      "cost": {
+        "food": 100,
+        "wood": 25
+      },
+      "pop": 1,
+      "trainTime": 18,
+      "trainedAt": ["market"],
+      "age": "heroic",
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Caravan_(Age_of_Mythology); https://aomr-analyzer.com/frise/civ/atlantean",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Atlantean Caravan (in-game name Llama Caravan). Limit 60. pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "promethean",
+      "name": {
+        "pt-BR": "Prometeano",
+        "en": "Promethean"
+      },
+      "icon": "units/atlanteans-promethean",
+      "pantheon": "atlanteans",
+      "tags": ["myth"],
+      "cost": {
+        "food": 90,
+        "favor": 9
+      },
+      "pop": 2,
+      "trainTime": 14,
+      "trainedAt": ["temple"],
+      "age": "classical",
+      "requires": ["prometheus"],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Promethean; https://aomr-analyzer.com/unit-comparison",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Splits into Promethean Offspring on death."
+      },
+      "fieldMeta": {
+        "trainTime": {
+          "source": "measured",
+          "checkedAt": "2026-10-17",
+          "confidence": "high",
+          "note": "Owner: 14 s (sources + measured); wiki agrees."
+        }
+      }
+    },
+    {
+      "id": "automaton",
+      "name": {
+        "pt-BR": "Autômato",
+        "en": "Automaton"
+      },
+      "icon": "units/atlanteans-automaton",
+      "pantheon": "atlanteans",
+      "tags": ["myth"],
+      "cost": {
+        "gold": 90,
+        "favor": 6
+      },
+      "pop": 2,
+      "trainTime": 9,
+      "trainedAt": ["temple"],
+      "age": "classical",
+      "requires": ["leto"],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Automaton; https://aomr-analyzer.com/unit-comparison",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Train time 9 s since update 19.14612. pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "caladria",
+      "name": {
+        "pt-BR": "Caladria",
+        "en": "Caladria"
+      },
+      "icon": "units/atlanteans-caladria",
+      "pantheon": "atlanteans",
+      "tags": ["myth"],
+      "cost": {
+        "wood": 100,
+        "gold": 25,
+        "favor": 12
+      },
+      "pop": 2,
+      "trainTime": 9,
+      "trainedAt": ["temple"],
+      "age": "classical",
+      "requires": ["oceanus"],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Caladria; https://aomr-analyzer.com/unit-comparison",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "servant",
+      "name": {
+        "pt-BR": "Servo",
+        "en": "Servant"
+      },
+      "icon": "units/atlanteans-servant",
+      "pantheon": "atlanteans",
+      "tags": ["myth", "ship"],
+      "cost": {
+        "gold": 125,
+        "favor": 12
+      },
+      "pop": 2,
+      "trainTime": 15,
+      "trainedAt": ["dock"],
+      "age": "classical",
+      "requires": ["oceanus"],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Servant; https://aomr-analyzer.com/unit-comparison",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "satyr",
+      "name": {
+        "pt-BR": "Sátiro",
+        "en": "Satyr"
+      },
+      "icon": "units/atlanteans-satyr",
+      "pantheon": "atlanteans",
+      "tags": ["myth"],
+      "cost": {
+        "wood": 250,
+        "favor": 20
+      },
+      "pop": 3,
+      "trainTime": 15,
+      "trainedAt": ["temple"],
+      "age": "heroic",
+      "requires": ["hyperion"],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Satyr; https://aomr-analyzer.com/unit-comparison",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "behemoth",
+      "name": {
+        "pt-BR": "Behemoth",
+        "en": "Behemoth"
+      },
+      "icon": "units/atlanteans-behemoth",
+      "pantheon": "atlanteans",
+      "tags": ["myth", "siege"],
+      "cost": {
+        "food": 250,
+        "favor": 20
+      },
+      "pop": 4,
+      "trainTime": 20,
+      "trainedAt": ["temple"],
+      "age": "heroic",
+      "requires": ["rheia"],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Behemoth; https://aomr-analyzer.com/unit-comparison",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": "stymphalian-bird",
+      "name": {
+        "pt-BR": "Ave do Estínfalo",
+        "en": "Stymphalian Bird"
+      },
+      "icon": "units/atlanteans-stymphalian-bird",
+      "pantheon": "atlanteans",
+      "tags": ["myth"],
+      "cost": {
+        "wood": 200,
+        "gold": 50,
+        "favor": 25
+      },
+      "pop": 3,
+      "trainTime": 10,
+      "trainedAt": ["temple"],
+      "age": "heroic",
+      "requires": ["theia"],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Stymphalian_Bird; https://aomr-analyzer.com/unit-comparison",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "dryad",
+      "name": {
+        "pt-BR": "Dríade",
+        "en": "Dryad"
+      },
+      "icon": "units/atlanteans-dryad",
+      "pantheon": "atlanteans",
+      "tags": ["myth"],
+      "cost": {
+        "wood": 175
+      },
+      "pop": 0,
+      "trainTime": 13,
+      "trainedAt": ["hesperides-tree"],
+      "age": "heroic",
+      "requires": ["theia"],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Dryad; https://aomr-analyzer.com/unit-comparison",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Costs no favor or population. Limit 5 per Hesperides Tree; the Hesperides god power also spawns 2 free Dryads. pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "argus",
+      "name": {
+        "pt-BR": "Argos",
+        "en": "Argus"
+      },
+      "icon": "units/atlanteans-argus",
+      "pantheon": "atlanteans",
+      "tags": ["myth"],
+      "cost": {
+        "gold": 250,
+        "favor": 25
+      },
+      "pop": 4,
+      "trainTime": 20,
+      "trainedAt": ["temple"],
+      "age": "mythic",
+      "requires": ["atlas"],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Argus; https://aomr-analyzer.com/unit-comparison",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "centimanus",
+      "name": {
+        "pt-BR": "Centímano",
+        "en": "Centimanus"
+      },
+      "icon": "units/atlanteans-centimanus",
+      "pantheon": "atlanteans",
+      "tags": ["myth"],
+      "cost": {
+        "gold": 300,
+        "favor": 25
+      },
+      "pop": 4,
+      "trainTime": 18,
+      "trainedAt": ["temple"],
+      "age": "mythic",
+      "requires": ["helios"],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Centimanus; https://aomr-analyzer.com/unit-comparison",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "lampades",
+      "name": {
+        "pt-BR": "Lâmpades",
+        "en": "Lampades"
+      },
+      "icon": "units/atlanteans-lampades",
+      "pantheon": "atlanteans",
+      "tags": ["myth"],
+      "cost": {
+        "gold": 200,
+        "favor": 20
+      },
+      "pop": 4,
+      "trainTime": 20,
+      "trainedAt": ["temple"],
+      "age": "mythic",
+      "requires": ["hekate"],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Lampades; https://aomr-analyzer.com/unit-comparison",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Cost 200 gold 20 favor since update 19.14612. pt-BR name not verified against the official localization."
+      }
+    }
+  ],
+  "buildings": [
+    {
+      "id": "town-center",
+      "name": {
+        "pt-BR": "Centro da Cidade",
+        "en": "Town Center"
+      },
+      "icon": "buildings/atlanteans-town-center",
+      "pantheon": "atlanteans",
+      "cost": {
+        "wood": 350,
+        "gold": 350
+      },
+      "buildTime": 150,
+      "popCap": 15,
+      "age": "archaic",
+      "trains": ["citizen"],
+      "researches": ["masons", "architects", "fortified-town-center", "channels"],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Town_Center_(Age_of_Mythology); https://aomr-analyzer.com/frise/civ/atlantean",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Players start with one. Additional Town Centers (on Settlements) from the Classical Age. Ages are advanced here."
+      },
+      "fieldMeta": {
+        "buildTime": {
+          "source": "https://ageofempires.fandom.com/wiki/Town_Center_(Age_of_Mythology)",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Base 150 s; wiki says a Citizen builds it in 120 s (+25% for Town Centers)."
+        }
+      }
+    },
+    {
+      "id": "village-center",
+      "name": {
+        "pt-BR": "Centro de Vila",
+        "en": "Village Center"
+      },
+      "icon": "buildings/atlanteans-village-center",
+      "pantheon": "atlanteans",
+      "cost": {
+        "wood": 350,
+        "gold": 350
+      },
+      "buildTime": 150,
+      "popCap": 0,
+      "age": "classical",
+      "trains": ["citizen"],
+      "researches": ["channels"],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Village_Center; https://aomr-analyzer.com/frise/civ/atlantean",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Town Center built off a Settlement: no population, trains workers 25% slower, can be built anywhere (one in the Archaic Age only if no TC/VC remains). pt-BR name not verified against the official localization."
+      },
+      "fieldMeta": {
+        "buildTime": {
+          "source": "https://ageofempires.fandom.com/wiki/Village_Center",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Base 150 s; wiki says a Citizen builds it in 120 s."
+        }
+      }
+    },
+    {
+      "id": "manor",
+      "name": {
+        "pt-BR": "Mansão",
+        "en": "Manor"
+      },
+      "icon": "buildings/atlanteans-manor",
+      "pantheon": "atlanteans",
+      "cost": {
+        "wood": 80,
+        "gold": 20
+      },
+      "buildTime": 25,
+      "popCap": 20,
+      "limit": 8,
+      "age": "archaic",
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Manor_(Age_of_Mythology); https://aomr-analyzer.com/frise/civ/atlantean",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Garrisons 2 foot units. Kronos: buildings near a Manor build 25% faster (Temporal Scaffolding)."
+      },
+      "fieldMeta": {
+        "buildTime": {
+          "source": "https://ageofempires.fandom.com/wiki/Manor_(Age_of_Mythology); project owner (sources)",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Base 25 s (owner value and wiki base agree; marked to confirm). Wiki says a Citizen builds it in 16.66 s."
+        }
+      }
+    },
+    {
+      "id": "temple",
+      "name": {
+        "pt-BR": "Templo",
+        "en": "Temple"
+      },
+      "icon": "buildings/atlanteans-temple",
+      "pantheon": "atlanteans",
+      "cost": {
+        "wood": 150,
+        "gold": 150
+      },
+      "buildTime": 40,
+      "age": "archaic",
+      "trains": [
+        "oracle",
+        "promethean",
+        "automaton",
+        "caladria",
+        "satyr",
+        "behemoth",
+        "stymphalian-bird",
+        "argus",
+        "centimanus",
+        "lampades"
+      ],
+      "researches": [
+        "temporal-chaos",
+        "empyrian-speed",
+        "alluvial-clay",
+        "heart-of-the-titans",
+        "hephaestus-revenge",
+        "perception",
+        "volcanic-forge",
+        "gemini",
+        "heroic-renewal",
+        "sons-of-the-sun",
+        "rheias-gift",
+        "prophetic-sight",
+        "guardian-of-io",
+        "titanomachy",
+        "asper-blood",
+        "celerity",
+        "mythic-rejuvenation"
+      ],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Temple_(Age_of_Mythology); https://aomr-analyzer.com/frise/civ/atlantean",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Required for the Classical Age."
+      },
+      "fieldMeta": {
+        "buildTime": {
+          "source": "https://ageofempires.fandom.com/wiki/Temple_(Age_of_Mythology)",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "buildTime = base build time (single Citizen per this project's convention, consistent with the measured Counter-Barracks). Wiki says a Citizen builds it in 26.67 s (Citizens +50% build speed)."
+        }
+      }
+    },
+    {
+      "id": "economic-guild",
+      "name": {
+        "pt-BR": "Guilda Econômica",
+        "en": "Economic Guild"
+      },
+      "icon": "buildings/atlanteans-economic-guild",
+      "pantheon": "atlanteans",
+      "tags": ["economic"],
+      "cost": {
+        "wood": 50,
+        "gold": 15
+      },
+      "buildTime": 15,
+      "age": "archaic",
+      "researches": [
+        "husbandry",
+        "hand-axe",
+        "pickaxe",
+        "plow",
+        "plow-gaia",
+        "survival-equipment",
+        "survival-equipment-gaia",
+        "bow-saw",
+        "bow-saw-gaia",
+        "shaft-mine",
+        "shaft-mine-gaia",
+        "irrigation",
+        "irrigation-gaia",
+        "carpenters",
+        "carpenters-gaia",
+        "quarry",
+        "quarry-gaia",
+        "flood-control",
+        "flood-control-gaia",
+        "theft-of-fire"
+      ],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Economic_Guild; https://aomr-analyzer.com/frise/civ/atlantean",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Gaia: -35% cost. pt-BR name not verified against the official localization."
+      },
+      "fieldMeta": {
+        "buildTime": {
+          "source": "https://ageofempires.fandom.com/wiki/Economic_Guild",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "buildTime = base build time (single Citizen per this project's convention, consistent with the measured Counter-Barracks). Wiki says a Citizen builds it in 10 s (Citizens +50% build speed)."
+        }
+      }
+    },
+    {
+      "id": "dock",
+      "name": {
+        "pt-BR": "Doca",
+        "en": "Dock"
+      },
+      "icon": "buildings/atlanteans-dock",
+      "pantheon": "atlanteans",
+      "cost": {
+        "wood": 125
+      },
+      "buildTime": 30,
+      "age": "archaic",
+      "trains": [
+        "fishing-ship",
+        "transport-ship",
+        "bireme",
+        "fire-ship",
+        "siege-bireme",
+        "servant",
+        "nereid",
+        "man-o-war"
+      ],
+      "researches": [
+        "purse-seine",
+        "salt-amphora",
+        "enclosed-deck",
+        "heroic-fleet",
+        "heavy-warships",
+        "champion-warships",
+        "conscript-sailors",
+        "pioneer-of-the-skies",
+        "daktyloi",
+        "daughters-of-the-sea"
+      ],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Dock_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Drop site for Fishing Ships. pt-BR name not verified against the official localization."
+      },
+      "fieldMeta": {
+        "cost": {
+          "source": "https://ageofempires.fandom.com/wiki/Dock_(Age_of_Mythology); https://ageofempires.fandom.com/wiki/Atlanteans",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Wiki: Atlantean Docks cost 125 wood (Retold). aomr-analyzer shows 100 wood (generic proto, apparently without the Atlantean modifier)."
+        },
+        "buildTime": {
+          "source": "https://ageofempires.fandom.com/wiki/Dock_(Age_of_Mythology)",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "buildTime = base build time (single Citizen per this project's convention, consistent with the measured Counter-Barracks). Wiki says a Citizen builds it in 20 s (Citizens +50% build speed)."
+        }
+      },
+      "dropsiteFor": ["fish"]
+    },
+    {
+      "id": "farm",
+      "name": {
+        "pt-BR": "Fazenda",
+        "en": "Farm"
+      },
+      "icon": "buildings/atlanteans-farm",
+      "pantheon": "atlanteans",
+      "tags": ["farm"],
+      "cost": {
+        "wood": 150
+      },
+      "buildTime": 10,
+      "age": "classical",
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Farm_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Infinite food source (see sources.json 'farm'). 400 HP for Atlanteans. pt-BR name not verified against the official localization."
+      },
+      "fieldMeta": {
+        "cost": {
+          "source": "https://ageofempires.fandom.com/wiki/Farm_(Age_of_Mythology); https://ageofempires.fandom.com/wiki/Atlanteans",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Wiki: Atlantean Farms cost 150 wood (Retold). aomr-analyzer shows 75 wood (generic proto, apparently without the Atlantean modifier)."
+        },
+        "buildTime": {
+          "source": "https://ageofempires.fandom.com/wiki/Farm_(Age_of_Mythology)",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "buildTime = base build time (single Citizen per this project's convention, consistent with the measured Counter-Barracks). Wiki says a Citizen builds it in 6.67 s (Citizens +50% build speed)."
+        }
+      }
+    },
+    {
+      "id": "counter-barracks",
+      "name": {
+        "pt-BR": "Contraquartel",
+        "en": "Counter-Barracks"
+      },
+      "icon": "buildings/atlanteans-counter-barracks",
+      "pantheon": "atlanteans",
+      "cost": {
+        "wood": 100,
+        "gold": 25
+      },
+      "buildTime": 25,
+      "age": "classical",
+      "trains": ["katapeltes", "turma", "cheiroballista"],
+      "researches": ["weightless-mace", "levy-counter-soldiers", "conscript-counter-soldiers"],
+      "meta": {
+        "source": "measured; https://ageofempires.fandom.com/wiki/Counter_Barracks; https://aomr-analyzer.com/frise/civ/atlantean",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "buildTime": {
+          "source": "measured",
+          "checkedAt": "2026-10-17",
+          "confidence": "high",
+          "note": "Measured 25 s by the project owner. Wiki: base 25 s, 16.67 s with a Citizen."
+        }
+      }
+    },
+    {
+      "id": "military-barracks",
+      "name": {
+        "pt-BR": "Quartel Militar",
+        "en": "Military Barracks"
+      },
+      "icon": "buildings/atlanteans-military-barracks",
+      "pantheon": "atlanteans",
+      "cost": {
+        "wood": 75,
+        "gold": 35
+      },
+      "buildTime": 30,
+      "age": "classical",
+      "trains": ["murmillo", "arcus", "contarius"],
+      "researches": [
+        "bite-of-the-shark",
+        "frontline-heroics",
+        "orichalcum-mail",
+        "poseidons-secret",
+        "lance-of-stone",
+        "levy-mainline-soldiers",
+        "conscript-mainline-soldiers",
+        "medium-infantry",
+        "medium-ranged-soldiers",
+        "heavy-infantry",
+        "heavy-ranged-soldiers",
+        "heavy-cavalry",
+        "champion-infantry",
+        "champion-ranged-soldiers",
+        "champion-cavalry"
+      ],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Military_Barracks; https://aomr-analyzer.com/frise/civ/atlantean",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "pt-BR name not verified against the official localization."
+      },
+      "fieldMeta": {
+        "buildTime": {
+          "source": "https://ageofempires.fandom.com/wiki/Military_Barracks",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "buildTime = base build time (single Citizen per this project's convention, consistent with the measured Counter-Barracks). Wiki says a Citizen builds it in 20 s (Citizens +50% build speed)."
+        }
+      }
+    },
+    {
+      "id": "armory",
+      "name": {
+        "pt-BR": "Arsenal",
+        "en": "Armory"
+      },
+      "icon": "buildings/atlanteans-armory",
+      "pantheon": "atlanteans",
+      "cost": {
+        "wood": 150
+      },
+      "buildTime": 40,
+      "age": "classical",
+      "researches": [
+        "copper-weapons",
+        "copper-armor",
+        "copper-shields",
+        "ballistics",
+        "bronze-weapons",
+        "bronze-armor",
+        "bronze-shields",
+        "iron-weapons",
+        "iron-armor",
+        "iron-shields",
+        "burning-pitch"
+      ],
+      "meta": {
+        "source": "measured (cost); https://ageofempires.fandom.com/wiki/Armory; https://aomr-analyzer.com/frise/civ/atlantean",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "One of the Heroic Age requirements (Armory or Market)."
+      },
+      "fieldMeta": {
+        "buildTime": {
+          "source": "measured (cost)",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "buildTime = base build time (single Citizen per this project's convention, consistent with the measured Counter-Barracks). Wiki says a Citizen builds it in 26.67 s (Citizens +50% build speed)."
+        }
+      }
+    },
+    {
+      "id": "market",
+      "name": {
+        "pt-BR": "Mercado",
+        "en": "Market"
+      },
+      "icon": "buildings/atlanteans-market",
+      "pantheon": "atlanteans",
+      "cost": {
+        "wood": 150
+      },
+      "buildTime": 40,
+      "age": "classical",
+      "trains": ["llama-caravan"],
+      "researches": ["tax-collectors", "ambassadors", "coinage"],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Market_(Age_of_Mythology); https://aomr-analyzer.com/frise/civ/atlantean",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "One of the Heroic Age requirements (Armory or Market). pt-BR name not verified against the official localization."
+      },
+      "fieldMeta": {
+        "buildTime": {
+          "source": "https://ageofempires.fandom.com/wiki/Market_(Age_of_Mythology)",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "buildTime = base build time (single Citizen per this project's convention, consistent with the measured Counter-Barracks). Wiki says a Citizen builds it in 26.67 s (Citizens +50% build speed)."
+        }
+      }
+    },
+    {
+      "id": "sentry-tower",
+      "name": {
+        "pt-BR": "Torre de Sentinela",
+        "en": "Sentry Tower"
+      },
+      "icon": "buildings/atlanteans-sentry-tower",
+      "pantheon": "atlanteans",
+      "tags": ["defensive"],
+      "cost": {
+        "wood": 150,
+        "gold": 100
+      },
+      "buildTime": 60,
+      "limit": 30,
+      "age": "classical",
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Sentry_Tower_(Age_of_Mythology); https://aomr-analyzer.com/frise/civ/atlantean",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "pt-BR name not verified against the official localization."
+      },
+      "fieldMeta": {
+        "buildTime": {
+          "source": "https://ageofempires.fandom.com/wiki/Sentry_Tower_(Age_of_Mythology)",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "buildTime = base build time (single Citizen per this project's convention, consistent with the measured Counter-Barracks). Wiki says a Citizen builds it in 40 s (Citizens +50% build speed)."
+        }
+      }
+    },
+    {
+      "id": "wooden-wall",
+      "name": {
+        "pt-BR": "Muralha de Madeira",
+        "en": "Wooden Wall"
+      },
+      "icon": "buildings/atlanteans-wooden-wall",
+      "pantheon": "atlanteans",
+      "tags": ["defensive", "wall"],
+      "cost": {
+        "gold": 3
+      },
+      "buildTime": 5,
+      "age": "archaic",
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Wooden_Wall; https://aomr-analyzer.com/frise/civ/atlantean",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Values for one wall connector. Short/Medium/Long segments: 6/9/15 gold, 6/9/15 s. Upgrades (Stone/Bronze/Iron/Orichalcum Wall) not included. pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "palace",
+      "name": {
+        "pt-BR": "Palácio",
+        "en": "Palace"
+      },
+      "icon": "buildings/atlanteans-palace",
+      "pantheon": "atlanteans",
+      "cost": {
+        "wood": 300,
+        "gold": 300,
+        "favor": 8
+      },
+      "buildTime": 115,
+      "limit": 15,
+      "age": "heroic",
+      "trains": ["destroyer", "fanatic", "fire-siphon"],
+      "researches": [
+        "horns-of-consecration",
+        "devotees-of-atlas",
+        "titan-shield",
+        "halo-of-the-sun",
+        "petrification",
+        "levy-palace-soldiers",
+        "conscript-palace-soldiers",
+        "draft-horses",
+        "engineers",
+        "advanced-fortifications"
+      ],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Palace_(Age_of_Mythology); https://aomr-analyzer.com/frise/civ/atlantean",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Fortress-type building; required for the Mythic Age."
+      },
+      "fieldMeta": {
+        "buildTime": {
+          "source": "https://ageofempires.fandom.com/wiki/Palace_(Age_of_Mythology)",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "buildTime = base build time (single Citizen per this project's convention, consistent with the measured Counter-Barracks). Wiki says a Citizen builds it in 76.67 s (Citizens +50% build speed)."
+        }
+      }
+    },
+    {
+      "id": "sky-passage",
+      "name": {
+        "pt-BR": "Passagem Celeste",
+        "en": "Sky Passage"
+      },
+      "icon": "buildings/atlanteans-sky-passage",
+      "pantheon": "atlanteans",
+      "cost": {
+        "wood": 25,
+        "favor": 8
+      },
+      "buildTime": 30,
+      "age": "archaic",
+      "requires": ["oranos"],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Sky_Passage; https://aomr-analyzer.com/frise/civ/atlantean",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Oranos only. Build limit grows per age: 2 Archaic, 3 Classical, 4 Heroic, 5 Mythic. pt-BR name not verified against the official localization."
+      },
+      "fieldMeta": {
+        "buildTime": {
+          "source": "https://ageofempires.fandom.com/wiki/Sky_Passage",
+          "checkedAt": "2026-10-17",
+          "confidence": "low",
+          "note": "Wiki lists 30 s without saying whether it is base or Citizen time."
+        }
+      }
+    },
+    {
+      "id": "mirror-tower",
+      "name": {
+        "pt-BR": "Torre Espelhada",
+        "en": "Mirror Tower"
+      },
+      "icon": "buildings/atlanteans-mirror-tower",
+      "pantheon": "atlanteans",
+      "tags": ["defensive"],
+      "cost": {
+        "wood": 75,
+        "gold": 50,
+        "favor": 5
+      },
+      "buildTime": 60,
+      "limit": 5,
+      "age": "mythic",
+      "requires": ["helios"],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Mirror_Tower_(Age_of_Mythology); https://aomr-analyzer.com/frise/civ/atlantean",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "pt-BR name not verified against the official localization."
+      },
+      "fieldMeta": {
+        "buildTime": {
+          "source": "https://ageofempires.fandom.com/wiki/Mirror_Tower_(Age_of_Mythology)",
+          "checkedAt": "2026-10-17",
+          "confidence": "low",
+          "note": "Wiki lists 60 s without saying whether it is base or Citizen time."
+        }
+      }
+    },
+    {
+      "id": "hesperides-tree",
+      "name": {
+        "pt-BR": "Árvore das Hespérides",
+        "en": "Hesperides Tree"
+      },
+      "icon": "buildings/atlanteans-hesperides-tree",
+      "pantheon": "atlanteans",
+      "tags": ["god-power"],
+      "cost": {},
+      "buildTime": 0,
+      "age": "heroic",
+      "requires": ["theia"],
+      "trains": ["dryad"],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Hesperides_Tree",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Not buildable: created by the Hesperides god power (Theia). Can be captured. pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "wonder",
+      "name": {
+        "pt-BR": "Maravilha",
+        "en": "Wonder"
+      },
+      "icon": "buildings/atlanteans-wonder",
+      "pantheon": "atlanteans",
+      "cost": {
+        "food": 5000,
+        "wood": 5000,
+        "gold": 5000
+      },
+      "buildTime": 5400,
+      "limit": 1,
+      "age": "mythic",
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Wonder_(Age_of_Mythology); https://aomr-analyzer.com/frise/civ/atlantean",
+        "checkedAt": "2026-10-17",
+        "confidence": "low",
+        "note": "Not affected by Kronos' Manor build bonus. pt-BR name not verified against the official localization."
+      },
+      "fieldMeta": {
+        "buildTime": {
+          "source": "https://ageofempires.fandom.com/wiki/Wonder_(Age_of_Mythology)",
+          "checkedAt": "2026-10-17",
+          "confidence": "low",
+          "note": "Generic wiki value; Citizen-specific time not documented."
+        }
+      }
+    }
+  ],
+  "researches": [
+    {
+      "id": "husbandry",
+      "name": {
+        "pt-BR": "Pecuária",
+        "en": "Husbandry"
+      },
+      "icon": "techs/atlanteans-husbandry",
+      "pantheon": "atlanteans",
+      "tags": ["economic"],
+      "cost": {
+        "wood": 100,
+        "gold": 50
+      },
+      "time": 30,
+      "at": "economic-guild",
+      "age": "archaic",
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.1,
+          "scope": {
+            "sources": ["herd"]
+          },
+          "note": "+10% herdable gather rate (also +25% fattening)."
+        }
+      ],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Husbandry_(Age_of_Mythology); https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "hand-axe",
+      "name": {
+        "pt-BR": "Machado de Mão",
+        "en": "Hand Axe"
+      },
+      "icon": "techs/atlanteans-hand-axe",
+      "pantheon": "atlanteans",
+      "tags": ["economic"],
+      "cost": {
+        "food": 120,
+        "gold": 50
+      },
+      "time": 30,
+      "at": "economic-guild",
+      "age": "archaic",
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.1,
+          "scope": {
+            "sources": ["wood"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Hand_Axe; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "pickaxe",
+      "name": {
+        "pt-BR": "Picareta",
+        "en": "Pickaxe"
+      },
+      "icon": "techs/atlanteans-pickaxe",
+      "pantheon": "atlanteans",
+      "tags": ["economic"],
+      "cost": {
+        "food": 50,
+        "wood": 120
+      },
+      "time": 30,
+      "at": "economic-guild",
+      "age": "archaic",
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.1,
+          "scope": {
+            "sources": ["gold"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Pickaxe; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "plow",
+      "name": {
+        "pt-BR": "Arado",
+        "en": "Plow"
+      },
+      "icon": "techs/atlanteans-plow",
+      "pantheon": "atlanteans",
+      "tags": ["economic"],
+      "cost": {
+        "wood": 50,
+        "gold": 100
+      },
+      "time": 40,
+      "at": "economic-guild",
+      "age": "classical",
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.1,
+          "scope": {
+            "sources": ["farm"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Plow_(Age_of_Mythology); https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "plow-gaia",
+      "name": {
+        "pt-BR": "Arado (Gaia)",
+        "en": "Plow (Gaia)"
+      },
+      "icon": "techs/atlanteans-plow-gaia",
+      "pantheon": "atlanteans",
+      "tags": ["economic"],
+      "cost": {
+        "wood": 50,
+        "gold": 100
+      },
+      "time": 40,
+      "at": "economic-guild",
+      "age": "archaic",
+      "requires": ["gaia"],
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.1,
+          "scope": {
+            "sources": ["farm"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Gaia_(goddess); https://ageofempires.fandom.com/wiki/Plow_(Age_of_Mythology); https://aomr-analyzer.com/frise/civ/atlantean",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Same technology as 'plow', made available one age earlier by Gaia's bonus (aomr-analyzer lists it in the archaic column for Gaia). Research only one of the two. Gaia's -35% cost is applied by the god modifier. pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "survival-equipment",
+      "name": {
+        "pt-BR": "Equipamento de Sobrevivência",
+        "en": "Survival Equipment"
+      },
+      "icon": "techs/atlanteans-survival-equipment",
+      "pantheon": "atlanteans",
+      "tags": ["economic"],
+      "cost": {
+        "wood": 100,
+        "gold": 100
+      },
+      "time": 20,
+      "at": "economic-guild",
+      "age": "classical",
+      "effects": [],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Survival_Equipment; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Citizens +25% HP, +10% melee attack, +50% ranged (anti-animal) attack; no direct gather-rate effect modelled. pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "survival-equipment-gaia",
+      "name": {
+        "pt-BR": "Equipamento de Sobrevivência (Gaia)",
+        "en": "Survival Equipment (Gaia)"
+      },
+      "icon": "techs/atlanteans-survival-equipment-gaia",
+      "pantheon": "atlanteans",
+      "tags": ["economic"],
+      "cost": {
+        "wood": 100,
+        "gold": 100
+      },
+      "time": 20,
+      "at": "economic-guild",
+      "age": "archaic",
+      "requires": ["gaia"],
+      "effects": [],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Gaia_(goddess); https://ageofempires.fandom.com/wiki/Survival_Equipment; https://aomr-analyzer.com/frise/civ/atlantean",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Same technology as 'survival-equipment', made available one age earlier by Gaia's bonus (aomr-analyzer lists it in the archaic column for Gaia). Research only one of the two. Gaia's -35% cost is applied by the god modifier. pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "bow-saw",
+      "name": {
+        "pt-BR": "Serra de Arco",
+        "en": "Bow Saw"
+      },
+      "icon": "techs/atlanteans-bow-saw",
+      "pantheon": "atlanteans",
+      "tags": ["economic"],
+      "cost": {
+        "food": 250,
+        "gold": 150
+      },
+      "time": 45,
+      "at": "economic-guild",
+      "age": "heroic",
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.15,
+          "scope": {
+            "sources": ["wood"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Bow_Saw_(Age_of_Mythology); https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "bow-saw-gaia",
+      "name": {
+        "pt-BR": "Serra de Arco (Gaia)",
+        "en": "Bow Saw (Gaia)"
+      },
+      "icon": "techs/atlanteans-bow-saw-gaia",
+      "pantheon": "atlanteans",
+      "tags": ["economic"],
+      "cost": {
+        "food": 250,
+        "gold": 150
+      },
+      "time": 45,
+      "at": "economic-guild",
+      "age": "classical",
+      "requires": ["gaia"],
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.15,
+          "scope": {
+            "sources": ["wood"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Gaia_(goddess); https://ageofempires.fandom.com/wiki/Bow_Saw_(Age_of_Mythology); https://aomr-analyzer.com/frise/civ/atlantean",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Same technology as 'bow-saw', made available one age earlier by Gaia's bonus (aomr-analyzer lists it in the classical column for Gaia). Research only one of the two. Gaia's -35% cost is applied by the god modifier. pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "shaft-mine",
+      "name": {
+        "pt-BR": "Mina de Poço",
+        "en": "Shaft Mine"
+      },
+      "icon": "techs/atlanteans-shaft-mine",
+      "pantheon": "atlanteans",
+      "tags": ["economic"],
+      "cost": {
+        "food": 150,
+        "wood": 250
+      },
+      "time": 40,
+      "at": "economic-guild",
+      "age": "heroic",
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.15,
+          "scope": {
+            "sources": ["gold"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Shaft_Mine; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "shaft-mine-gaia",
+      "name": {
+        "pt-BR": "Mina de Poço (Gaia)",
+        "en": "Shaft Mine (Gaia)"
+      },
+      "icon": "techs/atlanteans-shaft-mine-gaia",
+      "pantheon": "atlanteans",
+      "tags": ["economic"],
+      "cost": {
+        "food": 150,
+        "wood": 250
+      },
+      "time": 40,
+      "at": "economic-guild",
+      "age": "classical",
+      "requires": ["gaia"],
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.15,
+          "scope": {
+            "sources": ["gold"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Gaia_(goddess); https://ageofempires.fandom.com/wiki/Shaft_Mine; https://aomr-analyzer.com/frise/civ/atlantean",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Same technology as 'shaft-mine', made available one age earlier by Gaia's bonus (aomr-analyzer lists it in the classical column for Gaia). Research only one of the two. Gaia's -35% cost is applied by the god modifier. pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "irrigation",
+      "name": {
+        "pt-BR": "Irrigação",
+        "en": "Irrigation"
+      },
+      "icon": "techs/atlanteans-irrigation",
+      "pantheon": "atlanteans",
+      "tags": ["economic"],
+      "cost": {
+        "wood": 150,
+        "gold": 250
+      },
+      "time": 30,
+      "at": "economic-guild",
+      "age": "heroic",
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.1,
+          "scope": {
+            "sources": ["farm"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Irrigation_(Age_of_Mythology); https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "irrigation-gaia",
+      "name": {
+        "pt-BR": "Irrigação (Gaia)",
+        "en": "Irrigation (Gaia)"
+      },
+      "icon": "techs/atlanteans-irrigation-gaia",
+      "pantheon": "atlanteans",
+      "tags": ["economic"],
+      "cost": {
+        "wood": 150,
+        "gold": 250
+      },
+      "time": 30,
+      "at": "economic-guild",
+      "age": "classical",
+      "requires": ["gaia"],
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.1,
+          "scope": {
+            "sources": ["farm"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Gaia_(goddess); https://ageofempires.fandom.com/wiki/Irrigation_(Age_of_Mythology); https://aomr-analyzer.com/frise/civ/atlantean",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Same technology as 'irrigation', made available one age earlier by Gaia's bonus (aomr-analyzer lists it in the classical column for Gaia). Research only one of the two. Gaia's -35% cost is applied by the god modifier. pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "carpenters",
+      "name": {
+        "pt-BR": "Carpinteiros",
+        "en": "Carpenters"
+      },
+      "icon": "techs/atlanteans-carpenters",
+      "pantheon": "atlanteans",
+      "tags": ["economic"],
+      "cost": {
+        "food": 300,
+        "gold": 200
+      },
+      "time": 55,
+      "at": "economic-guild",
+      "age": "mythic",
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.2,
+          "scope": {
+            "sources": ["wood"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Carpenters; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "carpenters-gaia",
+      "name": {
+        "pt-BR": "Carpinteiros (Gaia)",
+        "en": "Carpenters (Gaia)"
+      },
+      "icon": "techs/atlanteans-carpenters-gaia",
+      "pantheon": "atlanteans",
+      "tags": ["economic"],
+      "cost": {
+        "food": 300,
+        "gold": 200
+      },
+      "time": 55,
+      "at": "economic-guild",
+      "age": "heroic",
+      "requires": ["gaia"],
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.2,
+          "scope": {
+            "sources": ["wood"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Gaia_(goddess); https://ageofempires.fandom.com/wiki/Carpenters; https://aomr-analyzer.com/frise/civ/atlantean",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Same technology as 'carpenters', made available one age earlier by Gaia's bonus (aomr-analyzer lists it in the heroic column for Gaia). Research only one of the two. Gaia's -35% cost is applied by the god modifier. pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "quarry",
+      "name": {
+        "pt-BR": "Pedreira",
+        "en": "Quarry"
+      },
+      "icon": "techs/atlanteans-quarry",
+      "pantheon": "atlanteans",
+      "tags": ["economic"],
+      "cost": {
+        "food": 200,
+        "wood": 300
+      },
+      "time": 50,
+      "at": "economic-guild",
+      "age": "mythic",
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.2,
+          "scope": {
+            "sources": ["gold"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Quarry; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "quarry-gaia",
+      "name": {
+        "pt-BR": "Pedreira (Gaia)",
+        "en": "Quarry (Gaia)"
+      },
+      "icon": "techs/atlanteans-quarry-gaia",
+      "pantheon": "atlanteans",
+      "tags": ["economic"],
+      "cost": {
+        "food": 200,
+        "wood": 300
+      },
+      "time": 50,
+      "at": "economic-guild",
+      "age": "heroic",
+      "requires": ["gaia"],
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.2,
+          "scope": {
+            "sources": ["gold"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Gaia_(goddess); https://ageofempires.fandom.com/wiki/Quarry; https://aomr-analyzer.com/frise/civ/atlantean",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Same technology as 'quarry', made available one age earlier by Gaia's bonus (aomr-analyzer lists it in the heroic column for Gaia). Research only one of the two. Gaia's -35% cost is applied by the god modifier. pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "flood-control",
+      "name": {
+        "pt-BR": "Controle de Enchentes",
+        "en": "Flood Control"
+      },
+      "icon": "techs/atlanteans-flood-control",
+      "pantheon": "atlanteans",
+      "tags": ["economic"],
+      "cost": {
+        "wood": 250,
+        "gold": 350
+      },
+      "time": 40,
+      "at": "economic-guild",
+      "age": "mythic",
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.1,
+          "scope": {
+            "sources": ["farm"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Flood_Control; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "flood-control-gaia",
+      "name": {
+        "pt-BR": "Controle de Enchentes (Gaia)",
+        "en": "Flood Control (Gaia)"
+      },
+      "icon": "techs/atlanteans-flood-control-gaia",
+      "pantheon": "atlanteans",
+      "tags": ["economic"],
+      "cost": {
+        "wood": 250,
+        "gold": 350
+      },
+      "time": 40,
+      "at": "economic-guild",
+      "age": "heroic",
+      "requires": ["gaia"],
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.1,
+          "scope": {
+            "sources": ["farm"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Gaia_(goddess); https://ageofempires.fandom.com/wiki/Flood_Control; https://aomr-analyzer.com/frise/civ/atlantean",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Same technology as 'flood-control', made available one age earlier by Gaia's bonus (aomr-analyzer lists it in the heroic column for Gaia). Research only one of the two. Gaia's -35% cost is applied by the god modifier. pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "theft-of-fire",
+      "name": {
+        "pt-BR": "Roubo do Fogo",
+        "en": "Theft of Fire"
+      },
+      "icon": "techs/atlanteans-theft-of-fire",
+      "pantheon": "atlanteans",
+      "tags": ["myth-tech", "economic"],
+      "cost": {
+        "wood": 100,
+        "favor": 12
+      },
+      "time": 30,
+      "at": "economic-guild",
+      "age": "classical",
+      "requires": ["prometheus"],
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.2,
+          "scope": {
+            "ids": ["citizen-hero"]
+          }
+        },
+        {
+          "target": "buildRate",
+          "op": "mul",
+          "value": 1.2,
+          "scope": {
+            "ids": ["citizen-hero"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Theft_of_Fire; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Citizen Heroes +20% gather and build rate. Not available to Gaia (Gaia cannot pick Prometheus). pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "purse-seine",
+      "name": {
+        "pt-BR": "Rede de Cerco",
+        "en": "Purse Seine"
+      },
+      "icon": "techs/atlanteans-purse-seine",
+      "pantheon": "atlanteans",
+      "tags": ["economic"],
+      "cost": {
+        "wood": 150,
+        "gold": 150
+      },
+      "time": 20,
+      "at": "dock",
+      "age": "classical",
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.5,
+          "scope": {
+            "sources": ["fish"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Purse_Seine; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "salt-amphora",
+      "name": {
+        "pt-BR": "Ânfora de Sal",
+        "en": "Salt Amphora"
+      },
+      "icon": "techs/atlanteans-salt-amphora",
+      "pantheon": "atlanteans",
+      "tags": ["economic"],
+      "cost": {
+        "wood": 200,
+        "gold": 300
+      },
+      "time": 30,
+      "at": "dock",
+      "age": "heroic",
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.5,
+          "scope": {
+            "sources": ["fish"]
+          },
+          "note": "+50% fish gather rate, +25 carry capacity."
+        }
+      ],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Salt_Amphora; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "enclosed-deck",
+      "name": {
+        "pt-BR": "Convés Fechado",
+        "en": "Enclosed Deck"
+      },
+      "icon": "techs/atlanteans-enclosed-deck",
+      "pantheon": "atlanteans",
+      "tags": ["military"],
+      "cost": {
+        "food": 200,
+        "wood": 200
+      },
+      "time": 40,
+      "at": "dock",
+      "age": "classical",
+      "effects": [],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Enclosed_Deck; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "heroic-fleet",
+      "name": {
+        "pt-BR": "Frota Heroica",
+        "en": "Heroic Fleet"
+      },
+      "icon": "techs/atlanteans-heroic-fleet",
+      "pantheon": "atlanteans",
+      "tags": ["military"],
+      "cost": {
+        "food": 100,
+        "gold": 100,
+        "favor": 10
+      },
+      "time": 20,
+      "at": "dock",
+      "age": "classical",
+      "effects": [],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Heroic_Fleet; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "heavy-warships",
+      "name": {
+        "pt-BR": "Navios de Guerra Pesados",
+        "en": "Heavy Warships"
+      },
+      "icon": "techs/atlanteans-heavy-warships",
+      "pantheon": "atlanteans",
+      "tags": ["military"],
+      "cost": {
+        "wood": 150,
+        "gold": 150
+      },
+      "time": 20,
+      "at": "dock",
+      "age": "heroic",
+      "effects": [],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Heavy_Warships_(Age_of_Mythology); https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "champion-warships",
+      "name": {
+        "pt-BR": "Navios de Guerra Campeões",
+        "en": "Champion Warships"
+      },
+      "icon": "techs/atlanteans-champion-warships",
+      "pantheon": "atlanteans",
+      "tags": ["military"],
+      "cost": {
+        "wood": 250,
+        "gold": 200
+      },
+      "time": 20,
+      "at": "dock",
+      "age": "mythic",
+      "effects": [],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Champion_Warships; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "conscript-sailors",
+      "name": {
+        "pt-BR": "Marinheiros Recrutas",
+        "en": "Conscript Sailors"
+      },
+      "icon": "techs/atlanteans-conscript-sailors",
+      "pantheon": "atlanteans",
+      "tags": ["economic"],
+      "cost": {
+        "wood": 300
+      },
+      "time": 30,
+      "at": "dock",
+      "age": "mythic",
+      "effects": [
+        {
+          "target": "trainTime",
+          "op": "mul",
+          "value": 0.8,
+          "scope": {
+            "tags": ["ship"]
+          },
+          "note": "Ships train 25% faster (x0.8 train time)."
+        }
+      ],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Conscript_Sailors; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "masons",
+      "name": {
+        "pt-BR": "Pedreiros",
+        "en": "Masons"
+      },
+      "icon": "techs/atlanteans-masons",
+      "pantheon": "atlanteans",
+      "tags": ["defensive"],
+      "cost": {
+        "food": 200,
+        "wood": 300
+      },
+      "time": 20,
+      "at": "town-center",
+      "age": "classical",
+      "effects": [],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Masons; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "architects",
+      "name": {
+        "pt-BR": "Arquitetos",
+        "en": "Architects"
+      },
+      "icon": "techs/atlanteans-architects",
+      "pantheon": "atlanteans",
+      "tags": ["defensive"],
+      "cost": {
+        "food": 400,
+        "wood": 500
+      },
+      "time": 30,
+      "at": "town-center",
+      "age": "heroic",
+      "effects": [],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Architects; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "fortified-town-center",
+      "name": {
+        "pt-BR": "Centro da Cidade Fortificado",
+        "en": "Fortified Town Center"
+      },
+      "icon": "techs/atlanteans-fortified-town-center",
+      "pantheon": "atlanteans",
+      "tags": ["economic"],
+      "cost": {
+        "wood": 400,
+        "gold": 400
+      },
+      "time": 60,
+      "at": "town-center",
+      "age": "heroic",
+      "effects": [
+        {
+          "target": "popCap",
+          "op": "add",
+          "value": 10,
+          "scope": {
+            "ids": ["town-center"]
+          },
+          "note": "+10 population per Town Center (15 -> 25)."
+        }
+      ],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Fortified_Town_Center; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "temporal-chaos",
+      "name": {
+        "pt-BR": "Caos Temporal",
+        "en": "Temporal Chaos"
+      },
+      "icon": "techs/atlanteans-temporal-chaos",
+      "pantheon": "atlanteans",
+      "tags": ["myth-tech"],
+      "cost": {
+        "wood": 100,
+        "gold": 50,
+        "favor": 10
+      },
+      "time": 20,
+      "at": "temple",
+      "age": "archaic",
+      "requires": ["kronos"],
+      "effects": [],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Temporal_Chaos; https://www.ageofempires.com/news/age-of-mythology-retold-update-19-12998/; https://aomr-analyzer.com/frise/civ/atlantean",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Time Shift: 3 concurrent shifts, takes 50% of the build time instead of 100%, -50% shift cost for towers/Palaces/Mirror Towers (patch 19.12998). Not expressible as a modifier. pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "empyrian-speed",
+      "name": {
+        "pt-BR": "Velocidade Empírea",
+        "en": "Empyrian Speed"
+      },
+      "icon": "techs/atlanteans-empyrian-speed",
+      "pantheon": "atlanteans",
+      "tags": ["myth-tech"],
+      "cost": {
+        "gold": 100,
+        "favor": 5
+      },
+      "time": 30,
+      "at": "temple",
+      "age": "archaic",
+      "requires": ["oranos"],
+      "effects": [],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Empyrian_Speed; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Infantry +10% movement speed. pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "channels",
+      "name": {
+        "pt-BR": "Canais",
+        "en": "Channels"
+      },
+      "icon": "techs/atlanteans-channels",
+      "pantheon": "atlanteans",
+      "tags": ["myth-tech"],
+      "cost": {
+        "gold": 100,
+        "favor": 10
+      },
+      "time": 40,
+      "at": "town-center",
+      "age": "archaic",
+      "requires": ["gaia"],
+      "effects": [],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Channels; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Units move 15% faster on Lush. Also researchable at the Temple and Village Center. pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "alluvial-clay",
+      "name": {
+        "pt-BR": "Argila Aluvial",
+        "en": "Alluvial Clay"
+      },
+      "icon": "techs/atlanteans-alluvial-clay",
+      "pantheon": "atlanteans",
+      "tags": ["myth-tech"],
+      "cost": {
+        "food": 140,
+        "favor": 10
+      },
+      "time": 30,
+      "at": "temple",
+      "age": "classical",
+      "requires": ["prometheus"],
+      "effects": [],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Alluvial_Clay; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "heart-of-the-titans",
+      "name": {
+        "pt-BR": "Coração dos Titãs",
+        "en": "Heart of the Titans"
+      },
+      "icon": "techs/atlanteans-heart-of-the-titans",
+      "pantheon": "atlanteans",
+      "tags": ["myth-tech"],
+      "cost": {
+        "gold": 50,
+        "favor": 5
+      },
+      "time": 20,
+      "at": "temple",
+      "age": "classical",
+      "requires": ["prometheus"],
+      "effects": [],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Heart_of_the_Titans; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Hero promotion time x0.25 (7 s -> 1.75 s); not expressible as a modifier. pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "hephaestus-revenge",
+      "name": {
+        "pt-BR": "Vingança de Hefesto",
+        "en": "Hephaestus Revenge"
+      },
+      "icon": "techs/atlanteans-hephaestus-revenge",
+      "pantheon": "atlanteans",
+      "tags": ["myth-tech"],
+      "cost": {
+        "gold": 100,
+        "favor": 10
+      },
+      "time": 20,
+      "at": "temple",
+      "age": "classical",
+      "requires": ["leto"],
+      "effects": [],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Hephaestus_Revenge; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "perception",
+      "name": {
+        "pt-BR": "Percepção",
+        "en": "Perception"
+      },
+      "icon": "techs/atlanteans-perception",
+      "pantheon": "atlanteans",
+      "tags": ["myth-tech", "economic"],
+      "cost": {
+        "food": 50,
+        "wood": 50
+      },
+      "time": 30,
+      "at": "temple",
+      "age": "classical",
+      "requires": ["leto"],
+      "effects": [
+        {
+          "target": "favorRate",
+          "op": "mul",
+          "value": 1.1,
+          "scope": {
+            "ids": ["oracle", "oracle-hero"]
+          },
+          "note": "Estimate: +0.1 full-capacity multiplier (wiki formula). The extra +10% LOS adds up to ~+17% more at full LOS."
+        }
+      ],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Perception; https://www.ageofempires.com/news/age-of-mythology-retold-update-19-14612/; https://aomr-analyzer.com/frise/civ/atlantean",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Oracles +10% LOS. Cost 50f 50w since 19.14612. pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "volcanic-forge",
+      "name": {
+        "pt-BR": "Forja Vulcânica",
+        "en": "Volcanic Forge"
+      },
+      "icon": "techs/atlanteans-volcanic-forge",
+      "pantheon": "atlanteans",
+      "tags": ["myth-tech"],
+      "cost": {
+        "food": 100,
+        "gold": 50,
+        "favor": 15
+      },
+      "time": 40,
+      "at": "temple",
+      "age": "classical",
+      "requires": ["leto"],
+      "effects": [],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Volcanic_Forge; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Also researchable at the Armory. pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "bite-of-the-shark",
+      "name": {
+        "pt-BR": "Mordida do Tubarão",
+        "en": "Bite of the Shark"
+      },
+      "icon": "techs/atlanteans-bite-of-the-shark",
+      "pantheon": "atlanteans",
+      "tags": ["myth-tech"],
+      "cost": {
+        "food": 100,
+        "favor": 15
+      },
+      "time": 40,
+      "at": "military-barracks",
+      "age": "classical",
+      "requires": ["oceanus"],
+      "effects": [],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Bite_of_the_Shark; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Also researchable at the Armory. pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "weightless-mace",
+      "name": {
+        "pt-BR": "Maça sem Peso",
+        "en": "Weightless Mace"
+      },
+      "icon": "techs/atlanteans-weightless-mace",
+      "pantheon": "atlanteans",
+      "tags": ["myth-tech"],
+      "cost": {
+        "wood": 75,
+        "gold": 100,
+        "favor": 20
+      },
+      "time": 40,
+      "at": "counter-barracks",
+      "age": "classical",
+      "requires": ["oceanus"],
+      "effects": [],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Weightless_Mace; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Also researchable at the Armory. pt-BR name not verified against the official localization."
+      },
+      "fieldMeta": {
+        "cost": {
+          "source": "https://aomr-analyzer.com/frise/civ/atlantean",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "aomr-analyzer: 20 favor; wiki: 15 favor. Analyzer (higher priority) used."
+        }
+      }
+    },
+    {
+      "id": "frontline-heroics",
+      "name": {
+        "pt-BR": "Heroísmo da Linha de Frente",
+        "en": "Frontline Heroics"
+      },
+      "icon": "techs/atlanteans-frontline-heroics",
+      "pantheon": "atlanteans",
+      "tags": ["myth-tech"],
+      "cost": {
+        "gold": 100,
+        "favor": 12
+      },
+      "time": 40,
+      "at": "military-barracks",
+      "age": "classical",
+      "requires": ["oceanus"],
+      "effects": [],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Frontline_Heroics; https://www.ageofempires.com/news/age-of-mythology-retold-update-19-14612/; https://aomr-analyzer.com/frise/civ/atlantean",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Infantry hero promotion -20% food/gold cost. Also at Counter-Barracks and Palace. pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "pioneer-of-the-skies",
+      "name": {
+        "pt-BR": "Pioneiro dos Céus",
+        "en": "Pioneer of the Skies"
+      },
+      "icon": "techs/atlanteans-pioneer-of-the-skies",
+      "pantheon": "atlanteans",
+      "tags": ["myth-tech"],
+      "cost": {
+        "food": 50,
+        "gold": 150,
+        "favor": 15
+      },
+      "time": 40,
+      "at": "dock",
+      "age": "heroic",
+      "requires": ["hyperion"],
+      "effects": [],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Pioneer_of_the_Skies; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "gemini",
+      "name": {
+        "pt-BR": "Gêmeos",
+        "en": "Gemini"
+      },
+      "icon": "techs/atlanteans-gemini",
+      "pantheon": "atlanteans",
+      "tags": ["myth-tech"],
+      "cost": {
+        "wood": 200,
+        "favor": 15
+      },
+      "time": 40,
+      "at": "temple",
+      "age": "heroic",
+      "requires": ["hyperion"],
+      "effects": [],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Gemini; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "heroic-renewal",
+      "name": {
+        "pt-BR": "Renovação Heroica",
+        "en": "Heroic Renewal"
+      },
+      "icon": "techs/atlanteans-heroic-renewal",
+      "pantheon": "atlanteans",
+      "tags": ["myth-tech"],
+      "cost": {
+        "gold": 125,
+        "favor": 15
+      },
+      "time": 30,
+      "at": "temple",
+      "age": "heroic",
+      "requires": ["hyperion"],
+      "effects": [],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Heroic_Renewal; https://www.ageofempires.com/news/age-of-mythology-retold-update-19-14612/; https://aomr-analyzer.com/frise/civ/atlantean",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Also researchable at the Palace. 30 s since 19.14612. pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "sons-of-the-sun",
+      "name": {
+        "pt-BR": "Filhos do Sol",
+        "en": "Sons of the Sun"
+      },
+      "icon": "techs/atlanteans-sons-of-the-sun",
+      "pantheon": "atlanteans",
+      "tags": ["myth-tech", "economic"],
+      "cost": {
+        "gold": 200,
+        "favor": 15
+      },
+      "time": 40,
+      "at": "temple",
+      "age": "heroic",
+      "requires": ["hyperion"],
+      "effects": [
+        {
+          "target": "favorRate",
+          "op": "mul",
+          "value": 1.44,
+          "scope": {
+            "ids": ["oracle"]
+          },
+          "note": "Approximation: all Oracles (existing and new) become Oracle Heroes (x1.44 favor)."
+        }
+      ],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Sons_of_the_Sun; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "daktyloi",
+      "name": {
+        "pt-BR": "Dáctilos",
+        "en": "Daktyloi"
+      },
+      "icon": "techs/atlanteans-daktyloi",
+      "pantheon": "atlanteans",
+      "tags": ["myth-tech"],
+      "cost": {
+        "food": 50,
+        "wood": 100,
+        "favor": 10
+      },
+      "time": 30,
+      "at": "dock",
+      "age": "heroic",
+      "requires": ["rheia"],
+      "effects": [],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Daktyloi; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "horns-of-consecration",
+      "name": {
+        "pt-BR": "Chifres da Consagração",
+        "en": "Horns of Consecration"
+      },
+      "icon": "techs/atlanteans-horns-of-consecration",
+      "pantheon": "atlanteans",
+      "tags": ["myth-tech"],
+      "cost": {
+        "gold": 150,
+        "favor": 20
+      },
+      "time": 25,
+      "at": "palace",
+      "age": "heroic",
+      "requires": ["rheia"],
+      "effects": [
+        {
+          "target": "trainTime",
+          "op": "mul",
+          "value": 0.8,
+          "scope": {
+            "ids": ["fanatic"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Horns_of_Consecration; https://www.ageofempires.com/news/age-of-mythology-retold-update-19-14612/; https://aomr-analyzer.com/frise/civ/atlantean",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Fanatics can be trained in the Heroic Age and train 20% faster. The age unlock is not expressible as a modifier. pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "orichalcum-mail",
+      "name": {
+        "pt-BR": "Malha de Oricalco",
+        "en": "Orichalcum Mail"
+      },
+      "icon": "techs/atlanteans-orichalcum-mail",
+      "pantheon": "atlanteans",
+      "tags": ["myth-tech"],
+      "cost": {
+        "gold": 175,
+        "favor": 25
+      },
+      "time": 40,
+      "at": "military-barracks",
+      "age": "heroic",
+      "requires": ["rheia"],
+      "effects": [],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Orichalcum_Mail; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Also at Counter-Barracks and Armory. pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "rheias-gift",
+      "name": {
+        "pt-BR": "Dádiva de Reia",
+        "en": "Rheia's Gift"
+      },
+      "icon": "techs/atlanteans-rheias-gift",
+      "pantheon": "atlanteans",
+      "tags": ["myth-tech", "economic"],
+      "cost": {
+        "food": 75,
+        "gold": 75
+      },
+      "time": 5,
+      "at": "temple",
+      "age": "heroic",
+      "requires": ["rheia"],
+      "effects": [
+        {
+          "target": "cost",
+          "op": "mul",
+          "value": 0,
+          "scope": {
+            "tags": ["myth-tech"],
+            "resources": ["favor"]
+          },
+          "note": "Myth technologies cost no favor; favor already spent on them is refunded (refund not modelled)."
+        }
+      ],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Rheia%27s_Gift; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "daughters-of-the-sea",
+      "name": {
+        "pt-BR": "Filhas do Mar",
+        "en": "Daughters of the Sea"
+      },
+      "icon": "techs/atlanteans-daughters-of-the-sea",
+      "pantheon": "atlanteans",
+      "tags": ["myth-tech"],
+      "cost": {
+        "gold": 150,
+        "favor": 15
+      },
+      "time": 30,
+      "at": "dock",
+      "age": "heroic",
+      "requires": ["theia"],
+      "effects": [],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Daughters_of_the_Sea; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "prophetic-sight",
+      "name": {
+        "pt-BR": "Visão Profética",
+        "en": "Prophetic Sight"
+      },
+      "icon": "techs/atlanteans-prophetic-sight",
+      "pantheon": "atlanteans",
+      "tags": ["myth-tech", "economic"],
+      "cost": {
+        "food": 50,
+        "gold": 100,
+        "favor": 8
+      },
+      "time": 40,
+      "at": "temple",
+      "age": "heroic",
+      "requires": ["theia"],
+      "effects": [
+        {
+          "target": "favorRate",
+          "op": "mul",
+          "value": 1.1,
+          "scope": {
+            "ids": ["oracle", "oracle-hero"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Prophetic_Sight; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Oracles +10% favor generation; reveals enemy build queues in their LOS. pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "poseidons-secret",
+      "name": {
+        "pt-BR": "Segredo de Poseidon",
+        "en": "Poseidon's Secret"
+      },
+      "icon": "techs/atlanteans-poseidons-secret",
+      "pantheon": "atlanteans",
+      "tags": ["myth-tech"],
+      "cost": {
+        "food": 150,
+        "favor": 30
+      },
+      "time": 40,
+      "at": "military-barracks",
+      "age": "heroic",
+      "requires": ["theia"],
+      "effects": [
+        {
+          "target": "cost",
+          "op": "mul",
+          "value": 0.9,
+          "scope": {
+            "tags": ["cavalry"]
+          },
+          "note": "Cavalry -10% cost (wiki techbox; Theia page says 15%)."
+        }
+      ],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Poseidon%27s_Secret; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Cavalry +10% speed; hero promotion of cavalry cheaper. pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "lance-of-stone",
+      "name": {
+        "pt-BR": "Lança de Pedra",
+        "en": "Lance of Stone"
+      },
+      "icon": "techs/atlanteans-lance-of-stone",
+      "pantheon": "atlanteans",
+      "tags": ["myth-tech"],
+      "cost": {
+        "gold": 100,
+        "favor": 12
+      },
+      "time": 40,
+      "at": "military-barracks",
+      "age": "heroic",
+      "requires": ["theia"],
+      "effects": [],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Lance_of_Stone; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "guardian-of-io",
+      "name": {
+        "pt-BR": "Guardião de Io",
+        "en": "Guardian of Io"
+      },
+      "icon": "techs/atlanteans-guardian-of-io",
+      "pantheon": "atlanteans",
+      "tags": ["myth-tech"],
+      "cost": {
+        "food": 50,
+        "gold": 200,
+        "favor": 12
+      },
+      "time": 40,
+      "at": "temple",
+      "age": "mythic",
+      "requires": ["atlas"],
+      "effects": [],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Guardian_of_Io; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "devotees-of-atlas",
+      "name": {
+        "pt-BR": "Devotos de Atlas",
+        "en": "Devotees of Atlas"
+      },
+      "icon": "techs/atlanteans-devotees-of-atlas",
+      "pantheon": "atlanteans",
+      "tags": ["myth-tech"],
+      "cost": {
+        "food": 50,
+        "gold": 100,
+        "favor": 5
+      },
+      "time": 40,
+      "at": "palace",
+      "age": "mythic",
+      "requires": ["atlas"],
+      "effects": [],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Devotees_of_Atlas; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "titan-shield",
+      "name": {
+        "pt-BR": "Escudo Titã",
+        "en": "Titan Shield"
+      },
+      "icon": "techs/atlanteans-titan-shield",
+      "pantheon": "atlanteans",
+      "tags": ["myth-tech"],
+      "cost": {
+        "wood": 200,
+        "gold": 75,
+        "favor": 15
+      },
+      "time": 40,
+      "at": "palace",
+      "age": "mythic",
+      "requires": ["atlas"],
+      "effects": [],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Titan_Shield; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "halo-of-the-sun",
+      "name": {
+        "pt-BR": "Halo do Sol",
+        "en": "Halo of the Sun"
+      },
+      "icon": "techs/atlanteans-halo-of-the-sun",
+      "pantheon": "atlanteans",
+      "tags": ["myth-tech"],
+      "cost": {
+        "gold": 150,
+        "favor": 20
+      },
+      "time": 50,
+      "at": "palace",
+      "age": "mythic",
+      "requires": ["helios"],
+      "effects": [],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Halo_of_the_Sun; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Also at the Military Barracks. pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "petrification",
+      "name": {
+        "pt-BR": "Petrificação",
+        "en": "Petrification"
+      },
+      "icon": "techs/atlanteans-petrification",
+      "pantheon": "atlanteans",
+      "tags": ["myth-tech"],
+      "cost": {
+        "wood": 150,
+        "gold": 50,
+        "favor": 10
+      },
+      "time": 40,
+      "at": "palace",
+      "age": "mythic",
+      "requires": ["helios"],
+      "effects": [],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Petrification; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "titanomachy",
+      "name": {
+        "pt-BR": "Titanomaquia",
+        "en": "Titanomachy"
+      },
+      "icon": "techs/atlanteans-titanomachy",
+      "pantheon": "atlanteans",
+      "tags": ["myth-tech"],
+      "cost": {
+        "food": 250,
+        "favor": 20
+      },
+      "time": 40,
+      "at": "temple",
+      "age": "mythic",
+      "requires": ["helios"],
+      "effects": [],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Titanomachy; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "asper-blood",
+      "name": {
+        "pt-BR": "Sangue de Asper",
+        "en": "Asper Blood"
+      },
+      "icon": "techs/atlanteans-asper-blood",
+      "pantheon": "atlanteans",
+      "tags": ["myth-tech"],
+      "cost": {
+        "gold": 175,
+        "favor": 12
+      },
+      "time": 40,
+      "at": "temple",
+      "age": "mythic",
+      "requires": ["hekate"],
+      "effects": [],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Asper_Blood; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "pt-BR name not verified against the official localization."
+      },
+      "fieldMeta": {
+        "cost": {
+          "source": "https://aomr-analyzer.com/frise/civ/atlantean",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "aomr-analyzer: 12 favor; wiki: 15 favor. Analyzer (higher priority) used."
+        }
+      }
+    },
+    {
+      "id": "celerity",
+      "name": {
+        "pt-BR": "Celeridade",
+        "en": "Celerity"
+      },
+      "icon": "techs/atlanteans-celerity",
+      "pantheon": "atlanteans",
+      "tags": ["myth-tech"],
+      "cost": {
+        "gold": 200,
+        "favor": 10
+      },
+      "time": 40,
+      "at": "temple",
+      "age": "mythic",
+      "requires": ["hekate"],
+      "effects": [],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Celerity; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "mythic-rejuvenation",
+      "name": {
+        "pt-BR": "Rejuvenescimento Mítico",
+        "en": "Mythic Rejuvenation"
+      },
+      "icon": "techs/atlanteans-mythic-rejuvenation",
+      "pantheon": "atlanteans",
+      "tags": ["myth-tech"],
+      "cost": {
+        "gold": 150,
+        "favor": 30
+      },
+      "time": 40,
+      "at": "temple",
+      "age": "mythic",
+      "requires": ["hekate"],
+      "effects": [],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Mythic_Rejuvenation; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "levy-mainline-soldiers",
+      "name": {
+        "pt-BR": "Soldados de Linha Convocados",
+        "en": "Levy Mainline Soldiers"
+      },
+      "icon": "techs/atlanteans-levy-mainline-soldiers",
+      "pantheon": "atlanteans",
+      "tags": ["economic"],
+      "cost": {
+        "food": 75,
+        "wood": 75,
+        "gold": 75
+      },
+      "time": 20,
+      "at": "military-barracks",
+      "age": "heroic",
+      "effects": [
+        {
+          "target": "trainTime",
+          "op": "mul",
+          "value": 0.8,
+          "scope": {
+            "ids": ["murmillo", "arcus", "contarius"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Levy_Mainline_Soldiers; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "conscript-mainline-soldiers",
+      "name": {
+        "pt-BR": "Soldados de Linha Recrutados",
+        "en": "Conscript Mainline Soldiers"
+      },
+      "icon": "techs/atlanteans-conscript-mainline-soldiers",
+      "pantheon": "atlanteans",
+      "tags": ["economic"],
+      "cost": {
+        "food": 100,
+        "wood": 100,
+        "gold": 100
+      },
+      "time": 30,
+      "at": "military-barracks",
+      "age": "mythic",
+      "effects": [
+        {
+          "target": "trainTime",
+          "op": "mul",
+          "value": 0.8,
+          "scope": {
+            "ids": ["murmillo", "arcus", "contarius"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Conscript_Mainline_Soldiers; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "levy-counter-soldiers",
+      "name": {
+        "pt-BR": "Soldados de Contraquartel Convocados",
+        "en": "Levy Counter Soldiers"
+      },
+      "icon": "techs/atlanteans-levy-counter-soldiers",
+      "pantheon": "atlanteans",
+      "tags": ["economic"],
+      "cost": {
+        "food": 75,
+        "wood": 150
+      },
+      "time": 20,
+      "at": "counter-barracks",
+      "age": "heroic",
+      "effects": [
+        {
+          "target": "trainTime",
+          "op": "mul",
+          "value": 0.8,
+          "scope": {
+            "ids": ["katapeltes", "turma", "cheiroballista"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Levy_Counter_Soldiers; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "conscript-counter-soldiers",
+      "name": {
+        "pt-BR": "Soldados de Contraquartel Recrutados",
+        "en": "Conscript Counter Soldiers"
+      },
+      "icon": "techs/atlanteans-conscript-counter-soldiers",
+      "pantheon": "atlanteans",
+      "tags": ["economic"],
+      "cost": {
+        "food": 100,
+        "wood": 200
+      },
+      "time": 20,
+      "at": "counter-barracks",
+      "age": "mythic",
+      "effects": [
+        {
+          "target": "trainTime",
+          "op": "mul",
+          "value": 0.8,
+          "scope": {
+            "ids": ["katapeltes", "turma", "cheiroballista"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Conscript_Counter_Soldiers; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "levy-palace-soldiers",
+      "name": {
+        "pt-BR": "Soldados do Palácio Convocados",
+        "en": "Levy Palace Soldiers"
+      },
+      "icon": "techs/atlanteans-levy-palace-soldiers",
+      "pantheon": "atlanteans",
+      "tags": ["economic"],
+      "cost": {
+        "food": 150
+      },
+      "time": 20,
+      "at": "palace",
+      "age": "heroic",
+      "effects": [
+        {
+          "target": "trainTime",
+          "op": "mul",
+          "value": 0.8,
+          "scope": {
+            "ids": ["destroyer", "fanatic"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Levy_Palace_Soldiers; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "conscript-palace-soldiers",
+      "name": {
+        "pt-BR": "Soldados do Palácio Recrutados",
+        "en": "Conscript Palace Soldiers"
+      },
+      "icon": "techs/atlanteans-conscript-palace-soldiers",
+      "pantheon": "atlanteans",
+      "tags": ["economic"],
+      "cost": {
+        "food": 200
+      },
+      "time": 30,
+      "at": "palace",
+      "age": "mythic",
+      "effects": [
+        {
+          "target": "trainTime",
+          "op": "mul",
+          "value": 0.8,
+          "scope": {
+            "ids": ["destroyer", "fanatic"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Conscript_Palace_Soldiers; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "medium-infantry",
+      "name": {
+        "pt-BR": "Infantaria Média",
+        "en": "Medium Infantry"
+      },
+      "icon": "techs/atlanteans-medium-infantry",
+      "pantheon": "atlanteans",
+      "tags": ["military"],
+      "cost": {
+        "food": 150,
+        "gold": 150
+      },
+      "time": 20,
+      "at": "military-barracks",
+      "age": "classical",
+      "effects": [],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Medium_Infantry; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Also at Counter-Barracks and Palace. pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "medium-ranged-soldiers",
+      "name": {
+        "pt-BR": "Soldados de Longo Alcance Médios",
+        "en": "Medium Ranged Soldiers"
+      },
+      "icon": "techs/atlanteans-medium-ranged-soldiers",
+      "pantheon": "atlanteans",
+      "tags": ["military"],
+      "cost": {
+        "wood": 150,
+        "gold": 150
+      },
+      "time": 20,
+      "at": "military-barracks",
+      "age": "classical",
+      "effects": [],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Medium_Ranged_Soldiers; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Also at Counter-Barracks. pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "heavy-infantry",
+      "name": {
+        "pt-BR": "Infantaria Pesada",
+        "en": "Heavy Infantry"
+      },
+      "icon": "techs/atlanteans-heavy-infantry",
+      "pantheon": "atlanteans",
+      "tags": ["military"],
+      "cost": {
+        "food": 300,
+        "gold": 300
+      },
+      "time": 30,
+      "at": "military-barracks",
+      "age": "heroic",
+      "effects": [],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Heavy_Infantry_(Age_of_Mythology); https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Also at Counter-Barracks and Palace. pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "heavy-ranged-soldiers",
+      "name": {
+        "pt-BR": "Soldados de Longo Alcance Pesados",
+        "en": "Heavy Ranged Soldiers"
+      },
+      "icon": "techs/atlanteans-heavy-ranged-soldiers",
+      "pantheon": "atlanteans",
+      "tags": ["military"],
+      "cost": {
+        "wood": 300,
+        "gold": 300
+      },
+      "time": 30,
+      "at": "military-barracks",
+      "age": "heroic",
+      "effects": [],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Heavy_Ranged_Soldiers; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Also at Counter-Barracks. pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "heavy-cavalry",
+      "name": {
+        "pt-BR": "Cavalaria Pesada",
+        "en": "Heavy Cavalry"
+      },
+      "icon": "techs/atlanteans-heavy-cavalry",
+      "pantheon": "atlanteans",
+      "tags": ["military"],
+      "cost": {
+        "food": 300,
+        "gold": 150
+      },
+      "time": 30,
+      "at": "military-barracks",
+      "age": "heroic",
+      "effects": [],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Heavy_Cavalry_(Age_of_Mythology); https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Atlanteans get Heavy/Champion Cavalry 25% cheaper (wiki, update 17.43876): 400f 200g base -> 300f 150g. aomr-analyzer shows the undiscounted 400f 200g. Medium Cavalry is free for Atlanteans. pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "champion-infantry",
+      "name": {
+        "pt-BR": "Infantaria Campeã",
+        "en": "Champion Infantry"
+      },
+      "icon": "techs/atlanteans-champion-infantry",
+      "pantheon": "atlanteans",
+      "tags": ["military"],
+      "cost": {
+        "food": 500,
+        "gold": 400
+      },
+      "time": 40,
+      "at": "military-barracks",
+      "age": "mythic",
+      "effects": [],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Champion_Infantry; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Also at Counter-Barracks and Palace. pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "champion-ranged-soldiers",
+      "name": {
+        "pt-BR": "Soldados de Longo Alcance Campeões",
+        "en": "Champion Ranged Soldiers"
+      },
+      "icon": "techs/atlanteans-champion-ranged-soldiers",
+      "pantheon": "atlanteans",
+      "tags": ["military"],
+      "cost": {
+        "wood": 500,
+        "gold": 400
+      },
+      "time": 40,
+      "at": "military-barracks",
+      "age": "mythic",
+      "effects": [],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Champion_Ranged_Soldiers; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Also at Counter-Barracks. pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "champion-cavalry",
+      "name": {
+        "pt-BR": "Cavalaria Campeã",
+        "en": "Champion Cavalry"
+      },
+      "icon": "techs/atlanteans-champion-cavalry",
+      "pantheon": "atlanteans",
+      "tags": ["military"],
+      "cost": {
+        "food": 525,
+        "gold": 150
+      },
+      "time": 40,
+      "at": "military-barracks",
+      "age": "mythic",
+      "effects": [],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Champion_Cavalry; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "700f 200g base with the Atlantean -25% discount (wiki). aomr-analyzer shows 700f 200g. pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "copper-weapons",
+      "name": {
+        "pt-BR": "Armas de Cobre",
+        "en": "Copper Weapons"
+      },
+      "icon": "techs/atlanteans-copper-weapons",
+      "pantheon": "atlanteans",
+      "tags": ["military"],
+      "cost": {
+        "food": 100,
+        "gold": 100
+      },
+      "time": 30,
+      "at": "armory",
+      "age": "classical",
+      "effects": [],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Copper_Weapons; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "copper-armor",
+      "name": {
+        "pt-BR": "Armadura de Cobre",
+        "en": "Copper Armor"
+      },
+      "icon": "techs/atlanteans-copper-armor",
+      "pantheon": "atlanteans",
+      "tags": ["military"],
+      "cost": {
+        "food": 75,
+        "gold": 75
+      },
+      "time": 30,
+      "at": "armory",
+      "age": "classical",
+      "effects": [],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Copper_Armor; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "copper-shields",
+      "name": {
+        "pt-BR": "Escudos de Cobre",
+        "en": "Copper Shields"
+      },
+      "icon": "techs/atlanteans-copper-shields",
+      "pantheon": "atlanteans",
+      "tags": ["military"],
+      "cost": {
+        "wood": 75,
+        "gold": 75
+      },
+      "time": 30,
+      "at": "armory",
+      "age": "classical",
+      "effects": [],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Copper_Shields; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "ballistics",
+      "name": {
+        "pt-BR": "Balística",
+        "en": "Ballistics"
+      },
+      "icon": "techs/atlanteans-ballistics",
+      "pantheon": "atlanteans",
+      "tags": ["military"],
+      "cost": {
+        "wood": 150,
+        "gold": 150
+      },
+      "time": 50,
+      "at": "armory",
+      "age": "classical",
+      "effects": [],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Ballistics_(Age_of_Mythology); https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "bronze-weapons",
+      "name": {
+        "pt-BR": "Armas de Bronze",
+        "en": "Bronze Weapons"
+      },
+      "icon": "techs/atlanteans-bronze-weapons",
+      "pantheon": "atlanteans",
+      "tags": ["military"],
+      "cost": {
+        "food": 200,
+        "gold": 200
+      },
+      "time": 40,
+      "at": "armory",
+      "age": "heroic",
+      "effects": [],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Bronze_Weapons; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "bronze-armor",
+      "name": {
+        "pt-BR": "Armadura de Bronze",
+        "en": "Bronze Armor"
+      },
+      "icon": "techs/atlanteans-bronze-armor",
+      "pantheon": "atlanteans",
+      "tags": ["military"],
+      "cost": {
+        "food": 200,
+        "gold": 150
+      },
+      "time": 40,
+      "at": "armory",
+      "age": "heroic",
+      "effects": [],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Bronze_Armor; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "bronze-shields",
+      "name": {
+        "pt-BR": "Escudos de Bronze",
+        "en": "Bronze Shields"
+      },
+      "icon": "techs/atlanteans-bronze-shields",
+      "pantheon": "atlanteans",
+      "tags": ["military"],
+      "cost": {
+        "wood": 200,
+        "gold": 150
+      },
+      "time": 40,
+      "at": "armory",
+      "age": "heroic",
+      "effects": [],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Bronze_Shields; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "iron-weapons",
+      "name": {
+        "pt-BR": "Armas de Ferro",
+        "en": "Iron Weapons"
+      },
+      "icon": "techs/atlanteans-iron-weapons",
+      "pantheon": "atlanteans",
+      "tags": ["military"],
+      "cost": {
+        "food": 450,
+        "gold": 450
+      },
+      "time": 50,
+      "at": "armory",
+      "age": "mythic",
+      "effects": [],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Iron_Weapons; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "iron-armor",
+      "name": {
+        "pt-BR": "Armadura de Ferro",
+        "en": "Iron Armor"
+      },
+      "icon": "techs/atlanteans-iron-armor",
+      "pantheon": "atlanteans",
+      "tags": ["military"],
+      "cost": {
+        "food": 400,
+        "gold": 400
+      },
+      "time": 50,
+      "at": "armory",
+      "age": "mythic",
+      "effects": [],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Iron_Armor; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "iron-shields",
+      "name": {
+        "pt-BR": "Escudos de Ferro",
+        "en": "Iron Shields"
+      },
+      "icon": "techs/atlanteans-iron-shields",
+      "pantheon": "atlanteans",
+      "tags": ["military"],
+      "cost": {
+        "wood": 400,
+        "gold": 350
+      },
+      "time": 50,
+      "at": "armory",
+      "age": "mythic",
+      "effects": [],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Iron_Shields; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "burning-pitch",
+      "name": {
+        "pt-BR": "Piche em Chamas",
+        "en": "Burning Pitch"
+      },
+      "icon": "techs/atlanteans-burning-pitch",
+      "pantheon": "atlanteans",
+      "tags": ["military"],
+      "cost": {
+        "wood": 500,
+        "gold": 300
+      },
+      "time": 40,
+      "at": "armory",
+      "age": "mythic",
+      "effects": [],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Burning_Pitch; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "tax-collectors",
+      "name": {
+        "pt-BR": "Coletores de Impostos",
+        "en": "Tax Collectors"
+      },
+      "icon": "techs/atlanteans-tax-collectors",
+      "pantheon": "atlanteans",
+      "tags": ["economic"],
+      "cost": {
+        "food": 200,
+        "gold": 200
+      },
+      "time": 35,
+      "at": "market",
+      "age": "heroic",
+      "effects": [],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Tax_Collectors; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Better market exchange rates (not modelled). pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "ambassadors",
+      "name": {
+        "pt-BR": "Embaixadores",
+        "en": "Ambassadors"
+      },
+      "icon": "techs/atlanteans-ambassadors",
+      "pantheon": "atlanteans",
+      "tags": ["economic"],
+      "cost": {
+        "gold": 250
+      },
+      "time": 30,
+      "at": "market",
+      "age": "mythic",
+      "effects": [],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Ambassadors; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "coinage",
+      "name": {
+        "pt-BR": "Cunhagem",
+        "en": "Coinage"
+      },
+      "icon": "techs/atlanteans-coinage",
+      "pantheon": "atlanteans",
+      "tags": ["economic"],
+      "cost": {
+        "gold": 200
+      },
+      "time": 40,
+      "at": "market",
+      "age": "mythic",
+      "effects": [],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Coinage_(Age_of_Mythology); https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Caravans +20% speed. pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "draft-horses",
+      "name": {
+        "pt-BR": "Cavalos de Tração",
+        "en": "Draft Horses"
+      },
+      "icon": "techs/atlanteans-draft-horses",
+      "pantheon": "atlanteans",
+      "tags": ["military"],
+      "cost": {
+        "food": 300,
+        "gold": 200
+      },
+      "time": 40,
+      "at": "palace",
+      "age": "heroic",
+      "effects": [],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Draft_Horses_(Age_of_Mythology); https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "engineers",
+      "name": {
+        "pt-BR": "Engenheiros",
+        "en": "Engineers"
+      },
+      "icon": "techs/atlanteans-engineers",
+      "pantheon": "atlanteans",
+      "tags": ["military"],
+      "cost": {
+        "food": 300,
+        "gold": 500
+      },
+      "time": 40,
+      "at": "palace",
+      "age": "mythic",
+      "effects": [],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Engineers; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    },
+    {
+      "id": "advanced-fortifications",
+      "name": {
+        "pt-BR": "Fortificações Avançadas",
+        "en": "Advanced Fortifications"
+      },
+      "icon": "techs/atlanteans-advanced-fortifications",
+      "pantheon": "atlanteans",
+      "tags": ["defensive"],
+      "cost": {
+        "wood": 600,
+        "gold": 600
+      },
+      "time": 30,
+      "at": "palace",
+      "age": "mythic",
+      "effects": [],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Advanced_Fortifications; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "pt-BR name not verified against the official localization."
+      }
+    }
+  ],
+  "meta": {
+    "source": "https://ageofempires.fandom.com/wiki/Atlanteans; https://aomr-analyzer.com/frise/civ/atlantean; project owner (sources + measured)",
+    "checkedAt": "2026-10-17",
+    "confidence": "high",
+    "note": "Start: 275f 250w 75g, 2 Citizens + 3 Oracles (Oracles spawn at 6/10/14 s), pop 7/15. Patch 19.17020 (balance as of 19.16313)."
+  }
+}

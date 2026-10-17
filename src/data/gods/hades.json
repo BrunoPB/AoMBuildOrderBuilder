@@ -1,0 +1,52 @@
+{
+  "id": "hades",
+  "pantheon": "greeks",
+  "name": {
+    "pt-BR": "Hades",
+    "en": "Hades"
+  },
+  "icon": "gods/hades",
+  "portrait": "gods/hades-portrait",
+  "modifiers": [
+    {
+      "target": "cost",
+      "op": "mul",
+      "value": 0.67,
+      "scope": {
+        "ids": [
+          "medium-ranged-soldiers",
+          "heavy-ranged-soldiers",
+          "champion-ranged-soldiers",
+          "ballistics",
+          "burning-pitch",
+          "enyos-bow-of-horror",
+          "sun-ray",
+          "shafts-of-plague"
+        ],
+        "resources": ["food", "wood", "gold"]
+      },
+      "note": "Technologies that improve ranged soldiers cost -33% (since update 19.16313; replaced free Ballistics/Burning Pitch). Favor cost assumed unchanged."
+    }
+  ],
+  "powers": ["sentinel"],
+  "minors": {
+    "classical": ["athena", "ares"],
+    "heroic": ["apollo", "aphrodite"],
+    "mythic": ["artemis", "hephaestus"]
+  },
+  "unlocks": [
+    "gastraphetoros",
+    "shade-of-hades",
+    "ajax",
+    "achilles",
+    "chiron",
+    "perseus",
+    "vaults-of-erebus"
+  ],
+  "meta": {
+    "source": "https://ageofempires.fandom.com/wiki/Hades ; https://aomr-analyzer.com/gods/hades",
+    "checkedAt": "2026-10-17",
+    "confidence": "high",
+    "note": "Not expressible: 20% chance fallen human soldiers return as Shades; myth units +4/8/12/16% HP per age; ranged soldiers and heroes +1 range/LOS; ranged fortifications +2 range."
+  }
+}

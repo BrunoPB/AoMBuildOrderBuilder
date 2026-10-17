@@ -1,0 +1,19 @@
+{
+  "id": "apollo",
+  "pantheon": "greeks",
+  "name": {
+    "pt-BR": "Apolo",
+    "en": "Apollo"
+  },
+  "icon": "gods/apollo",
+  "portrait": "gods/apollo-portrait",
+  "age": "heroic",
+  "unlocks": ["manticore", "anastrophe", "oracle", "temple-of-healing", "sun-ray"],
+  "powers": ["underworld-passage"],
+  "meta": {
+    "source": "https://ageofempires.fandom.com/wiki/Apollo ; https://aomr-analyzer.com/gods/zeus ; https://aomr-analyzer.com/gods/hades ; https://aomr-analyzer.com/gods/poseidon",
+    "checkedAt": "2026-10-17",
+    "confidence": "high",
+    "note": "No free units on age-up for Greek minor gods."
+  }
+}

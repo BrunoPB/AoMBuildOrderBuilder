@@ -1,0 +1,252 @@
+[
+  {
+    "id": "deconstruction",
+    "name": {
+      "pt-BR": "Desconstrução",
+      "en": "Deconstruction"
+    },
+    "icon": "powers/deconstruction",
+    "pantheon": "atlanteans",
+    "cooldown": 180,
+    "effect": {
+      "kind": "deconstruction"
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/Deconstruction; project owner",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "First cast is free; 'cost' is omitted. Reuse cost 10 favor, +10 per further reuse (wiki 'Cost'/'Ramp'). Dismantles an enemy building and refunds its current cost to the owner. Not usable on Town/Village Centers, Wonders, Titan Gates. pt-BR name not verified against the official localization."
+    }
+  },
+  {
+    "id": "time-shift",
+    "name": {
+      "pt-BR": "Deslocamento Temporal",
+      "en": "Time Shift"
+    },
+    "icon": "powers/time-shift",
+    "pantheon": "atlanteans",
+    "effect": {
+      "kind": "timeShift",
+      "buildTimeFraction": 1
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/Kronos; https://www.ageofempires.com/news/age-of-mythology-retold-update-19-12998/; measured",
+      "checkedAt": "2026-10-17",
+      "confidence": "high",
+      "note": "Kronos building ability (not a favor god power): moves an own finished building to a visible spot, rebuilding it over 100% of its base build time (50% with Temporal Chaos). Free for most buildings; towers, Palaces and Mirror Towers cost 50% of their resource cost (halved again by Temporal Chaos). Not usable on Town/Village Centers, walls, gates, Wonders. 2 concurrent shifts (3 with Temporal Chaos). No cooldown. pt-BR name not verified against the official localization."
+    }
+  },
+  {
+    "id": "shockwave",
+    "name": {
+      "pt-BR": "Onda de Choque",
+      "en": "Shockwave"
+    },
+    "icon": "powers/shockwave",
+    "pantheon": "atlanteans",
+    "cooldown": 180,
+    "effect": {
+      "kind": "military"
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/Shockwave; https://www.ageofempires.com/news/age-of-mythology-retold-update-19-14612/",
+      "checkedAt": "2026-10-17",
+      "confidence": "high",
+      "note": "First cast is free; 'cost' is omitted. Reuse cost 20 favor, +15 per further reuse (wiki 'Cost'/'Ramp'). Stuns enemy units in an area. pt-BR name not verified against the official localization."
+    }
+  },
+  {
+    "id": "gaia-forest",
+    "name": {
+      "pt-BR": "Floresta de Gaia",
+      "en": "Gaia Forest"
+    },
+    "icon": "powers/gaia-forest",
+    "pantheon": "atlanteans",
+    "cooldown": 120,
+    "effect": {
+      "kind": "economy"
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/Gaia_Forest; https://ageofempires.fandom.com/wiki/Tree",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "First cast is free; 'cost' is omitted. Reuse cost 0 favor, +10 per further reuse (wiki 'Cost'/'Ramp'). Grows ~20 Gaia Trees with 250 wood each; Citizens gather 97.65 wood/min from them (vs 93 from normal trees). Not modelled as a modifier. pt-BR name not verified against the official localization."
+    }
+  },
+  {
+    "id": "valor",
+    "name": {
+      "pt-BR": "Bravura",
+      "en": "Valor"
+    },
+    "icon": "powers/valor",
+    "pantheon": "atlanteans",
+    "cooldown": 30,
+    "effect": {
+      "kind": "utility"
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/Valor",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "First cast is free; 'cost' is omitted. Reuse cost 1 favor, +1 per further reuse (wiki 'Cost'/'Ramp'). Turns one human unit into its hero form and heals it. pt-BR name not verified against the official localization."
+    }
+  },
+  {
+    "id": "spider-lair",
+    "name": {
+      "pt-BR": "Covil de Aranhas",
+      "en": "Spider Lair"
+    },
+    "icon": "powers/spider-lair",
+    "pantheon": "atlanteans",
+    "cooldown": 60,
+    "effect": {
+      "kind": "military"
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/Spider_Lair; https://www.ageofempires.com/news/age-of-mythology-retold-update-19-14612/",
+      "checkedAt": "2026-10-17",
+      "confidence": "high",
+      "note": "First cast is free; 'cost' is omitted. Reuse cost 4 favor, +4 per further reuse (wiki 'Cost'/'Ramp'). Lays spider eggs that trap enemy human soldiers. pt-BR name not verified against the official localization."
+    }
+  },
+  {
+    "id": "carnivora",
+    "name": {
+      "pt-BR": "Carnívora",
+      "en": "Carnivora"
+    },
+    "icon": "powers/carnivora",
+    "pantheon": "atlanteans",
+    "cooldown": 180,
+    "effect": {
+      "kind": "military"
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/Carnivora",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "First cast is free; 'cost' is omitted. Reuse cost 20 favor, +5 per further reuse (wiki 'Cost'/'Ramp'). Spawns a man-eating plant. pt-BR name not verified against the official localization."
+    }
+  },
+  {
+    "id": "chaos",
+    "name": {
+      "pt-BR": "Caos",
+      "en": "Chaos"
+    },
+    "icon": "powers/chaos",
+    "pantheon": "atlanteans",
+    "cooldown": 240,
+    "effect": {
+      "kind": "military"
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/Chaos; https://www.ageofempires.com/news/age-of-mythology-retold-update-19-14612/",
+      "checkedAt": "2026-10-17",
+      "confidence": "high",
+      "note": "First cast is free; 'cost' is omitted. Reuse cost 60 favor, +20 per further reuse (wiki 'Cost'/'Ramp'). Enemy units in the area become hostile to all. pt-BR name not verified against the official localization."
+    }
+  },
+  {
+    "id": "traitor",
+    "name": {
+      "pt-BR": "Traidor",
+      "en": "Traitor"
+    },
+    "icon": "powers/traitor",
+    "pantheon": "atlanteans",
+    "cooldown": 180,
+    "effect": {
+      "kind": "military"
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/Traitor",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "First cast is free; 'cost' is omitted. Reuse cost 15 favor, +15 per further reuse (wiki 'Cost'/'Ramp'). Converts one enemy unit. pt-BR name not verified against the official localization."
+    }
+  },
+  {
+    "id": "hesperides",
+    "name": {
+      "pt-BR": "Hespérides",
+      "en": "Hesperides"
+    },
+    "icon": "powers/hesperides",
+    "pantheon": "atlanteans",
+    "cooldown": 60,
+    "effect": {
+      "kind": "utility",
+      "spawn": {
+        "dryad": 2
+      }
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/Hesperides; https://ageofempires.fandom.com/wiki/Hesperides_Tree",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "First cast is free; 'cost' is omitted. Reuse cost 0 favor, +125 per further reuse (wiki 'Cost'/'Ramp'). Creates a Hesperides Tree that heals myth units and trains up to 5 Dryads; spawns 2 free Dryads. pt-BR name not verified against the official localization."
+    }
+  },
+  {
+    "id": "implode",
+    "name": {
+      "pt-BR": "Implosão",
+      "en": "Implode"
+    },
+    "icon": "powers/implode",
+    "pantheon": "atlanteans",
+    "cooldown": 180,
+    "effect": {
+      "kind": "military"
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/Implode",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "First cast is free; 'cost' is omitted. Reuse cost 350 favor, +5 per further reuse (wiki 'Cost'/'Ramp'). Black hole that damages units and buildings. pt-BR name not verified against the official localization."
+    }
+  },
+  {
+    "id": "vortex",
+    "name": {
+      "pt-BR": "Vórtice",
+      "en": "Vortex"
+    },
+    "icon": "powers/vortex",
+    "pantheon": "atlanteans",
+    "cooldown": 60,
+    "effect": {
+      "kind": "utility"
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/Vortex",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "First cast is free; 'cost' is omitted. Reuse cost 0 favor, +25 per further reuse (wiki 'Cost'/'Ramp'). Teleports all own non-naval military units to the target. pt-BR name not verified against the official localization."
+    }
+  },
+  {
+    "id": "tartarian-gate",
+    "name": {
+      "pt-BR": "Portão do Tártaro",
+      "en": "Tartarian Gate"
+    },
+    "icon": "powers/tartarian-gate",
+    "pantheon": "atlanteans",
+    "cooldown": 240,
+    "effect": {
+      "kind": "military"
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/Tartarian_Gate",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "First cast is free; 'cost' is omitted. Reuse cost 300 favor, +5 per further reuse (wiki 'Cost'/'Ramp'). Gate that destroys buildings and spawns creatures hostile to all. pt-BR name not verified against the official localization."
+    }
+  }
+]

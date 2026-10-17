@@ -86,6 +86,7 @@ export const WorkerSchema = z.strictObject({
 export const UnitSchema = z.strictObject({
   id,
   name: LocalizedTextSchema,
+  plural: LocalizedTextSchema.partial().optional(),
   icon: z.string().min(1),
   pantheon: PantheonIdSchema,
   tags: z.array(z.string()),
@@ -110,6 +111,7 @@ export type Unit = z.infer<typeof UnitSchema>;
 export const BuildingSchema = z.strictObject({
   id,
   name: LocalizedTextSchema,
+  plural: LocalizedTextSchema.partial().optional(),
   icon: z.string().min(1),
   pantheon: PantheonIdSchema,
   tags: z.array(z.string()).optional(),

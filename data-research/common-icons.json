@@ -1,0 +1,74 @@
+[
+  {
+    "id": "ages/archaic",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/Technologies/shared/static_color/technologies/archaic_age_icon.png",
+    "origin": "github.com/MiguelMG24/aom-retold-build-order",
+    "license": "Game asset © Microsoft; fan use under the Game Content Usage Rules"
+  },
+  {
+    "id": "ages/classical",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/Technologies/shared/static_color/technologies/classical_age_icon.png",
+    "origin": "github.com/MiguelMG24/aom-retold-build-order",
+    "license": "Game asset © Microsoft; fan use under the Game Content Usage Rules"
+  },
+  {
+    "id": "ages/heroic",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/Technologies/shared/static_color/technologies/heroic_age_icon.png",
+    "origin": "github.com/MiguelMG24/aom-retold-build-order",
+    "license": "Game asset © Microsoft; fan use under the Game Content Usage Rules"
+  },
+  {
+    "id": "ages/mythic",
+    "url": "https://raw.githubusercontent.com/MiguelMG24/aom-retold-build-order/main/assets/Technologies/shared/static_color/technologies/mythic_age_icon.png",
+    "origin": "github.com/MiguelMG24/aom-retold-build-order",
+    "license": "Game asset © Microsoft; fan use under the Game Content Usage Rules"
+  },
+  {
+    "id": "resources/food",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/cost_food.png",
+    "origin": "github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft; fan use under the Game Content Usage Rules"
+  },
+  {
+    "id": "resources/wood",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/cost_wood.png",
+    "origin": "github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft; fan use under the Game Content Usage Rules"
+  },
+  {
+    "id": "resources/gold",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/cost_gold.png",
+    "origin": "github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft; fan use under the Game Content Usage Rules"
+  },
+  {
+    "id": "resources/favor",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/cost_favor.png",
+    "origin": "github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft; fan use under the Game Content Usage Rules"
+  },
+  {
+    "id": "ui/pantheon-greeks",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/UI_god_pantheon_Greek.png",
+    "origin": "github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft; fan use under the Game Content Usage Rules"
+  },
+  {
+    "id": "ui/pantheon-egyptians",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/UI_god_pantheon_egyptian.png",
+    "origin": "github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft; fan use under the Game Content Usage Rules"
+  },
+  {
+    "id": "ui/pantheon-norse",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/UI_god_pantheon_Norse.png",
+    "origin": "github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft; fan use under the Game Content Usage Rules"
+  },
+  {
+    "id": "ui/pantheon-atlanteans",
+    "url": "https://raw.githubusercontent.com/Kries-Dev/BuildOrders/main/Icons/UI_god_pantheon_Atlantean.png",
+    "origin": "github.com/Kries-Dev/BuildOrders",
+    "license": "Game asset © Microsoft; fan use under the Game Content Usage Rules"
+  }
+]

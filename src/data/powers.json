@@ -1,0 +1,1114 @@
+[
+  {
+    "id": "carnivora",
+    "name": {
+      "pt-BR": "Carnívora",
+      "en": "Carnivora"
+    },
+    "icon": "powers/carnivora",
+    "pantheon": "atlanteans",
+    "cooldown": 180,
+    "effect": {
+      "kind": "military"
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/Carnivora",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "First cast is free; 'cost' is omitted. Reuse cost 20 favor, +5 per further reuse (wiki 'Cost'/'Ramp'). Spawns a man-eating plant. pt-BR name not verified against the official localization."
+    }
+  },
+  {
+    "id": "chaos",
+    "name": {
+      "pt-BR": "Caos",
+      "en": "Chaos"
+    },
+    "icon": "powers/chaos",
+    "pantheon": "atlanteans",
+    "cooldown": 240,
+    "effect": {
+      "kind": "military"
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/Chaos; https://www.ageofempires.com/news/age-of-mythology-retold-update-19-14612/",
+      "checkedAt": "2026-10-17",
+      "confidence": "high",
+      "note": "First cast is free; 'cost' is omitted. Reuse cost 60 favor, +20 per further reuse (wiki 'Cost'/'Ramp'). Enemy units in the area become hostile to all. pt-BR name not verified against the official localization."
+    }
+  },
+  {
+    "id": "deconstruction",
+    "name": {
+      "pt-BR": "Desconstrução",
+      "en": "Deconstruction"
+    },
+    "icon": "powers/deconstruction",
+    "pantheon": "atlanteans",
+    "cooldown": 180,
+    "effect": {
+      "kind": "deconstruction"
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/Deconstruction; project owner",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "First cast is free; 'cost' is omitted. Reuse cost 10 favor, +10 per further reuse (wiki 'Cost'/'Ramp'). Dismantles an enemy building and refunds its current cost to the owner. Not usable on Town/Village Centers, Wonders, Titan Gates. pt-BR name not verified against the official localization."
+    }
+  },
+  {
+    "id": "gaia-forest",
+    "name": {
+      "pt-BR": "Floresta de Gaia",
+      "en": "Gaia Forest"
+    },
+    "icon": "powers/gaia-forest",
+    "pantheon": "atlanteans",
+    "cooldown": 120,
+    "effect": {
+      "kind": "economy"
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/Gaia_Forest; https://ageofempires.fandom.com/wiki/Tree",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "First cast is free; 'cost' is omitted. Reuse cost 0 favor, +10 per further reuse (wiki 'Cost'/'Ramp'). Grows ~20 Gaia Trees with 250 wood each; Citizens gather 97.65 wood/min from them (vs 93 from normal trees). Not modelled as a modifier. pt-BR name not verified against the official localization."
+    }
+  },
+  {
+    "id": "hesperides",
+    "name": {
+      "pt-BR": "Hespérides",
+      "en": "Hesperides"
+    },
+    "icon": "powers/hesperides",
+    "pantheon": "atlanteans",
+    "cooldown": 60,
+    "effect": {
+      "kind": "utility",
+      "spawn": {
+        "dryad": 2
+      }
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/Hesperides; https://ageofempires.fandom.com/wiki/Hesperides_Tree",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "First cast is free; 'cost' is omitted. Reuse cost 0 favor, +125 per further reuse (wiki 'Cost'/'Ramp'). Creates a Hesperides Tree that heals myth units and trains up to 5 Dryads; spawns 2 free Dryads. pt-BR name not verified against the official localization."
+    }
+  },
+  {
+    "id": "implode",
+    "name": {
+      "pt-BR": "Implosão",
+      "en": "Implode"
+    },
+    "icon": "powers/implode",
+    "pantheon": "atlanteans",
+    "cooldown": 180,
+    "effect": {
+      "kind": "military"
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/Implode",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "First cast is free; 'cost' is omitted. Reuse cost 350 favor, +5 per further reuse (wiki 'Cost'/'Ramp'). Black hole that damages units and buildings. pt-BR name not verified against the official localization."
+    }
+  },
+  {
+    "id": "shockwave",
+    "name": {
+      "pt-BR": "Onda de Choque",
+      "en": "Shockwave"
+    },
+    "icon": "powers/shockwave",
+    "pantheon": "atlanteans",
+    "cooldown": 180,
+    "effect": {
+      "kind": "military"
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/Shockwave; https://www.ageofempires.com/news/age-of-mythology-retold-update-19-14612/",
+      "checkedAt": "2026-10-17",
+      "confidence": "high",
+      "note": "First cast is free; 'cost' is omitted. Reuse cost 20 favor, +15 per further reuse (wiki 'Cost'/'Ramp'). Stuns enemy units in an area. pt-BR name not verified against the official localization."
+    }
+  },
+  {
+    "id": "spider-lair",
+    "name": {
+      "pt-BR": "Covil de Aranhas",
+      "en": "Spider Lair"
+    },
+    "icon": "powers/spider-lair",
+    "pantheon": "atlanteans",
+    "cooldown": 60,
+    "effect": {
+      "kind": "military"
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/Spider_Lair; https://www.ageofempires.com/news/age-of-mythology-retold-update-19-14612/",
+      "checkedAt": "2026-10-17",
+      "confidence": "high",
+      "note": "First cast is free; 'cost' is omitted. Reuse cost 4 favor, +4 per further reuse (wiki 'Cost'/'Ramp'). Lays spider eggs that trap enemy human soldiers. pt-BR name not verified against the official localization."
+    }
+  },
+  {
+    "id": "tartarian-gate",
+    "name": {
+      "pt-BR": "Portão do Tártaro",
+      "en": "Tartarian Gate"
+    },
+    "icon": "powers/tartarian-gate",
+    "pantheon": "atlanteans",
+    "cooldown": 240,
+    "effect": {
+      "kind": "military"
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/Tartarian_Gate",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "First cast is free; 'cost' is omitted. Reuse cost 300 favor, +5 per further reuse (wiki 'Cost'/'Ramp'). Gate that destroys buildings and spawns creatures hostile to all. pt-BR name not verified against the official localization."
+    }
+  },
+  {
+    "id": "time-shift",
+    "name": {
+      "pt-BR": "Deslocamento Temporal",
+      "en": "Time Shift"
+    },
+    "icon": "powers/time-shift",
+    "pantheon": "atlanteans",
+    "effect": {
+      "kind": "timeShift",
+      "buildTimeFraction": 1
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/Kronos; https://www.ageofempires.com/news/age-of-mythology-retold-update-19-12998/; measured",
+      "checkedAt": "2026-10-17",
+      "confidence": "high",
+      "note": "Kronos building ability (not a favor god power): moves an own finished building to a visible spot, rebuilding it over 100% of its base build time (50% with Temporal Chaos). Free for most buildings; towers, Palaces and Mirror Towers cost 50% of their resource cost (halved again by Temporal Chaos). Not usable on Town/Village Centers, walls, gates, Wonders. 2 concurrent shifts (3 with Temporal Chaos). No cooldown. pt-BR name not verified against the official localization."
+    }
+  },
+  {
+    "id": "traitor",
+    "name": {
+      "pt-BR": "Traidor",
+      "en": "Traitor"
+    },
+    "icon": "powers/traitor",
+    "pantheon": "atlanteans",
+    "cooldown": 180,
+    "effect": {
+      "kind": "military"
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/Traitor",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "First cast is free; 'cost' is omitted. Reuse cost 15 favor, +15 per further reuse (wiki 'Cost'/'Ramp'). Converts one enemy unit. pt-BR name not verified against the official localization."
+    }
+  },
+  {
+    "id": "valor",
+    "name": {
+      "pt-BR": "Bravura",
+      "en": "Valor"
+    },
+    "icon": "powers/valor",
+    "pantheon": "atlanteans",
+    "cooldown": 30,
+    "effect": {
+      "kind": "utility"
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/Valor",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "First cast is free; 'cost' is omitted. Reuse cost 1 favor, +1 per further reuse (wiki 'Cost'/'Ramp'). Turns one human unit into its hero form and heals it. pt-BR name not verified against the official localization."
+    }
+  },
+  {
+    "id": "vortex",
+    "name": {
+      "pt-BR": "Vórtice",
+      "en": "Vortex"
+    },
+    "icon": "powers/vortex",
+    "pantheon": "atlanteans",
+    "cooldown": 60,
+    "effect": {
+      "kind": "utility"
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/Vortex",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "First cast is free; 'cost' is omitted. Reuse cost 0 favor, +25 per further reuse (wiki 'Cost'/'Ramp'). Teleports all own non-naval military units to the target. pt-BR name not verified against the official localization."
+    }
+  },
+  {
+    "id": "ancestors",
+    "name": {
+      "pt-BR": "Ancestrais",
+      "en": "Ancestors"
+    },
+    "icon": "powers/ancestors",
+    "pantheon": "egyptians",
+    "cost": {
+      "favor": 100
+    },
+    "cooldown": 180,
+    "effect": {
+      "kind": "military",
+      "duration": 55
+    },
+    "meta": {
+      "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Ancestors",
+      "checkedAt": "2026-10-17",
+      "confidence": "high",
+      "note": "Summons 13 Minions (ancestral soldiers; Lost Ships on water) for 55 s. Retold cost ramp: each further cast costs +5 Favor (repeatcost). Unlimited uses, gated by the recharge."
+    }
+  },
+  {
+    "id": "citadel",
+    "name": {
+      "pt-BR": "Cidadela",
+      "en": "Citadel"
+    },
+    "icon": "powers/citadel",
+    "pantheon": "egyptians",
+    "cost": {
+      "favor": 150
+    },
+    "cooldown": 120,
+    "effect": {
+      "kind": "utility"
+    },
+    "meta": {
+      "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Citadel_(Age_of_Mythology)",
+      "checkedAt": "2026-10-17",
+      "confidence": "high",
+      "note": "Turns a Town Center into a Citadel Center (25 pop instead of 15, stronger, trains/researches faster). Retold cost ramp: each further cast costs +50 Favor (repeatcost). Unlimited uses, gated by the recharge."
+    }
+  },
+  {
+    "id": "eclipse",
+    "name": {
+      "pt-BR": "Eclipse",
+      "en": "Eclipse"
+    },
+    "icon": "powers/eclipse",
+    "pantheon": "egyptians",
+    "cost": {
+      "favor": 90
+    },
+    "cooldown": 150,
+    "castTime": 6,
+    "effect": {
+      "kind": "military",
+      "modifiers": [
+        {
+          "target": "favorRate",
+          "op": "mul",
+          "value": 1.5,
+          "scope": {
+            "ids": [
+              "monument-to-villagers",
+              "monument-to-soldiers",
+              "monument-to-priests",
+              "monument-to-pharaohs",
+              "monument-to-gods"
+            ]
+          },
+          "note": "Monuments generate Favor 50% faster while active."
+        }
+      ],
+      "duration": 49
+    },
+    "meta": {
+      "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Eclipse",
+      "checkedAt": "2026-10-17",
+      "confidence": "high",
+      "note": "Night for 49 s (6 s build-up): myth units +20% damage, +15% speed, -10% damage taken, ability recharge x0.4; Monuments favor x1.5. Retold cost ramp: each further cast costs +25 Favor (repeatcost). Unlimited uses, gated by the recharge."
+    }
+  },
+  {
+    "id": "locust-swarm",
+    "name": {
+      "pt-BR": "Nuvem de Gafanhotos",
+      "en": "Locust Swarm"
+    },
+    "icon": "powers/locust-swarm",
+    "pantheon": "egyptians",
+    "cost": {
+      "favor": 75
+    },
+    "cooldown": 150,
+    "effect": {
+      "kind": "military",
+      "duration": 20
+    },
+    "meta": {
+      "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Locust_Swarm",
+      "checkedAt": "2026-10-17",
+      "confidence": "high",
+      "note": "Locust swarm along a path for 20 s; damages units/buildings and destroys Farms, livestock and berries. Retold cost ramp: each further cast costs +10 Favor (repeatcost). Unlimited uses, gated by the recharge."
+    }
+  },
+  {
+    "id": "meteor",
+    "name": {
+      "pt-BR": "Meteoro",
+      "en": "Meteor"
+    },
+    "icon": "powers/meteor",
+    "pantheon": "egyptians",
+    "cost": {
+      "favor": 350
+    },
+    "cooldown": 240,
+    "castTime": 3,
+    "effect": {
+      "kind": "military",
+      "duration": 15
+    },
+    "meta": {
+      "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Meteor",
+      "checkedAt": "2026-10-17",
+      "confidence": "high",
+      "note": "12 meteor strikes over 15 s in radius 25 (3 s build-up); strong vs buildings. Retold cost ramp: each further cast costs +5 Favor (repeatcost). Unlimited uses, gated by the recharge."
+    }
+  },
+  {
+    "id": "plague-of-serpents",
+    "name": {
+      "pt-BR": "Praga das Serpentes",
+      "en": "Plague of Serpents"
+    },
+    "icon": "powers/plague-of-serpents",
+    "pantheon": "egyptians",
+    "cost": {
+      "favor": 60
+    },
+    "cooldown": 180,
+    "effect": {
+      "kind": "military",
+      "duration": 18
+    },
+    "meta": {
+      "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Plague_of_Serpents",
+      "checkedAt": "2026-10-17",
+      "confidence": "high",
+      "note": "Summons 14 Serpents (2 every 3 s for 18 s) within radius 14; they are permanent until killed. Retold cost ramp: each further cast costs +10 Favor (repeatcost). Unlimited uses, gated by the recharge."
+    }
+  },
+  {
+    "id": "prosperity",
+    "name": {
+      "pt-BR": "Prosperidade",
+      "en": "Prosperity"
+    },
+    "icon": "powers/prosperity",
+    "pantheon": "egyptians",
+    "cost": {
+      "favor": 60
+    },
+    "cooldown": 120,
+    "effect": {
+      "kind": "economy",
+      "modifiers": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.5,
+          "scope": {
+            "sources": ["gold"]
+          },
+          "note": "Gold gather rate +50%; Caravans trade +20%."
+        }
+      ],
+      "duration": 75
+    },
+    "meta": {
+      "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Prosperity",
+      "checkedAt": "2026-10-17",
+      "confidence": "high",
+      "note": "Your Villagers gather Gold +50% and Caravans +20% for 75 s. Retold cost ramp: each further cast costs +10 Favor (repeatcost). Unlimited uses, gated by the recharge."
+    }
+  },
+  {
+    "id": "rain",
+    "name": {
+      "pt-BR": "Chuva",
+      "en": "Rain"
+    },
+    "icon": "powers/rain",
+    "pantheon": "egyptians",
+    "cost": {
+      "favor": 30
+    },
+    "cooldown": 90,
+    "effect": {
+      "kind": "economy",
+      "modifiers": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 2.5,
+          "scope": {
+            "sources": ["farm"]
+          },
+          "note": "Farm gather rate +150% (BasePercent 2.5)."
+        },
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.5,
+          "scope": {
+            "sources": ["fish"]
+          },
+          "note": "Fishing Ships +50%."
+        }
+      ],
+      "duration": 50
+    },
+    "meta": {
+      "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Rain",
+      "checkedAt": "2026-10-17",
+      "confidence": "high",
+      "note": "Your Laborers' Farm gather rate +150% and Fishing Ships +50% for 50 s, map-wide. Retold cost ramp: each further cast costs +15 Favor (repeatcost). Unlimited uses, gated by the recharge."
+    }
+  },
+  {
+    "id": "shifting-sands",
+    "name": {
+      "pt-BR": "Areias Movediças",
+      "en": "Shifting Sands"
+    },
+    "icon": "powers/shifting-sands",
+    "pantheon": "egyptians",
+    "cost": {
+      "favor": 40
+    },
+    "cooldown": 180,
+    "effect": {
+      "kind": "utility"
+    },
+    "meta": {
+      "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Shifting_Sands",
+      "checkedAt": "2026-10-17",
+      "confidence": "high",
+      "note": "Teleports own/allied units within radius 10 to a target location. Retold cost ramp: each further cast costs +20 Favor (repeatcost). Unlimited uses, gated by the recharge."
+    }
+  },
+  {
+    "id": "son-of-osiris",
+    "name": {
+      "pt-BR": "Filho de Osíris",
+      "en": "Son of Osiris"
+    },
+    "icon": "powers/son-of-osiris",
+    "pantheon": "egyptians",
+    "cost": {
+      "favor": 350
+    },
+    "cooldown": 240,
+    "effect": {
+      "kind": "military"
+    },
+    "meta": {
+      "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Son_of_Osiris",
+      "checkedAt": "2026-10-17",
+      "confidence": "high",
+      "note": "Transforms the Pharaoh into the Son of Osiris (super-empowering lightning demigod). Retold cost ramp: each further cast costs +50 Favor (repeatcost). Unlimited uses, gated by the recharge."
+    }
+  },
+  {
+    "id": "tornado",
+    "name": {
+      "pt-BR": "Tornado",
+      "en": "Tornado"
+    },
+    "icon": "powers/tornado",
+    "pantheon": "egyptians",
+    "cost": {
+      "favor": 350
+    },
+    "cooldown": 240,
+    "effect": {
+      "kind": "military",
+      "duration": 20
+    },
+    "meta": {
+      "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Tornado",
+      "checkedAt": "2026-10-17",
+      "confidence": "high",
+      "note": "Tornado for 20 s that throws units and damages buildings. Retold cost ramp: each further cast costs +5 Favor (repeatcost). Unlimited uses, gated by the recharge."
+    }
+  },
+  {
+    "id": "vision",
+    "name": {
+      "pt-BR": "Visão",
+      "en": "Vision"
+    },
+    "icon": "powers/vision",
+    "pantheon": "egyptians",
+    "cost": {
+      "favor": 40
+    },
+    "cooldown": 240,
+    "effect": {
+      "kind": "utility",
+      "duration": 20
+    },
+    "meta": {
+      "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Vision",
+      "checkedAt": "2026-10-17",
+      "confidence": "high",
+      "note": "Reveals a 60-radius area for 20 s. Retold cost ramp: each further cast costs +5 Favor (repeatcost). Unlimited uses, gated by the recharge."
+    }
+  },
+  {
+    "id": "bolt",
+    "name": {
+      "pt-BR": "Raio",
+      "en": "Bolt"
+    },
+    "icon": "powers/bolt",
+    "pantheon": "greeks",
+    "cost": {
+      "favor": 55
+    },
+    "cooldown": 90,
+    "effect": {
+      "kind": "military"
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/Bolt",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "First cast is free; cost is the base re-cast favor cost, each further cast adds the ramp. Ramp +5. Zeus. 10,000 divine damage to one military unit (2,500 vs Titans)."
+    }
+  },
+  {
+    "id": "bronze",
+    "name": {
+      "pt-BR": "Bronze",
+      "en": "Bronze"
+    },
+    "icon": "powers/bronze",
+    "pantheon": "greeks",
+    "cost": {
+      "favor": 150
+    },
+    "cooldown": 150,
+    "effect": {
+      "kind": "military",
+      "duration": 40
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/Bronze",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "First cast is free; cost is the base re-cast favor cost, each further cast adds the ramp. Ramp +25. Dionysus. Own soldiers, myth units and ships in area -35% hack/pierce vulnerability."
+    }
+  },
+  {
+    "id": "ceasefire",
+    "name": {
+      "pt-BR": "Cessar-Fogo",
+      "en": "Ceasefire"
+    },
+    "icon": "powers/ceasefire",
+    "pantheon": "greeks",
+    "cost": {
+      "favor": 75
+    },
+    "cooldown": 240,
+    "effect": {
+      "kind": "utility",
+      "duration": 30
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/Ceasefire",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "First cast is free; cost is the base re-cast favor cost, each further cast adds the ramp. Ramp +25. Hermes. Prevents combat map-wide; slows ranged fortification construction."
+    }
+  },
+  {
+    "id": "curse",
+    "name": {
+      "pt-BR": "Maldição",
+      "en": "Curse"
+    },
+    "icon": "powers/curse",
+    "pantheon": "greeks",
+    "cost": {
+      "favor": 125
+    },
+    "cooldown": 150,
+    "effect": {
+      "kind": "military"
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/Curse",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "First cast is free; cost is the base re-cast favor cost, each further cast adds the ramp. Ramp +5. Aphrodite. Turns enemy units in area into Pigs."
+    }
+  },
+  {
+    "id": "earthquake",
+    "name": {
+      "pt-BR": "Terremoto",
+      "en": "Earthquake"
+    },
+    "icon": "powers/earthquake",
+    "pantheon": "greeks",
+    "cost": {
+      "favor": 350
+    },
+    "cooldown": 240,
+    "effect": {
+      "kind": "military",
+      "duration": 12
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/Earthquake",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "First cast is free; cost is the base re-cast favor cost, each further cast adds the ramp. Ramp +5. Artemis. Heavy damage to buildings in area."
+    }
+  },
+  {
+    "id": "lightning-storm",
+    "name": {
+      "pt-BR": "Tempestade de Raios",
+      "en": "Lightning Storm"
+    },
+    "icon": "powers/lightning-storm",
+    "pantheon": "greeks",
+    "cost": {
+      "favor": 350
+    },
+    "cooldown": 240,
+    "effect": {
+      "kind": "military",
+      "duration": 16.3
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/Lightning_Storm",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "First cast is free; cost is the base re-cast favor cost, each further cast adds the ramp. Ramp +5. Hera. Lightning strikes enemies in area."
+    }
+  },
+  {
+    "id": "lure",
+    "name": {
+      "pt-BR": "Isca",
+      "en": "Lure"
+    },
+    "icon": "powers/lure",
+    "pantheon": "greeks",
+    "cost": {
+      "favor": 20
+    },
+    "cooldown": 60,
+    "effect": {
+      "kind": "economy"
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/Lure",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "First cast is free; cost is the base re-cast favor cost, each further cast adds the ramp. Ramp +5. Poseidon. Creates a Lure (food drop site) that attracts huntables/herdables and spawns Chickens: 3/4/6/10 (Archaic/Classical/Heroic/Mythic); total food attracted incl. chickens capped at 1200/1300/1500/1900. Chickens are not Greek unit ids, so no 'spawn' is given."
+    }
+  },
+  {
+    "id": "pestilence",
+    "name": {
+      "pt-BR": "Pestilência",
+      "en": "Pestilence"
+    },
+    "icon": "powers/pestilence",
+    "pantheon": "greeks",
+    "cost": {
+      "favor": 50
+    },
+    "cooldown": 120,
+    "effect": {
+      "kind": "military",
+      "duration": 60
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/Pestilence",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "First cast is free; cost is the base re-cast favor cost, each further cast adds the ramp. Ramp +10. Ares. Enemy buildings in area train slower and cannot attack (not Town Centers)."
+    }
+  },
+  {
+    "id": "plenty",
+    "name": {
+      "pt-BR": "Fartura",
+      "en": "Plenty"
+    },
+    "icon": "powers/plenty",
+    "pantheon": "greeks",
+    "cost": {
+      "favor": 300
+    },
+    "cooldown": 180,
+    "effect": {
+      "kind": "economy"
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/Plenty",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "First cast is free; cost is the base re-cast favor cost, each further cast adds the ramp. Ramp +200. Hephaestus. Creates an indestructible (capturable) Plenty Vault producing 3.5 food, 3.5 wood and 3.5 gold per second (= 210/min each, Plenty Vault page, since update 18.65484; the God power page still says 4). Trickle not expressible in schema."
+    }
+  },
+  {
+    "id": "restoration",
+    "name": {
+      "pt-BR": "Restauração",
+      "en": "Restoration"
+    },
+    "icon": "powers/restoration",
+    "pantheon": "greeks",
+    "cost": {
+      "favor": 125
+    },
+    "cooldown": 180,
+    "effect": {
+      "kind": "utility",
+      "duration": 6
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/Restoration",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "First cast is free; cost is the base re-cast favor cost, each further cast adds the ramp. Ramp +25. Athena. Heals friendly units and buildings in an area."
+    }
+  },
+  {
+    "id": "sentinel",
+    "name": {
+      "pt-BR": "Sentinela",
+      "en": "Sentinel"
+    },
+    "icon": "powers/sentinel",
+    "pantheon": "greeks",
+    "cost": {
+      "favor": 60
+    },
+    "cooldown": 90,
+    "effect": {
+      "kind": "military"
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/Sentinel_(Age_of_Mythology)",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "First cast is free; cost is the base re-cast favor cost, each further cast adds the ramp. Ramp +10. Hades. Summons 5 stone Sentinels around an own/allied Town Center, Village Center or Fortress."
+    }
+  },
+  {
+    "id": "underworld-passage",
+    "name": {
+      "pt-BR": "Passagem do Submundo",
+      "en": "Underworld Passage"
+    },
+    "icon": "powers/underworld-passage",
+    "pantheon": "greeks",
+    "cost": {
+      "favor": 200
+    },
+    "cooldown": 180,
+    "effect": {
+      "kind": "utility"
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/Underworld_Passage",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "First cast is free; cost is the base re-cast favor cost, each further cast adds the ramp. Ramp +25. Apollo. Two linked portals."
+    }
+  },
+  {
+    "id": "dwarven-mine",
+    "name": {
+      "pt-BR": "Mina Anã",
+      "en": "Dwarven Mine"
+    },
+    "icon": "powers/dwarven-mine",
+    "pantheon": "norse",
+    "cost": {
+      "favor": 75
+    },
+    "cooldown": 120,
+    "effect": {
+      "kind": "economy"
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/God_power + https://ageofempires.fandom.com/wiki/Dwarven_Mine",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "Thor (Archaic). Retold: first cast is free; cost is the base reuse cost, +50 favor per further reuse; infinite uses. Creates a Gold Mine whose size depends on the age; gathered faster in later ages (Dwarf: 64.7/73.5/88.2 gold/min Classical/Heroic/Mythic vs 58.8 on a normal mine). Not modelled as a modifier."
+    }
+  },
+  {
+    "id": "fimbulwinter",
+    "name": {
+      "pt-BR": "Fimbulwinter",
+      "en": "Fimbulwinter"
+    },
+    "icon": "powers/fimbulwinter",
+    "pantheon": "norse",
+    "cost": {
+      "favor": 350
+    },
+    "cooldown": 240,
+    "effect": {
+      "kind": "military",
+      "duration": 31
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/God_power + https://ageofempires.fandom.com/wiki/Fimbulwinter",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "Tyr (Mythic). Retold: first cast is free; cost is the base reuse cost, +55 favor per further reuse; infinite uses."
+    }
+  },
+  {
+    "id": "flaming-weapons",
+    "name": {
+      "pt-BR": "Armas Flamejantes",
+      "en": "Flaming Weapons"
+    },
+    "icon": "powers/flaming-weapons",
+    "pantheon": "norse",
+    "cost": {
+      "favor": 250
+    },
+    "cooldown": 210,
+    "effect": {
+      "kind": "military",
+      "duration": 45
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/God_power + https://ageofempires.fandom.com/wiki/Flaming_Weapons",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "Bragi (Heroic). Retold: first cast is free; cost is the base reuse cost, +50 favor per further reuse; infinite uses. +60% attack for human units, ships and heroes."
+    }
+  },
+  {
+    "id": "forest-fire",
+    "name": {
+      "pt-BR": "Incêndio Florestal",
+      "en": "Forest Fire"
+    },
+    "icon": "powers/forest-fire",
+    "pantheon": "norse",
+    "cost": {
+      "favor": 125
+    },
+    "cooldown": 180,
+    "effect": {
+      "kind": "military",
+      "duration": 30
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/God_power + https://ageofempires.fandom.com/wiki/Forest_Fire",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "Freyja (Classical). Retold: first cast is free; cost is the base reuse cost, +50 favor per further reuse; infinite uses."
+    }
+  },
+  {
+    "id": "frost",
+    "name": {
+      "pt-BR": "Congelamento",
+      "en": "Frost"
+    },
+    "icon": "powers/frost",
+    "pantheon": "norse",
+    "cost": {
+      "favor": 200
+    },
+    "cooldown": 240,
+    "effect": {
+      "kind": "military",
+      "duration": 45
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/God_power + https://ageofempires.fandom.com/wiki/Frost",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "Skadi (Heroic). Retold: first cast is free; cost is the base reuse cost, +15 favor per further reuse; infinite uses."
+    }
+  },
+  {
+    "id": "great-hunt",
+    "name": {
+      "pt-BR": "Grande Caçada",
+      "en": "Great Hunt"
+    },
+    "icon": "powers/great-hunt",
+    "pantheon": "norse",
+    "cost": {
+      "favor": 25
+    },
+    "cooldown": 90,
+    "effect": {
+      "kind": "economy"
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/God_power + https://ageofempires.fandom.com/wiki/Great_Hunt",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "Odin (Archaic). Retold: first cast is free; cost is the base reuse cost, +5 favor per further reuse; infinite uses. Multiplies animals in the target area (stronger each age); spawns Elk if none. Food amount not modelled."
+    }
+  },
+  {
+    "id": "healing-spring",
+    "name": {
+      "pt-BR": "Fonte Curativa",
+      "en": "Healing Spring"
+    },
+    "icon": "powers/healing-spring",
+    "pantheon": "norse",
+    "cost": {
+      "favor": 100
+    },
+    "cooldown": 150,
+    "effect": {
+      "kind": "utility"
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/God_power + https://ageofempires.fandom.com/wiki/Healing_Spring",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "Forseti (Classical). Retold: first cast is free; cost is the base reuse cost, +150 favor per further reuse; infinite uses. Heals idle units 2.5 HP/s; capturable."
+    }
+  },
+  {
+    "id": "nidhogg",
+    "name": {
+      "pt-BR": "Nidhogg",
+      "en": "Nidhogg"
+    },
+    "icon": "powers/nidhogg",
+    "pantheon": "norse",
+    "cost": {
+      "favor": 350
+    },
+    "cooldown": 240,
+    "effect": {
+      "kind": "military"
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/God_power + https://ageofempires.fandom.com/wiki/Nidhogg",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "Hel (Mythic). Retold: first cast is free; cost is the base reuse cost, +50 favor per further reuse; infinite uses. Summons the Nidhogg dragon (unit not in this database)."
+    }
+  },
+  {
+    "id": "ragnarok",
+    "name": {
+      "pt-BR": "Ragnarök",
+      "en": "Ragnarok"
+    },
+    "icon": "powers/ragnarok",
+    "pantheon": "norse",
+    "cost": {
+      "favor": 250
+    },
+    "cooldown": 300,
+    "effect": {
+      "kind": "military"
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/God_power + https://ageofempires.fandom.com/wiki/Ragnarok",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "Baldr (Mythic). Retold: first cast is free; cost is the base reuse cost, +50 favor per further reuse; infinite uses. Converts all Gatherers and Dwarves into Heroes of Ragnarok (kills the economy)."
+    }
+  },
+  {
+    "id": "spy",
+    "name": {
+      "pt-BR": "Espião",
+      "en": "Spy"
+    },
+    "icon": "powers/spy",
+    "pantheon": "norse",
+    "cost": {
+      "favor": 30
+    },
+    "cooldown": 30,
+    "effect": {
+      "kind": "utility"
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/God_power + https://ageofempires.fandom.com/wiki/Spy_(Age_of_Mythology)",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "Loki (Archaic). Retold: first cast is free; cost is the base reuse cost, +5 favor per further reuse; infinite uses. Reveals an enemy unit's line of sight."
+    }
+  },
+  {
+    "id": "undermine",
+    "name": {
+      "pt-BR": "Solapar",
+      "en": "Undermine"
+    },
+    "icon": "powers/undermine",
+    "pantheon": "norse",
+    "cost": {
+      "favor": 50
+    },
+    "cooldown": 150,
+    "effect": {
+      "kind": "military",
+      "duration": 14
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/God_power + https://ageofempires.fandom.com/wiki/Undermine",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "Heimdall (Classical). Retold: first cast is free; cost is the base reuse cost, +10 favor per further reuse; infinite uses."
+    }
+  },
+  {
+    "id": "walking-woods",
+    "name": {
+      "pt-BR": "Floresta Ambulante",
+      "en": "Walking Woods"
+    },
+    "icon": "powers/walking-woods",
+    "pantheon": "norse",
+    "cost": {
+      "favor": 100
+    },
+    "cooldown": 180,
+    "effect": {
+      "kind": "military"
+    },
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/God_power + https://ageofempires.fandom.com/wiki/Walking_Woods",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "Njord (Heroic). Retold: first cast is free; cost is the base reuse cost, +50 favor per further reuse; infinite uses."
+    }
+  }
+]

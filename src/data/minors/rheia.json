@@ -1,0 +1,22 @@
+{
+  "id": "rheia",
+  "pantheon": "atlanteans",
+  "name": {
+    "pt-BR": "Reia",
+    "en": "Rheia"
+  },
+  "icon": "gods/rheia",
+  "portrait": "gods/rheia-portrait",
+  "age": "heroic",
+  "freeUnitsOnAgeUp": {
+    "behemoth": 1
+  },
+  "unlocks": ["behemoth", "daktyloi", "horns-of-consecration", "orichalcum-mail", "rheias-gift"],
+  "powers": ["traitor"],
+  "meta": {
+    "source": "https://ageofempires.fandom.com/wiki/Rheia; https://aomr-analyzer.com/gods/kronos (minor lists)",
+    "checkedAt": "2026-10-17",
+    "confidence": "high",
+    "note": "1 free behemoth on reaching the age through Rheia (Kronos: 2). pt-BR name not verified against the official localization."
+  }
+}

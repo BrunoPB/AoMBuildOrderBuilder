@@ -1,0 +1,5465 @@
+{
+  "id": "greeks",
+  "name": {
+    "pt-BR": "Gregos",
+    "en": "Greeks"
+  },
+  "icon": "ui/pantheon-greeks",
+  "workers": ["villager", "fishing-ship"],
+  "townCenter": "town-center",
+  "start": {
+    "resources": {
+      "food": 200,
+      "wood": 250,
+      "gold": 50,
+      "favor": 0
+    },
+    "units": {
+      "villager": 4,
+      "kataskopos": 1
+    },
+    "buildings": {
+      "town-center": 1
+    },
+    "popCap": 15
+  },
+  "favor": {
+    "type": "templeWorkers",
+    "building": "temple",
+    "table": [
+      6.0, 11.11, 15.53, 19.41, 22.85, 25.94, 28.75, 31.3, 33.66, 35.83, 37.86, 39.76, 41.55, 43.24,
+      44.84, 46.37, 47.82, 49.22, 50.56, 51.85, 53.1, 54.31, 55.48, 56.61, 57.72, 58.8, 59.85,
+      60.88, 61.89, 62.88
+    ],
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/Villager_(Age_of_Mythology)#Favor_generation_rates ; measured (owner: 1 villager 6/min, 8 villagers 31.3/min)",
+      "checkedAt": "2026-10-17",
+      "confidence": "high",
+      "note": "Retold formula (since update 19.14612): favor/s = N * M * (1/(N + 10.1111) + 0.01), N = villagers praying across all Temples, M = 1 (Zeus or Golden Apples: 1.2, applied via favorRate modifiers). Values here are favor/min for N = 1..30, M = 1; matches owner measurements (6 and 31.3) and the wiki table (1..16). No hard limit on praying villagers is documented; extrapolate with the formula beyond 30. Favor cap: aomr-analyzer says 100 for Greeks, wiki says favor has no cap since Retold (unresolved, see PENDING)."
+    }
+  },
+  "gods": ["zeus", "hades", "poseidon"],
+  "ageUps": [
+    {
+      "pantheon": "greeks",
+      "to": "classical",
+      "cost": {
+        "food": 400
+      },
+      "time": 60,
+      "at": "town-center",
+      "requiresAnyOf": [["temple"]],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Classical_Age_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Also researchable at a Village Center. Choose Athena/Hermes/Ares (per major god)."
+      }
+    },
+    {
+      "pantheon": "greeks",
+      "to": "heroic",
+      "cost": {
+        "food": 800,
+        "gold": 500
+      },
+      "time": 75,
+      "at": "town-center",
+      "requiresAnyOf": [["armory"], ["market"]],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Heroic_Age",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "75 s since update 17.27932. Market accepted as alternative requirement since Retold."
+      }
+    },
+    {
+      "pantheon": "greeks",
+      "to": "mythic",
+      "cost": {
+        "food": 1200,
+        "gold": 1200
+      },
+      "time": 120,
+      "at": "town-center",
+      "requiresAnyOf": [["fortress"]],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Mythic_Age",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "1200/1200 since update 17.64528; 120 s since update 17.27932."
+      }
+    }
+  ],
+  "units": [
+    {
+      "id": "villager",
+      "name": {
+        "pt-BR": "Aldeão",
+        "en": "Villager"
+      },
+      "icon": "units/greeks-villager",
+      "pantheon": "greeks",
+      "tags": ["worker", "human"],
+      "cost": {
+        "food": 50
+      },
+      "pop": 1,
+      "trainTime": 17,
+      "trainedAt": ["town-center", "village-center"],
+      "age": "archaic",
+      "worker": {
+        "gatherRates": {
+          "hunt": 60,
+          "herd": 54,
+          "berries": 42,
+          "farm": 42,
+          "wood": 60,
+          "gold": 51
+        },
+        "buildRate": 1,
+        "canBuild": true,
+        "needsDropsite": true
+      },
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Villager_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Gather rates (per minute, Retold): hunt 60, herd/chicken 54, berries 42, farm 42, wood 60, gold 51 (wiki gathering-rate table). Base carry 15 food / 10 wood / 10 gold. Limit 100 villagers. Village Centers train villagers 25% slower. Also prays at Temples for favor (see favor rule)."
+      }
+    },
+    {
+      "id": "fishing-ship",
+      "name": {
+        "pt-BR": "Barco de Pesca",
+        "en": "Fishing Ship"
+      },
+      "icon": "units/greeks-fishing-ship",
+      "pantheon": "greeks",
+      "tags": ["ship", "worker"],
+      "cost": {
+        "wood": 50
+      },
+      "pop": 1,
+      "trainTime": 18,
+      "trainedAt": ["dock"],
+      "age": "archaic",
+      "worker": {
+        "gatherRates": {
+          "fish": 33
+        },
+        "canBuild": false,
+        "needsDropsite": true
+      },
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Fishing_Ship_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Fish gather rate 0.55/s = 33/min (generic, wiki). Limit 50."
+      }
+    },
+    {
+      "id": "kataskopos",
+      "name": {
+        "pt-BR": "Kataskopos",
+        "en": "Kataskopos"
+      },
+      "icon": "units/greeks-kataskopos",
+      "pantheon": "greeks",
+      "tags": ["scout", "cavalry", "human"],
+      "cost": {},
+      "pop": 1,
+      "trainTime": 0,
+      "trainedAt": [],
+      "age": "archaic",
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Kataskopos",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Starting scout; cannot be trained (internal cost 75 food per analyzer/wiki)."
+      }
+    },
+    {
+      "id": "hoplite",
+      "name": {
+        "pt-BR": "Hoplita",
+        "en": "Hoplite"
+      },
+      "icon": "units/greeks-hoplite",
+      "pantheon": "greeks",
+      "tags": ["infantry", "human"],
+      "cost": {
+        "food": 50,
+        "gold": 40
+      },
+      "pop": 2,
+      "trainTime": 12,
+      "trainedAt": ["military-academy"],
+      "age": "classical",
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Hoplite_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Zeus: Hoplites +15% speed (not modelled)."
+      }
+    },
+    {
+      "id": "hypaspist",
+      "name": {
+        "pt-BR": "Hipaspista",
+        "en": "Hypaspist"
+      },
+      "icon": "units/greeks-hypaspist",
+      "pantheon": "greeks",
+      "tags": ["infantry", "human"],
+      "cost": {
+        "food": 60,
+        "gold": 25
+      },
+      "pop": 2,
+      "trainTime": 9.5,
+      "trainedAt": ["military-academy"],
+      "age": "heroic",
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Hypaspist",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Available in the Classical Age with Ares' Deimos' Sword of Dread (age-shift not expressible in schema)."
+      }
+    },
+    {
+      "id": "myrmidon",
+      "name": {
+        "pt-BR": "Mirmidão",
+        "en": "Myrmidon"
+      },
+      "icon": "units/greeks-myrmidon",
+      "pantheon": "greeks",
+      "tags": ["infantry", "human"],
+      "cost": {
+        "food": 70,
+        "gold": 50
+      },
+      "pop": 3,
+      "trainTime": 6.5,
+      "trainedAt": ["fortress"],
+      "age": "mythic",
+      "requires": ["zeus"],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Myrmidon",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Zeus unique unit. Hera's Argive Patronage makes Fortresses spawn one every 60 s."
+      }
+    },
+    {
+      "id": "toxotes",
+      "name": {
+        "pt-BR": "Toxota",
+        "en": "Toxotes"
+      },
+      "icon": "units/greeks-toxotes",
+      "pantheon": "greeks",
+      "tags": ["archer", "human"],
+      "cost": {
+        "wood": 55,
+        "gold": 35
+      },
+      "pop": 2,
+      "trainTime": 15,
+      "trainedAt": ["archery-range"],
+      "age": "classical",
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Toxotes",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": "peltast",
+      "name": {
+        "pt-BR": "Peltasta",
+        "en": "Peltast"
+      },
+      "icon": "units/greeks-peltast",
+      "pantheon": "greeks",
+      "tags": ["archer", "human"],
+      "cost": {
+        "wood": 70,
+        "gold": 25
+      },
+      "pop": 2,
+      "trainTime": 10.5,
+      "trainedAt": ["archery-range"],
+      "age": "heroic",
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Peltast",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": "gastraphetoros",
+      "name": {
+        "pt-BR": "Gastrafetoros",
+        "en": "Gastraphetoros"
+      },
+      "icon": "units/greeks-gastraphetoros",
+      "pantheon": "greeks",
+      "tags": ["archer", "human"],
+      "cost": {
+        "wood": 100,
+        "gold": 60
+      },
+      "pop": 3,
+      "trainTime": 9,
+      "trainedAt": ["fortress"],
+      "age": "mythic",
+      "requires": ["hades"],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Gastraphetoros_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Hades unique unit."
+      }
+    },
+    {
+      "id": "hippeus",
+      "name": {
+        "pt-BR": "Hippeus",
+        "en": "Hippeus"
+      },
+      "icon": "units/greeks-hippeus",
+      "pantheon": "greeks",
+      "tags": ["cavalry", "human"],
+      "cost": {
+        "food": 40,
+        "gold": 80
+      },
+      "pop": 3,
+      "trainTime": 16,
+      "trainedAt": ["stable"],
+      "age": "classical",
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Hippeus_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": "prodromos",
+      "name": {
+        "pt-BR": "Pródromo",
+        "en": "Prodromos"
+      },
+      "icon": "units/greeks-prodromos",
+      "pantheon": "greeks",
+      "tags": ["cavalry", "human"],
+      "cost": {
+        "food": 70,
+        "gold": 40
+      },
+      "pop": 3,
+      "trainTime": 12,
+      "trainedAt": ["stable"],
+      "age": "heroic",
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Prodromos",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": "hetairos",
+      "name": {
+        "pt-BR": "Hetairos",
+        "en": "Hetairos"
+      },
+      "icon": "units/greeks-hetairos",
+      "pantheon": "greeks",
+      "tags": ["cavalry", "human"],
+      "cost": {
+        "food": 50,
+        "gold": 90
+      },
+      "pop": 3,
+      "trainTime": 8,
+      "trainedAt": ["fortress"],
+      "age": "mythic",
+      "requires": ["poseidon"],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Hetairos",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Poseidon unique unit."
+      }
+    },
+    {
+      "id": "militia",
+      "name": {
+        "pt-BR": "Milícia",
+        "en": "Militia"
+      },
+      "icon": "units/greeks-militia",
+      "pantheon": "greeks",
+      "tags": ["infantry", "human"],
+      "cost": {},
+      "pop": 1,
+      "trainTime": 0,
+      "trainedAt": [],
+      "age": "archaic",
+      "requires": ["poseidon"],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Militia_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Not trainable: spawns from Poseidon's razed buildings (1-8 per building, 30 for a Wonder). Internal cost 70 food."
+      }
+    },
+    {
+      "id": "petrobolos",
+      "name": {
+        "pt-BR": "Petróbolo",
+        "en": "Petrobolos"
+      },
+      "icon": "units/greeks-petrobolos",
+      "pantheon": "greeks",
+      "tags": ["siege"],
+      "cost": {
+        "wood": 125,
+        "gold": 150
+      },
+      "pop": 3,
+      "trainTime": 15,
+      "trainedAt": ["fortress"],
+      "age": "heroic",
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Petrobolos",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": "helepolis",
+      "name": {
+        "pt-BR": "Helépolis",
+        "en": "Helepolis"
+      },
+      "icon": "units/greeks-helepolis",
+      "pantheon": "greeks",
+      "tags": ["siege"],
+      "cost": {
+        "wood": 300,
+        "gold": 200
+      },
+      "pop": 5,
+      "trainTime": 24,
+      "trainedAt": ["fortress"],
+      "age": "mythic",
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Helepolis_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": "transport-ship",
+      "name": {
+        "pt-BR": "Navio de Transporte",
+        "en": "Transport Ship"
+      },
+      "icon": "units/greeks-transport-ship",
+      "pantheon": "greeks",
+      "tags": ["ship"],
+      "cost": {
+        "wood": 110
+      },
+      "pop": 1,
+      "trainTime": 19,
+      "trainedAt": ["dock"],
+      "age": "classical",
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Transport_Ship_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": "trireme",
+      "name": {
+        "pt-BR": "Trirreme",
+        "en": "Trireme"
+      },
+      "icon": "units/greeks-trireme",
+      "pantheon": "greeks",
+      "tags": ["ship", "human"],
+      "cost": {
+        "wood": 100,
+        "gold": 50
+      },
+      "pop": 3,
+      "trainTime": 16.5,
+      "trainedAt": ["dock"],
+      "age": "classical",
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Trireme_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": "pentekonter",
+      "name": {
+        "pt-BR": "Pentecôntera",
+        "en": "Pentekonter"
+      },
+      "icon": "units/greeks-pentekonter",
+      "pantheon": "greeks",
+      "tags": ["ship", "human"],
+      "cost": {
+        "wood": 100,
+        "gold": 50
+      },
+      "pop": 3,
+      "trainTime": 16.5,
+      "trainedAt": ["dock"],
+      "age": "classical",
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Pentekonter",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": "juggernaut",
+      "name": {
+        "pt-BR": "Juggernaut",
+        "en": "Juggernaut"
+      },
+      "icon": "units/greeks-juggernaut",
+      "pantheon": "greeks",
+      "tags": ["ship", "siege"],
+      "cost": {
+        "wood": 100,
+        "gold": 50
+      },
+      "pop": 3,
+      "trainTime": 16.5,
+      "trainedAt": ["dock"],
+      "age": "classical",
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Juggernaut_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": "caravan",
+      "name": {
+        "pt-BR": "Caravana",
+        "en": "Caravan"
+      },
+      "icon": "units/greeks-caravan",
+      "pantheon": "greeks",
+      "tags": ["caravan"],
+      "cost": {
+        "food": 100,
+        "wood": 25
+      },
+      "pop": 1,
+      "trainTime": 18,
+      "trainedAt": ["market"],
+      "age": "heroic",
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Caravan_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Analyzer names the Greek caravan 'Donkey Caravan'. Limit 60. Poseidon: +0.3/+0.4 speed in Heroic/Mythic."
+      }
+    },
+    {
+      "id": "jason",
+      "name": {
+        "pt-BR": "Jasão",
+        "en": "Jason"
+      },
+      "icon": "units/greeks-jason",
+      "pantheon": "greeks",
+      "tags": ["hero"],
+      "cost": {
+        "food": 100,
+        "wood": 50
+      },
+      "pop": 2,
+      "trainTime": 5,
+      "trainedAt": ["town-center", "village-center", "fortress"],
+      "age": "archaic",
+      "requires": ["zeus"],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Jason_(Age_of_Mythology) ; https://aomr-analyzer.com/gods/zeus",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Greek heroes train 10% faster per age from Classical on (cumulative); trainTime here is the value in the age the hero unlocks. Base 5 s (Archaic 5, Classical 4.5, Heroic 4, Mythic 3.6). Limit 1. Cost from wiki and analyzer unit data."
+      }
+    },
+    {
+      "id": "ajax",
+      "name": {
+        "pt-BR": "Ájax",
+        "en": "Ajax"
+      },
+      "icon": "units/greeks-ajax",
+      "pantheon": "greeks",
+      "tags": ["hero"],
+      "cost": {
+        "food": 100,
+        "wood": 50
+      },
+      "pop": 2,
+      "trainTime": 5,
+      "trainedAt": ["town-center", "village-center", "fortress"],
+      "age": "archaic",
+      "requires": ["hades"],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Ajax_(Age_of_Mythology) ; https://aomr-analyzer.com/gods/hades",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Greek heroes train 10% faster per age from Classical on (cumulative); trainTime here is the value in the age the hero unlocks. Base 5 s (Archaic 5, Classical 4.5, Heroic 4, Mythic 3.6). Limit 1. Cost from wiki and analyzer unit data."
+      }
+    },
+    {
+      "id": "theseus",
+      "name": {
+        "pt-BR": "Teseu",
+        "en": "Theseus"
+      },
+      "icon": "units/greeks-theseus",
+      "pantheon": "greeks",
+      "tags": ["hero"],
+      "cost": {
+        "food": 100,
+        "wood": 50
+      },
+      "pop": 2,
+      "trainTime": 5,
+      "trainedAt": ["town-center", "village-center", "fortress"],
+      "age": "archaic",
+      "requires": ["poseidon"],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Theseus ; https://aomr-analyzer.com/gods/poseidon",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Greek heroes train 10% faster per age from Classical on (cumulative); trainTime here is the value in the age the hero unlocks. Base 5 s (Archaic 5, Classical 4.5, Heroic 4, Mythic 3.6). Limit 1. Cost from wiki and analyzer unit data."
+      }
+    },
+    {
+      "id": "heracles",
+      "name": {
+        "pt-BR": "Héracles",
+        "en": "Heracles"
+      },
+      "icon": "units/greeks-heracles",
+      "pantheon": "greeks",
+      "tags": ["hero"],
+      "cost": {
+        "food": 75,
+        "gold": 175,
+        "favor": 2
+      },
+      "pop": 3,
+      "trainTime": 18,
+      "trainedAt": ["town-center", "village-center", "fortress"],
+      "age": "classical",
+      "requires": ["zeus"],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Heracles",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Greek heroes train 10% faster per age from Classical on (cumulative); trainTime here is the value in the age the hero unlocks. Base 20 s (analyzer shows base 20 s); Classical 18, Heroic 16.2, Mythic 14.6. Limit 1."
+      },
+      "fieldMeta": {
+        "trainTime": {
+          "source": "https://ageofempires.fandom.com/wiki/Heracles",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Analyzer shows the base train time (20/25/30 s); this value applies the Greek -10% hero train time of each age (wiki), taken at the unlock age."
+        }
+      }
+    },
+    {
+      "id": "achilles",
+      "name": {
+        "pt-BR": "Aquiles",
+        "en": "Achilles"
+      },
+      "icon": "units/greeks-achilles",
+      "pantheon": "greeks",
+      "tags": ["hero"],
+      "cost": {
+        "food": 75,
+        "gold": 175,
+        "favor": 2
+      },
+      "pop": 3,
+      "trainTime": 18,
+      "trainedAt": ["town-center", "village-center", "fortress"],
+      "age": "classical",
+      "requires": ["hades"],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Achilles_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Greek heroes train 10% faster per age from Classical on (cumulative); trainTime here is the value in the age the hero unlocks. Base 20 s (analyzer shows base 20 s); Classical 18, Heroic 16.2, Mythic 14.6. Limit 1."
+      },
+      "fieldMeta": {
+        "trainTime": {
+          "source": "https://ageofempires.fandom.com/wiki/Achilles_(Age_of_Mythology)",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Analyzer shows the base train time (20/25/30 s); this value applies the Greek -10% hero train time of each age (wiki), taken at the unlock age."
+        }
+      }
+    },
+    {
+      "id": "atalanta",
+      "name": {
+        "pt-BR": "Atalanta",
+        "en": "Atalanta"
+      },
+      "icon": "units/greeks-atalanta",
+      "pantheon": "greeks",
+      "tags": ["hero"],
+      "cost": {
+        "food": 75,
+        "gold": 175,
+        "favor": 2
+      },
+      "pop": 3,
+      "trainTime": 18,
+      "trainedAt": ["town-center", "village-center", "fortress"],
+      "age": "classical",
+      "requires": ["poseidon"],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Atalanta",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Greek heroes train 10% faster per age from Classical on (cumulative); trainTime here is the value in the age the hero unlocks. Base 20 s (analyzer shows base 20 s); Classical 18, Heroic 16.2, Mythic 14.6. Limit 1."
+      },
+      "fieldMeta": {
+        "trainTime": {
+          "source": "https://ageofempires.fandom.com/wiki/Atalanta",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Analyzer shows the base train time (20/25/30 s); this value applies the Greek -10% hero train time of each age (wiki), taken at the unlock age."
+        }
+      }
+    },
+    {
+      "id": "odysseus",
+      "name": {
+        "pt-BR": "Odisseu",
+        "en": "Odysseus"
+      },
+      "icon": "units/greeks-odysseus",
+      "pantheon": "greeks",
+      "tags": ["hero"],
+      "cost": {
+        "wood": 250,
+        "gold": 100,
+        "favor": 4
+      },
+      "pop": 2,
+      "trainTime": 20.3,
+      "trainedAt": ["town-center", "village-center", "fortress"],
+      "age": "heroic",
+      "requires": ["zeus"],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Odysseus_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Greek heroes train 10% faster per age from Classical on (cumulative); trainTime here is the value in the age the hero unlocks. Base 25 s; Heroic 20.3, Mythic 18.2. Limit 1."
+      },
+      "fieldMeta": {
+        "trainTime": {
+          "source": "https://ageofempires.fandom.com/wiki/Odysseus_(Age_of_Mythology)",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Analyzer shows the base train time (20/25/30 s); this value applies the Greek -10% hero train time of each age (wiki), taken at the unlock age."
+        }
+      }
+    },
+    {
+      "id": "chiron",
+      "name": {
+        "pt-BR": "Quíron",
+        "en": "Chiron"
+      },
+      "icon": "units/greeks-chiron",
+      "pantheon": "greeks",
+      "tags": ["hero"],
+      "cost": {
+        "wood": 250,
+        "gold": 100,
+        "favor": 4
+      },
+      "pop": 2,
+      "trainTime": 20.3,
+      "trainedAt": ["town-center", "village-center", "fortress"],
+      "age": "heroic",
+      "requires": ["hades"],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Chiron",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Greek heroes train 10% faster per age from Classical on (cumulative); trainTime here is the value in the age the hero unlocks. Base 25 s; Heroic 20.3, Mythic 18.2. Limit 1."
+      },
+      "fieldMeta": {
+        "trainTime": {
+          "source": "https://ageofempires.fandom.com/wiki/Chiron",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Analyzer shows the base train time (20/25/30 s); this value applies the Greek -10% hero train time of each age (wiki), taken at the unlock age."
+        }
+      }
+    },
+    {
+      "id": "hippolyta",
+      "name": {
+        "pt-BR": "Hipólita",
+        "en": "Hippolyta"
+      },
+      "icon": "units/greeks-hippolyta",
+      "pantheon": "greeks",
+      "tags": ["hero"],
+      "cost": {
+        "wood": 250,
+        "gold": 100,
+        "favor": 4
+      },
+      "pop": 2,
+      "trainTime": 20.3,
+      "trainedAt": ["town-center", "village-center", "fortress"],
+      "age": "heroic",
+      "requires": ["poseidon"],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Hippolyta",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Greek heroes train 10% faster per age from Classical on (cumulative); trainTime here is the value in the age the hero unlocks. Base 25 s; Heroic 20.3, Mythic 18.2. Limit 1."
+      },
+      "fieldMeta": {
+        "trainTime": {
+          "source": "https://ageofempires.fandom.com/wiki/Hippolyta",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Analyzer shows the base train time (20/25/30 s); this value applies the Greek -10% hero train time of each age (wiki), taken at the unlock age."
+        }
+      }
+    },
+    {
+      "id": "bellerophon",
+      "name": {
+        "pt-BR": "Belerofonte",
+        "en": "Bellerophon"
+      },
+      "icon": "units/greeks-bellerophon",
+      "pantheon": "greeks",
+      "tags": ["hero"],
+      "cost": {
+        "gold": 400,
+        "favor": 6
+      },
+      "pop": 4,
+      "trainTime": 21.9,
+      "trainedAt": ["town-center", "village-center", "fortress"],
+      "age": "mythic",
+      "requires": ["zeus"],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Bellerophon",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Greek heroes train 10% faster per age from Classical on (cumulative); trainTime here is the value in the age the hero unlocks. Base 30 s; Mythic 21.9. Limit 1."
+      },
+      "fieldMeta": {
+        "trainTime": {
+          "source": "https://ageofempires.fandom.com/wiki/Bellerophon",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Analyzer shows the base train time (20/25/30 s); this value applies the Greek -10% hero train time of each age (wiki), taken at the unlock age."
+        }
+      }
+    },
+    {
+      "id": "perseus",
+      "name": {
+        "pt-BR": "Perseu",
+        "en": "Perseus"
+      },
+      "icon": "units/greeks-perseus",
+      "pantheon": "greeks",
+      "tags": ["hero"],
+      "cost": {
+        "gold": 400,
+        "favor": 6
+      },
+      "pop": 4,
+      "trainTime": 21.9,
+      "trainedAt": ["town-center", "village-center", "fortress"],
+      "age": "mythic",
+      "requires": ["hades"],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Perseus_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Greek heroes train 10% faster per age from Classical on (cumulative); trainTime here is the value in the age the hero unlocks. Base 30 s; Mythic 21.9. Limit 1."
+      },
+      "fieldMeta": {
+        "trainTime": {
+          "source": "https://ageofempires.fandom.com/wiki/Perseus_(Age_of_Mythology)",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Analyzer shows the base train time (20/25/30 s); this value applies the Greek -10% hero train time of each age (wiki), taken at the unlock age."
+        }
+      }
+    },
+    {
+      "id": "polyphemus",
+      "name": {
+        "pt-BR": "Polifemo",
+        "en": "Polyphemus"
+      },
+      "icon": "units/greeks-polyphemus",
+      "pantheon": "greeks",
+      "tags": ["hero"],
+      "cost": {
+        "gold": 400,
+        "favor": 6
+      },
+      "pop": 4,
+      "trainTime": 21.9,
+      "trainedAt": ["town-center", "village-center", "fortress"],
+      "age": "mythic",
+      "requires": ["poseidon"],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Polyphemus",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Greek heroes train 10% faster per age from Classical on (cumulative); trainTime here is the value in the age the hero unlocks. Base 30 s; Mythic 21.9. Limit 1."
+      },
+      "fieldMeta": {
+        "trainTime": {
+          "source": "https://ageofempires.fandom.com/wiki/Polyphemus",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Analyzer shows the base train time (20/25/30 s); this value applies the Greek -10% hero train time of each age (wiki), taken at the unlock age."
+        }
+      }
+    },
+    {
+      "id": "the-argo",
+      "name": {
+        "pt-BR": "Argo",
+        "en": "The Argo"
+      },
+      "icon": "units/greeks-the-argo",
+      "pantheon": "greeks",
+      "tags": ["hero", "ship"],
+      "cost": {
+        "wood": 200,
+        "favor": 4
+      },
+      "pop": 4,
+      "trainTime": 20.3,
+      "trainedAt": ["dock"],
+      "age": "heroic",
+      "requires": ["aphrodite", "argonauts"],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/The_Argo",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Granted by Aphrodite's Argonauts (one spawns at the Dock); can be rebuilt at the Dock if sunk. Hero ship, limit 1. Base 25 s; Heroic 20.3, Mythic 18.2."
+      }
+    },
+    {
+      "id": "pegasus",
+      "name": {
+        "pt-BR": "Pégaso",
+        "en": "Pegasus"
+      },
+      "icon": "units/greeks-pegasus",
+      "pantheon": "greeks",
+      "tags": ["myth", "scout"],
+      "cost": {
+        "food": 50,
+        "favor": 2
+      },
+      "pop": 2,
+      "trainTime": 6,
+      "trainedAt": ["temple"],
+      "age": "archaic",
+      "meta": {
+        "source": "https://aomr-analyzer.com/unit-comparison ; https://ageofempires.fandom.com/wiki/Pegasus",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Generic Greek flying scout. Hermes' Winged Messenger grants a respawning one. Zeus: myth units cost 1 less population (not modelled here)."
+      },
+      "fieldMeta": {
+        "trainTime": {
+          "source": "https://ageofempires.fandom.com/wiki/Pegasus",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Train time from the wiki only (analyzer unit data has no train time)."
+        }
+      }
+    },
+    {
+      "id": "minotaur",
+      "name": {
+        "pt-BR": "Minotauro",
+        "en": "Minotaur"
+      },
+      "icon": "units/greeks-minotaur",
+      "pantheon": "greeks",
+      "tags": ["myth"],
+      "cost": {
+        "gold": 180,
+        "favor": 14
+      },
+      "pop": 3,
+      "trainTime": 20,
+      "trainedAt": ["temple"],
+      "age": "classical",
+      "requires": ["athena"],
+      "meta": {
+        "source": "https://aomr-analyzer.com/unit-comparison ; https://ageofempires.fandom.com/wiki/Minotaur",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Zeus: myth units cost 1 less population (not modelled here)."
+      },
+      "fieldMeta": {
+        "trainTime": {
+          "source": "https://ageofempires.fandom.com/wiki/Minotaur",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Train time from the wiki only (analyzer unit data has no train time)."
+        }
+      }
+    },
+    {
+      "id": "centaur",
+      "name": {
+        "pt-BR": "Centauro",
+        "en": "Centaur"
+      },
+      "icon": "units/greeks-centaur",
+      "pantheon": "greeks",
+      "tags": ["myth"],
+      "cost": {
+        "wood": 180,
+        "favor": 14
+      },
+      "pop": 3,
+      "trainTime": 22,
+      "trainedAt": ["temple"],
+      "age": "classical",
+      "requires": ["hermes"],
+      "meta": {
+        "source": "https://aomr-analyzer.com/unit-comparison ; https://ageofempires.fandom.com/wiki/Centaur",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Zeus: myth units cost 1 less population (not modelled here)."
+      },
+      "fieldMeta": {
+        "trainTime": {
+          "source": "https://ageofempires.fandom.com/wiki/Centaur",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Train time from the wiki only (analyzer unit data has no train time)."
+        }
+      }
+    },
+    {
+      "id": "cyclops",
+      "name": {
+        "pt-BR": "Ciclope",
+        "en": "Cyclops"
+      },
+      "icon": "units/greeks-cyclops",
+      "pantheon": "greeks",
+      "tags": ["myth"],
+      "cost": {
+        "food": 150,
+        "favor": 18
+      },
+      "pop": 3,
+      "trainTime": 20,
+      "trainedAt": ["temple"],
+      "age": "classical",
+      "requires": ["ares"],
+      "meta": {
+        "source": "https://aomr-analyzer.com/unit-comparison ; https://ageofempires.fandom.com/wiki/Cyclops",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Zeus: myth units cost 1 less population (not modelled here)."
+      },
+      "fieldMeta": {
+        "trainTime": {
+          "source": "https://ageofempires.fandom.com/wiki/Cyclops",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Train time from the wiki only (analyzer unit data has no train time)."
+        }
+      }
+    },
+    {
+      "id": "manticore",
+      "name": {
+        "pt-BR": "Mantícora",
+        "en": "Manticore"
+      },
+      "icon": "units/greeks-manticore",
+      "pantheon": "greeks",
+      "tags": ["myth"],
+      "cost": {
+        "wood": 250,
+        "favor": 22
+      },
+      "pop": 4,
+      "trainTime": 17,
+      "trainedAt": ["temple"],
+      "age": "heroic",
+      "requires": ["apollo"],
+      "meta": {
+        "source": "https://aomr-analyzer.com/unit-comparison ; https://ageofempires.fandom.com/wiki/Manticore",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Zeus: myth units cost 1 less population (not modelled here)."
+      },
+      "fieldMeta": {
+        "trainTime": {
+          "source": "https://ageofempires.fandom.com/wiki/Manticore",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Train time from the wiki only (analyzer unit data has no train time)."
+        }
+      }
+    },
+    {
+      "id": "hydra",
+      "name": {
+        "pt-BR": "Hidra",
+        "en": "Hydra"
+      },
+      "icon": "units/greeks-hydra",
+      "pantheon": "greeks",
+      "tags": ["myth"],
+      "cost": {
+        "food": 250,
+        "favor": 26
+      },
+      "pop": 4,
+      "trainTime": 20,
+      "trainedAt": ["temple"],
+      "age": "heroic",
+      "requires": ["dionysus"],
+      "meta": {
+        "source": "https://aomr-analyzer.com/unit-comparison ; https://ageofempires.fandom.com/wiki/Hydra",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Zeus: myth units cost 1 less population (not modelled here)."
+      },
+      "fieldMeta": {
+        "trainTime": {
+          "source": "https://ageofempires.fandom.com/wiki/Hydra",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Train time from the wiki only (analyzer unit data has no train time)."
+        }
+      }
+    },
+    {
+      "id": "nemean-lion",
+      "name": {
+        "pt-BR": "Leão de Nemeia",
+        "en": "Nemean Lion"
+      },
+      "icon": "units/greeks-nemean-lion",
+      "pantheon": "greeks",
+      "tags": ["myth"],
+      "cost": {
+        "gold": 250,
+        "favor": 22
+      },
+      "pop": 3,
+      "trainTime": 20,
+      "trainedAt": ["temple"],
+      "age": "heroic",
+      "requires": ["aphrodite"],
+      "meta": {
+        "source": "https://aomr-analyzer.com/unit-comparison ; https://ageofempires.fandom.com/wiki/Nemean_Lion",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Zeus: myth units cost 1 less population (not modelled here)."
+      },
+      "fieldMeta": {
+        "trainTime": {
+          "source": "https://ageofempires.fandom.com/wiki/Nemean_Lion",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Train time from the wiki only (analyzer unit data has no train time)."
+        }
+      }
+    },
+    {
+      "id": "scylla",
+      "name": {
+        "pt-BR": "Cila",
+        "en": "Scylla"
+      },
+      "icon": "units/greeks-scylla",
+      "pantheon": "greeks",
+      "tags": ["myth", "ship"],
+      "cost": {
+        "gold": 200,
+        "favor": 20
+      },
+      "pop": 4,
+      "trainTime": 15,
+      "trainedAt": ["dock"],
+      "age": "heroic",
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Scylla",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Available to all Greek gods since Retold (was Dionysus-only). Zeus: myth units cost 1 less population (not modelled here)."
+      },
+      "fieldMeta": {
+        "trainTime": {
+          "source": "https://ageofempires.fandom.com/wiki/Scylla",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Train time from the wiki only (analyzer unit data has no train time)."
+        }
+      }
+    },
+    {
+      "id": "colossus",
+      "name": {
+        "pt-BR": "Colosso",
+        "en": "Colossus"
+      },
+      "icon": "units/greeks-colossus",
+      "pantheon": "greeks",
+      "tags": ["myth"],
+      "cost": {
+        "gold": 350,
+        "favor": 30
+      },
+      "pop": 4,
+      "trainTime": 24,
+      "trainedAt": ["temple"],
+      "age": "mythic",
+      "requires": ["hephaestus"],
+      "meta": {
+        "source": "https://aomr-analyzer.com/unit-comparison ; https://ageofempires.fandom.com/wiki/Colossus",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Zeus: myth units cost 1 less population (not modelled here)."
+      },
+      "fieldMeta": {
+        "trainTime": {
+          "source": "https://ageofempires.fandom.com/wiki/Colossus",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Train time from the wiki only (analyzer unit data has no train time)."
+        }
+      }
+    },
+    {
+      "id": "medusa",
+      "name": {
+        "pt-BR": "Medusa",
+        "en": "Medusa"
+      },
+      "icon": "units/greeks-medusa",
+      "pantheon": "greeks",
+      "tags": ["myth"],
+      "cost": {
+        "wood": 250,
+        "favor": 24
+      },
+      "pop": 4,
+      "trainTime": 20,
+      "trainedAt": ["temple"],
+      "age": "mythic",
+      "requires": ["hera"],
+      "meta": {
+        "source": "https://aomr-analyzer.com/unit-comparison ; https://ageofempires.fandom.com/wiki/Medusa_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Zeus: myth units cost 1 less population (not modelled here)."
+      },
+      "fieldMeta": {
+        "trainTime": {
+          "source": "https://ageofempires.fandom.com/wiki/Medusa_(Age_of_Mythology)",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Train time from the wiki only (analyzer unit data has no train time)."
+        }
+      }
+    },
+    {
+      "id": "chimera",
+      "name": {
+        "pt-BR": "Quimera",
+        "en": "Chimera"
+      },
+      "icon": "units/greeks-chimera",
+      "pantheon": "greeks",
+      "tags": ["myth"],
+      "cost": {
+        "food": 280,
+        "favor": 26
+      },
+      "pop": 4,
+      "trainTime": 20,
+      "trainedAt": ["temple"],
+      "age": "mythic",
+      "requires": ["artemis"],
+      "meta": {
+        "source": "https://aomr-analyzer.com/unit-comparison ; https://ageofempires.fandom.com/wiki/Chimera",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Zeus: myth units cost 1 less population (not modelled here)."
+      },
+      "fieldMeta": {
+        "trainTime": {
+          "source": "https://ageofempires.fandom.com/wiki/Chimera",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Train time from the wiki only (analyzer unit data has no train time)."
+        }
+      }
+    },
+    {
+      "id": "carcinos",
+      "name": {
+        "pt-BR": "Carcino",
+        "en": "Carcinos"
+      },
+      "icon": "units/greeks-carcinos",
+      "pantheon": "greeks",
+      "tags": ["myth", "ship"],
+      "cost": {
+        "wood": 200,
+        "favor": 15
+      },
+      "pop": 3,
+      "trainTime": 9,
+      "trainedAt": ["dock"],
+      "age": "mythic",
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Carcinos",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Available to all Greek gods since Retold (was Hera-only). 9 s train time looks short; verify. Zeus: myth units cost 1 less population (not modelled here)."
+      },
+      "fieldMeta": {
+        "trainTime": {
+          "source": "https://ageofempires.fandom.com/wiki/Carcinos",
+          "checkedAt": "2026-10-17",
+          "confidence": "low",
+          "note": "Train time from the wiki only (analyzer unit data has no train time)."
+        }
+      }
+    },
+    {
+      "id": "hippocampus",
+      "name": {
+        "pt-BR": "Hipocampo",
+        "en": "Hippocampus"
+      },
+      "icon": "units/greeks-hippocampus",
+      "pantheon": "greeks",
+      "tags": ["myth", "ship", "scout"],
+      "cost": {},
+      "pop": 0,
+      "trainTime": 0,
+      "trainedAt": [],
+      "age": "archaic",
+      "requires": ["poseidon", "dock"],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Hippocampus ; https://aomr-analyzer.com/gods/poseidon",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Poseidon: a free Hippocampus spawns (and respawns) at the first Dock. Not trainable."
+      }
+    },
+    {
+      "id": "shade-of-hades",
+      "name": {
+        "pt-BR": "Sombra de Hades",
+        "en": "Shade of Hades"
+      },
+      "icon": "units/greeks-shade-of-hades",
+      "pantheon": "greeks",
+      "tags": ["myth"],
+      "cost": {},
+      "pop": 1,
+      "trainTime": 0,
+      "trainedAt": [],
+      "age": "archaic",
+      "requires": ["hades"],
+      "meta": {
+        "source": "https://aomr-analyzer.com/unit-comparison ; https://ageofempires.fandom.com/wiki/Shade_of_Hades",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Not trainable: 20% chance to appear at a Temple when a Hades human soldier dies. Internal cost 100 gold + 5 favor."
+      }
+    }
+  ],
+  "buildings": [
+    {
+      "id": "town-center",
+      "name": {
+        "pt-BR": "Centro da Cidade",
+        "en": "Town Center"
+      },
+      "icon": "buildings/greeks-town-center",
+      "pantheon": "greeks",
+      "cost": {
+        "wood": 350,
+        "gold": 350
+      },
+      "buildTime": 150,
+      "popCap": 15,
+      "age": "classical",
+      "trains": [
+        "villager",
+        "jason",
+        "ajax",
+        "theseus",
+        "heracles",
+        "achilles",
+        "atalanta",
+        "odysseus",
+        "chiron",
+        "hippolyta",
+        "bellerophon",
+        "perseus",
+        "polyphemus"
+      ],
+      "researches": [
+        "masons",
+        "architects",
+        "fortified-town-center",
+        "divine-blood",
+        "golden-apples"
+      ],
+      "dropsiteFor": ["hunt", "herd", "berries", "farm", "wood", "gold"],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Town_Center_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Players start with one. Additional Town Centers only on Settlements from the Classical Age (placing one elsewhere makes a Village Center). +10 pop with Fortified Town Center. Age-ups are researched here."
+      },
+      "fieldMeta": {
+        "buildTime": {
+          "source": "https://ageofempires.fandom.com/wiki/Town_Center_(Age_of_Mythology)",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Build time from the wiki only (analyzer has no build times)."
+        }
+      }
+    },
+    {
+      "id": "village-center",
+      "name": {
+        "pt-BR": "Centro de Vila",
+        "en": "Village Center"
+      },
+      "icon": "buildings/greeks-village-center",
+      "pantheon": "greeks",
+      "cost": {
+        "wood": 350,
+        "gold": 350
+      },
+      "buildTime": 150,
+      "popCap": 0,
+      "age": "archaic",
+      "trains": [
+        "villager",
+        "jason",
+        "ajax",
+        "theseus",
+        "heracles",
+        "achilles",
+        "atalanta",
+        "odysseus",
+        "chiron",
+        "hippolyta",
+        "bellerophon",
+        "perseus",
+        "polyphemus"
+      ],
+      "dropsiteFor": ["hunt", "herd", "berries", "farm", "wood", "gold"],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Village_Center",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Retold: built anywhere; no pop support; trains villagers 25% slower; in the Archaic Age only if you have no Town Center/Village Center. Can also advance ages."
+      },
+      "fieldMeta": {
+        "buildTime": {
+          "source": "https://ageofempires.fandom.com/wiki/Village_Center",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Build time from the wiki only (analyzer has no build times)."
+        }
+      }
+    },
+    {
+      "id": "house",
+      "name": {
+        "pt-BR": "Casa",
+        "en": "House"
+      },
+      "icon": "buildings/greeks-house",
+      "pantheon": "greeks",
+      "cost": {
+        "wood": 50
+      },
+      "buildTime": 15,
+      "popCap": 10,
+      "limit": 16,
+      "age": "archaic",
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/House_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "buildTime": {
+          "source": "https://ageofempires.fandom.com/wiki/House_(Age_of_Mythology)",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Build time from the wiki only (analyzer has no build times)."
+        }
+      }
+    },
+    {
+      "id": "temple",
+      "name": {
+        "pt-BR": "Templo",
+        "en": "Temple"
+      },
+      "icon": "buildings/greeks-temple",
+      "pantheon": "greeks",
+      "cost": {
+        "wood": 150,
+        "gold": 150
+      },
+      "buildTime": 40,
+      "age": "archaic",
+      "trains": [
+        "pegasus",
+        "minotaur",
+        "centaur",
+        "cyclops",
+        "manticore",
+        "hydra",
+        "nemean-lion",
+        "colossus",
+        "medusa",
+        "chimera"
+      ],
+      "researches": [
+        "olympian-parentage",
+        "omniscience",
+        "labyrinth-of-minos",
+        "sylvan-lore",
+        "winged-messenger",
+        "will-of-kronos",
+        "oracle",
+        "temple-of-healing",
+        "chthonic-rites",
+        "dionysia",
+        "roar-of-orthus",
+        "hand-of-talos",
+        "shoulder-of-talos",
+        "face-of-the-gorgon",
+        "monstrous-rage",
+        "flames-of-typhon"
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Temple_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Villagers pray here for favor (see favor rule). Required for the Classical Age."
+      },
+      "fieldMeta": {
+        "buildTime": {
+          "source": "https://ageofempires.fandom.com/wiki/Temple_(Age_of_Mythology)",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Build time from the wiki only (analyzer has no build times)."
+        }
+      }
+    },
+    {
+      "id": "granary",
+      "name": {
+        "pt-BR": "Celeiro",
+        "en": "Granary"
+      },
+      "icon": "buildings/greeks-granary",
+      "pantheon": "greeks",
+      "cost": {
+        "wood": 50
+      },
+      "buildTime": 15,
+      "age": "archaic",
+      "researches": ["husbandry", "plow", "irrigation", "flood-control", "survival-equipment"],
+      "dropsiteFor": ["hunt", "herd", "berries", "farm"],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Granary_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "buildTime": {
+          "source": "https://ageofempires.fandom.com/wiki/Granary_(Age_of_Mythology)",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Build time from the wiki only (analyzer has no build times)."
+        }
+      }
+    },
+    {
+      "id": "storehouse",
+      "name": {
+        "pt-BR": "Depósito",
+        "en": "Storehouse"
+      },
+      "icon": "buildings/greeks-storehouse",
+      "pantheon": "greeks",
+      "cost": {
+        "wood": 50
+      },
+      "buildTime": 15,
+      "age": "archaic",
+      "researches": [
+        "hand-axe",
+        "bow-saw",
+        "carpenters",
+        "pickaxe",
+        "shaft-mine",
+        "quarry",
+        "vaults-of-erebus"
+      ],
+      "dropsiteFor": ["wood", "gold"],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Storehouse",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "buildTime": {
+          "source": "https://ageofempires.fandom.com/wiki/Storehouse",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Build time from the wiki only (analyzer has no build times)."
+        }
+      }
+    },
+    {
+      "id": "farm",
+      "name": {
+        "pt-BR": "Fazenda",
+        "en": "Farm"
+      },
+      "icon": "buildings/greeks-farm",
+      "pantheon": "greeks",
+      "tags": ["farm"],
+      "cost": {
+        "wood": 75
+      },
+      "buildTime": 10,
+      "age": "classical",
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Farm_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Farms are available from the Classical Age for Greeks in Retold. One worker per farm."
+      },
+      "fieldMeta": {
+        "buildTime": {
+          "source": "https://ageofempires.fandom.com/wiki/Farm_(Age_of_Mythology)",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Build time from the wiki only (analyzer has no build times)."
+        }
+      }
+    },
+    {
+      "id": "market",
+      "name": {
+        "pt-BR": "Mercado",
+        "en": "Market"
+      },
+      "icon": "buildings/greeks-market",
+      "pantheon": "greeks",
+      "cost": {
+        "wood": 150
+      },
+      "buildTime": 40,
+      "age": "classical",
+      "trains": ["caravan"],
+      "researches": ["tax-collectors", "ambassadors", "coinage"],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Market_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Classical Age since Retold. Poseidon: -30% cost, +15% exchange rates. Market (or Armory) unlocks the Heroic Age."
+      },
+      "fieldMeta": {
+        "buildTime": {
+          "source": "https://ageofempires.fandom.com/wiki/Market_(Age_of_Mythology)",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Build time from the wiki only (analyzer has no build times)."
+        }
+      }
+    },
+    {
+      "id": "dock",
+      "name": {
+        "pt-BR": "Doca",
+        "en": "Dock"
+      },
+      "icon": "buildings/greeks-dock",
+      "pantheon": "greeks",
+      "cost": {
+        "wood": 100
+      },
+      "buildTime": 30,
+      "age": "archaic",
+      "trains": [
+        "fishing-ship",
+        "transport-ship",
+        "trireme",
+        "pentekonter",
+        "juggernaut",
+        "the-argo",
+        "scylla",
+        "carcinos"
+      ],
+      "researches": [
+        "purse-seine",
+        "salt-amphora",
+        "enclosed-deck",
+        "heroic-fleet",
+        "heavy-warships",
+        "champion-warships",
+        "conscript-sailors",
+        "argonauts",
+        "anastrophe"
+      ],
+      "dropsiteFor": ["fish", "hunt", "herd", "berries", "farm"],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Dock_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Fish drop site; in Retold also a food drop site for land workers."
+      },
+      "fieldMeta": {
+        "buildTime": {
+          "source": "https://ageofempires.fandom.com/wiki/Dock_(Age_of_Mythology)",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Build time from the wiki only (analyzer has no build times)."
+        }
+      }
+    },
+    {
+      "id": "military-academy",
+      "name": {
+        "pt-BR": "Academia Militar",
+        "en": "Military Academy"
+      },
+      "icon": "buildings/greeks-military-academy",
+      "pantheon": "greeks",
+      "cost": {
+        "wood": 100
+      },
+      "buildTime": 25,
+      "age": "classical",
+      "trains": ["hoplite", "hypaspist"],
+      "researches": [
+        "medium-infantry",
+        "heavy-infantry",
+        "champion-infantry",
+        "levy-infantry",
+        "conscript-infantry",
+        "aegis-shield",
+        "sarissa",
+        "phobos-spear-of-panic",
+        "deimos-sword-of-dread"
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Military_Academy_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "buildTime": {
+          "source": "https://ageofempires.fandom.com/wiki/Military_Academy_(Age_of_Mythology)",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Build time from the wiki only (analyzer has no build times)."
+        }
+      }
+    },
+    {
+      "id": "archery-range",
+      "name": {
+        "pt-BR": "Campo de Tiro com Arco",
+        "en": "Archery Range"
+      },
+      "icon": "buildings/greeks-archery-range",
+      "pantheon": "greeks",
+      "cost": {
+        "wood": 100
+      },
+      "buildTime": 25,
+      "age": "classical",
+      "trains": ["toxotes", "peltast"],
+      "researches": [
+        "medium-ranged-soldiers",
+        "heavy-ranged-soldiers",
+        "champion-ranged-soldiers",
+        "levy-ranged-soldiers",
+        "conscript-ranged-soldiers",
+        "enyos-bow-of-horror",
+        "sun-ray",
+        "shafts-of-plague"
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Archery_Range_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "buildTime": {
+          "source": "https://ageofempires.fandom.com/wiki/Archery_Range_(Age_of_Mythology)",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Build time from the wiki only (analyzer has no build times)."
+        }
+      }
+    },
+    {
+      "id": "stable",
+      "name": {
+        "pt-BR": "Estábulo",
+        "en": "Stable"
+      },
+      "icon": "buildings/greeks-stable",
+      "pantheon": "greeks",
+      "cost": {
+        "wood": 100
+      },
+      "buildTime": 25,
+      "age": "classical",
+      "trains": ["hippeus", "prodromos"],
+      "researches": [
+        "medium-cavalry",
+        "heavy-cavalry",
+        "champion-cavalry",
+        "levy-cavalry",
+        "conscript-cavalry",
+        "lord-of-horses",
+        "spirited-charge",
+        "thracian-horses"
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Stable_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Poseidon: -30% cost."
+      },
+      "fieldMeta": {
+        "buildTime": {
+          "source": "https://ageofempires.fandom.com/wiki/Stable_(Age_of_Mythology)",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Build time from the wiki only (analyzer has no build times)."
+        }
+      }
+    },
+    {
+      "id": "armory",
+      "name": {
+        "pt-BR": "Arsenal",
+        "en": "Armory"
+      },
+      "icon": "buildings/greeks-armory",
+      "pantheon": "greeks",
+      "cost": {
+        "wood": 150
+      },
+      "buildTime": 40,
+      "age": "classical",
+      "researches": [
+        "copper-weapons",
+        "copper-armor",
+        "copper-shields",
+        "bronze-weapons",
+        "bronze-armor",
+        "bronze-shields",
+        "iron-weapons",
+        "iron-armor",
+        "iron-shields",
+        "ballistics",
+        "burning-pitch",
+        "forge-of-olympus",
+        "olympian-weapons"
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Armory",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Armory (or Market) unlocks the Heroic Age."
+      },
+      "fieldMeta": {
+        "buildTime": {
+          "source": "https://ageofempires.fandom.com/wiki/Armory",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Build time from the wiki only (analyzer has no build times)."
+        }
+      }
+    },
+    {
+      "id": "sentry-tower",
+      "name": {
+        "pt-BR": "Torre de Sentinela",
+        "en": "Sentry Tower"
+      },
+      "icon": "buildings/greeks-sentry-tower",
+      "pantheon": "greeks",
+      "cost": {
+        "wood": 150,
+        "gold": 100
+      },
+      "buildTime": 60,
+      "limit": 30,
+      "age": "classical",
+      "researches": [
+        "watch-tower",
+        "guard-tower",
+        "signal-fires",
+        "carrier-pigeons",
+        "crenellations",
+        "boiling-oil"
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Sentry_Tower_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Upgradable to Watch Tower (Classical) and Guard Tower (Heroic). Wiki says standard matches start with four Sentry Towers around the Town Center (not included in start state; see PENDING)."
+      },
+      "fieldMeta": {
+        "buildTime": {
+          "source": "https://ageofempires.fandom.com/wiki/Sentry_Tower_(Age_of_Mythology)",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Build time from the wiki only (analyzer has no build times)."
+        }
+      }
+    },
+    {
+      "id": "fortress",
+      "name": {
+        "pt-BR": "Fortaleza",
+        "en": "Fortress"
+      },
+      "icon": "buildings/greeks-fortress",
+      "pantheon": "greeks",
+      "cost": {
+        "wood": 300,
+        "gold": 300,
+        "favor": 10
+      },
+      "buildTime": 150,
+      "limit": 15,
+      "age": "heroic",
+      "trains": [
+        "jason",
+        "ajax",
+        "theseus",
+        "heracles",
+        "achilles",
+        "atalanta",
+        "odysseus",
+        "chiron",
+        "hippolyta",
+        "bellerophon",
+        "perseus",
+        "polyphemus",
+        "petrobolos",
+        "helepolis",
+        "myrmidon",
+        "gastraphetoros",
+        "hetairos"
+      ],
+      "researches": [
+        "draft-horses",
+        "engineers",
+        "advanced-fortifications",
+        "beast-slayer",
+        "argive-patronage"
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Fortress_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Required for the Mythic Age."
+      },
+      "fieldMeta": {
+        "buildTime": {
+          "source": "https://ageofempires.fandom.com/wiki/Fortress_(Age_of_Mythology)",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Build time from the wiki only (analyzer has no build times)."
+        }
+      }
+    },
+    {
+      "id": "wall",
+      "name": {
+        "pt-BR": "Muro de Madeira",
+        "en": "Wooden Wall"
+      },
+      "icon": "buildings/greeks-wall",
+      "pantheon": "greeks",
+      "cost": {
+        "gold": 15
+      },
+      "buildTime": 15,
+      "age": "archaic",
+      "researches": ["stone-wall", "fortified-wall"],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Wooden_Wall",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Cost/time are for one long segment (connector 3 gold/5 s, short 6/6 s, medium 9/9 s, long 15/15 s). Upgrades to Stone Wall (Classical) and Fortified Wall (Heroic)."
+      },
+      "fieldMeta": {
+        "buildTime": {
+          "source": "https://ageofempires.fandom.com/wiki/Wooden_Wall",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Build time from the wiki only (analyzer has no build times)."
+        }
+      }
+    },
+    {
+      "id": "gate",
+      "name": {
+        "pt-BR": "Portão de Madeira",
+        "en": "Wooden Gate"
+      },
+      "icon": "buildings/greeks-gate",
+      "pantheon": "greeks",
+      "cost": {
+        "gold": 15
+      },
+      "buildTime": 0,
+      "age": "archaic",
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Wooden_Gate",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Converted from a long wall segment ('Build Gate' ability, 15 gold); build time not documented."
+      },
+      "fieldMeta": {
+        "buildTime": {
+          "source": "https://ageofempires.fandom.com/wiki/Wooden_Gate",
+          "checkedAt": "2026-10-17",
+          "confidence": "low",
+          "note": "Build time from the wiki only (analyzer has no build times)."
+        }
+      }
+    },
+    {
+      "id": "wonder",
+      "name": {
+        "pt-BR": "Maravilha",
+        "en": "Wonder"
+      },
+      "icon": "buildings/greeks-wonder",
+      "pantheon": "greeks",
+      "cost": {
+        "food": 5000,
+        "wood": 5000,
+        "gold": 5000
+      },
+      "buildTime": 5400,
+      "limit": 1,
+      "age": "mythic",
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Wonder_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Retold: building it advances to the Wonder Age."
+      },
+      "fieldMeta": {
+        "buildTime": {
+          "source": "https://ageofempires.fandom.com/wiki/Wonder_(Age_of_Mythology)",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Build time from the wiki only (analyzer has no build times)."
+        }
+      }
+    }
+  ],
+  "researches": [
+    {
+      "id": "husbandry",
+      "name": {
+        "pt-BR": "Pecuária",
+        "en": "Husbandry"
+      },
+      "icon": "techs/greeks-husbandry",
+      "pantheon": "greeks",
+      "tags": ["economy"],
+      "cost": {
+        "wood": 100,
+        "gold": 50
+      },
+      "time": 30,
+      "at": "granary",
+      "age": "archaic",
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.1,
+          "scope": {
+            "sources": ["herd"]
+          },
+          "note": "+10% herdable gather rate. Also +15 food carry and +25% herd fattening (not modelled)."
+        }
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Husbandry_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Husbandry_(Age_of_Mythology)",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "plow",
+      "name": {
+        "pt-BR": "Arado",
+        "en": "Plow"
+      },
+      "icon": "techs/greeks-plow",
+      "pantheon": "greeks",
+      "tags": ["economy"],
+      "cost": {
+        "wood": 50,
+        "gold": 100
+      },
+      "time": 40,
+      "at": "granary",
+      "age": "classical",
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.1,
+          "scope": {
+            "sources": ["farm"]
+          },
+          "note": "Assumed to stack multiplicatively with other gather-rate techs."
+        }
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Plow_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Plow_(Age_of_Mythology)",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "irrigation",
+      "name": {
+        "pt-BR": "Irrigação",
+        "en": "Irrigation"
+      },
+      "icon": "techs/greeks-irrigation",
+      "pantheon": "greeks",
+      "tags": ["economy"],
+      "cost": {
+        "wood": 150,
+        "gold": 250
+      },
+      "time": 30,
+      "at": "granary",
+      "age": "heroic",
+      "requires": ["plow"],
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.1,
+          "scope": {
+            "sources": ["farm"]
+          },
+          "note": "Assumed to stack multiplicatively with other gather-rate techs."
+        }
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Irrigation_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Irrigation_(Age_of_Mythology)",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "flood-control",
+      "name": {
+        "pt-BR": "Controle de Enchentes",
+        "en": "Flood Control"
+      },
+      "icon": "techs/greeks-flood-control",
+      "pantheon": "greeks",
+      "tags": ["economy"],
+      "cost": {
+        "wood": 250,
+        "gold": 350
+      },
+      "time": 40,
+      "at": "granary",
+      "age": "mythic",
+      "requires": ["irrigation"],
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.1,
+          "scope": {
+            "sources": ["farm"]
+          },
+          "note": "Assumed to stack multiplicatively with other gather-rate techs."
+        }
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Flood_Control",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Flood_Control",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "hand-axe",
+      "name": {
+        "pt-BR": "Machado de Mão",
+        "en": "Hand Axe"
+      },
+      "icon": "techs/greeks-hand-axe",
+      "pantheon": "greeks",
+      "tags": ["economy"],
+      "cost": {
+        "food": 120,
+        "gold": 50
+      },
+      "time": 30,
+      "at": "storehouse",
+      "age": "archaic",
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.1,
+          "scope": {
+            "sources": ["wood"]
+          },
+          "note": "+10% wood gather rate, +5 carry (carry not modelled)."
+        }
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Hand_Axe",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Hand_Axe",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "bow-saw",
+      "name": {
+        "pt-BR": "Serra de Arco",
+        "en": "Bow Saw"
+      },
+      "icon": "techs/greeks-bow-saw",
+      "pantheon": "greeks",
+      "tags": ["economy"],
+      "cost": {
+        "food": 250,
+        "gold": 150
+      },
+      "time": 45,
+      "at": "storehouse",
+      "age": "heroic",
+      "requires": ["hand-axe"],
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.15,
+          "scope": {
+            "sources": ["wood"]
+          },
+          "note": "+15% wood gather rate, +5 carry. Assumed to stack multiplicatively with other gather-rate techs."
+        }
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Bow_Saw_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Bow_Saw_(Age_of_Mythology)",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "carpenters",
+      "name": {
+        "pt-BR": "Carpinteiros",
+        "en": "Carpenters"
+      },
+      "icon": "techs/greeks-carpenters",
+      "pantheon": "greeks",
+      "tags": ["economy"],
+      "cost": {
+        "food": 300,
+        "gold": 200
+      },
+      "time": 55,
+      "at": "storehouse",
+      "age": "mythic",
+      "requires": ["bow-saw"],
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.2,
+          "scope": {
+            "sources": ["wood"]
+          },
+          "note": "+20% wood gather rate, +5 carry. Assumed to stack multiplicatively with other gather-rate techs."
+        }
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Carpenters",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Carpenters",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "pickaxe",
+      "name": {
+        "pt-BR": "Picareta",
+        "en": "Pickaxe"
+      },
+      "icon": "techs/greeks-pickaxe",
+      "pantheon": "greeks",
+      "tags": ["economy"],
+      "cost": {
+        "food": 50,
+        "wood": 120
+      },
+      "time": 30,
+      "at": "storehouse",
+      "age": "archaic",
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.1,
+          "scope": {
+            "sources": ["gold"]
+          },
+          "note": "+10% gold gather rate, +5 carry (carry not modelled)."
+        }
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Pickaxe",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Pickaxe",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "shaft-mine",
+      "name": {
+        "pt-BR": "Mina de Poço",
+        "en": "Shaft Mine"
+      },
+      "icon": "techs/greeks-shaft-mine",
+      "pantheon": "greeks",
+      "tags": ["economy"],
+      "cost": {
+        "food": 150,
+        "wood": 250
+      },
+      "time": 40,
+      "at": "storehouse",
+      "age": "heroic",
+      "requires": ["pickaxe"],
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.15,
+          "scope": {
+            "sources": ["gold"]
+          },
+          "note": "+15% gold gather rate, +5 carry. Assumed to stack multiplicatively with other gather-rate techs."
+        }
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Shaft_Mine",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Shaft_Mine",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "quarry",
+      "name": {
+        "pt-BR": "Pedreira",
+        "en": "Quarry"
+      },
+      "icon": "techs/greeks-quarry",
+      "pantheon": "greeks",
+      "tags": ["economy"],
+      "cost": {
+        "food": 200,
+        "wood": 300
+      },
+      "time": 50,
+      "at": "storehouse",
+      "age": "mythic",
+      "requires": ["shaft-mine"],
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.2,
+          "scope": {
+            "sources": ["gold"]
+          },
+          "note": "+20% gold gather rate, +5 carry. Assumed to stack multiplicatively with other gather-rate techs."
+        }
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Quarry",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Quarry",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "purse-seine",
+      "name": {
+        "pt-BR": "Rede de Cerco",
+        "en": "Purse Seine"
+      },
+      "icon": "techs/greeks-purse-seine",
+      "pantheon": "greeks",
+      "tags": ["economy"],
+      "cost": {
+        "wood": 150,
+        "gold": 150
+      },
+      "time": 20,
+      "at": "dock",
+      "age": "classical",
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.5,
+          "scope": {
+            "sources": ["fish"]
+          },
+          "note": "+50% fishing gather rate."
+        }
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Purse_Seine",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Purse_Seine",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "salt-amphora",
+      "name": {
+        "pt-BR": "Ânfora de Sal",
+        "en": "Salt Amphora"
+      },
+      "icon": "techs/greeks-salt-amphora",
+      "pantheon": "greeks",
+      "tags": ["economy"],
+      "cost": {
+        "wood": 200,
+        "gold": 300
+      },
+      "time": 30,
+      "at": "dock",
+      "age": "heroic",
+      "requires": ["purse-seine"],
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.5,
+          "scope": {
+            "sources": ["fish"]
+          },
+          "note": "+50% fishing gather rate (+25 Fishing Ship carry). Assumed to stack multiplicatively with other gather-rate techs."
+        }
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Salt_Amphora",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Salt_Amphora",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "survival-equipment",
+      "name": {
+        "pt-BR": "Equipamento de Sobrevivência",
+        "en": "Survival Equipment"
+      },
+      "icon": "techs/greeks-survival-equipment",
+      "pantheon": "greeks",
+      "cost": {
+        "wood": 100,
+        "gold": 100
+      },
+      "time": 20,
+      "at": "granary",
+      "age": "classical",
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Survival_Equipment",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Villagers +25% HP, +10% melee attack, +50% ranged (anti-animal) attack. No gather-rate effect."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Survival_Equipment",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "masons",
+      "name": {
+        "pt-BR": "Pedreiros",
+        "en": "Masons"
+      },
+      "icon": "techs/greeks-masons",
+      "pantheon": "greeks",
+      "cost": {
+        "food": 200,
+        "wood": 300
+      },
+      "time": 20,
+      "at": "town-center",
+      "age": "classical",
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Masons",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Buildings +20% HP."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Masons",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "architects",
+      "name": {
+        "pt-BR": "Arquitetos",
+        "en": "Architects"
+      },
+      "icon": "techs/greeks-architects",
+      "pantheon": "greeks",
+      "cost": {
+        "food": 400,
+        "wood": 500
+      },
+      "time": 30,
+      "at": "town-center",
+      "age": "heroic",
+      "requires": ["masons"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Architects",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Buildings +30% HP."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Architects",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "fortified-town-center",
+      "name": {
+        "pt-BR": "Centro da Cidade Fortificado",
+        "en": "Fortified Town Center"
+      },
+      "icon": "techs/greeks-fortified-town-center",
+      "pantheon": "greeks",
+      "tags": ["economy"],
+      "cost": {
+        "wood": 400,
+        "gold": 400
+      },
+      "time": 60,
+      "at": "town-center",
+      "age": "heroic",
+      "effects": [
+        {
+          "target": "popCap",
+          "op": "add",
+          "value": 10,
+          "scope": {
+            "ids": ["town-center"]
+          },
+          "note": "+10 population per Town Center (15 -> 25)."
+        }
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Fortified_Town_Center",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Also +25% HP, +2 range, +50% attack."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Fortified_Town_Center",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "tax-collectors",
+      "name": {
+        "pt-BR": "Coletores de Impostos",
+        "en": "Tax Collectors"
+      },
+      "icon": "techs/greeks-tax-collectors",
+      "pantheon": "greeks",
+      "cost": {
+        "food": 200,
+        "gold": 200
+      },
+      "time": 35,
+      "at": "market",
+      "age": "heroic",
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Tax_Collectors",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Market buy/sell -25% cost; tribute penalty -50% (market not modelled)."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Tax_Collectors",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "ambassadors",
+      "name": {
+        "pt-BR": "Embaixadores",
+        "en": "Ambassadors"
+      },
+      "icon": "techs/greeks-ambassadors",
+      "pantheon": "greeks",
+      "cost": {
+        "gold": 250
+      },
+      "time": 30,
+      "at": "market",
+      "age": "mythic",
+      "requires": ["tax-collectors"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Ambassadors",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Improves market exchange rates; removes tribute penalty."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Ambassadors",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "coinage",
+      "name": {
+        "pt-BR": "Cunhagem",
+        "en": "Coinage"
+      },
+      "icon": "techs/greeks-coinage",
+      "pantheon": "greeks",
+      "cost": {
+        "gold": 200
+      },
+      "time": 40,
+      "at": "market",
+      "age": "mythic",
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Coinage_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Caravans +20% speed."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Coinage_(Age_of_Mythology)",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "levy-infantry",
+      "name": {
+        "pt-BR": "Recrutamento de Infantaria",
+        "en": "Levy Infantry"
+      },
+      "icon": "techs/greeks-levy-infantry",
+      "pantheon": "greeks",
+      "tags": ["economy"],
+      "cost": {
+        "food": 150
+      },
+      "time": 20,
+      "at": "military-academy",
+      "age": "heroic",
+      "effects": [
+        {
+          "target": "trainTime",
+          "op": "mul",
+          "value": 0.8,
+          "scope": {
+            "tags": ["infantry"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Levy_Infantry",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Levy_Infantry",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "conscript-infantry",
+      "name": {
+        "pt-BR": "Conscrição de Infantaria",
+        "en": "Conscript Infantry"
+      },
+      "icon": "techs/greeks-conscript-infantry",
+      "pantheon": "greeks",
+      "tags": ["economy"],
+      "cost": {
+        "food": 200
+      },
+      "time": 30,
+      "at": "military-academy",
+      "age": "mythic",
+      "requires": ["levy-infantry"],
+      "effects": [
+        {
+          "target": "trainTime",
+          "op": "mul",
+          "value": 0.8,
+          "scope": {
+            "tags": ["infantry"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Conscript_Infantry",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Conscript_Infantry",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "levy-ranged-soldiers",
+      "name": {
+        "pt-BR": "Recrutamento de Soldados de Longo Alcance",
+        "en": "Levy Ranged Soldiers"
+      },
+      "icon": "techs/greeks-levy-ranged-soldiers",
+      "pantheon": "greeks",
+      "tags": ["economy"],
+      "cost": {
+        "wood": 150
+      },
+      "time": 20,
+      "at": "archery-range",
+      "age": "heroic",
+      "effects": [
+        {
+          "target": "trainTime",
+          "op": "mul",
+          "value": 0.8,
+          "scope": {
+            "tags": ["archer"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Levy_Ranged_Soldiers",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Levy_Ranged_Soldiers",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "conscript-ranged-soldiers",
+      "name": {
+        "pt-BR": "Conscrição de Soldados de Longo Alcance",
+        "en": "Conscript Ranged Soldiers"
+      },
+      "icon": "techs/greeks-conscript-ranged-soldiers",
+      "pantheon": "greeks",
+      "tags": ["economy"],
+      "cost": {
+        "wood": 200
+      },
+      "time": 30,
+      "at": "archery-range",
+      "age": "mythic",
+      "requires": ["levy-ranged-soldiers"],
+      "effects": [
+        {
+          "target": "trainTime",
+          "op": "mul",
+          "value": 0.8,
+          "scope": {
+            "tags": ["archer"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Conscript_Ranged_Soldiers",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Conscript_Ranged_Soldiers",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "levy-cavalry",
+      "name": {
+        "pt-BR": "Recrutamento de Cavalaria",
+        "en": "Levy Cavalry"
+      },
+      "icon": "techs/greeks-levy-cavalry",
+      "pantheon": "greeks",
+      "tags": ["economy"],
+      "cost": {
+        "food": 150
+      },
+      "time": 20,
+      "at": "stable",
+      "age": "heroic",
+      "effects": [
+        {
+          "target": "trainTime",
+          "op": "mul",
+          "value": 0.8,
+          "scope": {
+            "tags": ["cavalry"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Levy_Cavalry",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Levy_Cavalry",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "conscript-cavalry",
+      "name": {
+        "pt-BR": "Conscrição de Cavalaria",
+        "en": "Conscript Cavalry"
+      },
+      "icon": "techs/greeks-conscript-cavalry",
+      "pantheon": "greeks",
+      "tags": ["economy"],
+      "cost": {
+        "food": 200
+      },
+      "time": 30,
+      "at": "stable",
+      "age": "mythic",
+      "requires": ["levy-cavalry"],
+      "effects": [
+        {
+          "target": "trainTime",
+          "op": "mul",
+          "value": 0.8,
+          "scope": {
+            "tags": ["cavalry"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Conscript_Cavalry",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Conscript_Cavalry",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "conscript-sailors",
+      "name": {
+        "pt-BR": "Conscrição de Marinheiros",
+        "en": "Conscript Sailors"
+      },
+      "icon": "techs/greeks-conscript-sailors",
+      "pantheon": "greeks",
+      "tags": ["economy"],
+      "cost": {
+        "wood": 300
+      },
+      "time": 30,
+      "at": "dock",
+      "age": "mythic",
+      "effects": [
+        {
+          "target": "trainTime",
+          "op": "mul",
+          "value": 0.8,
+          "scope": {
+            "tags": ["ship"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Conscript_Sailors",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "+25% training speed = -20% training time."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Conscript_Sailors",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "omniscience",
+      "name": {
+        "pt-BR": "Onisciência",
+        "en": "Omniscience"
+      },
+      "icon": "techs/greeks-omniscience",
+      "pantheon": "greeks",
+      "cost": {},
+      "time": 4,
+      "at": "temple",
+      "age": "mythic",
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Omniscience",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Cost is 100 gold x total population of all enemy units (variable; left empty). Reveals enemy units."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Omniscience",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "medium-infantry",
+      "name": {
+        "pt-BR": "Infantaria Média",
+        "en": "Medium Infantry"
+      },
+      "icon": "techs/greeks-medium-infantry",
+      "pantheon": "greeks",
+      "tags": ["military"],
+      "cost": {
+        "food": 150,
+        "gold": 150
+      },
+      "time": 20,
+      "at": "military-academy",
+      "age": "classical",
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Medium_Infantry",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Medium_Infantry",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "heavy-infantry",
+      "name": {
+        "pt-BR": "Infantaria Pesada",
+        "en": "Heavy Infantry"
+      },
+      "icon": "techs/greeks-heavy-infantry",
+      "pantheon": "greeks",
+      "tags": ["military"],
+      "cost": {
+        "food": 300,
+        "gold": 300
+      },
+      "time": 30,
+      "at": "military-academy",
+      "age": "heroic",
+      "requires": ["medium-infantry"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Heavy_Infantry_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Heavy_Infantry_(Age_of_Mythology)",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "champion-infantry",
+      "name": {
+        "pt-BR": "Infantaria Campeã",
+        "en": "Champion Infantry"
+      },
+      "icon": "techs/greeks-champion-infantry",
+      "pantheon": "greeks",
+      "tags": ["military"],
+      "cost": {
+        "food": 500,
+        "gold": 400
+      },
+      "time": 40,
+      "at": "military-academy",
+      "age": "mythic",
+      "requires": ["heavy-infantry"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Champion_Infantry",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Champion_Infantry",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "medium-ranged-soldiers",
+      "name": {
+        "pt-BR": "Soldados de Longo Alcance Médios",
+        "en": "Medium Ranged Soldiers"
+      },
+      "icon": "techs/greeks-medium-ranged-soldiers",
+      "pantheon": "greeks",
+      "tags": ["military"],
+      "cost": {
+        "wood": 150,
+        "gold": 150
+      },
+      "time": 20,
+      "at": "archery-range",
+      "age": "classical",
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Medium_Ranged_Soldiers",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Hades: -33% cost (modifier on the Hades god file)."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Medium_Ranged_Soldiers",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "heavy-ranged-soldiers",
+      "name": {
+        "pt-BR": "Soldados de Longo Alcance Pesados",
+        "en": "Heavy Ranged Soldiers"
+      },
+      "icon": "techs/greeks-heavy-ranged-soldiers",
+      "pantheon": "greeks",
+      "tags": ["military"],
+      "cost": {
+        "wood": 300,
+        "gold": 300
+      },
+      "time": 30,
+      "at": "archery-range",
+      "age": "heroic",
+      "requires": ["medium-ranged-soldiers"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Heavy_Ranged_Soldiers",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Hades: -33% cost (modifier on the Hades god file)."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Heavy_Ranged_Soldiers",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "champion-ranged-soldiers",
+      "name": {
+        "pt-BR": "Soldados de Longo Alcance Campeões",
+        "en": "Champion Ranged Soldiers"
+      },
+      "icon": "techs/greeks-champion-ranged-soldiers",
+      "pantheon": "greeks",
+      "tags": ["military"],
+      "cost": {
+        "wood": 500,
+        "gold": 400
+      },
+      "time": 40,
+      "at": "archery-range",
+      "age": "mythic",
+      "requires": ["heavy-ranged-soldiers"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Champion_Ranged_Soldiers",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Hades: -33% cost (modifier on the Hades god file)."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Champion_Ranged_Soldiers",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "medium-cavalry",
+      "name": {
+        "pt-BR": "Cavalaria Média",
+        "en": "Medium Cavalry"
+      },
+      "icon": "techs/greeks-medium-cavalry",
+      "pantheon": "greeks",
+      "tags": ["military"],
+      "cost": {
+        "food": 200,
+        "gold": 100
+      },
+      "time": 20,
+      "at": "stable",
+      "age": "classical",
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Medium_Cavalry",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Medium_Cavalry",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "heavy-cavalry",
+      "name": {
+        "pt-BR": "Cavalaria Pesada",
+        "en": "Heavy Cavalry"
+      },
+      "icon": "techs/greeks-heavy-cavalry",
+      "pantheon": "greeks",
+      "tags": ["military"],
+      "cost": {
+        "food": 400,
+        "gold": 200
+      },
+      "time": 30,
+      "at": "stable",
+      "age": "heroic",
+      "requires": ["medium-cavalry"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Heavy_Cavalry_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Heavy_Cavalry_(Age_of_Mythology)",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "champion-cavalry",
+      "name": {
+        "pt-BR": "Cavalaria Campeã",
+        "en": "Champion Cavalry"
+      },
+      "icon": "techs/greeks-champion-cavalry",
+      "pantheon": "greeks",
+      "tags": ["military"],
+      "cost": {
+        "food": 700,
+        "gold": 200
+      },
+      "time": 40,
+      "at": "stable",
+      "age": "mythic",
+      "requires": ["heavy-cavalry"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Champion_Cavalry",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Champion_Cavalry",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "copper-weapons",
+      "name": {
+        "pt-BR": "Armas de Cobre",
+        "en": "Copper Weapons"
+      },
+      "icon": "techs/greeks-copper-weapons",
+      "pantheon": "greeks",
+      "tags": ["military"],
+      "cost": {
+        "food": 100,
+        "gold": 100
+      },
+      "time": 30,
+      "at": "armory",
+      "age": "classical",
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Copper_Weapons",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Copper_Weapons",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "copper-armor",
+      "name": {
+        "pt-BR": "Armadura de Cobre",
+        "en": "Copper Armor"
+      },
+      "icon": "techs/greeks-copper-armor",
+      "pantheon": "greeks",
+      "tags": ["military"],
+      "cost": {
+        "food": 75,
+        "gold": 75
+      },
+      "time": 30,
+      "at": "armory",
+      "age": "classical",
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Copper_Armor",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Copper_Armor",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "copper-shields",
+      "name": {
+        "pt-BR": "Escudos de Cobre",
+        "en": "Copper Shields"
+      },
+      "icon": "techs/greeks-copper-shields",
+      "pantheon": "greeks",
+      "tags": ["military"],
+      "cost": {
+        "wood": 75,
+        "gold": 75
+      },
+      "time": 30,
+      "at": "armory",
+      "age": "classical",
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Copper_Shields",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Copper_Shields",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "bronze-weapons",
+      "name": {
+        "pt-BR": "Armas de Bronze",
+        "en": "Bronze Weapons"
+      },
+      "icon": "techs/greeks-bronze-weapons",
+      "pantheon": "greeks",
+      "tags": ["military"],
+      "cost": {
+        "food": 200,
+        "gold": 200
+      },
+      "time": 40,
+      "at": "armory",
+      "age": "heroic",
+      "requires": ["copper-weapons"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Bronze_Weapons",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Bronze_Weapons",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "bronze-armor",
+      "name": {
+        "pt-BR": "Armadura de Bronze",
+        "en": "Bronze Armor"
+      },
+      "icon": "techs/greeks-bronze-armor",
+      "pantheon": "greeks",
+      "tags": ["military"],
+      "cost": {
+        "food": 200,
+        "gold": 150
+      },
+      "time": 40,
+      "at": "armory",
+      "age": "heroic",
+      "requires": ["copper-armor"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Bronze_Armor",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Bronze_Armor",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "bronze-shields",
+      "name": {
+        "pt-BR": "Escudos de Bronze",
+        "en": "Bronze Shields"
+      },
+      "icon": "techs/greeks-bronze-shields",
+      "pantheon": "greeks",
+      "tags": ["military"],
+      "cost": {
+        "wood": 200,
+        "gold": 150
+      },
+      "time": 40,
+      "at": "armory",
+      "age": "heroic",
+      "requires": ["copper-shields"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Bronze_Shields",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Bronze_Shields",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "iron-weapons",
+      "name": {
+        "pt-BR": "Armas de Ferro",
+        "en": "Iron Weapons"
+      },
+      "icon": "techs/greeks-iron-weapons",
+      "pantheon": "greeks",
+      "tags": ["military"],
+      "cost": {
+        "food": 450,
+        "gold": 450
+      },
+      "time": 50,
+      "at": "armory",
+      "age": "mythic",
+      "requires": ["bronze-weapons"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Iron_Weapons",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Iron_Weapons",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "iron-armor",
+      "name": {
+        "pt-BR": "Armadura de Ferro",
+        "en": "Iron Armor"
+      },
+      "icon": "techs/greeks-iron-armor",
+      "pantheon": "greeks",
+      "tags": ["military"],
+      "cost": {
+        "food": 400,
+        "gold": 400
+      },
+      "time": 50,
+      "at": "armory",
+      "age": "mythic",
+      "requires": ["bronze-armor"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Iron_Armor",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Iron_Armor",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "iron-shields",
+      "name": {
+        "pt-BR": "Escudos de Ferro",
+        "en": "Iron Shields"
+      },
+      "icon": "techs/greeks-iron-shields",
+      "pantheon": "greeks",
+      "tags": ["military"],
+      "cost": {
+        "wood": 400,
+        "gold": 350
+      },
+      "time": 50,
+      "at": "armory",
+      "age": "mythic",
+      "requires": ["bronze-shields"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Iron_Shields",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Iron_Shields",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "ballistics",
+      "name": {
+        "pt-BR": "Balística",
+        "en": "Ballistics"
+      },
+      "icon": "techs/greeks-ballistics",
+      "pantheon": "greeks",
+      "tags": ["military"],
+      "cost": {
+        "wood": 150,
+        "gold": 150
+      },
+      "time": 50,
+      "at": "armory",
+      "age": "classical",
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Ballistics_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Hades: -33% cost (modifier on the Hades god file)."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Ballistics_(Age_of_Mythology)",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "burning-pitch",
+      "name": {
+        "pt-BR": "Piche Ardente",
+        "en": "Burning Pitch"
+      },
+      "icon": "techs/greeks-burning-pitch",
+      "pantheon": "greeks",
+      "tags": ["military"],
+      "cost": {
+        "wood": 500,
+        "gold": 300
+      },
+      "time": 40,
+      "at": "armory",
+      "age": "mythic",
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Burning_Pitch",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Hades: -33% cost (modifier on the Hades god file)."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Burning_Pitch",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "enclosed-deck",
+      "name": {
+        "pt-BR": "Convés Fechado",
+        "en": "Enclosed Deck"
+      },
+      "icon": "techs/greeks-enclosed-deck",
+      "pantheon": "greeks",
+      "tags": ["military"],
+      "cost": {
+        "food": 200,
+        "wood": 200
+      },
+      "time": 40,
+      "at": "dock",
+      "age": "classical",
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Enclosed_Deck",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Enclosed_Deck",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "heroic-fleet",
+      "name": {
+        "pt-BR": "Frota Heroica",
+        "en": "Heroic Fleet"
+      },
+      "icon": "techs/greeks-heroic-fleet",
+      "pantheon": "greeks",
+      "tags": ["military"],
+      "cost": {
+        "food": 100,
+        "gold": 100,
+        "favor": 10
+      },
+      "time": 20,
+      "at": "dock",
+      "age": "classical",
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Heroic_Fleet",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Heroic_Fleet",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "heavy-warships",
+      "name": {
+        "pt-BR": "Navios de Guerra Pesados",
+        "en": "Heavy Warships"
+      },
+      "icon": "techs/greeks-heavy-warships",
+      "pantheon": "greeks",
+      "tags": ["military"],
+      "cost": {
+        "wood": 150,
+        "gold": 150
+      },
+      "time": 20,
+      "at": "dock",
+      "age": "heroic",
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Heavy_Warships_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Heavy_Warships_(Age_of_Mythology)",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "champion-warships",
+      "name": {
+        "pt-BR": "Navios de Guerra Campeões",
+        "en": "Champion Warships"
+      },
+      "icon": "techs/greeks-champion-warships",
+      "pantheon": "greeks",
+      "tags": ["military"],
+      "cost": {
+        "wood": 250,
+        "gold": 200
+      },
+      "time": 20,
+      "at": "dock",
+      "age": "mythic",
+      "requires": ["heavy-warships"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Champion_Warships",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Champion_Warships",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "watch-tower",
+      "name": {
+        "pt-BR": "Torre de Vigia",
+        "en": "Watch Tower"
+      },
+      "icon": "techs/greeks-watch-tower",
+      "pantheon": "greeks",
+      "tags": ["military"],
+      "cost": {
+        "wood": 250,
+        "gold": 150
+      },
+      "time": 15,
+      "at": "sentry-tower",
+      "age": "classical",
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Sentry_Tower_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": " Upgrade of an existing building; cost/time from the upgrade table on the building's wiki page."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Sentry_Tower_(Age_of_Mythology)",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "guard-tower",
+      "name": {
+        "pt-BR": "Torre de Guarda",
+        "en": "Guard Tower"
+      },
+      "icon": "techs/greeks-guard-tower",
+      "pantheon": "greeks",
+      "tags": ["military"],
+      "cost": {
+        "wood": 300,
+        "gold": 300
+      },
+      "time": 40,
+      "at": "sentry-tower",
+      "age": "heroic",
+      "requires": ["watch-tower"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Watch_Tower_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": " Upgrade of an existing building; cost/time from the upgrade table on the building's wiki page."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Watch_Tower_(Age_of_Mythology)",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "signal-fires",
+      "name": {
+        "pt-BR": "Fogueiras de Sinalização",
+        "en": "Signal Fires"
+      },
+      "icon": "techs/greeks-signal-fires",
+      "pantheon": "greeks",
+      "tags": ["military"],
+      "cost": {
+        "wood": 150
+      },
+      "time": 30,
+      "at": "sentry-tower",
+      "age": "classical",
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Signal_Fires",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Signal_Fires",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "carrier-pigeons",
+      "name": {
+        "pt-BR": "Pombos-Correio",
+        "en": "Carrier Pigeons"
+      },
+      "icon": "techs/greeks-carrier-pigeons",
+      "pantheon": "greeks",
+      "tags": ["military"],
+      "cost": {
+        "wood": 400
+      },
+      "time": 45,
+      "at": "sentry-tower",
+      "age": "heroic",
+      "requires": ["signal-fires"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Carrier_Pigeons",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Carrier_Pigeons",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "crenellations",
+      "name": {
+        "pt-BR": "Ameias",
+        "en": "Crenellations"
+      },
+      "icon": "techs/greeks-crenellations",
+      "pantheon": "greeks",
+      "tags": ["military"],
+      "cost": {
+        "food": 150,
+        "wood": 150
+      },
+      "time": 20,
+      "at": "sentry-tower",
+      "age": "classical",
+      "requires": ["watch-tower"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Crenellations_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Crenellations_(Age_of_Mythology)",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "boiling-oil",
+      "name": {
+        "pt-BR": "Óleo Fervente",
+        "en": "Boiling Oil"
+      },
+      "icon": "techs/greeks-boiling-oil",
+      "pantheon": "greeks",
+      "tags": ["military"],
+      "cost": {
+        "food": 100,
+        "wood": 300
+      },
+      "time": 40,
+      "at": "sentry-tower",
+      "age": "heroic",
+      "requires": ["watch-tower"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Boiling_Oil_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Boiling_Oil_(Age_of_Mythology)",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "stone-wall",
+      "name": {
+        "pt-BR": "Muro de Pedra",
+        "en": "Stone Wall"
+      },
+      "icon": "techs/greeks-stone-wall",
+      "pantheon": "greeks",
+      "tags": ["military"],
+      "cost": {
+        "food": 200,
+        "gold": 200
+      },
+      "time": 40,
+      "at": "wall",
+      "age": "classical",
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Wooden_Wall",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": " Upgrade of an existing building; cost/time from the upgrade table on the building's wiki page."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Wooden_Wall",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "fortified-wall",
+      "name": {
+        "pt-BR": "Muro Fortificado",
+        "en": "Fortified Wall"
+      },
+      "icon": "techs/greeks-fortified-wall",
+      "pantheon": "greeks",
+      "tags": ["military"],
+      "cost": {
+        "food": 500,
+        "gold": 400
+      },
+      "time": 50,
+      "at": "wall",
+      "age": "heroic",
+      "requires": ["stone-wall"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Stone_Wall_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": " Upgrade of an existing building; cost/time from the upgrade table on the building's wiki page."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Stone_Wall_(Age_of_Mythology)",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "draft-horses",
+      "name": {
+        "pt-BR": "Cavalos de Tração",
+        "en": "Draft Horses"
+      },
+      "icon": "techs/greeks-draft-horses",
+      "pantheon": "greeks",
+      "tags": ["military"],
+      "cost": {
+        "food": 300,
+        "gold": 200
+      },
+      "time": 40,
+      "at": "fortress",
+      "age": "heroic",
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Draft_Horses_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Draft_Horses_(Age_of_Mythology)",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "engineers",
+      "name": {
+        "pt-BR": "Engenheiros",
+        "en": "Engineers"
+      },
+      "icon": "techs/greeks-engineers",
+      "pantheon": "greeks",
+      "tags": ["military"],
+      "cost": {
+        "food": 300,
+        "gold": 500
+      },
+      "time": 40,
+      "at": "fortress",
+      "age": "mythic",
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Engineers",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Engineers",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "advanced-fortifications",
+      "name": {
+        "pt-BR": "Fortificações Avançadas",
+        "en": "Advanced Fortifications"
+      },
+      "icon": "techs/greeks-advanced-fortifications",
+      "pantheon": "greeks",
+      "tags": ["military"],
+      "cost": {
+        "wood": 600,
+        "gold": 600
+      },
+      "time": 30,
+      "at": "fortress",
+      "age": "mythic",
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Advanced_Fortifications",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Advanced_Fortifications",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "olympian-parentage",
+      "name": {
+        "pt-BR": "Ascendência Olímpica",
+        "en": "Olympian Parentage"
+      },
+      "icon": "techs/greeks-olympian-parentage",
+      "pantheon": "greeks",
+      "tags": ["myth"],
+      "cost": {
+        "food": 100,
+        "favor": 10
+      },
+      "time": 40,
+      "at": "temple",
+      "age": "archaic",
+      "requires": ["zeus"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Olympian_Parentage",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Heroes +25% HP, +1 HP/s regeneration. Also available at the Fortress."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Olympian_Parentage",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "vaults-of-erebus",
+      "name": {
+        "pt-BR": "Cofres de Érebo",
+        "en": "Vaults of Erebus"
+      },
+      "icon": "techs/greeks-vaults-of-erebus",
+      "pantheon": "greeks",
+      "tags": ["myth", "economy"],
+      "cost": {
+        "wood": 200,
+        "favor": 15
+      },
+      "time": 40,
+      "at": "storehouse",
+      "age": "archaic",
+      "requires": ["hades"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Vaults_of_Erebus",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Generates a gold trickle of 1.75 gold/s (= 105 gold/min) with no villagers. Not expressible as a modifier in the current schema (no trickle target); simulator must special-case it."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Vaults_of_Erebus",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "lord-of-horses",
+      "name": {
+        "pt-BR": "Senhor dos Cavalos",
+        "en": "Lord of Horses"
+      },
+      "icon": "techs/greeks-lord-of-horses",
+      "pantheon": "greeks",
+      "tags": ["myth"],
+      "cost": {
+        "food": 75,
+        "favor": 5
+      },
+      "time": 25,
+      "at": "stable",
+      "age": "classical",
+      "requires": ["poseidon"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Lord_of_Horses",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Cavalry and scouts +4 LOS, +0.5 HP/s regeneration."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Lord_of_Horses",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "labyrinth-of-minos",
+      "name": {
+        "pt-BR": "Labirinto de Minos",
+        "en": "Labyrinth of Minos"
+      },
+      "icon": "techs/greeks-labyrinth-of-minos",
+      "pantheon": "greeks",
+      "tags": ["myth"],
+      "cost": {
+        "wood": 250,
+        "favor": 20
+      },
+      "time": 30,
+      "at": "temple",
+      "age": "classical",
+      "requires": ["athena"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Labyrinth_of_Minos",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Minotaur -> Bull Minotaur: +35% HP, +15% speed."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Labyrinth_of_Minos",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "aegis-shield",
+      "name": {
+        "pt-BR": "Escudo Égide",
+        "en": "Aegis Shield"
+      },
+      "icon": "techs/greeks-aegis-shield",
+      "pantheon": "greeks",
+      "tags": ["myth"],
+      "cost": {
+        "wood": 200,
+        "favor": 20
+      },
+      "time": 40,
+      "at": "military-academy",
+      "age": "classical",
+      "requires": ["athena"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Aegis_Shield",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Infantry -15% pierce vulnerability. Also at the Armory."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Aegis_Shield",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "sarissa",
+      "name": {
+        "pt-BR": "Sarissa",
+        "en": "Sarissa"
+      },
+      "icon": "techs/greeks-sarissa",
+      "pantheon": "greeks",
+      "tags": ["myth"],
+      "cost": {
+        "wood": 125,
+        "favor": 20
+      },
+      "time": 40,
+      "at": "military-academy",
+      "age": "classical",
+      "requires": ["athena"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Sarissa",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Hoplites +10% hack attack, +0.5 range. Also at the Armory."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Sarissa",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "sylvan-lore",
+      "name": {
+        "pt-BR": "Saber Silvestre",
+        "en": "Sylvan Lore"
+      },
+      "icon": "techs/greeks-sylvan-lore",
+      "pantheon": "greeks",
+      "tags": ["myth"],
+      "cost": {
+        "wood": 250,
+        "favor": 18
+      },
+      "time": 40,
+      "at": "temple",
+      "age": "classical",
+      "requires": ["hermes"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Sylvan_Lore",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Centaur -> Centaur Polemarch: +35% HP, +3 range, +1 LOS."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Sylvan_Lore",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "winged-messenger",
+      "name": {
+        "pt-BR": "Mensageiro Alado",
+        "en": "Winged Messenger"
+      },
+      "icon": "techs/greeks-winged-messenger",
+      "pantheon": "greeks",
+      "tags": ["myth"],
+      "cost": {
+        "gold": 50,
+        "favor": 3
+      },
+      "time": 30,
+      "at": "temple",
+      "age": "classical",
+      "requires": ["hermes"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Winged_Messenger",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Grants a free Pegasus that respawns if killed; Pegasi +6 LOS, +20% speed."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Winged_Messenger",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "spirited-charge",
+      "name": {
+        "pt-BR": "Investida Fogosa",
+        "en": "Spirited Charge"
+      },
+      "icon": "techs/greeks-spirited-charge",
+      "pantheon": "greeks",
+      "tags": ["myth"],
+      "cost": {
+        "food": 125,
+        "favor": 20
+      },
+      "time": 40,
+      "at": "stable",
+      "age": "classical",
+      "requires": ["hermes"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Spirited_Charge",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Cavalry +10% speed and melee attack; Centaurs +10% speed, +5% attack."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Spirited_Charge",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "phobos-spear-of-panic",
+      "name": {
+        "pt-BR": "Lança do Pânico de Fobos",
+        "en": "Phobos' Spear of Panic"
+      },
+      "icon": "techs/greeks-phobos-spear-of-panic",
+      "pantheon": "greeks",
+      "tags": ["myth"],
+      "cost": {
+        "food": 100,
+        "favor": 15
+      },
+      "time": 40,
+      "at": "military-academy",
+      "age": "classical",
+      "requires": ["ares"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Phobos'_Spear_of_Panic",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Hoplites, Prodromoi and Militia +1 divine attack. Also at Stable/Armory."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Phobos'_Spear_of_Panic",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "deimos-sword-of-dread",
+      "name": {
+        "pt-BR": "Espada do Pavor de Deimos",
+        "en": "Deimos' Sword of Dread"
+      },
+      "icon": "techs/greeks-deimos-sword-of-dread",
+      "pantheon": "greeks",
+      "tags": ["myth"],
+      "cost": {
+        "gold": 150,
+        "favor": 10
+      },
+      "time": 20,
+      "at": "military-academy",
+      "age": "classical",
+      "requires": ["ares"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Deimos'_Sword_of_Dread",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Hypaspists +15% attack and unlocked from the Classical Age. Also at the Armory."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Deimos'_Sword_of_Dread",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "enyos-bow-of-horror",
+      "name": {
+        "pt-BR": "Arco do Horror de Ênio",
+        "en": "Enyo's Bow of Horror"
+      },
+      "icon": "techs/greeks-enyos-bow-of-horror",
+      "pantheon": "greeks",
+      "tags": ["myth"],
+      "cost": {
+        "wood": 125,
+        "favor": 12
+      },
+      "time": 20,
+      "at": "archery-range",
+      "age": "classical",
+      "requires": ["ares"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Enyo's_Bow_of_Horror",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Toxotes +10% attack; arrows +20 speed. Also at the Armory. Hades: -33% cost."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Enyo's_Bow_of_Horror",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "will-of-kronos",
+      "name": {
+        "pt-BR": "Vontade de Cronos",
+        "en": "Will of Kronos"
+      },
+      "icon": "techs/greeks-will-of-kronos",
+      "pantheon": "greeks",
+      "tags": ["myth"],
+      "cost": {
+        "gold": 150,
+        "favor": 10
+      },
+      "time": 40,
+      "at": "temple",
+      "age": "classical",
+      "requires": ["ares"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Will_of_Kronos",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Cyclops -> Elder Cyclops (area damage)."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Will_of_Kronos",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "anastrophe",
+      "name": {
+        "pt-BR": "Anástrofe",
+        "en": "Anastrophe"
+      },
+      "icon": "techs/greeks-anastrophe",
+      "pantheon": "greeks",
+      "tags": ["myth"],
+      "cost": {
+        "wood": 100,
+        "gold": 100,
+        "favor": 15
+      },
+      "time": 30,
+      "at": "dock",
+      "age": "heroic",
+      "requires": ["apollo"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Anastrophe",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Pentekonters gain Critical Strike."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Anastrophe",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "oracle",
+      "name": {
+        "pt-BR": "Oráculo",
+        "en": "Oracle"
+      },
+      "icon": "techs/greeks-oracle",
+      "pantheon": "greeks",
+      "tags": ["myth"],
+      "cost": {
+        "wood": 75,
+        "favor": 10
+      },
+      "time": 30,
+      "at": "temple",
+      "age": "heroic",
+      "requires": ["apollo"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Oracle_(technology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Units and buildings +5 LOS; see enemy production queues."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Oracle_(technology)",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "temple-of-healing",
+      "name": {
+        "pt-BR": "Templo da Cura",
+        "en": "Temple of Healing"
+      },
+      "icon": "techs/greeks-temple-of-healing",
+      "pantheon": "greeks",
+      "tags": ["myth"],
+      "cost": {
+        "gold": 75,
+        "favor": 12
+      },
+      "time": 30,
+      "at": "temple",
+      "age": "heroic",
+      "requires": ["apollo"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Temple_of_Healing",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Temples heal up to 3 nearby units."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Temple_of_Healing",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "sun-ray",
+      "name": {
+        "pt-BR": "Raio de Sol",
+        "en": "Sun Ray"
+      },
+      "icon": "techs/greeks-sun-ray",
+      "pantheon": "greeks",
+      "tags": ["myth"],
+      "cost": {
+        "food": 100,
+        "favor": 20
+      },
+      "time": 30,
+      "at": "archery-range",
+      "age": "heroic",
+      "requires": ["apollo"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Sun_Ray",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Ranged units +15% attack; projectiles reveal LOS. Also at the Armory. Hades: -33% cost."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Sun_Ray",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "chthonic-rites",
+      "name": {
+        "pt-BR": "Ritos Ctônicos",
+        "en": "Chthonic Rites"
+      },
+      "icon": "techs/greeks-chthonic-rites",
+      "pantheon": "greeks",
+      "tags": ["myth"],
+      "cost": {
+        "gold": 100,
+        "favor": 25
+      },
+      "time": 25,
+      "at": "temple",
+      "age": "heroic",
+      "requires": ["dionysus"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Chthonic_Rites",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Hydrai and Scyllai regenerate 4 HP/s. Also at the Dock."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Chthonic_Rites",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "dionysia",
+      "name": {
+        "pt-BR": "Dionisíacas",
+        "en": "Dionysia"
+      },
+      "icon": "techs/greeks-dionysia",
+      "pantheon": "greeks",
+      "tags": ["myth"],
+      "cost": {
+        "wood": 150,
+        "favor": 20
+      },
+      "time": 40,
+      "at": "temple",
+      "age": "heroic",
+      "requires": ["dionysus"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Dionysia",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "All units +5% HP."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Dionysia",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "thracian-horses",
+      "name": {
+        "pt-BR": "Cavalos Trácios",
+        "en": "Thracian Horses"
+      },
+      "icon": "techs/greeks-thracian-horses",
+      "pantheon": "greeks",
+      "tags": ["myth"],
+      "cost": {
+        "food": 150,
+        "favor": 30
+      },
+      "time": 40,
+      "at": "stable",
+      "age": "heroic",
+      "requires": ["dionysus"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Thracian_Horses",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Cavalry heal 30% of damage dealt to units."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Thracian_Horses",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "argonauts",
+      "name": {
+        "pt-BR": "Argonautas",
+        "en": "Argonauts"
+      },
+      "icon": "techs/greeks-argonauts",
+      "pantheon": "greeks",
+      "tags": ["myth"],
+      "cost": {
+        "wood": 100,
+        "gold": 100,
+        "favor": 15
+      },
+      "time": 30,
+      "at": "dock",
+      "age": "heroic",
+      "requires": ["aphrodite"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Argonauts",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Spawns and unlocks The Argo hero ship."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Argonauts",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "divine-blood",
+      "name": {
+        "pt-BR": "Sangue Divino",
+        "en": "Divine Blood"
+      },
+      "icon": "techs/greeks-divine-blood",
+      "pantheon": "greeks",
+      "tags": ["myth"],
+      "cost": {
+        "food": 100,
+        "favor": 25
+      },
+      "time": 30,
+      "at": "town-center",
+      "age": "heroic",
+      "requires": ["aphrodite"],
+      "effects": [
+        {
+          "target": "buildRate",
+          "op": "mul",
+          "value": 1.15,
+          "scope": {
+            "ids": ["villager"]
+          },
+          "note": "+15% build rate. Also +20% villager speed and +10 carry capacity (not modelled)."
+        }
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Divine_Blood",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Divine_Blood",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "golden-apples",
+      "name": {
+        "pt-BR": "Maçãs Douradas",
+        "en": "Golden Apples"
+      },
+      "icon": "techs/greeks-golden-apples",
+      "pantheon": "greeks",
+      "tags": ["myth"],
+      "cost": {
+        "food": 100,
+        "gold": 75
+      },
+      "time": 30,
+      "at": "town-center",
+      "age": "heroic",
+      "requires": ["aphrodite"],
+      "effects": [
+        {
+          "target": "favorRate",
+          "op": "mul",
+          "value": 1.2,
+          "note": "Villagers gather favor 20% faster (M = 1.2 in the prayer formula)."
+        }
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Golden_Apples",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Also researchable at the Temple."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Golden_Apples",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "roar-of-orthus",
+      "name": {
+        "pt-BR": "Rugido de Ortro",
+        "en": "Roar of Orthus"
+      },
+      "icon": "techs/greeks-roar-of-orthus",
+      "pantheon": "greeks",
+      "tags": ["myth"],
+      "cost": {
+        "food": 300,
+        "favor": 20
+      },
+      "time": 40,
+      "at": "temple",
+      "age": "heroic",
+      "requires": ["aphrodite"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Roar_of_Orthus",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Nemean Lion -> Nemean Rex: Roar area doubled."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Roar_of_Orthus",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "hand-of-talos",
+      "name": {
+        "pt-BR": "Mão de Talos",
+        "en": "Hand of Talos"
+      },
+      "icon": "techs/greeks-hand-of-talos",
+      "pantheon": "greeks",
+      "tags": ["myth"],
+      "cost": {
+        "wood": 200,
+        "favor": 15
+      },
+      "time": 40,
+      "at": "temple",
+      "age": "mythic",
+      "requires": ["hephaestus"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Hand_of_Talos",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Colossus -> Silver Colossus: +25% HP."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Hand_of_Talos",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "shoulder-of-talos",
+      "name": {
+        "pt-BR": "Ombro de Talos",
+        "en": "Shoulder of Talos"
+      },
+      "icon": "techs/greeks-shoulder-of-talos",
+      "pantheon": "greeks",
+      "tags": ["myth"],
+      "cost": {
+        "gold": 300,
+        "favor": 20
+      },
+      "time": 50,
+      "at": "temple",
+      "age": "mythic",
+      "requires": ["hephaestus", "hand-of-talos"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Shoulder_of_Talos",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Silver -> Gold Colossus: +30% HP, -20% hack vulnerability."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Shoulder_of_Talos",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "olympian-weapons",
+      "name": {
+        "pt-BR": "Armas Olímpicas",
+        "en": "Olympian Weapons"
+      },
+      "icon": "techs/greeks-olympian-weapons",
+      "pantheon": "greeks",
+      "tags": ["myth"],
+      "cost": {
+        "gold": 300,
+        "favor": 20
+      },
+      "time": 40,
+      "at": "armory",
+      "age": "mythic",
+      "requires": ["hephaestus"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Olympian_Weapons",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Myrmidons, Hetairoi, Gastraphetoroi +20% attack, +1x vs myth units."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Olympian_Weapons",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "forge-of-olympus",
+      "name": {
+        "pt-BR": "Forja do Olimpo",
+        "en": "Forge of Olympus"
+      },
+      "icon": "techs/greeks-forge-of-olympus",
+      "pantheon": "greeks",
+      "tags": ["myth"],
+      "cost": {
+        "gold": 300,
+        "favor": 30
+      },
+      "time": 5,
+      "at": "armory",
+      "age": "mythic",
+      "requires": ["hephaestus"],
+      "effects": [
+        {
+          "target": "cost",
+          "op": "mul",
+          "value": 0.25,
+          "scope": {
+            "ids": [
+              "copper-weapons",
+              "copper-armor",
+              "copper-shields",
+              "bronze-weapons",
+              "bronze-armor",
+              "bronze-shields",
+              "iron-weapons",
+              "iron-armor",
+              "iron-shields",
+              "ballistics",
+              "burning-pitch",
+              "olympian-weapons"
+            ],
+            "resources": ["food", "wood", "gold"]
+          },
+          "note": "Armory technologies -75% food/wood/gold cost (favor unchanged)."
+        },
+        {
+          "target": "researchTime",
+          "op": "mul",
+          "value": 0.6667,
+          "scope": {
+            "ids": [
+              "copper-weapons",
+              "copper-armor",
+              "copper-shields",
+              "bronze-weapons",
+              "bronze-armor",
+              "bronze-shields",
+              "iron-weapons",
+              "iron-armor",
+              "iron-shields",
+              "ballistics",
+              "burning-pitch",
+              "olympian-weapons"
+            ]
+          },
+          "note": "Armories research +50% faster (wiki tech page, since 19.14612). Wiki god page still says 100% faster; tech page also says '-25% research time'. Low confidence."
+        }
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Forge_of_Olympus",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Forge_of_Olympus",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "face-of-the-gorgon",
+      "name": {
+        "pt-BR": "Face da Górgona",
+        "en": "Face of the Gorgon"
+      },
+      "icon": "techs/greeks-face-of-the-gorgon",
+      "pantheon": "greeks",
+      "tags": ["myth"],
+      "cost": {
+        "wood": 300,
+        "favor": 20
+      },
+      "time": 40,
+      "at": "temple",
+      "age": "mythic",
+      "requires": ["hera"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Face_of_the_Gorgon",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Medusa -> Medusa Matriarch: +5 range, -25% ability recharge."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Face_of_the_Gorgon",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "monstrous-rage",
+      "name": {
+        "pt-BR": "Fúria Monstruosa",
+        "en": "Monstrous Rage"
+      },
+      "icon": "techs/greeks-monstrous-rage",
+      "pantheon": "greeks",
+      "tags": ["myth"],
+      "cost": {
+        "food": 250,
+        "favor": 25
+      },
+      "time": 30,
+      "at": "temple",
+      "age": "mythic",
+      "requires": ["hera"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Monstrous_Rage",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Myth units -25% reload time, +15% speed."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Monstrous_Rage",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "argive-patronage",
+      "name": {
+        "pt-BR": "Patronato Argivo",
+        "en": "Argive Patronage"
+      },
+      "icon": "techs/greeks-argive-patronage",
+      "pantheon": "greeks",
+      "tags": ["myth"],
+      "cost": {
+        "food": 200,
+        "gold": 300,
+        "favor": 30
+      },
+      "time": 40,
+      "at": "fortress",
+      "age": "mythic",
+      "requires": ["hera"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Argive_Patronage",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Fortresses spawn a free Myrmidon every 60 s (Zeus; Demeter's version spawns Amazon Archers)."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Argive_Patronage",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "shafts-of-plague",
+      "name": {
+        "pt-BR": "Flechas da Peste",
+        "en": "Shafts of Plague"
+      },
+      "icon": "techs/greeks-shafts-of-plague",
+      "pantheon": "greeks",
+      "tags": ["myth"],
+      "cost": {
+        "gold": 300,
+        "favor": 30
+      },
+      "time": 40,
+      "at": "archery-range",
+      "age": "mythic",
+      "requires": ["artemis"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Shafts_of_Plague",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Ranged soldiers +10% attack and poison. Also at the Armory. Hades: -33% cost."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Shafts_of_Plague",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "flames-of-typhon",
+      "name": {
+        "pt-BR": "Chamas de Tifão",
+        "en": "Flames of Typhon"
+      },
+      "icon": "techs/greeks-flames-of-typhon",
+      "pantheon": "greeks",
+      "tags": ["myth"],
+      "cost": {
+        "food": 300,
+        "favor": 20
+      },
+      "time": 40,
+      "at": "temple",
+      "age": "mythic",
+      "requires": ["artemis"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Flames_of_Typhon",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Chimera -> Chimera Tyrant: +40% attack."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Flames_of_Typhon",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    },
+    {
+      "id": "beast-slayer",
+      "name": {
+        "pt-BR": "Matador de Feras",
+        "en": "Beast Slayer"
+      },
+      "icon": "techs/greeks-beast-slayer",
+      "pantheon": "greeks",
+      "tags": ["myth"],
+      "cost": {
+        "food": 125,
+        "gold": 125,
+        "favor": 20
+      },
+      "time": 30,
+      "at": "fortress",
+      "age": "mythic",
+      "requires": ["artemis"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Beast_Slayer",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Heroes +2x vs myth units, +10% speed."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Beast_Slayer",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time from the wiki only (analyzer has no research times)."
+        }
+      }
+    }
+  ],
+  "meta": {
+    "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Greeks_(Age_of_Mythology)",
+    "checkedAt": "2026-10-17",
+    "confidence": "high",
+    "note": "Base game only (Demeter and her minor gods Pan/Hestia/Persephone, and Demeter heroes Orpheus/Iolaus/Icarus/King Midas/Amazon Archer excluded). Patch 19.17020 (2026-07-01). Start: Town Center, 4 Villagers, 1 Kataskopos, 200 food / 250 wood / 50 gold. pt-BR names are translations, not verified against the official localization."
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "id": "athena",
+  "pantheon": "greeks",
+  "name": {
+    "pt-BR": "Atena",
+    "en": "Athena"
+  },
+  "icon": "gods/athena",
+  "portrait": "gods/athena-portrait",
+  "age": "classical",
+  "unlocks": ["minotaur", "labyrinth-of-minos", "aegis-shield", "sarissa"],
+  "powers": ["restoration"],
+  "meta": {
+    "source": "https://ageofempires.fandom.com/wiki/Athena ; https://aomr-analyzer.com/gods/zeus ; https://aomr-analyzer.com/gods/hades ; https://aomr-analyzer.com/gods/poseidon",
+    "checkedAt": "2026-10-17",
+    "confidence": "high",
+    "note": "No free units on age-up for Greek minor gods."
+  }
+}

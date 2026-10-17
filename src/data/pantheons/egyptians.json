@@ -1,0 +1,4595 @@
+{
+  "id": "egyptians",
+  "name": {
+    "pt-BR": "Egípcios",
+    "en": "Egyptians"
+  },
+  "icon": "ui/pantheon-egyptians",
+  "workers": ["laborer"],
+  "townCenter": "town-center",
+  "start": {
+    "resources": {
+      "food": 200,
+      "wood": 100,
+      "gold": 50,
+      "favor": 0
+    },
+    "units": {
+      "laborer": 3,
+      "priest": 1,
+      "pharaoh": 1
+    },
+    "buildings": {
+      "town-center": 1
+    },
+    "popCap": 15
+  },
+  "favor": {
+    "type": "monuments",
+    "rates": {
+      "monument-to-villagers": 4.5,
+      "monument-to-soldiers": 6,
+      "monument-to-priests": 7.5,
+      "monument-to-pharaohs": 9,
+      "monument-to-gods": 12
+    },
+    "meta": {
+      "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml) (Monument AutoGather Favor 0.075/0.1/0.125/0.15/0.2 per s); project owner values",
+      "checkedAt": "2026-10-17",
+      "confidence": "high",
+      "note": "Matches the owner's 4.5/6/7.5/9/12 per min. Pharaoh-empowered Monument x1.2 (Isis x2.0, Ra Priest x1.12); Necropolis x1.25; Eclipse x1.5. Rates are per Monument and stack."
+    }
+  },
+  "gods": ["ra", "isis", "set"],
+  "ageUps": [
+    {
+      "pantheon": "egyptians",
+      "to": "classical",
+      "cost": {
+        "food": 400
+      },
+      "time": 60,
+      "at": "town-center",
+      "requiresAnyOf": [["temple"]],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Classical_Age_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Cost/time identical for every minor god of this age (tech ClassicalAgeBast and siblings). Also researchable at Village/Citadel Center."
+      }
+    },
+    {
+      "pantheon": "egyptians",
+      "to": "heroic",
+      "cost": {
+        "food": 800,
+        "gold": 500
+      },
+      "time": 75,
+      "at": "town-center",
+      "requiresAnyOf": [["armory"], ["market"]],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Heroic_Age",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Cost/time identical for every minor god of this age (tech HeroicAgeSobek and siblings). Also researchable at Village/Citadel Center. Prerequisite is an Armory OR a Market (OrPrereqs flag)."
+      }
+    },
+    {
+      "pantheon": "egyptians",
+      "to": "mythic",
+      "cost": {
+        "food": 1200,
+        "gold": 1200
+      },
+      "time": 120,
+      "at": "town-center",
+      "requiresAnyOf": [["migdol-stronghold"]],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Mythic_Age",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Cost/time identical for every minor god of this age (tech MythicAgeOsiris and siblings). Also researchable at Village/Citadel Center."
+      }
+    }
+  ],
+  "units": [
+    {
+      "id": "laborer",
+      "name": {
+        "pt-BR": "Trabalhador",
+        "en": "Laborer"
+      },
+      "icon": "units/egyptians-laborer",
+      "pantheon": "egyptians",
+      "tags": ["worker", "human"],
+      "cost": {
+        "food": 50
+      },
+      "pop": 1,
+      "trainTime": 17,
+      "trainedAt": ["town-center", "village-center"],
+      "age": "archaic",
+      "worker": {
+        "gatherRates": {
+          "hunt": 54,
+          "herd": 48.6,
+          "berries": 37.8,
+          "farm": 37.8,
+          "wood": 54,
+          "gold": 46.2
+        },
+        "buildRate": 1,
+        "canBuild": true,
+        "needsDropsite": true
+      },
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Laborer",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Gather rates = proto <Gather> rates (per second) x60. Carry: 15 Food / 10 Wood / 10 Gold. Laborers build at 0.75 of the Greek Villager rate; building buildTime values already include this. Limit 100. TC auto-trains Laborers at start."
+      }
+    },
+    {
+      "id": "priest",
+      "name": {
+        "pt-BR": "Sacerdote",
+        "en": "Priest"
+      },
+      "icon": "units/egyptians-priest",
+      "pantheon": "egyptians",
+      "tags": ["priest", "hero", "human"],
+      "cost": {
+        "gold": 100
+      },
+      "pop": 2,
+      "trainTime": 10,
+      "trainedAt": ["temple", "town-center", "village-center"],
+      "age": "archaic",
+      "requires": ["temple"],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Priest_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Hero. Builds Obelisks (only builder of Obelisks). Requires a Temple to be trainable. Heals (7.5 HP/s). Ra: can empower at 60% of Pharaoh efficiency (x1.45 build/research/train, x1.12 favor/dropsite). Set: can convert wild animals (lose 25% Food)."
+      }
+    },
+    {
+      "id": "pharaoh",
+      "name": {
+        "pt-BR": "Faraó",
+        "en": "Pharaoh"
+      },
+      "icon": "units/egyptians-pharaoh",
+      "pantheon": "egyptians",
+      "tags": ["pharaoh", "hero", "human"],
+      "cost": {},
+      "pop": 0,
+      "trainTime": 0,
+      "trainedAt": [],
+      "age": "archaic",
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Pharaoh_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Hero, 0 pop, not trainable: one Pharaoh spawns at the Town Center at game start and respawns for free at a Town Center if killed (PharaohRespawn). Empower (range 3) on a building: x1.75 build rate, research rate and military training rate, x1.2 Favor generation (Monuments) and x1.2 'DropsiteRate' (resources dropped at an empowered dropsite yield 20% more), +attack speed for towers; empowering a settlement foundation x1.75 build. Not expressible as a modifier in the current schema (needs an 'empowered' condition)."
+      }
+    },
+    {
+      "id": "pharaoh-new-kingdom",
+      "name": {
+        "pt-BR": "Faraó (Novo Reino)",
+        "en": "Pharaoh (New Kingdom)"
+      },
+      "icon": "units/egyptians-pharaoh-new-kingdom",
+      "pantheon": "egyptians",
+      "tags": ["pharaoh", "hero", "human"],
+      "cost": {},
+      "pop": 0,
+      "trainTime": 0,
+      "trainedAt": [],
+      "age": "mythic",
+      "requires": ["osiris", "new-kingdom"],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Pharaoh_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Second Pharaoh granted by Osiris' New Kingdom technology; same empower ability; respawns at the Town Center."
+      }
+    },
+    {
+      "id": "mercenary",
+      "name": {
+        "pt-BR": "Mercenário",
+        "en": "Mercenary"
+      },
+      "icon": "units/egyptians-mercenary",
+      "pantheon": "egyptians",
+      "tags": ["infantry", "human"],
+      "cost": {
+        "gold": 90
+      },
+      "pop": 0,
+      "trainTime": 1,
+      "trainedAt": ["town-center"],
+      "age": "archaic",
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Mercenary_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "0 pop, limit 12, loses 2.5 HP/s (temporary unit). Trained at the Town Center/Citadel Center."
+      }
+    },
+    {
+      "id": "mercenary-cavalry",
+      "name": {
+        "pt-BR": "Cavalaria Mercenária",
+        "en": "Mercenary Cavalry"
+      },
+      "icon": "units/egyptians-mercenary-cavalry",
+      "pantheon": "egyptians",
+      "tags": ["cavalry", "human"],
+      "cost": {
+        "gold": 120
+      },
+      "pop": 0,
+      "trainTime": 2,
+      "trainedAt": ["town-center"],
+      "age": "heroic",
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Mercenary_Cavalry",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "0 pop, limit 8, loses 4 HP/s (temporary unit). Enabled in the Heroic Age."
+      }
+    },
+    {
+      "id": "spearman",
+      "name": {
+        "pt-BR": "Lanceiro",
+        "en": "Spearman"
+      },
+      "icon": "units/egyptians-spearman",
+      "pantheon": "egyptians",
+      "tags": ["infantry", "human"],
+      "cost": {
+        "food": 50,
+        "gold": 25
+      },
+      "pop": 2,
+      "trainTime": 12.5,
+      "trainedAt": ["barracks"],
+      "age": "classical",
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Spearman_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": "axeman",
+      "name": {
+        "pt-BR": "Machadeiro",
+        "en": "Axeman"
+      },
+      "icon": "units/egyptians-axeman",
+      "pantheon": "egyptians",
+      "tags": ["infantry", "human"],
+      "cost": {
+        "food": 40,
+        "gold": 30
+      },
+      "pop": 2,
+      "trainTime": 11.5,
+      "trainedAt": ["barracks"],
+      "age": "classical",
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Axeman_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": "slinger",
+      "name": {
+        "pt-BR": "Fundeiro",
+        "en": "Slinger"
+      },
+      "icon": "units/egyptians-slinger",
+      "pantheon": "egyptians",
+      "tags": ["archer", "infantry", "human"],
+      "cost": {
+        "wood": 55,
+        "gold": 25
+      },
+      "pop": 2,
+      "trainTime": 13.5,
+      "trainedAt": ["barracks"],
+      "age": "classical",
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Slinger_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": "chariot-archer",
+      "name": {
+        "pt-BR": "Arqueiro em Biga",
+        "en": "Chariot Archer"
+      },
+      "icon": "units/egyptians-chariot-archer",
+      "pantheon": "egyptians",
+      "tags": ["archer", "cavalry", "human"],
+      "cost": {
+        "wood": 100,
+        "gold": 40
+      },
+      "pop": 3,
+      "trainTime": 8,
+      "trainedAt": ["migdol-stronghold"],
+      "age": "heroic",
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Chariot_Archer_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": "camel-rider",
+      "name": {
+        "pt-BR": "Cameleiro",
+        "en": "Camel Rider"
+      },
+      "icon": "units/egyptians-camel-rider",
+      "pantheon": "egyptians",
+      "tags": ["cavalry", "human"],
+      "cost": {
+        "food": 50,
+        "gold": 70
+      },
+      "pop": 3,
+      "trainTime": 6.5,
+      "trainedAt": ["migdol-stronghold"],
+      "age": "heroic",
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Camel_Rider_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": "war-elephant",
+      "name": {
+        "pt-BR": "Elefante de Guerra",
+        "en": "War Elephant"
+      },
+      "icon": "units/egyptians-war-elephant",
+      "pantheon": "egyptians",
+      "tags": ["cavalry", "human"],
+      "cost": {
+        "food": 180,
+        "gold": 70
+      },
+      "pop": 5,
+      "trainTime": 14,
+      "trainedAt": ["migdol-stronghold"],
+      "age": "heroic",
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/War_Elephant_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": "siege-tower",
+      "name": {
+        "pt-BR": "Torre de Cerco",
+        "en": "Siege Tower"
+      },
+      "icon": "units/egyptians-siege-tower",
+      "pantheon": "egyptians",
+      "tags": ["siege"],
+      "cost": {
+        "wood": 200,
+        "gold": 100
+      },
+      "pop": 3,
+      "trainTime": 15,
+      "trainedAt": ["siege-works"],
+      "age": "heroic",
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Siege_Tower_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": "catapult",
+      "name": {
+        "pt-BR": "Catapulta",
+        "en": "Catapult"
+      },
+      "icon": "units/egyptians-catapult",
+      "pantheon": "egyptians",
+      "tags": ["siege"],
+      "cost": {
+        "wood": 200,
+        "gold": 200
+      },
+      "pop": 5,
+      "trainTime": 26.5,
+      "trainedAt": ["siege-works"],
+      "age": "mythic",
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Catapult_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Normally Mythic Age; Sekhmet's Force of the West Wind enables it in the Heroic Age."
+      }
+    },
+    {
+      "id": "fishing-ship",
+      "name": {
+        "pt-BR": "Navio Pesqueiro",
+        "en": "Fishing Ship"
+      },
+      "icon": "units/egyptians-fishing-ship",
+      "pantheon": "egyptians",
+      "tags": ["ship", "worker"],
+      "cost": {
+        "wood": 50
+      },
+      "pop": 1,
+      "trainTime": 18,
+      "trainedAt": ["dock"],
+      "age": "archaic",
+      "worker": {
+        "gatherRates": {
+          "fish": 30
+        },
+        "canBuild": false,
+        "needsDropsite": true
+      },
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Fishing_Ship_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Carry 25 Food. Limit 50."
+      }
+    },
+    {
+      "id": "transport-ship",
+      "name": {
+        "pt-BR": "Navio de Transporte",
+        "en": "Transport Ship"
+      },
+      "icon": "units/egyptians-transport-ship",
+      "pantheon": "egyptians",
+      "tags": ["ship"],
+      "cost": {
+        "wood": 110
+      },
+      "pop": 1,
+      "trainTime": 19,
+      "trainedAt": ["dock"],
+      "age": "classical",
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Transport_Ship_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": "kebenit",
+      "name": {
+        "pt-BR": "Kebenit",
+        "en": "Kebenit"
+      },
+      "icon": "units/egyptians-kebenit",
+      "pantheon": "egyptians",
+      "tags": ["ship"],
+      "cost": {
+        "wood": 90,
+        "gold": 45
+      },
+      "pop": 3,
+      "trainTime": 16.5,
+      "trainedAt": ["dock"],
+      "age": "classical",
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Kebenit",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": "ramming-galley",
+      "name": {
+        "pt-BR": "Galé com Aríete",
+        "en": "Ramming Galley"
+      },
+      "icon": "units/egyptians-ramming-galley",
+      "pantheon": "egyptians",
+      "tags": ["ship"],
+      "cost": {
+        "wood": 90,
+        "gold": 45
+      },
+      "pop": 3,
+      "trainTime": 16.5,
+      "trainedAt": ["dock"],
+      "age": "classical",
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Ramming_Galley",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": "war-barge",
+      "name": {
+        "pt-BR": "Barcaça de Guerra",
+        "en": "War Barge"
+      },
+      "icon": "units/egyptians-war-barge",
+      "pantheon": "egyptians",
+      "tags": ["ship"],
+      "cost": {
+        "wood": 90,
+        "gold": 45
+      },
+      "pop": 3,
+      "trainTime": 12.5,
+      "trainedAt": ["dock"],
+      "age": "classical",
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/War_Barge",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": "camel-caravan",
+      "name": {
+        "pt-BR": "Caravana de Camelo",
+        "en": "Camel Caravan"
+      },
+      "icon": "units/egyptians-camel-caravan",
+      "pantheon": "egyptians",
+      "tags": ["caravan"],
+      "cost": {
+        "food": 100,
+        "wood": 25
+      },
+      "pop": 1,
+      "trainTime": 18,
+      "trainedAt": ["market"],
+      "age": "heroic",
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Caravan_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Trade unit; carries up to 1000 Gold; trade income not modelled."
+      }
+    },
+    {
+      "id": "leviathan",
+      "name": {
+        "pt-BR": "Leviatã",
+        "en": "Leviathan"
+      },
+      "icon": "units/egyptians-leviathan",
+      "pantheon": "egyptians",
+      "tags": ["myth", "ship"],
+      "cost": {
+        "gold": 200,
+        "favor": 15
+      },
+      "pop": 3,
+      "trainTime": 10,
+      "trainedAt": ["dock"],
+      "age": "heroic",
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Leviathan_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Generic Egyptian naval myth unit trained at the Dock (no minor god needed). One is created for free at the Dock on reaching the Heroic Age."
+      }
+    },
+    {
+      "id": "war-turtle",
+      "name": {
+        "pt-BR": "Tartaruga de Guerra",
+        "en": "War Turtle"
+      },
+      "icon": "units/egyptians-war-turtle",
+      "pantheon": "egyptians",
+      "tags": ["myth", "ship"],
+      "cost": {
+        "food": 225,
+        "favor": 15
+      },
+      "pop": 4,
+      "trainTime": 9,
+      "trainedAt": ["dock"],
+      "age": "mythic",
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/War_Turtle",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Generic Egyptian naval myth unit trained at the Dock (no minor god needed). One is created for free at the Dock on reaching the Mythic Age."
+      }
+    },
+    {
+      "id": "sphinx",
+      "name": {
+        "pt-BR": "Esfinge",
+        "en": "Sphinx"
+      },
+      "icon": "units/egyptians-sphinx",
+      "pantheon": "egyptians",
+      "tags": ["myth"],
+      "cost": {
+        "gold": 120,
+        "favor": 18
+      },
+      "pop": 3,
+      "trainTime": 17,
+      "trainedAt": ["temple"],
+      "age": "classical",
+      "requires": ["bast"],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Sphinx",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Upgrades: Criosphinx, Hieracosphinx."
+      }
+    },
+    {
+      "id": "wadjet",
+      "name": {
+        "pt-BR": "Wadjet",
+        "en": "Wadjet"
+      },
+      "icon": "units/egyptians-wadjet",
+      "pantheon": "egyptians",
+      "tags": ["myth"],
+      "cost": {
+        "wood": 150,
+        "favor": 15
+      },
+      "pop": 2,
+      "trainTime": 17,
+      "trainedAt": ["temple"],
+      "age": "classical",
+      "requires": ["ptah"],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Wadjet",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": "anubite",
+      "name": {
+        "pt-BR": "Anubita",
+        "en": "Anubite"
+      },
+      "icon": "units/egyptians-anubite",
+      "pantheon": "egyptians",
+      "tags": ["myth"],
+      "cost": {
+        "food": 100,
+        "favor": 15
+      },
+      "pop": 2,
+      "trainTime": 9,
+      "trainedAt": ["temple"],
+      "age": "classical",
+      "requires": ["anubis"],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Anubite",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": "petsuchos",
+      "name": {
+        "pt-BR": "Petsuchos",
+        "en": "Petsuchos"
+      },
+      "icon": "units/egyptians-petsuchos",
+      "pantheon": "egyptians",
+      "tags": ["myth"],
+      "cost": {
+        "gold": 200,
+        "favor": 16
+      },
+      "pop": 3,
+      "trainTime": 20,
+      "trainedAt": ["temple"],
+      "age": "heroic",
+      "requires": ["sobek"],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Petsuchos",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": "roc",
+      "name": {
+        "pt-BR": "Roc",
+        "en": "Roc"
+      },
+      "icon": "units/egyptians-roc",
+      "pantheon": "egyptians",
+      "tags": ["myth"],
+      "cost": {
+        "gold": 100,
+        "favor": 5
+      },
+      "pop": 3,
+      "trainTime": 14,
+      "trainedAt": ["temple"],
+      "age": "heroic",
+      "requires": ["sobek"],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Roc",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "In Retold the Roc belongs to Sobek (heroic); one free Roc and one free Petsuchos on choosing Sobek. Wiki differs: Population wiki 2 (since Retold) vs game proto 3 (game data used)."
+      }
+    },
+    {
+      "id": "scorpion-man",
+      "name": {
+        "pt-BR": "Homem Escorpião",
+        "en": "Scorpion Man"
+      },
+      "icon": "units/egyptians-scorpion-man",
+      "pantheon": "egyptians",
+      "tags": ["myth"],
+      "cost": {
+        "wood": 200,
+        "favor": 22
+      },
+      "pop": 3,
+      "trainTime": 20,
+      "trainedAt": ["temple"],
+      "age": "heroic",
+      "requires": ["nephthys"],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Scorpion_Man",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": "scarab",
+      "name": {
+        "pt-BR": "Escaravelho",
+        "en": "Scarab"
+      },
+      "icon": "units/egyptians-scarab",
+      "pantheon": "egyptians",
+      "tags": ["myth"],
+      "cost": {
+        "food": 240,
+        "favor": 18
+      },
+      "pop": 4,
+      "trainTime": 20,
+      "trainedAt": ["temple"],
+      "age": "heroic",
+      "requires": ["sekhmet"],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Scarab",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": "mummy",
+      "name": {
+        "pt-BR": "Múmia",
+        "en": "Mummy"
+      },
+      "icon": "units/egyptians-mummy",
+      "pantheon": "egyptians",
+      "tags": ["myth"],
+      "cost": {
+        "wood": 275,
+        "favor": 25
+      },
+      "pop": 4,
+      "trainTime": 17,
+      "trainedAt": ["temple"],
+      "age": "mythic",
+      "requires": ["osiris"],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Mummy",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": "phoenix",
+      "name": {
+        "pt-BR": "Fênix",
+        "en": "Phoenix"
+      },
+      "icon": "units/egyptians-phoenix",
+      "pantheon": "egyptians",
+      "tags": ["myth"],
+      "cost": {
+        "gold": 200,
+        "favor": 22
+      },
+      "pop": 4,
+      "trainTime": 6,
+      "trainedAt": ["temple"],
+      "age": "mythic",
+      "requires": ["thoth"],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Phoenix",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": "avenger",
+      "name": {
+        "pt-BR": "Vingador",
+        "en": "Avenger"
+      },
+      "icon": "units/egyptians-avenger",
+      "pantheon": "egyptians",
+      "tags": ["myth"],
+      "cost": {
+        "food": 250,
+        "favor": 22
+      },
+      "pop": 3,
+      "trainTime": 24,
+      "trainedAt": ["temple"],
+      "age": "mythic",
+      "requires": ["horus"],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Avenger",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": "baboon-of-set",
+      "name": {
+        "pt-BR": "Babuíno de Set",
+        "en": "Baboon of Set"
+      },
+      "icon": "units/egyptians-baboon-of-set",
+      "pantheon": "egyptians",
+      "tags": ["favor"],
+      "cost": {
+        "favor": 3
+      },
+      "pop": 1,
+      "trainTime": 3,
+      "trainedAt": [],
+      "age": "archaic",
+      "requires": ["set"],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Baboon_of_Set",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Animal of Set: summoned by the Pharaoh for Favor only (Set). Free animals are also granted on each Set age-up (see god file). Summoned by the Pharaoh (Set), not trained at a building; not trainable in the simulator."
+      }
+    },
+    {
+      "id": "hyena-of-set",
+      "name": {
+        "pt-BR": "Hiena de Set",
+        "en": "Hyena of Set"
+      },
+      "icon": "units/egyptians-hyena-of-set",
+      "pantheon": "egyptians",
+      "tags": ["favor"],
+      "cost": {
+        "favor": 4
+      },
+      "pop": 1,
+      "trainTime": 4,
+      "trainedAt": [],
+      "age": "classical",
+      "requires": ["set"],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Hyena_of_Set",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Animal of Set: summoned by the Pharaoh for Favor only (Set). Free animals are also granted on each Set age-up (see god file). Summoned by the Pharaoh (Set), not trained at a building; not trainable in the simulator."
+      }
+    },
+    {
+      "id": "gazelle-of-set",
+      "name": {
+        "pt-BR": "Gazela de Set",
+        "en": "Gazelle of Set"
+      },
+      "icon": "units/egyptians-gazelle-of-set",
+      "pantheon": "egyptians",
+      "tags": ["favor"],
+      "cost": {
+        "favor": 3
+      },
+      "pop": 1,
+      "trainTime": 3,
+      "trainedAt": [],
+      "age": "classical",
+      "requires": ["set"],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Gazelle_of_Set",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Animal of Set: summoned by the Pharaoh for Favor only (Set). Free animals are also granted on each Set age-up (see god file). Summoned by the Pharaoh (Set), not trained at a building; not trainable in the simulator."
+      }
+    },
+    {
+      "id": "giraffe-of-set",
+      "name": {
+        "pt-BR": "Girafa de Set",
+        "en": "Giraffe of Set"
+      },
+      "icon": "units/egyptians-giraffe-of-set",
+      "pantheon": "egyptians",
+      "tags": ["favor"],
+      "cost": {
+        "favor": 5
+      },
+      "pop": 1,
+      "trainTime": 4,
+      "trainedAt": [],
+      "age": "heroic",
+      "requires": ["set"],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Giraffe_of_Set",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Animal of Set: summoned by the Pharaoh for Favor only (Set). Free animals are also granted on each Set age-up (see god file). Summoned by the Pharaoh (Set), not trained at a building; not trainable in the simulator."
+      }
+    },
+    {
+      "id": "crocodile-of-set",
+      "name": {
+        "pt-BR": "Crocodilo de Set",
+        "en": "Crocodile of Set"
+      },
+      "icon": "units/egyptians-crocodile-of-set",
+      "pantheon": "egyptians",
+      "tags": ["favor"],
+      "cost": {
+        "favor": 6
+      },
+      "pop": 1,
+      "trainTime": 4,
+      "trainedAt": [],
+      "age": "heroic",
+      "requires": ["set"],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Crocodile_of_Set",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Animal of Set: summoned by the Pharaoh for Favor only (Set). Free animals are also granted on each Set age-up (see god file). Summoned by the Pharaoh (Set), not trained at a building; not trainable in the simulator."
+      }
+    },
+    {
+      "id": "hippopotamus-of-set",
+      "name": {
+        "pt-BR": "Hipopótamo de Set",
+        "en": "Hippopotamus of Set"
+      },
+      "icon": "units/egyptians-hippopotamus-of-set",
+      "pantheon": "egyptians",
+      "tags": ["favor"],
+      "cost": {
+        "favor": 7
+      },
+      "pop": 2,
+      "trainTime": 6,
+      "trainedAt": [],
+      "age": "mythic",
+      "requires": ["set"],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Hippopotamus_of_Set",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Animal of Set: summoned by the Pharaoh for Favor only (Set). Free animals are also granted on each Set age-up (see god file). Summoned by the Pharaoh (Set), not trained at a building; not trainable in the simulator."
+      }
+    },
+    {
+      "id": "rhinoceros-of-set",
+      "name": {
+        "pt-BR": "Rinoceronte de Set",
+        "en": "Rhinoceros of Set"
+      },
+      "icon": "units/egyptians-rhinoceros-of-set",
+      "pantheon": "egyptians",
+      "tags": ["favor"],
+      "cost": {
+        "favor": 9
+      },
+      "pop": 2,
+      "trainTime": 6,
+      "trainedAt": [],
+      "age": "mythic",
+      "requires": ["set"],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Rhinoceros_of_Set",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Animal of Set: summoned by the Pharaoh for Favor only (Set). Free animals are also granted on each Set age-up (see god file). Summoned by the Pharaoh (Set), not trained at a building; not trainable in the simulator."
+      }
+    },
+    {
+      "id": "elephant-of-set",
+      "name": {
+        "pt-BR": "Elefante de Set",
+        "en": "Elephant of Set"
+      },
+      "icon": "units/egyptians-elephant-of-set",
+      "pantheon": "egyptians",
+      "tags": ["favor"],
+      "cost": {
+        "favor": 14
+      },
+      "pop": 2,
+      "trainTime": 8,
+      "trainedAt": [],
+      "age": "mythic",
+      "requires": ["set"],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Elephant_of_Set",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Animal of Set: summoned by the Pharaoh for Favor only (Set). Free animals are also granted on each Set age-up (see god file). Summoned by the Pharaoh (Set), not trained at a building; not trainable in the simulator."
+      }
+    }
+  ],
+  "buildings": [
+    {
+      "id": "town-center",
+      "name": {
+        "pt-BR": "Centro Urbano",
+        "en": "Town Center"
+      },
+      "icon": "buildings/egyptians-town-center",
+      "pantheon": "egyptians",
+      "tags": ["building", "settlement"],
+      "cost": {
+        "gold": 550
+      },
+      "buildTime": 200,
+      "popCap": 15,
+      "age": "archaic",
+      "trains": ["laborer", "priest", "mercenary", "mercenary-cavalry"],
+      "researches": [
+        "skin-of-the-rhino",
+        "masons",
+        "sun-dried-mud-brick",
+        "architects",
+        "fortified-town-center",
+        "book-of-thoth",
+        "secrets-of-the-titans"
+      ],
+      "dropsiteFor": ["hunt", "herd", "berries", "farm", "wood", "gold"],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Egyptians_(Age_of_Mythology) (Egyptian cost rules) + https://ageofempires.fandom.com/wiki/Laborer (Laborers build 25% slower)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "buildTime = 150 build points / Laborer build rate 0.75. Egyptian cost override (base proto cost {\"wood\": 350, \"gold\": 350}). Build limit 1 in the Archaic Age (must be on a Settlement); unlimited from the Classical Age. Isis: +5 pop. Fortified Town Center: +10 pop."
+      }
+    },
+    {
+      "id": "village-center",
+      "name": {
+        "pt-BR": "Centro de Aldeia",
+        "en": "Village Center"
+      },
+      "icon": "buildings/egyptians-village-center",
+      "pantheon": "egyptians",
+      "tags": ["building", "settlement"],
+      "cost": {
+        "gold": 550
+      },
+      "buildTime": 200,
+      "limit": 1,
+      "age": "archaic",
+      "trains": ["laborer", "priest"],
+      "dropsiteFor": ["hunt", "herd", "berries", "farm", "wood", "gold"],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Egyptians_(Age_of_Mythology) (Egyptian cost rules) + https://ageofempires.fandom.com/wiki/Laborer (Laborers build 25% slower)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "buildTime = 150 build points / Laborer build rate 0.75. Egyptian cost override (base proto cost {\"wood\": 350, \"gold\": 350}). Retold Village Center: Town Center placed off-Settlement; trains Laborers and Priests, no population bonus; limit 1. Low practical relevance - verify."
+      }
+    },
+    {
+      "id": "house",
+      "name": {
+        "pt-BR": "Casa",
+        "en": "House"
+      },
+      "icon": "buildings/egyptians-house",
+      "pantheon": "egyptians",
+      "tags": ["building"],
+      "cost": {},
+      "buildTime": 20,
+      "popCap": 10,
+      "limit": 16,
+      "age": "archaic",
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Egyptians_(Age_of_Mythology) (Egyptian cost rules) + https://ageofempires.fandom.com/wiki/Laborer (Laborers build 25% slower)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "buildTime = 15 build points / Laborer build rate 0.75. Egyptian cost override (base proto cost {\"wood\": 50}). Free for Egyptians. Build limit 16 (10 pop each)."
+      }
+    },
+    {
+      "id": "granary",
+      "name": {
+        "pt-BR": "Celeiro",
+        "en": "Granary"
+      },
+      "icon": "buildings/egyptians-granary",
+      "pantheon": "egyptians",
+      "tags": ["building"],
+      "cost": {},
+      "buildTime": 20,
+      "age": "archaic",
+      "researches": [
+        "flood-of-the-nile",
+        "husbandry",
+        "shaduf",
+        "sacred-cats",
+        "plow",
+        "survival-equipment",
+        "irrigation",
+        "flood-control"
+      ],
+      "dropsiteFor": ["hunt", "herd", "berries", "farm"],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Egyptians_(Age_of_Mythology) (Egyptian cost rules) + https://ageofempires.fandom.com/wiki/Laborer (Laborers build 25% slower)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "buildTime = 15 build points / Laborer build rate 0.75. Egyptian cost override (base proto cost {\"wood\": 50})."
+      }
+    },
+    {
+      "id": "mining-camp",
+      "name": {
+        "pt-BR": "Campo de Mineração",
+        "en": "Mining Camp"
+      },
+      "icon": "buildings/egyptians-mining-camp",
+      "pantheon": "egyptians",
+      "tags": ["building"],
+      "cost": {},
+      "buildTime": 20,
+      "age": "archaic",
+      "researches": ["pickaxe", "shaft-mine", "quarry"],
+      "dropsiteFor": ["gold"],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Egyptians_(Age_of_Mythology) (Egyptian cost rules) + https://ageofempires.fandom.com/wiki/Laborer (Laborers build 25% slower)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "buildTime = 15 build points / Laborer build rate 0.75."
+      }
+    },
+    {
+      "id": "lumber-camp",
+      "name": {
+        "pt-BR": "Campo Madeireiro",
+        "en": "Lumber Camp"
+      },
+      "icon": "buildings/egyptians-lumber-camp",
+      "pantheon": "egyptians",
+      "tags": ["building"],
+      "cost": {},
+      "buildTime": 20,
+      "age": "archaic",
+      "researches": ["hand-axe", "adze-of-wepwawet", "bow-saw", "carpenters"],
+      "dropsiteFor": ["wood"],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Egyptians_(Age_of_Mythology) (Egyptian cost rules) + https://ageofempires.fandom.com/wiki/Laborer (Laborers build 25% slower)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "buildTime = 15 build points / Laborer build rate 0.75."
+      }
+    },
+    {
+      "id": "temple",
+      "name": {
+        "pt-BR": "Templo",
+        "en": "Temple"
+      },
+      "icon": "buildings/egyptians-temple",
+      "pantheon": "egyptians",
+      "tags": ["building"],
+      "cost": {
+        "gold": 150
+      },
+      "buildTime": 53.33,
+      "age": "archaic",
+      "trains": [
+        "priest",
+        "wadjet",
+        "anubite",
+        "sphinx",
+        "scarab",
+        "petsuchos",
+        "scorpion-man",
+        "phoenix",
+        "avenger",
+        "mummy",
+        "roc"
+      ],
+      "researches": [
+        "clairvoyance",
+        "hands-of-the-pharaoh",
+        "criosphinx",
+        "hieracosphinx",
+        "feet-of-the-jackal",
+        "necropolis",
+        "crimson-linen",
+        "crocodilopolis",
+        "spirit-of-maat",
+        "funeral-rites",
+        "nebty",
+        "new-kingdom",
+        "atef-crown",
+        "omniscience"
+      ],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Temple_(Age_of_Mythology) (base 150W+150G, 40 bp) + https://ageofempires.fandom.com/wiki/Egyptians_(Age_of_Mythology) (no Wood for Egyptian buildings)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "buildTime = 40 build points / Laborer build rate 0.75. Egyptian cost override (base proto cost {\"wood\": 150, \"gold\": 150}). Required for Priests and for the Classical Age. Free myth unit of each chosen minor god spawns at a Temple on age-up."
+      }
+    },
+    {
+      "id": "dock",
+      "name": {
+        "pt-BR": "Doca",
+        "en": "Dock"
+      },
+      "icon": "buildings/egyptians-dock",
+      "pantheon": "egyptians",
+      "tags": ["building"],
+      "cost": {
+        "gold": 50
+      },
+      "buildTime": 40,
+      "age": "archaic",
+      "trains": [
+        "fishing-ship",
+        "kebenit",
+        "ramming-galley",
+        "war-barge",
+        "transport-ship",
+        "leviathan",
+        "war-turtle"
+      ],
+      "researches": [
+        "purse-seine",
+        "enclosed-deck",
+        "heroic-fleet",
+        "solar-barque",
+        "funeral-barge",
+        "salt-amphora",
+        "heavy-warships",
+        "conscript-sailors",
+        "champion-warships"
+      ],
+      "dropsiteFor": ["fish"],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Egyptians_(Age_of_Mythology) (Egyptian cost rules) + https://ageofempires.fandom.com/wiki/Laborer (Laborers build 25% slower)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "buildTime = 30 build points / Laborer build rate 0.75. Egyptian cost override (base proto cost {\"wood\": 100})."
+      }
+    },
+    {
+      "id": "farm",
+      "name": {
+        "pt-BR": "Fazenda",
+        "en": "Farm"
+      },
+      "icon": "buildings/egyptians-farm",
+      "pantheon": "egyptians",
+      "tags": ["building"],
+      "cost": {
+        "gold": 70
+      },
+      "buildTime": 13.33,
+      "age": "archaic",
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Egyptians_(Age_of_Mythology) (Egyptian cost rules) + https://ageofempires.fandom.com/wiki/Laborer (Laborers build 25% slower)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "buildTime = 10 build points / Laborer build rate 0.75. Egyptian cost override (base proto cost {\"wood\": 75}). Infinite food source. Shaduf (Ptah) halves Gold cost and build time."
+      }
+    },
+    {
+      "id": "obelisk",
+      "name": {
+        "pt-BR": "Obelisco",
+        "en": "Obelisk"
+      },
+      "icon": "buildings/egyptians-obelisk",
+      "pantheon": "egyptians",
+      "tags": ["building"],
+      "cost": {
+        "gold": 10
+      },
+      "buildTime": 12,
+      "age": "archaic",
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Obelisk",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Built only by Priests (build rate 1.0 => 12s). Isis: -5 Gold and Priests build Obelisks 40% faster."
+      }
+    },
+    {
+      "id": "monument-to-villagers",
+      "name": {
+        "pt-BR": "Monumento aos Aldeões",
+        "en": "Monument to Villagers"
+      },
+      "icon": "buildings/egyptians-monument-to-villagers",
+      "pantheon": "egyptians",
+      "tags": ["building", "monument"],
+      "cost": {
+        "food": 50,
+        "gold": 50
+      },
+      "buildTime": 26.67,
+      "limit": 1,
+      "age": "archaic",
+      "favorRate": 4.5,
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Monument_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "buildTime = 20 build points / Laborer build rate 0.75. Monuments must be built in order (each requires the previous one); limit 1 each. Pharaoh empowerment x1.2 Favor (Isis: x2.0); Necropolis (Anubis) +25%; Eclipse x1.5 while active."
+      }
+    },
+    {
+      "id": "monument-to-soldiers",
+      "name": {
+        "pt-BR": "Monumento aos Soldados",
+        "en": "Monument to Soldiers"
+      },
+      "icon": "buildings/egyptians-monument-to-soldiers",
+      "pantheon": "egyptians",
+      "tags": ["building", "monument"],
+      "cost": {
+        "food": 100,
+        "gold": 100
+      },
+      "buildTime": 40,
+      "limit": 1,
+      "age": "archaic",
+      "requires": ["monument-to-villagers"],
+      "favorRate": 6,
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Monument_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "buildTime = 30 build points / Laborer build rate 0.75. Monuments must be built in order (each requires the previous one); limit 1 each. Pharaoh empowerment x1.2 Favor (Isis: x2.0); Necropolis (Anubis) +25%; Eclipse x1.5 while active."
+      }
+    },
+    {
+      "id": "monument-to-priests",
+      "name": {
+        "pt-BR": "Monumento aos Sacerdotes",
+        "en": "Monument to Priests"
+      },
+      "icon": "buildings/egyptians-monument-to-priests",
+      "pantheon": "egyptians",
+      "tags": ["building", "monument"],
+      "cost": {
+        "food": 200,
+        "gold": 200
+      },
+      "buildTime": 53.33,
+      "limit": 1,
+      "age": "archaic",
+      "requires": ["monument-to-soldiers"],
+      "favorRate": 7.5,
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Monument_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "buildTime = 40 build points / Laborer build rate 0.75. Monuments must be built in order (each requires the previous one); limit 1 each. Pharaoh empowerment x1.2 Favor (Isis: x2.0); Necropolis (Anubis) +25%; Eclipse x1.5 while active."
+      }
+    },
+    {
+      "id": "monument-to-pharaohs",
+      "name": {
+        "pt-BR": "Monumento aos Faraós",
+        "en": "Monument to Pharaohs"
+      },
+      "icon": "buildings/egyptians-monument-to-pharaohs",
+      "pantheon": "egyptians",
+      "tags": ["building", "monument"],
+      "cost": {
+        "food": 300,
+        "gold": 300
+      },
+      "buildTime": 66.67,
+      "limit": 1,
+      "age": "archaic",
+      "requires": ["monument-to-priests"],
+      "favorRate": 9,
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Monument_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "buildTime = 50 build points / Laborer build rate 0.75. Monuments must be built in order (each requires the previous one); limit 1 each. Pharaoh empowerment x1.2 Favor (Isis: x2.0); Necropolis (Anubis) +25%; Eclipse x1.5 while active."
+      }
+    },
+    {
+      "id": "monument-to-gods",
+      "name": {
+        "pt-BR": "Monumento aos Deuses",
+        "en": "Monument to Gods"
+      },
+      "icon": "buildings/egyptians-monument-to-gods",
+      "pantheon": "egyptians",
+      "tags": ["building", "monument"],
+      "cost": {
+        "food": 600,
+        "gold": 600
+      },
+      "buildTime": 80,
+      "limit": 1,
+      "age": "archaic",
+      "requires": ["monument-to-pharaohs"],
+      "favorRate": 12,
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Monument_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "buildTime = 60 build points / Laborer build rate 0.75. Monuments must be built in order (each requires the previous one); limit 1 each. Pharaoh empowerment x1.2 Favor (Isis: x2.0); Necropolis (Anubis) +25%; Eclipse x1.5 while active."
+      }
+    },
+    {
+      "id": "wall",
+      "name": {
+        "pt-BR": "Muralha de Madeira",
+        "en": "Wooden Wall"
+      },
+      "icon": "buildings/egyptians-wall",
+      "pantheon": "egyptians",
+      "tags": ["building"],
+      "cost": {
+        "gold": 6
+      },
+      "buildTime": 20,
+      "age": "archaic",
+      "researches": ["stone-wall", "fortified-wall", "citadel-wall"],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml)",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "buildTime = 15 build points / Laborer build rate 0.75. Represents a short Wooden Wall segment (6 Gold, 15 bp). Connector 3 Gold/5 bp, medium 9 Gold, long 15 Gold, gate 15 Gold (all 15 bp)."
+      }
+    },
+    {
+      "id": "barracks",
+      "name": {
+        "pt-BR": "Quartel",
+        "en": "Barracks"
+      },
+      "icon": "buildings/egyptians-barracks",
+      "pantheon": "egyptians",
+      "tags": ["building"],
+      "cost": {
+        "gold": 75
+      },
+      "buildTime": 33.33,
+      "age": "classical",
+      "trains": ["spearman", "axeman", "slinger"],
+      "researches": [
+        "scalloped-axe",
+        "leather-frame-shield",
+        "electrum-bullets",
+        "serpent-spear",
+        "medium-axemen",
+        "medium-spearmen",
+        "medium-slingers",
+        "slings-of-the-sun",
+        "heavy-axemen",
+        "heavy-spearmen",
+        "heavy-slingers",
+        "levy-barracks-soldiers",
+        "axe-of-vengeance",
+        "greatest-of-fifty",
+        "spear-of-horus",
+        "champion-axemen",
+        "champion-spearmen",
+        "champion-slingers",
+        "conscript-barracks-soldiers"
+      ],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Barracks_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "buildTime = 25 build points / Laborer build rate 0.75. Set: -25% Gold cost."
+      }
+    },
+    {
+      "id": "market",
+      "name": {
+        "pt-BR": "Mercado",
+        "en": "Market"
+      },
+      "icon": "buildings/egyptians-market",
+      "pantheon": "egyptians",
+      "tags": ["building"],
+      "cost": {},
+      "buildTime": 53.33,
+      "age": "classical",
+      "trains": ["camel-caravan"],
+      "researches": ["tax-collectors", "ambassadors", "coinage"],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Egyptians_(Age_of_Mythology) (Egyptian cost rules) + https://ageofempires.fandom.com/wiki/Laborer (Laborers build 25% slower)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "buildTime = 40 build points / Laborer build rate 0.75. Egyptian cost override (base proto cost {\"wood\": 150})."
+      }
+    },
+    {
+      "id": "armory",
+      "name": {
+        "pt-BR": "Armaria",
+        "en": "Armory"
+      },
+      "icon": "buildings/egyptians-armory",
+      "pantheon": "egyptians",
+      "tags": ["building"],
+      "cost": {},
+      "buildTime": 53.33,
+      "age": "classical",
+      "researches": [
+        "copper-weapons",
+        "copper-armor",
+        "copper-shields",
+        "ballistics",
+        "bronze-weapons",
+        "bronze-armor",
+        "bronze-shields",
+        "iron-weapons",
+        "iron-armor",
+        "iron-shields",
+        "burning-pitch"
+      ],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Egyptians_(Age_of_Mythology) (Egyptian cost rules) + https://ageofempires.fandom.com/wiki/Laborer (Laborers build 25% slower)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "buildTime = 40 build points / Laborer build rate 0.75. Egyptian cost override (base proto cost {\"wood\": 150})."
+      }
+    },
+    {
+      "id": "sentry-tower",
+      "name": {
+        "pt-BR": "Torre de Sentinela",
+        "en": "Sentry Tower"
+      },
+      "icon": "buildings/egyptians-sentry-tower",
+      "pantheon": "egyptians",
+      "tags": ["building"],
+      "cost": {
+        "gold": 200
+      },
+      "buildTime": 80,
+      "limit": 30,
+      "age": "classical",
+      "researches": [
+        "watch-tower",
+        "signal-fires",
+        "crenellations",
+        "guard-tower",
+        "carrier-pigeons",
+        "boiling-oil",
+        "ballista-tower"
+      ],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml)",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "buildTime = 60 build points / Laborer build rate 0.75. Egyptian cost override (base proto cost {\"wood\": 150, \"gold\": 100})."
+      }
+    },
+    {
+      "id": "migdol-stronghold",
+      "name": {
+        "pt-BR": "Fortaleza Migdol",
+        "en": "Migdol Stronghold"
+      },
+      "icon": "buildings/egyptians-migdol-stronghold",
+      "pantheon": "egyptians",
+      "tags": ["building"],
+      "cost": {
+        "gold": 500,
+        "favor": 10
+      },
+      "buildTime": 153.33,
+      "limit": 15,
+      "age": "heroic",
+      "trains": ["chariot-archer", "camel-rider", "war-elephant"],
+      "researches": [
+        "bone-bow",
+        "dark-water",
+        "heavy-chariots",
+        "heavy-camel-riders",
+        "heavy-war-elephants",
+        "levy-migdol-soldiers",
+        "desert-wind",
+        "tusks-of-apedemak",
+        "valley-of-the-kings",
+        "champion-chariots",
+        "champion-camel-riders",
+        "champion-war-elephants",
+        "conscript-migdol-soldiers",
+        "advanced-fortifications"
+      ],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Migdol_Stronghold",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "buildTime = 115 build points / Laborer build rate 0.75. Set: -25% Gold cost."
+      }
+    },
+    {
+      "id": "siege-works",
+      "name": {
+        "pt-BR": "Oficina de Cerco",
+        "en": "Siege Works"
+      },
+      "icon": "buildings/egyptians-siege-works",
+      "pantheon": "egyptians",
+      "tags": ["building"],
+      "cost": {
+        "gold": 75
+      },
+      "buildTime": 53.33,
+      "age": "heroic",
+      "trains": ["siege-tower", "catapult"],
+      "researches": ["force-of-the-west-wind", "draft-horses", "engineers"],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Siege_Works_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "buildTime = 40 build points / Laborer build rate 0.75. Set: -25% Gold cost."
+      }
+    },
+    {
+      "id": "lighthouse",
+      "name": {
+        "pt-BR": "Farol",
+        "en": "Lighthouse"
+      },
+      "icon": "buildings/egyptians-lighthouse",
+      "pantheon": "egyptians",
+      "tags": ["building"],
+      "cost": {
+        "gold": 200
+      },
+      "buildTime": 160,
+      "age": "mythic",
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Lighthouse_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "buildTime = 120 build points / Laborer build rate 0.75."
+      }
+    },
+    {
+      "id": "wonder",
+      "name": {
+        "pt-BR": "Maravilha",
+        "en": "Wonder"
+      },
+      "icon": "buildings/egyptians-wonder",
+      "pantheon": "egyptians",
+      "tags": ["building"],
+      "cost": {
+        "food": 5000,
+        "gold": 7500
+      },
+      "buildTime": 7200,
+      "limit": 1,
+      "age": "mythic",
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Egyptians_(Age_of_Mythology) (Egyptian cost rules) + https://ageofempires.fandom.com/wiki/Laborer (Laborers build 25% slower)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "buildTime = 5400 build points / Laborer build rate 0.75. Egyptian cost override (base proto cost {\"food\": 5000, \"wood\": 5000, \"gold\": 5000})."
+      }
+    }
+  ],
+  "researches": [
+    {
+      "id": "skin-of-the-rhino",
+      "name": {
+        "pt-BR": "Pele do Rinoceronte",
+        "en": "Skin of the Rhino"
+      },
+      "icon": "techs/egyptians-skin-of-the-rhino",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "food": 50,
+        "favor": 5
+      },
+      "time": 15,
+      "at": "town-center",
+      "age": "archaic",
+      "requires": ["ra"],
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Skin_of_the_Rhino",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Ra improves the armor of Laborers, making them more resistant to attacks. Also researchable at: village-center."
+      }
+    },
+    {
+      "id": "flood-of-the-nile",
+      "name": {
+        "pt-BR": "Enchente do Nilo",
+        "en": "Flood of the Nile"
+      },
+      "icon": "techs/egyptians-flood-of-the-nile",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "gold": 150,
+        "favor": 8
+      },
+      "time": 40,
+      "at": "granary",
+      "age": "archaic",
+      "requires": ["isis"],
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Flood_of_the_Nile",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Isis ensures the continued fertility of your lands, granting a steady trickle of Food. Grants a permanent Food trickle of 1.0 Food/second (60/min); the schema has no trickle modifier, so it is not in effects."
+      }
+    },
+    {
+      "id": "clairvoyance",
+      "name": {
+        "pt-BR": "Clarividência",
+        "en": "Clairvoyance"
+      },
+      "icon": "techs/egyptians-clairvoyance",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "gold": 150,
+        "favor": 10
+      },
+      "time": 40,
+      "at": "temple",
+      "age": "archaic",
+      "requires": ["set"],
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Clairvoyance",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Set makes additional charges of the Vision God Power be cast with no Favor cost and be granted more quickly. Vision God Power: additional charges cost 0 Favor and recharge 50% faster."
+      }
+    },
+    {
+      "id": "hands-of-the-pharaoh",
+      "name": {
+        "pt-BR": "Mãos do Faraó",
+        "en": "Hands of the Pharaoh"
+      },
+      "icon": "techs/egyptians-hands-of-the-pharaoh",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "gold": 75
+      },
+      "time": 10,
+      "at": "temple",
+      "age": "archaic",
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Hands_of_the_Pharaoh",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Allows your Priests to pick up Relics and increases their attack range. Priests can pick up Relics; +3 Priest range and LOS."
+      }
+    },
+    {
+      "id": "husbandry",
+      "name": {
+        "pt-BR": "Pecuária",
+        "en": "Husbandry"
+      },
+      "icon": "techs/egyptians-husbandry",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "wood": 100,
+        "gold": 50
+      },
+      "time": 30,
+      "at": "granary",
+      "age": "archaic",
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.1,
+          "scope": {
+            "sources": ["herd"]
+          },
+          "note": "Also +15 Food carry capacity and livestock fatten 25% faster (not modelled)."
+        }
+      ],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Husbandry_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Livestock animals fatten faster and Villagers gather from them and Chickens more quickly. Villagers carry more Food. Game uses BasePercent: bonuses from several techs add on the base rate (e.g. +10% and +15% = +25%), they do not compound."
+      }
+    },
+    {
+      "id": "hand-axe",
+      "name": {
+        "pt-BR": "Machado de Mão",
+        "en": "Hand Axe"
+      },
+      "icon": "techs/egyptians-hand-axe",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "food": 120,
+        "gold": 50
+      },
+      "time": 30,
+      "at": "lumber-camp",
+      "age": "archaic",
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.1,
+          "scope": {
+            "sources": ["wood"]
+          },
+          "note": "Also +5 Wood carry capacity."
+        }
+      ],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Hand_Axe",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Villagers gather Wood faster and carry more. Game uses BasePercent: bonuses from several techs add on the base rate (e.g. +10% and +15% = +25%), they do not compound."
+      }
+    },
+    {
+      "id": "pickaxe",
+      "name": {
+        "pt-BR": "Picareta",
+        "en": "Pickaxe"
+      },
+      "icon": "techs/egyptians-pickaxe",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "food": 50,
+        "wood": 120
+      },
+      "time": 30,
+      "at": "mining-camp",
+      "age": "archaic",
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.1,
+          "scope": {
+            "sources": ["gold"]
+          },
+          "note": "Also +5 Gold carry capacity."
+        }
+      ],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Pickaxe",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Villagers gather Gold faster and carry more. Game uses BasePercent: bonuses from several techs add on the base rate (e.g. +10% and +15% = +25%), they do not compound."
+      }
+    },
+    {
+      "id": "shaduf",
+      "name": {
+        "pt-BR": "Shaduf",
+        "en": "Shaduf"
+      },
+      "icon": "techs/egyptians-shaduf",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "wood": 100,
+        "favor": 10
+      },
+      "time": 20,
+      "at": "granary",
+      "age": "classical",
+      "requires": ["ptah"],
+      "effects": [
+        {
+          "target": "cost",
+          "op": "mul",
+          "value": 0.5,
+          "scope": {
+            "ids": ["farm"],
+            "resources": ["gold"]
+          }
+        },
+        {
+          "target": "buildTime",
+          "op": "mul",
+          "value": 0.5,
+          "scope": {
+            "ids": ["farm"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Shaduf",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Ptah's invention reduces the cost of Farms and enables Laborers to build them faster. Also researchable at: temple."
+      }
+    },
+    {
+      "id": "scalloped-axe",
+      "name": {
+        "pt-BR": "Machado Dentado",
+        "en": "Scalloped Axe"
+      },
+      "icon": "techs/egyptians-scalloped-axe",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "food": 50,
+        "favor": 10
+      },
+      "time": 30,
+      "at": "barracks",
+      "age": "classical",
+      "requires": ["ptah"],
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Scalloped_Axe",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Ptah's invention increases the attack of Axemen. Also researchable at: armory."
+      }
+    },
+    {
+      "id": "leather-frame-shield",
+      "name": {
+        "pt-BR": "Escudo de Couro",
+        "en": "Leather Frame Shield"
+      },
+      "icon": "techs/egyptians-leather-frame-shield",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "wood": 75,
+        "favor": 10
+      },
+      "time": 40,
+      "at": "barracks",
+      "age": "classical",
+      "requires": ["ptah"],
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Leather_Frame_Shield",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Ptah's invention improves the pierce armor of Spearmen. Also researchable at: armory."
+      }
+    },
+    {
+      "id": "electrum-bullets",
+      "name": {
+        "pt-BR": "Projéteis de Electro",
+        "en": "Electrum Bullets"
+      },
+      "icon": "techs/egyptians-electrum-bullets",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "gold": 150,
+        "favor": 15
+      },
+      "time": 40,
+      "at": "barracks",
+      "age": "classical",
+      "requires": ["ptah"],
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Electrum_Bullets",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Ptah's invention causes Slingers to deal additional divine damage. Also researchable at: armory."
+      }
+    },
+    {
+      "id": "adze-of-wepwawet",
+      "name": {
+        "pt-BR": "Enxó de Wepwawet",
+        "en": "Adze of Wepwawet"
+      },
+      "icon": "techs/egyptians-adze-of-wepwawet",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "gold": 50,
+        "favor": 10
+      },
+      "time": 40,
+      "at": "lumber-camp",
+      "age": "classical",
+      "requires": ["bast"],
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.1,
+          "scope": {
+            "sources": ["wood"]
+          },
+          "note": "Also +5 chop damage vs trees."
+        }
+      ],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Adze_of_Wepwawet",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Bast lends Laborers the Adze of Wepwawet, allowing them to fell trees and gather Wood faster. Game uses BasePercent: bonuses from several techs add on the base rate (e.g. +10% and +15% = +25%), they do not compound."
+      }
+    },
+    {
+      "id": "sacred-cats",
+      "name": {
+        "pt-BR": "Gatos Sagrados",
+        "en": "Sacred Cats"
+      },
+      "icon": "techs/egyptians-sacred-cats",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "gold": 55,
+        "favor": 10
+      },
+      "time": 30,
+      "at": "granary",
+      "age": "classical",
+      "requires": ["bast"],
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.08,
+          "scope": {
+            "sources": ["farm"]
+          }
+        },
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.1,
+          "scope": {
+            "sources": ["hunt", "herd", "berries"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Sacred_Cats",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Bast's cats protect Granaries from vermin, improving all Food gather rates. Game uses BasePercent: bonuses from several techs add on the base rate (e.g. +10% and +15% = +25%), they do not compound."
+      }
+    },
+    {
+      "id": "criosphinx",
+      "name": {
+        "pt-BR": "Criosfinge",
+        "en": "Criosphinx"
+      },
+      "icon": "techs/egyptians-criosphinx",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "wood": 150,
+        "favor": 5
+      },
+      "time": 40,
+      "at": "temple",
+      "age": "classical",
+      "requires": ["bast"],
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Criosphinx",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Bast upgrades Sphinxes to Criosphinxes, with more hitpoints and attack."
+      }
+    },
+    {
+      "id": "hieracosphinx",
+      "name": {
+        "pt-BR": "Hierocosfinge",
+        "en": "Hieracosphinx"
+      },
+      "icon": "techs/egyptians-hieracosphinx",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "wood": 150,
+        "favor": 10
+      },
+      "time": 30,
+      "at": "temple",
+      "age": "classical",
+      "requires": ["bast", "criosphinx"],
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Hieracosphinx",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Bast upgrades Criosphinxes to Hieracosphinxes, with increased speed and attack."
+      }
+    },
+    {
+      "id": "feet-of-the-jackal",
+      "name": {
+        "pt-BR": "Pés de Chacal",
+        "en": "Feet of the Jackal"
+      },
+      "icon": "techs/egyptians-feet-of-the-jackal",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "gold": 200,
+        "favor": 10
+      },
+      "time": 30,
+      "at": "temple",
+      "age": "classical",
+      "requires": ["anubis"],
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Feet_of_the_Jackal",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Anubis upgrades Anubites to Guardian Anubites, with more hitpoints, attack, and jump distance."
+      }
+    },
+    {
+      "id": "necropolis",
+      "name": {
+        "pt-BR": "Necrópole",
+        "en": "Necropolis"
+      },
+      "icon": "techs/egyptians-necropolis",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "gold": 150,
+        "wood": 50
+      },
+      "time": 30,
+      "at": "temple",
+      "age": "classical",
+      "requires": ["anubis"],
+      "effects": [
+        {
+          "target": "favorRate",
+          "op": "mul",
+          "value": 1.25,
+          "scope": {
+            "ids": [
+              "monument-to-villagers",
+              "monument-to-soldiers",
+              "monument-to-priests",
+              "monument-to-pharaohs",
+              "monument-to-gods"
+            ]
+          }
+        }
+      ],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Necropolis",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Anubis increases the rate at which Monuments generate Favor."
+      }
+    },
+    {
+      "id": "serpent-spear",
+      "name": {
+        "pt-BR": "Lança da Serpente",
+        "en": "Serpent Spear"
+      },
+      "icon": "techs/egyptians-serpent-spear",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "food": 125,
+        "favor": 12
+      },
+      "time": 40,
+      "at": "barracks",
+      "age": "classical",
+      "requires": ["anubis"],
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Serpent_Spear",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Anubis grants your Spearmen weapons coated with venom, which inflict damage over time."
+      }
+    },
+    {
+      "id": "watch-tower",
+      "name": {
+        "pt-BR": "Torre de Vigia",
+        "en": "Watch Tower"
+      },
+      "icon": "techs/egyptians-watch-tower",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "wood": 50,
+        "gold": 100
+      },
+      "time": 15,
+      "at": "sentry-tower",
+      "age": "classical",
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Egyptians_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Enables Towers to attack at range. Egyptian cost override: 50 Wood + 100 Gold (base 250 Wood + 150 Gold)."
+      }
+    },
+    {
+      "id": "medium-axemen",
+      "name": {
+        "pt-BR": "Machadeiros Médios",
+        "en": "Medium Axemen"
+      },
+      "icon": "techs/egyptians-medium-axemen",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "food": 100,
+        "gold": 100
+      },
+      "time": 20,
+      "at": "barracks",
+      "age": "classical",
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Medium_Axemen",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Upgrades Axemen to Medium Axemen, with more hitpoints and attack."
+      }
+    },
+    {
+      "id": "medium-spearmen",
+      "name": {
+        "pt-BR": "Lanceiros Médios",
+        "en": "Medium Spearmen"
+      },
+      "icon": "techs/egyptians-medium-spearmen",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "food": 100,
+        "gold": 100
+      },
+      "time": 20,
+      "at": "barracks",
+      "age": "classical",
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Medium_Spearmen",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Upgrades Spearmen to Medium Spearmen, with more hitpoints and attack."
+      }
+    },
+    {
+      "id": "medium-slingers",
+      "name": {
+        "pt-BR": "Fundeiros Médios",
+        "en": "Medium Slingers"
+      },
+      "icon": "techs/egyptians-medium-slingers",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "wood": 100,
+        "gold": 100
+      },
+      "time": 20,
+      "at": "barracks",
+      "age": "classical",
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Medium_Slingers",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Upgrades Slingers to Medium Slingers, with more hitpoints, attack, and range."
+      }
+    },
+    {
+      "id": "stone-wall",
+      "name": {
+        "pt-BR": "Muralha de Pedra",
+        "en": "Stone Wall"
+      },
+      "icon": "techs/egyptians-stone-wall",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "food": 200,
+        "gold": 200
+      },
+      "time": 40,
+      "at": "wall",
+      "age": "classical",
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml)",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Effect: Upgrades Walls to Stone Walls, which have more hitpoints and line of sight."
+      }
+    },
+    {
+      "id": "masons",
+      "name": {
+        "pt-BR": "Pedreiros",
+        "en": "Masons"
+      },
+      "icon": "techs/egyptians-masons",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "food": 200,
+        "wood": 300
+      },
+      "time": 20,
+      "at": "town-center",
+      "age": "classical",
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Masons",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Strengthens buildings by improving hitpoints. Also researchable at: village-center."
+      }
+    },
+    {
+      "id": "signal-fires",
+      "name": {
+        "pt-BR": "Fogueiras Sinalizadoras",
+        "en": "Signal Fires"
+      },
+      "icon": "techs/egyptians-signal-fires",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "wood": 150
+      },
+      "time": 30,
+      "at": "sentry-tower",
+      "age": "classical",
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Signal_Fires",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Increases line of sight and stealth detection range for all buildings. Also researchable at: obelisk."
+      }
+    },
+    {
+      "id": "crenellations",
+      "name": {
+        "pt-BR": "Ameias",
+        "en": "Crenellations"
+      },
+      "icon": "techs/egyptians-crenellations",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "food": 150,
+        "wood": 150
+      },
+      "time": 20,
+      "at": "sentry-tower",
+      "age": "classical",
+      "requires": ["watch-tower"],
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Crenellations_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Increases Tower range and accuracy towards moving targets, and causes ranged buildings to deal bonus damage to cavalry."
+      }
+    },
+    {
+      "id": "copper-weapons",
+      "name": {
+        "pt-BR": "Armas de Cobre",
+        "en": "Copper Weapons"
+      },
+      "icon": "techs/egyptians-copper-weapons",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "food": 100,
+        "gold": 100
+      },
+      "time": 30,
+      "at": "armory",
+      "age": "classical",
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Copper_Weapons",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Copper weapons improve the attack of all human soldiers, heroes, ships, and buildings."
+      }
+    },
+    {
+      "id": "copper-armor",
+      "name": {
+        "pt-BR": "Armadura de Cobre",
+        "en": "Copper Armor"
+      },
+      "icon": "techs/egyptians-copper-armor",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "food": 75,
+        "gold": 75
+      },
+      "time": 30,
+      "at": "armory",
+      "age": "classical",
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Copper_Armor",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Copper armor improves human soldier, hero, and ship resistance to hack attacks, such as swords. It also makes ships more resistant to crush attacks, such as siege weapons."
+      }
+    },
+    {
+      "id": "copper-shields",
+      "name": {
+        "pt-BR": "Escudos de Cobre",
+        "en": "Copper Shields"
+      },
+      "icon": "techs/egyptians-copper-shields",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "wood": 75,
+        "gold": 75
+      },
+      "time": 30,
+      "at": "armory",
+      "age": "classical",
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Copper_Shields",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Copper shields improve human soldier, hero, and ship resistance to pierce attacks, such as arrows."
+      }
+    },
+    {
+      "id": "ballistics",
+      "name": {
+        "pt-BR": "Balística",
+        "en": "Ballistics"
+      },
+      "icon": "techs/egyptians-ballistics",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "wood": 150,
+        "gold": 150
+      },
+      "time": 50,
+      "at": "armory",
+      "age": "classical",
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Ballistics_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Ranged soldiers, ships, and fortifications fire more accurately at moving enemy targets."
+      }
+    },
+    {
+      "id": "purse-seine",
+      "name": {
+        "pt-BR": "Rede de Cerco",
+        "en": "Purse Seine"
+      },
+      "icon": "techs/egyptians-purse-seine",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "wood": 150,
+        "gold": 150
+      },
+      "time": 20,
+      "at": "dock",
+      "age": "classical",
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.5,
+          "scope": {
+            "sources": ["fish"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Purse_Seine",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Fishing Ships gather fish faster. Game uses BasePercent: bonuses from several techs add on the base rate (e.g. +10% and +15% = +25%), they do not compound."
+      }
+    },
+    {
+      "id": "enclosed-deck",
+      "name": {
+        "pt-BR": "Convés Fechado",
+        "en": "Enclosed Deck"
+      },
+      "icon": "techs/egyptians-enclosed-deck",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "food": 200,
+        "wood": 200
+      },
+      "time": 40,
+      "at": "dock",
+      "age": "classical",
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Enclosed_Deck",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Increases the hitpoints and speed of Transport Ships, and increases the carry capacity of Transport Ships and arrow ships."
+      }
+    },
+    {
+      "id": "heroic-fleet",
+      "name": {
+        "pt-BR": "Frota Heroica",
+        "en": "Heroic Fleet"
+      },
+      "icon": "techs/egyptians-heroic-fleet",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "food": 100,
+        "gold": 100,
+        "favor": 10
+      },
+      "time": 20,
+      "at": "dock",
+      "age": "classical",
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Heroic_Fleet",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: The gods make all of your arrow ships better at fighting myth units."
+      }
+    },
+    {
+      "id": "plow",
+      "name": {
+        "pt-BR": "Arado",
+        "en": "Plow"
+      },
+      "icon": "techs/egyptians-plow",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "wood": 50,
+        "gold": 100
+      },
+      "time": 40,
+      "at": "granary",
+      "age": "classical",
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.1,
+          "scope": {
+            "sources": ["farm"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Plow_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Villagers gather Food from Farms faster. Game uses BasePercent: bonuses from several techs add on the base rate (e.g. +10% and +15% = +25%), they do not compound."
+      }
+    },
+    {
+      "id": "survival-equipment",
+      "name": {
+        "pt-BR": "Equipamento de sobrevivência",
+        "en": "Survival Equipment"
+      },
+      "icon": "techs/egyptians-survival-equipment",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "wood": 100,
+        "gold": 100
+      },
+      "time": 20,
+      "at": "granary",
+      "age": "classical",
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Survival_Equipment",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Makes Villagers more durable by increasing their hitpoints and attack. Laborers +25% hitpoints, +10% hand attack, +50% ranged attack."
+      }
+    },
+    {
+      "id": "crimson-linen",
+      "name": {
+        "pt-BR": "Linho Carmesim",
+        "en": "Crimson Linen"
+      },
+      "icon": "techs/egyptians-crimson-linen",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "food": 125,
+        "favor": 20
+      },
+      "time": 40,
+      "at": "temple",
+      "age": "heroic",
+      "requires": ["sekhmet"],
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Crimson_Linen",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Sekhmet’s sanguine rituals cause your myth units – especially Scarabs – to regain hitpoints while attacking enemy units. Also researchable at: dock."
+      }
+    },
+    {
+      "id": "force-of-the-west-wind",
+      "name": {
+        "pt-BR": "Força do Vento Oeste",
+        "en": "Force of the West Wind"
+      },
+      "icon": "techs/egyptians-force-of-the-west-wind",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "gold": 150,
+        "favor": 25
+      },
+      "time": 90,
+      "at": "siege-works",
+      "age": "heroic",
+      "requires": ["sekhmet"],
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Force_of_the_West_Wind",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Sekhmet enables you to construct Catapults an age early, and her breath imbues your Scarabs and siege weapons with the destructive power of the desert winds. Enables Catapults in the Heroic Age (one age early); +15% crush damage for siege and myth units."
+      }
+    },
+    {
+      "id": "bone-bow",
+      "name": {
+        "pt-BR": "Arco de Osso",
+        "en": "Bone Bow"
+      },
+      "icon": "techs/egyptians-bone-bow",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "wood": 125,
+        "favor": 20
+      },
+      "time": 40,
+      "at": "migdol-stronghold",
+      "age": "heroic",
+      "requires": ["sekhmet"],
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Bone_Bow",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Sekhmet equips Chariot Archers with desert bone bows, improving their range and line of sight. Also researchable at: armory."
+      }
+    },
+    {
+      "id": "slings-of-the-sun",
+      "name": {
+        "pt-BR": "Fundas do Sol",
+        "en": "Slings of the Sun"
+      },
+      "icon": "techs/egyptians-slings-of-the-sun",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "gold": 100,
+        "favor": 15
+      },
+      "time": 40,
+      "at": "barracks",
+      "age": "heroic",
+      "requires": ["sekhmet"],
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Slings_of_the_Sun",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Sekhmet equips Slingers with burning Slings of the Sun, causing them to do extra damage to infantry. Also researchable at: armory."
+      }
+    },
+    {
+      "id": "solar-barque",
+      "name": {
+        "pt-BR": "Barca Solar",
+        "en": "Solar Barque"
+      },
+      "icon": "techs/egyptians-solar-barque",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "wood": 150,
+        "favor": 10
+      },
+      "time": 30,
+      "at": "dock",
+      "age": "heroic",
+      "requires": ["sobek"],
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Solar_Barque",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Sobek occasionally summons Sea Snakes near enemy ships that your Kebenits are attacking."
+      }
+    },
+    {
+      "id": "sun-dried-mud-brick",
+      "name": {
+        "pt-BR": "Tijolo de Barro Seco ao Sol",
+        "en": "Sun-dried Mud-brick"
+      },
+      "icon": "techs/egyptians-sun-dried-mud-brick",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "wood": 200,
+        "favor": 20
+      },
+      "time": 15,
+      "at": "town-center",
+      "age": "heroic",
+      "requires": ["sobek"],
+      "effects": [
+        {
+          "target": "buildTime",
+          "op": "mul",
+          "value": 0.85,
+          "scope": {
+            "tags": ["building"]
+          }
+        },
+        {
+          "target": "cost",
+          "op": "mul",
+          "value": 0.9,
+          "scope": {
+            "tags": ["building"],
+            "resources": ["gold"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Sun-dried_Mud-brick",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Sobek improves the hitpoints of buildings, and lowers their cost and construction time. Also researchable at: village-center."
+      }
+    },
+    {
+      "id": "crocodilopolis",
+      "name": {
+        "pt-BR": "Crocodilópolis",
+        "en": "Crocodilopolis"
+      },
+      "icon": "techs/egyptians-crocodilopolis",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "wood": 200,
+        "favor": 15
+      },
+      "time": 40,
+      "at": "temple",
+      "age": "heroic",
+      "requires": ["sobek"],
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Crocodilopolis",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Sobek upgrades Petsuchoi to Petsobeks, with increased range."
+      }
+    },
+    {
+      "id": "dark-water",
+      "name": {
+        "pt-BR": "Água Escura",
+        "en": "Dark Water"
+      },
+      "icon": "techs/egyptians-dark-water",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "food": 200,
+        "favor": 18
+      },
+      "time": 30,
+      "at": "migdol-stronghold",
+      "age": "heroic",
+      "requires": ["sobek"],
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Dark_Water",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Sobek offers the Dark Water to your camel units, increasing their hitpoints and allowing them to regenerate. Also researchable at: market."
+      }
+    },
+    {
+      "id": "funeral-barge",
+      "name": {
+        "pt-BR": "Barcaça Funeral",
+        "en": "Funeral Barge"
+      },
+      "icon": "techs/egyptians-funeral-barge",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "gold": 200,
+        "favor": 20
+      },
+      "time": 30,
+      "at": "dock",
+      "age": "heroic",
+      "requires": ["nephthys"],
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Funeral_Barge",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Nephthys occasionally summons Leviathans to take the place of War Barges that you lose in battle."
+      }
+    },
+    {
+      "id": "spirit-of-maat",
+      "name": {
+        "pt-BR": "Espírito de Maat",
+        "en": "Spirit of Maat"
+      },
+      "icon": "techs/egyptians-spirit-of-maat",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "gold": 100,
+        "favor": 25
+      },
+      "time": 30,
+      "at": "temple",
+      "age": "heroic",
+      "requires": ["nephthys"],
+      "effects": [
+        {
+          "target": "cost",
+          "op": "mul",
+          "value": 0.7,
+          "scope": {
+            "ids": ["priest"],
+            "resources": ["gold"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Spirit_of_Maat",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Nephthys increases the healing rate of Pharaohs and Priests, and lowers the cost of Priests. Also researchable at: town-center, village-center."
+      }
+    },
+    {
+      "id": "funeral-rites",
+      "name": {
+        "pt-BR": "Ritos Funerários",
+        "en": "Funeral Rites"
+      },
+      "icon": "techs/egyptians-funeral-rites",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "gold": 100,
+        "favor": 15
+      },
+      "time": 40,
+      "at": "temple",
+      "age": "heroic",
+      "requires": ["nephthys"],
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Funeral_Rites",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Nephthys compensates you with gold when your warriors fall in combat. Human soldiers and heroes return 8 Gold when they die. Also researchable at: town-center, village-center."
+      }
+    },
+    {
+      "id": "nebty",
+      "name": {
+        "pt-BR": "Nebty",
+        "en": "Nebty"
+      },
+      "icon": "techs/egyptians-nebty",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "wood": 100,
+        "favor": 15
+      },
+      "time": 30,
+      "at": "temple",
+      "age": "heroic",
+      "requires": ["nephthys"],
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Nebty",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Nephthys increases Priest and Pharaoh hitpoints, as well as their damage against myth units. Also researchable at: town-center, village-center."
+      }
+    },
+    {
+      "id": "heavy-axemen",
+      "name": {
+        "pt-BR": "Machadeiros Pesados",
+        "en": "Heavy Axemen"
+      },
+      "icon": "techs/egyptians-heavy-axemen",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "food": 300,
+        "gold": 200
+      },
+      "time": 30,
+      "at": "barracks",
+      "age": "heroic",
+      "requires": ["medium-axemen"],
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Heavy_Axemen",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Upgrades Axemen to Heavy Axemen, with more hitpoints and attack."
+      }
+    },
+    {
+      "id": "heavy-spearmen",
+      "name": {
+        "pt-BR": "Lanceiros Pesados",
+        "en": "Heavy Spearmen"
+      },
+      "icon": "techs/egyptians-heavy-spearmen",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "food": 300,
+        "gold": 200
+      },
+      "time": 30,
+      "at": "barracks",
+      "age": "heroic",
+      "requires": ["medium-spearmen"],
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Heavy_Spearmen",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Upgrades Spearmen to Heavy Spearmen, with more hitpoints and attack."
+      }
+    },
+    {
+      "id": "heavy-slingers",
+      "name": {
+        "pt-BR": "Fundeiros Pesados",
+        "en": "Heavy Slingers"
+      },
+      "icon": "techs/egyptians-heavy-slingers",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "wood": 300,
+        "gold": 200
+      },
+      "time": 30,
+      "at": "barracks",
+      "age": "heroic",
+      "requires": ["medium-slingers"],
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Heavy_Slingers",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Upgrades Slingers to Heavy Slingers, with more hitpoints, attack, and range."
+      }
+    },
+    {
+      "id": "levy-barracks-soldiers",
+      "name": {
+        "pt-BR": "Convocar Soldados de Quartel",
+        "en": "Levy Barracks Soldiers"
+      },
+      "icon": "techs/egyptians-levy-barracks-soldiers",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "food": 150,
+        "wood": 75
+      },
+      "time": 20,
+      "at": "barracks",
+      "age": "heroic",
+      "effects": [
+        {
+          "target": "trainTime",
+          "op": "mul",
+          "value": 0.8,
+          "scope": {
+            "ids": ["spearman", "axeman", "slinger"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Levy_Barracks_Soldiers",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Barracks units train faster."
+      }
+    },
+    {
+      "id": "heavy-chariots",
+      "name": {
+        "pt-BR": "Bigas Pesadas",
+        "en": "Heavy Chariots"
+      },
+      "icon": "techs/egyptians-heavy-chariots",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "wood": 200,
+        "gold": 200
+      },
+      "time": 15,
+      "at": "migdol-stronghold",
+      "age": "heroic",
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Heavy_Chariots",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Upgrades Chariots to Heavy Chariots, with more hitpoints and attack."
+      }
+    },
+    {
+      "id": "heavy-camel-riders",
+      "name": {
+        "pt-BR": "Cameleiros Pesados",
+        "en": "Heavy Camel Riders"
+      },
+      "icon": "techs/egyptians-heavy-camel-riders",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "food": 250,
+        "gold": 150
+      },
+      "time": 15,
+      "at": "migdol-stronghold",
+      "age": "heroic",
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Heavy_Camel_Riders",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Upgrades Camel Riders to Heavy Camel Riders, with more hitpoints and attack."
+      }
+    },
+    {
+      "id": "heavy-war-elephants",
+      "name": {
+        "pt-BR": "Elefantes de Guerra Pesados",
+        "en": "Heavy War Elephants"
+      },
+      "icon": "techs/egyptians-heavy-war-elephants",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "food": 300,
+        "gold": 200
+      },
+      "time": 15,
+      "at": "migdol-stronghold",
+      "age": "heroic",
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Heavy_War_Elephants",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Upgrades War Elephants to Heavy War Elephants, with more hitpoints and attack."
+      }
+    },
+    {
+      "id": "levy-migdol-soldiers",
+      "name": {
+        "pt-BR": "Convocar Soldados de Migdol",
+        "en": "Levy Migdol Soldiers"
+      },
+      "icon": "techs/egyptians-levy-migdol-soldiers",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "wood": 75,
+        "gold": 150
+      },
+      "time": 20,
+      "at": "migdol-stronghold",
+      "age": "heroic",
+      "effects": [
+        {
+          "target": "trainTime",
+          "op": "mul",
+          "value": 0.8,
+          "scope": {
+            "ids": ["chariot-archer", "camel-rider", "war-elephant"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Levy_Migdol_Soldiers",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Migdol Stronghold units train faster."
+      }
+    },
+    {
+      "id": "fortified-wall",
+      "name": {
+        "pt-BR": "Muralha Fortificada",
+        "en": "Fortified Wall"
+      },
+      "icon": "techs/egyptians-fortified-wall",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "food": 500,
+        "gold": 400
+      },
+      "time": 50,
+      "at": "wall",
+      "age": "heroic",
+      "requires": ["stone-wall"],
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml)",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Effect: Upgrades Walls to Fortified Walls, which have more hitpoints and line of sight."
+      }
+    },
+    {
+      "id": "architects",
+      "name": {
+        "pt-BR": "Arquitetos",
+        "en": "Architects"
+      },
+      "icon": "techs/egyptians-architects",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "food": 400,
+        "wood": 500
+      },
+      "time": 30,
+      "at": "town-center",
+      "age": "heroic",
+      "requires": ["masons"],
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Architects",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Significantly strengthens buildings by improving their hitpoints. Also researchable at: village-center."
+      }
+    },
+    {
+      "id": "fortified-town-center",
+      "name": {
+        "pt-BR": "Centro Urbano Fortificado",
+        "en": "Fortified Town Center"
+      },
+      "icon": "techs/egyptians-fortified-town-center",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "wood": 400,
+        "gold": 400
+      },
+      "time": 60,
+      "at": "town-center",
+      "age": "heroic",
+      "effects": [
+        {
+          "target": "popCap",
+          "op": "add",
+          "value": 10,
+          "scope": {
+            "ids": ["town-center"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Fortified_Town_Center",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Improves the hitpoints, attack, and range of your Town Centers, and lets each support additional population."
+      }
+    },
+    {
+      "id": "guard-tower",
+      "name": {
+        "pt-BR": "Torre de Guarda",
+        "en": "Guard Tower"
+      },
+      "icon": "techs/egyptians-guard-tower",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "wood": 300,
+        "gold": 300
+      },
+      "time": 40,
+      "at": "sentry-tower",
+      "age": "heroic",
+      "requires": ["watch-tower"],
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml)",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Effect: Increases Tower hitpoints and attack."
+      }
+    },
+    {
+      "id": "carrier-pigeons",
+      "name": {
+        "pt-BR": "Pombos Correio",
+        "en": "Carrier Pigeons"
+      },
+      "icon": "techs/egyptians-carrier-pigeons",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "wood": 400
+      },
+      "time": 45,
+      "at": "sentry-tower",
+      "age": "heroic",
+      "requires": ["signal-fires"],
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Carrier_Pigeons",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Increases line of sight and stealth detection range for all buildings. Also researchable at: obelisk."
+      }
+    },
+    {
+      "id": "boiling-oil",
+      "name": {
+        "pt-BR": "Óleo Fervente",
+        "en": "Boiling Oil"
+      },
+      "icon": "techs/egyptians-boiling-oil",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "food": 100,
+        "wood": 300
+      },
+      "time": 40,
+      "at": "sentry-tower",
+      "age": "heroic",
+      "requires": ["watch-tower"],
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Boiling_Oil_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Allows ranged fortifications to attack units beneath them."
+      }
+    },
+    {
+      "id": "bronze-weapons",
+      "name": {
+        "pt-BR": "Armas de Bronze",
+        "en": "Bronze Weapons"
+      },
+      "icon": "techs/egyptians-bronze-weapons",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "food": 200,
+        "gold": 200
+      },
+      "time": 40,
+      "at": "armory",
+      "age": "heroic",
+      "requires": ["copper-weapons"],
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Bronze_Weapons",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Bronze weapons improve the attack of all human soldiers, heroes, ships, and buildings."
+      }
+    },
+    {
+      "id": "bronze-armor",
+      "name": {
+        "pt-BR": "Armadura de Bronze",
+        "en": "Bronze Armor"
+      },
+      "icon": "techs/egyptians-bronze-armor",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "food": 200,
+        "gold": 150
+      },
+      "time": 40,
+      "at": "armory",
+      "age": "heroic",
+      "requires": ["copper-armor"],
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Bronze_Armor",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Bronze armor improves human soldier, hero, and ship resistance to hack attacks, such as swords. It also makes ships more resistant to crush attacks, such as siege weapons."
+      }
+    },
+    {
+      "id": "bronze-shields",
+      "name": {
+        "pt-BR": "Escudos de Bronze",
+        "en": "Bronze Shields"
+      },
+      "icon": "techs/egyptians-bronze-shields",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "wood": 200,
+        "gold": 150
+      },
+      "time": 40,
+      "at": "armory",
+      "age": "heroic",
+      "requires": ["copper-shields"],
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Bronze_Shields",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Bronze shields improve human soldier, hero, and ship resistance to pierce attacks, such as arrows."
+      }
+    },
+    {
+      "id": "draft-horses",
+      "name": {
+        "pt-BR": "Cavalos de Carga",
+        "en": "Draft Horses"
+      },
+      "icon": "techs/egyptians-draft-horses",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "food": 300,
+        "gold": 200
+      },
+      "time": 40,
+      "at": "siege-works",
+      "age": "heroic",
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Draft_Horses_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Increases siege weapon speed."
+      }
+    },
+    {
+      "id": "salt-amphora",
+      "name": {
+        "pt-BR": "Ânfora com Sal",
+        "en": "Salt Amphora"
+      },
+      "icon": "techs/egyptians-salt-amphora",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "wood": 200,
+        "gold": 300
+      },
+      "time": 30,
+      "at": "dock",
+      "age": "heroic",
+      "requires": ["purse-seine"],
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.5,
+          "scope": {
+            "sources": ["fish"]
+          },
+          "note": "Also +25 Food carry capacity for Fishing Ships."
+        }
+      ],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Salt_Amphora",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Fishing Ships gather fish faster and carry more. Game uses BasePercent: bonuses from several techs add on the base rate (e.g. +10% and +15% = +25%), they do not compound."
+      }
+    },
+    {
+      "id": "heavy-warships",
+      "name": {
+        "pt-BR": "Navios de Guerra Pesados",
+        "en": "Heavy Warships"
+      },
+      "icon": "techs/egyptians-heavy-warships",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "wood": 150,
+        "gold": 150
+      },
+      "time": 20,
+      "at": "dock",
+      "age": "heroic",
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Heavy_Warships_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Upgrades Warships to Heavy Warships, with more hitpoints and attack."
+      }
+    },
+    {
+      "id": "irrigation",
+      "name": {
+        "pt-BR": "Irrigação",
+        "en": "Irrigation"
+      },
+      "icon": "techs/egyptians-irrigation",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "wood": 150,
+        "gold": 250
+      },
+      "time": 30,
+      "at": "granary",
+      "age": "heroic",
+      "requires": ["plow"],
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.1,
+          "scope": {
+            "sources": ["farm"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Irrigation_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Villagers gather Food from Farms faster. Game uses BasePercent: bonuses from several techs add on the base rate (e.g. +10% and +15% = +25%), they do not compound."
+      }
+    },
+    {
+      "id": "bow-saw",
+      "name": {
+        "pt-BR": "Arco de Serra",
+        "en": "Bow Saw"
+      },
+      "icon": "techs/egyptians-bow-saw",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "food": 250,
+        "gold": 150
+      },
+      "time": 45,
+      "at": "lumber-camp",
+      "age": "heroic",
+      "requires": ["hand-axe"],
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.15,
+          "scope": {
+            "sources": ["wood"]
+          },
+          "note": "Also +5 Wood carry capacity."
+        }
+      ],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Bow_Saw_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Villagers gather Wood faster and carry more. Game uses BasePercent: bonuses from several techs add on the base rate (e.g. +10% and +15% = +25%), they do not compound."
+      }
+    },
+    {
+      "id": "shaft-mine",
+      "name": {
+        "pt-BR": "Poços de Mina",
+        "en": "Shaft Mine"
+      },
+      "icon": "techs/egyptians-shaft-mine",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "food": 150,
+        "wood": 250
+      },
+      "time": 40,
+      "at": "mining-camp",
+      "age": "heroic",
+      "requires": ["pickaxe"],
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.15,
+          "scope": {
+            "sources": ["gold"]
+          },
+          "note": "Also +5 Gold carry capacity."
+        }
+      ],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Shaft_Mine",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Villagers gather Gold faster and carry more. Game uses BasePercent: bonuses from several techs add on the base rate (e.g. +10% and +15% = +25%), they do not compound."
+      }
+    },
+    {
+      "id": "tax-collectors",
+      "name": {
+        "pt-BR": "Coletores de Impostos",
+        "en": "Tax Collectors"
+      },
+      "icon": "techs/egyptians-tax-collectors",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "food": 200,
+        "gold": 200
+      },
+      "time": 35,
+      "at": "market",
+      "age": "heroic",
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Tax_Collectors",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Improves market exchange rates and reduces the tax on sending resources to other players. Market buy/sell factors improved by 0.075 and tribute penalty -10%."
+      }
+    },
+    {
+      "id": "new-kingdom",
+      "name": {
+        "pt-BR": "Novo Reino",
+        "en": "New Kingdom"
+      },
+      "icon": "techs/egyptians-new-kingdom",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "gold": 150,
+        "favor": 20
+      },
+      "time": 30,
+      "at": "temple",
+      "age": "mythic",
+      "requires": ["osiris"],
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/New_Kingdom",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Osiris mandates that the realm be led by two Pharaohs instead of one. Grants a second Pharaoh (Pharaoh (New Kingdom)) that respawns at the Town Center. Also researchable at: town-center, village-center."
+      }
+    },
+    {
+      "id": "atef-crown",
+      "name": {
+        "pt-BR": "Coroa de Atef",
+        "en": "Atef Crown"
+      },
+      "icon": "techs/egyptians-atef-crown",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "gold": 200,
+        "favor": 20
+      },
+      "time": 40,
+      "at": "temple",
+      "age": "mythic",
+      "requires": ["osiris"],
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Atef_Crown",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Osiris upgrades Mummies to Mummy Viziers, which have improved hitpoints and attack, and grants their Minions a longer lifespan."
+      }
+    },
+    {
+      "id": "desert-wind",
+      "name": {
+        "pt-BR": "Vento do Deserto",
+        "en": "Desert Wind"
+      },
+      "icon": "techs/egyptians-desert-wind",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "gold": 300,
+        "favor": 30
+      },
+      "time": 40,
+      "at": "migdol-stronghold",
+      "age": "mythic",
+      "requires": ["osiris"],
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Desert_Wind",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Osiris places the desert wind at your Camel Riders' backs, increasing their speed, attack, and hitpoints."
+      }
+    },
+    {
+      "id": "axe-of-vengeance",
+      "name": {
+        "pt-BR": "Machado da Vingança",
+        "en": "Axe of Vengeance"
+      },
+      "icon": "techs/egyptians-axe-of-vengeance",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "wood": 150,
+        "favor": 20
+      },
+      "time": 40,
+      "at": "barracks",
+      "age": "mythic",
+      "requires": ["horus"],
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Axe_of_Vengeance",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Horus increases the attack of Axemen as they lose hitpoints, and makes them stronger against buildings."
+      }
+    },
+    {
+      "id": "greatest-of-fifty",
+      "name": {
+        "pt-BR": "Maior de Cinquenta",
+        "en": "Greatest of Fifty"
+      },
+      "icon": "techs/egyptians-greatest-of-fifty",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "gold": 150,
+        "favor": 20
+      },
+      "time": 40,
+      "at": "barracks",
+      "age": "mythic",
+      "requires": ["horus"],
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Greatest_of_Fifty",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Horus appoints military commanders, increasing infantry hitpoints and speed."
+      }
+    },
+    {
+      "id": "spear-of-horus",
+      "name": {
+        "pt-BR": "Lança de Hórus",
+        "en": "Spear of Horus"
+      },
+      "icon": "techs/egyptians-spear-of-horus",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "food": 250,
+        "favor": 25
+      },
+      "time": 40,
+      "at": "barracks",
+      "age": "mythic",
+      "requires": ["horus"],
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Spear_of_Horus",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Horus lends Spearmen his weapon of retribution, increasing their attack and allowing them to counter cavalry more effectively."
+      }
+    },
+    {
+      "id": "book-of-thoth",
+      "name": {
+        "pt-BR": "Livro de Thoth",
+        "en": "Book of Thoth"
+      },
+      "icon": "techs/egyptians-book-of-thoth",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "wood": 300,
+        "favor": 30
+      },
+      "time": 40,
+      "at": "town-center",
+      "age": "mythic",
+      "requires": ["thoth"],
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.1,
+          "scope": {
+            "sources": ["farm", "hunt", "herd", "berries", "wood", "gold"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Book_of_Thoth",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Thoth's secrets allow your Laborers to gather Food, Wood, and Gold faster. Also researchable at: village-center. Game uses BasePercent: bonuses from several techs add on the base rate (e.g. +10% and +15% = +25%), they do not compound."
+      }
+    },
+    {
+      "id": "tusks-of-apedemak",
+      "name": {
+        "pt-BR": "Presas de Apedemak",
+        "en": "Tusks of Apedemak"
+      },
+      "icon": "techs/egyptians-tusks-of-apedemak",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "food": 250,
+        "favor": 15
+      },
+      "time": 40,
+      "at": "migdol-stronghold",
+      "age": "mythic",
+      "requires": ["thoth"],
+      "effects": [
+        {
+          "target": "cost",
+          "op": "mul",
+          "value": 0.9,
+          "scope": {
+            "ids": ["war-elephant"],
+            "resources": ["food", "gold"]
+          },
+          "note": "Also -1 population per War Elephant and +10% attack (not modelled)."
+        }
+      ],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Tusks_of_Apedemak",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Thoth makes War Elephants stronger, cheaper, and reduces their population cost."
+      }
+    },
+    {
+      "id": "valley-of-the-kings",
+      "name": {
+        "pt-BR": "Vale dos Reis",
+        "en": "Valley of the Kings"
+      },
+      "icon": "techs/egyptians-valley-of-the-kings",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "gold": 500,
+        "favor": 40
+      },
+      "time": 20,
+      "at": "migdol-stronghold",
+      "age": "mythic",
+      "requires": ["thoth"],
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Valley_of_the_Kings",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Thoth teaches secrets that cause Barracks and Migdol Strongholds to spawn additional units when empowered. Pharaoh-empowered Barracks and Migdol Strongholds get a chance to spawn a second unit and +40% (BasePercent) military training rate from empowerment. Not expressible as a modifier."
+      }
+    },
+    {
+      "id": "secrets-of-the-titans",
+      "name": {
+        "pt-BR": "Segredos dos Titãs",
+        "en": "Secrets of the Titans"
+      },
+      "icon": "techs/egyptians-secrets-of-the-titans",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "food": 800,
+        "wood": 800,
+        "gold": 800,
+        "favor": 50
+      },
+      "time": 60,
+      "at": "town-center",
+      "age": "mythic",
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Secrets_of_the_Titans",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Unlocking the Secrets of the Titans will give you a god power that allows placement of the Titan Gate. Grants the Titan Gate god power. Not discounted by Isis (cost is restored). Also researchable at: village-center."
+      }
+    },
+    {
+      "id": "champion-axemen",
+      "name": {
+        "pt-BR": "Machadeiros Campeões",
+        "en": "Champion Axemen"
+      },
+      "icon": "techs/egyptians-champion-axemen",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "food": 400,
+        "gold": 300
+      },
+      "time": 40,
+      "at": "barracks",
+      "age": "mythic",
+      "requires": ["heavy-axemen"],
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Champion_Axemen",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Upgrades Axemen to Champion Axemen, with more hitpoints and attack."
+      }
+    },
+    {
+      "id": "champion-spearmen",
+      "name": {
+        "pt-BR": "Lanceiros Campeões",
+        "en": "Champion Spearmen"
+      },
+      "icon": "techs/egyptians-champion-spearmen",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "food": 400,
+        "gold": 300
+      },
+      "time": 40,
+      "at": "barracks",
+      "age": "mythic",
+      "requires": ["heavy-spearmen"],
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Champion_Spearmen",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Upgrades Spearmen to Champion Spearmen, with more hitpoints and attack."
+      }
+    },
+    {
+      "id": "champion-slingers",
+      "name": {
+        "pt-BR": "Fundeiros Campeões",
+        "en": "Champion Slingers"
+      },
+      "icon": "techs/egyptians-champion-slingers",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "wood": 400,
+        "gold": 300
+      },
+      "time": 40,
+      "at": "barracks",
+      "age": "mythic",
+      "requires": ["heavy-slingers"],
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Champion_Slingers",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Upgrades Slingers to Champion Slingers, with more hitpoints, attack, and range."
+      }
+    },
+    {
+      "id": "conscript-barracks-soldiers",
+      "name": {
+        "pt-BR": "Recrutar Soldados de Quartel",
+        "en": "Conscript Barracks Soldiers"
+      },
+      "icon": "techs/egyptians-conscript-barracks-soldiers",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "food": 200,
+        "wood": 100
+      },
+      "time": 30,
+      "at": "barracks",
+      "age": "mythic",
+      "requires": ["levy-barracks-soldiers"],
+      "effects": [
+        {
+          "target": "trainTime",
+          "op": "mul",
+          "value": 0.8,
+          "scope": {
+            "ids": ["spearman", "axeman", "slinger"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Conscript_Barracks_Soldiers",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Barracks units train faster."
+      }
+    },
+    {
+      "id": "champion-chariots",
+      "name": {
+        "pt-BR": "Bigas Campeãs",
+        "en": "Champion Chariots"
+      },
+      "icon": "techs/egyptians-champion-chariots",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "wood": 400,
+        "gold": 200
+      },
+      "time": 40,
+      "at": "migdol-stronghold",
+      "age": "mythic",
+      "requires": ["heavy-chariots"],
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Champion_Chariots",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Upgrades Chariots to Champion Chariots, with more hitpoints and attack."
+      }
+    },
+    {
+      "id": "champion-camel-riders",
+      "name": {
+        "pt-BR": "Cameleiros Campeões",
+        "en": "Champion Camel Riders"
+      },
+      "icon": "techs/egyptians-champion-camel-riders",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "food": 400,
+        "gold": 200
+      },
+      "time": 40,
+      "at": "migdol-stronghold",
+      "age": "mythic",
+      "requires": ["heavy-camel-riders"],
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Champion_Camel_Riders",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Upgrades Camel Riders to Champion Camel Riders, with more hitpoints and attack."
+      }
+    },
+    {
+      "id": "champion-war-elephants",
+      "name": {
+        "pt-BR": "Elefantes de Guerra Campeões",
+        "en": "Champion War Elephants"
+      },
+      "icon": "techs/egyptians-champion-war-elephants",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "food": 500,
+        "gold": 400
+      },
+      "time": 40,
+      "at": "migdol-stronghold",
+      "age": "mythic",
+      "requires": ["heavy-war-elephants"],
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Champion_War_Elephants",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Upgrades Heavy War Elephants to Champion War Elephants, with more hitpoints, attack and area damage."
+      }
+    },
+    {
+      "id": "conscript-migdol-soldiers",
+      "name": {
+        "pt-BR": "Recrutar Soldados de Migdol",
+        "en": "Conscript Migdol Soldiers"
+      },
+      "icon": "techs/egyptians-conscript-migdol-soldiers",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "wood": 100,
+        "gold": 200
+      },
+      "time": 20,
+      "at": "migdol-stronghold",
+      "age": "mythic",
+      "requires": ["levy-migdol-soldiers"],
+      "effects": [
+        {
+          "target": "trainTime",
+          "op": "mul",
+          "value": 0.8,
+          "scope": {
+            "ids": ["chariot-archer", "camel-rider", "war-elephant"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Conscript_Migdol_Soldiers",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Migdol Stronghold units train faster."
+      }
+    },
+    {
+      "id": "ballista-tower",
+      "name": {
+        "pt-BR": "Torre de Balista",
+        "en": "Ballista Tower"
+      },
+      "icon": "techs/egyptians-ballista-tower",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "food": 500,
+        "wood": 800
+      },
+      "time": 40,
+      "at": "sentry-tower",
+      "age": "mythic",
+      "requires": ["guard-tower"],
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml)",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Effect: Increases Tower hitpoints and attack."
+      }
+    },
+    {
+      "id": "citadel-wall",
+      "name": {
+        "pt-BR": "Muralha de Cidadela",
+        "en": "Citadel Wall"
+      },
+      "icon": "techs/egyptians-citadel-wall",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "food": 800,
+        "gold": 500
+      },
+      "time": 50,
+      "at": "wall",
+      "age": "mythic",
+      "requires": ["fortified-wall"],
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml)",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Effect: Upgrades Fortified Walls to Citadel Walls, with more hitpoints."
+      }
+    },
+    {
+      "id": "omniscience",
+      "name": {
+        "pt-BR": "Onisciência",
+        "en": "Omniscience"
+      },
+      "icon": "techs/egyptians-omniscience",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "gold": 100
+      },
+      "time": 4,
+      "at": "temple",
+      "age": "mythic",
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Omniscience",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Your god grants you the ability to see all enemy units. The cost is per enemy unit. Dynamic cost: 100 Gold per enemy unit (listed cost is per unit)."
+      }
+    },
+    {
+      "id": "iron-weapons",
+      "name": {
+        "pt-BR": "Armas de Ferro",
+        "en": "Iron Weapons"
+      },
+      "icon": "techs/egyptians-iron-weapons",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "food": 450,
+        "gold": 450
+      },
+      "time": 50,
+      "at": "armory",
+      "age": "mythic",
+      "requires": ["bronze-weapons"],
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Iron_Weapons",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Iron weapons improve the attack of all human soldiers, heroes, ships, and buildings."
+      }
+    },
+    {
+      "id": "iron-armor",
+      "name": {
+        "pt-BR": "Armadura de Ferro",
+        "en": "Iron Armor"
+      },
+      "icon": "techs/egyptians-iron-armor",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "food": 400,
+        "gold": 400
+      },
+      "time": 50,
+      "at": "armory",
+      "age": "mythic",
+      "requires": ["bronze-armor"],
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Iron_Armor",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Iron armor improves human soldier, hero, and ship resistance to hack attacks, such as swords. It also makes ships more resistant to crush attacks, such as siege weapons."
+      }
+    },
+    {
+      "id": "iron-shields",
+      "name": {
+        "pt-BR": "Escudos de Ferro",
+        "en": "Iron Shields"
+      },
+      "icon": "techs/egyptians-iron-shields",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "wood": 400,
+        "gold": 350
+      },
+      "time": 50,
+      "at": "armory",
+      "age": "mythic",
+      "requires": ["bronze-shields"],
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Iron_Shields",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Iron shields improve human soldier, hero, and ship resistance to pierce attacks, such as arrows."
+      }
+    },
+    {
+      "id": "burning-pitch",
+      "name": {
+        "pt-BR": "Breu Incendiário",
+        "en": "Burning Pitch"
+      },
+      "icon": "techs/egyptians-burning-pitch",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "wood": 500,
+        "gold": 300
+      },
+      "time": 40,
+      "at": "armory",
+      "age": "mythic",
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Burning_Pitch",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Ranged soldiers and ships fire flaming missiles for greater attack vs. buildings and ships."
+      }
+    },
+    {
+      "id": "engineers",
+      "name": {
+        "pt-BR": "Engenheiros",
+        "en": "Engineers"
+      },
+      "icon": "techs/egyptians-engineers",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "food": 300,
+        "gold": 500
+      },
+      "time": 40,
+      "at": "siege-works",
+      "age": "mythic",
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Engineers",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Increases siege weapon range and attack, especially against walls."
+      }
+    },
+    {
+      "id": "advanced-fortifications",
+      "name": {
+        "pt-BR": "Fortificações Avançadas",
+        "en": "Advanced Fortifications"
+      },
+      "icon": "techs/egyptians-advanced-fortifications",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "wood": 600,
+        "gold": 600
+      },
+      "time": 30,
+      "at": "migdol-stronghold",
+      "age": "mythic",
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Advanced_Fortifications",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": "conscript-sailors",
+      "name": {
+        "pt-BR": "Recrutar Marinheiros",
+        "en": "Conscript Sailors"
+      },
+      "icon": "techs/egyptians-conscript-sailors",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "wood": 300
+      },
+      "time": 30,
+      "at": "dock",
+      "age": "mythic",
+      "effects": [
+        {
+          "target": "trainTime",
+          "op": "mul",
+          "value": 0.8,
+          "scope": {
+            "tags": ["ship"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Conscript_Sailors",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Ships are built faster."
+      }
+    },
+    {
+      "id": "champion-warships",
+      "name": {
+        "pt-BR": "Navios de Guerra Campeões",
+        "en": "Champion Warships"
+      },
+      "icon": "techs/egyptians-champion-warships",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "wood": 250,
+        "gold": 200
+      },
+      "time": 20,
+      "at": "dock",
+      "age": "mythic",
+      "requires": ["heavy-warships"],
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Champion_Warships",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Upgrades Warships to Champion Warships, with more hitpoints, attack and siege ship range."
+      }
+    },
+    {
+      "id": "flood-control",
+      "name": {
+        "pt-BR": "Controle de Enchentes",
+        "en": "Flood Control"
+      },
+      "icon": "techs/egyptians-flood-control",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "wood": 250,
+        "gold": 350
+      },
+      "time": 40,
+      "at": "granary",
+      "age": "mythic",
+      "requires": ["irrigation"],
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.1,
+          "scope": {
+            "sources": ["farm"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Flood_Control",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Villagers gather Food from Farms faster. Game uses BasePercent: bonuses from several techs add on the base rate (e.g. +10% and +15% = +25%), they do not compound."
+      }
+    },
+    {
+      "id": "carpenters",
+      "name": {
+        "pt-BR": "Carpinteiros",
+        "en": "Carpenters"
+      },
+      "icon": "techs/egyptians-carpenters",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "food": 300,
+        "gold": 200
+      },
+      "time": 55,
+      "at": "lumber-camp",
+      "age": "mythic",
+      "requires": ["bow-saw"],
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.2,
+          "scope": {
+            "sources": ["wood"]
+          },
+          "note": "Also +5 Wood carry capacity."
+        }
+      ],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Carpenters",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Villagers gather Wood faster and carry more. Game uses BasePercent: bonuses from several techs add on the base rate (e.g. +10% and +15% = +25%), they do not compound."
+      }
+    },
+    {
+      "id": "quarry",
+      "name": {
+        "pt-BR": "Pedreira",
+        "en": "Quarry"
+      },
+      "icon": "techs/egyptians-quarry",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "food": 200,
+        "wood": 300
+      },
+      "time": 50,
+      "at": "mining-camp",
+      "age": "mythic",
+      "requires": ["shaft-mine"],
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.2,
+          "scope": {
+            "sources": ["gold"]
+          },
+          "note": "Also +5 Gold carry capacity."
+        }
+      ],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Quarry",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Villagers gather Gold faster and carry more. Game uses BasePercent: bonuses from several techs add on the base rate (e.g. +10% and +15% = +25%), they do not compound."
+      }
+    },
+    {
+      "id": "ambassadors",
+      "name": {
+        "pt-BR": "Embaixadores",
+        "en": "Ambassadors"
+      },
+      "icon": "techs/egyptians-ambassadors",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "gold": 250
+      },
+      "time": 30,
+      "at": "market",
+      "age": "mythic",
+      "requires": ["tax-collectors"],
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Ambassadors",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Improves market exchange rates and reduces the tax on sending resources to other players. Market buy/sell factors improved by 0.075 and tribute penalty removed."
+      }
+    },
+    {
+      "id": "coinage",
+      "name": {
+        "pt-BR": "Cunhagem",
+        "en": "Coinage"
+      },
+      "icon": "techs/egyptians-coinage",
+      "pantheon": "egyptians",
+      "tags": ["research"],
+      "cost": {
+        "gold": 200
+      },
+      "time": 40,
+      "at": "market",
+      "age": "mythic",
+      "effects": [],
+      "meta": {
+        "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Coinage_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Effect: Increases Caravan speed. +20% Caravan speed (more trade income; not modelled)."
+      }
+    }
+  ],
+  "meta": {
+    "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml)",
+    "checkedAt": "2026-10-17",
+    "confidence": "high",
+    "note": "Start (major_gods.xml): 200 Food, 100 Wood, 50 Gold, 0 Favor; 3 Laborers + 1 Priest (+1 Baboon of Set for Set); the Pharaoh is spawned at the TC immediately by tech PharaohFirstSpawn; TC auto-queues Laborers. Laborer train 17s. PHARAOH EMPOWER (not expressible as modifiers): an empowered building gets x1.75 build rate, research rate and military train rate, x1.2 Favor (Monuments) and x1.2 DropsiteRate (resources dropped there +20%); Ra's Priests and Pharaoh-empowered Monuments (aura 30) empower at x1.45 / x1.12. Most Egyptian buildings cost Gold or are free (House, Granary, Mining Camp, Lumber Camp, Market, Armory); Laborers build at 0.75 speed (buildTime values include it). Heroic Age: free Leviathan at a Dock; Mythic Age: free War Turtle at a Dock. Classical age-up removes the TC build limit."
+  }
+}

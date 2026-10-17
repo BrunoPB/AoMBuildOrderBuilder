@@ -1,0 +1,4977 @@
+{
+  "id": "norse",
+  "name": {
+    "pt-BR": "Nórdicos",
+    "en": "Norse"
+  },
+  "icon": "ui/pantheon-norse",
+  "workers": ["gatherer", "dwarf"],
+  "townCenter": "town-center",
+  "start": {
+    "resources": {
+      "food": 200,
+      "wood": 150,
+      "gold": 100,
+      "favor": 0
+    },
+    "units": {
+      "gatherer": 3,
+      "berserk": 1
+    },
+    "buildings": {
+      "town-center": 1,
+      "ox-cart": 1
+    },
+    "popCap": 15
+  },
+  "favor": {
+    "type": "combat",
+    "damagePerFavor": 80,
+    "decayFrom": 100,
+    "decayTo": 300,
+    "defaultPerMinute": 0,
+    "meta": {
+      "source": "https://ageofempires.fandom.com/wiki/Norse#Favor",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "Retold: human soldiers, heroes and (since update 18.49472) buildings earn 1 favor per 80 damage; ships and Temple/Dock myth units 1 per 160; Odin's Great Hall units 1 per 64; Gatherers/Dwarves 1 per 20. Target multipliers: huntables x0.5, herdables/chickens x5, shooting buildings x0.5, walls x0, other buildings x0.1. After 100 total combat favor the gain rate falls linearly to x0.5 at 300 total (spent or not). Hersir/Godi also trickle 0.6/min each (unit favorRate). Favor cap 200 (analyzer). Analyzer favor guide only confirms 'favor from combat, cap 200'."
+    }
+  },
+  "gods": ["odin", "thor", "loki"],
+  "ageUps": [
+    {
+      "pantheon": "norse",
+      "to": "classical",
+      "cost": {
+        "food": 400
+      },
+      "time": 60,
+      "at": "town-center",
+      "requiresAnyOf": [["temple"]],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Classical_Age_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Also researchable at Village Centers. Choose Freyja/Heimdall/Forseti per major god."
+      }
+    },
+    {
+      "pantheon": "norse",
+      "to": "heroic",
+      "cost": {
+        "food": 800,
+        "gold": 500
+      },
+      "time": 75,
+      "at": "town-center",
+      "requiresAnyOf": [["armory"], ["dwarven-armory"], ["market"]],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Heroic_Age",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Requires any one of Armory, Dwarven Armory (Thor) or Market (Market since Retold)."
+      }
+    },
+    {
+      "pantheon": "norse",
+      "to": "mythic",
+      "cost": {
+        "food": 1200,
+        "gold": 1200
+      },
+      "time": 120,
+      "at": "town-center",
+      "requiresAnyOf": [["hill-fort"]],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Mythic_Age",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Requires a fortress-type building (Hill Fort for Norse) since Retold."
+      }
+    }
+  ],
+  "units": [
+    {
+      "id": "gatherer",
+      "name": {
+        "pt-BR": "Coletor",
+        "en": "Gatherer"
+      },
+      "icon": "units/norse-gatherer",
+      "pantheon": "norse",
+      "tags": ["worker", "human"],
+      "cost": {
+        "food": 50
+      },
+      "pop": 1,
+      "trainTime": 17,
+      "trainedAt": ["town-center", "village-center"],
+      "age": "archaic",
+      "worker": {
+        "gatherRates": {
+          "hunt": 54,
+          "herd": 48.6,
+          "berries": 37.8,
+          "farm": 37.8,
+          "wood": 54,
+          "gold": 46.2
+        },
+        "canBuild": true,
+        "buildRate": 1,
+        "needsDropsite": true
+      },
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Gatherer",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Gather rates from wiki table (current values, update 18.52475+). Can only build Houses, Farms and Ox Carts (all other buildings are built by Norse infantry/heroes). Can be transformed into a Berserk for 30 food + 20 gold (Loki: -50%); transform not modelled. Villager limit 100 shared with Dwarves."
+      },
+      "fieldMeta": {
+        "worker": {
+          "source": "https://ageofempires.fandom.com/wiki/Gatherer",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Gather rates only from the wiki (analyzer gives no numbers)."
+        }
+      }
+    },
+    {
+      "id": "dwarf",
+      "name": {
+        "pt-BR": "Anão",
+        "en": "Dwarf"
+      },
+      "icon": "units/norse-dwarf",
+      "pantheon": "norse",
+      "tags": ["worker", "human"],
+      "cost": {
+        "gold": 60
+      },
+      "pop": 1,
+      "trainTime": 17,
+      "trainedAt": ["town-center", "village-center"],
+      "age": "archaic",
+      "worker": {
+        "gatherRates": {
+          "hunt": 42,
+          "herd": 37.8,
+          "berries": 29.4,
+          "farm": 29.4,
+          "wood": 42,
+          "gold": 58.8
+        },
+        "canBuild": true,
+        "buildRate": 1,
+        "needsDropsite": true
+      },
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Dwarf",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Gold +27.79% vs Gatherer, food/wood -22.22%. Thor: -10 gold cost and +25% food/wood gather (see thor.json). Can only build Houses, Farms and Ox Carts. Transform to Berserk: 10 food + 30 gold."
+      },
+      "fieldMeta": {
+        "worker": {
+          "source": "https://ageofempires.fandom.com/wiki/Dwarf",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Gather rates only from the wiki (analyzer gives no numbers)."
+        }
+      }
+    },
+    {
+      "id": "berserk",
+      "name": {
+        "pt-BR": "Berserker",
+        "en": "Berserk"
+      },
+      "icon": "units/norse-berserk",
+      "pantheon": "norse",
+      "tags": ["infantry", "human", "scout"],
+      "cost": {
+        "food": 50,
+        "gold": 30
+      },
+      "pop": 2,
+      "trainTime": 9,
+      "trainedAt": ["town-center", "longhouse"],
+      "age": "archaic",
+      "worker": {
+        "gatherRates": {},
+        "canBuild": true,
+        "buildRate": 1,
+        "needsDropsite": false
+      },
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Berserk_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Renamed from Ulfsark in Retold. Norse infantry construct and repair buildings (worker.canBuild). Longhouse is a Classical building, so Longhouse training starts in Classical."
+      },
+      "fieldMeta": {
+        "worker": {
+          "source": "https://ageofempires.fandom.com/wiki/Norse",
+          "checkedAt": "2026-10-17",
+          "confidence": "low",
+          "note": "Builder speed of Norse infantry assumed equal to the base builder (buildRate 1); not verified."
+        }
+      }
+    },
+    {
+      "id": "hersir",
+      "name": {
+        "pt-BR": "Hersir",
+        "en": "Hersir"
+      },
+      "icon": "units/norse-hersir",
+      "pantheon": "norse",
+      "tags": ["hero", "infantry", "human"],
+      "cost": {
+        "food": 80,
+        "gold": 40
+      },
+      "pop": 3,
+      "trainTime": 16,
+      "trainedAt": ["temple", "great-hall"],
+      "age": "archaic",
+      "worker": {
+        "gatherRates": {},
+        "canBuild": true,
+        "buildRate": 1,
+        "needsDropsite": false
+      },
+      "favorRate": 0.6,
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Hersir",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Unlimited count. Builds like infantry. Passive favor trickle 0.01/s (0.6/min) just by existing; Hammer of Thunder (Thor) +50%. Combat favor handled by the pantheon favor rule. Great Hall is Classical, so Great Hall training starts in Classical."
+      },
+      "fieldMeta": {
+        "favorRate": {
+          "source": "https://ageofempires.fandom.com/wiki/Norse",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Wiki: Hersirs and Godis trickle 0.01 favor/s."
+        }
+      }
+    },
+    {
+      "id": "godi",
+      "name": {
+        "pt-BR": "Godi",
+        "en": "Godi"
+      },
+      "icon": "units/norse-godi",
+      "pantheon": "norse",
+      "tags": ["hero", "archer", "human"],
+      "cost": {
+        "wood": 80,
+        "gold": 40
+      },
+      "pop": 3,
+      "trainTime": 16,
+      "trainedAt": ["great-hall"],
+      "age": "heroic",
+      "worker": {
+        "gatherRates": {},
+        "canBuild": true,
+        "buildRate": 1,
+        "needsDropsite": false
+      },
+      "favorRate": 0.6,
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Godi",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Ranged hero, unlimited count. Passive favor 0.01/s like the Hersir (wiki). Builds like infantry (humanoid hero)."
+      },
+      "fieldMeta": {
+        "age": {
+          "source": "https://ageofempires.fandom.com/wiki/Godi",
+          "checkedAt": "2026-10-17",
+          "confidence": "high",
+          "note": "Heroic Age normally; Classical Age if Freyja's Sessrumnir is researched (not expressible)."
+        },
+        "favorRate": {
+          "source": "https://ageofempires.fandom.com/wiki/Norse",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Wiki: Hersirs and Godis trickle 0.01 favor/s."
+        }
+      }
+    },
+    {
+      "id": "hirdman",
+      "name": {
+        "pt-BR": "Hirdman",
+        "en": "Hirdman"
+      },
+      "icon": "units/norse-hirdman",
+      "pantheon": "norse",
+      "tags": ["infantry", "human"],
+      "cost": {
+        "food": 40,
+        "gold": 45
+      },
+      "pop": 2,
+      "trainTime": 14,
+      "trainedAt": ["longhouse"],
+      "age": "classical",
+      "worker": {
+        "gatherRates": {},
+        "canBuild": true,
+        "buildRate": 1,
+        "needsDropsite": false
+      },
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Hirdman_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Retold-only anti-cavalry infantry."
+      }
+    },
+    {
+      "id": "throwing-axeman",
+      "name": {
+        "pt-BR": "Lançador de Machados",
+        "en": "Throwing Axeman"
+      },
+      "icon": "units/norse-throwing-axeman",
+      "pantheon": "norse",
+      "tags": ["infantry", "archer", "human"],
+      "cost": {
+        "wood": 50,
+        "gold": 40
+      },
+      "pop": 2,
+      "trainTime": 15,
+      "trainedAt": ["longhouse"],
+      "age": "classical",
+      "worker": {
+        "gatherRates": {},
+        "canBuild": true,
+        "buildRate": 1,
+        "needsDropsite": false
+      },
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Throwing_Axeman_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Counts as ranged soldier since Retold; still infantry (builds)."
+      }
+    },
+    {
+      "id": "huskarl",
+      "name": {
+        "pt-BR": "Huscarlo",
+        "en": "Huskarl"
+      },
+      "icon": "units/norse-huskarl",
+      "pantheon": "norse",
+      "tags": ["infantry", "human"],
+      "cost": {
+        "wood": 75,
+        "gold": 40
+      },
+      "pop": 2,
+      "trainTime": 6.5,
+      "trainedAt": ["hill-fort"],
+      "age": "heroic",
+      "worker": {
+        "gatherRates": {},
+        "canBuild": true,
+        "buildRate": 1,
+        "needsDropsite": false
+      },
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Huskarl_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Proto age is Classical (analyzer column shows Archaic) but the Hill Fort is a Heroic building, so effectively Heroic."
+      }
+    },
+    {
+      "id": "raiding-cavalry",
+      "name": {
+        "pt-BR": "Cavalaria de Saque",
+        "en": "Raiding Cavalry"
+      },
+      "icon": "units/norse-raiding-cavalry",
+      "pantheon": "norse",
+      "tags": ["cavalry", "human"],
+      "cost": {
+        "food": 40,
+        "gold": 50
+      },
+      "pop": 2,
+      "trainTime": 10,
+      "trainedAt": ["great-hall"],
+      "age": "classical",
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Raiding_Cavalry",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": "jarl",
+      "name": {
+        "pt-BR": "Jarl",
+        "en": "Jarl"
+      },
+      "icon": "units/norse-jarl",
+      "pantheon": "norse",
+      "tags": ["cavalry", "human"],
+      "cost": {
+        "food": 50,
+        "gold": 80
+      },
+      "pop": 3,
+      "trainTime": 14.5,
+      "trainedAt": ["great-hall"],
+      "age": "heroic",
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Jarl_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": "portable-ram",
+      "name": {
+        "pt-BR": "Aríete Portátil",
+        "en": "Portable Ram"
+      },
+      "icon": "units/norse-portable-ram",
+      "pantheon": "norse",
+      "tags": ["siege"],
+      "cost": {
+        "wood": 125,
+        "gold": 125
+      },
+      "pop": 3,
+      "trainTime": 13,
+      "trainedAt": ["hill-fort"],
+      "age": "heroic",
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Portable_Ram",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": "ballista",
+      "name": {
+        "pt-BR": "Balista",
+        "en": "Ballista"
+      },
+      "icon": "units/norse-ballista",
+      "pantheon": "norse",
+      "tags": ["siege"],
+      "cost": {
+        "wood": 150,
+        "gold": 150
+      },
+      "pop": 3,
+      "trainTime": 17,
+      "trainedAt": ["hill-fort"],
+      "age": "mythic",
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Ballista_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": "fishing-ship",
+      "name": {
+        "pt-BR": "Barco de Pesca",
+        "en": "Fishing Ship"
+      },
+      "icon": "units/norse-fishing-ship",
+      "pantheon": "norse",
+      "tags": ["ship", "worker"],
+      "cost": {
+        "wood": 50
+      },
+      "pop": 1,
+      "trainTime": 18,
+      "trainedAt": ["dock"],
+      "age": "archaic",
+      "worker": {
+        "gatherRates": {
+          "fish": 33
+        },
+        "needsDropsite": true
+      },
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Fishing_Ship_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Limit 50. Drops food only at Docks."
+      },
+      "fieldMeta": {
+        "worker": {
+          "source": "https://ageofempires.fandom.com/wiki/Fishing_Ship_(Age_of_Mythology)",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Base 0.55 food/s (since update 18.27100); real rate depends on distance to the Dock."
+        }
+      }
+    },
+    {
+      "id": "transport-ship",
+      "name": {
+        "pt-BR": "Navio de Transporte",
+        "en": "Transport Ship"
+      },
+      "icon": "units/norse-transport-ship",
+      "pantheon": "norse",
+      "tags": ["ship"],
+      "cost": {
+        "wood": 110
+      },
+      "pop": 1,
+      "trainTime": 19,
+      "trainedAt": ["dock"],
+      "age": "classical",
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Transport_Ship_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": "longboat",
+      "name": {
+        "pt-BR": "Barco Longo",
+        "en": "Longboat"
+      },
+      "icon": "units/norse-longboat",
+      "pantheon": "norse",
+      "tags": ["ship"],
+      "cost": {
+        "wood": 100,
+        "gold": 50
+      },
+      "pop": 3,
+      "trainTime": 16.5,
+      "trainedAt": ["dock"],
+      "age": "classical",
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Longboat",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Arrow ship."
+      }
+    },
+    {
+      "id": "dreki",
+      "name": {
+        "pt-BR": "Dreki",
+        "en": "Dreki"
+      },
+      "icon": "units/norse-dreki",
+      "pantheon": "norse",
+      "tags": ["ship"],
+      "cost": {
+        "wood": 100,
+        "gold": 50
+      },
+      "pop": 3,
+      "trainTime": 16.5,
+      "trainedAt": ["dock"],
+      "age": "classical",
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Dreki_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Close-combat ship (Drakkar)."
+      }
+    },
+    {
+      "id": "dragon-ship",
+      "name": {
+        "pt-BR": "Navio-Dragão",
+        "en": "Dragon Ship"
+      },
+      "icon": "units/norse-dragon-ship",
+      "pantheon": "norse",
+      "tags": ["ship", "siege"],
+      "cost": {
+        "wood": 100,
+        "gold": 50
+      },
+      "pop": 3,
+      "trainTime": 16.5,
+      "trainedAt": ["dock"],
+      "age": "classical",
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Dragon_Ship_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Siege ship."
+      }
+    },
+    {
+      "id": "ox-caravan",
+      "name": {
+        "pt-BR": "Caravana de Bois",
+        "en": "Ox Caravan"
+      },
+      "icon": "units/norse-ox-caravan",
+      "pantheon": "norse",
+      "tags": ["caravan"],
+      "cost": {
+        "food": 100,
+        "wood": 25
+      },
+      "pop": 1,
+      "trainTime": 18,
+      "trainedAt": ["market"],
+      "age": "heroic",
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Caravan_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Norse caravan. Limit 60."
+      }
+    },
+    {
+      "id": "valkyrie",
+      "name": {
+        "pt-BR": "Valquíria",
+        "en": "Valkyrie"
+      },
+      "icon": "units/norse-valkyrie",
+      "pantheon": "norse",
+      "tags": ["myth"],
+      "cost": {
+        "food": 200,
+        "favor": 18
+      },
+      "pop": 3,
+      "trainTime": 17,
+      "trainedAt": ["temple"],
+      "age": "classical",
+      "requires": ["freyja"],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/pantheons + https://ageofempires.fandom.com/wiki/Valkyrie",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Cavalry myth unit that heals."
+      }
+    },
+    {
+      "id": "einheri",
+      "name": {
+        "pt-BR": "Einheri",
+        "en": "Einheri"
+      },
+      "icon": "units/norse-einheri",
+      "pantheon": "norse",
+      "tags": ["myth"],
+      "cost": {
+        "gold": 150,
+        "favor": 15
+      },
+      "pop": 2,
+      "trainTime": 17,
+      "trainedAt": ["temple"],
+      "age": "classical",
+      "requires": ["heimdall"],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/pantheons + https://ageofempires.fandom.com/wiki/Einheri",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": "troll",
+      "name": {
+        "pt-BR": "Troll",
+        "en": "Troll"
+      },
+      "icon": "units/norse-troll",
+      "pantheon": "norse",
+      "tags": ["myth"],
+      "cost": {
+        "wood": 160,
+        "favor": 15
+      },
+      "pop": 2,
+      "trainTime": 15,
+      "trainedAt": ["temple"],
+      "age": "classical",
+      "requires": ["forseti"],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/pantheons + https://ageofempires.fandom.com/wiki/Troll",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": "battle-boar",
+      "name": {
+        "pt-BR": "Javali de Batalha",
+        "en": "Battle Boar"
+      },
+      "icon": "units/norse-battle-boar",
+      "pantheon": "norse",
+      "tags": ["myth"],
+      "cost": {
+        "gold": 250,
+        "favor": 27
+      },
+      "pop": 3,
+      "trainTime": 20,
+      "trainedAt": ["temple"],
+      "age": "heroic",
+      "requires": ["bragi"],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/pantheons + https://ageofempires.fandom.com/wiki/Battle_Boar",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": "frost-giant",
+      "name": {
+        "pt-BR": "Gigante de Gelo",
+        "en": "Frost Giant"
+      },
+      "icon": "units/norse-frost-giant",
+      "pantheon": "norse",
+      "tags": ["myth"],
+      "cost": {
+        "gold": 200,
+        "favor": 22
+      },
+      "pop": 4,
+      "trainTime": 20,
+      "trainedAt": ["temple"],
+      "age": "heroic",
+      "requires": ["skadi"],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/pantheons + https://ageofempires.fandom.com/wiki/Frost_Giant",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Also trainable by Hel worshippers in the Mythic Age (requires is all-of, so only Skadi is listed; Hel lists it in unlocks). Needs any-of semantics: skadi OR hel."
+      }
+    },
+    {
+      "id": "mountain-giant",
+      "name": {
+        "pt-BR": "Gigante da Montanha",
+        "en": "Mountain Giant"
+      },
+      "icon": "units/norse-mountain-giant",
+      "pantheon": "norse",
+      "tags": ["myth"],
+      "cost": {
+        "food": 250,
+        "favor": 25
+      },
+      "pop": 4,
+      "trainTime": 17,
+      "trainedAt": ["temple"],
+      "age": "heroic",
+      "requires": ["njord"],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/pantheons + https://ageofempires.fandom.com/wiki/Mountain_Giant",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Also trainable by Hel worshippers in the Mythic Age (requires is all-of, so only Njord is listed; Hel lists it in unlocks). Needs any-of semantics: njord OR hel."
+      }
+    },
+    {
+      "id": "fire-giant",
+      "name": {
+        "pt-BR": "Gigante de Fogo",
+        "en": "Fire Giant"
+      },
+      "icon": "units/norse-fire-giant",
+      "pantheon": "norse",
+      "tags": ["myth"],
+      "cost": {
+        "gold": 300,
+        "favor": 28
+      },
+      "pop": 4,
+      "trainTime": 24,
+      "trainedAt": ["temple"],
+      "age": "mythic",
+      "requires": ["baldr"],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/pantheons + https://ageofempires.fandom.com/wiki/Fire_Giant",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Also Hel's myth unit (requires is all-of, so only Baldr is listed; Hel lists it in unlocks). Needs any-of semantics: baldr OR hel."
+      }
+    },
+    {
+      "id": "fenris-wolf-brood",
+      "name": {
+        "pt-BR": "Ninhada do Lobo Fenris",
+        "en": "Fenris Wolf Brood"
+      },
+      "icon": "units/norse-fenris-wolf-brood",
+      "pantheon": "norse",
+      "tags": ["myth"],
+      "cost": {
+        "food": 175,
+        "favor": 15
+      },
+      "pop": 2,
+      "trainTime": 12,
+      "trainedAt": ["temple"],
+      "age": "mythic",
+      "requires": ["tyr"],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/pantheons + https://ageofempires.fandom.com/wiki/Fenris_Wolf_Brood",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": "kraken",
+      "name": {
+        "pt-BR": "Kraken",
+        "en": "Kraken"
+      },
+      "icon": "units/norse-kraken",
+      "pantheon": "norse",
+      "tags": ["myth", "ship"],
+      "cost": {
+        "food": 300,
+        "favor": 20
+      },
+      "pop": 4,
+      "trainTime": 10,
+      "trainedAt": ["dock"],
+      "age": "heroic",
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Kraken",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Naval myth unit available to all Norse gods in Retold (Njord only before Retold). Not on the analyzer Norse page."
+      }
+    },
+    {
+      "id": "jormun-elver",
+      "name": {
+        "pt-BR": "Jormun Elver",
+        "en": "Jormun Elver"
+      },
+      "icon": "units/norse-jormun-elver",
+      "pantheon": "norse",
+      "tags": ["myth", "ship"],
+      "cost": {
+        "food": 200,
+        "favor": 15
+      },
+      "pop": 4,
+      "trainTime": 10,
+      "trainedAt": ["dock"],
+      "age": "mythic",
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Jormun_Elver",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Naval myth unit available to all Norse gods in Retold (Tyr only before Retold). Not on the analyzer Norse page."
+      }
+    }
+  ],
+  "buildings": [
+    {
+      "id": "town-center",
+      "name": {
+        "pt-BR": "Centro da Cidade",
+        "en": "Town Center"
+      },
+      "icon": "buildings/norse-town-center",
+      "pantheon": "norse",
+      "cost": {
+        "wood": 350,
+        "gold": 350
+      },
+      "buildTime": 150,
+      "popCap": 15,
+      "age": "classical",
+      "trains": ["gatherer", "dwarf", "berserk"],
+      "researches": ["masons", "architects", "fortified-town-center", "rigsthula"],
+      "dropsiteFor": ["hunt", "herd", "berries", "farm", "wood", "gold"],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Town_Center_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Start with one. Extra Town Centers must be built on Settlements from the Classical Age."
+      },
+      "fieldMeta": {
+        "buildTime": {
+          "source": "https://ageofempires.fandom.com/wiki/Town_Center_(Age_of_Mythology)",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium"
+        }
+      }
+    },
+    {
+      "id": "village-center",
+      "name": {
+        "pt-BR": "Centro de Vila",
+        "en": "Village Center"
+      },
+      "icon": "buildings/norse-village-center",
+      "pantheon": "norse",
+      "cost": {
+        "wood": 350,
+        "gold": 350
+      },
+      "buildTime": 150,
+      "popCap": 0,
+      "age": "classical",
+      "trains": ["gatherer", "dwarf", "berserk"],
+      "dropsiteFor": ["hunt", "herd", "berries", "farm", "wood", "gold"],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Village_Center",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Retold: a Town Center placed off a Settlement. No population, trains workers 25% slower (not modelled), fires only when garrisoned. Can also research Masons, Architects and Rigsthula and advance ages (those are listed only at the Town Center because a research has a single `at`). Normally from Classical (one allowed in Archaic if you have no TC)."
+      },
+      "fieldMeta": {
+        "buildTime": {
+          "source": "https://ageofempires.fandom.com/wiki/Village_Center",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium"
+        }
+      }
+    },
+    {
+      "id": "house",
+      "name": {
+        "pt-BR": "Casa",
+        "en": "House"
+      },
+      "icon": "buildings/norse-house",
+      "pantheon": "norse",
+      "cost": {
+        "wood": 45
+      },
+      "buildTime": 15,
+      "popCap": 10,
+      "limit": 16,
+      "age": "archaic",
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/House_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Wiki: Norse House, Dock, Temple, Market, Armory, Sentry Tower and Wonder cost -10% wood and have -10% HP. The analyzer shows the generic (non-Norse) values for these shared buildings (identical to its Greek page), so the wiki value was used. Analyzer: 50 wood. Can be built by Gatherers/Dwarves and by infantry."
+      }
+    },
+    {
+      "id": "temple",
+      "name": {
+        "pt-BR": "Templo",
+        "en": "Temple"
+      },
+      "icon": "buildings/norse-temple",
+      "pantheon": "norse",
+      "cost": {
+        "wood": 135,
+        "gold": 150
+      },
+      "buildTime": 30,
+      "age": "archaic",
+      "trains": [
+        "hersir",
+        "valkyrie",
+        "einheri",
+        "troll",
+        "battle-boar",
+        "frost-giant",
+        "mountain-giant",
+        "fire-giant",
+        "fenris-wolf-brood"
+      ],
+      "researches": [
+        "eyes-in-the-forest",
+        "cave-troll",
+        "hall-of-thanes",
+        "disablot",
+        "gjallarhorn",
+        "safeguard",
+        "thurisaz-rune",
+        "jotuns",
+        "rime",
+        "omniscience",
+        "granite-blood",
+        "rampage"
+      ],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Temple_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Wiki: Norse House, Dock, Temple, Market, Armory, Sentry Tower and Wonder cost -10% wood and have -10% HP. The analyzer shows the generic (non-Norse) values for these shared buildings (identical to its Greek page), so the wiki value was used. Analyzer: 150 wood + 150 gold. Wiki: Norse Temple is built in 30 s by one builder. Required for the Classical Age."
+      }
+    },
+    {
+      "id": "longhouse",
+      "name": {
+        "pt-BR": "Casa Longa",
+        "en": "Longhouse"
+      },
+      "icon": "buildings/norse-longhouse",
+      "pantheon": "norse",
+      "cost": {
+        "wood": 90
+      },
+      "buildTime": 25,
+      "age": "classical",
+      "trains": ["berserk", "throwing-axeman", "hirdman"],
+      "researches": [
+        "medium-infantry",
+        "heavy-infantry",
+        "champion-infantry",
+        "levy-longhouse-soldiers",
+        "conscript-longhouse-soldiers",
+        "hamask",
+        "call-of-valhalla",
+        "swine-array",
+        "huntress-axe",
+        "berserkergang"
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Longhouse_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Built by Norse infantry/heroes. Analyzer lists the Berserk/Hamask in its Archaic column, but the wiki gives the Longhouse as a Classical building."
+      },
+      "fieldMeta": {
+        "buildTime": {
+          "source": "https://ageofempires.fandom.com/wiki/Longhouse_(Age_of_Mythology)",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium"
+        }
+      }
+    },
+    {
+      "id": "great-hall",
+      "name": {
+        "pt-BR": "Grande Salão",
+        "en": "Great Hall"
+      },
+      "icon": "buildings/norse-great-hall",
+      "pantheon": "norse",
+      "cost": {
+        "wood": 135
+      },
+      "buildTime": 40,
+      "age": "classical",
+      "trains": ["hersir", "raiding-cavalry", "jarl", "godi"],
+      "researches": [
+        "medium-cavalry",
+        "heavy-cavalry",
+        "champion-cavalry",
+        "levy-great-hall-soldiers",
+        "conscript-great-hall-soldiers",
+        "sessrumnir",
+        "thundering-hooves",
+        "ring-giver",
+        "vikings",
+        "sons-of-sleipnir"
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Retold-only. Built by Norse infantry/heroes. Cost conflict: analyzer 135 wood (game data, used), wiki 160 wood. Researches some techs faster (wiki notes 'Great Hall works faster'; times below already include it)."
+      },
+      "fieldMeta": {
+        "buildTime": {
+          "source": "https://ageofempires.fandom.com/wiki/Great_Hall",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium"
+        }
+      }
+    },
+    {
+      "id": "hill-fort",
+      "name": {
+        "pt-BR": "Forte da Colina",
+        "en": "Hill Fort"
+      },
+      "icon": "buildings/norse-hill-fort",
+      "pantheon": "norse",
+      "cost": {
+        "wood": 270,
+        "gold": 300,
+        "favor": 5
+      },
+      "buildTime": 135,
+      "limit": 15,
+      "age": "heroic",
+      "trains": ["huskarl", "portable-ram", "ballista"],
+      "researches": [
+        "levy-hill-fort-soldiers",
+        "conscript-hill-fort-soldiers",
+        "draft-horses",
+        "engineers",
+        "advanced-fortifications",
+        "dwarven-auger",
+        "bravery"
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Hill_Fort_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Norse fortress-type building, required for the Mythic Age. Built by Norse infantry/heroes. Limit 15."
+      },
+      "fieldMeta": {
+        "buildTime": {
+          "source": "https://ageofempires.fandom.com/wiki/Hill_Fort_(Age_of_Mythology)",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium"
+        }
+      }
+    },
+    {
+      "id": "armory",
+      "name": {
+        "pt-BR": "Arsenal",
+        "en": "Armory"
+      },
+      "icon": "buildings/norse-armory",
+      "pantheon": "norse",
+      "cost": {
+        "wood": 135
+      },
+      "buildTime": 40,
+      "age": "classical",
+      "researches": [
+        "copper-weapons",
+        "copper-armor",
+        "copper-shields",
+        "bronze-weapons",
+        "bronze-armor",
+        "bronze-shields",
+        "iron-weapons",
+        "iron-armor",
+        "iron-shields",
+        "ballistics",
+        "burning-pitch",
+        "dwarven-breastplate"
+      ],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Armory",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Wiki: Norse House, Dock, Temple, Market, Armory, Sentry Tower and Wonder cost -10% wood and have -10% HP. The analyzer shows the generic (non-Norse) values for these shared buildings (identical to its Greek page), so the wiki value was used. Analyzer: 150 wood. Odin and Loki only: Thor gets the Dwarven Armory instead (cannot be expressed with requires; the simulator must hide this building for Thor). One of the Heroic Age prerequisites."
+      }
+    },
+    {
+      "id": "dwarven-armory",
+      "name": {
+        "pt-BR": "Arsenal Anão",
+        "en": "Dwarven Armory"
+      },
+      "icon": "buildings/norse-dwarven-armory",
+      "pantheon": "norse",
+      "cost": {
+        "wood": 135
+      },
+      "buildTime": 40,
+      "age": "archaic",
+      "requires": ["thor"],
+      "researches": [
+        "copper-weapons-thor",
+        "copper-armor-thor",
+        "copper-shields-thor",
+        "bronze-weapons-thor",
+        "bronze-armor-thor",
+        "bronze-shields-thor",
+        "iron-weapons-thor",
+        "iron-armor-thor",
+        "iron-shields-thor",
+        "ballistics-thor",
+        "burning-pitch-thor",
+        "dwarven-weapons",
+        "meteoric-iron-armor",
+        "dragonscale-shields",
+        "hammer-of-thunder",
+        "dwarven-breastplate-thor"
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Dwarven_Armory",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Thor only; replaces the Armory. Can be built and research in any age; research speed is x0.33 in Archaic and rises each age (x1 Classical, x1.5 Heroic, x2 Mythic). Every research here spawns 1 free Dwarf (not expressible)."
+      }
+    },
+    {
+      "id": "market",
+      "name": {
+        "pt-BR": "Mercado",
+        "en": "Market"
+      },
+      "icon": "buildings/norse-market",
+      "pantheon": "norse",
+      "cost": {
+        "wood": 135
+      },
+      "buildTime": 40,
+      "age": "classical",
+      "trains": ["ox-caravan"],
+      "researches": ["tax-collectors", "ambassadors", "coinage"],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Market_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "low",
+        "note": "Wiki: Norse House, Dock, Temple, Market, Armory, Sentry Tower and Wonder cost -10% wood and have -10% HP. The analyzer shows the generic (non-Norse) values for these shared buildings (identical to its Greek page), so the wiki value was used. Analyzer: 150 wood (generic). The Market page itself still says -20% (pre-Retold text), the Norse page says -10%. One of the Heroic Age prerequisites."
+      }
+    },
+    {
+      "id": "dock",
+      "name": {
+        "pt-BR": "Doca",
+        "en": "Dock"
+      },
+      "icon": "buildings/norse-dock",
+      "pantheon": "norse",
+      "cost": {
+        "wood": 90
+      },
+      "buildTime": 25,
+      "age": "archaic",
+      "trains": [
+        "fishing-ship",
+        "transport-ship",
+        "longboat",
+        "dreki",
+        "dragon-ship",
+        "kraken",
+        "jormun-elver"
+      ],
+      "researches": [
+        "purse-seine",
+        "salt-amphora",
+        "enclosed-deck",
+        "heroic-fleet",
+        "heavy-warships",
+        "champion-warships",
+        "conscript-sailors",
+        "long-serpent",
+        "wrath-of-the-deep",
+        "arctic-winds"
+      ],
+      "dropsiteFor": ["fish"],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Dock_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Wiki: Norse House, Dock, Temple, Market, Armory, Sentry Tower and Wonder cost -10% wood and have -10% HP. The analyzer shows the generic (non-Norse) values for these shared buildings (identical to its Greek page), so the wiki value was used. Analyzer: 100 wood. Wiki: Norse Dock built in 25 s by one builder (generic 30 s)."
+      }
+    },
+    {
+      "id": "sentry-tower",
+      "name": {
+        "pt-BR": "Torre de Sentinela",
+        "en": "Sentry Tower"
+      },
+      "icon": "buildings/norse-sentry-tower",
+      "pantheon": "norse",
+      "cost": {
+        "wood": 135,
+        "gold": 100
+      },
+      "buildTime": 60,
+      "limit": 30,
+      "age": "classical",
+      "researches": [
+        "watch-tower",
+        "signal-fires",
+        "crenellations",
+        "carrier-pigeons",
+        "boiling-oil"
+      ],
+      "meta": {
+        "source": "https://ageofempires.fandom.com/wiki/Sentry_Tower_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Wiki: Norse House, Dock, Temple, Market, Armory, Sentry Tower and Wonder cost -10% wood and have -10% HP. The analyzer shows the generic (non-Norse) values for these shared buildings (identical to its Greek page), so the wiki value was used. Analyzer: 150 wood + 100 gold. Limit 30. Does not attack until the Watch Tower upgrade."
+      }
+    },
+    {
+      "id": "wooden-wall",
+      "name": {
+        "pt-BR": "Muralha de Madeira",
+        "en": "Wooden Wall"
+      },
+      "icon": "buildings/norse-wooden-wall",
+      "pantheon": "norse",
+      "cost": {
+        "gold": 3
+      },
+      "buildTime": 5,
+      "age": "archaic",
+      "researches": ["stone-wall"],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Wooden_Wall",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Cost/time are per connector piece (short 6 gold/6 s, medium 9/9 s, long 15/15 s). Gate: 15 gold, converted from a wall section."
+      }
+    },
+    {
+      "id": "farm",
+      "name": {
+        "pt-BR": "Fazenda",
+        "en": "Farm"
+      },
+      "icon": "buildings/norse-farm",
+      "pantheon": "norse",
+      "tags": ["farm"],
+      "cost": {
+        "wood": 75
+      },
+      "buildTime": 10,
+      "age": "classical",
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Farm_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Built by Gatherers/Dwarves. Infinite food source."
+      }
+    },
+    {
+      "id": "ox-cart",
+      "name": {
+        "pt-BR": "Carro de Boi",
+        "en": "Ox Cart"
+      },
+      "icon": "buildings/norse-ox-cart",
+      "pantheon": "norse",
+      "tags": ["dropsite", "mobile"],
+      "cost": {
+        "food": 40,
+        "wood": 40
+      },
+      "buildTime": 15,
+      "age": "archaic",
+      "researches": [
+        "husbandry",
+        "hand-axe",
+        "pickaxe",
+        "plow",
+        "survival-equipment",
+        "irrigation",
+        "bow-saw",
+        "shaft-mine",
+        "winter-harvest",
+        "flood-control",
+        "carpenters",
+        "quarry"
+      ],
+      "dropsiteFor": ["hunt", "herd", "berries", "farm", "wood", "gold"],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Ox_Cart_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Modelled as a building: workers build it from a foundation, then it becomes a mobile unit (0 pop) that is a dropsite for all land resources and follows the gatherers. All economic technologies are researched here. Loki: -50% cost."
+      },
+      "fieldMeta": {
+        "buildTime": {
+          "source": "https://ageofempires.fandom.com/wiki/Ox_Cart_(Age_of_Mythology)",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium"
+        }
+      }
+    },
+    {
+      "id": "wonder",
+      "name": {
+        "pt-BR": "Maravilha",
+        "en": "Wonder"
+      },
+      "icon": "buildings/norse-wonder",
+      "pantheon": "norse",
+      "cost": {
+        "food": 5000,
+        "wood": 5000,
+        "gold": 5000
+      },
+      "buildTime": 5400,
+      "limit": 1,
+      "age": "mythic",
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Wonder_(Age_of_Mythology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Takes the player to the Wonder Age. Wiki says the Norse -10% wood applies to the Wonder too (would be 4500 wood); generic value kept."
+      }
+    }
+  ],
+  "researches": [
+    {
+      "id": "husbandry",
+      "name": {
+        "pt-BR": "Pecuária",
+        "en": "Husbandry"
+      },
+      "icon": "techs/norse-husbandry",
+      "pantheon": "norse",
+      "cost": {
+        "wood": 100,
+        "gold": 50
+      },
+      "time": 30,
+      "at": "ox-cart",
+      "age": "archaic",
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.1,
+          "scope": {
+            "ids": ["gatherer", "dwarf"],
+            "sources": ["herd"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Husbandry",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Also +15 food carry capacity and +25% livestock fattening."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Husbandry",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "hand-axe",
+      "name": {
+        "pt-BR": "Machado de Mão",
+        "en": "Hand Axe"
+      },
+      "icon": "techs/norse-hand-axe",
+      "pantheon": "norse",
+      "cost": {
+        "food": 120,
+        "gold": 50
+      },
+      "time": 30,
+      "at": "ox-cart",
+      "age": "archaic",
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.1,
+          "scope": {
+            "ids": ["gatherer", "dwarf"],
+            "sources": ["wood"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Hand_Axe",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Also +5 wood carry capacity."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Hand_Axe",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "pickaxe",
+      "name": {
+        "pt-BR": "Picareta",
+        "en": "Pickaxe"
+      },
+      "icon": "techs/norse-pickaxe",
+      "pantheon": "norse",
+      "cost": {
+        "food": 50,
+        "wood": 120
+      },
+      "time": 30,
+      "at": "ox-cart",
+      "age": "archaic",
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.1,
+          "scope": {
+            "ids": ["gatherer", "dwarf"],
+            "sources": ["gold"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Pickaxe",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Also +5 gold carry capacity."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Pickaxe",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "plow",
+      "name": {
+        "pt-BR": "Arado",
+        "en": "Plow"
+      },
+      "icon": "techs/norse-plow",
+      "pantheon": "norse",
+      "cost": {
+        "wood": 50,
+        "gold": 100
+      },
+      "time": 40,
+      "at": "ox-cart",
+      "age": "classical",
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.1,
+          "scope": {
+            "ids": ["gatherer", "dwarf"],
+            "sources": ["farm"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Plow",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Plow",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "survival-equipment",
+      "name": {
+        "pt-BR": "Equipamento de Sobrevivência",
+        "en": "Survival Equipment"
+      },
+      "icon": "techs/norse-survival-equipment",
+      "pantheon": "norse",
+      "cost": {
+        "wood": 100,
+        "gold": 100
+      },
+      "time": 20,
+      "at": "ox-cart",
+      "age": "classical",
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Survival_Equipment",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Workers +25% HP, +10% melee attack, +50% ranged (anti-animal) attack. May speed up hunting slightly (faster kills); not modelled."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Survival_Equipment",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "irrigation",
+      "name": {
+        "pt-BR": "Irrigação",
+        "en": "Irrigation"
+      },
+      "icon": "techs/norse-irrigation",
+      "pantheon": "norse",
+      "cost": {
+        "wood": 150,
+        "gold": 250
+      },
+      "time": 30,
+      "at": "ox-cart",
+      "age": "heroic",
+      "requires": ["plow"],
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.1,
+          "scope": {
+            "ids": ["gatherer", "dwarf"],
+            "sources": ["farm"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Irrigation",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Multiplier taken as listed on the wiki (+x% of base); whether chained techs add or compound is not confirmed."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Irrigation",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "bow-saw",
+      "name": {
+        "pt-BR": "Serra de Arco",
+        "en": "Bow Saw"
+      },
+      "icon": "techs/norse-bow-saw",
+      "pantheon": "norse",
+      "cost": {
+        "food": 250,
+        "gold": 150
+      },
+      "time": 45,
+      "at": "ox-cart",
+      "age": "heroic",
+      "requires": ["hand-axe"],
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.15,
+          "scope": {
+            "ids": ["gatherer", "dwarf"],
+            "sources": ["wood"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Bow_Saw",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Also +5 wood carry capacity. Multiplier taken as listed on the wiki (+x% of base); whether chained techs add or compound is not confirmed."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Bow_Saw",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "shaft-mine",
+      "name": {
+        "pt-BR": "Mina de Poço",
+        "en": "Shaft Mine"
+      },
+      "icon": "techs/norse-shaft-mine",
+      "pantheon": "norse",
+      "cost": {
+        "food": 150,
+        "wood": 250
+      },
+      "time": 40,
+      "at": "ox-cart",
+      "age": "heroic",
+      "requires": ["pickaxe"],
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.15,
+          "scope": {
+            "ids": ["gatherer", "dwarf"],
+            "sources": ["gold"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Shaft_Mine",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Also +5 gold carry capacity. Multiplier taken as listed on the wiki (+x% of base); whether chained techs add or compound is not confirmed."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Shaft_Mine",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "flood-control",
+      "name": {
+        "pt-BR": "Controle de Enchentes",
+        "en": "Flood Control"
+      },
+      "icon": "techs/norse-flood-control",
+      "pantheon": "norse",
+      "cost": {
+        "wood": 250,
+        "gold": 350
+      },
+      "time": 40,
+      "at": "ox-cart",
+      "age": "mythic",
+      "requires": ["irrigation"],
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.1,
+          "scope": {
+            "ids": ["gatherer", "dwarf"],
+            "sources": ["farm"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Flood_Control",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Multiplier taken as listed on the wiki (+x% of base); whether chained techs add or compound is not confirmed."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Flood_Control",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "carpenters",
+      "name": {
+        "pt-BR": "Carpinteiros",
+        "en": "Carpenters"
+      },
+      "icon": "techs/norse-carpenters",
+      "pantheon": "norse",
+      "cost": {
+        "food": 300,
+        "gold": 200
+      },
+      "time": 55,
+      "at": "ox-cart",
+      "age": "mythic",
+      "requires": ["bow-saw"],
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.2,
+          "scope": {
+            "ids": ["gatherer", "dwarf"],
+            "sources": ["wood"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Carpenters",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Also +5 wood carry capacity. Multiplier taken as listed on the wiki (+x% of base); whether chained techs add or compound is not confirmed."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Carpenters",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "quarry",
+      "name": {
+        "pt-BR": "Pedreira",
+        "en": "Quarry"
+      },
+      "icon": "techs/norse-quarry",
+      "pantheon": "norse",
+      "cost": {
+        "food": 200,
+        "wood": 300
+      },
+      "time": 50,
+      "at": "ox-cart",
+      "age": "mythic",
+      "requires": ["shaft-mine"],
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.2,
+          "scope": {
+            "ids": ["gatherer", "dwarf"],
+            "sources": ["gold"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Quarry",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Also +5 gold carry capacity. Multiplier taken as listed on the wiki (+x% of base); whether chained techs add or compound is not confirmed."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Quarry",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "masons",
+      "name": {
+        "pt-BR": "Pedreiros",
+        "en": "Masons"
+      },
+      "icon": "techs/norse-masons",
+      "pantheon": "norse",
+      "cost": {
+        "food": 200,
+        "wood": 300
+      },
+      "time": 20,
+      "at": "town-center",
+      "age": "classical",
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Masons",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Buildings +20% HP."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Masons",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "architects",
+      "name": {
+        "pt-BR": "Arquitetos",
+        "en": "Architects"
+      },
+      "icon": "techs/norse-architects",
+      "pantheon": "norse",
+      "cost": {
+        "food": 400,
+        "wood": 500
+      },
+      "time": 30,
+      "at": "town-center",
+      "age": "heroic",
+      "requires": ["masons"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Architects",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Buildings +30% HP."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Architects",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "fortified-town-center",
+      "name": {
+        "pt-BR": "Centro da Cidade Fortificado",
+        "en": "Fortified Town Center"
+      },
+      "icon": "techs/norse-fortified-town-center",
+      "pantheon": "norse",
+      "cost": {
+        "wood": 400,
+        "gold": 400
+      },
+      "time": 60,
+      "at": "town-center",
+      "age": "heroic",
+      "effects": [
+        {
+          "target": "popCap",
+          "op": "add",
+          "value": 10,
+          "scope": {
+            "ids": ["town-center"]
+          },
+          "note": "+10 pop per Town Center (15 -> 25)."
+        }
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Fortified_Town_Center",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Town Center +25% HP, +2 range, +50% attack, +10 population."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Fortified_Town_Center",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "purse-seine",
+      "name": {
+        "pt-BR": "Rede de Cerco",
+        "en": "Purse Seine"
+      },
+      "icon": "techs/norse-purse-seine",
+      "pantheon": "norse",
+      "cost": {
+        "wood": 150,
+        "gold": 150
+      },
+      "time": 20,
+      "at": "dock",
+      "age": "classical",
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.5,
+          "scope": {
+            "ids": ["fishing-ship"],
+            "sources": ["fish"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Purse_Seine",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Purse_Seine",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "salt-amphora",
+      "name": {
+        "pt-BR": "Ânfora de Sal",
+        "en": "Salt Amphora"
+      },
+      "icon": "techs/norse-salt-amphora",
+      "pantheon": "norse",
+      "cost": {
+        "wood": 200,
+        "gold": 300
+      },
+      "time": 30,
+      "at": "dock",
+      "age": "heroic",
+      "requires": ["purse-seine"],
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.5,
+          "scope": {
+            "ids": ["fishing-ship"],
+            "sources": ["fish"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Salt_Amphora",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Also +25 carry capacity. Multiplier taken as listed on the wiki (+x% of base); whether chained techs add or compound is not confirmed."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Salt_Amphora",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "enclosed-deck",
+      "name": {
+        "pt-BR": "Convés Fechado",
+        "en": "Enclosed Deck"
+      },
+      "icon": "techs/norse-enclosed-deck",
+      "pantheon": "norse",
+      "tags": ["military"],
+      "cost": {
+        "food": 200,
+        "wood": 200
+      },
+      "time": 40,
+      "at": "dock",
+      "age": "classical",
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Enclosed_Deck",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Enclosed_Deck",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "heroic-fleet",
+      "name": {
+        "pt-BR": "Frota Heroica",
+        "en": "Heroic Fleet"
+      },
+      "icon": "techs/norse-heroic-fleet",
+      "pantheon": "norse",
+      "tags": ["military"],
+      "cost": {
+        "food": 100,
+        "gold": 100,
+        "favor": 10
+      },
+      "time": 20,
+      "at": "dock",
+      "age": "classical",
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Heroic_Fleet",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Heroic_Fleet",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "heavy-warships",
+      "name": {
+        "pt-BR": "Navios de Guerra Pesados",
+        "en": "Heavy Warships"
+      },
+      "icon": "techs/norse-heavy-warships",
+      "pantheon": "norse",
+      "tags": ["military"],
+      "cost": {
+        "wood": 150,
+        "gold": 150
+      },
+      "time": 20,
+      "at": "dock",
+      "age": "heroic",
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Heavy_Warships",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Heavy_Warships",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "champion-warships",
+      "name": {
+        "pt-BR": "Navios de Guerra Campeões",
+        "en": "Champion Warships"
+      },
+      "icon": "techs/norse-champion-warships",
+      "pantheon": "norse",
+      "tags": ["military"],
+      "cost": {
+        "wood": 250,
+        "gold": 200
+      },
+      "time": 20,
+      "at": "dock",
+      "age": "mythic",
+      "requires": ["heavy-warships"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Champion_Warships",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Champion_Warships",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "conscript-sailors",
+      "name": {
+        "pt-BR": "Marinheiros Conscritos",
+        "en": "Conscript Sailors"
+      },
+      "icon": "techs/norse-conscript-sailors",
+      "pantheon": "norse",
+      "cost": {
+        "wood": 300
+      },
+      "time": 30,
+      "at": "dock",
+      "age": "mythic",
+      "effects": [
+        {
+          "target": "trainTime",
+          "op": "mul",
+          "value": 0.8,
+          "scope": {
+            "tags": ["ship"]
+          },
+          "note": "Wiki: '-20% training time' (in-game text: ships built faster)."
+        }
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Conscript_Sailors",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Conscript_Sailors",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "tax-collectors",
+      "name": {
+        "pt-BR": "Coletores de Impostos",
+        "en": "Tax Collectors"
+      },
+      "icon": "techs/norse-tax-collectors",
+      "pantheon": "norse",
+      "cost": {
+        "food": 200,
+        "gold": 200
+      },
+      "time": 35,
+      "at": "market",
+      "age": "heroic",
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Tax_Collectors",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Market buy/sell -25% cost, tribute penalty -50%."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Tax_Collectors",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "ambassadors",
+      "name": {
+        "pt-BR": "Embaixadores",
+        "en": "Ambassadors"
+      },
+      "icon": "techs/norse-ambassadors",
+      "pantheon": "norse",
+      "cost": {
+        "gold": 250
+      },
+      "time": 30,
+      "at": "market",
+      "age": "mythic",
+      "requires": ["tax-collectors"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Ambassadors",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Market exchange improved further; tribute penalty removed."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Ambassadors",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "coinage",
+      "name": {
+        "pt-BR": "Cunhagem",
+        "en": "Coinage"
+      },
+      "icon": "techs/norse-coinage",
+      "pantheon": "norse",
+      "cost": {
+        "gold": 200
+      },
+      "time": 40,
+      "at": "market",
+      "age": "mythic",
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Coinage",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Caravan +20% speed."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Coinage",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "medium-infantry",
+      "name": {
+        "pt-BR": "Infantaria Média",
+        "en": "Medium Infantry"
+      },
+      "icon": "techs/norse-medium-infantry",
+      "pantheon": "norse",
+      "tags": ["military"],
+      "cost": {
+        "food": 150,
+        "gold": 150
+      },
+      "time": 20,
+      "at": "longhouse",
+      "age": "classical",
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Medium_Infantry",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Also researchable at the Hill Fort (single 'at' field: Longhouse used)."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Medium_Infantry",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "heavy-infantry",
+      "name": {
+        "pt-BR": "Infantaria Pesada",
+        "en": "Heavy Infantry"
+      },
+      "icon": "techs/norse-heavy-infantry",
+      "pantheon": "norse",
+      "tags": ["military"],
+      "cost": {
+        "food": 300,
+        "gold": 300
+      },
+      "time": 30,
+      "at": "longhouse",
+      "age": "heroic",
+      "requires": ["medium-infantry"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Heavy_Infantry",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Also researchable at the Hill Fort."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Heavy_Infantry",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "champion-infantry",
+      "name": {
+        "pt-BR": "Infantaria Campeã",
+        "en": "Champion Infantry"
+      },
+      "icon": "techs/norse-champion-infantry",
+      "pantheon": "norse",
+      "tags": ["military"],
+      "cost": {
+        "food": 500,
+        "gold": 400
+      },
+      "time": 40,
+      "at": "longhouse",
+      "age": "mythic",
+      "requires": ["heavy-infantry"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Champion_Infantry",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Also researchable at the Hill Fort."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Champion_Infantry",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "levy-longhouse-soldiers",
+      "name": {
+        "pt-BR": "Recrutamento de Soldados da Casa Longa",
+        "en": "Levy Longhouse Soldiers"
+      },
+      "icon": "techs/norse-levy-longhouse-soldiers",
+      "pantheon": "norse",
+      "cost": {
+        "food": 150,
+        "wood": 75
+      },
+      "time": 20,
+      "at": "longhouse",
+      "age": "heroic",
+      "effects": [
+        {
+          "target": "trainTime",
+          "op": "mul",
+          "value": 0.8,
+          "scope": {
+            "ids": ["berserk", "throwing-axeman", "hirdman"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Levy_Longhouse_Soldiers",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Levy_Longhouse_Soldiers",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "conscript-longhouse-soldiers",
+      "name": {
+        "pt-BR": "Conscrição de Soldados da Casa Longa",
+        "en": "Conscript Longhouse Soldiers"
+      },
+      "icon": "techs/norse-conscript-longhouse-soldiers",
+      "pantheon": "norse",
+      "cost": {
+        "food": 200,
+        "wood": 100
+      },
+      "time": 30,
+      "at": "longhouse",
+      "age": "mythic",
+      "requires": ["levy-longhouse-soldiers"],
+      "effects": [
+        {
+          "target": "trainTime",
+          "op": "mul",
+          "value": 0.8,
+          "scope": {
+            "ids": ["berserk", "throwing-axeman", "hirdman"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Conscript_Longhouse_Soldiers",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Conscript_Longhouse_Soldiers",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "medium-cavalry",
+      "name": {
+        "pt-BR": "Cavalaria Média",
+        "en": "Medium Cavalry"
+      },
+      "icon": "techs/norse-medium-cavalry",
+      "pantheon": "norse",
+      "tags": ["military"],
+      "cost": {
+        "food": 200,
+        "gold": 100
+      },
+      "time": 20,
+      "at": "great-hall",
+      "age": "classical",
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Medium_Cavalry",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Medium_Cavalry",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "heavy-cavalry",
+      "name": {
+        "pt-BR": "Cavalaria Pesada",
+        "en": "Heavy Cavalry"
+      },
+      "icon": "techs/norse-heavy-cavalry",
+      "pantheon": "norse",
+      "tags": ["military"],
+      "cost": {
+        "food": 400,
+        "gold": 200
+      },
+      "time": 30,
+      "at": "great-hall",
+      "age": "heroic",
+      "requires": ["medium-cavalry"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Heavy_Cavalry",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Heavy_Cavalry",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "champion-cavalry",
+      "name": {
+        "pt-BR": "Cavalaria Campeã",
+        "en": "Champion Cavalry"
+      },
+      "icon": "techs/norse-champion-cavalry",
+      "pantheon": "norse",
+      "tags": ["military"],
+      "cost": {
+        "food": 700,
+        "gold": 200
+      },
+      "time": 40,
+      "at": "great-hall",
+      "age": "mythic",
+      "requires": ["heavy-cavalry"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Champion_Cavalry",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Champion_Cavalry",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "levy-great-hall-soldiers",
+      "name": {
+        "pt-BR": "Recrutamento de Soldados do Grande Salão",
+        "en": "Levy Great Hall Soldiers"
+      },
+      "icon": "techs/norse-levy-great-hall-soldiers",
+      "pantheon": "norse",
+      "cost": {
+        "food": 75,
+        "wood": 75,
+        "gold": 150
+      },
+      "time": 20,
+      "at": "great-hall",
+      "age": "heroic",
+      "effects": [
+        {
+          "target": "trainTime",
+          "op": "mul",
+          "value": 0.8,
+          "scope": {
+            "ids": ["hersir", "raiding-cavalry", "jarl", "godi"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Levy_Great_Hall_Soldiers",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Levy_Great_Hall_Soldiers",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "conscript-great-hall-soldiers",
+      "name": {
+        "pt-BR": "Conscrição de Soldados do Grande Salão",
+        "en": "Conscript Great Hall Soldiers"
+      },
+      "icon": "techs/norse-conscript-great-hall-soldiers",
+      "pantheon": "norse",
+      "cost": {
+        "food": 100,
+        "wood": 100,
+        "gold": 200
+      },
+      "time": 30,
+      "at": "great-hall",
+      "age": "mythic",
+      "requires": ["levy-great-hall-soldiers"],
+      "effects": [
+        {
+          "target": "trainTime",
+          "op": "mul",
+          "value": 0.8,
+          "scope": {
+            "ids": ["hersir", "raiding-cavalry", "jarl", "godi"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Conscript_Great_Hall_Soldiers",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Conscript_Great_Hall_Soldiers",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "levy-hill-fort-soldiers",
+      "name": {
+        "pt-BR": "Recrutamento de Soldados do Forte",
+        "en": "Levy Hill Fort Soldiers"
+      },
+      "icon": "techs/norse-levy-hill-fort-soldiers",
+      "pantheon": "norse",
+      "cost": {
+        "food": 75
+      },
+      "time": 20,
+      "at": "hill-fort",
+      "age": "heroic",
+      "effects": [
+        {
+          "target": "trainTime",
+          "op": "mul",
+          "value": 0.8,
+          "scope": {
+            "ids": ["huskarl"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Levy_Hill_Fort_Soldiers",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Wiki: affects Huskarls only (siege not included)."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Levy_Hill_Fort_Soldiers",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "conscript-hill-fort-soldiers",
+      "name": {
+        "pt-BR": "Conscrição de Soldados do Forte",
+        "en": "Conscript Hill Fort Soldiers"
+      },
+      "icon": "techs/norse-conscript-hill-fort-soldiers",
+      "pantheon": "norse",
+      "cost": {
+        "food": 100
+      },
+      "time": 30,
+      "at": "hill-fort",
+      "age": "mythic",
+      "requires": ["levy-hill-fort-soldiers"],
+      "effects": [
+        {
+          "target": "trainTime",
+          "op": "mul",
+          "value": 0.8,
+          "scope": {
+            "ids": ["huskarl"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Conscript_Hill_Fort_Soldiers",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Wiki: affects Huskarls only."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Conscript_Hill_Fort_Soldiers",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "draft-horses",
+      "name": {
+        "pt-BR": "Cavalos de Tração",
+        "en": "Draft Horses"
+      },
+      "icon": "techs/norse-draft-horses",
+      "pantheon": "norse",
+      "tags": ["military"],
+      "cost": {
+        "food": 300,
+        "gold": 200
+      },
+      "time": 40,
+      "at": "hill-fort",
+      "age": "heroic",
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Draft_Horses",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Siege +20% speed."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Draft_Horses",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "engineers",
+      "name": {
+        "pt-BR": "Engenheiros",
+        "en": "Engineers"
+      },
+      "icon": "techs/norse-engineers",
+      "pantheon": "norse",
+      "tags": ["military"],
+      "cost": {
+        "food": 300,
+        "gold": 500
+      },
+      "time": 40,
+      "at": "hill-fort",
+      "age": "mythic",
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Engineers",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Engineers",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "advanced-fortifications",
+      "name": {
+        "pt-BR": "Fortificações Avançadas",
+        "en": "Advanced Fortifications"
+      },
+      "icon": "techs/norse-advanced-fortifications",
+      "pantheon": "norse",
+      "tags": ["military"],
+      "cost": {
+        "wood": 600,
+        "gold": 600
+      },
+      "time": 30,
+      "at": "hill-fort",
+      "age": "mythic",
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Advanced_Fortifications",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Advanced_Fortifications",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "omniscience",
+      "name": {
+        "pt-BR": "Onisciência",
+        "en": "Omniscience"
+      },
+      "icon": "techs/norse-omniscience",
+      "pantheon": "norse",
+      "cost": {
+        "gold": 100
+      },
+      "time": 4,
+      "at": "temple",
+      "age": "mythic",
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Omniscience",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Real cost is 100 gold x total population of all enemy units; 100 is the per-pop factor only."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Omniscience",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "copper-weapons",
+      "name": {
+        "pt-BR": "Armas de Cobre",
+        "en": "Copper Weapons"
+      },
+      "icon": "techs/norse-copper-weapons",
+      "pantheon": "norse",
+      "tags": ["military"],
+      "cost": {
+        "food": 100,
+        "gold": 100
+      },
+      "time": 30,
+      "at": "armory",
+      "age": "classical",
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Copper_Weapons",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Odin/Loki version (Armory). Thor researches the '-thor' variant at the Dwarven Armory."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Copper_Weapons",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "copper-armor",
+      "name": {
+        "pt-BR": "Armadura de Cobre",
+        "en": "Copper Armor"
+      },
+      "icon": "techs/norse-copper-armor",
+      "pantheon": "norse",
+      "tags": ["military"],
+      "cost": {
+        "food": 75,
+        "gold": 75
+      },
+      "time": 30,
+      "at": "armory",
+      "age": "classical",
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Copper_Armor",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Odin/Loki version (Armory). Thor researches the '-thor' variant at the Dwarven Armory."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Copper_Armor",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "copper-shields",
+      "name": {
+        "pt-BR": "Escudos de Cobre",
+        "en": "Copper Shields"
+      },
+      "icon": "techs/norse-copper-shields",
+      "pantheon": "norse",
+      "tags": ["military"],
+      "cost": {
+        "wood": 75,
+        "gold": 75
+      },
+      "time": 30,
+      "at": "armory",
+      "age": "classical",
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Copper_Shields",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Odin/Loki version (Armory). Thor researches the '-thor' variant at the Dwarven Armory."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Copper_Shields",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "bronze-weapons",
+      "name": {
+        "pt-BR": "Armas de Bronze",
+        "en": "Bronze Weapons"
+      },
+      "icon": "techs/norse-bronze-weapons",
+      "pantheon": "norse",
+      "tags": ["military"],
+      "cost": {
+        "food": 200,
+        "gold": 200
+      },
+      "time": 40,
+      "at": "armory",
+      "age": "heroic",
+      "requires": ["copper-weapons"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Bronze_Weapons",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Odin/Loki version (Armory). Thor researches the '-thor' variant at the Dwarven Armory."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Bronze_Weapons",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "bronze-armor",
+      "name": {
+        "pt-BR": "Armadura de Bronze",
+        "en": "Bronze Armor"
+      },
+      "icon": "techs/norse-bronze-armor",
+      "pantheon": "norse",
+      "tags": ["military"],
+      "cost": {
+        "food": 200,
+        "gold": 150
+      },
+      "time": 40,
+      "at": "armory",
+      "age": "heroic",
+      "requires": ["copper-armor"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Bronze_Armor",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Odin/Loki version (Armory). Thor researches the '-thor' variant at the Dwarven Armory."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Bronze_Armor",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "bronze-shields",
+      "name": {
+        "pt-BR": "Escudos de Bronze",
+        "en": "Bronze Shields"
+      },
+      "icon": "techs/norse-bronze-shields",
+      "pantheon": "norse",
+      "tags": ["military"],
+      "cost": {
+        "wood": 200,
+        "gold": 150
+      },
+      "time": 40,
+      "at": "armory",
+      "age": "heroic",
+      "requires": ["copper-shields"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Bronze_Shields",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Odin/Loki version (Armory). Thor researches the '-thor' variant at the Dwarven Armory."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Bronze_Shields",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "iron-weapons",
+      "name": {
+        "pt-BR": "Armas de Ferro",
+        "en": "Iron Weapons"
+      },
+      "icon": "techs/norse-iron-weapons",
+      "pantheon": "norse",
+      "tags": ["military"],
+      "cost": {
+        "food": 450,
+        "gold": 450
+      },
+      "time": 50,
+      "at": "armory",
+      "age": "mythic",
+      "requires": ["bronze-weapons"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Iron_Weapons",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Odin/Loki version (Armory). Thor researches the '-thor' variant at the Dwarven Armory."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Iron_Weapons",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "iron-armor",
+      "name": {
+        "pt-BR": "Armadura de Ferro",
+        "en": "Iron Armor"
+      },
+      "icon": "techs/norse-iron-armor",
+      "pantheon": "norse",
+      "tags": ["military"],
+      "cost": {
+        "food": 400,
+        "gold": 400
+      },
+      "time": 50,
+      "at": "armory",
+      "age": "mythic",
+      "requires": ["bronze-armor"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Iron_Armor",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Odin/Loki version (Armory). Thor researches the '-thor' variant at the Dwarven Armory."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Iron_Armor",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "iron-shields",
+      "name": {
+        "pt-BR": "Escudos de Ferro",
+        "en": "Iron Shields"
+      },
+      "icon": "techs/norse-iron-shields",
+      "pantheon": "norse",
+      "tags": ["military"],
+      "cost": {
+        "wood": 400,
+        "gold": 350
+      },
+      "time": 50,
+      "at": "armory",
+      "age": "mythic",
+      "requires": ["bronze-shields"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Iron_Shields",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Odin/Loki version (Armory). Thor researches the '-thor' variant at the Dwarven Armory."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Iron_Shields",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "ballistics",
+      "name": {
+        "pt-BR": "Balística",
+        "en": "Ballistics"
+      },
+      "icon": "techs/norse-ballistics",
+      "pantheon": "norse",
+      "tags": ["military"],
+      "cost": {
+        "wood": 150,
+        "gold": 150
+      },
+      "time": 50,
+      "at": "armory",
+      "age": "classical",
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Ballistics",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Odin/Loki version (Armory). Thor researches the '-thor' variant at the Dwarven Armory."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Ballistics",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "burning-pitch",
+      "name": {
+        "pt-BR": "Piche Ardente",
+        "en": "Burning Pitch"
+      },
+      "icon": "techs/norse-burning-pitch",
+      "pantheon": "norse",
+      "tags": ["military"],
+      "cost": {
+        "wood": 500,
+        "gold": 300
+      },
+      "time": 40,
+      "at": "armory",
+      "age": "mythic",
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Burning_Pitch",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Odin/Loki version (Armory). Thor researches the '-thor' variant at the Dwarven Armory."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Burning_Pitch",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "copper-weapons-thor",
+      "name": {
+        "pt-BR": "Armas de Cobre",
+        "en": "Copper Weapons"
+      },
+      "icon": "techs/norse-copper-weapons",
+      "pantheon": "norse",
+      "tags": ["military"],
+      "cost": {
+        "food": 100,
+        "gold": 100
+      },
+      "time": 30,
+      "at": "dwarven-armory",
+      "age": "archaic",
+      "requires": ["thor"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Copper_Weapons",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Thor version at the Dwarven Armory (available in any age). Thor's Dwarven Armory researches at x0.33 speed in Archaic, x1 Classical, x1.5 Heroic, x2 Mythic; the base (Classical) time is given. Each Dwarven Armory research spawns 1 free Dwarf (Thor bonus; not expressible as a modifier). Thor pays 10% less (modifier in thor.json)."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Copper_Weapons",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "copper-armor-thor",
+      "name": {
+        "pt-BR": "Armadura de Cobre",
+        "en": "Copper Armor"
+      },
+      "icon": "techs/norse-copper-armor",
+      "pantheon": "norse",
+      "tags": ["military"],
+      "cost": {
+        "food": 75,
+        "gold": 75
+      },
+      "time": 30,
+      "at": "dwarven-armory",
+      "age": "archaic",
+      "requires": ["thor"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Copper_Armor",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Thor version at the Dwarven Armory (available in any age). Thor's Dwarven Armory researches at x0.33 speed in Archaic, x1 Classical, x1.5 Heroic, x2 Mythic; the base (Classical) time is given. Each Dwarven Armory research spawns 1 free Dwarf (Thor bonus; not expressible as a modifier). Thor pays 10% less (modifier in thor.json)."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Copper_Armor",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "copper-shields-thor",
+      "name": {
+        "pt-BR": "Escudos de Cobre",
+        "en": "Copper Shields"
+      },
+      "icon": "techs/norse-copper-shields",
+      "pantheon": "norse",
+      "tags": ["military"],
+      "cost": {
+        "wood": 75,
+        "gold": 75
+      },
+      "time": 30,
+      "at": "dwarven-armory",
+      "age": "archaic",
+      "requires": ["thor"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Copper_Shields",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Thor version at the Dwarven Armory (available in any age). Thor's Dwarven Armory researches at x0.33 speed in Archaic, x1 Classical, x1.5 Heroic, x2 Mythic; the base (Classical) time is given. Each Dwarven Armory research spawns 1 free Dwarf (Thor bonus; not expressible as a modifier). Thor pays 10% less (modifier in thor.json)."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Copper_Shields",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "bronze-weapons-thor",
+      "name": {
+        "pt-BR": "Armas de Bronze",
+        "en": "Bronze Weapons"
+      },
+      "icon": "techs/norse-bronze-weapons",
+      "pantheon": "norse",
+      "tags": ["military"],
+      "cost": {
+        "food": 200,
+        "gold": 200
+      },
+      "time": 40,
+      "at": "dwarven-armory",
+      "age": "archaic",
+      "requires": ["thor", "copper-weapons-thor"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Bronze_Weapons",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Thor version at the Dwarven Armory (available in any age). Thor's Dwarven Armory researches at x0.33 speed in Archaic, x1 Classical, x1.5 Heroic, x2 Mythic; the base (Classical) time is given. Each Dwarven Armory research spawns 1 free Dwarf (Thor bonus; not expressible as a modifier). Thor pays 10% less (modifier in thor.json)."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Bronze_Weapons",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "bronze-armor-thor",
+      "name": {
+        "pt-BR": "Armadura de Bronze",
+        "en": "Bronze Armor"
+      },
+      "icon": "techs/norse-bronze-armor",
+      "pantheon": "norse",
+      "tags": ["military"],
+      "cost": {
+        "food": 200,
+        "gold": 150
+      },
+      "time": 40,
+      "at": "dwarven-armory",
+      "age": "archaic",
+      "requires": ["thor", "copper-armor-thor"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Bronze_Armor",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Thor version at the Dwarven Armory (available in any age). Thor's Dwarven Armory researches at x0.33 speed in Archaic, x1 Classical, x1.5 Heroic, x2 Mythic; the base (Classical) time is given. Each Dwarven Armory research spawns 1 free Dwarf (Thor bonus; not expressible as a modifier). Thor pays 10% less (modifier in thor.json)."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Bronze_Armor",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "bronze-shields-thor",
+      "name": {
+        "pt-BR": "Escudos de Bronze",
+        "en": "Bronze Shields"
+      },
+      "icon": "techs/norse-bronze-shields",
+      "pantheon": "norse",
+      "tags": ["military"],
+      "cost": {
+        "wood": 200,
+        "gold": 150
+      },
+      "time": 40,
+      "at": "dwarven-armory",
+      "age": "archaic",
+      "requires": ["thor", "copper-shields-thor"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Bronze_Shields",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Thor version at the Dwarven Armory (available in any age). Thor's Dwarven Armory researches at x0.33 speed in Archaic, x1 Classical, x1.5 Heroic, x2 Mythic; the base (Classical) time is given. Each Dwarven Armory research spawns 1 free Dwarf (Thor bonus; not expressible as a modifier). Thor pays 10% less (modifier in thor.json)."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Bronze_Shields",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "iron-weapons-thor",
+      "name": {
+        "pt-BR": "Armas de Ferro",
+        "en": "Iron Weapons"
+      },
+      "icon": "techs/norse-iron-weapons",
+      "pantheon": "norse",
+      "tags": ["military"],
+      "cost": {
+        "food": 450,
+        "gold": 450
+      },
+      "time": 50,
+      "at": "dwarven-armory",
+      "age": "archaic",
+      "requires": ["thor", "bronze-weapons-thor"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Iron_Weapons",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Thor version at the Dwarven Armory (available in any age). Thor's Dwarven Armory researches at x0.33 speed in Archaic, x1 Classical, x1.5 Heroic, x2 Mythic; the base (Classical) time is given. Each Dwarven Armory research spawns 1 free Dwarf (Thor bonus; not expressible as a modifier). Thor pays 10% less (modifier in thor.json)."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Iron_Weapons",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "iron-armor-thor",
+      "name": {
+        "pt-BR": "Armadura de Ferro",
+        "en": "Iron Armor"
+      },
+      "icon": "techs/norse-iron-armor",
+      "pantheon": "norse",
+      "tags": ["military"],
+      "cost": {
+        "food": 400,
+        "gold": 400
+      },
+      "time": 50,
+      "at": "dwarven-armory",
+      "age": "archaic",
+      "requires": ["thor", "bronze-armor-thor"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Iron_Armor",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Thor version at the Dwarven Armory (available in any age). Thor's Dwarven Armory researches at x0.33 speed in Archaic, x1 Classical, x1.5 Heroic, x2 Mythic; the base (Classical) time is given. Each Dwarven Armory research spawns 1 free Dwarf (Thor bonus; not expressible as a modifier). Thor pays 10% less (modifier in thor.json)."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Iron_Armor",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "iron-shields-thor",
+      "name": {
+        "pt-BR": "Escudos de Ferro",
+        "en": "Iron Shields"
+      },
+      "icon": "techs/norse-iron-shields",
+      "pantheon": "norse",
+      "tags": ["military"],
+      "cost": {
+        "wood": 400,
+        "gold": 350
+      },
+      "time": 50,
+      "at": "dwarven-armory",
+      "age": "archaic",
+      "requires": ["thor", "bronze-shields-thor"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Iron_Shields",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Thor version at the Dwarven Armory (available in any age). Thor's Dwarven Armory researches at x0.33 speed in Archaic, x1 Classical, x1.5 Heroic, x2 Mythic; the base (Classical) time is given. Each Dwarven Armory research spawns 1 free Dwarf (Thor bonus; not expressible as a modifier). Thor pays 10% less (modifier in thor.json)."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Iron_Shields",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "ballistics-thor",
+      "name": {
+        "pt-BR": "Balística",
+        "en": "Ballistics"
+      },
+      "icon": "techs/norse-ballistics",
+      "pantheon": "norse",
+      "tags": ["military"],
+      "cost": {
+        "wood": 150,
+        "gold": 150
+      },
+      "time": 50,
+      "at": "dwarven-armory",
+      "age": "archaic",
+      "requires": ["thor"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Ballistics",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Thor version at the Dwarven Armory (available in any age). Thor's Dwarven Armory researches at x0.33 speed in Archaic, x1 Classical, x1.5 Heroic, x2 Mythic; the base (Classical) time is given. Each Dwarven Armory research spawns 1 free Dwarf (Thor bonus; not expressible as a modifier). Thor pays 10% less (modifier in thor.json)."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Ballistics",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "burning-pitch-thor",
+      "name": {
+        "pt-BR": "Piche Ardente",
+        "en": "Burning Pitch"
+      },
+      "icon": "techs/norse-burning-pitch",
+      "pantheon": "norse",
+      "tags": ["military"],
+      "cost": {
+        "wood": 500,
+        "gold": 300
+      },
+      "time": 40,
+      "at": "dwarven-armory",
+      "age": "archaic",
+      "requires": ["thor"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Burning_Pitch",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Thor version at the Dwarven Armory (available in any age). Thor's Dwarven Armory researches at x0.33 speed in Archaic, x1 Classical, x1.5 Heroic, x2 Mythic; the base (Classical) time is given. Each Dwarven Armory research spawns 1 free Dwarf (Thor bonus; not expressible as a modifier). Thor pays 10% less (modifier in thor.json)."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Burning_Pitch",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "dwarven-weapons",
+      "name": {
+        "pt-BR": "Armas Anãs",
+        "en": "Dwarven Weapons"
+      },
+      "icon": "techs/norse-dwarven-weapons",
+      "pantheon": "norse",
+      "tags": ["military"],
+      "cost": {
+        "food": 500,
+        "gold": 500
+      },
+      "time": 60,
+      "at": "dwarven-armory",
+      "age": "archaic",
+      "requires": ["thor", "iron-weapons-thor"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Dwarven_Weapons",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Thor only. Thor's Dwarven Armory researches at x0.33 speed in Archaic, x1 Classical, x1.5 Heroic, x2 Mythic; the base (Classical) time is given. Each Dwarven Armory research spawns 1 free Dwarf (Thor bonus; not expressible as a modifier). Thor pays 10% less (modifier in thor.json)."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Dwarven_Weapons",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "meteoric-iron-armor",
+      "name": {
+        "pt-BR": "Armadura de Ferro Meteórico",
+        "en": "Meteoric Iron Armor"
+      },
+      "icon": "techs/norse-meteoric-iron-armor",
+      "pantheon": "norse",
+      "tags": ["military"],
+      "cost": {
+        "food": 500,
+        "gold": 500
+      },
+      "time": 60,
+      "at": "dwarven-armory",
+      "age": "archaic",
+      "requires": ["thor", "iron-armor-thor"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Meteoric_Iron_Armor",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Thor only. Thor's Dwarven Armory researches at x0.33 speed in Archaic, x1 Classical, x1.5 Heroic, x2 Mythic; the base (Classical) time is given. Each Dwarven Armory research spawns 1 free Dwarf (Thor bonus; not expressible as a modifier). Thor pays 10% less (modifier in thor.json)."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Meteoric_Iron_Armor",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "dragonscale-shields",
+      "name": {
+        "pt-BR": "Escudos de Escamas de Dragão",
+        "en": "Dragonscale Shields"
+      },
+      "icon": "techs/norse-dragonscale-shields",
+      "pantheon": "norse",
+      "tags": ["military"],
+      "cost": {
+        "wood": 500,
+        "gold": 500
+      },
+      "time": 60,
+      "at": "dwarven-armory",
+      "age": "archaic",
+      "requires": ["thor", "iron-shields-thor"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Dragonscale_Shields",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Thor only. Thor's Dwarven Armory researches at x0.33 speed in Archaic, x1 Classical, x1.5 Heroic, x2 Mythic; the base (Classical) time is given. Each Dwarven Armory research spawns 1 free Dwarf (Thor bonus; not expressible as a modifier). Thor pays 10% less (modifier in thor.json)."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Dragonscale_Shields",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "hammer-of-thunder",
+      "name": {
+        "pt-BR": "Martelo do Trovão",
+        "en": "Hammer of Thunder"
+      },
+      "icon": "techs/norse-hammer-of-thunder",
+      "pantheon": "norse",
+      "cost": {
+        "gold": 125,
+        "favor": 10
+      },
+      "time": 40,
+      "at": "dwarven-armory",
+      "age": "archaic",
+      "requires": ["thor"],
+      "effects": [
+        {
+          "target": "favorRate",
+          "op": "mul",
+          "value": 1.5,
+          "scope": {
+            "ids": ["hersir"]
+          },
+          "note": "Passive Hersir favor trickle +50%."
+        }
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Hammer_of_Thunder",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Thor only. Hersir +15% attack and +50% passive favor. Also researchable at the Great Hall (40 s). At the Dwarven Armory the time scales by age (121 s Archaic, 40 s Classical, 26.7 s Heroic, 20 s Mythic) and it spawns 1 free Dwarf. Thor pays 10% less (113 gold, 9 favor)."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Hammer_of_Thunder",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "watch-tower",
+      "name": {
+        "pt-BR": "Torre de Vigia",
+        "en": "Watch Tower"
+      },
+      "icon": "techs/norse-watch-tower",
+      "pantheon": "norse",
+      "tags": ["military"],
+      "cost": {
+        "wood": 250,
+        "gold": 150
+      },
+      "time": 20,
+      "at": "sentry-tower",
+      "age": "classical",
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse",
+        "checkedAt": "2026-10-17",
+        "confidence": "medium",
+        "note": "Lets Sentry Towers attack."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Sentry_Tower_(Age_of_Mythology)",
+          "checkedAt": "2026-10-17",
+          "confidence": "low",
+          "note": "Only an old (pre-Retold) value of 20 s found; current time unknown."
+        }
+      }
+    },
+    {
+      "id": "signal-fires",
+      "name": {
+        "pt-BR": "Fogueiras de Sinalização",
+        "en": "Signal Fires"
+      },
+      "icon": "techs/norse-signal-fires",
+      "pantheon": "norse",
+      "tags": ["military"],
+      "cost": {
+        "wood": 150
+      },
+      "time": 30,
+      "at": "sentry-tower",
+      "age": "classical",
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Signal_Fires",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Signal_Fires",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "crenellations",
+      "name": {
+        "pt-BR": "Ameias",
+        "en": "Crenellations"
+      },
+      "icon": "techs/norse-crenellations",
+      "pantheon": "norse",
+      "tags": ["military"],
+      "cost": {
+        "food": 150,
+        "wood": 150
+      },
+      "time": 20,
+      "at": "sentry-tower",
+      "age": "classical",
+      "requires": ["watch-tower"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Crenellations",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Crenellations",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "carrier-pigeons",
+      "name": {
+        "pt-BR": "Pombos-Correio",
+        "en": "Carrier Pigeons"
+      },
+      "icon": "techs/norse-carrier-pigeons",
+      "pantheon": "norse",
+      "tags": ["military"],
+      "cost": {
+        "wood": 400
+      },
+      "time": 45,
+      "at": "sentry-tower",
+      "age": "heroic",
+      "requires": ["signal-fires"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Carrier_Pigeons",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Carrier_Pigeons",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "boiling-oil",
+      "name": {
+        "pt-BR": "Óleo Fervente",
+        "en": "Boiling Oil"
+      },
+      "icon": "techs/norse-boiling-oil",
+      "pantheon": "norse",
+      "tags": ["military"],
+      "cost": {
+        "food": 100,
+        "wood": 300
+      },
+      "time": 40,
+      "at": "sentry-tower",
+      "age": "heroic",
+      "requires": ["watch-tower"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Boiling_Oil",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Boiling_Oil",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "stone-wall",
+      "name": {
+        "pt-BR": "Muralha de Pedra",
+        "en": "Stone Wall"
+      },
+      "icon": "techs/norse-stone-wall",
+      "pantheon": "norse",
+      "tags": ["military"],
+      "cost": {
+        "food": 200,
+        "gold": 200
+      },
+      "time": 40,
+      "at": "wooden-wall",
+      "age": "classical",
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Wooden_Wall",
+        "checkedAt": "2026-10-17",
+        "confidence": "high"
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Stone_Wall",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "hamask",
+      "name": {
+        "pt-BR": "Hamask",
+        "en": "Hamask"
+      },
+      "icon": "techs/norse-hamask",
+      "pantheon": "norse",
+      "tags": ["military"],
+      "cost": {
+        "wood": 175,
+        "favor": 12
+      },
+      "time": 40,
+      "at": "longhouse",
+      "age": "classical",
+      "requires": ["odin"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Hamask",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Odin only. Berserk +10% speed, x1.5 vs myth units. Analyzer lists it as an Archaic improvement, but it is researched at the Longhouse (Classical) - wiki says Classical."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Hamask",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "eyes-in-the-forest",
+      "name": {
+        "pt-BR": "Olhos na Floresta",
+        "en": "Eyes in the Forest"
+      },
+      "icon": "techs/norse-eyes-in-the-forest",
+      "pantheon": "norse",
+      "cost": {
+        "gold": 75,
+        "favor": 8
+      },
+      "time": 40,
+      "at": "temple",
+      "age": "archaic",
+      "requires": ["loki"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Eyes_in_the_Forest",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Loki only. Nature objects grant vision; heroes +5% speed."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Eyes_in_the_Forest",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "disablot",
+      "name": {
+        "pt-BR": "Dísablót",
+        "en": "Disablot"
+      },
+      "icon": "techs/norse-disablot",
+      "pantheon": "norse",
+      "tags": ["myth"],
+      "cost": {
+        "gold": 200,
+        "favor": 10
+      },
+      "time": 40,
+      "at": "temple",
+      "age": "classical",
+      "requires": ["freyja"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/pantheons + https://ageofempires.fandom.com/wiki/Disablot",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Valkyrie -> Shieldmaiden Valkyrie."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Disablot",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "thundering-hooves",
+      "name": {
+        "pt-BR": "Cascos Trovejantes",
+        "en": "Thundering Hooves"
+      },
+      "icon": "techs/norse-thundering-hooves",
+      "pantheon": "norse",
+      "tags": ["myth"],
+      "cost": {
+        "food": 150,
+        "favor": 20
+      },
+      "time": 30,
+      "at": "great-hall",
+      "age": "classical",
+      "requires": ["freyja"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/pantheons + https://ageofempires.fandom.com/wiki/Thundering_Hooves",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Cavalry and Valkyrie +10% HP and speed."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Thundering_Hooves",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "sessrumnir",
+      "name": {
+        "pt-BR": "Sessrúmnir",
+        "en": "Sessrumnir"
+      },
+      "icon": "techs/norse-sessrumnir",
+      "pantheon": "norse",
+      "tags": ["myth"],
+      "cost": {
+        "food": 100,
+        "wood": 100,
+        "favor": 10
+      },
+      "time": 20,
+      "at": "great-hall",
+      "age": "classical",
+      "requires": ["freyja"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/pantheons + https://ageofempires.fandom.com/wiki/Sessrumnir",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Heroes +10% HP; enables Godi in the Classical Age."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Sessrumnir",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "gjallarhorn",
+      "name": {
+        "pt-BR": "Gjallarhorn",
+        "en": "Gjallarhorn"
+      },
+      "icon": "techs/norse-gjallarhorn",
+      "pantheon": "norse",
+      "tags": ["myth"],
+      "cost": {
+        "gold": 150,
+        "favor": 10
+      },
+      "time": 30,
+      "at": "temple",
+      "age": "classical",
+      "requires": ["heimdall"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/pantheons + https://ageofempires.fandom.com/wiki/Gjallarhorn",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Einheri -> Giant-killer Einheri."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Gjallarhorn",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "safeguard",
+      "name": {
+        "pt-BR": "Salvaguarda",
+        "en": "Safeguard"
+      },
+      "icon": "techs/norse-safeguard",
+      "pantheon": "norse",
+      "tags": ["myth"],
+      "cost": {
+        "wood": 100,
+        "favor": 12
+      },
+      "time": 40,
+      "at": "temple",
+      "age": "classical",
+      "requires": ["heimdall"],
+      "effects": [
+        {
+          "target": "cost",
+          "op": "mul",
+          "value": 0.5,
+          "scope": {
+            "ids": [
+              "town-center",
+              "village-center",
+              "temple",
+              "hill-fort",
+              "sentry-tower",
+              "wooden-wall",
+              "wonder"
+            ],
+            "resources": ["gold"]
+          },
+          "note": "Building gold cost -50%."
+        }
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/pantheons + https://ageofempires.fandom.com/wiki/Safeguard",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Walls and towers +25% HP; all buildings -50% gold cost."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Safeguard",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "rigsthula",
+      "name": {
+        "pt-BR": "Rígsþula",
+        "en": "Rigsthula"
+      },
+      "icon": "techs/norse-rigsthula",
+      "pantheon": "norse",
+      "tags": ["myth"],
+      "cost": {
+        "gold": 150,
+        "favor": 18
+      },
+      "time": 20,
+      "at": "town-center",
+      "age": "classical",
+      "requires": ["heimdall"],
+      "effects": [
+        {
+          "target": "trainTime",
+          "op": "mul",
+          "value": 0.8333
+        },
+        {
+          "target": "researchTime",
+          "op": "mul",
+          "value": 0.8333,
+          "note": "Includes age-up research."
+        }
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/pantheons + https://ageofempires.fandom.com/wiki/Rigsthula",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "All buildings +20% train and research speed, including age advancement (time x0.8333)."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Rigsthula",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "hall-of-thanes",
+      "name": {
+        "pt-BR": "Salão dos Thanes",
+        "en": "Hall of Thanes"
+      },
+      "icon": "techs/norse-hall-of-thanes",
+      "pantheon": "norse",
+      "tags": ["myth"],
+      "cost": {
+        "wood": 150,
+        "favor": 10
+      },
+      "time": 30,
+      "at": "temple",
+      "age": "classical",
+      "requires": ["forseti"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/pantheons + https://ageofempires.fandom.com/wiki/Hall_of_Thanes",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Infantry and heroes +5% speed. Also researchable at the Great Hall."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Hall_of_Thanes",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "dwarven-breastplate",
+      "name": {
+        "pt-BR": "Peitoral Anão",
+        "en": "Dwarven Breastplate"
+      },
+      "icon": "techs/norse-dwarven-breastplate",
+      "pantheon": "norse",
+      "tags": ["myth"],
+      "cost": {
+        "gold": 100,
+        "favor": 10
+      },
+      "time": 30,
+      "at": "armory",
+      "age": "classical",
+      "requires": ["forseti"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/pantheons + https://ageofempires.fandom.com/wiki/Dwarven_Breastplate",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Berserk and Hirdman -15% hack vulnerability. Thor uses the '-thor' variant at the Dwarven Armory."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Dwarven_Breastplate",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "dwarven-breastplate-thor",
+      "name": {
+        "pt-BR": "Peitoral Anão",
+        "en": "Dwarven Breastplate"
+      },
+      "icon": "techs/norse-dwarven-breastplate",
+      "pantheon": "norse",
+      "tags": ["myth"],
+      "cost": {
+        "gold": 100,
+        "favor": 10
+      },
+      "time": 30,
+      "at": "dwarven-armory",
+      "age": "classical",
+      "requires": ["forseti", "thor"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/pantheons + https://ageofempires.fandom.com/wiki/Dwarven_Breastplate",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Thor version (Dwarven Armory). Spawns 1 free Dwarf (Thor bonus); Thor pays 10% less."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Dwarven_Breastplate",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "cave-troll",
+      "name": {
+        "pt-BR": "Troll das Cavernas",
+        "en": "Cave Troll"
+      },
+      "icon": "techs/norse-cave-troll",
+      "pantheon": "norse",
+      "tags": ["myth"],
+      "cost": {
+        "wood": 200,
+        "favor": 10
+      },
+      "time": 40,
+      "at": "temple",
+      "age": "classical",
+      "requires": ["forseti"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/pantheons + https://ageofempires.fandom.com/wiki/Cave_Troll",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Troll -> Hamarrtroll."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Cave_Troll",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "arctic-winds",
+      "name": {
+        "pt-BR": "Ventos Árticos",
+        "en": "Arctic Winds"
+      },
+      "icon": "techs/norse-arctic-winds",
+      "pantheon": "norse",
+      "tags": ["myth"],
+      "cost": {
+        "wood": 200,
+        "favor": 10
+      },
+      "time": 40,
+      "at": "dock",
+      "age": "heroic",
+      "requires": ["skadi"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/pantheons + https://ageofempires.fandom.com/wiki/Arctic_Winds",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Dreki attacks slow/freeze."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Arctic_Winds",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "rime",
+      "name": {
+        "pt-BR": "Geada",
+        "en": "Rime"
+      },
+      "icon": "techs/norse-rime",
+      "pantheon": "norse",
+      "tags": ["myth"],
+      "cost": {
+        "food": 200,
+        "favor": 20
+      },
+      "time": 40,
+      "at": "temple",
+      "age": "heroic",
+      "requires": ["skadi"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/pantheons + https://ageofempires.fandom.com/wiki/Rime",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Frost Giant -> Frost Giant of Thrym."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Rime",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "huntress-axe",
+      "name": {
+        "pt-BR": "Machado da Caçadora",
+        "en": "Huntress' Axe"
+      },
+      "icon": "techs/norse-huntress-axe",
+      "pantheon": "norse",
+      "tags": ["myth"],
+      "cost": {
+        "gold": 150,
+        "favor": 20
+      },
+      "time": 40,
+      "at": "longhouse",
+      "age": "heroic",
+      "requires": ["skadi"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/pantheons + https://ageofempires.fandom.com/wiki/Huntress'_Axe",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Throwing Axeman +1 range, homing projectiles."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Huntress'_Axe",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "winter-harvest",
+      "name": {
+        "pt-BR": "Colheita de Inverno",
+        "en": "Winter Harvest"
+      },
+      "icon": "techs/norse-winter-harvest",
+      "pantheon": "norse",
+      "tags": ["myth"],
+      "cost": {
+        "food": 100,
+        "favor": 20
+      },
+      "time": 40,
+      "at": "ox-cart",
+      "age": "heroic",
+      "requires": ["skadi"],
+      "effects": [
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.2,
+          "scope": {
+            "ids": ["gatherer", "dwarf"],
+            "sources": ["farm"]
+          }
+        },
+        {
+          "target": "gatherRate",
+          "op": "mul",
+          "value": 1.1,
+          "scope": {
+            "ids": ["gatherer", "dwarf"],
+            "sources": ["hunt", "herd", "berries"]
+          },
+          "note": "'Other food sources'; assumed not to include fishing ships."
+        }
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/pantheons + https://ageofempires.fandom.com/wiki/Winter_Harvest",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Workers +20% food from Farms, +10% food from other sources."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Winter_Harvest",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "wrath-of-the-deep",
+      "name": {
+        "pt-BR": "Ira das Profundezas",
+        "en": "Wrath of the Deep"
+      },
+      "icon": "techs/norse-wrath-of-the-deep",
+      "pantheon": "norse",
+      "tags": ["myth"],
+      "cost": {
+        "gold": 100,
+        "favor": 15
+      },
+      "time": 40,
+      "at": "dock",
+      "age": "heroic",
+      "requires": ["njord"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/pantheons + https://ageofempires.fandom.com/wiki/Wrath_of_the_Deep",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Kraken -> Trench Kraken."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Wrath_of_the_Deep",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "ring-giver",
+      "name": {
+        "pt-BR": "Doador de Anéis",
+        "en": "Ring Giver"
+      },
+      "icon": "techs/norse-ring-giver",
+      "pantheon": "norse",
+      "tags": ["myth"],
+      "cost": {
+        "gold": 125,
+        "favor": 25
+      },
+      "time": 20,
+      "at": "great-hall",
+      "age": "heroic",
+      "requires": ["njord"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/pantheons + https://ageofempires.fandom.com/wiki/Ring_Giver",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Jarl +15% HP, +1x vs myth units."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Ring_Giver",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "vikings",
+      "name": {
+        "pt-BR": "Vikings",
+        "en": "Vikings"
+      },
+      "icon": "techs/norse-vikings",
+      "pantheon": "norse",
+      "tags": ["myth"],
+      "cost": {
+        "food": 175,
+        "favor": 25
+      },
+      "time": 26.67,
+      "at": "great-hall",
+      "age": "heroic",
+      "requires": ["njord"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/pantheons + https://ageofempires.fandom.com/wiki/Vikings",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Raiding Cavalry generate 1 gold per 8 damage dealt to units (combat income; not expressible) and +1.5 divine attack."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Vikings",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "jotuns",
+      "name": {
+        "pt-BR": "Jötnar",
+        "en": "Jotuns"
+      },
+      "icon": "techs/norse-jotuns",
+      "pantheon": "norse",
+      "tags": ["myth"],
+      "cost": {
+        "food": 175,
+        "favor": 30
+      },
+      "time": 40,
+      "at": "temple",
+      "age": "heroic",
+      "requires": ["njord"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/pantheons + https://ageofempires.fandom.com/wiki/Jotuns",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Mountain Giant -> Jotun."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Jotuns",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "long-serpent",
+      "name": {
+        "pt-BR": "Serpente Longa",
+        "en": "Long Serpent"
+      },
+      "icon": "techs/norse-long-serpent",
+      "pantheon": "norse",
+      "tags": ["myth"],
+      "cost": {
+        "wood": 100,
+        "gold": 200,
+        "favor": 20
+      },
+      "time": 30,
+      "at": "dock",
+      "age": "heroic",
+      "requires": ["bragi"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/pantheons + https://ageofempires.fandom.com/wiki/Long_Serpent",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Longboat upgrade."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Long_Serpent",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "call-of-valhalla",
+      "name": {
+        "pt-BR": "Chamado de Valhalla",
+        "en": "Call of Valhalla"
+      },
+      "icon": "techs/norse-call-of-valhalla",
+      "pantheon": "norse",
+      "tags": ["myth"],
+      "cost": {
+        "food": 150,
+        "favor": 20
+      },
+      "time": 40,
+      "at": "longhouse",
+      "age": "heroic",
+      "requires": ["bragi"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/pantheons + https://ageofempires.fandom.com/wiki/Call_of_Valhalla",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Berserk +10% HP; +0.5 favor each time a Berserk dies (not expressible)."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Call_of_Valhalla",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "thurisaz-rune",
+      "name": {
+        "pt-BR": "Runa Thurisaz",
+        "en": "Thurisaz Rune"
+      },
+      "icon": "techs/norse-thurisaz-rune",
+      "pantheon": "norse",
+      "tags": ["myth"],
+      "cost": {
+        "wood": 100,
+        "favor": 20
+      },
+      "time": 30,
+      "at": "temple",
+      "age": "heroic",
+      "requires": ["bragi"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/pantheons + https://ageofempires.fandom.com/wiki/Thurisaz_Rune",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Myth units +10% speed and regenerate."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Thurisaz_Rune",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "swine-array",
+      "name": {
+        "pt-BR": "Formação do Javali",
+        "en": "Swine Array"
+      },
+      "icon": "techs/norse-swine-array",
+      "pantheon": "norse",
+      "tags": ["myth"],
+      "cost": {
+        "wood": 125,
+        "favor": 15
+      },
+      "time": 50,
+      "at": "longhouse",
+      "age": "heroic",
+      "requires": ["bragi"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/pantheons + https://ageofempires.fandom.com/wiki/Swine_Array",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Hirdman +10% attack, x2 vs cavalry."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Swine_Array",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "sons-of-sleipnir",
+      "name": {
+        "pt-BR": "Filhos de Sleipnir",
+        "en": "Sons of Sleipnir"
+      },
+      "icon": "techs/norse-sons-of-sleipnir",
+      "pantheon": "norse",
+      "tags": ["myth"],
+      "cost": {
+        "food": 150,
+        "favor": 20
+      },
+      "time": 26.67,
+      "at": "great-hall",
+      "age": "mythic",
+      "requires": ["baldr"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/pantheons + https://ageofempires.fandom.com/wiki/Sons_of_Sleipnir",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Cavalry +20% attack, +1x vs archers."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Sons_of_Sleipnir",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "dwarven-auger",
+      "name": {
+        "pt-BR": "Broca Anã",
+        "en": "Dwarven Auger"
+      },
+      "icon": "techs/norse-dwarven-auger",
+      "pantheon": "norse",
+      "tags": ["myth"],
+      "cost": {
+        "gold": 150,
+        "favor": 15
+      },
+      "time": 40,
+      "at": "hill-fort",
+      "age": "mythic",
+      "requires": ["baldr"],
+      "effects": [
+        {
+          "target": "trainTime",
+          "op": "mul",
+          "value": 0.75,
+          "scope": {
+            "ids": ["portable-ram"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/pantheons + https://ageofempires.fandom.com/wiki/Dwarven_Auger",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Portable Ram -25% train time, +10% speed, +20% attack."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Dwarven_Auger",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "berserkergang",
+      "name": {
+        "pt-BR": "Berserkergang",
+        "en": "Berserkergang"
+      },
+      "icon": "techs/norse-berserkergang",
+      "pantheon": "norse",
+      "tags": ["myth"],
+      "cost": {
+        "gold": 150,
+        "favor": 30
+      },
+      "time": 40,
+      "at": "longhouse",
+      "age": "mythic",
+      "requires": ["tyr"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/pantheons + https://ageofempires.fandom.com/wiki/Berserkergang",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Berserks heal from 35% of damage dealt."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Berserkergang",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "bravery",
+      "name": {
+        "pt-BR": "Bravura",
+        "en": "Bravery"
+      },
+      "icon": "techs/norse-bravery",
+      "pantheon": "norse",
+      "tags": ["myth"],
+      "cost": {
+        "food": 250,
+        "favor": 22
+      },
+      "time": 40,
+      "at": "hill-fort",
+      "age": "mythic",
+      "requires": ["tyr"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/pantheons + https://ageofempires.fandom.com/wiki/Bravery",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Huskarl +20% attack, +1.25x vs buildings."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Bravery",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "rampage",
+      "name": {
+        "pt-BR": "Fúria",
+        "en": "Rampage"
+      },
+      "icon": "techs/norse-rampage",
+      "pantheon": "norse",
+      "tags": ["myth"],
+      "cost": {
+        "gold": 300,
+        "favor": 20
+      },
+      "time": 40,
+      "at": "temple",
+      "age": "mythic",
+      "requires": ["hel"],
+      "effects": [
+        {
+          "target": "trainTime",
+          "op": "mul",
+          "value": 0.05,
+          "scope": {
+            "tags": ["myth"]
+          }
+        }
+      ],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/pantheons + https://ageofempires.fandom.com/wiki/Rampage_(technology)",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Myth units -95% training time."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Rampage_(technology)",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    },
+    {
+      "id": "granite-blood",
+      "name": {
+        "pt-BR": "Sangue de Granito",
+        "en": "Granite Blood"
+      },
+      "icon": "techs/norse-granite-blood",
+      "pantheon": "norse",
+      "tags": ["myth"],
+      "cost": {
+        "wood": 600,
+        "favor": 30
+      },
+      "time": 40,
+      "at": "temple",
+      "age": "mythic",
+      "requires": ["hel"],
+      "effects": [],
+      "meta": {
+        "source": "https://aomr-analyzer.com/frise/pantheons + https://ageofempires.fandom.com/wiki/Granite_Blood",
+        "checkedAt": "2026-10-17",
+        "confidence": "high",
+        "note": "Fire Giant -> Son of Muspell; Giants more HP."
+      },
+      "fieldMeta": {
+        "time": {
+          "source": "https://ageofempires.fandom.com/wiki/Granite_Blood",
+          "checkedAt": "2026-10-17",
+          "confidence": "medium",
+          "note": "Research time only from the wiki (the analyzer shows none)."
+        }
+      }
+    }
+  ],
+  "meta": {
+    "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Norse",
+    "checkedAt": "2026-10-17",
+    "confidence": "medium",
+    "note": "Patch 19.17020 (2026-07-01). Ox Cart is modelled as a building (it is built by workers). pt-BR names are translations by the research agent, not checked against the official Brazilian localization. Freyr (DLC) and his minor gods Ullr, Aegir, Vidar are excluded (base game only). Norse infantry and humanoid heroes construct all buildings; Gatherers/Dwarves only build Houses, Farms and Ox Carts."
+  }
+}

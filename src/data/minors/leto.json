@@ -1,0 +1,22 @@
+{
+  "id": "leto",
+  "pantheon": "atlanteans",
+  "name": {
+    "pt-BR": "Leto",
+    "en": "Leto"
+  },
+  "icon": "gods/leto",
+  "portrait": "gods/leto-portrait",
+  "age": "classical",
+  "freeUnitsOnAgeUp": {
+    "automaton": 1
+  },
+  "unlocks": ["automaton", "hephaestus-revenge", "volcanic-forge", "perception"],
+  "powers": ["spider-lair"],
+  "meta": {
+    "source": "https://ageofempires.fandom.com/wiki/Leto; https://aomr-analyzer.com/gods/kronos (minor lists)",
+    "checkedAt": "2026-10-17",
+    "confidence": "high",
+    "note": "1 free automaton on reaching the age through Leto (Kronos: 2). pt-BR name not verified against the official localization."
+  }
+}

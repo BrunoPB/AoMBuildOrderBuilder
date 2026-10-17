@@ -1,0 +1,30 @@
+{
+  "id": "bragi",
+  "pantheon": "norse",
+  "name": {
+    "pt-BR": "Bragi",
+    "en": "Bragi"
+  },
+  "icon": "gods/bragi",
+  "portrait": "gods/bragi-portrait",
+  "age": "heroic",
+  "freeUnitsOnAgeUp": {
+    "battle-boar": 1
+  },
+  "unlocks": ["battle-boar", "long-serpent", "call-of-valhalla", "thurisaz-rune", "swine-array"],
+  "powers": ["flaming-weapons"],
+  "meta": {
+    "source": "https://aomr-analyzer.com/frise/pantheons + https://ageofempires.fandom.com/wiki/Bragi + https://ageofempires.fandom.com/wiki/Temple_(Age_of_Mythology)",
+    "checkedAt": "2026-10-17",
+    "confidence": "high",
+    "note": "Thor, Loki. Focus: myth units and earning favor. Free unit on age up: one of each of the minor god's Temple myth units spawns at the Temple when the age-up completes (or when the next Temple is built if none exists)."
+  },
+  "fieldMeta": {
+    "freeUnitsOnAgeUp": {
+      "source": "https://ageofempires.fandom.com/wiki/Temple_(Age_of_Mythology)",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "Rule from the Temple page (since The Titans; still in Retold)."
+    }
+  }
+}

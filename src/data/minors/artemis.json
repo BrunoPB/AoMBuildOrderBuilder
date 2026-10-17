@@ -1,0 +1,19 @@
+{
+  "id": "artemis",
+  "pantheon": "greeks",
+  "name": {
+    "pt-BR": "Ártemis",
+    "en": "Artemis"
+  },
+  "icon": "gods/artemis",
+  "portrait": "gods/artemis-portrait",
+  "age": "mythic",
+  "unlocks": ["chimera", "shafts-of-plague", "flames-of-typhon", "beast-slayer"],
+  "powers": ["earthquake"],
+  "meta": {
+    "source": "https://ageofempires.fandom.com/wiki/Artemis ; https://aomr-analyzer.com/gods/zeus ; https://aomr-analyzer.com/gods/hades ; https://aomr-analyzer.com/gods/poseidon",
+    "checkedAt": "2026-10-17",
+    "confidence": "high",
+    "note": "No free units on age-up for Greek minor gods."
+  }
+}

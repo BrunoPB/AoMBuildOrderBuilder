@@ -1,0 +1,22 @@
+{
+  "id": "hyperion",
+  "pantheon": "atlanteans",
+  "name": {
+    "pt-BR": "Hiperíon",
+    "en": "Hyperion"
+  },
+  "icon": "gods/hyperion",
+  "portrait": "gods/hyperion-portrait",
+  "age": "heroic",
+  "freeUnitsOnAgeUp": {
+    "satyr": 1
+  },
+  "unlocks": ["satyr", "pioneer-of-the-skies", "gemini", "heroic-renewal", "sons-of-the-sun"],
+  "powers": ["chaos"],
+  "meta": {
+    "source": "https://ageofempires.fandom.com/wiki/Hyperion; https://aomr-analyzer.com/gods/kronos (minor lists)",
+    "checkedAt": "2026-10-17",
+    "confidence": "high",
+    "note": "1 free satyr on reaching the age through Hyperion (Kronos: 2). pt-BR name not verified against the official localization."
+  }
+}

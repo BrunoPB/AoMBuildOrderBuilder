@@ -1,0 +1,30 @@
+{
+  "id": "baldr",
+  "pantheon": "norse",
+  "name": {
+    "pt-BR": "Baldr",
+    "en": "Baldr"
+  },
+  "icon": "gods/baldr",
+  "portrait": "gods/baldr-portrait",
+  "age": "mythic",
+  "freeUnitsOnAgeUp": {
+    "fire-giant": 1
+  },
+  "unlocks": ["fire-giant", "sons-of-sleipnir", "dwarven-auger"],
+  "powers": ["ragnarok"],
+  "meta": {
+    "source": "https://aomr-analyzer.com/frise/pantheons + https://ageofempires.fandom.com/wiki/Baldr + https://ageofempires.fandom.com/wiki/Temple_(Age_of_Mythology)",
+    "checkedAt": "2026-10-17",
+    "confidence": "high",
+    "note": "Odin, Thor. Focus: cavalry and siege. Free unit on age up: one of each of the minor god's Temple myth units spawns at the Temple when the age-up completes (or when the next Temple is built if none exists)."
+  },
+  "fieldMeta": {
+    "freeUnitsOnAgeUp": {
+      "source": "https://ageofempires.fandom.com/wiki/Temple_(Age_of_Mythology)",
+      "checkedAt": "2026-10-17",
+      "confidence": "medium",
+      "note": "Rule from the Temple page (since The Titans; still in Retold)."
+    }
+  }
+}

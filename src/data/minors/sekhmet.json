@@ -1,0 +1,22 @@
+{
+  "id": "sekhmet",
+  "pantheon": "egyptians",
+  "name": {
+    "pt-BR": "Sekhmet",
+    "en": "Sekhmet"
+  },
+  "icon": "gods/sekhmet",
+  "portrait": "gods/sekhmet-portrait",
+  "age": "heroic",
+  "freeUnitsOnAgeUp": {
+    "scarab": 1
+  },
+  "unlocks": ["scarab", "crimson-linen", "force-of-the-west-wind", "bone-bow", "slings-of-the-sun"],
+  "powers": ["citadel"],
+  "meta": {
+    "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml) (tech HeroicAgeSekhmet); cross-checked: https://ageofempires.fandom.com/wiki/Sekhmet and the Ra/Isis/Set wiki pages (minor god lists)",
+    "checkedAt": "2026-10-17",
+    "confidence": "high",
+    "note": "Goddess of warfare and the desert. Focus: ranged weapons and siege weapons. Free unit(s) spawn at a Temple when the age-up completes. God power recharge 120 s."
+  }
+}

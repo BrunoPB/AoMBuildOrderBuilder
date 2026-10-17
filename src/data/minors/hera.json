@@ -1,0 +1,19 @@
+{
+  "id": "hera",
+  "pantheon": "greeks",
+  "name": {
+    "pt-BR": "Hera",
+    "en": "Hera"
+  },
+  "icon": "gods/hera",
+  "portrait": "gods/hera-portrait",
+  "age": "mythic",
+  "unlocks": ["medusa", "face-of-the-gorgon", "monstrous-rage", "argive-patronage"],
+  "powers": ["lightning-storm"],
+  "meta": {
+    "source": "https://ageofempires.fandom.com/wiki/Hera ; https://aomr-analyzer.com/gods/zeus ; https://aomr-analyzer.com/gods/hades ; https://aomr-analyzer.com/gods/poseidon",
+    "checkedAt": "2026-10-17",
+    "confidence": "high",
+    "note": "No free units on age-up for Greek minor gods. Carcinos (formerly Hera) is available to all Greeks in Retold."
+  }
+}
