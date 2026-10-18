@@ -5,13 +5,14 @@ export type ModContext = {
   tags?: string[];
   source?: SourceId;
   resource?: ResourceId;
-  nearManor?: boolean;
+  /** Kronos Manors in range of the building (each adds the bonus again). */
+  manors?: number;
 };
 
 export function modifierApplies(mod: Modifier, ctx: ModContext): boolean {
   const condition = mod.condition ?? "always";
   if (condition === "custom") return false;
-  if (condition === "nearManor" && !ctx.nearManor) return false;
+  if (condition === "nearManor" && !ctx.manors) return false;
   if (ctx.id && mod.except?.includes(ctx.id)) return false;
   const scope = mod.scope;
   if (!scope) return true;
@@ -34,9 +35,11 @@ export function applyModifiers(
   let mul = 1;
   for (const mod of mods) {
     if (mod.target !== target || !modifierApplies(mod, ctx)) continue;
-    if (mod.op === "add") add += mod.value;
-    else if (mod.op === "pct") pct += mod.value;
-    else mul *= mod.value;
+    // Manor auras stack additively: n Manors × 1.25 → 1 + 0.25 n.
+    const n = mod.condition === "nearManor" ? (ctx.manors ?? 0) : 1;
+    if (mod.op === "add") add += mod.value * n;
+    else if (mod.op === "pct") pct += mod.value * n;
+    else mul *= n === 1 ? mod.value : 1 + (mod.value - 1) * n;
   }
   return (base + add) * (1 + pct) * mul;
 }

@@ -22,9 +22,10 @@ describe("modifiers", () => {
       },
       { target: "trainTime" as const, op: "add" as const, value: -2, scope: { tags: ["myth"] } },
     ];
-    expect(applyModifiers(1, "buildRate", mods, { nearManor: true })).toBe(1.25);
-    expect(applyModifiers(1, "buildRate", mods, { nearManor: false })).toBe(1);
-    expect(applyModifiers(1, "buildRate", mods, { id: "wonder", nearManor: true })).toBe(1);
+    expect(applyModifiers(1, "buildRate", mods, { manors: 1 })).toBe(1.25);
+    expect(applyModifiers(1, "buildRate", mods, { manors: 0 })).toBe(1);
+    expect(applyModifiers(1, "buildRate", mods, { manors: 3 })).toBe(1.75);
+    expect(applyModifiers(1, "buildRate", mods, { id: "wonder", manors: 1 })).toBe(1);
     expect(applyModifiers(10, "trainTime", mods, { tags: ["myth"] })).toBe(8);
     expect(applyModifiers(10, "trainTime", mods, { tags: ["human"] })).toBe(10);
   });

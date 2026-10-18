@@ -1,5 +1,10 @@
 # Data changelog
 
+## 2026-10-18 — Krush as reference only
+
+- Krush preset back to the default settings (no calibration); the measured match is a reference (`npm run compare:krush`).
+- Kronos Manor bonus stacks additively per Manor in range (manor.tactics + official forum).
+
 ## 2026-10-18 — installed game as source of truth
 
 - All four pantheons reconciled against the game files (proto.xml, techtree.xml, god files, string tables): official pt-BR/en names, values, research lists, effect ops.

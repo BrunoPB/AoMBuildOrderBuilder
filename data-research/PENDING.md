@@ -8,8 +8,8 @@ Answers taken from the game files (build 19.17020) are written up in [game-files
 
 ## Open questions for the owner (SPEC 18 + research)
 
-- [ ] Citizen train time: the game files say 28 s, the Krush measurement shows a 30 s rhythm. The data keeps 28 s; the Krush preset uses `autoQueueDelay: 2`. Is there a pause between auto-queued units in game?
-- [ ] Do the bonuses of several Kronos Manors stack on the same building?
+- [x] Citizen train time: 28 s (game files). The 30 s rhythm of the Krush match is only a reference.
+- [x] Several Kronos Manors stack additively (+25% build rate each): `manor.tactics` gives each Manor a ×1.25 aura; official forum confirms it is intended. Build actions have a "Manors nearby" count (default 1).
 
 - [x] Population counts when the unit leaves the building; a finished unit waits inside while the population is full (owner). Default `popReservedAt: "end"`.
 - [x] Oracle hero promotion cost: game files confirm 30 food + 45 gold + 1 favor, 7 s (`OracleToHero`, techtree.xml). All other promotion costs in the data also match the files. The Krush timing gap must come from something else (e.g. the unit stops working for the 7 s, or promotions made while the unit keeps gathering).
@@ -24,14 +24,14 @@ Answers taken from the game files (build 19.17020) are written up in [game-files
 - [x] Promotion: villagers stop working for the 7 s; Oracles keep producing favor but stop walking (owner). Modelled.
 - [x] Wooden Gate: 15 build points in proto.xml (WallGate).
 
-## Krush calibration (known gap)
+## Krush reference
 
-- [ ] With the researched data the model cannot feed the auto-queued Citizens and five Prometheans at the same time: by 6:20 it trains 3 Prometheans (measured 5) and 7 Turmas (measured 8). Citizens, Counter-Barracks, Manors and both ages match within ±10 s. Preset settings: efficiency 1.0, hunt 2000, Oracle 1.6 favor/min (Oracles explore early). Real food income in that match was higher than the model's.
+- The Krush times are one real match, used as a reference only (owner, 2026-10-18). The preset uses the game data and the default settings; `npm run compare:krush` prints simulated vs measured. Fixed-time and data-driven rows match (Classical, Counter Barracks); economy rows drift (Heroic about +76 s), so the model's economy is slower than that match (efficiency, hunt, Oracle favor and walking are not exact).
 
 ## Not modelled yet (needs schema or engine work)
 
 - [x] Multiple builders (engine applies it): the game uses `buildingefficiency` 0.6 (2nd builder) and `extrabuildingefficiency` 0.3 (each further builder), major_gods.xml, same for all 12 gods. Builders are sorted by rate; the fastest counts fully.
-- [ ] Kronos Manor bonus stacking per Manor in range.
+- [x] Kronos Manor bonus stacking per Manor in range (manors count per build action).
 - [ ] Egyptian Pharaoh/Priest empower (×1.75 build/research/train, ×1.2 monument favor), Isis/Set monument auras.
 - [x] Resource trickles: Hersir/Godi (`trickle.favor` 0.6) and Plenty (`effect.trickle` 210 food/wood/gold per min, permanent).
 - [x] Vaults of Erebus (+1.75 gold/s = 105/min) and Flood of the Nile (+1.0 food/s = 60/min) are **techs** (`ResourceTrickleRate` on the player), not god powers. Now `Research.trickle`.

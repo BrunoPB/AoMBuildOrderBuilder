@@ -62,6 +62,8 @@ export const ActionSchema = z.discriminatedUnion("do", [
     builders: count,
     then: TaskTargetSchema.optional(),
     nearManor: z.boolean().optional(),
+    /** Kronos: how many Manors are within range of this building (default 1 once a Manor exists). */
+    manors: z.number().int().min(0).max(8).optional(),
   }),
   z.strictObject({
     ...base,
@@ -151,8 +153,6 @@ export const SettingsSchema = z.strictObject({
   sourceAmounts: z.partialRecord(SourceIdSchema, z.number().positive()).optional(),
   /** Seconds to simulate after the last action; default 30. */
   tail: z.number().nonnegative().optional(),
-  /** Seconds the auto queue waits after each unit before starting the next (player/game latency). */
-  autoQueueDelay: z.number().nonnegative().max(30).optional(),
 });
 export type Settings = z.infer<typeof SettingsSchema>;
 

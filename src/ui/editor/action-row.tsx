@@ -459,11 +459,18 @@ export function ActionRow(props: Props) {
                 <label class="field">
                   {t("row.nearManor")}
                   <input
-                    type="checkbox"
-                    checked={a.nearManor !== false}
-                    onChange={(e) =>
-                      set({ nearManor: e.currentTarget.checked ? undefined : false })
-                    }
+                    class="small"
+                    type="number"
+                    min={0}
+                    max={8}
+                    value={a.nearManor === false ? 0 : (a.manors ?? 1)}
+                    onChange={(e) => {
+                      const n = Math.max(
+                        0,
+                        Math.min(8, Math.round(Number(e.currentTarget.value) || 0)),
+                      );
+                      set({ manors: n === 1 ? undefined : n, nearManor: undefined });
+                    }}
                   />
                 </label>
               )}

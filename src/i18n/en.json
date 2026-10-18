@@ -108,7 +108,7 @@
   "row.then": "Then goes to",
   "row.from": "From",
   "row.to": "To",
-  "row.nearManor": "Near a Manor",
+  "row.nearManor": "Manors nearby",
   "row.target": "Target",
   "row.lose": "Lose",
   "row.gainFavor": "Gain favor",
@@ -237,6 +237,5 @@
   "step.byUnit": "1 {unit}",
   "row.builderUnit": "Soldier",
   "warn.cannotBuild": "{unit} cannot build {building}",
-  "warn.noUnitToBuild": "No {unit} available; waited {waited} s",
-  "editor.autoQueueDelay": "Auto queue delay (s)"
+  "warn.noUnitToBuild": "No {unit} available; waited {waited} s"
 }

@@ -81,8 +81,6 @@ type Site = {
   shiftAction?: number;
   jobs: Job[];
   slots: number;
-  /** Auto queue pause after a unit spawns. */
-  autoQueueUntil?: number;
 };
 
 type Reason = { key: string; level: WarningLevel; params: Params };
@@ -130,7 +128,6 @@ export type ResolvedSettings = {
   affordableWindow: number;
   sourceAmounts: Partial<Record<SourceId, number>>;
   tail: number;
-  autoQueueDelay: number;
 };
 
 export function resolveSettings(build: Build, data: GameData): ResolvedSettings {
@@ -146,7 +143,6 @@ export function resolveSettings(build: Build, data: GameData): ResolvedSettings 
     affordableWindow: s.affordableWindow ?? d.affordableWindow,
     sourceAmounts: s.sourceAmounts ?? {},
     tail: s.tail ?? 30,
-    autoQueueDelay: s.autoQueueDelay ?? 0,
   };
 }
 
@@ -716,14 +712,7 @@ class Simulation {
       reserved?: Cost;
     },
   ): Reason | Site {
-    const rule = opts.rule !== undefined ? this.rules[opts.rule] : undefined;
-    const all = this.trainSites(def, opts.at);
-    const candidates = all.filter(
-      (s) => rule?.kind !== "autoTrain" || (s.autoQueueUntil ?? 0) <= this.t + EPS,
-    );
-    if (candidates.length === 0 && all.length > 0) {
-      return { key: "warn.queueBusy", level: "delay", params: { building: all[0]!.def.id } };
-    }
+    const candidates = this.trainSites(def, opts.at);
     const req = this.requirement(def.requires, def.age);
     if (req) return req;
     const site = this.freeSite(candidates, opts.prefer);
@@ -1000,8 +989,11 @@ class Simulation {
     if (missing) return this.block(i, this.noResource(cost, missing));
     this.pay(cost);
     const site = this.newSite(def, "building", false);
-    const nearManor = a.nearManor !== false && this.hasBuilding("manor");
-    const ctx: ModContext = { id: def.id, tags: def.tags, nearManor };
+    const manorsBuilt = this.sites.filter(
+      (s) => s.def.id === "manor" && s.state !== "building",
+    ).length;
+    const manors = a.nearManor === false ? 0 : Math.min(a.manors ?? 1, manorsBuilt);
+    const ctx: ModContext = { id: def.id, tags: def.tags, manors };
     site.time = applyModifiers(def.buildTime, "buildTime", mods, ctx);
     site.speedMul = applyModifiers(1, "buildRate", mods, ctx);
     site.then = a.then;
@@ -1403,15 +1395,7 @@ class Simulation {
       const done: Job[] = [];
       for (const job of site.jobs) {
         if (job.remaining > EPS) continue;
-        if (!this.finishJob(job)) continue;
-        done.push(job);
-        if (
-          job.kind === "unit" &&
-          job.rule !== undefined &&
-          this.rules[job.rule]?.kind === "autoTrain"
-        ) {
-          site.autoQueueUntil = this.t + this.s.autoQueueDelay;
-        }
+        if (this.finishJob(job)) done.push(job);
       }
       if (done.length) site.jobs = site.jobs.filter((j) => !done.includes(j));
     }

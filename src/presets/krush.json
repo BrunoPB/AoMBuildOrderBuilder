@@ -5,7 +5,7 @@
   "name": "Krush",
   "author": "Bruno",
   "createdAt": "2026-10-17T13:00:00Z",
-  "updatedAt": "2026-10-18T12:00:00Z",
+  "updatedAt": "2026-10-18T18:00:00Z",
   "pantheon": "atlanteans",
   "god": "kronos",
   "type": "rush",
@@ -18,14 +18,7 @@
     "en": "Heroic with Rheia (2 free Behemoths) and Turma pressure on the enemy base."
   },
   "settings": {
-    "efficiency": 1,
-    "tick": 1,
-    "foodChain": ["hunt", "berries", "farm"],
-    "sourceAmounts": {
-      "hunt": 2000
-    },
-    "oracleRate": 1.6,
-    "autoQueueDelay": 2
+    "tick": 1
   },
   "milestones": [
     {

@@ -15,6 +15,7 @@ npm test             # unit, golden (Krush), data, i18n and API tests (Vitest)
 npm run test:e2e     # Playwright smoke tests (run `npm run build` first; `npx playwright install chromium` once)
 npm run lint         # ESLint + Prettier check
 npm run check-data   # validates the game database and lists low-confidence values
+npm run compare:krush # Krush preset vs the measured match (reference only)
 npm run build        # type check + Vite build + static API in dist/
 npm run preview      # serves dist/
 ```

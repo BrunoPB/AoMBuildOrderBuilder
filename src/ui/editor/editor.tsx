@@ -109,18 +109,6 @@ function SettingsPanel({
           </select>
         </label>
         <label class="field">
-          {t("editor.autoQueueDelay")}
-          <input
-            type="number"
-            min="0"
-            max="30"
-            step="0.5"
-            placeholder="0"
-            value={s.autoQueueDelay ?? ""}
-            onChange={(e) => set({ autoQueueDelay: num(e.currentTarget.value) })}
-          />
-        </label>
-        <label class="field">
           {t("editor.window")}
           <input
             type="number"

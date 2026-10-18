@@ -1,6 +1,6 @@
 {
   "preset": "preset:krush",
-  "source": "SPEC.md section 16, measured in real matches by the project owner",
+  "source": "SPEC.md section 16: one real match measured by the owner. Reference only; the game files are the truth.",
   "tolerance": 10,
   "milestones": {
     "classicalClick": "1:55",
@@ -14,5 +14,12 @@
   "autoCitizens": ["3:55", "4:25", "4:55", "5:25", "5:55", "6:25", "6:55", "7:25"],
   "prometheans": ["3:20", "3:40", "4:30", "5:25", "6:10"],
   "turmas": ["3:55", "4:05", "4:32", "5:00", "5:12", "5:55", "6:10", "6:20"],
-  "freeUnits": { "classical": { "promethean": 2 }, "heroic": { "behemoth": 2 } }
+  "freeUnits": {
+    "classical": {
+      "promethean": 2
+    },
+    "heroic": {
+      "behemoth": 2
+    }
+  }
 }
