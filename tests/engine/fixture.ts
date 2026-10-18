@@ -146,7 +146,7 @@ export function testData(overrides: { oracleRate?: number; favorCap?: number } =
               gatherRates: { hunt: 60, berries: 60, farm: 30, wood: 60, gold: 60 },
               needsDropsite: false,
             },
-            promotion: { to: "citizen-hero", cost: { favor: 5 }, time: 0 },
+            promotion: { to: "citizen-hero", cost: { favor: 5 }, time: 5 },
             meta,
           },
           {

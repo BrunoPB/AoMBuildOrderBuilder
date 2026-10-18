@@ -37,7 +37,8 @@ type Task =
   | { kind: "gather"; source: SourceId }
   | { kind: "favor" }
   | { kind: "idle" }
-  | { kind: "build"; site: number };
+  | { kind: "build"; site: number }
+  | { kind: "busy"; resume: Task };
 
 type Worker = {
   uid: number;
@@ -58,7 +59,7 @@ type Job =
       action?: number;
       rule?: number;
       rally?: TaskTarget;
-      held?: boolean;
+      heldSince?: number;
     }
   | { kind: "research"; research: string; remaining: number; action: number }
   | { kind: "age"; age: AgeTo; minor: string; remaining: number; action: number };
@@ -1202,7 +1203,9 @@ class Simulation {
     }
     this.flagLowConfidence(i, def);
     const n = a.count ?? 1;
-    const workers = this.workers.filter((w) => w.unit === def.id).slice(-n);
+    const workers = this.workers
+      .filter((w) => w.unit === def.id && w.task.kind !== "build" && w.task.kind !== "busy")
+      .slice(-n);
     const others = Math.min(this.others.get(def.id) ?? 0, n - workers.length);
     if (workers.length + others < n) {
       return this.block(i, {
@@ -1224,6 +1227,7 @@ class Simulation {
       id: def.promotion.to,
       tags: hero?.tags,
     });
+    for (const w of workers) w.task = { kind: "busy", resume: w.task };
     this.promotions.push({
       at: this.t + time,
       from: def.id,
@@ -1348,6 +1352,8 @@ class Simulation {
         });
         if (site.shiftAction !== undefined) this.complete(site.shiftAction);
       }
+    }
+    for (const site of this.sites) {
       const done: Job[] = [];
       for (const job of site.jobs) {
         if (job.remaining > EPS) continue;
@@ -1394,8 +1400,16 @@ class Simulation {
         def &&
         this.popUsed() + this.unitPop(def) > this.popCap() + EPS
       ) {
-        job.held = true;
+        job.heldSince ??= this.t;
         return false;
+      }
+      if (job.heldSince !== undefined) {
+        const waited = round(this.t - job.heldSince, 1);
+        const action =
+          job.action ?? (job.rule !== undefined ? this.rules[job.rule]?.action : undefined);
+        if (waited >= this.s.tick - EPS) {
+          this.warn("delay", "warn.popCapped", { unit: job.unit, waited }, action);
+        }
       }
       const rally = job.rally ?? (isGatherer(def) ? "food" : undefined);
       const origin =
@@ -1472,7 +1486,17 @@ class Simulation {
     if (due.length === 0) return;
     this.promotions = this.promotions.filter((p) => !due.includes(p));
     for (const p of due) {
-      for (const w of this.workers) if (p.workers.includes(w.uid)) w.unit = p.to;
+      for (const w of this.workers) {
+        if (!p.workers.includes(w.uid)) continue;
+        w.unit = p.to;
+        if (w.task.kind === "busy") {
+          const resume = w.task.resume;
+          w.task =
+            resume.kind === "gather" && !this.available(resume.source)
+              ? this.resolveTask(w.lastTarget)
+              : resume;
+        }
+      }
       const n = Math.min(p.others, this.others.get(p.from) ?? 0);
       if (n > 0) {
         this.others.set(p.from, (this.others.get(p.from) ?? 0) - n);
@@ -1588,11 +1612,12 @@ class Simulation {
   }
 
   allocation(): Allocation {
-    const alloc: Allocation = { food: 0, wood: 0, gold: 0, favor: 0, idle: 0, build: 0 };
+    const alloc: Allocation = { food: 0, wood: 0, gold: 0, favor: 0, idle: 0, build: 0, busy: 0 };
     for (const w of this.workers) {
       if (w.task.kind === "gather") alloc[this.sourceResource(w.task.source)]++;
       else if (w.task.kind === "favor") alloc.favor++;
       else if (w.task.kind === "build") alloc.build++;
+      else if (w.task.kind === "busy") alloc.busy++;
       else alloc.idle++;
     }
     return alloc;

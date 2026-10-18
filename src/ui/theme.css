@@ -1202,3 +1202,8 @@ details.collapsible > summary::-webkit-details-marker {
     display: none;
   }
 }
+
+textarea {
+  width: 100%;
+  resize: vertical;
+}

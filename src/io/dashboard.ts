@@ -62,7 +62,7 @@ export function toDashboard(data: GameData, build: Build, result: SimResult): Da
     status: "final",
     name: build.name,
     objective: text(locale, build.objective),
-    end: final.t ? `${final.text} ${final.t}` : final.text,
+    end: text(locale, build.end) || (final.t ? `${final.text} ${final.t}` : final.text),
     steps: JSON.stringify(toDashboardSteps(steps)),
     final: JSON.stringify(final),
     matchups: JSON.stringify(

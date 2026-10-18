@@ -258,3 +258,32 @@ describe("trickles, caps and pop modifiers", () => {
     expect(at(r, 30).pop).toBe(3 + 2);
   });
 });
+
+describe("population counted when units leave the building", () => {
+  it("holds a finished unit inside the building until there is room", () => {
+    const r = run(
+      [
+        { when: "0:00", do: "event", gainResource: { food: 1000 } },
+        { when: "0:00", do: "train", unit: "citizen", count: 8 },
+        { when: "1:30", do: "build", building: "manor", builder: { from: "idle" } },
+      ],
+      { popReservedAt: "end" },
+    );
+    const citizens = r.produced.filter((p) => p.unit === "citizen").map((p) => p.t);
+    expect(citizens).toEqual([10, 20, 30, 40, 50, 60, 70, 110]);
+    expect(r.warnings.find((w) => w.key === "warn.popCapped")?.params.waited).toBe(30);
+  });
+});
+
+describe("hero promotion", () => {
+  it("stops the villager while it is promoted", () => {
+    const r = run([
+      { when: "0:00", do: "event", gainFavor: 5 },
+      { when: "0:00", do: "move", count: 2, from: "idle", to: "wood" },
+      { when: "0:00", do: "promote", unit: "citizen" },
+      { when: "0:10", do: "event", note: "end" },
+    ]);
+    expect(at(r, 2).alloc.busy).toBe(1);
+    expect(at(r, 10).resources.wood).toBeCloseTo(120);
+  });
+});

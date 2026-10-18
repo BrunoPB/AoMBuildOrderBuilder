@@ -42,7 +42,7 @@ export type SimEvent = { t: number; action?: number } & (
 );
 export type EventKind = SimEvent["kind"];
 
-export type Allocation = Record<ResourceId, number> & { idle: number; build: number };
+export type Allocation = Record<ResourceId, number> & { idle: number; build: number; busy: number };
 
 export type Snapshot = {
   t: number;

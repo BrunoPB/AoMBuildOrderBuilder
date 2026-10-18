@@ -52,6 +52,7 @@
   "editor.god": "Major god",
   "editor.minors": "Minor gods",
   "editor.objective": "Objective",
+  "editor.end": "Build end",
   "editor.actions": "Actions",
   "editor.add": "Add action",
   "editor.result": "Result",

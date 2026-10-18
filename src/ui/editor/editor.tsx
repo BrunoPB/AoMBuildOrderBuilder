@@ -413,6 +413,27 @@ export function Editor({ id }: { id: string }) {
           </div>
         </div>
 
+        <div class="panel stack" style={{ gap: 8 }}>
+          {(["objective", "end"] as const).map((field) => (
+            <label class="field" key={field}>
+              {t(`editor.${field}`)}
+              <textarea
+                rows={2}
+                maxLength={300}
+                disabled={readonly}
+                data-testid={`build-${field}`}
+                value={build[field]?.[locale] ?? ""}
+                onInput={(e) => {
+                  const value = e.currentTarget.value;
+                  const next = { ...(build[field] ?? {}), [locale]: value || undefined };
+                  if (!value) delete next[locale];
+                  update({ ...build, [field]: Object.keys(next).length ? next : undefined });
+                }}
+              />
+            </label>
+          ))}
+        </div>
+
         <GodPicker build={build} readonly={readonly} onChange={update} />
         <SettingsPanel
           build={build}

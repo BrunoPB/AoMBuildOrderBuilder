@@ -105,6 +105,12 @@ function BuildCard({
         })}
       </div>
       {build.objective && <span class="action-times">{text(locale, build.objective)}</span>}
+      {build.end && (
+        <span class="row action-times" style={{ gap: 4 }}>
+          <Svg name="flag" />
+          {text(locale, build.end)}
+        </span>
+      )}
       <div class="card-actions">
         <Tip label={t("card.open")}>
           <a class="btn icon-only" href={open} aria-label={t("card.open")}>

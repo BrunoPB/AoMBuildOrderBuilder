@@ -13,6 +13,10 @@
     "pt-BR": "Clássica rápida com Prometeu, Contraquartel na frente com Time Shift e pressão de Turmas; Heroica com Rheia.",
     "en": "Fast Classical with Prometheus, forward Counter-Barracks via Time Shift and Turma pressure; Heroic with Rheia."
   },
+  "end": {
+    "pt-BR": "Heroica com Rheia (2 Behemoths grátis) e pressão de Turmas na base inimiga.",
+    "en": "Heroic with Rheia (2 free Behemoths) and Turma pressure on the enemy base."
+  },
   "settings": {
     "efficiency": 1,
     "tick": 1,

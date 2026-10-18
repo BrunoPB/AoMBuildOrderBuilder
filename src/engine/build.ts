@@ -179,6 +179,8 @@ export const BuildSchema = z.object({
   god: z.string(),
   type: BuildTypeSchema,
   objective: LocalizedTextSchema.partial().optional(),
+  /** Where the build ends (an attack, an age, a unit…); the rest of the game is up to the player. */
+  end: LocalizedTextSchema.partial().optional(),
   settings: SettingsSchema.optional(),
   milestones: z.array(MilestoneSchema).optional(),
   matchups: z.array(MatchupSchema).optional(),
