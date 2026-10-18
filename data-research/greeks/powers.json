@@ -214,13 +214,26 @@
     },
     "cooldown": 180,
     "effect": {
-      "kind": "economy"
+      "kind": "economy",
+      "trickle": {
+        "food": 210,
+        "wood": 210,
+        "gold": 210
+      }
     },
     "meta": {
       "source": "https://ageofempires.fandom.com/wiki/Plenty",
       "checkedAt": "2026-10-17",
       "confidence": "medium",
-      "note": "First cast is free; cost is the base re-cast favor cost, each further cast adds the ramp. Ramp +200. Hephaestus. Creates an indestructible (capturable) Plenty Vault producing 3.5 food, 3.5 wood and 3.5 gold per second (= 210/min each, Plenty Vault page, since update 18.65484; the God power page still says 4). Trickle not expressible in schema."
+      "note": "First cast is free; cost is the base re-cast favor cost, each further cast adds the ramp. Ramp +200. Hephaestus. Creates an indestructible (capturable) Plenty Vault producing 3.5 food, 3.5 wood and 3.5 gold per second (= 210/min each, Plenty Vault page, since update 18.65484; the God power page still says 4). Trickle now in effect.trickle (210/min each, permanent)."
+    },
+    "fieldMeta": {
+      "effect": {
+        "source": "Game files 19.17020 (god_powers/greek.godpowers; proto.xml)",
+        "checkedAt": "2026-10-18",
+        "confidence": "high",
+        "note": "PlentyVault power creates a permanent PlentyVault (createunit permanent); its AutoGather rate is 3.5 food, 3.5 wood and 3.5 gold per second (= 210/min each) while you control it. The Vault is capturable (AutoConvert range 12); the simulator treats it as permanent (no duration). Power file: cost 300, repeatcost 200."
+      }
     }
   },
   {

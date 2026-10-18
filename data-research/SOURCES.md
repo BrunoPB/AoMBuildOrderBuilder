@@ -19,15 +19,22 @@ Detailed per-pantheon notes, including every conflict and which source won:
 
 ## Project-level decisions
 
-| Topic                      | Decision                                                 | Why                                                                                                                       |
-| -------------------------- | -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| Atlantean build speed      | Citizen `buildRate` 1.5 over base build times            | Wiki says Citizens build 50% faster; matches the measured Krush Temple (~27 s) and Counter-Barracks near a Manor (~13 s). |
-| Kronos Manor bonus         | ×1.25 build rate once the first Manor is ready           | SPEC 6.2 simplification (no map). In game it stacks per Manor in range.                                                   |
-| Free myth units (Kronos)   | `ageUpFreeUnits` replaces the minor god's own free units | Kronos gets 2 instead of 1; measured in Krush.                                                                            |
-| God `startExtras.units`    | Replaces the start count of that unit                    | Thor `{gatherer: 0, dwarf: 3}`, Gaia hero Citizens.                                                                       |
-| Minor gods in `requires`   | Any one of the listed minor gods is enough               | Norse giants are available to more than one minor god.                                                                    |
-| Fish                       | Infinite                                                 | Retold fish do not run out.                                                                                               |
-| Hunt amount (Krush preset) | 2000 food                                                | Typical value unknown (open question); calibrated to the measured Krush. Data default stays 1400.                         |
+| Topic                    | Decision                                                 | Why                                                                                                                       |
+| ------------------------ | -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| Atlantean build speed    | Citizen `buildRate` 1.5 over base build times            | Wiki says Citizens build 50% faster; matches the measured Krush Temple (~27 s) and Counter-Barracks near a Manor (~13 s). |
+| Kronos Manor bonus       | ×1.25 build rate once the first Manor is ready           | SPEC 6.2 simplification (no map). In game it stacks per Manor in range.                                                   |
+| Free myth units (Kronos) | `ageUpFreeUnits` replaces the minor god's own free units | Kronos gets 2 instead of 1; measured in Krush.                                                                            |
+| God `startExtras.units`  | Replaces the start count of that unit                    | Thor `{gatherer: 0, dwarf: 3}`, Gaia hero Citizens.                                                                       |
+| Minor gods in `requires` | Any one of the listed minor gods is enough               | Norse giants are available to more than one minor god.                                                                    |
+| Fish                     | Infinite                                                 | Retold fish do not run out.                                                                                               |
+| Hunt amount              | Default 1200 (owner estimate); Krush preset 2000         | Varies a lot per map; the Krush preset is calibrated to the measured match.                                               |
+
+| Gather techs | `op: "pct"` (added on the base rate) | Game files: relativity BasePercent. |
+| Multiple builders | 2nd builder 60%, each further builder 30% | Game files: buildingefficiency 0.6, extrabuildingefficiency 0.3. |
+| Favor cap | None | Owner (Greeks) and game files (all cultures). |
+| Start | 4 Sentry Towers for every pantheon | Owner; random map scripts place 4 SentryTower per player. |
+
+
 
 ## Icons
 

@@ -58,6 +58,7 @@ export const ModifierSchema = z.strictObject({
     "popCap",
     "buildRate",
     "pop",
+    "promotionTime",
   ]),
   /** mul: × value · add: + value · pct: + value × base, summed with other pct (game "BasePercent"). */
   op: z.enum(["mul", "add", "pct"]),
@@ -151,6 +152,8 @@ export const ResearchSchema = z.strictObject({
   age: AgeSchema,
   requires: z.array(z.string()).optional(),
   effects: z.array(ModifierSchema),
+  /** Resources per minute once researched (e.g. Vaults of Erebus). */
+  trickle: CostSchema.optional(),
   meta: MetaSchema,
   fieldMeta: FieldMetaSchema,
 });
@@ -341,6 +344,10 @@ export const CommonSchema = z.strictObject({
     popReservedAt: z.enum(["start", "end"]),
     affordableWindow: z.number().nonnegative(),
     norseFavorPerMinute: z.number().nonnegative(),
+    /** Share of the 2nd builder's rate that counts (game: buildingefficiency). */
+    secondBuilderEfficiency: z.number().nonnegative().optional(),
+    /** Share of each further builder's rate (game: extrabuildingefficiency). */
+    extraBuilderEfficiency: z.number().nonnegative().optional(),
   }),
   meta: MetaSchema,
 });

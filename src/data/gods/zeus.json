@@ -10,9 +10,18 @@
   "modifiers": [
     {
       "target": "favorRate",
-      "op": "mul",
-      "value": 1.2,
-      "note": "Villagers gather favor 20% faster."
+      "op": "pct",
+      "value": 0.2,
+      "note": "Villagers gather favor 20% faster (Gather WorkRate on AbstractTemple x1.20 BasePercent)."
+    },
+    {
+      "target": "pop",
+      "op": "add",
+      "value": -1,
+      "scope": {
+        "tags": ["myth"]
+      },
+      "note": "Myth units cost 1 less population (PopulationCount -1 Absolute on MythUnit)."
     }
   ],
   "startExtras": {
@@ -32,5 +41,13 @@
     "checkedAt": "2026-10-17",
     "confidence": "high",
     "note": "Not expressible: myth units cost 1 less population; infantry +60% damage vs buildings; Hoplites +15% speed."
+  },
+  "fieldMeta": {
+    "modifiers": {
+      "source": "Game files 19.17020 (techtree.xml)",
+      "checkedAt": "2026-10-18",
+      "confidence": "high",
+      "note": "ArchaicAgeZeus: favor x1.20 BasePercent, MythUnit PopulationCount -1; starts with 10 favor (major_gods.xml startingresources)."
+    }
   }
 }

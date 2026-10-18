@@ -20,8 +20,8 @@
     },
     {
       "target": "gatherRate",
-      "op": "mul",
-      "value": 1.25,
+      "op": "pct",
+      "value": 0.25,
       "scope": {
         "ids": ["dwarf"],
         "sources": ["hunt", "herd", "berries", "farm", "wood"]
@@ -30,8 +30,8 @@
     },
     {
       "target": "cost",
-      "op": "mul",
-      "value": 0.9,
+      "op": "pct",
+      "value": -0.1,
       "scope": {
         "ids": [
           "copper-weapons-thor",
@@ -52,7 +52,7 @@
           "dwarven-breastplate-thor"
         ]
       },
-      "note": "Armory technologies 10% cheaper (favor too, e.g. Hammer of Thunder 113 gold + 9 favor)."
+      "note": "Armory technologies (techtype ArmoryTechnology) cost x0.90 BasePercent, favor included."
     }
   ],
   "startExtras": {
@@ -98,6 +98,12 @@
       "checkedAt": "2026-10-17",
       "confidence": "medium",
       "note": "Override semantics to be confirmed by the owner (see PENDING)."
+    },
+    "modifiers": {
+      "source": "Game files 19.17020 (techtree.xml)",
+      "checkedAt": "2026-10-18",
+      "confidence": "high",
+      "note": "ArchaicAgeThor: Dwarf gather x1.25 BasePercent (hunt, herd, berries, farm, wood), Dwarf cost Gold -10 Absolute, ArmoryTechnology cost x0.90 BasePercent."
     }
   }
 }

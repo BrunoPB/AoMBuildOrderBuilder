@@ -1220,8 +1220,12 @@ class Simulation {
     const missing = this.afford(cost);
     if (missing) return this.block(i, this.noResource(cost, missing));
     this.pay(cost);
+    const time = applyModifiers(def.promotion.time, "promotionTime", this.mods(), {
+      id: def.promotion.to,
+      tags: hero?.tags,
+    });
     this.promotions.push({
-      at: this.t + def.promotion.time,
+      at: this.t + time,
       from: def.id,
       to: def.promotion.to,
       workers: workers.map((w) => w.uid),
@@ -1308,11 +1312,19 @@ class Simulation {
     if (cap !== undefined) this.res.favor = Math.min(this.res.favor, cap);
     for (const site of this.sites) {
       if (site.state === "building") {
-        let speed = 0;
-        for (const uid of site.builders) {
-          const w = this.workers.find((x) => x.uid === uid);
-          if (w) speed += this.unit(w.unit)?.worker?.buildRate ?? 1;
-        }
+        const rates = site.builders
+          .map((uid) => this.workers.find((x) => x.uid === uid))
+          .filter((w): w is Worker => w !== undefined)
+          .map((w) => this.unit(w.unit)?.worker?.buildRate ?? 1)
+          .sort((a, b) => b - a);
+        const d = this.data.common.defaults;
+        const share = (k: number) =>
+          k === 0
+            ? 1
+            : k === 1
+              ? (d.secondBuilderEfficiency ?? 1)
+              : (d.extraBuilderEfficiency ?? 1);
+        const speed = rates.reduce((sum, r, k) => sum + r * share(k), 0);
         site.progress += (dt * speed * site.speedMul) / Math.max(site.time, EPS);
       }
       for (const job of site.jobs) job.remaining -= dt;
@@ -1377,7 +1389,11 @@ class Simulation {
   finishJob(job: Job): boolean {
     if (job.kind === "unit") {
       const def = this.unit(job.unit);
-      if (this.s.popReservedAt === "end" && def && this.popUsed() + this.unitPop(def) > this.popCap() + EPS) {
+      if (
+        this.s.popReservedAt === "end" &&
+        def &&
+        this.popUsed() + this.unitPop(def) > this.popCap() + EPS
+      ) {
         job.held = true;
         return false;
       }
@@ -1508,45 +1524,66 @@ class Simulation {
     }
   }
 
+  /** Resource trickles; favor trickles also get favorRate modifiers scoped to their source. */
   trickles(dt: number): void {
-    const add = (cost: Cost | undefined, times = 1) => {
+    const mods = this.mods();
+    const add = (cost: Cost | undefined, ctx: ModContext, times = 1) => {
       for (const [r, v] of Object.entries(cost ?? {}) as [ResourceId, number][]) {
-        this.res[r] += (v * times * dt) / 60;
+        const rate = r === "favor" ? applyModifiers(v, "favorRate", mods, ctx) : v;
+        this.res[r] += (rate * times * dt) / 60;
       }
     };
-    for (const w of this.workers) add(this.unit(w.unit)?.trickle);
-    for (const [u, n] of this.others) add(this.unit(u)?.trickle, n);
-    for (const site of this.sites) if (site.state === "ready") add(site.def.trickle);
-    for (const e of this.effects) add(e.trickle);
+    const unitCtx = (id: string): ModContext => ({ id, tags: this.unit(id)?.tags });
+    for (const w of this.workers) add(this.unit(w.unit)?.trickle, unitCtx(w.unit));
+    for (const [u, n] of this.others) add(this.unit(u)?.trickle, unitCtx(u), n);
+    for (const site of this.sites) {
+      if (site.state === "ready") add(site.def.trickle, { id: site.def.id, tags: site.def.tags });
+    }
+    for (const r of this.researched) {
+      const def = this.p.researches.get(r);
+      add(def?.trickle, { id: r, tags: def?.tags });
+    }
+    for (const e of this.effects) add(e.trickle, {});
   }
 
+  /** Favor per pantheon rule; favorRate modifiers apply per source (unit or building). */
   favor(dt: number): void {
     const rule = this.p.def.favor;
+    const mods = this.mods();
+    const rated = (base: number, id?: string, tags?: string[]) =>
+      applyModifiers(base, "favorRate", mods, { id, tags });
     let perMin = 0;
     switch (rule.type) {
       case "oracles": {
         const rate = this.s.oracleRate ?? rule.defaultRate;
-        perMin = this.unitCount(rule.unit) * rate;
-        if (rule.heroUnit) perMin += this.unitCount(rule.heroUnit) * rate * rule.heroMultiplier;
+        perMin = this.unitCount(rule.unit) * rated(rate, rule.unit, this.unit(rule.unit)?.tags);
+        if (rule.heroUnit) {
+          const hero = rated(
+            rate * rule.heroMultiplier,
+            rule.heroUnit,
+            this.unit(rule.heroUnit)?.tags,
+          );
+          perMin += this.unitCount(rule.heroUnit) * hero;
+        }
         break;
       }
       case "templeWorkers": {
         const n = this.workers.filter((w) => w.task.kind === "favor").length;
         if (n > 0 && this.hasBuilding(rule.building)) {
-          perMin = rule.table[Math.min(n, rule.table.length) - 1] ?? 0;
+          perMin = rated(rule.table[Math.min(n, rule.table.length) - 1] ?? 0, rule.building);
         }
         break;
       }
       case "monuments":
         for (const site of this.sites) {
-          if (site.state !== "building") perMin += rule.rates[site.def.id] ?? 0;
+          const base = rule.rates[site.def.id];
+          if (site.state !== "building" && base) perMin += rated(base, site.def.id, site.def.tags);
         }
         break;
       case "combat":
-        perMin = this.s.norseFavorPerMinute || rule.defaultPerMinute;
+        perMin = rated(this.s.norseFavorPerMinute || rule.defaultPerMinute);
         break;
     }
-    perMin = applyModifiers(perMin, "favorRate", this.mods(), {});
     this.res.favor += (perMin * dt) / 60;
   }
 

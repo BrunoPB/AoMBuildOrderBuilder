@@ -18,7 +18,8 @@
       "oracle": 3
     },
     "buildings": {
-      "town-center": 1
+      "town-center": 1,
+      "sentry-tower": 4
     },
     "popCap": 15
   },
@@ -31,10 +32,10 @@
     "heroMultiplier": 1.44,
     "heroUnit": "oracle-hero",
     "meta": {
-      "source": "project owner (sources); https://ageofempires.fandom.com/wiki/Oracle_(unit)",
-      "checkedAt": "2026-10-17",
+      "source": "project owner (sources); https://ageofempires.fandom.com/wiki/Oracle_(unit) ; Game files 19.17020 (proto.xml Oracle/OracleHero AutoGatherFavor)",
+      "checkedAt": "2026-10-18",
       "confidence": "high",
-      "note": "Per Oracle, favor/min 0.6 (moving/no LOS) to ~3.4 (full LOS 25, no overlap); hero ~4.9 max (+44%). Overlapping LOS counts once. Favor cap 200."
+      "note": "Per Oracle, favor/min 0.6 (moving/no LOS) to ~3.4 (full LOS 25, no overlap); hero ~4.9 max (+44%). Overlapping LOS counts once. Favor cap: the game files (major_gods.xml, techtree.xml) define no favor cap; the wiki says favor has no cap since Retold; aomr-analyzer lists 100 (Greeks) / 200 (others) but the owner confirmed no cap for Greeks, so no favorCap is set (owner to verify in game). proto.xml: favor/s = 0.01 + modifymultiplier x (bonusLOS / 100)^2, bonusLOS grows +1/s while still (AutoLOS, decay 0.3) up to modifyratecap; Oracle multiplier 0.75 cap 25 (max 3.41/min), Oracle Hero 0.80 cap 30 (max 4.92/min, x1.44)."
     }
   },
   "gods": ["kronos", "oranos", "gaia"],
@@ -144,16 +145,16 @@
           "note": "Measured ~30 s in game; wiki and aomr-analyzer list 28 s (28 since update 18.65484)."
         },
         "worker": {
-          "source": "https://ageofempires.fandom.com/wiki/Citizen",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "buildRate 1.5: Citizens build 50% faster than base build times (wiki). Consistent with the measured Krush Counter-Barracks (base 25 s, started 3:05 near a Manor, ready 3:20 = 25/1.5/1.25 ≈ 13 s) and the Temple (started 0:35, ready ~1:05 = 40/1.5 ≈ 27 s)."
+          "source": "Game files 19.17020 (proto.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "VillagerAtlantean Build rate: Building 1.5, Settlement/VillageCenter 1.25 (Town Center and Village Center buildTime are scaled so a Citizen takes 150/1.25 = 120 s). Gather rates from earlier sources."
         },
         "promotion": {
-          "source": "https://ageofempires.fandom.com/wiki/Citizen; https://aomr-analyzer.com/frise/civ/atlantean",
-          "checkedAt": "2026-10-17",
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
           "confidence": "high",
-          "note": "Promotion cost 65f 10w 2 favor, 7 s (analyzer hero total 150f 25w 2fav = base + promotion). Gaia: -25%. Heart of the Titans: x0.25 time."
+          "note": "Promotion tech <Unit>ToHero (techtype HeroPromotion): researchpoints 7, cost as listed. It is a transform command researched on the unit itself (proto.xml transformcommand), not a building queue. Heart of the Titans: HeroPromotion research time x0.25. Rheia's Gift does not change the favor cost. Gaia: VillagerAtlanteanToHero cost x0.75 BasePercent (food, wood, favor) -> 48.75f 7.5w 1.5 favor."
         }
       },
       "plural": {
@@ -201,6 +202,14 @@
       "plural": {
         "pt-BR": "Cidadãos (Heróis)",
         "en": "Citizens (Hero)"
+      },
+      "fieldMeta": {
+        "worker": {
+          "source": "Game files 19.17020 (proto.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "VillagerAtlanteanHero Build rate: Building 1.65, Settlement/VillageCenter 1.375 (both x1.1 the Citizen)."
+        }
       }
     },
     {
@@ -242,6 +251,12 @@
           "checkedAt": "2026-10-17",
           "confidence": "medium",
           "note": "Wiki formula: favor/s = 0.01 + 0.75*(bonusLOS/100)^2, bonusLOS 0..25 -> 0.6..3.4 favor/min. 2.0 is a planning default."
+        },
+        "promotion": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Promotion tech <Unit>ToHero (techtype HeroPromotion): researchpoints 7, cost as listed. It is a transform command researched on the unit itself (proto.xml transformcommand), not a building queue. Heart of the Titans: HeroPromotion research time x0.25. Rheia's Gift does not change the favor cost."
         }
       }
     },
@@ -310,6 +325,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "high",
         "note": "pt-BR name not verified against the official localization."
+      },
+      "fieldMeta": {
+        "promotion": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Promotion tech <Unit>ToHero (techtype HeroPromotion): researchpoints 7, cost as listed. It is a transform command researched on the unit itself (proto.xml transformcommand), not a building queue. Heart of the Titans: HeroPromotion research time x0.25. Rheia's Gift does not change the favor cost."
+        }
       }
     },
     {
@@ -368,6 +391,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "high",
         "note": "pt-BR name not verified against the official localization."
+      },
+      "fieldMeta": {
+        "promotion": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Promotion tech <Unit>ToHero (techtype HeroPromotion): researchpoints 7, cost as listed. It is a transform command researched on the unit itself (proto.xml transformcommand), not a building queue. Heart of the Titans: HeroPromotion research time x0.25. Rheia's Gift does not change the favor cost."
+        }
       }
     },
     {
@@ -432,6 +463,12 @@
           "checkedAt": "2026-10-17",
           "confidence": "high",
           "note": "Owner: 10 s (sources + measured). Wiki and aomr-analyzer list 9.5 s."
+        },
+        "promotion": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Promotion tech <Unit>ToHero (techtype HeroPromotion): researchpoints 7, cost as listed. It is a transform command researched on the unit itself (proto.xml transformcommand), not a building queue. Heart of the Titans: HeroPromotion research time x0.25. Rheia's Gift does not change the favor cost."
         }
       }
     },
@@ -491,6 +528,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "high",
         "note": "pt-BR name not verified against the official localization."
+      },
+      "fieldMeta": {
+        "promotion": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Promotion tech <Unit>ToHero (techtype HeroPromotion): researchpoints 7, cost as listed. It is a transform command researched on the unit itself (proto.xml transformcommand), not a building queue. Heart of the Titans: HeroPromotion research time x0.25. Rheia's Gift does not change the favor cost."
+        }
       }
     },
     {
@@ -549,6 +594,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "high",
         "note": "pt-BR name not verified against the official localization."
+      },
+      "fieldMeta": {
+        "promotion": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Promotion tech <Unit>ToHero (techtype HeroPromotion): researchpoints 7, cost as listed. It is a transform command researched on the unit itself (proto.xml transformcommand), not a building queue. Heart of the Titans: HeroPromotion research time x0.25. Rheia's Gift does not change the favor cost."
+        }
       }
     },
     {
@@ -607,6 +660,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "high",
         "note": "pt-BR name not verified against the official localization."
+      },
+      "fieldMeta": {
+        "promotion": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Promotion tech <Unit>ToHero (techtype HeroPromotion): researchpoints 7, cost as listed. It is a transform command researched on the unit itself (proto.xml transformcommand), not a building queue. Heart of the Titans: HeroPromotion research time x0.25. Rheia's Gift does not change the favor cost."
+        }
       }
     },
     {
@@ -665,6 +726,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "high",
         "note": "pt-BR name not verified against the official localization."
+      },
+      "fieldMeta": {
+        "promotion": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Promotion tech <Unit>ToHero (techtype HeroPromotion): researchpoints 7, cost as listed. It is a transform command researched on the unit itself (proto.xml transformcommand), not a building queue. Heart of the Titans: HeroPromotion research time x0.25. Rheia's Gift does not change the favor cost."
+        }
       }
     },
     {
@@ -723,6 +792,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "high",
         "note": "pt-BR name not verified against the official localization."
+      },
+      "fieldMeta": {
+        "promotion": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Promotion tech <Unit>ToHero (techtype HeroPromotion): researchpoints 7, cost as listed. It is a transform command researched on the unit itself (proto.xml transformcommand), not a building queue. Heart of the Titans: HeroPromotion research time x0.25. Rheia's Gift does not change the favor cost."
+        }
       }
     },
     {
@@ -1276,7 +1353,7 @@
         "wood": 350,
         "gold": 350
       },
-      "buildTime": 150,
+      "buildTime": 180,
       "popCap": 15,
       "age": "archaic",
       "trains": ["citizen"],
@@ -1289,10 +1366,10 @@
       },
       "fieldMeta": {
         "buildTime": {
-          "source": "https://ageofempires.fandom.com/wiki/Town_Center_(Age_of_Mythology)",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Base 150 s; wiki says a Citizen builds it in 120 s (+25% for Town Centers)."
+          "source": "Game files 19.17020 (proto.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "buildpoints 150. Citizens build Settlements/Village Centers at rate 1.25 instead of their usual 1.5, so the value is scaled to 150 x 1.5 / 1.25 = 180: a Citizen (1.5) takes 120 s, a Citizen Hero (1.65) 109 s."
         }
       }
     },
@@ -1308,7 +1385,7 @@
         "wood": 350,
         "gold": 350
       },
-      "buildTime": 150,
+      "buildTime": 180,
       "popCap": 0,
       "age": "classical",
       "trains": ["citizen"],
@@ -1321,10 +1398,10 @@
       },
       "fieldMeta": {
         "buildTime": {
-          "source": "https://ageofempires.fandom.com/wiki/Village_Center",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Base 150 s; wiki says a Citizen builds it in 120 s."
+          "source": "Game files 19.17020 (proto.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "buildpoints 150. Citizens build Settlements/Village Centers at rate 1.25 instead of their usual 1.5, so the value is scaled to 150 x 1.5 / 1.25 = 180: a Citizen (1.5) takes 120 s, a Citizen Hero (1.65) 109 s."
         }
       }
     },
@@ -1514,10 +1591,10 @@
       },
       "fieldMeta": {
         "cost": {
-          "source": "https://ageofempires.fandom.com/wiki/Dock_(Age_of_Mythology); https://ageofempires.fandom.com/wiki/Atlanteans",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Wiki: Atlantean Docks cost 125 wood (Retold). aomr-analyzer shows 100 wood (generic proto, apparently without the Atlantean modifier)."
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "ArchaicAgeAtlantean assigns Dock wood cost 125 (generic Dock proto 100)."
         },
         "buildTime": {
           "source": "https://ageofempires.fandom.com/wiki/Dock_(Age_of_Mythology)",
@@ -1550,10 +1627,10 @@
       },
       "fieldMeta": {
         "cost": {
-          "source": "https://ageofempires.fandom.com/wiki/Farm_(Age_of_Mythology); https://ageofempires.fandom.com/wiki/Atlanteans",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Wiki: Atlantean Farms cost 150 wood (Retold). aomr-analyzer shows 75 wood (generic proto, apparently without the Atlantean modifier)."
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "ArchaicAgeAtlantean assigns Farm wood cost 150 (generic Farm proto 75, which aomr-analyzer shows)."
         },
         "buildTime": {
           "source": "https://ageofempires.fandom.com/wiki/Farm_(Age_of_Mythology)",
@@ -1830,10 +1907,10 @@
       },
       "fieldMeta": {
         "buildTime": {
-          "source": "https://ageofempires.fandom.com/wiki/Sky_Passage",
-          "checkedAt": "2026-10-17",
-          "confidence": "low",
-          "note": "Wiki lists 30 s without saying whether it is base or Citizen time."
+          "source": "Game files 19.17020 (proto.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "SkyPassage buildpoints 30 (base; a Citizen at 1.5 takes 20 s)."
         }
       }
     },
@@ -1863,10 +1940,10 @@
       },
       "fieldMeta": {
         "buildTime": {
-          "source": "https://ageofempires.fandom.com/wiki/Mirror_Tower_(Age_of_Mythology)",
-          "checkedAt": "2026-10-17",
-          "confidence": "low",
-          "note": "Wiki lists 60 s without saying whether it is base or Citizen time."
+          "source": "Game files 19.17020 (proto.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "MirrorTower buildpoints 60 (base; a Citizen at 1.5 takes 40 s)."
         }
       }
     },
@@ -1915,10 +1992,10 @@
       },
       "fieldMeta": {
         "buildTime": {
-          "source": "https://ageofempires.fandom.com/wiki/Wonder_(Age_of_Mythology)",
-          "checkedAt": "2026-10-17",
-          "confidence": "low",
-          "note": "Generic wiki value; Citizen-specific time not documented."
+          "source": "Game files 19.17020 (proto.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Wonder buildpoints 5400 (base)."
         }
       }
     }
@@ -1943,8 +2020,8 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.1,
+          "op": "pct",
+          "value": 0.1,
           "scope": {
             "sources": ["herd"]
           },
@@ -1956,6 +2033,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "high",
         "note": "pt-BR name not verified against the official localization."
+      },
+      "fieldMeta": {
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct."
+        }
       }
     },
     {
@@ -1977,8 +2062,8 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.1,
+          "op": "pct",
+          "value": 0.1,
           "scope": {
             "sources": ["wood"]
           }
@@ -1989,6 +2074,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "high",
         "note": "pt-BR name not verified against the official localization."
+      },
+      "fieldMeta": {
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct."
+        }
       }
     },
     {
@@ -2010,8 +2103,8 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.1,
+          "op": "pct",
+          "value": 0.1,
           "scope": {
             "sources": ["gold"]
           }
@@ -2022,6 +2115,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "high",
         "note": "pt-BR name not verified against the official localization."
+      },
+      "fieldMeta": {
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct."
+        }
       }
     },
     {
@@ -2043,8 +2144,8 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.1,
+          "op": "pct",
+          "value": 0.1,
           "scope": {
             "sources": ["farm"]
           }
@@ -2055,6 +2156,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "medium",
         "note": "pt-BR name not verified against the official localization."
+      },
+      "fieldMeta": {
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct."
+        }
       }
     },
     {
@@ -2077,8 +2186,8 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.1,
+          "op": "pct",
+          "value": 0.1,
           "scope": {
             "sources": ["farm"]
           }
@@ -2089,6 +2198,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "medium",
         "note": "Same technology as 'plow', made available one age earlier by Gaia's bonus (aomr-analyzer lists it in the archaic column for Gaia). Research only one of the two. Gaia's -35% cost is applied by the god modifier. pt-BR name not verified against the official localization."
+      },
+      "fieldMeta": {
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct. Same game tech as the non-Gaia one."
+        }
       }
     },
     {
@@ -2159,8 +2276,8 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.15,
+          "op": "pct",
+          "value": 0.15,
           "scope": {
             "sources": ["wood"]
           }
@@ -2171,6 +2288,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "medium",
         "note": "pt-BR name not verified against the official localization."
+      },
+      "fieldMeta": {
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct."
+        }
       }
     },
     {
@@ -2193,8 +2318,8 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.15,
+          "op": "pct",
+          "value": 0.15,
           "scope": {
             "sources": ["wood"]
           }
@@ -2205,6 +2330,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "medium",
         "note": "Same technology as 'bow-saw', made available one age earlier by Gaia's bonus (aomr-analyzer lists it in the classical column for Gaia). Research only one of the two. Gaia's -35% cost is applied by the god modifier. pt-BR name not verified against the official localization."
+      },
+      "fieldMeta": {
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct. Same game tech as the non-Gaia one."
+        }
       }
     },
     {
@@ -2226,8 +2359,8 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.15,
+          "op": "pct",
+          "value": 0.15,
           "scope": {
             "sources": ["gold"]
           }
@@ -2238,6 +2371,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "medium",
         "note": "pt-BR name not verified against the official localization."
+      },
+      "fieldMeta": {
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct."
+        }
       }
     },
     {
@@ -2260,8 +2401,8 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.15,
+          "op": "pct",
+          "value": 0.15,
           "scope": {
             "sources": ["gold"]
           }
@@ -2272,6 +2413,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "medium",
         "note": "Same technology as 'shaft-mine', made available one age earlier by Gaia's bonus (aomr-analyzer lists it in the classical column for Gaia). Research only one of the two. Gaia's -35% cost is applied by the god modifier. pt-BR name not verified against the official localization."
+      },
+      "fieldMeta": {
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct. Same game tech as the non-Gaia one."
+        }
       }
     },
     {
@@ -2293,8 +2442,8 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.1,
+          "op": "pct",
+          "value": 0.1,
           "scope": {
             "sources": ["farm"]
           }
@@ -2305,6 +2454,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "medium",
         "note": "pt-BR name not verified against the official localization."
+      },
+      "fieldMeta": {
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct."
+        }
       }
     },
     {
@@ -2327,8 +2484,8 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.1,
+          "op": "pct",
+          "value": 0.1,
           "scope": {
             "sources": ["farm"]
           }
@@ -2339,6 +2496,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "medium",
         "note": "Same technology as 'irrigation', made available one age earlier by Gaia's bonus (aomr-analyzer lists it in the classical column for Gaia). Research only one of the two. Gaia's -35% cost is applied by the god modifier. pt-BR name not verified against the official localization."
+      },
+      "fieldMeta": {
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct. Same game tech as the non-Gaia one."
+        }
       }
     },
     {
@@ -2360,8 +2525,8 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.2,
+          "op": "pct",
+          "value": 0.2,
           "scope": {
             "sources": ["wood"]
           }
@@ -2372,6 +2537,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "medium",
         "note": "pt-BR name not verified against the official localization."
+      },
+      "fieldMeta": {
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct."
+        }
       }
     },
     {
@@ -2394,8 +2567,8 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.2,
+          "op": "pct",
+          "value": 0.2,
           "scope": {
             "sources": ["wood"]
           }
@@ -2406,6 +2579,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "medium",
         "note": "Same technology as 'carpenters', made available one age earlier by Gaia's bonus (aomr-analyzer lists it in the heroic column for Gaia). Research only one of the two. Gaia's -35% cost is applied by the god modifier. pt-BR name not verified against the official localization."
+      },
+      "fieldMeta": {
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct. Same game tech as the non-Gaia one."
+        }
       }
     },
     {
@@ -2427,8 +2608,8 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.2,
+          "op": "pct",
+          "value": 0.2,
           "scope": {
             "sources": ["gold"]
           }
@@ -2439,6 +2620,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "medium",
         "note": "pt-BR name not verified against the official localization."
+      },
+      "fieldMeta": {
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct."
+        }
       }
     },
     {
@@ -2461,8 +2650,8 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.2,
+          "op": "pct",
+          "value": 0.2,
           "scope": {
             "sources": ["gold"]
           }
@@ -2473,6 +2662,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "medium",
         "note": "Same technology as 'quarry', made available one age earlier by Gaia's bonus (aomr-analyzer lists it in the heroic column for Gaia). Research only one of the two. Gaia's -35% cost is applied by the god modifier. pt-BR name not verified against the official localization."
+      },
+      "fieldMeta": {
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct. Same game tech as the non-Gaia one."
+        }
       }
     },
     {
@@ -2494,8 +2691,8 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.1,
+          "op": "pct",
+          "value": 0.1,
           "scope": {
             "sources": ["farm"]
           }
@@ -2506,6 +2703,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "medium",
         "note": "pt-BR name not verified against the official localization."
+      },
+      "fieldMeta": {
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct."
+        }
       }
     },
     {
@@ -2528,8 +2733,8 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.1,
+          "op": "pct",
+          "value": 0.1,
           "scope": {
             "sources": ["farm"]
           }
@@ -2540,6 +2745,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "medium",
         "note": "Same technology as 'flood-control', made available one age earlier by Gaia's bonus (aomr-analyzer lists it in the heroic column for Gaia). Research only one of the two. Gaia's -35% cost is applied by the god modifier. pt-BR name not verified against the official localization."
+      },
+      "fieldMeta": {
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct. Same game tech as the non-Gaia one."
+        }
       }
     },
     {
@@ -2562,16 +2775,16 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.2,
+          "op": "pct",
+          "value": 0.2,
           "scope": {
             "ids": ["citizen-hero"]
           }
         },
         {
           "target": "buildRate",
-          "op": "mul",
-          "value": 1.2,
+          "op": "pct",
+          "value": 0.2,
           "scope": {
             "ids": ["citizen-hero"]
           }
@@ -2582,6 +2795,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "high",
         "note": "Citizen Heroes +20% gather and build rate. Not available to Gaia (Gaia cannot pick Prometheus). pt-BR name not verified against the official localization."
+      },
+      "fieldMeta": {
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct."
+        }
       }
     },
     {
@@ -2603,8 +2824,8 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.5,
+          "op": "pct",
+          "value": 0.5,
           "scope": {
             "sources": ["fish"]
           }
@@ -2615,6 +2836,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "medium",
         "note": "pt-BR name not verified against the official localization."
+      },
+      "fieldMeta": {
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct."
+        }
       }
     },
     {
@@ -2636,8 +2865,8 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.5,
+          "op": "pct",
+          "value": 0.5,
           "scope": {
             "sources": ["fish"]
           },
@@ -2649,6 +2878,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "medium",
         "note": "pt-BR name not verified against the official localization."
+      },
+      "fieldMeta": {
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct."
+        }
       }
     },
     {
@@ -2779,6 +3016,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "medium",
         "note": "pt-BR name not verified against the official localization."
+      },
+      "fieldMeta": {
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "TrainPoints/BuildPoints/cost with relativity Percent (multiplicative) -> op mul; PopulationCapAddition Absolute -> add. Values confirmed."
+        }
       }
     },
     {
@@ -2861,6 +3106,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "medium",
         "note": "pt-BR name not verified against the official localization."
+      },
+      "fieldMeta": {
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "TrainPoints/BuildPoints/cost with relativity Percent (multiplicative) -> op mul; PopulationCapAddition Absolute -> add. Values confirmed."
+        }
       }
     },
     {
@@ -2981,12 +3234,21 @@
       "at": "temple",
       "age": "classical",
       "requires": ["prometheus"],
-      "effects": [],
+      "effects": [
+        {
+          "target": "promotionTime",
+          "op": "mul",
+          "value": 0.25,
+          "scope": {
+            "tags": ["hero"]
+          }
+        }
+      ],
       "meta": {
         "source": "https://ageofempires.fandom.com/wiki/Heart_of_the_Titans; https://aomr-analyzer.com/frise/civ/atlantean (cost)",
         "checkedAt": "2026-10-17",
         "confidence": "high",
-        "note": "Hero promotion time x0.25 (7 s -> 1.75 s); not expressible as a modifier. pt-BR name not verified against the official localization."
+        "note": "Hero promotion time x0.25 (7 s -> 1.75 s)."
       }
     },
     {
@@ -3328,6 +3590,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "high",
         "note": "Fanatics can be trained in the Heroic Age and train 20% faster. The age unlock is not expressible as a modifier. pt-BR name not verified against the official localization."
+      },
+      "fieldMeta": {
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "TrainPoints/BuildPoints/cost with relativity Percent (multiplicative) -> op mul; PopulationCapAddition Absolute -> add. Values confirmed."
+        }
       }
     },
     {
@@ -3375,13 +3645,13 @@
       "effects": [
         {
           "target": "cost",
-          "op": "mul",
-          "value": 0,
+          "op": "pct",
+          "value": -1,
           "scope": {
             "tags": ["myth-tech"],
             "resources": ["favor"]
           },
-          "note": "Myth technologies cost no favor; favor already spent on them is refunded (refund not modelled)."
+          "note": "Favor cost x0.00 BasePercent on all techs. Secrets of the Titans and hero promotions also get x2.00 BasePercent, so their favor cost is unchanged."
         }
       ],
       "meta": {
@@ -3389,6 +3659,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "high",
         "note": "pt-BR name not verified against the official localization."
+      },
+      "fieldMeta": {
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "RheiasGift: favor cost 0 for every tech except Secrets of the Titans and hero promotions (net unchanged); refunds favor already spent on techs (ResourceByKBStat totalTechCost, cap 2000), refund not modelled."
+        }
       }
     },
     {
@@ -3437,8 +3715,8 @@
       "effects": [
         {
           "target": "favorRate",
-          "op": "mul",
-          "value": 1.1,
+          "op": "pct",
+          "value": 0.1,
           "scope": {
             "ids": ["oracle", "oracle-hero"]
           }
@@ -3449,6 +3727,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "high",
         "note": "Oracles +10% favor generation; reveals enemy build queues in their LOS. pt-BR name not verified against the official localization."
+      },
+      "fieldMeta": {
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct. PropheticSight: AutoGatherFavor WorkRate x1.10 BasePercent on AbstractOracle. WorkRate is the 0.01/s base rate of the Oracle formula; whether it also scales the LOS term is not stated in the files (approximation)."
+        }
       }
     },
     {
@@ -3471,12 +3757,12 @@
       "effects": [
         {
           "target": "cost",
-          "op": "mul",
-          "value": 0.9,
+          "op": "pct",
+          "value": -0.1,
           "scope": {
             "tags": ["cavalry"]
           },
-          "note": "Cavalry -10% cost (wiki techbox; Theia page says 15%)."
+          "note": "AbstractCavalry food/wood/gold cost x0.90 BasePercent (-10%)."
         }
       ],
       "meta": {
@@ -3484,6 +3770,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "medium",
         "note": "Cavalry +10% speed; hero promotion of cavalry cheaper. pt-BR name not verified against the official localization."
+      },
+      "fieldMeta": {
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "PoseidonsSecret: cost x0.90 BasePercent on AbstractCavalry and on the HeroCavalry promotion techs (Turma, Contarius); the promotion part is not modelled."
+        }
       }
     },
     {
@@ -3780,6 +4074,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "high",
         "note": "pt-BR name not verified against the official localization."
+      },
+      "fieldMeta": {
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "TrainPoints/BuildPoints/cost with relativity Percent (multiplicative) -> op mul; PopulationCapAddition Absolute -> add. Values confirmed."
+        }
       }
     },
     {
@@ -3814,6 +4116,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "high",
         "note": "pt-BR name not verified against the official localization."
+      },
+      "fieldMeta": {
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "TrainPoints/BuildPoints/cost with relativity Percent (multiplicative) -> op mul; PopulationCapAddition Absolute -> add. Values confirmed."
+        }
       }
     },
     {
@@ -3847,6 +4157,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "high",
         "note": "pt-BR name not verified against the official localization."
+      },
+      "fieldMeta": {
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "TrainPoints/BuildPoints/cost with relativity Percent (multiplicative) -> op mul; PopulationCapAddition Absolute -> add. Values confirmed."
+        }
       }
     },
     {
@@ -3880,6 +4198,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "high",
         "note": "pt-BR name not verified against the official localization."
+      },
+      "fieldMeta": {
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "TrainPoints/BuildPoints/cost with relativity Percent (multiplicative) -> op mul; PopulationCapAddition Absolute -> add. Values confirmed."
+        }
       }
     },
     {
@@ -3912,6 +4238,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "high",
         "note": "pt-BR name not verified against the official localization."
+      },
+      "fieldMeta": {
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "TrainPoints/BuildPoints/cost with relativity Percent (multiplicative) -> op mul; PopulationCapAddition Absolute -> add. Values confirmed."
+        }
       }
     },
     {
@@ -3944,6 +4278,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "high",
         "note": "pt-BR name not verified against the official localization."
+      },
+      "fieldMeta": {
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "TrainPoints/BuildPoints/cost with relativity Percent (multiplicative) -> op mul; PopulationCapAddition Absolute -> add. Values confirmed."
+        }
       }
     },
     {

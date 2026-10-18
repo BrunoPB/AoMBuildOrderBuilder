@@ -40,12 +40,12 @@
     },
     {
       "target": "cost",
-      "op": "mul",
-      "value": 0.75,
+      "op": "pct",
+      "value": -0.25,
       "scope": {
         "ids": ["citizen-hero"]
       },
-      "note": "Promoting Citizens to Citizen Heroes costs -25% (applies to the promotion cost)."
+      "note": "VillagerAtlanteanToHero promotion cost x0.75 BasePercent (food, wood and favor): 48.75f 7.5w 1.5 favor."
     }
   ],
   "startExtras": {
@@ -76,5 +76,13 @@
     "checkedAt": "2026-10-17",
     "confidence": "high",
     "note": "startExtras REPLACES the 2 starting Citizens with 2 Citizen Heroes (citizen: 0, citizen-hero: 2), it is not additive. Economic Guild techs one age earlier: modelled by the '*-gaia' research entries. Not expressed: economic buildings grow Lush (1 HP/s regeneration)."
+  },
+  "fieldMeta": {
+    "modifiers": {
+      "source": "Game files 19.17020 (techtree.xml)",
+      "checkedAt": "2026-10-18",
+      "confidence": "high",
+      "note": "ArchaicAgeGaia: Economic Guild and its techs cost x0.65 Percent; Citizen promotion cost x0.75 BasePercent."
+    }
   }
 }

@@ -76,5 +76,13 @@
     "checkedAt": "2026-10-17",
     "confidence": "high",
     "note": "Other bonuses: Monuments block enemy god powers within 25 (50 when empowered); empowered Monuments heal nearby units (50 range). Prosperity recharge 120 s."
+  },
+  "fieldMeta": {
+    "modifiers": {
+      "source": "Game files 19.17020 (techtree.xml)",
+      "checkedAt": "2026-10-18",
+      "confidence": "high",
+      "note": "ArchaicAgeIsis: techAll food/wood/gold cost x0.90 Percent; Obelisk -5 gold; Priest Obelisk build x1.4 Percent; +5 pop on Town Centers; empower FavorGatherRate x1.667 BasePercent. Ops already match (mul/add)."
+    }
   }
 }

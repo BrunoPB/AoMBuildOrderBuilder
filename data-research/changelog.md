@@ -1,5 +1,15 @@
 # Data changelog
 
+## 2026-10-18 — game files pass (patch 19.17020)
+
+- Gather techs and other base-percent bonuses now use `op: "pct"` (they add on the base rate).
+- Multiple builders: 2nd at 60%, further at 30% (`common.defaults`).
+- Hunt default 1200 (owner estimate). 4 Sentry Towers at start for every pantheon.
+- Trickles: Hersir/Godi favor, Plenty, Vaults of Erebus, Flood of the Nile. Zeus myth units −1 pop.
+- Heart of the Titans: hero promotion time ×0.25. Gaia Citizen promotion −25%.
+- Atlantean Town/Village Center build time 180 (Citizens build them at 1.25).
+- No favor cap for any culture.
+
 ## 2026-10-17 — first version (game patch 19.17020)
 
 - Added the four base pantheons: units, buildings, researches, age ups, start state and favor rules.

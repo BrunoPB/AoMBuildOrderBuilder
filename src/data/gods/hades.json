@@ -48,5 +48,13 @@
     "checkedAt": "2026-10-17",
     "confidence": "high",
     "note": "Not expressible: 20% chance fallen human soldiers return as Shades; myth units +4/8/12/16% HP per age; ranged soldiers and heroes +1 range/LOS; ranged fortifications +2 range."
+  },
+  "fieldMeta": {
+    "modifiers": {
+      "source": "Game files 19.17020 (techtree.xml)",
+      "checkedAt": "2026-10-18",
+      "confidence": "high",
+      "note": "ArchaicAgeHades: listed ranged techs cost x0.666 Percent (multiplicative)."
+    }
   }
 }

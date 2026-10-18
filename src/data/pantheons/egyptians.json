@@ -20,7 +20,8 @@
       "pharaoh": 1
     },
     "buildings": {
-      "town-center": 1
+      "town-center": 1,
+      "sentry-tower": 4
     },
     "popCap": 15
   },
@@ -37,7 +38,7 @@
       "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml) (Monument AutoGather Favor 0.075/0.1/0.125/0.15/0.2 per s); project owner values",
       "checkedAt": "2026-10-17",
       "confidence": "high",
-      "note": "Matches the owner's 4.5/6/7.5/9/12 per min. Pharaoh-empowered Monument x1.2 (Isis x2.0, Ra Priest x1.12); Necropolis x1.25; Eclipse x1.5. Rates are per Monument and stack."
+      "note": "Matches the owner's 4.5/6/7.5/9/12 per min. Pharaoh-empowered Monument x1.2 (Isis x2.0, Ra Priest x1.12); Necropolis x1.25; Eclipse x1.5. Rates are per Monument and stack. Favor cap: the game files (major_gods.xml, techtree.xml) define no favor cap; the wiki says favor has no cap since Retold; aomr-analyzer lists 100 (Greeks) / 200 (others) but the owner confirmed no cap for Greeks, so no favorCap is set (owner to verify in game)."
     }
   },
   "gods": ["ra", "isis", "set"],
@@ -128,6 +129,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "high",
         "note": "Gather rates = proto <Gather> rates (per second) x60. Carry: 15 Food / 10 Wood / 10 Gold. Laborers build at 0.75 of the Greek Villager rate; building buildTime values already include this. Limit 100. TC auto-trains Laborers at start."
+      },
+      "fieldMeta": {
+        "worker": {
+          "source": "Game files 19.17020 (proto.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "VillagerEgyptian Build rate 0.75 (Greek Villager 1.0). Egyptian building buildTime values already include it (base buildpoints / 0.75), so buildRate stays 1."
+        }
       }
     },
     {
@@ -1770,7 +1779,17 @@
         "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Flood_of_the_Nile",
         "checkedAt": "2026-10-17",
         "confidence": "high",
-        "note": "Effect: Isis ensures the continued fertility of your lands, granting a steady trickle of Food. Grants a permanent Food trickle of 1.0 Food/second (60/min); the schema has no trickle modifier, so it is not in effects."
+        "note": "Food trickle 1.0/s (60/min), ResourceTrickleRate on the player."
+      },
+      "trickle": {
+        "food": 60
+      },
+      "fieldMeta": {
+        "trickle": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high"
+        }
       }
     },
     {
@@ -1840,8 +1859,8 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.1,
+          "op": "pct",
+          "value": 0.1,
           "scope": {
             "sources": ["herd"]
           },
@@ -1853,6 +1872,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "high",
         "note": "Effect: Livestock animals fatten faster and Villagers gather from them and Chickens more quickly. Villagers carry more Food. Game uses BasePercent: bonuses from several techs add on the base rate (e.g. +10% and +15% = +25%), they do not compound."
+      },
+      "fieldMeta": {
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct."
+        }
       }
     },
     {
@@ -1874,8 +1901,8 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.1,
+          "op": "pct",
+          "value": 0.1,
           "scope": {
             "sources": ["wood"]
           },
@@ -1887,6 +1914,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "high",
         "note": "Effect: Villagers gather Wood faster and carry more. Game uses BasePercent: bonuses from several techs add on the base rate (e.g. +10% and +15% = +25%), they do not compound."
+      },
+      "fieldMeta": {
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct."
+        }
       }
     },
     {
@@ -1908,8 +1943,8 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.1,
+          "op": "pct",
+          "value": 0.1,
           "scope": {
             "sources": ["gold"]
           },
@@ -1921,6 +1956,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "high",
         "note": "Effect: Villagers gather Gold faster and carry more. Game uses BasePercent: bonuses from several techs add on the base rate (e.g. +10% and +15% = +25%), they do not compound."
+      },
+      "fieldMeta": {
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct."
+        }
       }
     },
     {
@@ -1964,6 +2007,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "high",
         "note": "Effect: Ptah's invention reduces the cost of Farms and enables Laborers to build them faster. Also researchable at: temple."
+      },
+      "fieldMeta": {
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "TrainPoints/BuildPoints/cost with relativity Percent (multiplicative) -> op mul; PopulationCapAddition Absolute -> add. Values confirmed."
+        }
       }
     },
     {
@@ -2061,8 +2112,8 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.1,
+          "op": "pct",
+          "value": 0.1,
           "scope": {
             "sources": ["wood"]
           },
@@ -2074,6 +2125,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "high",
         "note": "Effect: Bast lends Laborers the Adze of Wepwawet, allowing them to fell trees and gather Wood faster. Game uses BasePercent: bonuses from several techs add on the base rate (e.g. +10% and +15% = +25%), they do not compound."
+      },
+      "fieldMeta": {
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct."
+        }
       }
     },
     {
@@ -2096,16 +2155,16 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.08,
+          "op": "pct",
+          "value": 0.08,
           "scope": {
             "sources": ["farm"]
           }
         },
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.1,
+          "op": "pct",
+          "value": 0.1,
           "scope": {
             "sources": ["hunt", "herd", "berries"]
           }
@@ -2116,6 +2175,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "high",
         "note": "Effect: Bast's cats protect Granaries from vermin, improving all Food gather rates. Game uses BasePercent: bonuses from several techs add on the base rate (e.g. +10% and +15% = +25%), they do not compound."
+      },
+      "fieldMeta": {
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct."
+        }
       }
     },
     {
@@ -2213,8 +2280,8 @@
       "effects": [
         {
           "target": "favorRate",
-          "op": "mul",
-          "value": 1.25,
+          "op": "pct",
+          "value": 0.25,
           "scope": {
             "ids": [
               "monument-to-villagers",
@@ -2231,6 +2298,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "high",
         "note": "Effect: Anubis increases the rate at which Monuments generate Favor."
+      },
+      "fieldMeta": {
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct. Necropolis: Autogather Favor WorkRate x1.25 BasePercent on AbstractMonument."
+        }
       }
     },
     {
@@ -2565,8 +2640,8 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.5,
+          "op": "pct",
+          "value": 0.5,
           "scope": {
             "sources": ["fish"]
           }
@@ -2577,6 +2652,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "high",
         "note": "Effect: Fishing Ships gather fish faster. Game uses BasePercent: bonuses from several techs add on the base rate (e.g. +10% and +15% = +25%), they do not compound."
+      },
+      "fieldMeta": {
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct."
+        }
       }
     },
     {
@@ -2647,8 +2730,8 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.1,
+          "op": "pct",
+          "value": 0.1,
           "scope": {
             "sources": ["farm"]
           }
@@ -2659,6 +2742,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "high",
         "note": "Effect: Villagers gather Food from Farms faster. Game uses BasePercent: bonuses from several techs add on the base rate (e.g. +10% and +15% = +25%), they do not compound."
+      },
+      "fieldMeta": {
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct."
+        }
       }
     },
     {
@@ -2834,16 +2925,18 @@
           "value": 0.85,
           "scope": {
             "tags": ["building"]
-          }
+          },
+          "note": "BuildPoints x0.85 Percent (multiplicative)."
         },
         {
           "target": "cost",
-          "op": "mul",
-          "value": 0.9,
+          "op": "pct",
+          "value": -0.1,
           "scope": {
             "tags": ["building"],
             "resources": ["gold"]
-          }
+          },
+          "note": "Building gold cost x0.90 BasePercent."
         }
       ],
       "meta": {
@@ -2851,6 +2944,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "high",
         "note": "Effect: Sobek improves the hitpoints of buildings, and lowers their cost and construction time. Also researchable at: village-center."
+      },
+      "fieldMeta": {
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "SunDriedMudBrick: cost Gold x0.90 BasePercent (pct -0.1); BuildPoints x0.85 Percent (mul); +10% HP not modelled."
+        }
       }
     },
     {
@@ -2948,12 +3049,13 @@
       "effects": [
         {
           "target": "cost",
-          "op": "mul",
-          "value": 0.7,
+          "op": "pct",
+          "value": -0.3,
           "scope": {
             "ids": ["priest"],
             "resources": ["gold"]
-          }
+          },
+          "note": "Priest gold cost x0.70 BasePercent."
         }
       ],
       "meta": {
@@ -2961,6 +3063,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "high",
         "note": "Effect: Nephthys increases the healing rate of Pharaohs and Priests, and lowers the cost of Priests. Also researchable at: town-center, village-center."
+      },
+      "fieldMeta": {
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "SpiritOfMaat: Priest cost Gold x0.70 BasePercent; heal rate x1.5 not modelled."
+        }
       }
     },
     {
@@ -3119,6 +3229,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "high",
         "note": "Effect: Barracks units train faster."
+      },
+      "fieldMeta": {
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "TrainPoints/BuildPoints/cost with relativity Percent (multiplicative) -> op mul; PopulationCapAddition Absolute -> add. Values confirmed."
+        }
       }
     },
     {
@@ -3224,6 +3342,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "high",
         "note": "Effect: Migdol Stronghold units train faster."
+      },
+      "fieldMeta": {
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "TrainPoints/BuildPoints/cost with relativity Percent (multiplicative) -> op mul; PopulationCapAddition Absolute -> add. Values confirmed."
+        }
       }
     },
     {
@@ -3307,6 +3433,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "high",
         "note": "Effect: Improves the hitpoints, attack, and range of your Town Centers, and lets each support additional population."
+      },
+      "fieldMeta": {
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "TrainPoints/BuildPoints/cost with relativity Percent (multiplicative) -> op mul; PopulationCapAddition Absolute -> add. Values confirmed."
+        }
       }
     },
     {
@@ -3502,8 +3636,8 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.5,
+          "op": "pct",
+          "value": 0.5,
           "scope": {
             "sources": ["fish"]
           },
@@ -3515,6 +3649,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "high",
         "note": "Effect: Fishing Ships gather fish faster and carry more. Game uses BasePercent: bonuses from several techs add on the base rate (e.g. +10% and +15% = +25%), they do not compound."
+      },
+      "fieldMeta": {
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct."
+        }
       }
     },
     {
@@ -3561,8 +3703,8 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.1,
+          "op": "pct",
+          "value": 0.1,
           "scope": {
             "sources": ["farm"]
           }
@@ -3573,6 +3715,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "high",
         "note": "Effect: Villagers gather Food from Farms faster. Game uses BasePercent: bonuses from several techs add on the base rate (e.g. +10% and +15% = +25%), they do not compound."
+      },
+      "fieldMeta": {
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct."
+        }
       }
     },
     {
@@ -3595,8 +3745,8 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.15,
+          "op": "pct",
+          "value": 0.15,
           "scope": {
             "sources": ["wood"]
           },
@@ -3608,6 +3758,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "high",
         "note": "Effect: Villagers gather Wood faster and carry more. Game uses BasePercent: bonuses from several techs add on the base rate (e.g. +10% and +15% = +25%), they do not compound."
+      },
+      "fieldMeta": {
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct."
+        }
       }
     },
     {
@@ -3630,8 +3788,8 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.15,
+          "op": "pct",
+          "value": 0.15,
           "scope": {
             "sources": ["gold"]
           },
@@ -3643,6 +3801,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "high",
         "note": "Effect: Villagers gather Gold faster and carry more. Game uses BasePercent: bonuses from several techs add on the base rate (e.g. +10% and +15% = +25%), they do not compound."
+      },
+      "fieldMeta": {
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct."
+        }
       }
     },
     {
@@ -3839,8 +4005,8 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.1,
+          "op": "pct",
+          "value": 0.1,
           "scope": {
             "sources": ["farm", "hunt", "herd", "berries", "wood", "gold"]
           }
@@ -3851,6 +4017,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "high",
         "note": "Effect: Thoth's secrets allow your Laborers to gather Food, Wood, and Gold faster. Also researchable at: village-center. Game uses BasePercent: bonuses from several techs add on the base rate (e.g. +10% and +15% = +25%), they do not compound."
+      },
+      "fieldMeta": {
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct."
+        }
       }
     },
     {
@@ -3873,13 +4047,22 @@
       "effects": [
         {
           "target": "cost",
-          "op": "mul",
-          "value": 0.9,
+          "op": "pct",
+          "value": -0.1,
           "scope": {
             "ids": ["war-elephant"],
             "resources": ["food", "gold"]
           },
-          "note": "Also -1 population per War Elephant and +10% attack (not modelled)."
+          "note": "War Elephant food and gold cost x0.90 BasePercent. +10% hand attack not modelled."
+        },
+        {
+          "target": "pop",
+          "op": "add",
+          "value": -1,
+          "scope": {
+            "ids": ["war-elephant"]
+          },
+          "note": "PopulationCount -1 Absolute."
         }
       ],
       "meta": {
@@ -3887,6 +4070,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "high",
         "note": "Effect: Thoth makes War Elephants stronger, cheaper, and reduces their population cost."
+      },
+      "fieldMeta": {
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "TusksOfApedemak: cost x0.90 BasePercent (Food, Gold), PopulationCount -1 Absolute."
+        }
       }
     },
     {
@@ -4047,6 +4238,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "high",
         "note": "Effect: Barracks units train faster."
+      },
+      "fieldMeta": {
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "TrainPoints/BuildPoints/cost with relativity Percent (multiplicative) -> op mul; PopulationCapAddition Absolute -> add. Values confirmed."
+        }
       }
     },
     {
@@ -4156,6 +4355,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "high",
         "note": "Effect: Migdol Stronghold units train faster."
+      },
+      "fieldMeta": {
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "TrainPoints/BuildPoints/cost with relativity Percent (multiplicative) -> op mul; PopulationCapAddition Absolute -> add. Values confirmed."
+        }
       }
     },
     {
@@ -4407,6 +4614,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "high",
         "note": "Effect: Ships are built faster."
+      },
+      "fieldMeta": {
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "TrainPoints/BuildPoints/cost with relativity Percent (multiplicative) -> op mul; PopulationCapAddition Absolute -> add. Values confirmed."
+        }
       }
     },
     {
@@ -4454,8 +4669,8 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.1,
+          "op": "pct",
+          "value": 0.1,
           "scope": {
             "sources": ["farm"]
           }
@@ -4466,6 +4681,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "high",
         "note": "Effect: Villagers gather Food from Farms faster. Game uses BasePercent: bonuses from several techs add on the base rate (e.g. +10% and +15% = +25%), they do not compound."
+      },
+      "fieldMeta": {
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct."
+        }
       }
     },
     {
@@ -4488,8 +4711,8 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.2,
+          "op": "pct",
+          "value": 0.2,
           "scope": {
             "sources": ["wood"]
           },
@@ -4501,6 +4724,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "high",
         "note": "Effect: Villagers gather Wood faster and carry more. Game uses BasePercent: bonuses from several techs add on the base rate (e.g. +10% and +15% = +25%), they do not compound."
+      },
+      "fieldMeta": {
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct."
+        }
       }
     },
     {
@@ -4523,8 +4754,8 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.2,
+          "op": "pct",
+          "value": 0.2,
           "scope": {
             "sources": ["gold"]
           },
@@ -4536,6 +4767,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "high",
         "note": "Effect: Villagers gather Gold faster and carry more. Game uses BasePercent: bonuses from several techs add on the base rate (e.g. +10% and +15% = +25%), they do not compound."
+      },
+      "fieldMeta": {
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct."
+        }
       }
     },
     {

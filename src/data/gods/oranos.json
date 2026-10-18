@@ -33,10 +33,10 @@
   },
   "fieldMeta": {
     "modifiers": {
-      "source": "https://aomr-analyzer.com/gods/oranos; https://ageofempires.fandom.com/wiki/Oracle_(unit)",
-      "checkedAt": "2026-10-17",
-      "confidence": "medium",
-      "note": "+25% from aomr-analyzer; applies only at full LOS."
+      "source": "Game files 19.17020 (techtree.xml)",
+      "checkedAt": "2026-10-18",
+      "confidence": "high",
+      "note": "ArchaicAgeOranos: Oracle AutoGatherFavor and AutoLOS ModifyRateCap +4 Absolute (25 -> 29). Not a flat multiplier: at full LOS a plain Oracle goes 3.41 -> 4.38 favor/min (+28%); the x1.25 here is an approximation."
     }
   }
 }

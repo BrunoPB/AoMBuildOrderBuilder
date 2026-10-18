@@ -7,13 +7,13 @@
     },
     "icon": "resources/source-hunt",
     "resource": "food",
-    "defaultAmount": 1400,
+    "defaultAmount": 1200,
     "fallback": "berries",
     "meta": {
-      "source": "https://ageofempires.fandom.com/wiki/Deer; https://github.com/Skrylas/AoMR-RMS-SkirmishMapPack (map scripts)",
-      "checkedAt": "2026-10-17",
-      "confidence": "low",
-      "note": "Typical starting hunt ~7 Deer x 200 food (Deer/Gazelle/Elk 200 each, Aurochs 500, since update 18.27100). Varies by map; decay 12 food/min once killed is not modelled."
+      "source": "owner estimate",
+      "checkedAt": "2026-10-18",
+      "confidence": "medium",
+      "note": "Owner: typical hunt near the base is about 1200 food; varies a lot by map (Deer/Gazelle/Elk 200 each, Aurochs 500). Decay 12 food/min once killed is not modelled."
     }
   },
   {

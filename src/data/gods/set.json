@@ -56,5 +56,13 @@
     "checkedAt": "2026-10-17",
     "confidence": "high",
     "note": "Other bonuses: Pharaoh summons Animals of Set (Favor); Priests convert wild animals (-25% Food); +5% speed for Spearmen, Axemen, Slingers. Free animals on age-up (not expressible): Classical 1 Hyena + 2 Gazelles of Set, Heroic 1 Crocodile + 2 Giraffes of Set, Mythic 1 Rhinoceros + 2 Hippopotamuses of Set (spawn at a Temple). Vision recharge 240 s."
+  },
+  "fieldMeta": {
+    "modifiers": {
+      "source": "Game files 19.17020 (techtree.xml)",
+      "checkedAt": "2026-10-18",
+      "confidence": "high",
+      "note": "ArchaicAgeSet: Barracks/Migdol Stronghold/Siege Works gold x0.75 Percent; starts with 1 Baboon of Set (major_gods.xml)."
+    }
   }
 }

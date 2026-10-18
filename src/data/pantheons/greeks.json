@@ -19,7 +19,8 @@
       "kataskopos": 1
     },
     "buildings": {
-      "town-center": 1
+      "town-center": 1,
+      "sentry-tower": 4
     },
     "popCap": 15
   },
@@ -27,7 +28,7 @@
     "type": "templeWorkers",
     "building": "temple",
     "table": [
-      6.0, 11.11, 15.53, 19.41, 22.85, 25.94, 28.75, 31.3, 33.66, 35.83, 37.86, 39.76, 41.55, 43.24,
+      6, 11.11, 15.53, 19.41, 22.85, 25.94, 28.75, 31.3, 33.66, 35.83, 37.86, 39.76, 41.55, 43.24,
       44.84, 46.37, 47.82, 49.22, 50.56, 51.85, 53.1, 54.31, 55.48, 56.61, 57.72, 58.8, 59.85,
       60.88, 61.89, 62.88
     ],
@@ -35,7 +36,7 @@
       "source": "https://ageofempires.fandom.com/wiki/Villager_(Age_of_Mythology)#Favor_generation_rates ; measured (owner: 1 villager 6/min, 8 villagers 31.3/min)",
       "checkedAt": "2026-10-17",
       "confidence": "high",
-      "note": "Retold formula (since update 19.14612): favor/s = N * M * (1/(N + 10.1111) + 0.01), N = villagers praying across all Temples, M = 1 (Zeus or Golden Apples: 1.2, applied via favorRate modifiers). Values here are favor/min for N = 1..30, M = 1; matches owner measurements (6 and 31.3) and the wiki table (1..16). No hard limit on praying villagers is documented; extrapolate with the formula beyond 30. Favor cap: aomr-analyzer says 100 for Greeks, wiki says favor has no cap since Retold (unresolved, see PENDING)."
+      "note": "Retold formula (since update 19.14612): favor/s = N * M * (1/(N + 10.1111) + 0.01), N = villagers praying across all Temples, M = 1 (Zeus or Golden Apples: 1.2, applied via favorRate modifiers). Values here are favor/min for N = 1..30, M = 1; matches owner measurements (6 and 31.3) and the wiki table (1..16). No hard limit on praying villagers is documented; extrapolate with the formula beyond 30. Favor cap: the game files (major_gods.xml, techtree.xml) define no favor cap; the wiki says favor has no cap since Retold; aomr-analyzer lists 100 (Greeks) / 200 (others) but the owner confirmed no cap for Greeks, so no favorCap is set (owner to verify in game)."
     }
   },
   "gods": ["zeus", "hades", "poseidon"],
@@ -1366,10 +1367,10 @@
       },
       "fieldMeta": {
         "trainTime": {
-          "source": "https://ageofempires.fandom.com/wiki/Carcinos",
-          "checkedAt": "2026-10-17",
-          "confidence": "low",
-          "note": "Train time from the wiki only (analyzer unit data has no train time)."
+          "source": "Game files 19.17020 (proto.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Carcinos trainpoints 9."
         }
       }
     },
@@ -2075,7 +2076,7 @@
       "cost": {
         "gold": 15
       },
-      "buildTime": 0,
+      "buildTime": 15,
       "age": "archaic",
       "meta": {
         "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Wooden_Gate",
@@ -2085,10 +2086,10 @@
       },
       "fieldMeta": {
         "buildTime": {
-          "source": "https://ageofempires.fandom.com/wiki/Wooden_Gate",
-          "checkedAt": "2026-10-17",
-          "confidence": "low",
-          "note": "Build time from the wiki only (analyzer has no build times)."
+          "source": "Game files 19.17020 (proto.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "medium",
+          "note": "WallGate buildpoints 15, cost 15 gold. Assumes the wall-to-gate conversion builds a WallGate foundation."
         }
       }
     },
@@ -2144,8 +2145,8 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.1,
+          "op": "pct",
+          "value": 0.1,
           "scope": {
             "sources": ["herd"]
           },
@@ -2163,6 +2164,12 @@
           "checkedAt": "2026-10-17",
           "confidence": "medium",
           "note": "Research time from the wiki only (analyzer has no research times)."
+        },
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct."
         }
       }
     },
@@ -2185,12 +2192,11 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.1,
+          "op": "pct",
+          "value": 0.1,
           "scope": {
             "sources": ["farm"]
-          },
-          "note": "Assumed to stack multiplicatively with other gather-rate techs."
+          }
         }
       ],
       "meta": {
@@ -2204,6 +2210,12 @@
           "checkedAt": "2026-10-17",
           "confidence": "medium",
           "note": "Research time from the wiki only (analyzer has no research times)."
+        },
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct."
         }
       }
     },
@@ -2227,12 +2239,11 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.1,
+          "op": "pct",
+          "value": 0.1,
           "scope": {
             "sources": ["farm"]
-          },
-          "note": "Assumed to stack multiplicatively with other gather-rate techs."
+          }
         }
       ],
       "meta": {
@@ -2246,6 +2257,12 @@
           "checkedAt": "2026-10-17",
           "confidence": "medium",
           "note": "Research time from the wiki only (analyzer has no research times)."
+        },
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct."
         }
       }
     },
@@ -2269,12 +2286,11 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.1,
+          "op": "pct",
+          "value": 0.1,
           "scope": {
             "sources": ["farm"]
-          },
-          "note": "Assumed to stack multiplicatively with other gather-rate techs."
+          }
         }
       ],
       "meta": {
@@ -2288,6 +2304,12 @@
           "checkedAt": "2026-10-17",
           "confidence": "medium",
           "note": "Research time from the wiki only (analyzer has no research times)."
+        },
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct."
         }
       }
     },
@@ -2310,8 +2332,8 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.1,
+          "op": "pct",
+          "value": 0.1,
           "scope": {
             "sources": ["wood"]
           },
@@ -2329,6 +2351,12 @@
           "checkedAt": "2026-10-17",
           "confidence": "medium",
           "note": "Research time from the wiki only (analyzer has no research times)."
+        },
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct."
         }
       }
     },
@@ -2352,12 +2380,12 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.15,
+          "op": "pct",
+          "value": 0.15,
           "scope": {
             "sources": ["wood"]
           },
-          "note": "+15% wood gather rate, +5 carry. Assumed to stack multiplicatively with other gather-rate techs."
+          "note": "+15% wood gather rate, +5 carry."
         }
       ],
       "meta": {
@@ -2371,6 +2399,12 @@
           "checkedAt": "2026-10-17",
           "confidence": "medium",
           "note": "Research time from the wiki only (analyzer has no research times)."
+        },
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct."
         }
       }
     },
@@ -2394,12 +2428,12 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.2,
+          "op": "pct",
+          "value": 0.2,
           "scope": {
             "sources": ["wood"]
           },
-          "note": "+20% wood gather rate, +5 carry. Assumed to stack multiplicatively with other gather-rate techs."
+          "note": "+20% wood gather rate, +5 carry."
         }
       ],
       "meta": {
@@ -2413,6 +2447,12 @@
           "checkedAt": "2026-10-17",
           "confidence": "medium",
           "note": "Research time from the wiki only (analyzer has no research times)."
+        },
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct."
         }
       }
     },
@@ -2435,8 +2475,8 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.1,
+          "op": "pct",
+          "value": 0.1,
           "scope": {
             "sources": ["gold"]
           },
@@ -2454,6 +2494,12 @@
           "checkedAt": "2026-10-17",
           "confidence": "medium",
           "note": "Research time from the wiki only (analyzer has no research times)."
+        },
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct."
         }
       }
     },
@@ -2477,12 +2523,12 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.15,
+          "op": "pct",
+          "value": 0.15,
           "scope": {
             "sources": ["gold"]
           },
-          "note": "+15% gold gather rate, +5 carry. Assumed to stack multiplicatively with other gather-rate techs."
+          "note": "+15% gold gather rate, +5 carry."
         }
       ],
       "meta": {
@@ -2496,6 +2542,12 @@
           "checkedAt": "2026-10-17",
           "confidence": "medium",
           "note": "Research time from the wiki only (analyzer has no research times)."
+        },
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct."
         }
       }
     },
@@ -2519,12 +2571,12 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.2,
+          "op": "pct",
+          "value": 0.2,
           "scope": {
             "sources": ["gold"]
           },
-          "note": "+20% gold gather rate, +5 carry. Assumed to stack multiplicatively with other gather-rate techs."
+          "note": "+20% gold gather rate, +5 carry."
         }
       ],
       "meta": {
@@ -2538,6 +2590,12 @@
           "checkedAt": "2026-10-17",
           "confidence": "medium",
           "note": "Research time from the wiki only (analyzer has no research times)."
+        },
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct."
         }
       }
     },
@@ -2560,8 +2618,8 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.5,
+          "op": "pct",
+          "value": 0.5,
           "scope": {
             "sources": ["fish"]
           },
@@ -2579,6 +2637,12 @@
           "checkedAt": "2026-10-17",
           "confidence": "medium",
           "note": "Research time from the wiki only (analyzer has no research times)."
+        },
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct."
         }
       }
     },
@@ -2602,12 +2666,12 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.5,
+          "op": "pct",
+          "value": 0.5,
           "scope": {
             "sources": ["fish"]
           },
-          "note": "+50% fishing gather rate (+25 Fishing Ship carry). Assumed to stack multiplicatively with other gather-rate techs."
+          "note": "+50% fishing gather rate (+25 Fishing Ship carry)."
         }
       ],
       "meta": {
@@ -2621,6 +2685,12 @@
           "checkedAt": "2026-10-17",
           "confidence": "medium",
           "note": "Research time from the wiki only (analyzer has no research times)."
+        },
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct."
         }
       }
     },
@@ -2757,6 +2827,12 @@
           "checkedAt": "2026-10-17",
           "confidence": "medium",
           "note": "Research time from the wiki only (analyzer has no research times)."
+        },
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "TrainPoints/BuildPoints/cost with relativity Percent (multiplicative) -> op mul; PopulationCapAddition Absolute -> add. Values confirmed."
         }
       }
     },
@@ -2888,6 +2964,12 @@
           "checkedAt": "2026-10-17",
           "confidence": "medium",
           "note": "Research time from the wiki only (analyzer has no research times)."
+        },
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "TrainPoints/BuildPoints/cost with relativity Percent (multiplicative) -> op mul; PopulationCapAddition Absolute -> add. Values confirmed."
         }
       }
     },
@@ -2928,6 +3010,12 @@
           "checkedAt": "2026-10-17",
           "confidence": "medium",
           "note": "Research time from the wiki only (analyzer has no research times)."
+        },
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "TrainPoints/BuildPoints/cost with relativity Percent (multiplicative) -> op mul; PopulationCapAddition Absolute -> add. Values confirmed."
         }
       }
     },
@@ -2967,6 +3055,12 @@
           "checkedAt": "2026-10-17",
           "confidence": "medium",
           "note": "Research time from the wiki only (analyzer has no research times)."
+        },
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "TrainPoints/BuildPoints/cost with relativity Percent (multiplicative) -> op mul; PopulationCapAddition Absolute -> add. Values confirmed."
         }
       }
     },
@@ -3007,6 +3101,12 @@
           "checkedAt": "2026-10-17",
           "confidence": "medium",
           "note": "Research time from the wiki only (analyzer has no research times)."
+        },
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "TrainPoints/BuildPoints/cost with relativity Percent (multiplicative) -> op mul; PopulationCapAddition Absolute -> add. Values confirmed."
         }
       }
     },
@@ -3046,6 +3146,12 @@
           "checkedAt": "2026-10-17",
           "confidence": "medium",
           "note": "Research time from the wiki only (analyzer has no research times)."
+        },
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "TrainPoints/BuildPoints/cost with relativity Percent (multiplicative) -> op mul; PopulationCapAddition Absolute -> add. Values confirmed."
         }
       }
     },
@@ -3086,6 +3192,12 @@
           "checkedAt": "2026-10-17",
           "confidence": "medium",
           "note": "Research time from the wiki only (analyzer has no research times)."
+        },
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "TrainPoints/BuildPoints/cost with relativity Percent (multiplicative) -> op mul; PopulationCapAddition Absolute -> add. Values confirmed."
         }
       }
     },
@@ -3126,6 +3238,12 @@
           "checkedAt": "2026-10-17",
           "confidence": "medium",
           "note": "Research time from the wiki only (analyzer has no research times)."
+        },
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "TrainPoints/BuildPoints/cost with relativity Percent (multiplicative) -> op mul; PopulationCapAddition Absolute -> add. Values confirmed."
         }
       }
     },
@@ -4323,7 +4441,7 @@
         "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Vaults_of_Erebus",
         "checkedAt": "2026-10-17",
         "confidence": "high",
-        "note": "Generates a gold trickle of 1.75 gold/s (= 105 gold/min) with no villagers. Not expressible as a modifier in the current schema (no trickle target); simulator must special-case it."
+        "note": "Gold trickle 1.75/s (105/min), ResourceTrickleRate on the player."
       },
       "fieldMeta": {
         "time": {
@@ -4331,7 +4449,15 @@
           "checkedAt": "2026-10-17",
           "confidence": "medium",
           "note": "Research time from the wiki only (analyzer has no research times)."
+        },
+        "trickle": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high"
         }
+      },
+      "trickle": {
+        "gold": 105
       }
     },
     {
@@ -4983,8 +5109,8 @@
       "effects": [
         {
           "target": "buildRate",
-          "op": "mul",
-          "value": 1.15,
+          "op": "pct",
+          "value": 0.15,
           "scope": {
             "ids": ["villager"]
           },
@@ -5002,6 +5128,12 @@
           "checkedAt": "2026-10-17",
           "confidence": "medium",
           "note": "Research time from the wiki only (analyzer has no research times)."
+        },
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct. DivineBlood: Build WorkRate x1.15 BasePercent on EconomicUpgraded (all buildings)."
         }
       }
     },
@@ -5025,8 +5157,8 @@
       "effects": [
         {
           "target": "favorRate",
-          "op": "mul",
-          "value": 1.2,
+          "op": "pct",
+          "value": 0.2,
           "note": "Villagers gather favor 20% faster (M = 1.2 in the prayer formula)."
         }
       ],
@@ -5042,6 +5174,12 @@
           "checkedAt": "2026-10-17",
           "confidence": "medium",
           "note": "Research time from the wiki only (analyzer has no research times)."
+        },
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct. GoldenApples: Gather WorkRate on AbstractTemple x1.20 BasePercent; with Zeus (also x1.20 BasePercent) the total is +40%, not x1.44."
         }
       }
     },
@@ -5216,7 +5354,7 @@
             ],
             "resources": ["food", "wood", "gold"]
           },
-          "note": "Armory technologies -75% food/wood/gold cost (favor unchanged)."
+          "note": "CostBuildingTechs x0.25 Percent on the Armory (food/wood/gold)."
         },
         {
           "target": "researchTime",
@@ -5238,7 +5376,7 @@
               "olympian-weapons"
             ]
           },
-          "note": "Armories research +50% faster (wiki tech page, since 19.14612). Wiki god page still says 100% faster; tech page also says '-25% research time'. Low confidence."
+          "note": "Armory ResearchRate x1.5 BasePercent -> research time / 1.5."
         }
       ],
       "meta": {
@@ -5252,6 +5390,12 @@
           "checkedAt": "2026-10-17",
           "confidence": "medium",
           "note": "Research time from the wiki only (analyzer has no research times)."
+        },
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "ForgeOfOlympus: CostBuildingTechs x0.25 Percent (food, wood, gold) and ResearchRate x1.5 BasePercent on the Armory."
         }
       }
     },

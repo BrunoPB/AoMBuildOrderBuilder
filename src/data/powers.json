@@ -312,8 +312,8 @@
       "modifiers": [
         {
           "target": "favorRate",
-          "op": "mul",
-          "value": 1.5,
+          "op": "pct",
+          "value": 0.5,
           "scope": {
             "ids": [
               "monument-to-villagers",
@@ -333,6 +333,14 @@
       "checkedAt": "2026-10-17",
       "confidence": "high",
       "note": "Night for 49 s (6 s build-up): myth units +20% damage, +15% speed, -10% damage taken, ability recharge x0.4; Monuments favor x1.5. Retold cost ramp: each further cast costs +25 Favor (repeatcost). Unlimited uses, gated by the recharge."
+    },
+    "fieldMeta": {
+      "effect": {
+        "source": "Game files 19.17020 (god_powers/egyptian.godpowers)",
+        "checkedAt": "2026-10-18",
+        "confidence": "high",
+        "note": "WorkRate effects with relativity BasePercent -> op pct. Monument favor x1.5; myth unit buffs not modelled."
+      }
     }
   },
   {
@@ -422,8 +430,8 @@
       "modifiers": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.5,
+          "op": "pct",
+          "value": 0.5,
           "scope": {
             "sources": ["gold"]
           },
@@ -437,6 +445,14 @@
       "checkedAt": "2026-10-17",
       "confidence": "high",
       "note": "Your Villagers gather Gold +50% and Caravans +20% for 75 s. Retold cost ramp: each further cast costs +10 Favor (repeatcost). Unlimited uses, gated by the recharge."
+    },
+    "fieldMeta": {
+      "effect": {
+        "source": "Game files 19.17020 (god_powers/egyptian.godpowers)",
+        "checkedAt": "2026-10-18",
+        "confidence": "high",
+        "note": "WorkRate effects with relativity BasePercent -> op pct. Gold x1.5; caravan trade x1.2 not modelled."
+      }
     }
   },
   {
@@ -456,8 +472,8 @@
       "modifiers": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 2.5,
+          "op": "pct",
+          "value": 1.5,
           "scope": {
             "sources": ["farm"]
           },
@@ -465,8 +481,8 @@
         },
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.5,
+          "op": "pct",
+          "value": 0.5,
           "scope": {
             "sources": ["fish"]
           },
@@ -480,6 +496,14 @@
       "checkedAt": "2026-10-17",
       "confidence": "high",
       "note": "Your Laborers' Farm gather rate +150% and Fishing Ships +50% for 50 s, map-wide. Retold cost ramp: each further cast costs +15 Favor (repeatcost). Unlimited uses, gated by the recharge."
+    },
+    "fieldMeta": {
+      "effect": {
+        "source": "Game files 19.17020 (god_powers/egyptian.godpowers)",
+        "checkedAt": "2026-10-18",
+        "confidence": "high",
+        "note": "WorkRate effects with relativity BasePercent -> op pct. Farms x2.5 (+150%), fishing x1.5 (+50%)."
+      }
     }
   },
   {
@@ -766,13 +790,26 @@
     },
     "cooldown": 180,
     "effect": {
-      "kind": "economy"
+      "kind": "economy",
+      "trickle": {
+        "food": 210,
+        "wood": 210,
+        "gold": 210
+      }
     },
     "meta": {
       "source": "https://ageofempires.fandom.com/wiki/Plenty",
       "checkedAt": "2026-10-17",
       "confidence": "medium",
-      "note": "First cast is free; cost is the base re-cast favor cost, each further cast adds the ramp. Ramp +200. Hephaestus. Creates an indestructible (capturable) Plenty Vault producing 3.5 food, 3.5 wood and 3.5 gold per second (= 210/min each, Plenty Vault page, since update 18.65484; the God power page still says 4). Trickle not expressible in schema."
+      "note": "First cast is free; cost is the base re-cast favor cost, each further cast adds the ramp. Ramp +200. Hephaestus. Creates an indestructible (capturable) Plenty Vault producing 3.5 food, 3.5 wood and 3.5 gold per second (= 210/min each, Plenty Vault page, since update 18.65484; the God power page still says 4). Trickle now in effect.trickle (210/min each, permanent)."
+    },
+    "fieldMeta": {
+      "effect": {
+        "source": "Game files 19.17020 (god_powers/greek.godpowers; proto.xml)",
+        "checkedAt": "2026-10-18",
+        "confidence": "high",
+        "note": "PlentyVault power creates a permanent PlentyVault (createunit permanent); its AutoGather rate is 3.5 food, 3.5 wood and 3.5 gold per second (= 210/min each) while you control it. The Vault is capturable (AutoConvert range 12); the simulator treats it as permanent (no duration). Power file: cost 300, repeatcost 200."
+      }
     }
   },
   {

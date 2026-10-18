@@ -20,7 +20,8 @@
     },
     "buildings": {
       "town-center": 1,
-      "ox-cart": 1
+      "ox-cart": 1,
+      "sentry-tower": 4
     },
     "popCap": 15
   },
@@ -31,10 +32,10 @@
     "decayTo": 300,
     "defaultPerMinute": 0,
     "meta": {
-      "source": "https://ageofempires.fandom.com/wiki/Norse#Favor",
-      "checkedAt": "2026-10-17",
-      "confidence": "medium",
-      "note": "Retold: human soldiers, heroes and (since update 18.49472) buildings earn 1 favor per 80 damage; ships and Temple/Dock myth units 1 per 160; Odin's Great Hall units 1 per 64; Gatherers/Dwarves 1 per 20. Target multipliers: huntables x0.5, herdables/chickens x5, shooting buildings x0.5, walls x0, other buildings x0.1. After 100 total combat favor the gain rate falls linearly to x0.5 at 300 total (spent or not). Hersir/Godi also trickle 0.6/min each (unit favorRate). Favor cap 200 (analyzer). Analyzer favor guide only confirms 'favor from combat, cap 200'."
+      "source": "https://ageofempires.fandom.com/wiki/Norse#Favor ; Game files 19.17020 (major_gods.xml bountyresourceearning: bountydamagegoal 80, reductionstart 100, reductionend 300, strength 0.5)",
+      "checkedAt": "2026-10-18",
+      "confidence": "high",
+      "note": "Retold: human soldiers, heroes and (since update 18.49472) buildings earn 1 favor per 80 damage; ships and Temple/Dock myth units 1 per 160; Odin's Great Hall units 1 per 64; Gatherers/Dwarves 1 per 20. Target multipliers: huntables x0.5, herdables/chickens x5, shooting buildings x0.5, walls x0, other buildings x0.1. After 100 total combat favor the gain rate falls linearly to x0.5 at 300 total (spent or not). Hersir/Godi also trickle 0.6/min each (unit trickle). Analyzer favor guide only confirms 'favor from combat, cap 200'. Favor cap: the game files (major_gods.xml, techtree.xml) define no favor cap; the wiki says favor has no cap since Retold; aomr-analyzer lists 100 (Greeks) / 200 (others) but the owner confirmed no cap for Greeks, so no favorCap is set (owner to verify in game)."
     }
   },
   "gods": ["odin", "thor", "loki"],
@@ -210,10 +211,10 @@
       },
       "fieldMeta": {
         "worker": {
-          "source": "https://ageofempires.fandom.com/wiki/Norse",
-          "checkedAt": "2026-10-17",
-          "confidence": "low",
-          "note": "Builder speed of Norse infantry assumed equal to the base builder (buildRate 1); not verified."
+          "source": "Game files 19.17020 (proto.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Norse infantry/hero Build protoaction rate Building 1.0 (same as the base builder). Gatherers/Dwarves only build Farm, House and Ox Cart (rate 1.0)."
         }
       }
     },
@@ -240,7 +241,6 @@
         "buildRate": 1,
         "needsDropsite": false
       },
-      "favorRate": 0.6,
       "meta": {
         "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Hersir",
         "checkedAt": "2026-10-17",
@@ -248,12 +248,21 @@
         "note": "Unlimited count. Builds like infantry. Passive favor trickle 0.01/s (0.6/min) just by existing; Hammer of Thunder (Thor) +50%. Combat favor handled by the pantheon favor rule. Great Hall is Classical, so Great Hall training starts in Classical."
       },
       "fieldMeta": {
-        "favorRate": {
-          "source": "https://ageofempires.fandom.com/wiki/Norse",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Wiki: Hersirs and Godis trickle 0.01 favor/s."
+        "trickle": {
+          "source": "Game files 19.17020 (proto.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Hersir protoaction AutoGather rate Favor 0.01/s (persistent) = 0.6/min while alive. Hammer of Thunder: x1.5 BasePercent (0.9/min)."
+        },
+        "worker": {
+          "source": "Game files 19.17020 (proto.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Norse infantry/hero Build protoaction rate Building 1.0 (same as the base builder). Gatherers/Dwarves only build Farm, House and Ox Cart (rate 1.0)."
         }
+      },
+      "trickle": {
+        "favor": 0.6
       }
     },
     {
@@ -279,7 +288,6 @@
         "buildRate": 1,
         "needsDropsite": false
       },
-      "favorRate": 0.6,
       "meta": {
         "source": "https://aomr-analyzer.com/frise/civ/norse + https://ageofempires.fandom.com/wiki/Godi",
         "checkedAt": "2026-10-17",
@@ -293,12 +301,21 @@
           "confidence": "high",
           "note": "Heroic Age normally; Classical Age if Freyja's Sessrumnir is researched (not expressible)."
         },
-        "favorRate": {
-          "source": "https://ageofempires.fandom.com/wiki/Norse",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Wiki: Hersirs and Godis trickle 0.01 favor/s."
+        "trickle": {
+          "source": "Game files 19.17020 (proto.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Godi protoaction AutoGather rate Favor 0.01/s (persistent) = 0.6/min while alive."
+        },
+        "worker": {
+          "source": "Game files 19.17020 (proto.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Norse infantry/hero Build protoaction rate Building 1.0 (same as the base builder). Gatherers/Dwarves only build Farm, House and Ox Cart (rate 1.0)."
         }
+      },
+      "trickle": {
+        "favor": 0.6
       }
     },
     {
@@ -329,6 +346,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "high",
         "note": "Retold-only anti-cavalry infantry."
+      },
+      "fieldMeta": {
+        "worker": {
+          "source": "Game files 19.17020 (proto.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Norse infantry/hero Build protoaction rate Building 1.0 (same as the base builder). Gatherers/Dwarves only build Farm, House and Ox Cart (rate 1.0)."
+        }
       }
     },
     {
@@ -359,6 +384,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "high",
         "note": "Counts as ranged soldier since Retold; still infantry (builds)."
+      },
+      "fieldMeta": {
+        "worker": {
+          "source": "Game files 19.17020 (proto.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Norse infantry/hero Build protoaction rate Building 1.0 (same as the base builder). Gatherers/Dwarves only build Farm, House and Ox Cart (rate 1.0)."
+        }
       }
     },
     {
@@ -389,6 +422,14 @@
         "checkedAt": "2026-10-17",
         "confidence": "high",
         "note": "Proto age is Classical (analyzer column shows Archaic) but the Hill Fort is a Heroic building, so effectively Heroic."
+      },
+      "fieldMeta": {
+        "worker": {
+          "source": "Game files 19.17020 (proto.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Norse infantry/hero Build protoaction rate Building 1.0 (same as the base builder). Gatherers/Dwarves only build Farm, House and Ox Cart (rate 1.0)."
+        }
       }
     },
     {
@@ -1226,8 +1267,16 @@
       "meta": {
         "source": "https://ageofempires.fandom.com/wiki/Market_(Age_of_Mythology)",
         "checkedAt": "2026-10-17",
-        "confidence": "low",
-        "note": "Wiki: Norse House, Dock, Temple, Market, Armory, Sentry Tower and Wonder cost -10% wood and have -10% HP. The analyzer shows the generic (non-Norse) values for these shared buildings (identical to its Greek page), so the wiki value was used. Analyzer: 150 wood (generic). The Market page itself still says -20% (pre-Retold text), the Norse page says -10%. One of the Heroic Age prerequisites."
+        "confidence": "high",
+        "note": "Norse House, Dock, Temple, Market, Armory, Sentry Tower and Wonder cost -10% wood (ArchaicAgeNorse, techtree.xml). One of the Heroic Age prerequisites."
+      },
+      "fieldMeta": {
+        "cost": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "ArchaicAgeNorse sets Market wood cost to 135 (Assign); also House 45, Dock 90, Temple 135, Armory 135, Sentry Tower 135, Wonder 4500 wood."
+        }
       }
     },
     {
@@ -1430,8 +1479,8 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.1,
+          "op": "pct",
+          "value": 0.1,
           "scope": {
             "ids": ["gatherer", "dwarf"],
             "sources": ["herd"]
@@ -1450,6 +1499,12 @@
           "checkedAt": "2026-10-17",
           "confidence": "medium",
           "note": "Research time only from the wiki (the analyzer shows none)."
+        },
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct."
         }
       }
     },
@@ -1471,8 +1526,8 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.1,
+          "op": "pct",
+          "value": 0.1,
           "scope": {
             "ids": ["gatherer", "dwarf"],
             "sources": ["wood"]
@@ -1491,6 +1546,12 @@
           "checkedAt": "2026-10-17",
           "confidence": "medium",
           "note": "Research time only from the wiki (the analyzer shows none)."
+        },
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct."
         }
       }
     },
@@ -1512,8 +1573,8 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.1,
+          "op": "pct",
+          "value": 0.1,
           "scope": {
             "ids": ["gatherer", "dwarf"],
             "sources": ["gold"]
@@ -1532,6 +1593,12 @@
           "checkedAt": "2026-10-17",
           "confidence": "medium",
           "note": "Research time only from the wiki (the analyzer shows none)."
+        },
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct."
         }
       }
     },
@@ -1553,8 +1620,8 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.1,
+          "op": "pct",
+          "value": 0.1,
           "scope": {
             "ids": ["gatherer", "dwarf"],
             "sources": ["farm"]
@@ -1572,6 +1639,12 @@
           "checkedAt": "2026-10-17",
           "confidence": "medium",
           "note": "Research time only from the wiki (the analyzer shows none)."
+        },
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct."
         }
       }
     },
@@ -1625,8 +1698,8 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.1,
+          "op": "pct",
+          "value": 0.1,
           "scope": {
             "ids": ["gatherer", "dwarf"],
             "sources": ["farm"]
@@ -1645,6 +1718,12 @@
           "checkedAt": "2026-10-17",
           "confidence": "medium",
           "note": "Research time only from the wiki (the analyzer shows none)."
+        },
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct."
         }
       }
     },
@@ -1667,8 +1746,8 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.15,
+          "op": "pct",
+          "value": 0.15,
           "scope": {
             "ids": ["gatherer", "dwarf"],
             "sources": ["wood"]
@@ -1687,6 +1766,12 @@
           "checkedAt": "2026-10-17",
           "confidence": "medium",
           "note": "Research time only from the wiki (the analyzer shows none)."
+        },
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct."
         }
       }
     },
@@ -1709,8 +1794,8 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.15,
+          "op": "pct",
+          "value": 0.15,
           "scope": {
             "ids": ["gatherer", "dwarf"],
             "sources": ["gold"]
@@ -1729,6 +1814,12 @@
           "checkedAt": "2026-10-17",
           "confidence": "medium",
           "note": "Research time only from the wiki (the analyzer shows none)."
+        },
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct."
         }
       }
     },
@@ -1751,8 +1842,8 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.1,
+          "op": "pct",
+          "value": 0.1,
           "scope": {
             "ids": ["gatherer", "dwarf"],
             "sources": ["farm"]
@@ -1771,6 +1862,12 @@
           "checkedAt": "2026-10-17",
           "confidence": "medium",
           "note": "Research time only from the wiki (the analyzer shows none)."
+        },
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct."
         }
       }
     },
@@ -1793,8 +1890,8 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.2,
+          "op": "pct",
+          "value": 0.2,
           "scope": {
             "ids": ["gatherer", "dwarf"],
             "sources": ["wood"]
@@ -1813,6 +1910,12 @@
           "checkedAt": "2026-10-17",
           "confidence": "medium",
           "note": "Research time only from the wiki (the analyzer shows none)."
+        },
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct."
         }
       }
     },
@@ -1835,8 +1938,8 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.2,
+          "op": "pct",
+          "value": 0.2,
           "scope": {
             "ids": ["gatherer", "dwarf"],
             "sources": ["gold"]
@@ -1855,6 +1958,12 @@
           "checkedAt": "2026-10-17",
           "confidence": "medium",
           "note": "Research time only from the wiki (the analyzer shows none)."
+        },
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct."
         }
       }
     },
@@ -1959,6 +2068,12 @@
           "checkedAt": "2026-10-17",
           "confidence": "medium",
           "note": "Research time only from the wiki (the analyzer shows none)."
+        },
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "TrainPoints/BuildPoints/cost with relativity Percent (multiplicative) -> op mul; PopulationCapAddition Absolute -> add. Values confirmed."
         }
       }
     },
@@ -1980,8 +2095,8 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.5,
+          "op": "pct",
+          "value": 0.5,
           "scope": {
             "ids": ["fishing-ship"],
             "sources": ["fish"]
@@ -1999,6 +2114,12 @@
           "checkedAt": "2026-10-17",
           "confidence": "medium",
           "note": "Research time only from the wiki (the analyzer shows none)."
+        },
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct."
         }
       }
     },
@@ -2021,8 +2142,8 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.5,
+          "op": "pct",
+          "value": 0.5,
           "scope": {
             "ids": ["fishing-ship"],
             "sources": ["fish"]
@@ -2041,6 +2162,12 @@
           "checkedAt": "2026-10-17",
           "confidence": "medium",
           "note": "Research time only from the wiki (the analyzer shows none)."
+        },
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct."
         }
       }
     },
@@ -2206,6 +2333,12 @@
           "checkedAt": "2026-10-17",
           "confidence": "medium",
           "note": "Research time only from the wiki (the analyzer shows none)."
+        },
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "TrainPoints/BuildPoints/cost with relativity Percent (multiplicative) -> op mul; PopulationCapAddition Absolute -> add. Values confirmed."
         }
       }
     },
@@ -2435,6 +2568,12 @@
           "checkedAt": "2026-10-17",
           "confidence": "medium",
           "note": "Research time only from the wiki (the analyzer shows none)."
+        },
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "TrainPoints/BuildPoints/cost with relativity Percent (multiplicative) -> op mul; PopulationCapAddition Absolute -> add. Values confirmed."
         }
       }
     },
@@ -2475,6 +2614,12 @@
           "checkedAt": "2026-10-17",
           "confidence": "medium",
           "note": "Research time only from the wiki (the analyzer shows none)."
+        },
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "TrainPoints/BuildPoints/cost with relativity Percent (multiplicative) -> op mul; PopulationCapAddition Absolute -> add. Values confirmed."
         }
       }
     },
@@ -2610,6 +2755,12 @@
           "checkedAt": "2026-10-17",
           "confidence": "medium",
           "note": "Research time only from the wiki (the analyzer shows none)."
+        },
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "TrainPoints/BuildPoints/cost with relativity Percent (multiplicative) -> op mul; PopulationCapAddition Absolute -> add. Values confirmed."
         }
       }
     },
@@ -2651,6 +2802,12 @@
           "checkedAt": "2026-10-17",
           "confidence": "medium",
           "note": "Research time only from the wiki (the analyzer shows none)."
+        },
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "TrainPoints/BuildPoints/cost with relativity Percent (multiplicative) -> op mul; PopulationCapAddition Absolute -> add. Values confirmed."
         }
       }
     },
@@ -2690,6 +2847,12 @@
           "checkedAt": "2026-10-17",
           "confidence": "medium",
           "note": "Research time only from the wiki (the analyzer shows none)."
+        },
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "TrainPoints/BuildPoints/cost with relativity Percent (multiplicative) -> op mul; PopulationCapAddition Absolute -> add. Values confirmed."
         }
       }
     },
@@ -2730,6 +2893,12 @@
           "checkedAt": "2026-10-17",
           "confidence": "medium",
           "note": "Research time only from the wiki (the analyzer shows none)."
+        },
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "TrainPoints/BuildPoints/cost with relativity Percent (multiplicative) -> op mul; PopulationCapAddition Absolute -> add. Values confirmed."
         }
       }
     },
@@ -3696,12 +3865,12 @@
       "effects": [
         {
           "target": "favorRate",
-          "op": "mul",
-          "value": 1.5,
+          "op": "pct",
+          "value": 0.5,
           "scope": {
             "ids": ["hersir"]
           },
-          "note": "Passive Hersir favor trickle +50%."
+          "note": "Hersir AutoGather Favor x1.5 BasePercent (0.6 -> 0.9/min). The engine does not apply modifiers to unit trickles yet."
         }
       ],
       "meta": {
@@ -3716,6 +3885,12 @@
           "checkedAt": "2026-10-17",
           "confidence": "medium",
           "note": "Research time only from the wiki (the analyzer shows none)."
+        },
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct."
         }
       }
     },
@@ -3732,7 +3907,7 @@
         "wood": 250,
         "gold": 150
       },
-      "time": 20,
+      "time": 15,
       "at": "sentry-tower",
       "age": "classical",
       "effects": [],
@@ -3744,10 +3919,10 @@
       },
       "fieldMeta": {
         "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Sentry_Tower_(Age_of_Mythology)",
-          "checkedAt": "2026-10-17",
-          "confidence": "low",
-          "note": "Only an old (pre-Retold) value of 20 s found; current time unknown."
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "WatchTower researchpoints 15 (cost 250 wood, 150 gold)."
         }
       }
     },
@@ -4125,8 +4300,8 @@
       "effects": [
         {
           "target": "cost",
-          "op": "mul",
-          "value": 0.5,
+          "op": "pct",
+          "value": -0.5,
           "scope": {
             "ids": [
               "town-center",
@@ -4139,7 +4314,7 @@
             ],
             "resources": ["gold"]
           },
-          "note": "Building gold cost -50%."
+          "note": "Gold cost x0.50 BasePercent on LogicalTypeBuildingNotWonderOrTitan."
         }
       ],
       "meta": {
@@ -4154,6 +4329,12 @@
           "checkedAt": "2026-10-17",
           "confidence": "medium",
           "note": "Research time only from the wiki (the analyzer shows none)."
+        },
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Safeguard: cost Gold x0.50 BasePercent on every building except Wonder/Titan Gate (scope lists the main ones); tower/wall HP x1.25 not modelled."
         }
       }
     },
@@ -4199,6 +4380,12 @@
           "checkedAt": "2026-10-17",
           "confidence": "medium",
           "note": "Research time only from the wiki (the analyzer shows none)."
+        },
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Rigsthula: BuildingWorkRate x1.20 BasePercent on all buildings -> train/research time / 1.2 (x0.8333). Kept as mul on time."
         }
       }
     },
@@ -4453,8 +4640,8 @@
       "effects": [
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.2,
+          "op": "pct",
+          "value": 0.2,
           "scope": {
             "ids": ["gatherer", "dwarf"],
             "sources": ["farm"]
@@ -4462,8 +4649,8 @@
         },
         {
           "target": "gatherRate",
-          "op": "mul",
-          "value": 1.1,
+          "op": "pct",
+          "value": 0.1,
           "scope": {
             "ids": ["gatherer", "dwarf"],
             "sources": ["hunt", "herd", "berries"]
@@ -4483,6 +4670,12 @@
           "checkedAt": "2026-10-17",
           "confidence": "medium",
           "note": "Research time only from the wiki (the analyzer shows none)."
+        },
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct."
         }
       }
     },
@@ -4823,6 +5016,12 @@
           "checkedAt": "2026-10-17",
           "confidence": "medium",
           "note": "Research time only from the wiki (the analyzer shows none)."
+        },
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "TrainPoints/BuildPoints/cost with relativity Percent (multiplicative) -> op mul; PopulationCapAddition Absolute -> add. Values confirmed."
         }
       }
     },
@@ -4931,6 +5130,12 @@
           "checkedAt": "2026-10-17",
           "confidence": "medium",
           "note": "Research time only from the wiki (the analyzer shows none)."
+        },
+        "effects": {
+          "source": "Game files 19.17020 (techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "TrainPoints/BuildPoints/cost with relativity Percent (multiplicative) -> op mul; PopulationCapAddition Absolute -> add. Values confirmed."
         }
       }
     },

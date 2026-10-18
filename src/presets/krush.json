@@ -5,7 +5,7 @@
   "name": "Krush",
   "author": "Bruno",
   "createdAt": "2026-10-17T13:00:00Z",
-  "updatedAt": "2026-10-17T13:00:00Z",
+  "updatedAt": "2026-10-18T12:00:00Z",
   "pantheon": "atlanteans",
   "god": "kronos",
   "type": "rush",
@@ -19,7 +19,8 @@
     "foodChain": ["hunt", "berries", "farm"],
     "sourceAmounts": {
       "hunt": 2000
-    }
+    },
+    "oracleRate": 1.6
   },
   "milestones": [
     {
@@ -204,6 +205,14 @@
       "from": "temple"
     },
     {
+      "id": "o1",
+      "when": {
+        "after": "cl"
+      },
+      "do": "promote",
+      "unit": "oracle"
+    },
+    {
       "id": "cb",
       "when": "3:05",
       "do": "build",
@@ -227,6 +236,12 @@
       "do": "autoTrain",
       "unit": "citizen",
       "rally": "food"
+    },
+    {
+      "id": "o2",
+      "when": "3:25",
+      "do": "promote",
+      "unit": "oracle"
     },
     {
       "id": "tu",

@@ -13,9 +13,10 @@
       "op": "mul",
       "value": 0.7,
       "scope": {
-        "ids": ["stable", "market"]
+        "ids": ["stable", "market"],
+        "resources": ["wood"]
       },
-      "note": "Stables and Markets are 30% cheaper."
+      "note": "Stable and Market wood cost x0.70 Percent (both cost only wood)."
     }
   ],
   "powers": ["lure"],
@@ -39,5 +40,13 @@
     "checkedAt": "2026-10-17",
     "confidence": "high",
     "note": "Not expressible: Militia spawn from razed buildings; cavalry, caravans and myth units +0.1/0.2/0.3/0.4 speed per age; market exchange rates +15%; free respawning Hippocampus at the first Dock."
+  },
+  "fieldMeta": {
+    "modifiers": {
+      "source": "Game files 19.17020 (techtree.xml)",
+      "checkedAt": "2026-10-18",
+      "confidence": "high",
+      "note": "ArchaicAgePoseidon: Market and Stable cost Wood x0.70 Percent; market buy/sell factor -0.1/+0.1 (not modelled)."
+    }
   }
 }
