@@ -36,7 +36,7 @@
           "flood-control-gaia"
         ]
       },
-      "note": "Economic Guild and its technologies -35% cost (update 18.7603 value)."
+      "note": "ArchaicAgeGaia: Economic Guild and Husbandry, Plow, Survival Equipment, Irrigation, Flood Control, Hand Axe, Bow Saw, Carpenters, Pickaxe, Shaft Mine, Quarry cost x0.65 Percent (both of each tech's resources)."
     },
     {
       "target": "cost",
@@ -72,17 +72,17 @@
     "flood-control-gaia"
   ],
   "meta": {
-    "source": "https://ageofempires.fandom.com/wiki/Gaia_(goddess); https://aomr-analyzer.com/gods/gaia",
-    "checkedAt": "2026-10-17",
+    "source": "Game files 19.17020 (major_gods.xml, techtree.xml ArchaicAgeGaia/ClassicalAgeGaia/HeroicAgeGaia)",
+    "checkedAt": "2026-10-18",
     "confidence": "high",
-    "note": "startExtras REPLACES the 2 starting Citizens with 2 Citizen Heroes (citizen: 0, citizen-hero: 2), it is not additive. Economic Guild techs one age earlier: modelled by the '*-gaia' research entries. Not expressed: economic buildings grow Lush (1 HP/s regeneration)."
+    "note": "Power: Gaia Forest (cooldown 120). startExtras REPLACES the 2 starting Citizens with 2 Citizen Heroes (major_gods.xml startingunits: 2 VillagerAtlanteanHero). Economic Guild techs one age earlier (Plow/Survival Equipment Archaic; Bow Saw/Shaft Mine/Irrigation Classical; Carpenters/Quarry/Flood Control Heroic): the '*-gaia' research entries. Not expressed: Lush terrain creep around Town/Village Centers, Manors, Economic Guilds and Markets."
   },
   "fieldMeta": {
     "modifiers": {
-      "source": "Game files 19.17020 (techtree.xml)",
+      "source": "Game files 19.17020 (techtree.xml ArchaicAgeGaia)",
       "checkedAt": "2026-10-18",
       "confidence": "high",
-      "note": "ArchaicAgeGaia: Economic Guild and its techs cost x0.65 Percent; Citizen promotion cost x0.75 BasePercent."
+      "note": "Economic Guild and its techs cost x0.65 Percent -> mul; Citizen promotion (VillagerAtlanteanToHero) food/wood/favor x0.75 BasePercent -> pct."
     }
   }
 }

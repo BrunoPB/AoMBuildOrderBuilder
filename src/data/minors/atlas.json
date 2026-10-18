@@ -14,9 +14,9 @@
   "unlocks": ["argus", "guardian-of-io", "devotees-of-atlas", "titan-shield"],
   "powers": ["implode"],
   "meta": {
-    "source": "https://ageofempires.fandom.com/wiki/Atlas_(god); https://aomr-analyzer.com/gods/kronos (minor lists)",
-    "checkedAt": "2026-10-17",
+    "source": "Game files 19.17020 (techtree.xml MythicAgeAtlas)",
+    "checkedAt": "2026-10-18",
     "confidence": "high",
-    "note": "1 free argus on reaching the age through Atlas (Kronos: 2). pt-BR name not verified against the official localization."
+    "note": "Age-up tech: CreateUnit 1 argus at the Temple (Kronos: +1 from KronosExtra*, so 2). God power Implode (cooldown 180 s)."
   }
 }

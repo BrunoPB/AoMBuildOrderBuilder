@@ -14,17 +14,17 @@
   "unlocks": ["mountain-giant", "wrath-of-the-deep", "ring-giver", "vikings", "jotuns"],
   "powers": ["walking-woods"],
   "meta": {
-    "source": "https://aomr-analyzer.com/frise/pantheons + https://ageofempires.fandom.com/wiki/Njord + https://ageofempires.fandom.com/wiki/Temple_(Age_of_Mythology)",
-    "checkedAt": "2026-10-17",
+    "source": "Game files 19.17020 (techtree.xml)",
+    "checkedAt": "2026-10-18",
     "confidence": "high",
-    "note": "Odin, Loki. Focus: cavalry. (Kraken is generic Norse since Retold.) Free unit on age up: one of each of the minor god's Temple myth units spawns at the Temple when the age-up completes (or when the next Temple is built if none exists)."
+    "note": "Odin, Loki. Focus: cavalry. Age tech HeroicAgeNjord."
   },
   "fieldMeta": {
     "freeUnitsOnAgeUp": {
-      "source": "https://ageofempires.fandom.com/wiki/Temple_(Age_of_Mythology)",
-      "checkedAt": "2026-10-17",
-      "confidence": "medium",
-      "note": "Rule from the Temple page (since The Titans; still in Retold)."
+      "source": "Game files 19.17020 (techtree.xml)",
+      "checkedAt": "2026-10-18",
+      "confidence": "high",
+      "note": "HeroicAgeNjord: CreateUnit mountain-giant quantity 1, generator AbstractTemple (spawns at a Temple)."
     }
   }
 }

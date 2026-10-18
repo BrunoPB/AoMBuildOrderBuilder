@@ -85,7 +85,9 @@ function describe(c: Ctx, e: SimEvent): StepAction | null {
           ? t("step.byNew", { unit: name(c, e.by.unit) })
           : e.by.kind === "same"
             ? t("step.bySame")
-            : t("step.byFrom", { unit: name(c, e.by.unit), from: targetName(c, e.by.from) });
+            : e.by.kind === "unit"
+              ? t("step.byUnit", { unit: name(c, e.by.unit) })
+              : t("step.byFrom", { unit: name(c, e.by.unit), from: targetName(c, e.by.from) });
       return {
         ...base,
         kind: "build",

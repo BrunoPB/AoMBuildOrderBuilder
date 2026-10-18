@@ -13,7 +13,7 @@ Build order builder/simulator for Age of Mythology: Retold. Full requirements: t
 ## Data rules
 
 - **Data first:** every game number lives in `src/data/*.json` with `meta { source, checkedAt, confidence }` (`fieldMeta` per field when it differs). No game numbers in code.
-- Source priority: measured by the owner > extracted game data > official > wikis > aomstats (metadata only). Prefer Retold/2024+ sources. Never invent: unknown → `confidence: "low"` + entry in `data-research/PENDING.md`.
+- Source priority: **the game installation (files, string tables, images) is absolute truth** > owner measurements (behaviour the files don't define) > aomr-analyzer > official > wikis (support only) > aomstats (metadata only). Prefer Retold/2024+ sources. Never invent: unknown → `confidence: "low"` + entry in `data-research/PENDING.md`.
 - Ids are kebab-case English. Unit/building/research ids are unique per pantheon; gods, minors and powers are global.
 - Say "unidade mitológica", never "mítica" ("Mítica" is only the age).
 - After data changes: `npm run check-data` and `npm test`; log the change in `data-research/changelog.md`.

@@ -36,17 +36,9 @@
     "lord-of-horses"
   ],
   "meta": {
-    "source": "https://ageofempires.fandom.com/wiki/Poseidon ; https://aomr-analyzer.com/gods/poseidon",
-    "checkedAt": "2026-10-17",
+    "source": "Game files 19.17020 (major_gods.xml, techtree.xml)",
+    "checkedAt": "2026-10-18",
     "confidence": "high",
-    "note": "Not expressible: Militia spawn from razed buildings; cavalry, caravans and myth units +0.1/0.2/0.3/0.4 speed per age; market exchange rates +15%; free respawning Hippocampus at the first Dock."
-  },
-  "fieldMeta": {
-    "modifiers": {
-      "source": "Game files 19.17020 (techtree.xml)",
-      "checkedAt": "2026-10-18",
-      "confidence": "high",
-      "note": "ArchaicAgePoseidon: Market and Stable cost Wood x0.70 Percent; market buy/sell factor -0.1/+0.1 (not modelled)."
-    }
+    "note": "Also (not modelled): Militia partisans from razed buildings; myth units, cavalry and caravans +0.1 speed per age; market buy factor -0.10 / sell factor +0.10; respawning Hippocampus at a Dock."
   }
 }

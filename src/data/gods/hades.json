@@ -11,7 +11,7 @@
     {
       "target": "cost",
       "op": "mul",
-      "value": 0.67,
+      "value": 0.666,
       "scope": {
         "ids": [
           "medium-ranged-soldiers",
@@ -23,9 +23,9 @@
           "sun-ray",
           "shafts-of-plague"
         ],
-        "resources": ["food", "wood", "gold"]
+        "resources": ["food", "wood", "gold", "favor"]
       },
-      "note": "Technologies that improve ranged soldiers cost -33% (since update 19.16313; replaced free Ballistics/Burning Pitch). Favor cost assumed unchanged."
+      "note": "ArchaicAgeHades: Cost x0.666 Percent on Ballistics, Burning Pitch, Medium/Heavy/Champion Ranged Soldiers (wood, gold), Enyo's Bow of Horror (wood, favor), Sun Ray (food, favor), Shafts of Plague (gold, favor). Each tech is discounted on every resource it costs."
     }
   ],
   "powers": ["sentinel"],
@@ -44,17 +44,9 @@
     "vaults-of-erebus"
   ],
   "meta": {
-    "source": "https://ageofempires.fandom.com/wiki/Hades ; https://aomr-analyzer.com/gods/hades",
-    "checkedAt": "2026-10-17",
+    "source": "Game files 19.17020 (major_gods.xml, techtree.xml)",
+    "checkedAt": "2026-10-18",
     "confidence": "high",
-    "note": "Not expressible: 20% chance fallen human soldiers return as Shades; myth units +4/8/12/16% HP per age; ranged soldiers and heroes +1 range/LOS; ranged fortifications +2 range."
-  },
-  "fieldMeta": {
-    "modifiers": {
-      "source": "Game files 19.17020 (techtree.xml)",
-      "checkedAt": "2026-10-18",
-      "confidence": "high",
-      "note": "ArchaicAgeHades: listed ranged techs cost x0.666 Percent (multiplicative)."
-    }
+    "note": "Also (not modelled): 20% chance (10 s delay) for fallen human soldiers to return as Shades (major_gods.xml); myth units +4% HP BasePercent in each age (+16% in Mythic); ranged soldiers and heroes +1 range and +1 LOS; buildings +2 range."
   }
 }

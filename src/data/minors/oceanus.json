@@ -14,9 +14,9 @@
   "unlocks": ["caladria", "servant", "bite-of-the-shark", "weightless-mace", "frontline-heroics"],
   "powers": ["carnivora"],
   "meta": {
-    "source": "https://ageofempires.fandom.com/wiki/Oceanus; https://aomr-analyzer.com/gods/kronos (minor lists)",
-    "checkedAt": "2026-10-17",
+    "source": "Game files 19.17020 (techtree.xml ClassicalAgeOceanus)",
+    "checkedAt": "2026-10-18",
     "confidence": "high",
-    "note": "1 free caladria on reaching the age through Oceanus (Kronos: 2). pt-BR name not verified against the official localization."
+    "note": "Age-up tech: CreateUnit 1 caladria at the Temple (Kronos: +1 from KronosExtra*, so 2). God power Carnivora (cooldown 180 s). Also creates 1 Servant at a Dock (only if a Dock exists; not in freeUnitsOnAgeUp)."
   }
 }

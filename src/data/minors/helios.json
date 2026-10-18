@@ -14,9 +14,9 @@
   "unlocks": ["centimanus", "mirror-tower", "halo-of-the-sun", "petrification", "titanomachy"],
   "powers": ["vortex"],
   "meta": {
-    "source": "https://ageofempires.fandom.com/wiki/Helios; https://aomr-analyzer.com/gods/kronos (minor lists)",
-    "checkedAt": "2026-10-17",
+    "source": "Game files 19.17020 (techtree.xml MythicAgeHelios)",
+    "checkedAt": "2026-10-18",
     "confidence": "high",
-    "note": "1 free centimanus on reaching the age through Helios (Kronos: 2). pt-BR name not verified against the official localization."
+    "note": "Age-up tech: CreateUnit 1 centimanus at the Temple (Kronos: +1 from KronosExtra*, so 2). God power Vortex (cooldown 60 s). Also enables the Mirror Tower."
   }
 }

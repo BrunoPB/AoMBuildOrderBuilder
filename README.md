@@ -43,8 +43,20 @@ GitHub Pages: `.github/workflows/ci.yml` deploys `master` when the repository va
 1. Edit the JSON in `src/data/` (schemas in `src/data/schema.ts`). Every value needs `meta.source`, `checkedAt` and `confidence`.
 2. Record sources and conflicts in `data-research/SOURCES.md`, open items in `data-research/PENDING.md` and the change in `data-research/changelog.md`.
 3. God powers are researched per pantheon in `data-research/<pantheon>/powers.json`; `npx tsx scripts/merge-powers.ts` rebuilds `src/data/powers.json`.
-4. New icons: add `{ id, url, origin, license }` to `data-research/<pantheon>/icons.json`, then `npm run fetch-icons`.
+4. Icons come from the installed game: `npm run game-icons -- "<game folder>"` (see below).
 5. `npm run check-data && npm test`.
+
+## Icons from the game
+
+The icons in `public/icons/` are copied from an installed Age of Mythology: Retold (build 19.17020). The script reads the game's archives without changing them (`game/data/Data.bar` for proto.xml, techtree.xml, the god and god-power files and the English names; `game/ui/UITextureCache4K.bar` / `UITextureCache.bar` for the DDS icons), matches each icon id in the data to its game object by English name, and writes `<id>-64.webp` / `<id>-128.webp` plus the manifest entry (`origin` = path inside the game):
+
+```bash
+python -m pip install --user Pillow
+python scripts/game-icons.py "C:/Program Files (x86)/Steam/steamapps/common/Age of Mythology Retold"
+python scripts/game-icons.py "<game folder>" --report   # show the mapping, write nothing
+```
+
+Ids the script cannot match keep their current icon and are listed at the end; concepts and renamed entities are mapped by hand in `MANUAL` at the top of the script. Only the WebP files are committed, never extracted game files.
 
 ## Project layout
 
@@ -57,7 +69,7 @@ src/storage    localStorage + migrations
 src/io         import/export, dashboard (custom_builds) format
 src/api        static API generator
 src/ui         Preact UI
-scripts        build-api, check-data, fetch-icons, merge-powers
+scripts        build-api, check-data, game-icons.py, merge-powers
 data-research  research notes, sources, pending items
 tests          Vitest + Playwright
 ```

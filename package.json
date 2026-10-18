@@ -16,7 +16,7 @@
     "format": "prettier --write .",
     "typecheck": "tsc --noEmit",
     "check-data": "tsx scripts/check-data.ts",
-    "fetch-icons": "tsx scripts/fetch-icons.ts"
+    "game-icons": "python scripts/game-icons.py"
   },
   "engines": {
     "node": ">=22"

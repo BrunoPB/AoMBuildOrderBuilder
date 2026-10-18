@@ -36,8 +36,8 @@
       "duration": 50
     },
     "meta": {
-      "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Rain",
-      "checkedAt": "2026-10-17",
+      "source": "Game files 19.17020 (god_powers/egyptian.godpowers, techtree.xml, string_table.txt)",
+      "checkedAt": "2026-10-18",
       "confidence": "high",
       "note": "Your Laborers' Farm gather rate +150% and Fishing Ships +50% for 50 s, map-wide. Retold cost ramp: each further cast costs +15 Favor (repeatcost). Unlimited uses, gated by the recharge."
     },
@@ -78,8 +78,8 @@
       "duration": 75
     },
     "meta": {
-      "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Prosperity",
-      "checkedAt": "2026-10-17",
+      "source": "Game files 19.17020 (god_powers/egyptian.godpowers, techtree.xml, string_table.txt)",
+      "checkedAt": "2026-10-18",
       "confidence": "high",
       "note": "Your Villagers gather Gold +50% and Caravans +20% for 75 s. Retold cost ramp: each further cast costs +10 Favor (repeatcost). Unlimited uses, gated by the recharge."
     },
@@ -109,8 +109,8 @@
       "duration": 20
     },
     "meta": {
-      "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Vision",
-      "checkedAt": "2026-10-17",
+      "source": "Game files 19.17020 (god_powers/egyptian.godpowers, techtree.xml, string_table.txt)",
+      "checkedAt": "2026-10-18",
       "confidence": "high",
       "note": "Reveals a 60-radius area for 20 s. Retold cost ramp: each further cast costs +5 Favor (repeatcost). Unlimited uses, gated by the recharge."
     }
@@ -150,8 +150,8 @@
       "duration": 49
     },
     "meta": {
-      "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Eclipse",
-      "checkedAt": "2026-10-17",
+      "source": "Game files 19.17020 (god_powers/egyptian.godpowers, techtree.xml, string_table.txt)",
+      "checkedAt": "2026-10-18",
       "confidence": "high",
       "note": "Night for 49 s (6 s build-up): myth units +20% damage, +15% speed, -10% damage taken, ability recharge x0.4; Monuments favor x1.5. Retold cost ramp: each further cast costs +25 Favor (repeatcost). Unlimited uses, gated by the recharge."
     },
@@ -180,8 +180,8 @@
       "kind": "utility"
     },
     "meta": {
-      "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Shifting_Sands",
-      "checkedAt": "2026-10-17",
+      "source": "Game files 19.17020 (god_powers/egyptian.godpowers, techtree.xml, string_table.txt)",
+      "checkedAt": "2026-10-18",
       "confidence": "high",
       "note": "Teleports own/allied units within radius 10 to a target location. Retold cost ramp: each further cast costs +20 Favor (repeatcost). Unlimited uses, gated by the recharge."
     }
@@ -203,8 +203,8 @@
       "duration": 18
     },
     "meta": {
-      "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Plague_of_Serpents",
-      "checkedAt": "2026-10-17",
+      "source": "Game files 19.17020 (god_powers/egyptian.godpowers, techtree.xml, string_table.txt)",
+      "checkedAt": "2026-10-18",
       "confidence": "high",
       "note": "Summons 14 Serpents (2 every 3 s for 18 s) within radius 14; they are permanent until killed. Retold cost ramp: each further cast costs +10 Favor (repeatcost). Unlimited uses, gated by the recharge."
     }
@@ -226,8 +226,8 @@
       "duration": 20
     },
     "meta": {
-      "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Locust_Swarm",
-      "checkedAt": "2026-10-17",
+      "source": "Game files 19.17020 (god_powers/egyptian.godpowers, techtree.xml, string_table.txt)",
+      "checkedAt": "2026-10-18",
       "confidence": "high",
       "note": "Locust swarm along a path for 20 s; damages units/buildings and destroys Farms, livestock and berries. Retold cost ramp: each further cast costs +10 Favor (repeatcost). Unlimited uses, gated by the recharge."
     }
@@ -249,8 +249,8 @@
       "duration": 55
     },
     "meta": {
-      "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Ancestors",
-      "checkedAt": "2026-10-17",
+      "source": "Game files 19.17020 (god_powers/egyptian.godpowers, techtree.xml, string_table.txt)",
+      "checkedAt": "2026-10-18",
       "confidence": "high",
       "note": "Summons 13 Minions (ancestral soldiers; Lost Ships on water) for 55 s. Retold cost ramp: each further cast costs +5 Favor (repeatcost). Unlimited uses, gated by the recharge."
     }
@@ -271,8 +271,8 @@
       "kind": "utility"
     },
     "meta": {
-      "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Citadel_(Age_of_Mythology)",
-      "checkedAt": "2026-10-17",
+      "source": "Game files 19.17020 (god_powers/egyptian.godpowers, techtree.xml, string_table.txt)",
+      "checkedAt": "2026-10-18",
       "confidence": "high",
       "note": "Turns a Town Center into a Citadel Center (25 pop instead of 15, stronger, trains/researches faster). Retold cost ramp: each further cast costs +50 Favor (repeatcost). Unlimited uses, gated by the recharge."
     }
@@ -293,8 +293,8 @@
       "kind": "military"
     },
     "meta": {
-      "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Son_of_Osiris",
-      "checkedAt": "2026-10-17",
+      "source": "Game files 19.17020 (god_powers/egyptian.godpowers, techtree.xml, string_table.txt)",
+      "checkedAt": "2026-10-18",
       "confidence": "high",
       "note": "Transforms the Pharaoh into the Son of Osiris (super-empowering lightning demigod). Retold cost ramp: each further cast costs +50 Favor (repeatcost). Unlimited uses, gated by the recharge."
     }
@@ -317,8 +317,8 @@
       "duration": 15
     },
     "meta": {
-      "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Meteor",
-      "checkedAt": "2026-10-17",
+      "source": "Game files 19.17020 (god_powers/egyptian.godpowers, techtree.xml, string_table.txt)",
+      "checkedAt": "2026-10-18",
       "confidence": "high",
       "note": "12 meteor strikes over 15 s in radius 25 (3 s build-up); strong vs buildings. Retold cost ramp: each further cast costs +5 Favor (repeatcost). Unlimited uses, gated by the recharge."
     }
@@ -340,8 +340,8 @@
       "duration": 20
     },
     "meta": {
-      "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml); cross-checked: https://ageofempires.fandom.com/wiki/Tornado",
-      "checkedAt": "2026-10-17",
+      "source": "Game files 19.17020 (god_powers/egyptian.godpowers, techtree.xml, string_table.txt)",
+      "checkedAt": "2026-10-18",
       "confidence": "high",
       "note": "Tornado for 20 s that throws units and damages buildings. Retold cost ramp: each further cast costs +5 Favor (repeatcost). Unlimited uses, gated by the recharge."
     }

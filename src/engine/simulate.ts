@@ -48,6 +48,8 @@ type Worker = {
   claimable: boolean;
   lastTarget: TaskTarget;
   builtFor?: number;
+  /** A soldier borrowed from the army to build; goes back to `others` when done. */
+  army?: boolean;
 };
 
 type Job =
@@ -79,6 +81,8 @@ type Site = {
   shiftAction?: number;
   jobs: Job[];
   slots: number;
+  /** Auto queue pause after a unit spawns. */
+  autoQueueUntil?: number;
 };
 
 type Reason = { key: string; level: WarningLevel; params: Params };
@@ -126,6 +130,7 @@ export type ResolvedSettings = {
   affordableWindow: number;
   sourceAmounts: Partial<Record<SourceId, number>>;
   tail: number;
+  autoQueueDelay: number;
 };
 
 export function resolveSettings(build: Build, data: GameData): ResolvedSettings {
@@ -141,6 +146,7 @@ export function resolveSettings(build: Build, data: GameData): ResolvedSettings 
     affordableWindow: s.affordableWindow ?? d.affordableWindow,
     sourceAmounts: s.sourceAmounts ?? {},
     tail: s.tail ?? 30,
+    autoQueueDelay: s.autoQueueDelay ?? 0,
   };
 }
 
@@ -710,7 +716,14 @@ class Simulation {
       reserved?: Cost;
     },
   ): Reason | Site {
-    const candidates = this.trainSites(def, opts.at);
+    const rule = opts.rule !== undefined ? this.rules[opts.rule] : undefined;
+    const all = this.trainSites(def, opts.at);
+    const candidates = all.filter(
+      (s) => rule?.kind !== "autoTrain" || (s.autoQueueUntil ?? 0) <= this.t + EPS,
+    );
+    if (candidates.length === 0 && all.length > 0) {
+      return { key: "warn.queueBusy", level: "delay", params: { building: all[0]!.def.id } };
+    }
     const req = this.requirement(def.requires, def.age);
     if (req) return req;
     const site = this.freeSite(candidates, opts.prefer);
@@ -887,10 +900,37 @@ class Simulation {
     }
   }
 
+  canBuild(unitId: string, building: string): boolean {
+    const def = this.unit(unitId);
+    if (!def?.worker || def.worker.canBuild === false || def.tags.includes("ship")) return false;
+    return !def.worker.builds || def.worker.builds.includes(building);
+  }
+
   pickBuilders(i: number, a: Extract<Action, { do: "build" }>): Worker[] | Reason {
     const n = a.builders ?? 1;
-    const free = (w: Worker) => w.task.kind !== "build";
+    const free = (w: Worker) =>
+      w.task.kind !== "build" && w.task.kind !== "busy" && this.canBuild(w.unit, a.building);
     const b = a.builder;
+    if (b && "unit" in b) {
+      if (!this.canBuild(b.unit, a.building)) {
+        return {
+          key: "warn.cannotBuild",
+          level: "error",
+          params: { unit: b.unit, building: a.building },
+        };
+      }
+      if ((this.others.get(b.unit) ?? 0) < n) {
+        return { key: "warn.noUnitToBuild", level: "delay", params: { unit: b.unit } };
+      }
+      return Array.from({ length: n }, () => ({
+        uid: ++this.uid,
+        unit: b.unit,
+        task: { kind: "idle" } as Task,
+        claimable: false,
+        lastTarget: "idle" as TaskTarget,
+        army: true,
+      }));
+    }
     if (b && "new" in b) {
       const target = this.idIndex.get(b.new);
       if (target === undefined)
@@ -972,8 +1012,14 @@ class Simulation {
         ? { kind: "new", unit: first.unit }
         : a.builder && "same" in a.builder
           ? { kind: "same", unit: first.unit }
-          : { kind: "from", unit: first.unit, from: this.taskTargetOf(first) };
+          : a.builder && "unit" in a.builder
+            ? { kind: "unit", unit: first.unit }
+            : { kind: "from", unit: first.unit, from: this.taskTargetOf(first) };
     for (const w of builders) {
+      if (w.army && !this.workers.includes(w)) {
+        this.others.set(w.unit, (this.others.get(w.unit) ?? 0) - 1);
+        this.workers.push(w);
+      }
       if (w.task.kind === "gather" || w.task.kind === "favor") w.lastTarget = this.taskTargetOf(w);
       w.task = { kind: "build", site: site.uid };
       w.claimable = false;
@@ -1357,7 +1403,15 @@ class Simulation {
       const done: Job[] = [];
       for (const job of site.jobs) {
         if (job.remaining > EPS) continue;
-        if (this.finishJob(job)) done.push(job);
+        if (!this.finishJob(job)) continue;
+        done.push(job);
+        if (
+          job.kind === "unit" &&
+          job.rule !== undefined &&
+          this.rules[job.rule]?.kind === "autoTrain"
+        ) {
+          site.autoQueueUntil = this.t + this.s.autoQueueDelay;
+        }
       }
       if (done.length) site.jobs = site.jobs.filter((j) => !done.includes(j));
     }
@@ -1375,6 +1429,12 @@ class Simulation {
     for (const uid of site.builders) {
       const w = this.workers.find((x) => x.uid === uid);
       if (!w) continue;
+      if (w.army) {
+        this.workers = this.workers.filter((x) => x !== w);
+        this.others.set(w.unit, (this.others.get(w.unit) ?? 0) + 1);
+        builderUnit ??= w.unit;
+        continue;
+      }
       const target = site.then ?? w.lastTarget ?? "food";
       this.assign(w, target === "idle" && !site.then ? "food" : target);
       builderTo ??= this.targetResource(target);

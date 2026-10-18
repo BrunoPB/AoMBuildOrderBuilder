@@ -11,11 +11,14 @@ Detailed per-pantheon notes, including every conflict and which source won:
 
 ## Priority (SPEC 4.2)
 
-1. Measured in game by the project owner (`"source": "measured"`).
-2. Extracted game data: aomr-analyzer.com and, for the Egyptians, the game's own `Data.bar` (proto.xml, techtree.xml, major_gods.xml) from the owner's installed copy, read-only.
-3. Official pages and patch notes (ageofempires.com).
-4. Community wikis: Age of Empires Series Wiki (fandom), Liquipedia, Pro Game Guides.
-5. aomstats.io (metadata only).
+Since 2026-10-18 (owner decision) the game installation is the absolute source of truth.
+
+1. The owner's installed game (build 19.17020): `Data.bar` (proto.xml, techtree.xml, major_gods.xml, minor_gods.xml, god powers), string tables (English, PortugueseBrazil) and UI images.
+2. Measured in game by the project owner (`"source": "measured"`), for behaviour the files don't define.
+3. aomr-analyzer.com (extracted game data).
+4. Official pages and patch notes (ageofempires.com).
+5. Community wikis (support only): Age of Empires Series Wiki (fandom), Liquipedia, Pro Game Guides.
+6. aomstats.io (metadata only).
 
 ## Project-level decisions
 
@@ -38,4 +41,4 @@ Detailed per-pantheon notes, including every conflict and which source won:
 
 ## Icons
 
-`public/icons/manifest.json` records the origin of every icon. Sources: [Kries-Dev/BuildOrders](https://github.com/Kries-Dev/BuildOrders) (`Icons/`), [MiguelMG24/aom-retold-build-order](https://github.com/MiguelMG24/aom-retold-build-order) (`assets/`) and the AoE fandom wiki. Neither repository has a license file; all icons are game assets © Microsoft, used as fan content under the Game Content Usage Rules. The wiki CDN blocks scripted downloads, so `scripts/fetch-icons.ts` falls back to the two repositories by file name.
+Since 2026-10-18 every icon is taken from the installed game (`game/ui/UITextureCache4K.bar`, DDS → WebP) by `scripts/game-icons.py`; `public/icons/manifest.json` records the path of each one inside the game. Icons are game assets © Microsoft, used as fan content under the Game Content Usage Rules.

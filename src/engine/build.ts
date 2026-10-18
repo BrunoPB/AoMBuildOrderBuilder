@@ -38,6 +38,8 @@ export const BuilderSchema = z.union([
   z.strictObject({ new: z.string() }),
   z.strictObject({ from: TaskTargetSchema }),
   z.strictObject({ same: z.string() }),
+  /** A non-gathering unit that can build (e.g. Norse infantry); it returns to the army after. */
+  z.strictObject({ unit: z.string() }),
 ]);
 export type Builder = z.infer<typeof BuilderSchema>;
 
@@ -149,6 +151,8 @@ export const SettingsSchema = z.strictObject({
   sourceAmounts: z.partialRecord(SourceIdSchema, z.number().positive()).optional(),
   /** Seconds to simulate after the last action; default 30. */
   tail: z.number().nonnegative().optional(),
+  /** Seconds the auto queue waits after each unit before starting the next (player/game latency). */
+  autoQueueDelay: z.number().nonnegative().max(30).optional(),
 });
 export type Settings = z.infer<typeof SettingsSchema>;
 

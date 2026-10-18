@@ -86,6 +86,12 @@ export function ActionRow(props: Props) {
   const others = build.actions.filter((x, i) => i !== index && x.id);
   const set = (patch: Partial<Action>) => onChange({ ...a, ...patch } as Action);
   const units = p ? [...p.units.values()] : [];
+  const soldiers = units.filter(
+    (u) =>
+      u.worker?.canBuild &&
+      Object.keys(u.worker.gatherRates).length === 0 &&
+      u.trainedAt.length > 0,
+  );
   const buildings = p ? [...p.buildings.values()] : [];
   const name = (id: string) =>
     text(locale, p?.units.get(id)?.name ?? p?.buildings.get(id)?.name ?? { en: id, "pt-BR": id });
@@ -369,6 +375,7 @@ export function ActionRow(props: Props) {
                     if (m === "auto") set({ builder: undefined });
                     else if (m === "from") set({ builder: { from: "food" } });
                     else if (m === "new") set({ builder: { new: ref } });
+                    else if (m === "unit") set({ builder: { unit: soldiers[0]?.id ?? "" } });
                     else set({ builder: { same: ref } });
                   }}
                 >
@@ -380,8 +387,24 @@ export function ActionRow(props: Props) {
                   <option value="same" disabled={others.length === 0}>
                     {t("row.builderSame")}
                   </option>
+                  {soldiers.length > 0 && <option value="unit">{t("row.builderUnit")}</option>}
                 </select>
               </label>
+              {a.builder && "unit" in a.builder && (
+                <label class="field">
+                  {t("row.unit")}
+                  <select
+                    value={a.builder.unit}
+                    onChange={(e) => set({ builder: { unit: e.currentTarget.value } })}
+                  >
+                    {soldiers.map((u) => (
+                      <option key={u.id} value={u.id}>
+                        {name(u.id)}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+              )}
               {a.builder && "from" in a.builder && (
                 <label class="field">
                   {t("row.from")}

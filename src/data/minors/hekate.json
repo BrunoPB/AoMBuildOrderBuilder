@@ -14,9 +14,9 @@
   "unlocks": ["lampades", "asper-blood", "mythic-rejuvenation", "celerity"],
   "powers": ["tartarian-gate"],
   "meta": {
-    "source": "https://ageofempires.fandom.com/wiki/Hekate; https://aomr-analyzer.com/gods/kronos (minor lists)",
-    "checkedAt": "2026-10-17",
+    "source": "Game files 19.17020 (techtree.xml MythicAgeHekate)",
+    "checkedAt": "2026-10-18",
     "confidence": "high",
-    "note": "1 free lampades on reaching the age through Hekate (Kronos: 2). pt-BR name not verified against the official localization."
+    "note": "Age-up tech: CreateUnit 1 lampades at the Temple (Kronos: +1 from KronosExtra*, so 2). God power TartarianGate (cooldown 240 s)."
   }
 }

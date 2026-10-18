@@ -2,7 +2,7 @@
   "id": "hyperion",
   "pantheon": "atlanteans",
   "name": {
-    "pt-BR": "Hiperíon",
+    "pt-BR": "Hiperião",
     "en": "Hyperion"
   },
   "icon": "gods/hyperion",
@@ -14,9 +14,9 @@
   "unlocks": ["satyr", "pioneer-of-the-skies", "gemini", "heroic-renewal", "sons-of-the-sun"],
   "powers": ["chaos"],
   "meta": {
-    "source": "https://ageofempires.fandom.com/wiki/Hyperion; https://aomr-analyzer.com/gods/kronos (minor lists)",
-    "checkedAt": "2026-10-17",
+    "source": "Game files 19.17020 (techtree.xml HeroicAgeHyperion)",
+    "checkedAt": "2026-10-18",
     "confidence": "high",
-    "note": "1 free satyr on reaching the age through Hyperion (Kronos: 2). pt-BR name not verified against the official localization."
+    "note": "Age-up tech: CreateUnit 1 satyr at the Temple (Kronos: +1 from KronosExtra*, so 2). God power Chaos (cooldown 240 s)."
   }
 }

@@ -83,6 +83,8 @@ export const WorkerSchema = z.strictObject({
   /** Build speed multiplier relative to the pantheon's base builder (1 = base). */
   buildRate: z.number().positive().optional(),
   canBuild: z.boolean().optional(),
+  /** Only these building ids (absent = any building). */
+  builds: z.array(z.string()).optional(),
   needsDropsite: z.boolean(),
 });
 

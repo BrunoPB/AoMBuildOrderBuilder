@@ -14,8 +14,8 @@
   "unlocks": ["mummy", "new-kingdom", "atef-crown", "desert-wind", "pharaoh-new-kingdom"],
   "powers": ["son-of-osiris"],
   "meta": {
-    "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml) (tech MythicAgeOsiris); cross-checked: https://ageofempires.fandom.com/wiki/Osiris and the Ra/Isis/Set wiki pages (minor god lists)",
-    "checkedAt": "2026-10-17",
+    "source": "Game files 19.17020 (techtree.xml, minor_gods.xml, string_table.txt)",
+    "checkedAt": "2026-10-18",
     "confidence": "high",
     "note": "God of life and resurrection. Focus: Camel Riders and Pharaohs. Free unit(s) spawn at a Temple when the age-up completes. God power recharge 240 s."
   }

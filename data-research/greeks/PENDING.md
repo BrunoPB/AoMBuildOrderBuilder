@@ -1,64 +1,33 @@
-# Greeks: pending / low-confidence items
+# Greeks: pending / not answered by the game files
 
-## Open questions for the owner
+Reconciled against the installed game (build 19.17020) on 2026-10-18. Everything below is either not defined in the files or not expressible in the schema.
 
-- [ ] **Favor cap.** aomr-analyzer says Greeks are capped at 100 favor. The wiki says favor has had no cap since Retold. The schema has no cap field. Should one be added, and can you check this in-game?
-- [ ] **Starting Sentry Towers.** The wiki says standard matches start with 4 Sentry Towers around the Town Center. They are not in `start.buildings`. Can you confirm in a 1v1 game?
-- [ ] **Praying limit.** No limit on praying villagers is documented. `favor.table` stops at 30, so above that the simulator should extrapolate with the formula, or clamp.
-- [ ] **Hero train time per age.** Greek heroes train 10% faster per age, which the schema cannot express. Values are taken at each hero's unlock age.
+## Not defined in the files (owner check in game)
 
-## Not expressible in the current schema (noted in `meta.note`, simulator must special-case)
+- [ ] **First god-power cast.** The age tech grants each power with `GodPower amount 1` plus a cooldown; the file `<cost>` / `<repeatcost>` are the favor cost and per-recast ramp. The files do not say whether the first cast is free. The engine charges `cost` on every cast, including the first.
+- [ ] **Free Scylla / Carcinos without a Dock.** `HeroicAgeGreek` / `MythicAgeGreek` run `CreateUnit Scylla|Carcinos generator=Dock`. Presumably nothing spawns without a Dock; not modelled (the engine would spawn it unconditionally if it were put in `freeUnitsOnAgeUp`).
+- [ ] **Which builder counts as "first"** with mixed builders (generic, see game-files-findings).
 
-- [ ] Vaults of Erebus (Hades): +1.75 gold/s (105/min) trickle with no workers.
-- [ ] Plenty (Hephaestus power): Plenty Vault producing 3.5 food, wood and gold per second.
-- [ ] Lure (Poseidon power):
-  - Food drop site that attracts animals.
-  - Spawns 3/4/6/10 Chickens (Archaic/Classical/Heroic/Mythic).
-  - Total lured food is capped at 1200/1300/1500/1900.
-  - There is no chicken unit id, so no `spawn` is given.
-- [ ] Zeus: myth units cost 1 less pop. There is no pop modifier target.
-- [ ] Carry-capacity bonuses (Husbandry, Hand Axe, Pickaxe, Bow Saw, Divine Blood, Salt Amphora...). There is no carry target.
-- [ ] Village Center trains villagers 25% slower. There is no per-building trainTime modifier.
-- [ ] Deimos' Sword of Dread (Ares) makes the Hypaspist available in Classical. The unit is kept at `age: "heroic"`.
-- [ ] Hippocampus, Militia and Shade of Hades are free or spawned. They are listed with `trainedAt: []` and `cost: {}`.
-- [ ] Argive Patronage (Hera): a free Myrmidon every 60 s per Fortress.
-- [ ] Winged Messenger (Hermes): a free respawning Pegasus.
+## Not expressible in the current schema (in notes; simulator must special-case)
 
-## Low / medium confidence values
+- [ ] Hero train time drops ×0.9 in each of Classical, Heroic, Mythic (`HeroShadowUpgraded`). `trainTime` is the value in the unlock age; per-age values are in each hero's `fieldMeta.trainTime`.
+- [ ] Village Center `trainingrate` 0.75 (villagers take 1.33× as long there). No per-building train modifier.
+- [ ] Deimos' Sword of Dread (Ares) enables the Hypaspist in the Classical Age (requires is AND-only; unit kept at heroic).
+- [ ] Argonauts creates one free Argo at a Dock (researches have no spawn). The Argo has buildlimit 1.
+- [ ] Winged Messenger (Hermes): extra respawning Pegasus (`PegasusWingedMessenger`).
+- [ ] Argive Patronage (Hera, Zeus only): Fortress Maintain action, one Myrmidon per 60 train points.
+- [ ] Hippocampus (Poseidon) respawns at a Dock; Militia partisans; Shades of Hades (20%, 10 s). Listed with `trainedAt: []`; their proto cost is shown but never paid.
+- [ ] Lure: chickens (100 food each, 3/4/6/10 per age) and the lured-food cap 1200/1300/1500/1900; there is no chicken unit id.
+- [ ] Carry-capacity bonuses (Husbandry, axes/picks, Salt Amphora, Divine Blood). No carry target.
+- [ ] Omniscience: dynamic cost (100 gold per enemy unit); `cost` left empty.
+- [ ] Research `at` holds one building. Alternatives are listed in the buildings' `researches` (Golden Apples at Village Center/Temple, Divine Blood/Masons/Architects at the Village Center, Athena/Ares/Apollo/Artemis techs at the Armory, Phobos' Spear at the Stable, Chthonic Rites at the Dock, Olympian Parentage at the Fortress).
+- [ ] Wonder favor trickle (60/min) gets the unscoped Zeus `favorRate` ×1.2 in the simulator; in game Zeus only boosts Temple prayer.
 
-- [ ] Forge of Olympus research-speed bonus: x0.6667 time is used. Wiki pages conflict between +50% speed, -25% time and +100% speed. Research time 5 s.
-- [ ] Carcinos train time of 9 s (wiki only). It looks very short.
-- [ ] Gather-tech stacking: the effects are assumed to stack multiplicatively. This matters for Plow/Irrigation/Flood Control, Purse Seine with Salt Amphora (+50% each), and the wood/gold lines.
-- [ ] Forge of Olympus and Hades cost discounts are assumed not to touch favor costs.
-- [ ] All build times, research times and myth-unit train times come from the wiki only, which is a single source. They are marked medium in `fieldMeta`.
-- [ ] Archaic heroes (Jason, Ajax, Theseus): cost 100 food / 50 wood, 5 s. Overall confidence is medium (wiki and analyzer unit JSON, but the analyzer tags them "Classical").
-- [ ] Wooden Gate build time 0 (low): it is converted from a long wall segment. The wall cost and time used are those of the long segment (15 gold / 15 s).
-- [ ] Omniscience cost is variable (100 gold x enemy population), so `cost` is left as `{}`.
-- [ ] House limit 16 (wiki).
-- [ ] Fortress limit 15 and Sentry Tower limit 30 (wiki).
-- [ ] Research `at` holds a single building. Several myth techs can also be researched elsewhere (noted in each meta):
-  - Golden Apples: also at the Temple.
-  - Aegis Shield, Sarissa, Phobos', Deimos', Enyo's, Sun Ray, Shafts of Plague: also at the Armory.
-  - Chthonic Rites: also at the Dock.
-  - Olympian Parentage: also at the Fortress.
-  - Phobos' Spear: also at the Stable.
+## Names
 
-## Names (pt-BR)
+- Official string-table names are used everywhere, including suffixes ("Jason (Hero)" / "Jasão (Herói)", "The Argo (Hero)" / "O Argo (Herói)"). Some official pt-BR names differ from common usage: Hércules (Herói), Perseus (Herói), Hippeis, Gastrafeta, Penteconter.
+- `plural` added only for the Fishing Ship (pt "Navios Pesqueiros", en "Fishing Ships" from the string table). The generic pluralizer only pluralizes the first word, so English multi-word names (Transport Ship, Donkey Caravan, Nemean Lion, Sentry Tower...) come out wrong; that is an i18n issue, not data.
 
-- [ ] No official Brazilian Portuguese localization was found for AoM Retold. All pt-BR names are my translations and should be checked against the game, for example:
-  - Hipaspista, Mirmidão, Toxota, Pródromo
-  - Depósito (Storehouse), Celeiro (Granary), Campo de Tiro com Arco
-  - Tech names such as "Rede de Cerco" (Purse Seine)
-  - God powers: Raio, Isca, Fartura...
+## Icons (unchanged)
 
-## Icons (all 198 ids have a URL; visual checks suggested)
-
-- [ ] Kries files whose subject is ambiguous:
-  - `sentinel_icon.png` (the power, or the Sentinel unit?)
-  - `lure_icon.png` (the power, or the Lure building?)
-  - `bolt_icon.png`
-  - `curse.png`
-  - `carcinos.png`
-  - `house_icon.png`, `temple_icon.png`, `dock_icon.png`, `market_icon.png`, `armory_icon.png`: possibly a non-Greek architecture variant.
-- [ ] `gods/zeus-portrait` uses Kries `zeus_breakoutportrait.png`, because there is no `zeus_portrait.png`.
-- [ ] The 115 wiki URLs were verified in a browser. curl from this environment gets 403 from wikia's CDN, so hotlinking may need a referer-free fetch or a local copy.
+- [ ] Kries files with an ambiguous subject (sentinel, lure, bolt, curse, carcinos, some buildings) and the 115 wiki URLs verified only in a browser (curl gets 403). See `icons.json`.

@@ -56,6 +56,11 @@ describe("i18n", () => {
     expect(pluralize("pt-BR", "Mansão")).toBe("Mansões");
     expect(pluralize("en", "Citizen")).toBe("Citizens");
     expect(pluralize("en", "Huskarl")).toBe("Huskarls");
+    expect(pluralize("en", "Throwing Axeman")).toBe("Throwing Axemen");
+    expect(pluralize("en", "Citizen (Hero)")).toBe("Citizens (Hero)");
+    expect(pluralize("pt-BR", "Navio Pesqueiro")).toBe("Navios Pesqueiros");
+    expect(pluralize("pt-BR", "Centro de Aldeia")).toBe("Centros de Aldeia");
+    expect(pluralize("pt-BR", "Sacerdote (Herói)")).toBe("Sacerdotes (Herói)");
   });
 
   it("detects the browser language", () => {

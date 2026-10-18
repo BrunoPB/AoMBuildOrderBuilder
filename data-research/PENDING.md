@@ -8,7 +8,10 @@ Answers taken from the game files (build 19.17020) are written up in [game-files
 
 ## Open questions for the owner (SPEC 18 + research)
 
-- [ ] Population: reserved when training starts or ends? (default: start; configurable per build)
+- [ ] Citizen train time: the game files say 28 s, the Krush measurement shows a 30 s rhythm. The data keeps 28 s; the Krush preset uses `autoQueueDelay: 2`. Is there a pause between auto-queued units in game?
+- [ ] Do the bonuses of several Kronos Manors stack on the same building?
+
+- [x] Population counts when the unit leaves the building; a finished unit waits inside while the population is full (owner). Default `popReservedAt: "end"`.
 - [x] Oracle hero promotion cost: game files confirm 30 food + 45 gold + 1 favor, 7 s (`OracleToHero`, techtree.xml). All other promotion costs in the data also match the files. The Krush timing gap must come from something else (e.g. the unit stops working for the 7 s, or promotions made while the unit keeps gathering).
 - [ ] Deconstruction: first cast free, then 10 favor (+10 per reuse), 180 s cooldown. Time Shift: no favor cost or cooldown (50% resource cost for towers/Palace/Mirror Tower).
 - [ ] Average real Oracle favor rate in a match (default 2.0/min per Oracle). Game formula: 0.6/min (no LOS bonus) to 3.41/min (full 25 LOS bonus), see findings.
@@ -18,8 +21,8 @@ Answers taken from the game files (build 19.17020) are written up in [game-files
 - [ ] Do Egyptians, Norse and Atlanteans have a favor cap (aomr-analyzer: 200)? Game files and wiki say none, so no `favorCap` is set. Check in game: does favor stop at 200?
 - [x] 1v1 matches start with 4 Sentry Towers (owner; the random map scripts place 4 `SentryTower` per player at 26 m). Added to every pantheon's `start.buildings`.
 - [x] Gather techs: the game uses relativity `BasePercent` (additive on the base, +10% +10% +10% = +30%). Converted to `op: "pct"`.
-- [ ] Does a unit keep working while it is being promoted (7 s)? The files only say the promotion is a transform command researched on the unit itself.
-- [ ] Wooden Gate: build time set to 15 s (WallGate buildpoints) assuming the wall conversion builds a foundation; check in game.
+- [x] Promotion: villagers stop working for the 7 s; Oracles keep producing favor but stop walking (owner). Modelled.
+- [x] Wooden Gate: 15 build points in proto.xml (WallGate).
 
 ## Krush calibration (known gap)
 

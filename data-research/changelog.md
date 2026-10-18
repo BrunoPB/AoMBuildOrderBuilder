@@ -1,5 +1,15 @@
 # Data changelog
 
+## 2026-10-18 — installed game as source of truth
+
+- All four pantheons reconciled against the game files (proto.xml, techtree.xml, god files, string tables): official pt-BR/en names, values, research lists, effect ops.
+- Citizen train time 28 s (file) instead of the measured 30 s; the Krush preset uses a 2 s auto-queue delay to match the measured rhythm. Turma 9.5 s.
+- Greek minor gods give one free myth unit on age up; hero train times per age; Hades discount ×0.666 incl. favor.
+- Norse Gatherers/Dwarves only build House, Farm and Ox Cart; infantry can build (builder `{ unit }`).
+- Wonder favor trickle 60/min for every pantheon. Zeus favor bonus scoped to Temple prayer.
+- 9 Atlantean techs added (towers, walls, Omniscience, Secrets of the Titans).
+- All 779 icons extracted from the game.
+
 ## 2026-10-18 — game files pass (patch 19.17020)
 
 - Gather techs and other base-percent bonuses now use `op: "pct"` (they add on the base rate).

@@ -2,7 +2,7 @@
   "id": "kronos",
   "pantheon": "atlanteans",
   "name": {
-    "pt-BR": "Kronos",
+    "pt-BR": "Cronos",
     "en": "Kronos"
   },
   "icon": "gods/kronos",
@@ -14,7 +14,7 @@
       "value": 1.25,
       "condition": "nearManor",
       "except": ["wonder"],
-      "note": "Temporal Scaffolding: buildings within 20 of a Manor build 25% faster, stacking per Manor (one Manor modelled). Measured by the owner."
+      "note": "Temporal Scaffolding (manor.tactics, enabled by ArchaicAgeKronos): AutoRangedModify BuildRate x1.25 on unbuilt LogicalTypeBuildingSmall/Large within 20 m of a Manor (every Atlantean building except the Wonder, Sky Passage and gates). Whether several Manors stack is not stated; one Manor is modelled."
     }
   ],
   "ageUpFreeUnits": 2,
@@ -26,17 +26,9 @@
   },
   "unlocks": ["temporal-chaos"],
   "meta": {
-    "source": "https://ageofempires.fandom.com/wiki/Kronos; https://aomr-analyzer.com/gods/kronos; measured (build bonus, free units)",
-    "checkedAt": "2026-10-17",
+    "source": "Game files 19.17020 (major_gods.xml, techtree.xml ArchaicAgeKronos/ClassicalAgeKronos/HeroicAgeKronos, tactics/manor.tactics)",
+    "checkedAt": "2026-10-18",
     "confidence": "high",
-    "note": "Not expressed as modifiers: can Time Shift own buildings (see powers 'time-shift'); lost siege and myth units refund 20% of their cost. Age up: 2 free myth units of the chosen minor god instead of 1."
-  },
-  "fieldMeta": {
-    "modifiers": {
-      "source": "measured",
-      "checkedAt": "2026-10-17",
-      "confidence": "high",
-      "note": "Expressed as buildRate x1.25 with condition nearManor (not as buildTime)."
-    }
+    "note": "Power: Deconstruction (cooldown 180). Not expressed as modifiers: Time Shift of own buildings (major_gods.xml timeshifting, see power 'time-shift'); lost siege weapons (wood, gold) and myth units (all resources incl. favor) refund 20% (ResourceReturnRate 0.20; not Promethean Offspring). Age up: KronosExtra<Unit> techs create 1 more myth unit at the Temple on top of the minor god's 1, so 2 in total for every Kronos minor god."
   }
 }

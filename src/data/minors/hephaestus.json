@@ -8,6 +8,9 @@
   "icon": "gods/hephaestus",
   "portrait": "gods/hephaestus-portrait",
   "age": "mythic",
+  "freeUnitsOnAgeUp": {
+    "colossus": 1
+  },
   "unlocks": [
     "colossus",
     "hand-of-talos",
@@ -17,9 +20,9 @@
   ],
   "powers": ["plenty"],
   "meta": {
-    "source": "https://ageofempires.fandom.com/wiki/Hephaestus ; https://aomr-analyzer.com/gods/zeus ; https://aomr-analyzer.com/gods/hades ; https://aomr-analyzer.com/gods/poseidon",
-    "checkedAt": "2026-10-17",
+    "source": "Game files 19.17020 (techtree.xml)",
+    "checkedAt": "2026-10-18",
     "confidence": "high",
-    "note": "No free units on age-up for Greek minor gods."
+    "note": "MythicAgeHephaestus: CreateUnit Colossus at a Temple (one free myth unit), god power PlentyVault (cooldown 180 s); enables the listed unit and techs."
   }
 }

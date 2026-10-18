@@ -8,12 +8,15 @@
   "icon": "gods/hera",
   "portrait": "gods/hera-portrait",
   "age": "mythic",
+  "freeUnitsOnAgeUp": {
+    "medusa": 1
+  },
   "unlocks": ["medusa", "face-of-the-gorgon", "monstrous-rage", "argive-patronage"],
   "powers": ["lightning-storm"],
   "meta": {
-    "source": "https://ageofempires.fandom.com/wiki/Hera ; https://aomr-analyzer.com/gods/zeus ; https://aomr-analyzer.com/gods/hades ; https://aomr-analyzer.com/gods/poseidon",
-    "checkedAt": "2026-10-17",
+    "source": "Game files 19.17020 (techtree.xml)",
+    "checkedAt": "2026-10-18",
     "confidence": "high",
-    "note": "No free units on age-up for Greek minor gods. Carcinos (formerly Hera) is available to all Greeks in Retold."
+    "note": "MythicAgeHera: CreateUnit Medusa at a Temple (one free myth unit), god power LightningStorm (cooldown 240 s); enables the listed unit and techs."
   }
 }

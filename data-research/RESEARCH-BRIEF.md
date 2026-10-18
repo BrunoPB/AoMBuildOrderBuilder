@@ -4,11 +4,12 @@ Goal: build the game database for **Age of Mythology: Retold** (base game only, 
 
 ## Source priority (highest first)
 
-1. Values marked "measured" in the project spec (given in your task) — always win.
-2. Extracted game data: https://aomr-analyzer.com (and its sub-pages).
-3. Official: ageofempires.com pantheon/god pages and official patch notes (use the latest patch; record its number).
-4. Community wikis: Age of Empires Series Wiki (ageofempires.fandom.com), Liquipedia (liquipedia.net/ageofempires), Pro Game Guides AoM Retold wiki.
-5. aomstats.io — metadata only, never rules.
+1. **The game installation itself** (files, string tables, images from the owner's copy of AoM Retold) — absolute truth. Whatever the game files say is fact.
+2. Values measured in game by the owner — for behaviour the files do not define (timings, population rules, favor in practice).
+3. Extracted game data: https://aomr-analyzer.com.
+4. Official: ageofempires.com pantheon/god pages and official patch notes (use the latest patch; record its number).
+5. Community wikis: Age of Empires Series Wiki (ageofempires.fandom.com), Liquipedia, Pro Game Guides — support only.
+6. aomstats.io — metadata only, never rules.
 
 Many pages describe the 2002 original or Extended Edition. Prefer pages that cite Retold or 2024+ patches. When values conflict, use the higher-priority source and record the conflict.
 

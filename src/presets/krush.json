@@ -24,7 +24,8 @@
     "sourceAmounts": {
       "hunt": 2000
     },
-    "oracleRate": 1.6
+    "oracleRate": 1.6,
+    "autoQueueDelay": 2
   },
   "milestones": [
     {

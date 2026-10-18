@@ -12,10 +12,8 @@
       "target": "buildRate",
       "op": "pct",
       "value": 0.1,
-      "scope": {
-        "tags": ["infantry", "hero"]
-      },
-      "note": "Buildings (constructed by military units) built 10% faster."
+      "except": ["house", "farm", "ox-cart"],
+      "note": "Build WorkRate x1.1 BasePercent for AbstractInfantry and Godi builders. The simulator scopes buildRate by building, so it is applied to every building except those Gatherers/Dwarves build (House, Farm, Ox Cart)."
     },
     {
       "target": "cost",
@@ -24,7 +22,7 @@
       "scope": {
         "ids": ["ox-cart"]
       },
-      "note": "Ox Cart food and wood cost x0.5 (OxCartBuilding BasePercent / OxCart Percent): 20 food + 20 wood."
+      "note": "OxCartBuilding food and wood cost x0.5 BasePercent: 20 food + 20 wood."
     }
   ],
   "powers": ["spy"],
@@ -35,17 +33,9 @@
   },
   "unlocks": ["eyes-in-the-forest"],
   "meta": {
-    "source": "https://aomr-analyzer.com/gods/loki + https://ageofempires.fandom.com/wiki/Loki",
-    "checkedAt": "2026-10-17",
+    "source": "Game files 19.17020 (major_gods.xml, techtree.xml)",
+    "checkedAt": "2026-10-18",
     "confidence": "high",
-    "note": "Not expressed as modifiers: damage by human soldiers (15%) and Hersirs (50%) fills a meter that spawns a random myth unit when it reaches its cost (favor x10); human soldiers and heroes +10% counter damage; transforming Gatherers/Dwarves into Berserks costs 50% less."
-  },
-  "fieldMeta": {
-    "modifiers": {
-      "source": "Game files 19.17020 (techtree.xml)",
-      "checkedAt": "2026-10-18",
-      "confidence": "high",
-      "note": "ArchaicAgeLoki: Build WorkRate x1.1 BasePercent on AbstractInfantry and Godi; Ox Cart cost x0.5; Berserk promotion (VillagerNorse/DwarfToBerserk) cost x0.5 BasePercent (not modelled)."
-    }
+    "note": "ArchaicAgeLoki: Spy (cooldown 30); infantry/Godi build x1.1; Ox Cart cost x0.5; Berserk transform (VillagerNorse/DwarfToBerserk) cost x0.5 BasePercent (not modelled); +10% bonus damage for Hersir, Godi, Hirdman, Throwing Axeman, Huskarl and Raiding Cavalry against their counters. Not modelled: bonusunitspawning (major_gods.xml) - damage by Hersirs (0.5), Godi (0.15) and human soldiers (0.15) fills a meter that spawns a random myth unit when it reaches its cost (favor counted x10); Kraken and Jormun Elver excluded."
   }
 }

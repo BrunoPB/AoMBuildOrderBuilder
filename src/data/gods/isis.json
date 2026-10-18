@@ -61,7 +61,7 @@
         ]
       },
       "condition": "custom",
-      "note": "Only while a Monument is empowered by a Pharaoh: empower favor bonus becomes x2.0 instead of x1.2 (1.2 x 1.667)."
+      "note": "Only while a Monument is empowered by a Pharaoh: empower favor bonus becomes x2.0 instead of x1.2 (1.2 x 1.667). The file's BasePercent applies to the empower factor itself (EmpowerModify FavorGatherRate 1.2 -> 2.0), so relative to an empowered Monument's favor it is a plain x1.667: op mul is intended."
     }
   ],
   "powers": ["prosperity"],
@@ -72,8 +72,8 @@
   },
   "unlocks": ["flood-of-the-nile"],
   "meta": {
-    "source": "Extracted game data, AoM Retold build 19.17020 (Data.bar: gameplay/proto.xml, techtree.xml, major_gods.xml) (ArchaicAge<God> tech, STR_CIV_*_LR, string_replacement_values.xml); cross-checked: https://ageofempires.fandom.com/wiki/Ra , /Isis , /Set (Bonuses sections)",
-    "checkedAt": "2026-10-17",
+    "source": "Game files 19.17020 (major_gods.xml, techtree.xml, string_replacement_values.xml, string_table.txt)",
+    "checkedAt": "2026-10-18",
     "confidence": "high",
     "note": "Other bonuses: Monuments block enemy god powers within 25 (50 when empowered); empowered Monuments heal nearby units (50 range). Prosperity recharge 120 s."
   },

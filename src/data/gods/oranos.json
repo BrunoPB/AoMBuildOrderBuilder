@@ -2,7 +2,7 @@
   "id": "oranos",
   "pantheon": "atlanteans",
   "name": {
-    "pt-BR": "Oranos",
+    "pt-BR": "Urano",
     "en": "Oranos"
   },
   "icon": "gods/oranos",
@@ -11,11 +11,20 @@
     {
       "target": "favorRate",
       "op": "mul",
+      "value": 1.285,
+      "scope": {
+        "ids": ["oracle"]
+      },
+      "note": "ArchaicAgeOranos: AutoGatherFavor and AutoLOS ModifyRateCap +4 Absolute (25 -> 29). At full LOS 3.41 -> 4.38 favor/min (x1.285); no gain while the bonus LOS is below 25."
+    },
+    {
+      "target": "favorRate",
+      "op": "mul",
       "value": 1.25,
       "scope": {
-        "ids": ["oracle", "oracle-hero"]
+        "ids": ["oracle-hero"]
       },
-      "note": "Oracles +25% favor at full LOS (+4 max LOS). Wiki formula gives ~+28% at full LOS for a plain Oracle; less when LOS is not full."
+      "note": "Same +4 cap on the Oracle Hero (30 -> 34): 4.92 -> 6.15 favor/min at full LOS (x1.25)."
     }
   ],
   "powers": ["shockwave"],
@@ -26,17 +35,17 @@
   },
   "unlocks": ["sky-passage", "empyrian-speed"],
   "meta": {
-    "source": "https://ageofempires.fandom.com/wiki/Oranos; https://aomr-analyzer.com/gods/oranos",
-    "checkedAt": "2026-10-17",
+    "source": "Game files 19.17020 (major_gods.xml, techtree.xml ArchaicAgeOranos/ClassicalAgeOranos)",
+    "checkedAt": "2026-10-18",
     "confidence": "high",
-    "note": "Not expressed: all units +4 LOS; damaged enemy units stay visible 25 s; Sky Passages (one more per age) teleport units."
+    "note": "Power: Shockwave (cooldown 180). Not expressed: every unit +4 LOS (Oracles excluded: -4); human soldiers and heroes attach an Oranos revealer to units they hit; Sky Passage build limit 2, +1 per age."
   },
   "fieldMeta": {
     "modifiers": {
-      "source": "Game files 19.17020 (techtree.xml)",
+      "source": "Game files 19.17020 (techtree.xml ArchaicAgeOranos; proto.xml Oracle AutoGatherFavor)",
       "checkedAt": "2026-10-18",
-      "confidence": "high",
-      "note": "ArchaicAgeOranos: Oracle AutoGatherFavor and AutoLOS ModifyRateCap +4 Absolute (25 -> 29). Not a flat multiplier: at full LOS a plain Oracle goes 3.41 -> 4.38 favor/min (+28%); the x1.25 here is an approximation."
+      "confidence": "medium",
+      "note": "Multipliers derived at full LOS from the file parameters (wiki formula). Previously x1.25 for both (aomr-analyzer '+25%')."
     }
   }
 }

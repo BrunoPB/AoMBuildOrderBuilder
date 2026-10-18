@@ -15,7 +15,8 @@ export type SimWarning = {
 export type BuilderRef =
   | { kind: "new"; unit: string }
   | { kind: "from"; unit: string; from: TaskTarget }
-  | { kind: "same"; unit: string };
+  | { kind: "same"; unit: string }
+  | { kind: "unit"; unit: string };
 
 export type SimEvent = { t: number; action?: number } & (
   | { kind: "trainStart"; unit: string; count: number; rally?: TaskTarget }

@@ -8,12 +8,15 @@
   "icon": "gods/athena",
   "portrait": "gods/athena-portrait",
   "age": "classical",
+  "freeUnitsOnAgeUp": {
+    "minotaur": 1
+  },
   "unlocks": ["minotaur", "labyrinth-of-minos", "aegis-shield", "sarissa"],
   "powers": ["restoration"],
   "meta": {
-    "source": "https://ageofempires.fandom.com/wiki/Athena ; https://aomr-analyzer.com/gods/zeus ; https://aomr-analyzer.com/gods/hades ; https://aomr-analyzer.com/gods/poseidon",
-    "checkedAt": "2026-10-17",
+    "source": "Game files 19.17020 (techtree.xml)",
+    "checkedAt": "2026-10-18",
     "confidence": "high",
-    "note": "No free units on age-up for Greek minor gods."
+    "note": "ClassicalAgeAthena: CreateUnit Minotaur at a Temple (one free myth unit), god power Restoration (cooldown 180 s); enables the listed unit and techs."
   }
 }

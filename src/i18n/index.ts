@@ -42,11 +42,35 @@ export function text(
 }
 
 /** Plural of a game name when the data has none. */
+const PT_STOP = new Set([
+  "de",
+  "do",
+  "da",
+  "dos",
+  "das",
+  "a",
+  "ao",
+  "à",
+  "em",
+  "no",
+  "na",
+  "com",
+  "para",
+  "e",
+]);
+
 export function pluralize(locale: Locale, word: string): string {
-  return word
-    .split(" ")
-    .map((part, i) => (i === 0 ? pluralWord(locale, part) : part))
-    .join(" ");
+  const parts = word.split(" ");
+  const paren = parts.findIndex((p) => p.startsWith("("));
+  if (locale === "en") {
+    const head = paren > 0 ? paren - 1 : parts.length - 1;
+    return parts.map((part, i) => (i === head ? pluralWord(locale, part) : part)).join(" ");
+  }
+  // Portuguese: noun and its adjectives agree, up to a preposition ("Centro de Aldeia").
+  const stop = parts.findIndex(
+    (p, i) => i > 0 && (p.startsWith("(") || PT_STOP.has(p.toLowerCase())),
+  );
+  return parts.map((part, i) => (stop < 0 || i < stop ? pluralWord(locale, part) : part)).join(" ");
 }
 
 function pluralWord(locale: Locale, w: string): string {

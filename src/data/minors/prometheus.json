@@ -14,9 +14,9 @@
   "unlocks": ["promethean", "alluvial-clay", "heart-of-the-titans", "theft-of-fire"],
   "powers": ["valor"],
   "meta": {
-    "source": "https://ageofempires.fandom.com/wiki/Prometheus; https://aomr-analyzer.com/gods/kronos (minor lists)",
-    "checkedAt": "2026-10-17",
+    "source": "Game files 19.17020 (techtree.xml ClassicalAgePrometheus)",
+    "checkedAt": "2026-10-18",
     "confidence": "high",
-    "note": "1 free promethean on reaching the age through Prometheus (Kronos: 2). pt-BR name not verified against the official localization."
+    "note": "Age-up tech: CreateUnit 1 promethean at the Temple (Kronos: +1 from KronosExtra*, so 2). God power Valor (cooldown 30 s)."
   }
 }

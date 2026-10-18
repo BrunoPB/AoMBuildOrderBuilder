@@ -233,5 +233,10 @@
   "settings.off": "Desligado",
   "settings.data": "Base de dados",
   "settings.patch": "Patch do jogo",
-  "settings.api": "API estática"
+  "settings.api": "API estática",
+  "step.byUnit": "1 {unit}",
+  "row.builderUnit": "Soldado",
+  "warn.cannotBuild": "{unit} não constrói {building}",
+  "warn.noUnitToBuild": "Nenhum {unit} disponível; esperou {waited} s",
+  "editor.autoQueueDelay": "Intervalo da produção automática (s)"
 }

@@ -27,17 +27,9 @@
   },
   "unlocks": ["hamask"],
   "meta": {
-    "source": "https://aomr-analyzer.com/gods/odin + https://ageofempires.fandom.com/wiki/Odin",
-    "checkedAt": "2026-10-17",
+    "source": "Game files 19.17020 (major_gods.xml, techtree.xml)",
+    "checkedAt": "2026-10-18",
     "confidence": "high",
-    "note": "Not expressed as modifiers: Great Hall units (Hersir, Godi, Jarl, Raiding Cavalry) earn +25% combat favor (1 per 64 damage instead of 80); human soldiers and heroes regenerate 0.4 HP/s; 2 Raven scouts spawn when the first Temple is built and respawn when killed."
-  },
-  "fieldMeta": {
-    "modifiers": {
-      "source": "Game files 19.17020 (techtree.xml)",
-      "checkedAt": "2026-10-18",
-      "confidence": "high",
-      "note": "ArchaicAgeOdin: Gather WorkRate on Huntable x1.1 BasePercent (all economic units)."
-    }
+    "note": "ArchaicAgeOdin: Great Hunt (cooldown 90); hunt x1.1 BasePercent for EconomicUpgraded (modifier). Not expressed as modifiers: Hersir, Jarl, Godi and Raiding Cavalry earn combat favor x1.25 (1 per 64 damage, major_gods.xml); human soldiers and heroes regenerate 0.4 HP/s; 2 Ravens spawn at the first Temple (RavenFirstSpawn) and respawn (RavenRespawn), +2 LOS each age."
   }
 }

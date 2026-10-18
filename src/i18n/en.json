@@ -233,5 +233,10 @@
   "settings.off": "Off",
   "settings.data": "Game data",
   "settings.patch": "Game patch",
-  "settings.api": "Static API"
+  "settings.api": "Static API",
+  "step.byUnit": "1 {unit}",
+  "row.builderUnit": "Soldier",
+  "warn.cannotBuild": "{unit} cannot build {building}",
+  "warn.noUnitToBuild": "No {unit} available; waited {waited} s",
+  "editor.autoQueueDelay": "Auto queue delay (s)"
 }

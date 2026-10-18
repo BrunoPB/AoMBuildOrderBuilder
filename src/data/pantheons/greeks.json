@@ -28,15 +28,15 @@
     "type": "templeWorkers",
     "building": "temple",
     "table": [
-      6, 11.11, 15.53, 19.41, 22.85, 25.94, 28.75, 31.3, 33.66, 35.83, 37.86, 39.76, 41.55, 43.24,
+      6.0, 11.11, 15.53, 19.41, 22.85, 25.94, 28.75, 31.3, 33.66, 35.83, 37.86, 39.76, 41.55, 43.24,
       44.84, 46.37, 47.82, 49.22, 50.56, 51.85, 53.1, 54.31, 55.48, 56.61, 57.72, 58.8, 59.85,
       60.88, 61.89, 62.88
     ],
     "meta": {
-      "source": "https://ageofempires.fandom.com/wiki/Villager_(Age_of_Mythology)#Favor_generation_rates ; measured (owner: 1 villager 6/min, 8 villagers 31.3/min)",
-      "checkedAt": "2026-10-17",
+      "source": "Game files 19.17020 (game.cfg, proto.xml, techtree.xml)",
+      "checkedAt": "2026-10-18",
       "confidence": "high",
-      "note": "Retold formula (since update 19.14612): favor/s = N * M * (1/(N + 10.1111) + 0.01), N = villagers praying across all Temples, M = 1 (Zeus or Golden Apples: 1.2, applied via favorRate modifiers). Values here are favor/min for N = 1..30, M = 1; matches owner measurements (6 and 31.3) and the wiki table (1..16). No hard limit on praying villagers is documented; extrapolate with the formula beyond 30. Favor cap: the game files (major_gods.xml, techtree.xml) define no favor cap; the wiki says favor has no cap since Retold; aomr-analyzer lists 100 (Greeks) / 200 (others) but the owner confirmed no cap for Greeks, so no favorCap is set (owner to verify in game)."
+      "note": "game.cfg: PrayerEfficiencyEarlyIncomeReductionV=10.1111, PrayerEfficiencyLaterGrowthG=0.01, PrayerEfficiencyModifierZ=10.0; proto.xml VillagerGreek Gather AbstractTemple rate 0.1. favor/s = N x (rate x Z / 10) x (1/(N + V) + G) = N x M x (1/(N + 10.1111) + 0.01), N = villagers praying across all Temples, M = 1 (Zeus and Golden Apples each +0.2 BasePercent on the rate, via favorRate modifiers). Table = favor/min for N = 1..30 at M = 1; matches the owner measurements (6.00 and 31.30). No praying limit in the files (Temple maxcontained 5 is for garrison); extrapolate with the formula above 30. No favor cap in the files."
     }
   },
   "gods": ["zeus", "hades", "poseidon"],
@@ -51,10 +51,10 @@
       "at": "town-center",
       "requiresAnyOf": [["temple"]],
       "meta": {
-        "source": "https://ageofempires.fandom.com/wiki/Classical_Age_(Age_of_Mythology)",
-        "checkedAt": "2026-10-17",
-        "confidence": "medium",
-        "note": "Also researchable at a Village Center. Choose Athena/Hermes/Ares (per major god)."
+        "source": "Game files 19.17020 (techtree.xml)",
+        "checkedAt": "2026-10-18",
+        "confidence": "high",
+        "note": "ClassicalAgeAthena/Hermes/Ares: 400 food, 60 s, needs a Temple (typecount AbstractTemple >= 1). At Town Center or Village Center. Each gives one free myth unit at a Temple."
       }
     },
     {
@@ -68,10 +68,10 @@
       "at": "town-center",
       "requiresAnyOf": [["armory"], ["market"]],
       "meta": {
-        "source": "https://ageofempires.fandom.com/wiki/Heroic_Age",
-        "checkedAt": "2026-10-17",
-        "confidence": "medium",
-        "note": "75 s since update 17.27932. Market accepted as alternative requirement since Retold."
+        "source": "Game files 19.17020 (techtree.xml)",
+        "checkedAt": "2026-10-18",
+        "confidence": "high",
+        "note": "HeroicAgeApollo/Dionysus/Aphrodite: 800 food + 500 gold, 75 s, needs an Armory or a Market (OrPrereqs). At Town Center or Village Center. HeroicAgeGreek also creates a free Scylla at a Dock (if any)."
       }
     },
     {
@@ -85,10 +85,10 @@
       "at": "town-center",
       "requiresAnyOf": [["fortress"]],
       "meta": {
-        "source": "https://ageofempires.fandom.com/wiki/Mythic_Age",
-        "checkedAt": "2026-10-17",
-        "confidence": "medium",
-        "note": "1200/1200 since update 17.64528; 120 s since update 17.27932."
+        "source": "Game files 19.17020 (techtree.xml)",
+        "checkedAt": "2026-10-18",
+        "confidence": "high",
+        "note": "MythicAgeHera/Artemis/Hephaestus: 1200 food + 1200 gold, 120 s, needs a Fortress. At Town Center or Village Center. MythicAgeGreek also creates a free Carcinos at a Dock (if any)."
       }
     }
   ],
@@ -123,17 +123,21 @@
         "needsDropsite": true
       },
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Villager_(Age_of_Mythology)",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Gather rates (per minute, Retold): hunt 60, herd/chicken 54, berries 42, farm 42, wood 60, gold 51 (wiki gathering-rate table). Base carry 15 food / 10 wood / 10 gold. Limit 100 villagers. Village Centers train villagers 25% slower. Also prays at Temples for favor (see favor rule)."
+        "note": "Gather rates (proto.xml Gather/Hunting rates per second x 60): hunt 1.0, herd 0.9, berries (WildCrops) 0.7, farm 0.7, wood 1.0, gold 0.85. Base carry 15 food / 10 wood / 10 gold. Build rate 1.0. Limit 100. Village Centers have trainingrate 0.75 (villagers take 1/0.75 = 1.33x as long there; no per-building modifier in the schema). Also prays at Temples (Gather AbstractTemple 0.1/s, see favor rule)."
       }
     },
     {
       "id": "fishing-ship",
       "name": {
-        "pt-BR": "Barco de Pesca",
+        "pt-BR": "Navio Pesqueiro",
         "en": "Fishing Ship"
+      },
+      "plural": {
+        "pt-BR": "Navios Pesqueiros",
+        "en": "Fishing Ships"
       },
       "icon": "units/greeks-fishing-ship",
       "pantheon": "greeks",
@@ -153,10 +157,10 @@
         "needsDropsite": true
       },
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Fishing_Ship_(Age_of_Mythology)",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Fish gather rate 0.55/s = 33/min (generic, wiki). Limit 50."
+        "note": "Gather FishResource 0.55/s = 33/min. Limit 50."
       }
     },
     {
@@ -168,16 +172,18 @@
       "icon": "units/greeks-kataskopos",
       "pantheon": "greeks",
       "tags": ["scout", "cavalry", "human"],
-      "cost": {},
+      "cost": {
+        "food": 75
+      },
       "pop": 1,
       "trainTime": 0,
       "trainedAt": [],
       "age": "archaic",
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Kataskopos",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Starting scout; cannot be trained (internal cost 75 food per analyzer/wiki)."
+        "note": "Starting scout; cannot be trained. cost is the proto cost (75 food), never paid."
       }
     },
     {
@@ -198,8 +204,8 @@
       "trainedAt": ["military-academy"],
       "age": "classical",
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Hoplite_(Age_of_Mythology)",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
         "note": "Zeus: Hoplites +15% speed (not modelled)."
       }
@@ -222,10 +228,10 @@
       "trainedAt": ["military-academy"],
       "age": "heroic",
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Hypaspist",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Available in the Classical Age with Ares' Deimos' Sword of Dread (age-shift not expressible in schema)."
+        "note": "Enabled by HeroicAgeGreek; Ares' Deimos' Sword of Dread also enables it in the Classical Age (not expressible: requires is AND-only, so the unit stays at age heroic)."
       }
     },
     {
@@ -247,16 +253,16 @@
       "age": "mythic",
       "requires": ["zeus"],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Myrmidon",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Zeus unique unit. Hera's Argive Patronage makes Fortresses spawn one every 60 s."
+        "note": "Zeus unique unit (MythicAgeZeus). Hera's Argive Patronage gives Fortresses a Maintain action that trains one free Myrmidon per 60 train points."
       }
     },
     {
       "id": "toxotes",
       "name": {
-        "pt-BR": "Toxota",
+        "pt-BR": "Toxotes",
         "en": "Toxotes"
       },
       "icon": "units/greeks-toxotes",
@@ -271,8 +277,8 @@
       "trainedAt": ["archery-range"],
       "age": "classical",
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Toxotes",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high"
       }
     },
@@ -294,15 +300,15 @@
       "trainedAt": ["archery-range"],
       "age": "heroic",
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Peltast",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high"
       }
     },
     {
       "id": "gastraphetoros",
       "name": {
-        "pt-BR": "Gastrafetoros",
+        "pt-BR": "Gastrafeta",
         "en": "Gastraphetoros"
       },
       "icon": "units/greeks-gastraphetoros",
@@ -318,16 +324,16 @@
       "age": "mythic",
       "requires": ["hades"],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Gastraphetoros_(Age_of_Mythology)",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Hades unique unit."
+        "note": "Hades unique unit (MythicAgeHades)."
       }
     },
     {
       "id": "hippeus",
       "name": {
-        "pt-BR": "Hippeus",
+        "pt-BR": "Hippeis",
         "en": "Hippeus"
       },
       "icon": "units/greeks-hippeus",
@@ -342,15 +348,15 @@
       "trainedAt": ["stable"],
       "age": "classical",
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Hippeus_(Age_of_Mythology)",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high"
       }
     },
     {
       "id": "prodromos",
       "name": {
-        "pt-BR": "Pródromo",
+        "pt-BR": "Prodromos",
         "en": "Prodromos"
       },
       "icon": "units/greeks-prodromos",
@@ -365,8 +371,8 @@
       "trainedAt": ["stable"],
       "age": "heroic",
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Prodromos",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high"
       }
     },
@@ -389,10 +395,10 @@
       "age": "mythic",
       "requires": ["poseidon"],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Hetairos",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Poseidon unique unit."
+        "note": "Poseidon unique unit (MythicAgePoseidon)."
       }
     },
     {
@@ -404,23 +410,25 @@
       "icon": "units/greeks-militia",
       "pantheon": "greeks",
       "tags": ["infantry", "human"],
-      "cost": {},
+      "cost": {
+        "food": 70
+      },
       "pop": 1,
       "trainTime": 0,
       "trainedAt": [],
       "age": "archaic",
       "requires": ["poseidon"],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Militia_(Age_of_Mythology)",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Not trainable: spawns from Poseidon's razed buildings (1-8 per building, 30 for a Wonder). Internal cost 70 food."
+        "note": "Not trainable: Poseidon partisans spawn from razed buildings (partisancount 1-8 per building, 30 for a Wonder). cost is the proto cost (70 food), never paid."
       }
     },
     {
       "id": "petrobolos",
       "name": {
-        "pt-BR": "Petróbolo",
+        "pt-BR": "Petrobolos",
         "en": "Petrobolos"
       },
       "icon": "units/greeks-petrobolos",
@@ -435,15 +443,15 @@
       "trainedAt": ["fortress"],
       "age": "heroic",
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Petrobolos",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high"
       }
     },
     {
       "id": "helepolis",
       "name": {
-        "pt-BR": "Helépolis",
+        "pt-BR": "Helepolis",
         "en": "Helepolis"
       },
       "icon": "units/greeks-helepolis",
@@ -458,8 +466,8 @@
       "trainedAt": ["fortress"],
       "age": "mythic",
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Helepolis_(Age_of_Mythology)",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high"
       }
     },
@@ -480,8 +488,8 @@
       "trainedAt": ["dock"],
       "age": "classical",
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Transport_Ship_(Age_of_Mythology)",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high"
       }
     },
@@ -503,15 +511,15 @@
       "trainedAt": ["dock"],
       "age": "classical",
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Trireme_(Age_of_Mythology)",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high"
       }
     },
     {
       "id": "pentekonter",
       "name": {
-        "pt-BR": "Pentecôntera",
+        "pt-BR": "Penteconter",
         "en": "Pentekonter"
       },
       "icon": "units/greeks-pentekonter",
@@ -526,8 +534,8 @@
       "trainedAt": ["dock"],
       "age": "classical",
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Pentekonter",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high"
       }
     },
@@ -549,16 +557,16 @@
       "trainedAt": ["dock"],
       "age": "classical",
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Juggernaut_(Age_of_Mythology)",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high"
       }
     },
     {
       "id": "caravan",
       "name": {
-        "pt-BR": "Caravana",
-        "en": "Caravan"
+        "pt-BR": "Caravana de Burro",
+        "en": "Donkey Caravan"
       },
       "icon": "units/greeks-caravan",
       "pantheon": "greeks",
@@ -572,17 +580,17 @@
       "trainedAt": ["market"],
       "age": "heroic",
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Caravan_(Age_of_Mythology)",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Analyzer names the Greek caravan 'Donkey Caravan'. Limit 60. Poseidon: +0.3/+0.4 speed in Heroic/Mythic."
+        "note": "Official name Donkey Caravan (id kept as caravan). Limit 60. Poseidon: +0.1 speed per age (+0.3 in Heroic, +0.4 in Mythic)."
       }
     },
     {
       "id": "jason",
       "name": {
-        "pt-BR": "Jasão",
-        "en": "Jason"
+        "pt-BR": "Jasão (Herói)",
+        "en": "Jason (Hero)"
       },
       "icon": "units/greeks-jason",
       "pantheon": "greeks",
@@ -595,19 +603,27 @@
       "trainTime": 5,
       "trainedAt": ["town-center", "village-center", "fortress"],
       "age": "archaic",
-      "requires": ["zeus"],
+      "requires": ["zeus", "temple"],
       "meta": {
-        "source": "https://ageofempires.fandom.com/wiki/Jason_(Age_of_Mythology) ; https://aomr-analyzer.com/gods/zeus",
-        "checkedAt": "2026-10-17",
-        "confidence": "medium",
-        "note": "Greek heroes train 10% faster per age from Classical on (cumulative); trainTime here is the value in the age the hero unlocks. Base 5 s (Archaic 5, Classical 4.5, Heroic 4, Mythic 3.6). Limit 1. Cost from wiki and analyzer unit data."
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
+        "confidence": "high",
+        "note": "Hero, enabled by JasonEnable (needs at least one Temple alive)."
+      },
+      "fieldMeta": {
+        "trainTime": {
+          "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Proto trainpoints 5 s. ClassicalAgeGreek, HeroicAgeGreek and MythicAgeGreek each apply TrainPoints x0.90 (Percent) to HeroShadowUpgraded, so the time is 5 s x 0.9^(age index). Value here = the age the hero unlocks; per age: archaic 5, classical 4.5, heroic 4.05, mythic 3.645. The schema has no per-age modifier."
+        }
       }
     },
     {
       "id": "ajax",
       "name": {
-        "pt-BR": "Ájax",
-        "en": "Ajax"
+        "pt-BR": "Ájax (Herói)",
+        "en": "Ajax (Hero)"
       },
       "icon": "units/greeks-ajax",
       "pantheon": "greeks",
@@ -620,19 +636,27 @@
       "trainTime": 5,
       "trainedAt": ["town-center", "village-center", "fortress"],
       "age": "archaic",
-      "requires": ["hades"],
+      "requires": ["hades", "temple"],
       "meta": {
-        "source": "https://ageofempires.fandom.com/wiki/Ajax_(Age_of_Mythology) ; https://aomr-analyzer.com/gods/hades",
-        "checkedAt": "2026-10-17",
-        "confidence": "medium",
-        "note": "Greek heroes train 10% faster per age from Classical on (cumulative); trainTime here is the value in the age the hero unlocks. Base 5 s (Archaic 5, Classical 4.5, Heroic 4, Mythic 3.6). Limit 1. Cost from wiki and analyzer unit data."
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
+        "confidence": "high",
+        "note": "Hero, enabled by AjaxEnable (needs at least one Temple alive)."
+      },
+      "fieldMeta": {
+        "trainTime": {
+          "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Proto trainpoints 5 s. ClassicalAgeGreek, HeroicAgeGreek and MythicAgeGreek each apply TrainPoints x0.90 (Percent) to HeroShadowUpgraded, so the time is 5 s x 0.9^(age index). Value here = the age the hero unlocks; per age: archaic 5, classical 4.5, heroic 4.05, mythic 3.645. The schema has no per-age modifier."
+        }
       }
     },
     {
       "id": "theseus",
       "name": {
-        "pt-BR": "Teseu",
-        "en": "Theseus"
+        "pt-BR": "Teseu (Herói)",
+        "en": "Theseus (Hero)"
       },
       "icon": "units/greeks-theseus",
       "pantheon": "greeks",
@@ -645,19 +669,27 @@
       "trainTime": 5,
       "trainedAt": ["town-center", "village-center", "fortress"],
       "age": "archaic",
-      "requires": ["poseidon"],
+      "requires": ["poseidon", "temple"],
       "meta": {
-        "source": "https://ageofempires.fandom.com/wiki/Theseus ; https://aomr-analyzer.com/gods/poseidon",
-        "checkedAt": "2026-10-17",
-        "confidence": "medium",
-        "note": "Greek heroes train 10% faster per age from Classical on (cumulative); trainTime here is the value in the age the hero unlocks. Base 5 s (Archaic 5, Classical 4.5, Heroic 4, Mythic 3.6). Limit 1. Cost from wiki and analyzer unit data."
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
+        "confidence": "high",
+        "note": "Hero, enabled by TheseusEnable (needs at least one Temple alive)."
+      },
+      "fieldMeta": {
+        "trainTime": {
+          "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Proto trainpoints 5 s. ClassicalAgeGreek, HeroicAgeGreek and MythicAgeGreek each apply TrainPoints x0.90 (Percent) to HeroShadowUpgraded, so the time is 5 s x 0.9^(age index). Value here = the age the hero unlocks; per age: archaic 5, classical 4.5, heroic 4.05, mythic 3.645. The schema has no per-age modifier."
+        }
       }
     },
     {
       "id": "heracles",
       "name": {
-        "pt-BR": "Héracles",
-        "en": "Heracles"
+        "pt-BR": "Hércules (Herói)",
+        "en": "Heracles (Hero)"
       },
       "icon": "units/greeks-heracles",
       "pantheon": "greeks",
@@ -673,25 +705,25 @@
       "age": "classical",
       "requires": ["zeus"],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Heracles",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Greek heroes train 10% faster per age from Classical on (cumulative); trainTime here is the value in the age the hero unlocks. Base 20 s (analyzer shows base 20 s); Classical 18, Heroic 16.2, Mythic 14.6. Limit 1."
+        "note": "Hero, enabled by ClassicalAgeZeus."
       },
       "fieldMeta": {
         "trainTime": {
-          "source": "https://ageofempires.fandom.com/wiki/Heracles",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Analyzer shows the base train time (20/25/30 s); this value applies the Greek -10% hero train time of each age (wiki), taken at the unlock age."
+          "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Proto trainpoints 20 s. ClassicalAgeGreek, HeroicAgeGreek and MythicAgeGreek each apply TrainPoints x0.90 (Percent) to HeroShadowUpgraded, so the time is 20 s x 0.9^(age index). Value here = the age the hero unlocks; per age: classical 18, heroic 16.2, mythic 14.58. The schema has no per-age modifier."
         }
       }
     },
     {
       "id": "achilles",
       "name": {
-        "pt-BR": "Aquiles",
-        "en": "Achilles"
+        "pt-BR": "Aquiles (Herói)",
+        "en": "Achilles (Hero)"
       },
       "icon": "units/greeks-achilles",
       "pantheon": "greeks",
@@ -707,25 +739,25 @@
       "age": "classical",
       "requires": ["hades"],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Achilles_(Age_of_Mythology)",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Greek heroes train 10% faster per age from Classical on (cumulative); trainTime here is the value in the age the hero unlocks. Base 20 s (analyzer shows base 20 s); Classical 18, Heroic 16.2, Mythic 14.6. Limit 1."
+        "note": "Hero, enabled by ClassicalAgeHades."
       },
       "fieldMeta": {
         "trainTime": {
-          "source": "https://ageofempires.fandom.com/wiki/Achilles_(Age_of_Mythology)",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Analyzer shows the base train time (20/25/30 s); this value applies the Greek -10% hero train time of each age (wiki), taken at the unlock age."
+          "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Proto trainpoints 20 s. ClassicalAgeGreek, HeroicAgeGreek and MythicAgeGreek each apply TrainPoints x0.90 (Percent) to HeroShadowUpgraded, so the time is 20 s x 0.9^(age index). Value here = the age the hero unlocks; per age: classical 18, heroic 16.2, mythic 14.58. The schema has no per-age modifier."
         }
       }
     },
     {
       "id": "atalanta",
       "name": {
-        "pt-BR": "Atalanta",
-        "en": "Atalanta"
+        "pt-BR": "Atalanta (Heroína)",
+        "en": "Atalanta (Hero)"
       },
       "icon": "units/greeks-atalanta",
       "pantheon": "greeks",
@@ -741,25 +773,25 @@
       "age": "classical",
       "requires": ["poseidon"],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Atalanta",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Greek heroes train 10% faster per age from Classical on (cumulative); trainTime here is the value in the age the hero unlocks. Base 20 s (analyzer shows base 20 s); Classical 18, Heroic 16.2, Mythic 14.6. Limit 1."
+        "note": "Hero, enabled by ClassicalAgePoseidon."
       },
       "fieldMeta": {
         "trainTime": {
-          "source": "https://ageofempires.fandom.com/wiki/Atalanta",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Analyzer shows the base train time (20/25/30 s); this value applies the Greek -10% hero train time of each age (wiki), taken at the unlock age."
+          "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Proto trainpoints 20 s. ClassicalAgeGreek, HeroicAgeGreek and MythicAgeGreek each apply TrainPoints x0.90 (Percent) to HeroShadowUpgraded, so the time is 20 s x 0.9^(age index). Value here = the age the hero unlocks; per age: classical 18, heroic 16.2, mythic 14.58. The schema has no per-age modifier."
         }
       }
     },
     {
       "id": "odysseus",
       "name": {
-        "pt-BR": "Odisseu",
-        "en": "Odysseus"
+        "pt-BR": "Odisseu (Herói)",
+        "en": "Odysseus (Hero)"
       },
       "icon": "units/greeks-odysseus",
       "pantheon": "greeks",
@@ -770,30 +802,30 @@
         "favor": 4
       },
       "pop": 2,
-      "trainTime": 20.3,
+      "trainTime": 20.25,
       "trainedAt": ["town-center", "village-center", "fortress"],
       "age": "heroic",
       "requires": ["zeus"],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Odysseus_(Age_of_Mythology)",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Greek heroes train 10% faster per age from Classical on (cumulative); trainTime here is the value in the age the hero unlocks. Base 25 s; Heroic 20.3, Mythic 18.2. Limit 1."
+        "note": "Hero, enabled by HeroicAgeZeus."
       },
       "fieldMeta": {
         "trainTime": {
-          "source": "https://ageofempires.fandom.com/wiki/Odysseus_(Age_of_Mythology)",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Analyzer shows the base train time (20/25/30 s); this value applies the Greek -10% hero train time of each age (wiki), taken at the unlock age."
+          "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Proto trainpoints 25 s. ClassicalAgeGreek, HeroicAgeGreek and MythicAgeGreek each apply TrainPoints x0.90 (Percent) to HeroShadowUpgraded, so the time is 25 s x 0.9^(age index). Value here = the age the hero unlocks; per age: heroic 20.25, mythic 18.225. The schema has no per-age modifier."
         }
       }
     },
     {
       "id": "chiron",
       "name": {
-        "pt-BR": "Quíron",
-        "en": "Chiron"
+        "pt-BR": "Quíron (Herói)",
+        "en": "Chiron (Hero)"
       },
       "icon": "units/greeks-chiron",
       "pantheon": "greeks",
@@ -804,30 +836,30 @@
         "favor": 4
       },
       "pop": 2,
-      "trainTime": 20.3,
+      "trainTime": 20.25,
       "trainedAt": ["town-center", "village-center", "fortress"],
       "age": "heroic",
       "requires": ["hades"],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Chiron",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Greek heroes train 10% faster per age from Classical on (cumulative); trainTime here is the value in the age the hero unlocks. Base 25 s; Heroic 20.3, Mythic 18.2. Limit 1."
+        "note": "Hero, enabled by HeroicAgeHades."
       },
       "fieldMeta": {
         "trainTime": {
-          "source": "https://ageofempires.fandom.com/wiki/Chiron",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Analyzer shows the base train time (20/25/30 s); this value applies the Greek -10% hero train time of each age (wiki), taken at the unlock age."
+          "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Proto trainpoints 25 s. ClassicalAgeGreek, HeroicAgeGreek and MythicAgeGreek each apply TrainPoints x0.90 (Percent) to HeroShadowUpgraded, so the time is 25 s x 0.9^(age index). Value here = the age the hero unlocks; per age: heroic 20.25, mythic 18.225. The schema has no per-age modifier."
         }
       }
     },
     {
       "id": "hippolyta",
       "name": {
-        "pt-BR": "Hipólita",
-        "en": "Hippolyta"
+        "pt-BR": "Hipólita (Heroína)",
+        "en": "Hippolyta (Hero)"
       },
       "icon": "units/greeks-hippolyta",
       "pantheon": "greeks",
@@ -838,30 +870,30 @@
         "favor": 4
       },
       "pop": 2,
-      "trainTime": 20.3,
+      "trainTime": 20.25,
       "trainedAt": ["town-center", "village-center", "fortress"],
       "age": "heroic",
       "requires": ["poseidon"],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Hippolyta",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Greek heroes train 10% faster per age from Classical on (cumulative); trainTime here is the value in the age the hero unlocks. Base 25 s; Heroic 20.3, Mythic 18.2. Limit 1."
+        "note": "Hero, enabled by HeroicAgePoseidon."
       },
       "fieldMeta": {
         "trainTime": {
-          "source": "https://ageofempires.fandom.com/wiki/Hippolyta",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Analyzer shows the base train time (20/25/30 s); this value applies the Greek -10% hero train time of each age (wiki), taken at the unlock age."
+          "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Proto trainpoints 25 s. ClassicalAgeGreek, HeroicAgeGreek and MythicAgeGreek each apply TrainPoints x0.90 (Percent) to HeroShadowUpgraded, so the time is 25 s x 0.9^(age index). Value here = the age the hero unlocks; per age: heroic 20.25, mythic 18.225. The schema has no per-age modifier."
         }
       }
     },
     {
       "id": "bellerophon",
       "name": {
-        "pt-BR": "Belerofonte",
-        "en": "Bellerophon"
+        "pt-BR": "Belerofonte (Herói)",
+        "en": "Bellerophon (Hero)"
       },
       "icon": "units/greeks-bellerophon",
       "pantheon": "greeks",
@@ -871,30 +903,30 @@
         "favor": 6
       },
       "pop": 4,
-      "trainTime": 21.9,
+      "trainTime": 21.87,
       "trainedAt": ["town-center", "village-center", "fortress"],
       "age": "mythic",
       "requires": ["zeus"],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Bellerophon",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Greek heroes train 10% faster per age from Classical on (cumulative); trainTime here is the value in the age the hero unlocks. Base 30 s; Mythic 21.9. Limit 1."
+        "note": "Hero, enabled by MythicAgeZeus."
       },
       "fieldMeta": {
         "trainTime": {
-          "source": "https://ageofempires.fandom.com/wiki/Bellerophon",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Analyzer shows the base train time (20/25/30 s); this value applies the Greek -10% hero train time of each age (wiki), taken at the unlock age."
+          "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Proto trainpoints 30 s. ClassicalAgeGreek, HeroicAgeGreek and MythicAgeGreek each apply TrainPoints x0.90 (Percent) to HeroShadowUpgraded, so the time is 30 s x 0.9^(age index). Value here = the age the hero unlocks; per age: mythic 21.87. The schema has no per-age modifier."
         }
       }
     },
     {
       "id": "perseus",
       "name": {
-        "pt-BR": "Perseu",
-        "en": "Perseus"
+        "pt-BR": "Perseus (Herói)",
+        "en": "Perseus (Hero)"
       },
       "icon": "units/greeks-perseus",
       "pantheon": "greeks",
@@ -904,30 +936,30 @@
         "favor": 6
       },
       "pop": 4,
-      "trainTime": 21.9,
+      "trainTime": 21.87,
       "trainedAt": ["town-center", "village-center", "fortress"],
       "age": "mythic",
       "requires": ["hades"],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Perseus_(Age_of_Mythology)",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Greek heroes train 10% faster per age from Classical on (cumulative); trainTime here is the value in the age the hero unlocks. Base 30 s; Mythic 21.9. Limit 1."
+        "note": "Hero, enabled by MythicAgeHades."
       },
       "fieldMeta": {
         "trainTime": {
-          "source": "https://ageofempires.fandom.com/wiki/Perseus_(Age_of_Mythology)",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Analyzer shows the base train time (20/25/30 s); this value applies the Greek -10% hero train time of each age (wiki), taken at the unlock age."
+          "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Proto trainpoints 30 s. ClassicalAgeGreek, HeroicAgeGreek and MythicAgeGreek each apply TrainPoints x0.90 (Percent) to HeroShadowUpgraded, so the time is 30 s x 0.9^(age index). Value here = the age the hero unlocks; per age: mythic 21.87. The schema has no per-age modifier."
         }
       }
     },
     {
       "id": "polyphemus",
       "name": {
-        "pt-BR": "Polifemo",
-        "en": "Polyphemus"
+        "pt-BR": "Polifemo (Herói)",
+        "en": "Polyphemus (Hero)"
       },
       "icon": "units/greeks-polyphemus",
       "pantheon": "greeks",
@@ -937,30 +969,30 @@
         "favor": 6
       },
       "pop": 4,
-      "trainTime": 21.9,
+      "trainTime": 21.87,
       "trainedAt": ["town-center", "village-center", "fortress"],
       "age": "mythic",
       "requires": ["poseidon"],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Polyphemus",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Greek heroes train 10% faster per age from Classical on (cumulative); trainTime here is the value in the age the hero unlocks. Base 30 s; Mythic 21.9. Limit 1."
+        "note": "Hero, enabled by MythicAgePoseidon."
       },
       "fieldMeta": {
         "trainTime": {
-          "source": "https://ageofempires.fandom.com/wiki/Polyphemus",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Analyzer shows the base train time (20/25/30 s); this value applies the Greek -10% hero train time of each age (wiki), taken at the unlock age."
+          "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Proto trainpoints 30 s. ClassicalAgeGreek, HeroicAgeGreek and MythicAgeGreek each apply TrainPoints x0.90 (Percent) to HeroShadowUpgraded, so the time is 30 s x 0.9^(age index). Value here = the age the hero unlocks; per age: mythic 21.87. The schema has no per-age modifier."
         }
       }
     },
     {
       "id": "the-argo",
       "name": {
-        "pt-BR": "Argo",
-        "en": "The Argo"
+        "pt-BR": "O Argo (Herói)",
+        "en": "The Argo (Hero)"
       },
       "icon": "units/greeks-the-argo",
       "pantheon": "greeks",
@@ -970,15 +1002,23 @@
         "favor": 4
       },
       "pop": 4,
-      "trainTime": 20.3,
+      "trainTime": 20.25,
       "trainedAt": ["dock"],
       "age": "heroic",
       "requires": ["aphrodite", "argonauts"],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/The_Argo",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Granted by Aphrodite's Argonauts (one spawns at the Dock); can be rebuilt at the Dock if sunk. Hero ship, limit 1. Base 25 s; Heroic 20.3, Mythic 18.2."
+        "note": "Argonauts (Aphrodite) spawns one at a Dock and enables it; can be rebuilt at the Dock (buildlimit 1). Hero ship."
+      },
+      "fieldMeta": {
+        "trainTime": {
+          "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+          "checkedAt": "2026-10-18",
+          "confidence": "high",
+          "note": "Proto trainpoints 25 s. ClassicalAgeGreek, HeroicAgeGreek and MythicAgeGreek each apply TrainPoints x0.90 (Percent) to HeroShadowUpgraded, so the time is 25 s x 0.9^(age index). Value here = the age the hero unlocks; per age: heroic 20.25, mythic 18.225. The schema has no per-age modifier."
+        }
       }
     },
     {
@@ -999,18 +1039,10 @@
       "trainedAt": ["temple"],
       "age": "archaic",
       "meta": {
-        "source": "https://aomr-analyzer.com/unit-comparison ; https://ageofempires.fandom.com/wiki/Pegasus",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Generic Greek flying scout. Hermes' Winged Messenger grants a respawning one. Zeus: myth units cost 1 less population (not modelled here)."
-      },
-      "fieldMeta": {
-        "trainTime": {
-          "source": "https://ageofempires.fandom.com/wiki/Pegasus",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Train time from the wiki only (analyzer unit data has no train time)."
-        }
+        "note": "Enabled for all Greeks in the Archaic Age (ArchaicAgeGreek). Hermes' Winged Messenger adds a separate respawning Pegasus (PegasusWingedMessenger, not modelled)."
       }
     },
     {
@@ -1032,18 +1064,10 @@
       "age": "classical",
       "requires": ["athena"],
       "meta": {
-        "source": "https://aomr-analyzer.com/unit-comparison ; https://ageofempires.fandom.com/wiki/Minotaur",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Zeus: myth units cost 1 less population (not modelled here)."
-      },
-      "fieldMeta": {
-        "trainTime": {
-          "source": "https://ageofempires.fandom.com/wiki/Minotaur",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Train time from the wiki only (analyzer unit data has no train time)."
-        }
+        "note": "Free one at a Temple when you age up with its minor god (CreateUnit in the age tech). Zeus: -1 pop via the Zeus modifier."
       }
     },
     {
@@ -1065,18 +1089,10 @@
       "age": "classical",
       "requires": ["hermes"],
       "meta": {
-        "source": "https://aomr-analyzer.com/unit-comparison ; https://ageofempires.fandom.com/wiki/Centaur",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Zeus: myth units cost 1 less population (not modelled here)."
-      },
-      "fieldMeta": {
-        "trainTime": {
-          "source": "https://ageofempires.fandom.com/wiki/Centaur",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Train time from the wiki only (analyzer unit data has no train time)."
-        }
+        "note": "Free one at a Temple when you age up with its minor god (CreateUnit in the age tech). Zeus: -1 pop via the Zeus modifier."
       }
     },
     {
@@ -1098,18 +1114,10 @@
       "age": "classical",
       "requires": ["ares"],
       "meta": {
-        "source": "https://aomr-analyzer.com/unit-comparison ; https://ageofempires.fandom.com/wiki/Cyclops",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Zeus: myth units cost 1 less population (not modelled here)."
-      },
-      "fieldMeta": {
-        "trainTime": {
-          "source": "https://ageofempires.fandom.com/wiki/Cyclops",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Train time from the wiki only (analyzer unit data has no train time)."
-        }
+        "note": "Free one at a Temple when you age up with its minor god (CreateUnit in the age tech). Zeus: -1 pop via the Zeus modifier."
       }
     },
     {
@@ -1131,18 +1139,10 @@
       "age": "heroic",
       "requires": ["apollo"],
       "meta": {
-        "source": "https://aomr-analyzer.com/unit-comparison ; https://ageofempires.fandom.com/wiki/Manticore",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Zeus: myth units cost 1 less population (not modelled here)."
-      },
-      "fieldMeta": {
-        "trainTime": {
-          "source": "https://ageofempires.fandom.com/wiki/Manticore",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Train time from the wiki only (analyzer unit data has no train time)."
-        }
+        "note": "Free one at a Temple when you age up with its minor god (CreateUnit in the age tech). Zeus: -1 pop via the Zeus modifier."
       }
     },
     {
@@ -1164,18 +1164,10 @@
       "age": "heroic",
       "requires": ["dionysus"],
       "meta": {
-        "source": "https://aomr-analyzer.com/unit-comparison ; https://ageofempires.fandom.com/wiki/Hydra",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Zeus: myth units cost 1 less population (not modelled here)."
-      },
-      "fieldMeta": {
-        "trainTime": {
-          "source": "https://ageofempires.fandom.com/wiki/Hydra",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Train time from the wiki only (analyzer unit data has no train time)."
-        }
+        "note": "Free one at a Temple when you age up with its minor god (CreateUnit in the age tech). Zeus: -1 pop via the Zeus modifier."
       }
     },
     {
@@ -1197,18 +1189,10 @@
       "age": "heroic",
       "requires": ["aphrodite"],
       "meta": {
-        "source": "https://aomr-analyzer.com/unit-comparison ; https://ageofempires.fandom.com/wiki/Nemean_Lion",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Zeus: myth units cost 1 less population (not modelled here)."
-      },
-      "fieldMeta": {
-        "trainTime": {
-          "source": "https://ageofempires.fandom.com/wiki/Nemean_Lion",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Train time from the wiki only (analyzer unit data has no train time)."
-        }
+        "note": "Free one at a Temple when you age up with its minor god (CreateUnit in the age tech). Zeus: -1 pop via the Zeus modifier."
       }
     },
     {
@@ -1229,18 +1213,10 @@
       "trainedAt": ["dock"],
       "age": "heroic",
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Scylla",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Available to all Greek gods since Retold (was Dionysus-only). Zeus: myth units cost 1 less population (not modelled here)."
-      },
-      "fieldMeta": {
-        "trainTime": {
-          "source": "https://ageofempires.fandom.com/wiki/Scylla",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Train time from the wiki only (analyzer unit data has no train time)."
-        }
+        "note": "Enabled for all Greeks by HeroicAgeGreek, which also creates one free Scylla at a Dock when you reach the Heroic Age (only if you own a Dock; not modelled)."
       }
     },
     {
@@ -1262,18 +1238,10 @@
       "age": "mythic",
       "requires": ["hephaestus"],
       "meta": {
-        "source": "https://aomr-analyzer.com/unit-comparison ; https://ageofempires.fandom.com/wiki/Colossus",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Zeus: myth units cost 1 less population (not modelled here)."
-      },
-      "fieldMeta": {
-        "trainTime": {
-          "source": "https://ageofempires.fandom.com/wiki/Colossus",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Train time from the wiki only (analyzer unit data has no train time)."
-        }
+        "note": "Free one at a Temple when you age up with its minor god (CreateUnit in the age tech). Zeus: -1 pop via the Zeus modifier."
       }
     },
     {
@@ -1295,18 +1263,10 @@
       "age": "mythic",
       "requires": ["hera"],
       "meta": {
-        "source": "https://aomr-analyzer.com/unit-comparison ; https://ageofempires.fandom.com/wiki/Medusa_(Age_of_Mythology)",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Zeus: myth units cost 1 less population (not modelled here)."
-      },
-      "fieldMeta": {
-        "trainTime": {
-          "source": "https://ageofempires.fandom.com/wiki/Medusa_(Age_of_Mythology)",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Train time from the wiki only (analyzer unit data has no train time)."
-        }
+        "note": "Free one at a Temple when you age up with its minor god (CreateUnit in the age tech). Zeus: -1 pop via the Zeus modifier."
       }
     },
     {
@@ -1328,24 +1288,16 @@
       "age": "mythic",
       "requires": ["artemis"],
       "meta": {
-        "source": "https://aomr-analyzer.com/unit-comparison ; https://ageofempires.fandom.com/wiki/Chimera",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Zeus: myth units cost 1 less population (not modelled here)."
-      },
-      "fieldMeta": {
-        "trainTime": {
-          "source": "https://ageofempires.fandom.com/wiki/Chimera",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Train time from the wiki only (analyzer unit data has no train time)."
-        }
+        "note": "Free one at a Temple when you age up with its minor god (CreateUnit in the age tech). Zeus: -1 pop via the Zeus modifier."
       }
     },
     {
       "id": "carcinos",
       "name": {
-        "pt-BR": "Carcino",
+        "pt-BR": "Carcinos",
         "en": "Carcinos"
       },
       "icon": "units/greeks-carcinos",
@@ -1360,18 +1312,10 @@
       "trainedAt": ["dock"],
       "age": "mythic",
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Carcinos",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Available to all Greek gods since Retold (was Hera-only). 9 s train time looks short; verify. Zeus: myth units cost 1 less population (not modelled here)."
-      },
-      "fieldMeta": {
-        "trainTime": {
-          "source": "Game files 19.17020 (proto.xml)",
-          "checkedAt": "2026-10-18",
-          "confidence": "high",
-          "note": "Carcinos trainpoints 9."
-        }
+        "note": "Enabled for all Greeks by MythicAgeGreek, which also creates one free Carcinos at a Dock when you reach the Mythic Age (only if you own a Dock; not modelled)."
       }
     },
     {
@@ -1390,10 +1334,10 @@
       "age": "archaic",
       "requires": ["poseidon", "dock"],
       "meta": {
-        "source": "https://ageofempires.fandom.com/wiki/Hippocampus ; https://aomr-analyzer.com/gods/poseidon",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Poseidon: a free Hippocampus spawns (and respawns) at the first Dock. Not trainable."
+        "note": "Poseidon (ArchaicAgePoseidon): HippocampusRespawn creates one at a Dock whenever you own a Dock and have none alive. Not trainable, pop 0."
       }
     },
     {
@@ -1405,17 +1349,20 @@
       "icon": "units/greeks-shade-of-hades",
       "pantheon": "greeks",
       "tags": ["myth"],
-      "cost": {},
+      "cost": {
+        "gold": 100,
+        "favor": 5
+      },
       "pop": 1,
       "trainTime": 0,
       "trainedAt": [],
       "age": "archaic",
       "requires": ["hades"],
       "meta": {
-        "source": "https://aomr-analyzer.com/unit-comparison ; https://ageofempires.fandom.com/wiki/Shade_of_Hades",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Not trainable: 20% chance to appear at a Temple when a Hades human soldier dies. Internal cost 100 gold + 5 favor."
+        "note": "Not trainable: major_gods.xml <shades> gives each fallen HumanSoldier a 20% chance to return as a Shade after 10 s. cost is the proto cost (100 gold, 5 favor), never paid."
       }
     }
   ],
@@ -1423,7 +1370,7 @@
     {
       "id": "town-center",
       "name": {
-        "pt-BR": "Centro da Cidade",
+        "pt-BR": "Centro Urbano",
         "en": "Town Center"
       },
       "icon": "buildings/greeks-town-center",
@@ -1459,24 +1406,16 @@
       ],
       "dropsiteFor": ["hunt", "herd", "berries", "farm", "wood", "gold"],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Town_Center_(Age_of_Mythology)",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Players start with one. Additional Town Centers only on Settlements from the Classical Age (placing one elsewhere makes a Village Center). +10 pop with Fortified Town Center. Age-ups are researched here."
-      },
-      "fieldMeta": {
-        "buildTime": {
-          "source": "https://ageofempires.fandom.com/wiki/Town_Center_(Age_of_Mythology)",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Build time from the wiki only (analyzer has no build times)."
-        }
+        "note": "Players start with one. buildlimit 1 (shared with Village Centers) until ClassicalAgeGeneral sets it to unlimited, so new ones from the Classical Age, on Settlements. +10 pop with Fortified Town Center. Age-ups are researched here (and at Village Centers)."
       }
     },
     {
       "id": "village-center",
       "name": {
-        "pt-BR": "Centro de Vila",
+        "pt-BR": "Centro de Aldeia",
         "en": "Village Center"
       },
       "icon": "buildings/greeks-village-center",
@@ -1486,8 +1425,7 @@
         "gold": 350
       },
       "buildTime": 150,
-      "popCap": 0,
-      "age": "archaic",
+      "age": "classical",
       "trains": [
         "villager",
         "jason",
@@ -1505,19 +1443,12 @@
       ],
       "dropsiteFor": ["hunt", "herd", "berries", "farm", "wood", "gold"],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Village_Center",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Retold: built anywhere; no pop support; trains villagers 25% slower; in the Archaic Age only if you have no Town Center/Village Center. Can also advance ages."
+        "note": "No pop support. trainingrate 0.75 (villagers take 1.33x as long). Shares the Town Center buildlimit (1 in the Archaic Age, so only buildable there if you have no center; unlimited from the Classical Age). Can also advance ages and research Masons, Architects, Divine Blood and Golden Apples."
       },
-      "fieldMeta": {
-        "buildTime": {
-          "source": "https://ageofempires.fandom.com/wiki/Village_Center",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Build time from the wiki only (analyzer has no build times)."
-        }
-      }
+      "researches": ["masons", "architects", "divine-blood", "golden-apples"]
     },
     {
       "id": "house",
@@ -1535,17 +1466,10 @@
       "limit": 16,
       "age": "archaic",
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/House_(Age_of_Mythology)",
-        "checkedAt": "2026-10-17",
-        "confidence": "high"
-      },
-      "fieldMeta": {
-        "buildTime": {
-          "source": "https://ageofempires.fandom.com/wiki/House_(Age_of_Mythology)",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Build time from the wiki only (analyzer has no build times)."
-        }
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
+        "confidence": "high",
+        "note": "Limit 16, +10 pop."
       }
     },
     {
@@ -1590,21 +1514,14 @@
         "shoulder-of-talos",
         "face-of-the-gorgon",
         "monstrous-rage",
-        "flames-of-typhon"
+        "flames-of-typhon",
+        "golden-apples"
       ],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Temple_(Age_of_Mythology)",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Villagers pray here for favor (see favor rule). Required for the Classical Age."
-      },
-      "fieldMeta": {
-        "buildTime": {
-          "source": "https://ageofempires.fandom.com/wiki/Temple_(Age_of_Mythology)",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Build time from the wiki only (analyzer has no build times)."
-        }
+        "note": "Villagers pray here for favor (see favor rule). Required for the Classical Age and for the Archaic heroes."
       }
     },
     {
@@ -1623,23 +1540,15 @@
       "researches": ["husbandry", "plow", "irrigation", "flood-control", "survival-equipment"],
       "dropsiteFor": ["hunt", "herd", "berries", "farm"],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Granary_(Age_of_Mythology)",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high"
-      },
-      "fieldMeta": {
-        "buildTime": {
-          "source": "https://ageofempires.fandom.com/wiki/Granary_(Age_of_Mythology)",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Build time from the wiki only (analyzer has no build times)."
-        }
       }
     },
     {
       "id": "storehouse",
       "name": {
-        "pt-BR": "Depósito",
+        "pt-BR": "Armazém",
         "en": "Storehouse"
       },
       "icon": "buildings/greeks-storehouse",
@@ -1660,17 +1569,9 @@
       ],
       "dropsiteFor": ["wood", "gold"],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Storehouse",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high"
-      },
-      "fieldMeta": {
-        "buildTime": {
-          "source": "https://ageofempires.fandom.com/wiki/Storehouse",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Build time from the wiki only (analyzer has no build times)."
-        }
       }
     },
     {
@@ -1688,18 +1589,10 @@
       "buildTime": 10,
       "age": "classical",
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Farm_(Age_of_Mythology)",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Farms are available from the Classical Age for Greeks in Retold. One worker per farm."
-      },
-      "fieldMeta": {
-        "buildTime": {
-          "source": "https://ageofempires.fandom.com/wiki/Farm_(Age_of_Mythology)",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Build time from the wiki only (analyzer has no build times)."
-        }
+        "note": "Enabled for Greeks by ClassicalAgeGreek. One gatherer per farm (gathererlimit 1), 9999 food."
       }
     },
     {
@@ -1718,18 +1611,10 @@
       "trains": ["caravan"],
       "researches": ["tax-collectors", "ambassadors", "coinage"],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Market_(Age_of_Mythology)",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Classical Age since Retold. Poseidon: -30% cost, +15% exchange rates. Market (or Armory) unlocks the Heroic Age."
-      },
-      "fieldMeta": {
-        "buildTime": {
-          "source": "https://ageofempires.fandom.com/wiki/Market_(Age_of_Mythology)",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Build time from the wiki only (analyzer has no build times)."
-        }
+        "note": "Enabled by ClassicalAgeGreek. Poseidon: wood cost x0.70, buy factor -0.10 / sell factor +0.10. Market (or Armory) unlocks the Heroic Age."
       }
     },
     {
@@ -1764,22 +1649,15 @@
         "champion-warships",
         "conscript-sailors",
         "argonauts",
-        "anastrophe"
+        "anastrophe",
+        "chthonic-rites"
       ],
       "dropsiteFor": ["fish", "hunt", "herd", "berries", "farm"],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Dock_(Age_of_Mythology)",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Fish drop site; in Retold also a food drop site for land workers."
-      },
-      "fieldMeta": {
-        "buildTime": {
-          "source": "https://ageofempires.fandom.com/wiki/Dock_(Age_of_Mythology)",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Build time from the wiki only (analyzer has no build times)."
-        }
+        "note": "Food drop site (FoodDropsite), so land workers can also drop food here."
       }
     },
     {
@@ -1808,23 +1686,15 @@
         "deimos-sword-of-dread"
       ],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Military_Academy_(Age_of_Mythology)",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high"
-      },
-      "fieldMeta": {
-        "buildTime": {
-          "source": "https://ageofempires.fandom.com/wiki/Military_Academy_(Age_of_Mythology)",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Build time from the wiki only (analyzer has no build times)."
-        }
       }
     },
     {
       "id": "archery-range",
       "name": {
-        "pt-BR": "Campo de Tiro com Arco",
+        "pt-BR": "Campo de Arqueiros",
         "en": "Archery Range"
       },
       "icon": "buildings/greeks-archery-range",
@@ -1846,17 +1716,9 @@
         "shafts-of-plague"
       ],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Archery_Range_(Age_of_Mythology)",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high"
-      },
-      "fieldMeta": {
-        "buildTime": {
-          "source": "https://ageofempires.fandom.com/wiki/Archery_Range_(Age_of_Mythology)",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Build time from the wiki only (analyzer has no build times)."
-        }
       }
     },
     {
@@ -1881,27 +1743,20 @@
         "conscript-cavalry",
         "lord-of-horses",
         "spirited-charge",
-        "thracian-horses"
+        "thracian-horses",
+        "phobos-spear-of-panic"
       ],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Stable_(Age_of_Mythology)",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Poseidon: -30% cost."
-      },
-      "fieldMeta": {
-        "buildTime": {
-          "source": "https://ageofempires.fandom.com/wiki/Stable_(Age_of_Mythology)",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Build time from the wiki only (analyzer has no build times)."
-        }
+        "note": "Poseidon: wood cost x0.70."
       }
     },
     {
       "id": "armory",
       "name": {
-        "pt-BR": "Arsenal",
+        "pt-BR": "Armaria",
         "en": "Armory"
       },
       "icon": "buildings/greeks-armory",
@@ -1924,21 +1779,20 @@
         "ballistics",
         "burning-pitch",
         "forge-of-olympus",
-        "olympian-weapons"
+        "olympian-weapons",
+        "aegis-shield",
+        "sarissa",
+        "phobos-spear-of-panic",
+        "deimos-sword-of-dread",
+        "enyos-bow-of-horror",
+        "sun-ray",
+        "shafts-of-plague"
       ],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Armory",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Armory (or Market) unlocks the Heroic Age."
-      },
-      "fieldMeta": {
-        "buildTime": {
-          "source": "https://ageofempires.fandom.com/wiki/Armory",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Build time from the wiki only (analyzer has no build times)."
-        }
+        "note": "Armory (or Market) unlocks the Heroic Age. Also researches several minor-god techs (listed in researches)."
       }
     },
     {
@@ -1965,18 +1819,10 @@
         "boiling-oil"
       ],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Sentry_Tower_(Age_of_Mythology)",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Upgradable to Watch Tower (Classical) and Guard Tower (Heroic). Wiki says standard matches start with four Sentry Towers around the Town Center (not included in start state; see PENDING)."
-      },
-      "fieldMeta": {
-        "buildTime": {
-          "source": "https://ageofempires.fandom.com/wiki/Sentry_Tower_(Age_of_Mythology)",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Build time from the wiki only (analyzer has no build times)."
-        }
+        "note": "Limit 30. Random maps place 4 at the start (lib/rm_util.xs). Upgrades: Watch Tower (Classical), Guard Tower (Heroic)."
       }
     },
     {
@@ -2019,27 +1865,20 @@
         "engineers",
         "advanced-fortifications",
         "beast-slayer",
-        "argive-patronage"
+        "argive-patronage",
+        "olympian-parentage"
       ],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Fortress_(Age_of_Mythology)",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Required for the Mythic Age."
-      },
-      "fieldMeta": {
-        "buildTime": {
-          "source": "https://ageofempires.fandom.com/wiki/Fortress_(Age_of_Mythology)",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Build time from the wiki only (analyzer has no build times)."
-        }
+        "note": "Limit 15. Required for the Mythic Age."
       }
     },
     {
       "id": "wall",
       "name": {
-        "pt-BR": "Muro de Madeira",
+        "pt-BR": "Muralha de Madeira",
         "en": "Wooden Wall"
       },
       "icon": "buildings/greeks-wall",
@@ -2051,18 +1890,10 @@
       "age": "archaic",
       "researches": ["stone-wall", "fortified-wall"],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Wooden_Wall",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Cost/time are for one long segment (connector 3 gold/5 s, short 6/6 s, medium 9/9 s, long 15/15 s). Upgrades to Stone Wall (Classical) and Fortified Wall (Heroic)."
-      },
-      "fieldMeta": {
-        "buildTime": {
-          "source": "https://ageofempires.fandom.com/wiki/Wooden_Wall",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Build time from the wiki only (analyzer has no build times)."
-        }
+        "note": "Cost/time are for one long segment (WallLong 15 gold, 15 build points). Connector 3 gold / 5, short 6 gold / 15, medium 9 gold / 15. Upgrades to Stone Wall (Classical) and Fortified Wall (Heroic)."
       }
     },
     {
@@ -2079,18 +1910,10 @@
       "buildTime": 15,
       "age": "archaic",
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Wooden_Gate",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Converted from a long wall segment ('Build Gate' ability, 15 gold); build time not documented."
-      },
-      "fieldMeta": {
-        "buildTime": {
-          "source": "Game files 19.17020 (proto.xml)",
-          "checkedAt": "2026-10-18",
-          "confidence": "medium",
-          "note": "WallGate buildpoints 15, cost 15 gold. Assumes the wall-to-gate conversion builds a WallGate foundation."
-        }
+        "note": "WallGate: 15 gold, 15 build points; placed by converting a wall segment."
       }
     },
     {
@@ -2109,19 +1932,14 @@
       "buildTime": 5400,
       "limit": 1,
       "age": "mythic",
-      "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Wonder_(Age_of_Mythology)",
-        "checkedAt": "2026-10-17",
-        "confidence": "high",
-        "note": "Retold: building it advances to the Wonder Age."
+      "trickle": {
+        "favor": 60
       },
-      "fieldMeta": {
-        "buildTime": {
-          "source": "https://ageofempires.fandom.com/wiki/Wonder_(Age_of_Mythology)",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Build time from the wiki only (analyzer has no build times)."
-        }
+      "meta": {
+        "source": "Game files 19.17020 (proto.xml, techtree.xml)",
+        "checkedAt": "2026-10-18",
+        "confidence": "high",
+        "note": "Enabled by MythicAgeGreek. proto.xml AutoGather Favor 1.0/s = 60 favor/min while it stands (trickle). Note: the Zeus favorRate modifier is unscoped, so the simulator also applies x1.2 to this trickle, while in game Zeus only boosts Temple prayer."
       }
     }
   ],
@@ -2154,17 +1972,12 @@
         }
       ],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Husbandry_(Age_of_Mythology)",
-        "checkedAt": "2026-10-17",
-        "confidence": "high"
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
+        "confidence": "high",
+        "note": "Gather Herdable x1.10 BasePercent; also +15 food carry and Herdable fattening x1.25 (not modelled)."
       },
       "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Husbandry_(Age_of_Mythology)",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        },
         "effects": {
           "source": "Game files 19.17020 (techtree.xml)",
           "checkedAt": "2026-10-18",
@@ -2200,17 +2013,12 @@
         }
       ],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Plow_(Age_of_Mythology)",
-        "checkedAt": "2026-10-17",
-        "confidence": "high"
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
+        "confidence": "high",
+        "note": "Gather AbstractFarm x1.10 BasePercent."
       },
       "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Plow_(Age_of_Mythology)",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        },
         "effects": {
           "source": "Game files 19.17020 (techtree.xml)",
           "checkedAt": "2026-10-18",
@@ -2247,17 +2055,12 @@
         }
       ],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Irrigation_(Age_of_Mythology)",
-        "checkedAt": "2026-10-17",
-        "confidence": "high"
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
+        "confidence": "high",
+        "note": "Gather AbstractFarm x1.10 BasePercent."
       },
       "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Irrigation_(Age_of_Mythology)",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        },
         "effects": {
           "source": "Game files 19.17020 (techtree.xml)",
           "checkedAt": "2026-10-18",
@@ -2294,17 +2097,12 @@
         }
       ],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Flood_Control",
-        "checkedAt": "2026-10-17",
-        "confidence": "high"
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
+        "confidence": "high",
+        "note": "Gather AbstractFarm x1.10 BasePercent."
       },
       "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Flood_Control",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        },
         "effects": {
           "source": "Game files 19.17020 (techtree.xml)",
           "checkedAt": "2026-10-18",
@@ -2341,17 +2139,12 @@
         }
       ],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Hand_Axe",
-        "checkedAt": "2026-10-17",
-        "confidence": "high"
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
+        "confidence": "high",
+        "note": "Gather WoodResource x1.10 BasePercent; +5 wood carry (not modelled)."
       },
       "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Hand_Axe",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        },
         "effects": {
           "source": "Game files 19.17020 (techtree.xml)",
           "checkedAt": "2026-10-18",
@@ -2363,7 +2156,7 @@
     {
       "id": "bow-saw",
       "name": {
-        "pt-BR": "Serra de Arco",
+        "pt-BR": "Arco de Serra",
         "en": "Bow Saw"
       },
       "icon": "techs/greeks-bow-saw",
@@ -2389,17 +2182,12 @@
         }
       ],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Bow_Saw_(Age_of_Mythology)",
-        "checkedAt": "2026-10-17",
-        "confidence": "high"
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
+        "confidence": "high",
+        "note": "Gather WoodResource x1.15 BasePercent; +5 wood carry."
       },
       "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Bow_Saw_(Age_of_Mythology)",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        },
         "effects": {
           "source": "Game files 19.17020 (techtree.xml)",
           "checkedAt": "2026-10-18",
@@ -2437,17 +2225,12 @@
         }
       ],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Carpenters",
-        "checkedAt": "2026-10-17",
-        "confidence": "high"
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
+        "confidence": "high",
+        "note": "Gather WoodResource x1.20 BasePercent; +5 wood carry."
       },
       "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Carpenters",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        },
         "effects": {
           "source": "Game files 19.17020 (techtree.xml)",
           "checkedAt": "2026-10-18",
@@ -2484,17 +2267,12 @@
         }
       ],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Pickaxe",
-        "checkedAt": "2026-10-17",
-        "confidence": "high"
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
+        "confidence": "high",
+        "note": "Gather GoldResource x1.10 BasePercent; +5 gold carry."
       },
       "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Pickaxe",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        },
         "effects": {
           "source": "Game files 19.17020 (techtree.xml)",
           "checkedAt": "2026-10-18",
@@ -2506,7 +2284,7 @@
     {
       "id": "shaft-mine",
       "name": {
-        "pt-BR": "Mina de Poço",
+        "pt-BR": "Poços de Mina",
         "en": "Shaft Mine"
       },
       "icon": "techs/greeks-shaft-mine",
@@ -2532,17 +2310,12 @@
         }
       ],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Shaft_Mine",
-        "checkedAt": "2026-10-17",
-        "confidence": "high"
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
+        "confidence": "high",
+        "note": "Gather GoldResource x1.15 BasePercent; +5 gold carry."
       },
       "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Shaft_Mine",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        },
         "effects": {
           "source": "Game files 19.17020 (techtree.xml)",
           "checkedAt": "2026-10-18",
@@ -2580,17 +2353,12 @@
         }
       ],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Quarry",
-        "checkedAt": "2026-10-17",
-        "confidence": "high"
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
+        "confidence": "high",
+        "note": "Gather GoldResource x1.20 BasePercent; +5 gold carry."
       },
       "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Quarry",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        },
         "effects": {
           "source": "Game files 19.17020 (techtree.xml)",
           "checkedAt": "2026-10-18",
@@ -2627,17 +2395,12 @@
         }
       ],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Purse_Seine",
-        "checkedAt": "2026-10-17",
-        "confidence": "high"
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
+        "confidence": "high",
+        "note": "Fishing ships Gather FishResource x1.5 BasePercent."
       },
       "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Purse_Seine",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        },
         "effects": {
           "source": "Game files 19.17020 (techtree.xml)",
           "checkedAt": "2026-10-18",
@@ -2649,7 +2412,7 @@
     {
       "id": "salt-amphora",
       "name": {
-        "pt-BR": "Ânfora de Sal",
+        "pt-BR": "Ânfora com Sal",
         "en": "Salt Amphora"
       },
       "icon": "techs/greeks-salt-amphora",
@@ -2675,17 +2438,12 @@
         }
       ],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Salt_Amphora",
-        "checkedAt": "2026-10-17",
-        "confidence": "high"
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
+        "confidence": "high",
+        "note": "Fishing ships Gather FishResource x1.5 BasePercent; +25 food carry."
       },
       "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Salt_Amphora",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        },
         "effects": {
           "source": "Game files 19.17020 (techtree.xml)",
           "checkedAt": "2026-10-18",
@@ -2697,7 +2455,7 @@
     {
       "id": "survival-equipment",
       "name": {
-        "pt-BR": "Equipamento de Sobrevivência",
+        "pt-BR": "Equipamento de sobrevivência",
         "en": "Survival Equipment"
       },
       "icon": "techs/greeks-survival-equipment",
@@ -2711,18 +2469,10 @@
       "age": "classical",
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Survival_Equipment",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
         "note": "Villagers +25% HP, +10% melee attack, +50% ranged (anti-animal) attack. No gather-rate effect."
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Survival_Equipment",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
       }
     },
     {
@@ -2742,18 +2492,10 @@
       "age": "classical",
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Masons",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
         "note": "Buildings +20% HP."
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Masons",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
       }
     },
     {
@@ -2774,24 +2516,16 @@
       "requires": ["masons"],
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Architects",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
         "note": "Buildings +30% HP."
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Architects",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
       }
     },
     {
       "id": "fortified-town-center",
       "name": {
-        "pt-BR": "Centro da Cidade Fortificado",
+        "pt-BR": "Centro Urbano Fortificado",
         "en": "Fortified Town Center"
       },
       "icon": "techs/greeks-fortified-town-center",
@@ -2816,18 +2550,12 @@
         }
       ],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Fortified_Town_Center",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Also +25% HP, +2 range, +50% attack."
+        "note": "PopulationCapAddition +10 on TownCenter. Also +25% HP, +2 range, +50% ranged damage."
       },
       "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Fortified_Town_Center",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        },
         "effects": {
           "source": "Game files 19.17020 (techtree.xml)",
           "checkedAt": "2026-10-18",
@@ -2853,18 +2581,10 @@
       "age": "heroic",
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Tax_Collectors",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Market buy/sell -25% cost; tribute penalty -50% (market not modelled)."
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Tax_Collectors",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
+        "note": "Market buy factor -0.075, sell factor +0.075; tribute penalty -0.10 (market not modelled)."
       }
     },
     {
@@ -2884,18 +2604,10 @@
       "requires": ["tax-collectors"],
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Ambassadors",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Improves market exchange rates; removes tribute penalty."
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Ambassadors",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
+        "note": "Market buy factor -0.075, sell factor +0.075; tribute penalty set to 0."
       }
     },
     {
@@ -2914,24 +2626,16 @@
       "age": "mythic",
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Coinage_(Age_of_Mythology)",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
         "note": "Caravans +20% speed."
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Coinage_(Age_of_Mythology)",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
       }
     },
     {
       "id": "levy-infantry",
       "name": {
-        "pt-BR": "Recrutamento de Infantaria",
+        "pt-BR": "Convocar Infantaria",
         "en": "Levy Infantry"
       },
       "icon": "techs/greeks-levy-infantry",
@@ -2949,34 +2653,28 @@
           "op": "mul",
           "value": 0.8,
           "scope": {
-            "tags": ["infantry"]
-          }
+            "ids": ["hoplite", "hypaspist", "myrmidon", "militia"]
+          },
+          "note": "TrainPoints x0.80 Percent on InfantryLineUpgraded."
         }
       ],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Levy_Infantry",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high"
       },
       "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Levy_Infantry",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        },
         "effects": {
           "source": "Game files 19.17020 (techtree.xml)",
           "checkedAt": "2026-10-18",
-          "confidence": "high",
-          "note": "TrainPoints/BuildPoints/cost with relativity Percent (multiplicative) -> op mul; PopulationCapAddition Absolute -> add. Values confirmed."
+          "confidence": "high"
         }
       }
     },
     {
       "id": "conscript-infantry",
       "name": {
-        "pt-BR": "Conscrição de Infantaria",
+        "pt-BR": "Recrutar Infantaria",
         "en": "Conscript Infantry"
       },
       "icon": "techs/greeks-conscript-infantry",
@@ -2995,34 +2693,28 @@
           "op": "mul",
           "value": 0.8,
           "scope": {
-            "tags": ["infantry"]
-          }
+            "ids": ["hoplite", "hypaspist", "myrmidon", "militia"]
+          },
+          "note": "TrainPoints x0.80 Percent on InfantryLineUpgraded."
         }
       ],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Conscript_Infantry",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high"
       },
       "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Conscript_Infantry",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        },
         "effects": {
           "source": "Game files 19.17020 (techtree.xml)",
           "checkedAt": "2026-10-18",
-          "confidence": "high",
-          "note": "TrainPoints/BuildPoints/cost with relativity Percent (multiplicative) -> op mul; PopulationCapAddition Absolute -> add. Values confirmed."
+          "confidence": "high"
         }
       }
     },
     {
       "id": "levy-ranged-soldiers",
       "name": {
-        "pt-BR": "Recrutamento de Soldados de Longo Alcance",
+        "pt-BR": "Convocar Soldados de Longo Alcance",
         "en": "Levy Ranged Soldiers"
       },
       "icon": "techs/greeks-levy-ranged-soldiers",
@@ -3040,34 +2732,28 @@
           "op": "mul",
           "value": 0.8,
           "scope": {
-            "tags": ["archer"]
-          }
+            "ids": ["toxotes", "peltast", "gastraphetoros"]
+          },
+          "note": "TrainPoints x0.80 Percent on ArcherLineUpgraded."
         }
       ],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Levy_Ranged_Soldiers",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high"
       },
       "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Levy_Ranged_Soldiers",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        },
         "effects": {
           "source": "Game files 19.17020 (techtree.xml)",
           "checkedAt": "2026-10-18",
-          "confidence": "high",
-          "note": "TrainPoints/BuildPoints/cost with relativity Percent (multiplicative) -> op mul; PopulationCapAddition Absolute -> add. Values confirmed."
+          "confidence": "high"
         }
       }
     },
     {
       "id": "conscript-ranged-soldiers",
       "name": {
-        "pt-BR": "Conscrição de Soldados de Longo Alcance",
+        "pt-BR": "Recrutar Soldados de Longo Alcance",
         "en": "Conscript Ranged Soldiers"
       },
       "icon": "techs/greeks-conscript-ranged-soldiers",
@@ -3086,34 +2772,28 @@
           "op": "mul",
           "value": 0.8,
           "scope": {
-            "tags": ["archer"]
-          }
+            "ids": ["toxotes", "peltast", "gastraphetoros"]
+          },
+          "note": "TrainPoints x0.80 Percent on ArcherLineUpgraded."
         }
       ],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Conscript_Ranged_Soldiers",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high"
       },
       "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Conscript_Ranged_Soldiers",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        },
         "effects": {
           "source": "Game files 19.17020 (techtree.xml)",
           "checkedAt": "2026-10-18",
-          "confidence": "high",
-          "note": "TrainPoints/BuildPoints/cost with relativity Percent (multiplicative) -> op mul; PopulationCapAddition Absolute -> add. Values confirmed."
+          "confidence": "high"
         }
       }
     },
     {
       "id": "levy-cavalry",
       "name": {
-        "pt-BR": "Recrutamento de Cavalaria",
+        "pt-BR": "Convocar Cavalaria",
         "en": "Levy Cavalry"
       },
       "icon": "techs/greeks-levy-cavalry",
@@ -3131,34 +2811,28 @@
           "op": "mul",
           "value": 0.8,
           "scope": {
-            "tags": ["cavalry"]
-          }
+            "ids": ["hippeus", "prodromos", "hetairos"]
+          },
+          "note": "TrainPoints x0.80 Percent on CavalryLineUpgraded."
         }
       ],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Levy_Cavalry",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high"
       },
       "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Levy_Cavalry",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        },
         "effects": {
           "source": "Game files 19.17020 (techtree.xml)",
           "checkedAt": "2026-10-18",
-          "confidence": "high",
-          "note": "TrainPoints/BuildPoints/cost with relativity Percent (multiplicative) -> op mul; PopulationCapAddition Absolute -> add. Values confirmed."
+          "confidence": "high"
         }
       }
     },
     {
       "id": "conscript-cavalry",
       "name": {
-        "pt-BR": "Conscrição de Cavalaria",
+        "pt-BR": "Recrutar Cavalaria",
         "en": "Conscript Cavalry"
       },
       "icon": "techs/greeks-conscript-cavalry",
@@ -3177,34 +2851,28 @@
           "op": "mul",
           "value": 0.8,
           "scope": {
-            "tags": ["cavalry"]
-          }
+            "ids": ["hippeus", "prodromos", "hetairos"]
+          },
+          "note": "TrainPoints x0.80 Percent on CavalryLineUpgraded."
         }
       ],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Conscript_Cavalry",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high"
       },
       "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Conscript_Cavalry",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        },
         "effects": {
           "source": "Game files 19.17020 (techtree.xml)",
           "checkedAt": "2026-10-18",
-          "confidence": "high",
-          "note": "TrainPoints/BuildPoints/cost with relativity Percent (multiplicative) -> op mul; PopulationCapAddition Absolute -> add. Values confirmed."
+          "confidence": "high"
         }
       }
     },
     {
       "id": "conscript-sailors",
       "name": {
-        "pt-BR": "Conscrição de Marinheiros",
+        "pt-BR": "Recrutar Marinheiros",
         "en": "Conscript Sailors"
       },
       "icon": "techs/greeks-conscript-sailors",
@@ -3222,28 +2890,29 @@
           "op": "mul",
           "value": 0.8,
           "scope": {
-            "tags": ["ship"]
-          }
+            "ids": [
+              "fishing-ship",
+              "transport-ship",
+              "trireme",
+              "pentekonter",
+              "juggernaut",
+              "the-argo"
+            ]
+          },
+          "note": "TrainPoints x0.80 Percent on Ship."
         }
       ],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Conscript_Sailors",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "+25% training speed = -20% training time."
+        "note": "TrainPoints x0.80 (Percent) on unit type Ship: Fishing Ship, Transport Ship, Trireme, Pentekonter, Juggernaut, The Argo (not Scylla, Carcinos, Hippocampus)."
       },
       "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Conscript_Sailors",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        },
         "effects": {
           "source": "Game files 19.17020 (techtree.xml)",
           "checkedAt": "2026-10-18",
-          "confidence": "high",
-          "note": "TrainPoints/BuildPoints/cost with relativity Percent (multiplicative) -> op mul; PopulationCapAddition Absolute -> add. Values confirmed."
+          "confidence": "high"
         }
       }
     },
@@ -3261,18 +2930,10 @@
       "age": "mythic",
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Omniscience",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Cost is 100 gold x total population of all enemy units (variable; left empty). Reveals enemy units."
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Omniscience",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
+        "note": "DynamicCost: 100 gold per enemy unit (the file cost is 100 gold, multiplied in game), so cost is left empty. Reveals all enemy units."
       }
     },
     {
@@ -3293,17 +2954,9 @@
       "age": "classical",
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Medium_Infantry",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high"
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Medium_Infantry",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
       }
     },
     {
@@ -3325,17 +2978,9 @@
       "requires": ["medium-infantry"],
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Heavy_Infantry_(Age_of_Mythology)",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high"
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Heavy_Infantry_(Age_of_Mythology)",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
       }
     },
     {
@@ -3357,17 +3002,9 @@
       "requires": ["heavy-infantry"],
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Champion_Infantry",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high"
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Champion_Infantry",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
       }
     },
     {
@@ -3388,18 +3025,10 @@
       "age": "classical",
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Medium_Ranged_Soldiers",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Hades: -33% cost (modifier on the Hades god file)."
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Medium_Ranged_Soldiers",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
+        "note": "Hades: cost x0.666 (Hades god modifier)."
       }
     },
     {
@@ -3421,18 +3050,10 @@
       "requires": ["medium-ranged-soldiers"],
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Heavy_Ranged_Soldiers",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Hades: -33% cost (modifier on the Hades god file)."
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Heavy_Ranged_Soldiers",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
+        "note": "Hades: cost x0.666 (Hades god modifier)."
       }
     },
     {
@@ -3454,18 +3075,10 @@
       "requires": ["heavy-ranged-soldiers"],
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Champion_Ranged_Soldiers",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Hades: -33% cost (modifier on the Hades god file)."
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Champion_Ranged_Soldiers",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
+        "note": "Hades: cost x0.666 (Hades god modifier)."
       }
     },
     {
@@ -3486,17 +3099,9 @@
       "age": "classical",
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Medium_Cavalry",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high"
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Medium_Cavalry",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
       }
     },
     {
@@ -3518,17 +3123,9 @@
       "requires": ["medium-cavalry"],
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Heavy_Cavalry_(Age_of_Mythology)",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high"
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Heavy_Cavalry_(Age_of_Mythology)",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
       }
     },
     {
@@ -3550,17 +3147,9 @@
       "requires": ["heavy-cavalry"],
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Champion_Cavalry",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high"
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Champion_Cavalry",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
       }
     },
     {
@@ -3581,17 +3170,9 @@
       "age": "classical",
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Copper_Weapons",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high"
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Copper_Weapons",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
       }
     },
     {
@@ -3612,17 +3193,9 @@
       "age": "classical",
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Copper_Armor",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high"
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Copper_Armor",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
       }
     },
     {
@@ -3643,17 +3216,9 @@
       "age": "classical",
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Copper_Shields",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high"
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Copper_Shields",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
       }
     },
     {
@@ -3675,17 +3240,9 @@
       "requires": ["copper-weapons"],
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Bronze_Weapons",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high"
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Bronze_Weapons",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
       }
     },
     {
@@ -3707,17 +3264,9 @@
       "requires": ["copper-armor"],
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Bronze_Armor",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high"
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Bronze_Armor",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
       }
     },
     {
@@ -3739,17 +3288,9 @@
       "requires": ["copper-shields"],
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Bronze_Shields",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high"
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Bronze_Shields",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
       }
     },
     {
@@ -3771,17 +3312,9 @@
       "requires": ["bronze-weapons"],
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Iron_Weapons",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high"
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Iron_Weapons",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
       }
     },
     {
@@ -3803,17 +3336,9 @@
       "requires": ["bronze-armor"],
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Iron_Armor",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high"
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Iron_Armor",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
       }
     },
     {
@@ -3835,17 +3360,9 @@
       "requires": ["bronze-shields"],
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Iron_Shields",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high"
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Iron_Shields",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
       }
     },
     {
@@ -3866,24 +3383,16 @@
       "age": "classical",
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Ballistics_(Age_of_Mythology)",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Hades: -33% cost (modifier on the Hades god file)."
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Ballistics_(Age_of_Mythology)",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
+        "note": "Hades: cost x0.666 (Hades god modifier)."
       }
     },
     {
       "id": "burning-pitch",
       "name": {
-        "pt-BR": "Piche Ardente",
+        "pt-BR": "Breu Incendiário",
         "en": "Burning Pitch"
       },
       "icon": "techs/greeks-burning-pitch",
@@ -3898,18 +3407,10 @@
       "age": "mythic",
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Burning_Pitch",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Hades: -33% cost (modifier on the Hades god file)."
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Burning_Pitch",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
+        "note": "Hades: cost x0.666 (Hades god modifier)."
       }
     },
     {
@@ -3930,17 +3431,9 @@
       "age": "classical",
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Enclosed_Deck",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high"
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Enclosed_Deck",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
       }
     },
     {
@@ -3962,17 +3455,9 @@
       "age": "classical",
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Heroic_Fleet",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high"
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Heroic_Fleet",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
       }
     },
     {
@@ -3993,17 +3478,9 @@
       "age": "heroic",
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Heavy_Warships_(Age_of_Mythology)",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high"
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Heavy_Warships_(Age_of_Mythology)",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
       }
     },
     {
@@ -4025,17 +3502,9 @@
       "requires": ["heavy-warships"],
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Champion_Warships",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high"
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Champion_Warships",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
       }
     },
     {
@@ -4056,18 +3525,10 @@
       "age": "classical",
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Sentry_Tower_(Age_of_Mythology)",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": " Upgrade of an existing building; cost/time from the upgrade table on the building's wiki page."
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Sentry_Tower_(Age_of_Mythology)",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
+        "note": "Enables the Sentry Tower ranged attack."
       }
     },
     {
@@ -4089,24 +3550,15 @@
       "requires": ["watch-tower"],
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Watch_Tower_(Age_of_Mythology)",
-        "checkedAt": "2026-10-17",
-        "confidence": "high",
-        "note": " Upgrade of an existing building; cost/time from the upgrade table on the building's wiki page."
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Watch_Tower_(Age_of_Mythology)",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
+        "confidence": "high"
       }
     },
     {
       "id": "signal-fires",
       "name": {
-        "pt-BR": "Fogueiras de Sinalização",
+        "pt-BR": "Fogueiras Sinalizadoras",
         "en": "Signal Fires"
       },
       "icon": "techs/greeks-signal-fires",
@@ -4120,23 +3572,15 @@
       "age": "classical",
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Signal_Fires",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high"
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Signal_Fires",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
       }
     },
     {
       "id": "carrier-pigeons",
       "name": {
-        "pt-BR": "Pombos-Correio",
+        "pt-BR": "Pombos Correio",
         "en": "Carrier Pigeons"
       },
       "icon": "techs/greeks-carrier-pigeons",
@@ -4151,17 +3595,9 @@
       "requires": ["signal-fires"],
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Carrier_Pigeons",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high"
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Carrier_Pigeons",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
       }
     },
     {
@@ -4183,17 +3619,9 @@
       "requires": ["watch-tower"],
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Crenellations_(Age_of_Mythology)",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high"
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Crenellations_(Age_of_Mythology)",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
       }
     },
     {
@@ -4215,23 +3643,15 @@
       "requires": ["watch-tower"],
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Boiling_Oil_(Age_of_Mythology)",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high"
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Boiling_Oil_(Age_of_Mythology)",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
       }
     },
     {
       "id": "stone-wall",
       "name": {
-        "pt-BR": "Muro de Pedra",
+        "pt-BR": "Muralha de Pedra",
         "en": "Stone Wall"
       },
       "icon": "techs/greeks-stone-wall",
@@ -4246,24 +3666,15 @@
       "age": "classical",
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Wooden_Wall",
-        "checkedAt": "2026-10-17",
-        "confidence": "high",
-        "note": " Upgrade of an existing building; cost/time from the upgrade table on the building's wiki page."
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Wooden_Wall",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
+        "confidence": "high"
       }
     },
     {
       "id": "fortified-wall",
       "name": {
-        "pt-BR": "Muro Fortificado",
+        "pt-BR": "Muralha Fortificada",
         "en": "Fortified Wall"
       },
       "icon": "techs/greeks-fortified-wall",
@@ -4279,24 +3690,15 @@
       "requires": ["stone-wall"],
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Stone_Wall_(Age_of_Mythology)",
-        "checkedAt": "2026-10-17",
-        "confidence": "high",
-        "note": " Upgrade of an existing building; cost/time from the upgrade table on the building's wiki page."
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Stone_Wall_(Age_of_Mythology)",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
+        "confidence": "high"
       }
     },
     {
       "id": "draft-horses",
       "name": {
-        "pt-BR": "Cavalos de Tração",
+        "pt-BR": "Cavalos de Carga",
         "en": "Draft Horses"
       },
       "icon": "techs/greeks-draft-horses",
@@ -4311,17 +3713,9 @@
       "age": "heroic",
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Draft_Horses_(Age_of_Mythology)",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high"
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Draft_Horses_(Age_of_Mythology)",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
       }
     },
     {
@@ -4342,17 +3736,9 @@
       "age": "mythic",
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Engineers",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high"
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Engineers",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
       }
     },
     {
@@ -4373,17 +3759,9 @@
       "age": "mythic",
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Advanced_Fortifications",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high"
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Advanced_Fortifications",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
       }
     },
     {
@@ -4405,24 +3783,16 @@
       "requires": ["zeus"],
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Olympian_Parentage",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
         "note": "Heroes +25% HP, +1 HP/s regeneration. Also available at the Fortress."
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Olympian_Parentage",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
       }
     },
     {
       "id": "vaults-of-erebus",
       "name": {
-        "pt-BR": "Cofres de Érebo",
+        "pt-BR": "Cofres do Érebo",
         "en": "Vaults of Erebus"
       },
       "icon": "techs/greeks-vaults-of-erebus",
@@ -4438,18 +3808,12 @@
       "requires": ["hades"],
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Vaults_of_Erebus",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Gold trickle 1.75/s (105/min), ResourceTrickleRate on the player."
+        "note": "ResourceTrickleRate Gold +1.75/s (105/min) on the player."
       },
       "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Vaults_of_Erebus",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        },
         "trickle": {
           "source": "Game files 19.17020 (techtree.xml)",
           "checkedAt": "2026-10-18",
@@ -4479,18 +3843,10 @@
       "requires": ["poseidon"],
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Lord_of_Horses",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
         "note": "Cavalry and scouts +4 LOS, +0.5 HP/s regeneration."
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Lord_of_Horses",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
       }
     },
     {
@@ -4512,24 +3868,16 @@
       "requires": ["athena"],
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Labyrinth_of_Minos",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
         "note": "Minotaur -> Bull Minotaur: +35% HP, +15% speed."
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Labyrinth_of_Minos",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
       }
     },
     {
       "id": "aegis-shield",
       "name": {
-        "pt-BR": "Escudo Égide",
+        "pt-BR": "Égide",
         "en": "Aegis Shield"
       },
       "icon": "techs/greeks-aegis-shield",
@@ -4545,18 +3893,10 @@
       "requires": ["athena"],
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Aegis_Shield",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
         "note": "Infantry -15% pierce vulnerability. Also at the Armory."
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Aegis_Shield",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
       }
     },
     {
@@ -4578,24 +3918,16 @@
       "requires": ["athena"],
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Sarissa",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
         "note": "Hoplites +10% hack attack, +0.5 range. Also at the Armory."
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Sarissa",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
       }
     },
     {
       "id": "sylvan-lore",
       "name": {
-        "pt-BR": "Saber Silvestre",
+        "pt-BR": "Sabedoria Silvana",
         "en": "Sylvan Lore"
       },
       "icon": "techs/greeks-sylvan-lore",
@@ -4611,18 +3943,10 @@
       "requires": ["hermes"],
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Sylvan_Lore",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
         "note": "Centaur -> Centaur Polemarch: +35% HP, +3 range, +1 LOS."
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Sylvan_Lore",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
       }
     },
     {
@@ -4644,24 +3968,16 @@
       "requires": ["hermes"],
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Winged_Messenger",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Grants a free Pegasus that respawns if killed; Pegasi +6 LOS, +20% speed."
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Winged_Messenger",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
+        "note": "Pegasi +20% speed, +6 LOS; adds a respawning Pegasus at a Temple (WingedMessengerRespawn; not modelled)."
       }
     },
     {
       "id": "spirited-charge",
       "name": {
-        "pt-BR": "Investida Fogosa",
+        "pt-BR": "Avanço Intrépido",
         "en": "Spirited Charge"
       },
       "icon": "techs/greeks-spirited-charge",
@@ -4677,18 +3993,10 @@
       "requires": ["hermes"],
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Spirited_Charge",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
         "note": "Cavalry +10% speed and melee attack; Centaurs +10% speed, +5% attack."
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Spirited_Charge",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
       }
     },
     {
@@ -4710,24 +4018,16 @@
       "requires": ["ares"],
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Phobos'_Spear_of_Panic",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
         "note": "Hoplites, Prodromoi and Militia +1 divine attack. Also at Stable/Armory."
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Phobos'_Spear_of_Panic",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
       }
     },
     {
       "id": "deimos-sword-of-dread",
       "name": {
-        "pt-BR": "Espada do Pavor de Deimos",
+        "pt-BR": "Espada do Medo de Deimos",
         "en": "Deimos' Sword of Dread"
       },
       "icon": "techs/greeks-deimos-sword-of-dread",
@@ -4743,18 +4043,10 @@
       "requires": ["ares"],
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Deimos'_Sword_of_Dread",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Hypaspists +15% attack and unlocked from the Classical Age. Also at the Armory."
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Deimos'_Sword_of_Dread",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
+        "note": "Hypaspists +15% melee damage and enabled (from the Classical Age). Also at the Armory."
       }
     },
     {
@@ -4776,18 +4068,10 @@
       "requires": ["ares"],
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Enyo's_Bow_of_Horror",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Toxotes +10% attack; arrows +20 speed. Also at the Armory. Hades: -33% cost."
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Enyo's_Bow_of_Horror",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
+        "note": "Toxotes +10% ranged damage; arrow speed +20. Also at the Armory. Hades: wood and favor cost x0.666."
       }
     },
     {
@@ -4809,18 +4093,10 @@
       "requires": ["ares"],
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Will_of_Kronos",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
         "note": "Cyclops -> Elder Cyclops (area damage)."
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Will_of_Kronos",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
       }
     },
     {
@@ -4843,18 +4119,10 @@
       "requires": ["apollo"],
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Anastrophe",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
         "note": "Pentekonters gain Critical Strike."
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Anastrophe",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
       }
     },
     {
@@ -4876,24 +4144,16 @@
       "requires": ["apollo"],
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Oracle_(technology)",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
         "note": "Units and buildings +5 LOS; see enemy production queues."
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Oracle_(technology)",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
       }
     },
     {
       "id": "temple-of-healing",
       "name": {
-        "pt-BR": "Templo da Cura",
+        "pt-BR": "Templo de Cura",
         "en": "Temple of Healing"
       },
       "icon": "techs/greeks-temple-of-healing",
@@ -4909,18 +4169,10 @@
       "requires": ["apollo"],
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Temple_of_Healing",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
         "note": "Temples heal up to 3 nearby units."
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Temple_of_Healing",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
       }
     },
     {
@@ -4942,18 +4194,10 @@
       "requires": ["apollo"],
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Sun_Ray",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Ranged units +15% attack; projectiles reveal LOS. Also at the Armory. Hades: -33% cost."
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Sun_Ray",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
+        "note": "Ranged units +15% ranged damage; projectiles reveal LOS. Also at the Armory. Hades: food and favor cost x0.666."
       }
     },
     {
@@ -4975,24 +4219,16 @@
       "requires": ["dionysus"],
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Chthonic_Rites",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
         "note": "Hydrai and Scyllai regenerate 4 HP/s. Also at the Dock."
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Chthonic_Rites",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
       }
     },
     {
       "id": "dionysia",
       "name": {
-        "pt-BR": "Dionisíacas",
+        "pt-BR": "Dionísia",
         "en": "Dionysia"
       },
       "icon": "techs/greeks-dionysia",
@@ -5008,18 +4244,10 @@
       "requires": ["dionysus"],
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Dionysia",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
         "note": "All units +5% HP."
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Dionysia",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
       }
     },
     {
@@ -5041,18 +4269,10 @@
       "requires": ["dionysus"],
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Thracian_Horses",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
         "note": "Cavalry heal 30% of damage dealt to units."
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Thracian_Horses",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
       }
     },
     {
@@ -5075,18 +4295,10 @@
       "requires": ["aphrodite"],
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Argonauts",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Spawns and unlocks The Argo hero ship."
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Argonauts",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
+        "note": "Creates The Argo at a Dock and enables it (no spawn field for researches)."
       }
     },
     {
@@ -5118,17 +4330,12 @@
         }
       ],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Divine_Blood",
-        "checkedAt": "2026-10-17",
-        "confidence": "high"
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
+        "confidence": "high",
+        "note": "Villager Build x1.15 BasePercent; +10 food/wood/gold carry (not modelled). Also at the Village Center."
       },
       "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Divine_Blood",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        },
         "effects": {
           "source": "Game files 19.17020 (techtree.xml)",
           "checkedAt": "2026-10-18",
@@ -5163,18 +4370,12 @@
         }
       ],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Golden_Apples",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Also researchable at the Temple."
+        "note": "Villager Gather AbstractTemple x1.20 BasePercent (favor M = 1.2; with Zeus 1.4). Also at the Village Center and Temple."
       },
       "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Golden_Apples",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        },
         "effects": {
           "source": "Game files 19.17020 (techtree.xml)",
           "checkedAt": "2026-10-18",
@@ -5186,7 +4387,7 @@
     {
       "id": "roar-of-orthus",
       "name": {
-        "pt-BR": "Rugido de Ortro",
+        "pt-BR": "Rugido de Ortros",
         "en": "Roar of Orthus"
       },
       "icon": "techs/greeks-roar-of-orthus",
@@ -5202,18 +4403,10 @@
       "requires": ["aphrodite"],
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Roar_of_Orthus",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
         "note": "Nemean Lion -> Nemean Rex: Roar area doubled."
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Roar_of_Orthus",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
       }
     },
     {
@@ -5235,18 +4428,10 @@
       "requires": ["hephaestus"],
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Hand_of_Talos",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
         "note": "Colossus -> Silver Colossus: +25% HP."
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Hand_of_Talos",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
       }
     },
     {
@@ -5268,18 +4453,10 @@
       "requires": ["hephaestus", "hand-of-talos"],
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Shoulder_of_Talos",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
         "note": "Silver -> Gold Colossus: +30% HP, -20% hack vulnerability."
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Shoulder_of_Talos",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
       }
     },
     {
@@ -5301,18 +4478,10 @@
       "requires": ["hephaestus"],
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Olympian_Weapons",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
         "note": "Myrmidons, Hetairoi, Gastraphetoroi +20% attack, +1x vs myth units."
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Olympian_Weapons",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
       }
     },
     {
@@ -5380,17 +4549,12 @@
         }
       ],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Forge_of_Olympus",
-        "checkedAt": "2026-10-17",
-        "confidence": "high"
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
+        "confidence": "high",
+        "note": "CostBuildingTechs x0.25 (Percent) on the Armory for food, wood and gold (favor unchanged); Armory ResearchRate x1.5 BasePercent (time / 1.5)."
       },
       "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Forge_of_Olympus",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        },
         "effects": {
           "source": "Game files 19.17020 (techtree.xml)",
           "checkedAt": "2026-10-18",
@@ -5402,7 +4566,7 @@
     {
       "id": "face-of-the-gorgon",
       "name": {
-        "pt-BR": "Face da Górgona",
+        "pt-BR": "Rosto da Górgona",
         "en": "Face of the Gorgon"
       },
       "icon": "techs/greeks-face-of-the-gorgon",
@@ -5418,18 +4582,10 @@
       "requires": ["hera"],
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Face_of_the_Gorgon",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
         "note": "Medusa -> Medusa Matriarch: +5 range, -25% ability recharge."
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Face_of_the_Gorgon",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
       }
     },
     {
@@ -5451,24 +4607,16 @@
       "requires": ["hera"],
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Monstrous_Rage",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
         "note": "Myth units -25% reload time, +15% speed."
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Monstrous_Rage",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
       }
     },
     {
       "id": "argive-patronage",
       "name": {
-        "pt-BR": "Patronato Argivo",
+        "pt-BR": "Patrocínio Argivo",
         "en": "Argive Patronage"
       },
       "icon": "techs/greeks-argive-patronage",
@@ -5485,24 +4633,16 @@
       "requires": ["hera"],
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Argive_Patronage",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Fortresses spawn a free Myrmidon every 60 s (Zeus; Demeter's version spawns Amazon Archers)."
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Argive_Patronage",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
+        "note": "Tech ArgivePatronageZeus (needs MythicAgeZeus, so Zeus only): Fortresses get a Maintain action that trains one free Myrmidon per 60 train points."
       }
     },
     {
       "id": "shafts-of-plague",
       "name": {
-        "pt-BR": "Flechas da Peste",
+        "pt-BR": "Lanças da Praga",
         "en": "Shafts of Plague"
       },
       "icon": "techs/greeks-shafts-of-plague",
@@ -5518,18 +4658,10 @@
       "requires": ["artemis"],
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Shafts_of_Plague",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
-        "note": "Ranged soldiers +10% attack and poison. Also at the Armory. Hades: -33% cost."
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Shafts_of_Plague",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
+        "note": "Ranged soldiers +10% ranged damage and poison. Also at the Armory. Hades: gold and favor cost x0.666."
       }
     },
     {
@@ -5551,18 +4683,10 @@
       "requires": ["artemis"],
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Flames_of_Typhon",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
         "note": "Chimera -> Chimera Tyrant: +40% attack."
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Flames_of_Typhon",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
       }
     },
     {
@@ -5585,25 +4709,17 @@
       "requires": ["artemis"],
       "effects": [],
       "meta": {
-        "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Beast_Slayer",
-        "checkedAt": "2026-10-17",
+        "source": "Game files 19.17020 (techtree.xml, proto.xml)",
+        "checkedAt": "2026-10-18",
         "confidence": "high",
         "note": "Heroes +2x vs myth units, +10% speed."
-      },
-      "fieldMeta": {
-        "time": {
-          "source": "https://ageofempires.fandom.com/wiki/Beast_Slayer",
-          "checkedAt": "2026-10-17",
-          "confidence": "medium",
-          "note": "Research time from the wiki only (analyzer has no research times)."
-        }
       }
     }
   ],
   "meta": {
-    "source": "https://aomr-analyzer.com/frise/civ/greek ; https://ageofempires.fandom.com/wiki/Greeks_(Age_of_Mythology)",
-    "checkedAt": "2026-10-17",
+    "source": "Game files 19.17020 (major_gods.xml, techtree.xml, proto.xml, string tables)",
+    "checkedAt": "2026-10-18",
     "confidence": "high",
-    "note": "Base game only (Demeter and her minor gods Pan/Hestia/Persephone, and Demeter heroes Orpheus/Iolaus/Icarus/King Midas/Amazon Archer excluded). Patch 19.17020 (2026-07-01). Start: Town Center, 4 Villagers, 1 Kataskopos, 200 food / 250 wood / 50 gold. pt-BR names are translations, not verified against the official localization."
+    "note": "Base game only (Demeter, Pan, Hestia, Persephone and their units excluded). Start (major_gods.xml): 4 Villagers, 1 Kataskopos, 200 food / 250 wood / 50 gold (Zeus +10 favor); 4 Sentry Towers from the random-map scripts. Names from the English and PortugueseBrazil string tables."
   }
 }

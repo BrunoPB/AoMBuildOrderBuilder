@@ -30,6 +30,8 @@ export function validateRefs(build: Build, data: GameData): string[] {
         need(p.buildings.has(a.building), "building", a.building, i);
         if (a.builder && "new" in a.builder)
           need(ids.has(a.builder.new), "action", a.builder.new, i);
+        if (a.builder && "unit" in a.builder)
+          need(p.units.has(a.builder.unit), "unit", a.builder.unit, i);
         if (a.builder && "same" in a.builder)
           need(ids.has(a.builder.same), "action", a.builder.same, i);
         break;

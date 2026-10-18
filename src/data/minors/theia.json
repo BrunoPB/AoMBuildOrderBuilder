@@ -2,7 +2,7 @@
   "id": "theia",
   "pantheon": "atlanteans",
   "name": {
-    "pt-BR": "Teia",
+    "pt-BR": "Theia",
     "en": "Theia"
   },
   "icon": "gods/theia",
@@ -22,9 +22,9 @@
   ],
   "powers": ["hesperides"],
   "meta": {
-    "source": "https://ageofempires.fandom.com/wiki/Theia; https://aomr-analyzer.com/gods/kronos (minor lists)",
-    "checkedAt": "2026-10-17",
+    "source": "Game files 19.17020 (techtree.xml HeroicAgeTheia)",
+    "checkedAt": "2026-10-18",
     "confidence": "high",
-    "note": "1 free stymphalian-bird on reaching the age through Theia (Kronos: 2). pt-BR name not verified against the official localization."
+    "note": "Age-up tech: CreateUnit 1 stymphalian-bird at the Temple (Kronos: +1 from KronosExtra*, so 2). God power HesperidesTree (cooldown 60 s). Hesperides Tree god power: the tree trains Dryads (limit 5) and the cast spawns 2 Dryads."
   }
 }

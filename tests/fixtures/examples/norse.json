@@ -8,16 +8,34 @@
   "pantheon": "norse",
   "god": "thor",
   "type": "rush",
-  "settings": { "norseFavorPerMinute": 3 },
+  "settings": {
+    "norseFavorPerMinute": 3
+  },
   "actions": [
-    { "id": "s", "when": "0:00", "do": "move", "count": 3, "from": "idle", "to": "gold" },
-    { "id": "g", "when": "0:00", "do": "train", "unit": "gatherer", "count": 6, "rally": "food" },
+    {
+      "id": "s",
+      "when": "0:00",
+      "do": "move",
+      "count": 3,
+      "from": "idle",
+      "to": "gold"
+    },
+    {
+      "id": "g",
+      "when": "0:00",
+      "do": "train",
+      "unit": "gatherer",
+      "count": 6,
+      "rally": "food"
+    },
     {
       "id": "h",
       "when": "0:30",
       "do": "build",
       "building": "house",
-      "builder": { "from": "food" },
+      "builder": {
+        "from": "food"
+      },
       "then": "wood"
     },
     {
@@ -25,10 +43,25 @@
       "when": "asap",
       "do": "build",
       "building": "temple",
-      "builder": { "from": "gold" },
-      "then": "gold"
+      "builder": {
+        "unit": "berserk"
+      }
     },
-    { "id": "r", "when": "2:00", "do": "event", "gainFavor": 5, "note": "scouting fight" },
-    { "id": "cl", "when": { "after": "t" }, "do": "age", "to": "classical", "minor": "forseti" }
+    {
+      "id": "r",
+      "when": "2:00",
+      "do": "event",
+      "gainFavor": 5,
+      "note": "scouting fight"
+    },
+    {
+      "id": "cl",
+      "when": {
+        "after": "t"
+      },
+      "do": "age",
+      "to": "classical",
+      "minor": "forseti"
+    }
   ]
 }

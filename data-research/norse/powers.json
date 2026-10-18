@@ -2,7 +2,7 @@
   {
     "id": "great-hunt",
     "name": {
-      "pt-BR": "Grande Caçada",
+      "pt-BR": "Grande Caça",
       "en": "Great Hunt"
     },
     "icon": "powers/great-hunt",
@@ -15,16 +15,16 @@
       "kind": "economy"
     },
     "meta": {
-      "source": "https://ageofempires.fandom.com/wiki/God_power + https://ageofempires.fandom.com/wiki/Great_Hunt",
-      "checkedAt": "2026-10-17",
-      "confidence": "medium",
-      "note": "Odin (Archaic). Retold: first cast is free; cost is the base reuse cost, +5 favor per further reuse; infinite uses. Multiplies animals in the target area (stronger each age); spawns Elk if none. Food amount not modelled."
+      "source": "Game files 19.17020 (god_powers/norse.godpowers, techtree.xml)",
+      "checkedAt": "2026-10-18",
+      "confidence": "high",
+      "note": "Odin (Archaic). Cost 25, repeatcost +5 per further cast, cooldown 90. Multiplies the huntables in a 10 m radius up to maxfood 500 / 600 / 1200 / 2100 food (Archaic..Mythic); spawns Elk if none. Food not modelled. Cost is the godpowers <cost>; each further cast adds <repeatcost>. Cooldown from the age tech GodPower effect. Whether the first cast is free is not stated in these files."
     }
   },
   {
     "id": "dwarven-mine",
     "name": {
-      "pt-BR": "Mina Anã",
+      "pt-BR": "Mina Enânica",
       "en": "Dwarven Mine"
     },
     "icon": "powers/dwarven-mine",
@@ -37,10 +37,10 @@
       "kind": "economy"
     },
     "meta": {
-      "source": "https://ageofempires.fandom.com/wiki/God_power + https://ageofempires.fandom.com/wiki/Dwarven_Mine",
-      "checkedAt": "2026-10-17",
-      "confidence": "medium",
-      "note": "Thor (Archaic). Retold: first cast is free; cost is the base reuse cost, +50 favor per further reuse; infinite uses. Creates a Gold Mine whose size depends on the age; gathered faster in later ages (Dwarf: 64.7/73.5/88.2 gold/min Classical/Heroic/Mythic vs 58.8 on a normal mine). Not modelled as a modifier."
+      "source": "Game files 19.17020 (god_powers/norse.godpowers, techtree.xml)",
+      "checkedAt": "2026-10-18",
+      "confidence": "high",
+      "note": "Thor (Archaic). Cost 75, repeatcost +50, cooldown 120. Creates a Dwarven Mine with 500 / 1000 / 3000 / 6000 gold (Archaic..Mythic), gathered x1.0 / x1.1 / x1.25 / x1.5 faster. Not modelled. Cost is the godpowers <cost>; each further cast adds <repeatcost>. Cooldown from the age tech GodPower effect. Whether the first cast is free is not stated in these files."
     }
   },
   {
@@ -59,10 +59,10 @@
       "kind": "utility"
     },
     "meta": {
-      "source": "https://ageofempires.fandom.com/wiki/God_power + https://ageofempires.fandom.com/wiki/Spy_(Age_of_Mythology)",
-      "checkedAt": "2026-10-17",
-      "confidence": "medium",
-      "note": "Loki (Archaic). Retold: first cast is free; cost is the base reuse cost, +5 favor per further reuse; infinite uses. Reveals an enemy unit's line of sight."
+      "source": "Game files 19.17020 (god_powers/norse.godpowers, techtree.xml)",
+      "checkedAt": "2026-10-18",
+      "confidence": "high",
+      "note": "Loki (Archaic). Cost 30, repeatcost +5, cooldown 30. Shows an enemy unit's line of sight. Cost is the godpowers <cost>; each further cast adds <repeatcost>. Cooldown from the age tech GodPower effect. Whether the first cast is free is not stated in these files."
     }
   },
   {
@@ -82,16 +82,16 @@
       "duration": 30
     },
     "meta": {
-      "source": "https://ageofempires.fandom.com/wiki/God_power + https://ageofempires.fandom.com/wiki/Forest_Fire",
-      "checkedAt": "2026-10-17",
-      "confidence": "medium",
-      "note": "Freyja (Classical). Retold: first cast is free; cost is the base reuse cost, +50 favor per further reuse; infinite uses."
+      "source": "Game files 19.17020 (god_powers/norse.godpowers, techtree.xml)",
+      "checkedAt": "2026-10-18",
+      "confidence": "high",
+      "note": "Freyja (Classical). Cost 125, repeatcost +50, cooldown 180. Active 30 s. Cost is the godpowers <cost>; each further cast adds <repeatcost>. Cooldown from the age tech GodPower effect. Whether the first cast is free is not stated in these files."
     }
   },
   {
     "id": "undermine",
     "name": {
-      "pt-BR": "Solapar",
+      "pt-BR": "Desmoronar",
       "en": "Undermine"
     },
     "icon": "powers/undermine",
@@ -102,19 +102,19 @@
     "cooldown": 150,
     "effect": {
       "kind": "military",
-      "duration": 14
+      "duration": 15
     },
     "meta": {
-      "source": "https://ageofempires.fandom.com/wiki/God_power + https://ageofempires.fandom.com/wiki/Undermine",
-      "checkedAt": "2026-10-17",
-      "confidence": "medium",
-      "note": "Heimdall (Classical). Retold: first cast is free; cost is the base reuse cost, +10 favor per further reuse; infinite uses."
+      "source": "Game files 19.17020 (god_powers/norse.godpowers, techtree.xml)",
+      "checkedAt": "2026-10-18",
+      "confidence": "high",
+      "note": "Heimdall (Classical). Cost 50, repeatcost +10, cooldown 150. Active 15 s; instantly destroys walls and Sentry Towers on its path, damages other buildings. Cost is the godpowers <cost>; each further cast adds <repeatcost>. Cooldown from the age tech GodPower effect. Whether the first cast is free is not stated in these files."
     }
   },
   {
     "id": "healing-spring",
     "name": {
-      "pt-BR": "Fonte Curativa",
+      "pt-BR": "Fonte de Cura",
       "en": "Healing Spring"
     },
     "icon": "powers/healing-spring",
@@ -127,10 +127,10 @@
       "kind": "utility"
     },
     "meta": {
-      "source": "https://ageofempires.fandom.com/wiki/God_power + https://ageofempires.fandom.com/wiki/Healing_Spring",
-      "checkedAt": "2026-10-17",
-      "confidence": "medium",
-      "note": "Forseti (Classical). Retold: first cast is free; cost is the base reuse cost, +150 favor per further reuse; infinite uses. Heals idle units 2.5 HP/s; capturable."
+      "source": "Game files 19.17020 (god_powers/norse.godpowers, techtree.xml)",
+      "checkedAt": "2026-10-18",
+      "confidence": "high",
+      "note": "Forseti (Classical). Cost 100, repeatcost +150, cooldown 150. Creates a permanent Healing Spring. Cost is the godpowers <cost>; each further cast adds <repeatcost>. Cooldown from the age tech GodPower effect. Whether the first cast is free is not stated in these files."
     }
   },
   {
@@ -150,16 +150,16 @@
       "duration": 45
     },
     "meta": {
-      "source": "https://ageofempires.fandom.com/wiki/God_power + https://ageofempires.fandom.com/wiki/Frost",
-      "checkedAt": "2026-10-17",
-      "confidence": "medium",
-      "note": "Skadi (Heroic). Retold: first cast is free; cost is the base reuse cost, +15 favor per further reuse; infinite uses."
+      "source": "Game files 19.17020 (god_powers/norse.godpowers, techtree.xml)",
+      "checkedAt": "2026-10-18",
+      "confidence": "high",
+      "note": "Skadi (Heroic). Cost 200, repeatcost +15, cooldown 240. Freezes enemies in 23 m for 45 s. Cost is the godpowers <cost>; each further cast adds <repeatcost>. Cooldown from the age tech GodPower effect. Whether the first cast is free is not stated in these files."
     }
   },
   {
     "id": "walking-woods",
     "name": {
-      "pt-BR": "Floresta Ambulante",
+      "pt-BR": "Árvores Andantes",
       "en": "Walking Woods"
     },
     "icon": "powers/walking-woods",
@@ -172,10 +172,10 @@
       "kind": "military"
     },
     "meta": {
-      "source": "https://ageofempires.fandom.com/wiki/God_power + https://ageofempires.fandom.com/wiki/Walking_Woods",
-      "checkedAt": "2026-10-17",
-      "confidence": "medium",
-      "note": "Njord (Heroic). Retold: first cast is free; cost is the base reuse cost, +50 favor per further reuse; infinite uses."
+      "source": "Game files 19.17020 (god_powers/norse.godpowers, techtree.xml)",
+      "checkedAt": "2026-10-18",
+      "confidence": "high",
+      "note": "Njord (Heroic). Cost 100, repeatcost +50, cooldown 180. Turns 7 trees in 8 m into Walking Woods. Cost is the godpowers <cost>; each further cast adds <repeatcost>. Cooldown from the age tech GodPower effect. Whether the first cast is free is not stated in these files."
     }
   },
   {
@@ -195,16 +195,16 @@
       "duration": 45
     },
     "meta": {
-      "source": "https://ageofempires.fandom.com/wiki/God_power + https://ageofempires.fandom.com/wiki/Flaming_Weapons",
-      "checkedAt": "2026-10-17",
-      "confidence": "medium",
-      "note": "Bragi (Heroic). Retold: first cast is free; cost is the base reuse cost, +50 favor per further reuse; infinite uses. +60% attack for human units, ships and heroes."
+      "source": "Game files 19.17020 (god_powers/norse.godpowers, techtree.xml)",
+      "checkedAt": "2026-10-18",
+      "confidence": "high",
+      "note": "Bragi (Heroic). Cost 250, repeatcost +50, cooldown 210. Damage x1.60 (Percent) for 45 s. Cost is the godpowers <cost>; each further cast adds <repeatcost>. Cooldown from the age tech GodPower effect. Whether the first cast is free is not stated in these files."
     }
   },
   {
     "id": "ragnarok",
     "name": {
-      "pt-BR": "Ragnarök",
+      "pt-BR": "Ragnarok",
       "en": "Ragnarok"
     },
     "icon": "powers/ragnarok",
@@ -217,10 +217,10 @@
       "kind": "military"
     },
     "meta": {
-      "source": "https://ageofempires.fandom.com/wiki/God_power + https://ageofempires.fandom.com/wiki/Ragnarok",
-      "checkedAt": "2026-10-17",
-      "confidence": "medium",
-      "note": "Baldr (Mythic). Retold: first cast is free; cost is the base reuse cost, +50 favor per further reuse; infinite uses. Converts all Gatherers and Dwarves into Heroes of Ragnarok (kills the economy)."
+      "source": "Game files 19.17020 (god_powers/norse.godpowers, techtree.xml)",
+      "checkedAt": "2026-10-18",
+      "confidence": "high",
+      "note": "Baldr (Mythic). Cost 250, repeatcost +50, cooldown 300. Turns every Gatherer and Dwarf into a Hero of Ragnarok. Cost is the godpowers <cost>; each further cast adds <repeatcost>. Cooldown from the age tech GodPower effect. Whether the first cast is free is not stated in these files."
     }
   },
   {
@@ -235,15 +235,16 @@
       "favor": 350
     },
     "cooldown": 240,
+    "castTime": 6,
     "effect": {
       "kind": "military",
-      "duration": 31
+      "duration": 25
     },
     "meta": {
-      "source": "https://ageofempires.fandom.com/wiki/God_power + https://ageofempires.fandom.com/wiki/Fimbulwinter",
-      "checkedAt": "2026-10-17",
-      "confidence": "medium",
-      "note": "Tyr (Mythic). Retold: first cast is free; cost is the base reuse cost, +55 favor per further reuse; infinite uses."
+      "source": "Game files 19.17020 (god_powers/norse.godpowers, techtree.xml)",
+      "checkedAt": "2026-10-18",
+      "confidence": "high",
+      "note": "Tyr (Mythic). Cost 350, repeatcost +55, cooldown 240. 6 s build-up, active 25 s; wolf packs attack enemy settlements. Cost is the godpowers <cost>; each further cast adds <repeatcost>. Cooldown from the age tech GodPower effect. Whether the first cast is free is not stated in these files."
     }
   },
   {
@@ -262,10 +263,10 @@
       "kind": "military"
     },
     "meta": {
-      "source": "https://ageofempires.fandom.com/wiki/God_power + https://ageofempires.fandom.com/wiki/Nidhogg",
-      "checkedAt": "2026-10-17",
-      "confidence": "medium",
-      "note": "Hel (Mythic). Retold: first cast is free; cost is the base reuse cost, +50 favor per further reuse; infinite uses. Summons the Nidhogg dragon (unit not in this database)."
+      "source": "Game files 19.17020 (god_powers/norse.godpowers, techtree.xml)",
+      "checkedAt": "2026-10-18",
+      "confidence": "high",
+      "note": "Hel (Mythic). Cost 350, repeatcost +50, cooldown 240. Creates the Nidhogg dragon. Cost is the godpowers <cost>; each further cast adds <repeatcost>. Cooldown from the age tech GodPower effect. Whether the first cast is free is not stated in these files."
     }
   }
 ]

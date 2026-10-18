@@ -87,23 +87,9 @@
     "dwarven-breastplate-thor"
   ],
   "meta": {
-    "source": "https://aomr-analyzer.com/gods/thor + https://ageofempires.fandom.com/wiki/Thor",
-    "checkedAt": "2026-10-17",
+    "source": "Game files 19.17020 (major_gods.xml, techtree.xml)",
+    "checkedAt": "2026-10-18",
     "confidence": "high",
-    "note": "startExtras replaces the 3 starting Gatherers with 3 Dwarves (units record is meant to override the pantheon start counts: gatherer 0, dwarf 3). Not expressed as modifiers: Dwarven Armory replaces the Armory, can be built and research in any age (slower in Archaic, faster later); each Dwarven Armory research spawns 1 free Dwarf (even above pop/villager limit); 3 extra armory techs."
-  },
-  "fieldMeta": {
-    "startExtras": {
-      "source": "https://ageofempires.fandom.com/wiki/Thor",
-      "checkedAt": "2026-10-17",
-      "confidence": "medium",
-      "note": "Override semantics to be confirmed by the owner (see PENDING)."
-    },
-    "modifiers": {
-      "source": "Game files 19.17020 (techtree.xml)",
-      "checkedAt": "2026-10-18",
-      "confidence": "high",
-      "note": "ArchaicAgeThor: Dwarf gather x1.25 BasePercent (hunt, herd, berries, farm, wood), Dwarf cost Gold -10 Absolute, ArmoryTechnology cost x0.90 BasePercent."
-    }
+    "note": "startExtras replaces the 3 starting Gatherers with 3 Dwarves (major_gods.xml startingunits: 3 VillagerDwarf). ArchaicAgeThor: Dwarven Mine (cooldown 120); Dwarf gold -10 (Absolute); Dwarf hunt/herd/berries/farm/wood x1.25 BasePercent; ArmoryTechnology cost x0.90 BasePercent (food, wood, gold, favor). Not expressed: Dwarven Armory replaces the Armory and researches from the Archaic Age (rate 0.33 Archaic, 1.0 Classical, 1.5 Heroic, 2.0 Mythic); every ArmoryTechnology researched spawns 1 free Dwarf there (ThorDwarfSpawn); 3 extra armory techs (Dwarven Weapons, Meteoric Iron Armor, Dragonscale Shields)."
   }
 }
