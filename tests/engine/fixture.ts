@@ -5,7 +5,7 @@ const meta = { source: "test", checkedAt: "2026-10-17", confidence: "high" as co
 const name = (en: string) => ({ "pt-BR": en, en });
 
 /** Tiny hand-made dataset so engine tests do not depend on researched values. */
-export function testData(overrides: { oracleRate?: number } = {}): GameData {
+export function testData(overrides: { oracleRate?: number; favorCap?: number } = {}): GameData {
   const raw: RawData = {
     common: {
       game: "aom-retold",
@@ -77,6 +77,14 @@ export function testData(overrides: { oracleRate?: number } = {}): GameData {
         effect: { kind: "economy", grant: { gold: 100 } },
         meta,
       },
+      {
+        id: "harvest",
+        name: name("Harvest"),
+        icon: "p/h",
+        pantheon: "atlanteans",
+        effect: { kind: "economy", trickle: { food: 60 }, duration: 10 },
+        meta,
+      },
     ],
     pantheons: {
       atlanteans: {
@@ -91,6 +99,7 @@ export function testData(overrides: { oracleRate?: number } = {}): GameData {
           buildings: { "town-center": 1 },
           popCap: 10,
         },
+        ...(overrides.favorCap ? { favorCap: overrides.favorCap } : {}),
         favor: {
           type: "oracles",
           unit: "oracle",
@@ -293,7 +302,7 @@ export function testData(overrides: { oracleRate?: number } = {}): GameData {
         icon: "g/k",
         modifiers: [{ target: "buildRate", op: "mul", value: 2, condition: "nearManor" }],
         ageUpFreeUnits: 2,
-        powers: ["time-shift", "bounty"],
+        powers: ["time-shift", "bounty", "harvest"],
         minors: { classical: ["minor-a"], heroic: ["minor-b"], mythic: [] },
         meta,
       },

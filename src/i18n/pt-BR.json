@@ -6,10 +6,10 @@
   "nav.back": "Voltar",
   "footer.legal": "Age of Mythology © Microsoft Corporation. Este site não é afiliado nem endossado pela Microsoft.",
   "footer.fan": "Projeto de fã, sem fins lucrativos.",
+  "footer.reference": "* Os resultados são uma referência, não uma medição exata: favor dos Oráculos, deslocamento dos aldeões e outros fatores variam de partida para partida.",
   "storage.unavailable": "Não foi possível salvar no navegador. Exporte suas builds para não perdê-las.",
   "loading": "Carregando…",
   "error.data": "Erro ao carregar os dados do jogo",
-
   "library.mine": "Minhas builds",
   "library.presets": "Builds padrão",
   "library.empty": "Nenhuma build ainda",
@@ -32,13 +32,11 @@
   "confirm.yes": "Sim",
   "confirm.no": "Não",
   "confirm.cancel": "Cancelar",
-
   "type.rush": "Rush",
   "type.eco": "Economia",
   "type.timing": "Timing",
   "type.water": "Água",
   "type.other": "Outro",
-
   "import.ok.one": "{count} build importada",
   "import.ok.other": "{count} builds importadas",
   "import.error": "Arquivo inválido: {detail}",
@@ -47,7 +45,6 @@
   "import.replace": "Substituir",
   "import.keepBoth": "Manter as duas",
   "import.suffix": "(importada)",
-
   "editor.name": "Nome",
   "editor.author": "Autor",
   "editor.type": "Tipo",
@@ -79,10 +76,8 @@
   "editor.notFound": "Build não encontrada",
   "editor.changePantheon": "Trocar o panteão limpa as ações. Continuar?",
   "editor.reset": "Padrão",
-
   "palette.pick": "Escolha",
   "palette.allAges": "Todas as Eras",
-
   "action.train": "Treinar",
   "action.build": "Construir",
   "action.research": "Pesquisar",
@@ -96,7 +91,6 @@
   "action.trainWhenAffordable": "Treinar sempre que der",
   "action.stopTrainWhenAffordable": "Parar “sempre que der”",
   "action.event": "Evento manual",
-
   "row.when": "Quando",
   "row.asap": "Assim que der",
   "row.always": "Sempre",
@@ -132,7 +126,6 @@
   "row.done": "Terminou {t}",
   "row.notStarted": "Não começou",
   "row.none": "—",
-
   "result.timeline": "Linha do tempo",
   "result.resources": "Recursos",
   "result.population": "População",
@@ -149,7 +142,6 @@
   "result.lowConfidence": "Dado de baixa confiança",
   "result.clicked": "Clique",
   "result.reached": "Chegou",
-
   "res.food": "Comida",
   "res.wood": "Madeira",
   "res.gold": "Ouro",
@@ -157,7 +149,6 @@
   "res.idle": "ocioso",
   "res.any": "qualquer recurso",
   "word.or": " ou ",
-
   "step.train": "Treinar {count} {unit}",
   "step.ready": "+1 {unit} → {to}",
   "step.readyMilitary": "+1 {unit}",
@@ -187,7 +178,6 @@
   "step.lose": "−{count} {unit}",
   "step.gain": "+{count} {resource}",
   "step.depleted": "{source} esgotou → {next}",
-
   "warn.noResource": "Faltou {resource} ({missing}); esperou {waited} s",
   "warn.queueBusy": "Fila ocupada: {building}; esperou {waited} s",
   "warn.popCapped": "População no limite ({unit}); esperou {waited} s",
@@ -217,11 +207,9 @@
   "warn.cannotGather": "{unit} não coleta {source}",
   "warn.idleWorkers": "Aldeões ociosos por {waited} s",
   "warn.neverStarted": "A ação nunca começou",
-
   "level.info": "Info",
   "level.delay": "Atraso",
   "level.error": "Erro",
-
   "match.start": "Iniciar",
   "match.pause": "Pausar",
   "match.reset": "Zerar",
@@ -233,7 +221,6 @@
   "match.next": "Próxima",
   "match.done": "Fim da build",
   "match.exit": "Sair do modo partida",
-
   "settings.language": "Idioma",
   "settings.theme": "Tema",
   "settings.themeLight": "Claro",

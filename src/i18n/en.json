@@ -6,10 +6,10 @@
   "nav.back": "Back",
   "footer.legal": "Age of Mythology © Microsoft Corporation. This site is not affiliated with or endorsed by Microsoft.",
   "footer.fan": "Non-profit fan project.",
+  "footer.reference": "* Results are a reference, not an exact measurement: Oracle favor, villager walking time and other factors vary from match to match.",
   "storage.unavailable": "Could not save in the browser. Export your builds so you don't lose them.",
   "loading": "Loading…",
   "error.data": "Could not load the game data",
-
   "library.mine": "My builds",
   "library.presets": "Standard builds",
   "library.empty": "No builds yet",
@@ -32,13 +32,11 @@
   "confirm.yes": "Yes",
   "confirm.no": "No",
   "confirm.cancel": "Cancel",
-
   "type.rush": "Rush",
   "type.eco": "Economy",
   "type.timing": "Timing",
   "type.water": "Water",
   "type.other": "Other",
-
   "import.ok.one": "{count} build imported",
   "import.ok.other": "{count} builds imported",
   "import.error": "Invalid file: {detail}",
@@ -47,7 +45,6 @@
   "import.replace": "Replace",
   "import.keepBoth": "Keep both",
   "import.suffix": "(imported)",
-
   "editor.name": "Name",
   "editor.author": "Author",
   "editor.type": "Type",
@@ -79,10 +76,8 @@
   "editor.notFound": "Build not found",
   "editor.changePantheon": "Changing the pantheon clears the actions. Continue?",
   "editor.reset": "Default",
-
   "palette.pick": "Pick",
   "palette.allAges": "All ages",
-
   "action.train": "Train",
   "action.build": "Build",
   "action.research": "Research",
@@ -96,7 +91,6 @@
   "action.trainWhenAffordable": "Train when affordable",
   "action.stopTrainWhenAffordable": "Stop “when affordable”",
   "action.event": "Manual event",
-
   "row.when": "When",
   "row.asap": "As soon as possible",
   "row.always": "Always",
@@ -132,7 +126,6 @@
   "row.done": "Finished {t}",
   "row.notStarted": "Did not start",
   "row.none": "—",
-
   "result.timeline": "Timeline",
   "result.resources": "Resources",
   "result.population": "Population",
@@ -149,7 +142,6 @@
   "result.lowConfidence": "Low-confidence data",
   "result.clicked": "Click",
   "result.reached": "Reached",
-
   "res.food": "Food",
   "res.wood": "Wood",
   "res.gold": "Gold",
@@ -157,7 +149,6 @@
   "res.idle": "idle",
   "res.any": "any resource",
   "word.or": " or ",
-
   "step.train": "Train {count} {unit}",
   "step.ready": "+1 {unit} → {to}",
   "step.readyMilitary": "+1 {unit}",
@@ -187,7 +178,6 @@
   "step.lose": "−{count} {unit}",
   "step.gain": "+{count} {resource}",
   "step.depleted": "{source} depleted → {next}",
-
   "warn.noResource": "Not enough {resource} ({missing}); waited {waited} s",
   "warn.queueBusy": "Queue busy: {building}; waited {waited} s",
   "warn.popCapped": "Population capped ({unit}); waited {waited} s",
@@ -217,11 +207,9 @@
   "warn.cannotGather": "{unit} does not gather {source}",
   "warn.idleWorkers": "Idle villagers for {waited} s",
   "warn.neverStarted": "The action never started",
-
   "level.info": "Info",
   "level.delay": "Delay",
   "level.error": "Error",
-
   "match.start": "Start",
   "match.pause": "Pause",
   "match.reset": "Reset",
@@ -233,7 +221,6 @@
   "match.next": "Next",
   "match.done": "End of build",
   "match.exit": "Leave match mode",
-
   "settings.language": "Language",
   "settings.theme": "Theme",
   "settings.themeLight": "Light",

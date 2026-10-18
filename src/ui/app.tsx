@@ -193,7 +193,10 @@ export function App({ data }: { data: GameData }) {
           {route.page === "settings" && <SettingsPage />}
         </main>
         <footer class="legal">
-          {api.t("footer.fan")} {api.t("footer.legal")}
+          <p class="reference">{api.t("footer.reference")}</p>
+          <p>
+            {api.t("footer.fan")} {api.t("footer.legal")}
+          </p>
         </footer>
         <div class="toasts" aria-live="polite">
           {toasts.map((x) => (

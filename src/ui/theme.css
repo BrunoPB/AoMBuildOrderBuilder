@@ -212,6 +212,15 @@ main {
   padding: 16px;
 }
 
+footer.legal p {
+  margin: 2px 0;
+}
+
+footer.legal .reference {
+  font-size: 11px;
+  font-style: italic;
+}
+
 footer.legal {
   padding: 12px 16px;
   font-size: 12px;

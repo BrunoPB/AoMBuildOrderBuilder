@@ -22,7 +22,7 @@ export function modifierApplies(mod: Modifier, ctx: ModContext): boolean {
   return true;
 }
 
-/** (base + Σ add) × Π mul, over the modifiers of the given target that apply to ctx. */
+/** (base + Σ add) × (1 + Σ pct) × Π mul, over the modifiers of `target` that apply to ctx. */
 export function applyModifiers(
   base: number,
   target: Modifier["target"],
@@ -30,13 +30,15 @@ export function applyModifiers(
   ctx: ModContext,
 ): number {
   let add = 0;
+  let pct = 0;
   let mul = 1;
   for (const mod of mods) {
     if (mod.target !== target || !modifierApplies(mod, ctx)) continue;
     if (mod.op === "add") add += mod.value;
+    else if (mod.op === "pct") pct += mod.value;
     else mul *= mod.value;
   }
-  return (base + add) * mul;
+  return (base + add) * (1 + pct) * mul;
 }
 
 export function applyCostModifiers(cost: Cost, mods: readonly Modifier[], ctx: ModContext): Cost {

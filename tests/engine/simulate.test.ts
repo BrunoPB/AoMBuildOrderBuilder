@@ -224,3 +224,37 @@ describe("errors and determinism", () => {
     ).toBeLessThanOrEqual(1);
   });
 });
+
+describe("trickles, caps and pop modifiers", () => {
+  it("adds resources per minute while a power lasts", () => {
+    const r = run([
+      { when: "0:00", do: "power", power: "harvest" },
+      { when: "0:20", do: "event", note: "end" },
+    ]);
+    expect(at(r, 10).resources.food).toBeCloseTo(210);
+    expect(at(r, 20).resources.food).toBeCloseTo(210);
+  });
+
+  it("caps stored favor", () => {
+    const r = simulate(
+      testData({ favorCap: 3 }),
+      testBuild([{ when: "1:00", do: "event", note: "end" }]),
+    );
+    expect(Math.max(...r.series.map((s) => s.resources.favor))).toBeLessThanOrEqual(3);
+  });
+
+  it("applies pop modifiers to units", () => {
+    const d = testData();
+    d.gods
+      .get("kronos")!
+      .modifiers.push({ target: "pop", op: "add", value: -1, scope: { tags: ["myth"] } });
+    const r = simulate(
+      d,
+      testBuild([
+        { when: "0:00", do: "event", gainResource: { food: 300 } },
+        { when: "0:00", do: "age", to: "classical", minor: "minor-a" },
+      ]),
+    );
+    expect(at(r, 30).pop).toBe(3 + 2);
+  });
+});

@@ -57,8 +57,10 @@ export const ModifierSchema = z.strictObject({
     "cost",
     "popCap",
     "buildRate",
+    "pop",
   ]),
-  op: z.enum(["mul", "add"]),
+  /** mul: × value · add: + value · pct: + value × base, summed with other pct (game "BasePercent"). */
+  op: z.enum(["mul", "add", "pct"]),
   value: z.number(),
   scope: z
     .strictObject({
@@ -103,6 +105,8 @@ export const UnitSchema = z.strictObject({
     .optional(),
   /** Favor per minute produced by this unit (e.g. Atlantean Oracle), before modifiers. */
   favorRate: z.number().nonnegative().optional(),
+  /** Resources per minute generated just by existing (e.g. Norse Hersir favor). */
+  trickle: CostSchema.optional(),
   meta: MetaSchema,
   fieldMeta: FieldMetaSchema,
 });
@@ -128,6 +132,8 @@ export const BuildingSchema = z.strictObject({
   dropsiteFor: z.array(SourceIdSchema).optional(),
   /** Favor per minute generated while it stands (e.g. Egyptian Monuments). */
   favorRate: z.number().nonnegative().optional(),
+  /** Resources per minute generated while it stands. */
+  trickle: CostSchema.optional(),
   meta: MetaSchema,
   fieldMeta: FieldMetaSchema,
 });
@@ -215,6 +221,8 @@ export const PantheonSchema = z.strictObject({
   townCenter: z.string(),
   start: StartStateSchema,
   favor: FavorRuleSchema,
+  /** Maximum favor that can be stored; absent = no cap. */
+  favorCap: z.number().positive().optional(),
   gods: z.array(z.string()).length(3),
   ageUps: z.array(AgeUpSchema),
   units: z.array(UnitSchema),
@@ -270,6 +278,8 @@ export const PowerEffectSchema = z.strictObject({
   duration: z.number().nonnegative().optional(),
   grant: CostSchema.optional(),
   spawn: z.record(z.string(), z.number().int().nonnegative()).optional(),
+  /** Resources per minute while the effect lasts (e.g. Plenty, Flood of the Nile). */
+  trickle: CostSchema.optional(),
   /** Fraction of the target building's build time a relocation takes (Time Shift). */
   buildTimeFraction: z.number().nonnegative().optional(),
 });

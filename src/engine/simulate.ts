@@ -183,7 +183,7 @@ class Simulation {
   agingTo?: { age: AgeTo; minor: string };
   powerUses = new Map<string, number>();
   powerReady = new Map<string, number>();
-  effects: { mods: Modifier[]; until: number }[] = [];
+  effects: { mods: Modifier[]; trickle?: Cost; until: number }[] = [];
   remaining = new Map<SourceId, number>();
   promotions: Promotion[] = [];
   rules: Rule[] = [];
@@ -294,9 +294,14 @@ class Simulation {
 
   popUsed(): number {
     let pop = 0;
-    for (const w of this.workers) pop += this.unit(w.unit)?.pop ?? 0;
-    for (const [u, n] of this.others) pop += (this.unit(u)?.pop ?? 0) * n;
+    for (const w of this.workers) pop += this.unitPop(this.unit(w.unit));
+    for (const [u, n] of this.others) pop += this.unitPop(this.unit(u)) * n;
     return pop;
+  }
+
+  unitPop(def: Unit | undefined): number {
+    if (!def) return 0;
+    return Math.max(0, applyModifiers(def.pop, "pop", this.mods(), { id: def.id, tags: def.tags }));
   }
 
   popReserved(): number {
@@ -711,7 +716,7 @@ class Simulation {
     if (!("uid" in site)) return site;
     if (
       this.s.popReservedAt === "start" &&
-      this.popUsed() + this.popReserved() + def.pop > this.popCap() + EPS
+      this.popUsed() + this.popReserved() + this.unitPop(def) > this.popCap() + EPS
     ) {
       this.claims.add(site.uid);
       return { key: "warn.popCapped", level: "delay", params: { unit: def.id } };
@@ -727,7 +732,7 @@ class Simulation {
       kind: "unit",
       unit: def.id,
       remaining: this.trainTime(def),
-      pop: def.pop,
+      pop: this.unitPop(def),
       action: opts.action,
       rule: opts.rule,
       rally: opts.rally,
@@ -1131,8 +1136,12 @@ class Simulation {
     if (reason) return this.block(i, reason);
     this.usePower(power);
     const effect = power.effect;
-    if (effect.modifiers?.length) {
-      this.effects.push({ mods: effect.modifiers, until: this.t + (effect.duration ?? Infinity) });
+    if (effect.modifiers?.length || effect.trickle) {
+      this.effects.push({
+        mods: effect.modifiers ?? [],
+        trickle: effect.trickle,
+        until: this.t + (effect.duration ?? Infinity),
+      });
       this.dirty();
     }
     for (const [r, v] of Object.entries(effect.grant ?? {}) as [ResourceId, number][])
@@ -1294,6 +1303,9 @@ class Simulation {
   advance(dt: number): void {
     this.gather(dt);
     this.favor(dt);
+    this.trickles(dt);
+    const cap = this.p.def.favorCap;
+    if (cap !== undefined) this.res.favor = Math.min(this.res.favor, cap);
     for (const site of this.sites) {
       if (site.state === "building") {
         let speed = 0;
@@ -1365,7 +1377,7 @@ class Simulation {
   finishJob(job: Job): boolean {
     if (job.kind === "unit") {
       const def = this.unit(job.unit);
-      if (this.s.popReservedAt === "end" && def && this.popUsed() + def.pop > this.popCap() + EPS) {
+      if (this.s.popReservedAt === "end" && def && this.popUsed() + this.unitPop(def) > this.popCap() + EPS) {
         job.held = true;
         return false;
       }
@@ -1494,6 +1506,18 @@ class Simulation {
       }
       this.res[resource] += total;
     }
+  }
+
+  trickles(dt: number): void {
+    const add = (cost: Cost | undefined, times = 1) => {
+      for (const [r, v] of Object.entries(cost ?? {}) as [ResourceId, number][]) {
+        this.res[r] += (v * times * dt) / 60;
+      }
+    };
+    for (const w of this.workers) add(this.unit(w.unit)?.trickle);
+    for (const [u, n] of this.others) add(this.unit(u)?.trickle, n);
+    for (const site of this.sites) if (site.state === "ready") add(site.def.trickle);
+    for (const e of this.effects) add(e.trickle);
   }
 
   favor(dt: number): void {
