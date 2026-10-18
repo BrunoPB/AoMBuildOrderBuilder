@@ -1207,3 +1207,11 @@ textarea {
   width: 100%;
   resize: vertical;
 }
+
+.chip.pan-chip {
+  min-height: 42px;
+  padding: 2px 12px 2px 4px;
+  gap: 6px;
+  font-weight: 600;
+  border-left: 4px solid var(--pan);
+}

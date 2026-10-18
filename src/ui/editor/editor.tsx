@@ -231,18 +231,17 @@ function GodPicker({
     <div class="panel stack" style={{ gap: 8 }}>
       <div class="row" role="group" aria-label={t("editor.pantheon")}>
         {pantheons.map((p) => (
-          <Tip key={p.id} label={text(locale, p.name)}>
-            <button
-              class={`chip pan-${p.id}`}
-              aria-pressed={build.pantheon === p.id}
-              aria-label={text(locale, p.name)}
-              disabled={readonly}
-              data-testid={`pantheon-${p.id}`}
-              onClick={() => void changePantheon(p.id)}
-            >
-              <EntityIcon id={p.id} pantheon={p.id} size={22} tip={false} />
-            </button>
-          </Tip>
+          <button
+            key={p.id}
+            class={`chip pan-chip pan-${p.id}`}
+            aria-pressed={build.pantheon === p.id}
+            disabled={readonly}
+            data-testid={`pantheon-${p.id}`}
+            onClick={() => void changePantheon(p.id)}
+          >
+            <EntityIcon id={p.id} pantheon={p.id} size={32} tip={false} />
+            {text(locale, p.name)}
+          </button>
         ))}
       </div>
       <div class="portraits" role="group" aria-label={t("editor.god")}>
@@ -259,7 +258,7 @@ function GodPicker({
                 data-testid={`god-${id}`}
                 onClick={() => changeGod(id)}
               >
-                <EntityIcon id={id} pantheon={build.pantheon} size={56} tip={false} />
+                <EntityIcon id={id} pantheon={build.pantheon} size={72} tip={false} />
               </button>
             </Tip>
           );

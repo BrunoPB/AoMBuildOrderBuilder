@@ -106,7 +106,10 @@ function BuildCard({
       </div>
       {build.objective && <span class="action-times">{text(locale, build.objective)}</span>}
       {build.end && (
-        <span class="row action-times" style={{ gap: 4 }}>
+        <span
+          class="row action-times"
+          style={{ gap: 4, flexWrap: "nowrap", alignItems: "flex-start" }}
+        >
           <Svg name="flag" />
           {text(locale, build.end)}
         </span>
@@ -295,19 +298,19 @@ export function Library() {
             {t("library.all")}
           </button>
           {pantheonList.map((p) => (
-            <Tip key={p.id} label={text(locale, p.name)}>
-              <button
-                class={`chip pan-${p.id}`}
-                aria-pressed={pantheon === p.id}
-                aria-label={text(locale, p.name)}
-                onClick={() => {
-                  setPantheon(pantheon === p.id ? null : p.id);
-                  setGod(null);
-                }}
-              >
-                <EntityIcon id={p.id} pantheon={p.id} size={22} tip={false} />
-              </button>
-            </Tip>
+            <button
+              key={p.id}
+              class={`chip pan-chip pan-${p.id}`}
+              aria-pressed={pantheon === p.id}
+              data-testid={`filter-${p.id}`}
+              onClick={() => {
+                setPantheon(pantheon === p.id ? null : p.id);
+                setGod(null);
+              }}
+            >
+              <EntityIcon id={p.id} pantheon={p.id} size={32} tip={false} />
+              {text(locale, p.name)}
+            </button>
           ))}
         </div>
         <div class="filter-group">
@@ -319,7 +322,7 @@ export function Library() {
                 aria-label={text(locale, g.name)}
                 onClick={() => setGod(god === g.id ? null : g.id)}
               >
-                <EntityIcon id={g.id} pantheon={g.pantheon} size={30} tip={false} />
+                <EntityIcon id={g.id} pantheon={g.pantheon} size={56} tip={false} />
               </button>
             </Tip>
           ))}
