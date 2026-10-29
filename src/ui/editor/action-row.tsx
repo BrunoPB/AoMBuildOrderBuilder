@@ -133,42 +133,44 @@ export function ActionRow(props: Props) {
       }}
     >
       <div class="action-main">
-        {!readonly && (
-          <Tip label={t("row.drag")}>
-            <button
-              class="grip"
-              draggable
-              aria-label={t("row.drag")}
-              onDragStart={(e) => {
-                e.dataTransfer?.setData("text/plain", String(index));
-                drag.start(index);
-              }}
-              onDragEnd={drag.end}
-            >
-              <Svg name="grip" />
-            </button>
-          </Tip>
-        )}
-        <Tip label={t(`action.${a.do}`)}>
-          <span class="lvl-info" aria-label={t(`action.${a.do}`)}>
-            <Svg name={KIND_ICON[a.do] ?? "info"} />
-          </span>
-        </Tip>
-        <span class="action-label">
-          {actionIcons(a).map((id) => (
-            <EntityIcon key={id} id={id} pantheon={build.pantheon} size={28} />
-          ))}
-          <Tip label={[actionText(c, a), times, tip].filter(Boolean).join("\n")}>
-            <span class="label-text">{actionText(c, a)}</span>
-          </Tip>
-        </span>
-        {level && (
-          <Tip label={tip} focusable>
-            <span class={`lvl-${level}`}>
-              <Svg name={level === "error" ? "error" : "warning"} label={tip} />
+        <div class="action-head">
+          {!readonly && (
+            <Tip label={t("row.drag")}>
+              <button
+                class="grip"
+                draggable
+                aria-label={t("row.drag")}
+                onDragStart={(e) => {
+                  e.dataTransfer?.setData("text/plain", String(index));
+                  drag.start(index);
+                }}
+                onDragEnd={drag.end}
+              >
+                <Svg name="grip" />
+              </button>
+            </Tip>
+          )}
+          <Tip label={t(`action.${a.do}`)}>
+            <span class="lvl-info" aria-label={t(`action.${a.do}`)}>
+              <Svg name={KIND_ICON[a.do] ?? "info"} />
             </span>
           </Tip>
-        )}
+          <span class="action-label">
+            {actionIcons(a).map((id) => (
+              <EntityIcon key={id} id={id} pantheon={build.pantheon} size={28} />
+            ))}
+            <Tip label={[actionText(c, a), times, tip].filter(Boolean).join("\n")}>
+              <span class="label-text">{actionText(c, a)}</span>
+            </Tip>
+          </span>
+          {level && (
+            <Tip label={tip} focusable>
+              <span class={`lvl-${level}`}>
+                <Svg name={level === "error" ? "error" : "warning"} label={tip} />
+              </span>
+            </Tip>
+          )}
+        </div>
         <Tip label={help(`row.mode.${mode}`)}>
           <select
             value={mode}

@@ -1417,3 +1417,24 @@ textarea {
   background: repeating-linear-gradient(-45deg, var(--bad) 0 3px, transparent 3px 6px) !important;
   height: 8px !important;
 }
+
+.action-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1 1 100%;
+  min-width: 0;
+}
+
+.action-head .action-label .label-text {
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+  overflow-wrap: anywhere;
+}
+
+.action-head .action-label,
+.action-head .action-label > .tip {
+  overflow: visible;
+  min-width: 0;
+}
