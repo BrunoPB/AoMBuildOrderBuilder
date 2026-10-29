@@ -30,7 +30,7 @@ Answers taken from the game files (build 19.17020) are written up in [game-files
 
 ## Not modelled yet (needs schema or engine work)
 
-- [ ] Every major god starts with the Town Center auto-training its villager (`<startingqueue autotrain="true">` in major_gods.xml). Builds must add the auto queue themselves for now.
+- [x] Every major god starts with the Town Center auto-training its villager (`<startingqueue autotrain="true">` in major_gods.xml). Owner decision (2026-10-29): keep it manual — the build decides when to turn the auto queue on.
 - [ ] Temporal Chaos (Kronos): Time Shift ×0.5 time, 3 at once, 25% cost.
 
 - [x] Multiple builders (engine applies it): the game uses `buildingefficiency` 0.6 (2nd builder) and `extrabuildingefficiency` 0.3 (each further builder), major_gods.xml, same for all 12 gods. Builders are sorted by rate; the fastest counts fully.
