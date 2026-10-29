@@ -374,5 +374,7 @@
   "help.row.huntIt": "Kills the animal as soon as it appears: it takes no population and its food goes to the hunt.",
   "help.action.train.greeks": "Trains units at a building. Greek heroes have their own queue: they train without stopping villagers or the age up.",
   "help.action.research.thor": "Researches a technology. Thor: no Armory; each Dwarven Armory research gives 1 free Dwarf.",
-  "help.action.build.loki": "Builds a building. Gatherers and Dwarves only build House, Farm and Ox Cart; everything else is built by infantry, which builds 10% faster with Loki."
+  "help.action.build.loki": "Builds a building. Gatherers and Dwarves only build House, Farm and Ox Cart; everything else is built by infantry, which builds 10% faster with Loki.",
+  "editor.undo": "Undo (Ctrl+Z)",
+  "editor.redo": "Redo (Ctrl+Y)"
 }

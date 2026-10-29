@@ -203,3 +203,24 @@ test("Egyptian palette offers Empower, and summons only for Set", async ({ page 
   await expect(page.getByTestId("action-row")).toHaveCount(1);
   await expect(page.getByTestId("action-row").first()).toContainText("Fortalecer");
 });
+
+test("undo and redo changes in the build", async ({ page }) => {
+  await createBuildWithActions(page);
+  const rows = page.getByTestId("action-row");
+  await expect(rows).toHaveCount(3);
+  await page.getByTestId("undo").click();
+  await expect(rows).toHaveCount(2);
+  await page.getByTestId("undo").click();
+  await expect(rows).toHaveCount(1);
+  await page.getByTestId("redo").click();
+  await expect(rows).toHaveCount(2);
+  await page.locator("body").click({ position: { x: 5, y: 5 } });
+  await page.keyboard.press("Control+z");
+  await expect(rows).toHaveCount(1);
+  await page.keyboard.press("Control+y");
+  await expect(rows).toHaveCount(2);
+  await page.getByTestId("row-remove").first().click();
+  await expect(rows).toHaveCount(1);
+  await page.getByTestId("undo").click();
+  await expect(rows).toHaveCount(2);
+});

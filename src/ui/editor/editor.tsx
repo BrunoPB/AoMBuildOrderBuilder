@@ -1,4 +1,4 @@
-import { useState } from "preact/hooks";
+import { useEffect, useRef, useState } from "preact/hooks";
 import { type PantheonId, SOURCE_IDS, type SourceId } from "../../data/schema.ts";
 import { type Action, BUILD_TYPES, type Build, type Settings } from "../../engine/build.ts";
 import { text } from "../../i18n/index.ts";
@@ -10,6 +10,7 @@ import { Svg } from "../svg.tsx";
 import { ActionRow } from "./action-row.tsx";
 import { ProductionChart } from "./production.tsx";
 import { BuildActions } from "../build-actions.tsx";
+import { useHistory } from "./history.ts";
 import { nextActionId } from "./labels.ts";
 import { Palette } from "./palette.tsx";
 import { Charts, Matchups, Milestones, Timeline, WarningsPanel } from "./result.tsx";
@@ -317,9 +318,29 @@ export function Editor({ id }: { id: string }) {
   const [dragFrom, setDragFrom] = useState<number | null>(null);
   const [dragTarget, setDragTarget] = useState<number | null>(null);
   const [tab, setTab] = useState<"build" | "timeline" | "details">("build");
+  const history = useHistory();
   const build = found?.build;
   const readonly = found?.readonly ?? true;
   const sim = useSimulation(data, build, locale);
+
+  const keys = useRef<{ undo: () => void; redo: () => void } | null>(null);
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (!(e.ctrlKey || e.metaKey)) return;
+      const el = e.target as HTMLElement | null;
+      if (el && (el.tagName === "INPUT" || el.tagName === "TEXTAREA")) return;
+      const k = e.key.toLowerCase();
+      if (k === "z" && !e.shiftKey) {
+        e.preventDefault();
+        keys.current?.undo();
+      } else if (k === "y" || (k === "z" && e.shiftKey)) {
+        e.preventDefault();
+        keys.current?.redo();
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
 
   if (!build) {
     return (
@@ -332,10 +353,20 @@ export function Editor({ id }: { id: string }) {
     );
   }
 
-  const update = (next: Build) => {
+  const update = (next: Build, tag?: string) => {
     if (readonly) return;
+    history.record(build, tag);
     api.saveBuild({ ...next, updatedAt: new Date().toISOString() });
   };
+  const undo = () => {
+    const previous = history.undo(build);
+    if (previous) api.saveBuild({ ...previous, updatedAt: new Date().toISOString() });
+  };
+  const redo = () => {
+    const next = history.redo(build);
+    if (next) api.saveBuild({ ...next, updatedAt: new Date().toISOString() });
+  };
+  keys.current = readonly ? null : { undo, redo };
   const setActions = (actions: Action[]) => update({ ...build, actions });
   const move = (from: number, to: number) => {
     if (to < 0 || to >= build.actions.length || from === to) return;
@@ -460,7 +491,7 @@ export function Editor({ id }: { id: string }) {
             value={build.name}
             maxLength={80}
             disabled={readonly}
-            onInput={(e) => update({ ...build, name: e.currentTarget.value || build.name })}
+            onInput={(e) => update({ ...build, name: e.currentTarget.value || build.name }, "name")}
           />
           <Tip label={help(`type.${build.type}`)} focusable>
             <span class={`type-tag type-${build.type}`}>{t(`type.${build.type}`)}</span>
@@ -471,6 +502,32 @@ export function Editor({ id }: { id: string }) {
                 <Svg name="info" label={t("editor.readonly")} />
               </span>
             </Tip>
+          )}
+          {!readonly && (
+            <>
+              <Tip label={t("editor.undo")}>
+                <button
+                  class="btn icon-only"
+                  aria-label={t("editor.undo")}
+                  data-testid="undo"
+                  disabled={!history.canUndo}
+                  onClick={undo}
+                >
+                  <Svg name="undo" />
+                </button>
+              </Tip>
+              <Tip label={t("editor.redo")}>
+                <button
+                  class="btn icon-only"
+                  aria-label={t("editor.redo")}
+                  data-testid="redo"
+                  disabled={!history.canRedo}
+                  onClick={redo}
+                >
+                  <Svg name="redo" />
+                </button>
+              </Tip>
+            </>
           )}
           <BuildActions
             build={build}
@@ -583,7 +640,9 @@ export function Editor({ id }: { id: string }) {
                   value={build.author ?? ""}
                   maxLength={80}
                   disabled={readonly}
-                  onInput={(e) => update({ ...build, author: e.currentTarget.value || undefined })}
+                  onInput={(e) =>
+                    update({ ...build, author: e.currentTarget.value || undefined }, "author")
+                  }
                 />
               </label>
               {(["objective", "end"] as const).map((field) => (
@@ -599,7 +658,10 @@ export function Editor({ id }: { id: string }) {
                       const value = e.currentTarget.value;
                       const next = { ...(build[field] ?? {}), [locale]: value || undefined };
                       if (!value) delete next[locale];
-                      update({ ...build, [field]: Object.keys(next).length ? next : undefined });
+                      update(
+                        { ...build, [field]: Object.keys(next).length ? next : undefined },
+                        field,
+                      );
                     }}
                   />
                 </label>

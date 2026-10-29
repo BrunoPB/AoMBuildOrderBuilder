@@ -374,5 +374,7 @@
   "help.row.huntIt": "Mata o animal assim que ele surge: não ocupa população e a comida dele vai para a caça.",
   "help.action.train.greeks": "Treina unidades num prédio. Heróis gregos têm fila própria: podem ser treinados sem parar os aldeões nem a subida de Era.",
   "help.action.research.thor": "Pesquisa uma tecnologia. Thor: não tem Armaria; cada pesquisa da Armaria de Anões dá 1 Anão grátis.",
-  "help.action.build.loki": "Constrói um prédio. Coletores e Anões só constroem Casa, Fazenda e Carroça de Boi; o resto é construído pela infantaria, que com Loki constrói 10% mais rápido."
+  "help.action.build.loki": "Constrói um prédio. Coletores e Anões só constroem Casa, Fazenda e Carroça de Boi; o resto é construído pela infantaria, que com Loki constrói 10% mais rápido.",
+  "editor.undo": "Desfazer (Ctrl+Z)",
+  "editor.redo": "Refazer (Ctrl+Y)"
 }
