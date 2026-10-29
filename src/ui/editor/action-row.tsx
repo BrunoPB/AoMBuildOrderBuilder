@@ -89,6 +89,23 @@ export function ActionRow(props: Props) {
   const others = build.actions.filter((x, i) => i !== index && x.id);
   const set = (patch: Partial<Action>) => onChange({ ...a, ...patch } as Action);
   const units = p ? [...p.units.values()] : [];
+  const earlier = build.actions.slice(0, index).filter((x) => x.id);
+  /** "New villager from": earlier actions that produce villagers. */
+  const trainSources = earlier.filter(
+    (x) =>
+      (x.do === "train" || x.do === "autoTrain") &&
+      Object.keys(p?.units.get(x.unit)?.worker?.gatherRates ?? {}).length > 0,
+  );
+  /** "Same builder as": earlier constructions. */
+  const buildSources = earlier.filter((x) => x.do === "build");
+  const builderRef =
+    a.do === "build" && a.builder
+      ? "new" in a.builder
+        ? a.builder.new
+        : "same" in a.builder
+          ? a.builder.same
+          : ""
+      : "";
   const soldiers = units.filter(
     (u) =>
       u.worker?.canBuild &&
@@ -452,23 +469,19 @@ export function ActionRow(props: Props) {
                   value={a.builder ? Object.keys(a.builder)[0] : "auto"}
                   onChange={(e) => {
                     const m = e.currentTarget.value;
-                    const ref =
-                      others.find((x) => build.actions.indexOf(x) < index)?.id ??
-                      others[0]?.id ??
-                      "";
                     if (m === "auto") set({ builder: undefined });
                     else if (m === "from") set({ builder: { from: "food" } });
-                    else if (m === "new") set({ builder: { new: ref } });
+                    else if (m === "new") set({ builder: { new: trainSources.at(-1)?.id ?? "" } });
                     else if (m === "unit") set({ builder: { unit: soldiers[0]?.id ?? "" } });
-                    else set({ builder: { same: ref } });
+                    else set({ builder: { same: buildSources.at(-1)?.id ?? "" } });
                   }}
                 >
                   <option value="auto">{t("row.builderAuto")}</option>
                   <option value="from">{t("row.builderFrom")}</option>
-                  <option value="new" disabled={others.length === 0}>
+                  <option value="new" disabled={trainSources.length === 0}>
                     {t("row.builderNew")}
                   </option>
-                  <option value="same" disabled={others.length === 0}>
+                  <option value="same" disabled={buildSources.length === 0}>
                     {t("row.builderSame")}
                   </option>
                   {soldiers.length > 0 && <option value="unit">{t("row.builderUnit")}</option>}
@@ -501,19 +514,23 @@ export function ActionRow(props: Props) {
               )}
               {a.builder && ("new" in a.builder || "same" in a.builder) && (
                 <label class="field">
-                  <HelpText k="row.builder" ctx={ctx} />
+                  <HelpText k={"new" in a.builder ? "row.builderNewFrom" : "row.builderSameAs"} />
                   <select
-                    value={"new" in a.builder ? a.builder.new : a.builder.same}
+                    value={builderRef}
+                    data-testid="builder-source"
                     onChange={(e) => {
                       const v = e.currentTarget.value;
                       set({ builder: a.builder && "new" in a.builder ? { new: v } : { same: v } });
                     }}
                   >
-                    {others.map((x) => (
+                    {("new" in a.builder ? trainSources : buildSources).map((x) => (
                       <option key={x.id} value={x.id}>
                         {build.actions.indexOf(x) + 1}. {actionText(c, x)}
                       </option>
                     ))}
+                    {!("new" in a.builder ? trainSources : buildSources).some(
+                      (x) => x.id === builderRef,
+                    ) && <option value={builderRef}>⚠ {t("row.invalidRef")}</option>}
                   </select>
                 </label>
               )}

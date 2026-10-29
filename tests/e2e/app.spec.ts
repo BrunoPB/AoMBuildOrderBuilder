@@ -224,3 +224,13 @@ test("undo and redo changes in the build", async ({ page }) => {
   await page.getByTestId("undo").click();
   await expect(rows).toHaveCount(2);
 });
+
+test("builder choices only list earlier, matching actions", async ({ page }) => {
+  await page.goto("/#/build/preset%3Akrush");
+  const temple = page.getByTestId("action-row").nth(2);
+  await expect(temple).toContainText("Templo");
+  await temple.getByTestId("row-edit").click();
+  const options = temple.getByTestId("builder-source").locator("option");
+  await expect(options).toHaveCount(1);
+  await expect(options.first()).toContainText("2. Treinar 3 Cidadãos");
+});
