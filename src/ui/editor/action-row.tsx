@@ -5,7 +5,7 @@ import type { ActionOutcome, SimWarning } from "../../engine/types.ts";
 import { warningText } from "../../engine/format.ts";
 import { text } from "../../i18n/index.ts";
 import { useApp } from "../context.tsx";
-import { EntityIcon, Tip, HelpText, useHelp } from "../icon.tsx";
+import { EntityIcon, Tip, HelpText, useHelp, useLabel } from "../icon.tsx";
 import { KIND_ICON, Svg } from "../svg.tsx";
 import { actionIcons, actionText, targetLabel, taskTargets } from "./labels.ts";
 
@@ -72,6 +72,8 @@ export function ActionRow(props: Props) {
   const { build, index, action: a, outcome, warnings, readonly, onChange } = props;
   const { data, locale, t } = useApp();
   const help = useHelp();
+  const label = useLabel();
+  const ctx = { pantheon: build.pantheon, god: build.god };
   const [open, setOpen] = useState(false);
   const p = data.pantheons.get(build.pantheon);
   const c = { data, pantheon: build.pantheon, locale };
@@ -150,8 +152,12 @@ export function ActionRow(props: Props) {
               </button>
             </Tip>
           )}
-          <Tip label={t(`action.${a.do}`)}>
-            <span class="lvl-info" aria-label={t(`action.${a.do}`)}>
+          <Tip
+            label={[label(`action.${a.do}`, ctx), help(`action.${a.do}`, ctx)]
+              .filter(Boolean)
+              .join("\n")}
+          >
+            <span class="lvl-info" aria-label={label(`action.${a.do}`, ctx)}>
               <Svg name={KIND_ICON[a.do] ?? "info"} />
             </span>
           </Tip>
@@ -368,7 +374,7 @@ export function ActionRow(props: Props) {
           {a.do === "build" && (
             <>
               <label class="field">
-                <HelpText k="row.builder" />
+                <HelpText k="row.builder" ctx={ctx} />
                 <select
                   value={a.builder ? Object.keys(a.builder)[0] : "auto"}
                   onChange={(e) => {
@@ -422,7 +428,7 @@ export function ActionRow(props: Props) {
               )}
               {a.builder && ("new" in a.builder || "same" in a.builder) && (
                 <label class="field">
-                  <HelpText k="row.builder" />
+                  <HelpText k="row.builder" ctx={ctx} />
                   <select
                     value={"new" in a.builder ? a.builder.new : a.builder.same}
                     onChange={(e) => {

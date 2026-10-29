@@ -3,7 +3,7 @@ import { AGES, type Age } from "../../data/schema.ts";
 import type { Action, ActionKind, Build } from "../../engine/build.ts";
 import { text } from "../../i18n/index.ts";
 import { useApp } from "../context.tsx";
-import { EntityIcon, Tip, HelpText, useHelp } from "../icon.tsx";
+import { EntityIcon, Tip, HelpText, useHelp, useLabel } from "../icon.tsx";
 import { KIND_ICON, Svg } from "../svg.tsx";
 import { ageRank, chosenMinors, PALETTE_KINDS } from "./labels.ts";
 
@@ -23,6 +23,8 @@ export function Palette({ build, onAdd }: { build: Build; onAdd: (a: Action) => 
   const [age, setAge] = useState<Age | null>(null);
   const p = data.pantheons.get(build.pantheon);
   const god = data.gods.get(build.god);
+  const label = useLabel();
+  const ctx = { pantheon: build.pantheon, god: build.god };
   if (!p || !god) return null;
   const minors = Object.values(chosenMinors(build));
 
@@ -145,11 +147,14 @@ export function Palette({ build, onAdd }: { build: Build; onAdd: (a: Action) => 
       </h3>
       <div class="palette-kinds" role="toolbar" aria-label={t("editor.add")}>
         {PALETTE_KINDS.filter(available).map((k) => (
-          <Tip key={k} label={[t(`action.${k}`), help(`action.${k}`)].filter(Boolean).join("\n")}>
+          <Tip
+            key={k}
+            label={[label(`action.${k}`, ctx), help(`action.${k}`, ctx)].filter(Boolean).join("\n")}
+          >
             <button
               class={`btn icon-only kind-btn kind-${k}`}
               aria-pressed={kind === k}
-              aria-label={t(`action.${k}`)}
+              aria-label={label(`action.${k}`, ctx)}
               data-testid={`kind-${k}`}
               onClick={() => choose(k)}
             >

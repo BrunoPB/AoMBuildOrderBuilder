@@ -2,7 +2,7 @@ import type { ComponentChildren } from "preact";
 import { useState } from "preact/hooks";
 import { findEntity } from "../data/catalog.ts";
 import type { PantheonId } from "../data/schema.ts";
-import { text } from "../i18n/index.ts";
+import { contextKey, text } from "../i18n/index.ts";
 import { useApp } from "./context.tsx";
 
 const BASE = import.meta.env.BASE_URL;
@@ -65,19 +65,37 @@ function initials(name: string): string {
 }
 
 /** Help text for an i18n key, from `help.<key>`; empty when there is none or tips are off. */
-export function useHelp(): (key: string) => string {
-  const { t, prefs } = useApp();
-  return (key) => {
+export type HelpContext = { pantheon?: string; god?: string };
+
+/** Help text for an i18n key, from `help.<key>[.<god>|.<pantheon>]`; empty when tips are off. */
+export function useHelp(): (key: string, ctx?: HelpContext) => string {
+  const { t, prefs, locale } = useApp();
+  return (key, ctx) => {
     if (!prefs.tooltips) return "";
-    const help = t(`help.${key}`);
-    return help === `help.${key}` ? "" : help;
+    const k = contextKey(locale, `help.${key}`, ctx);
+    const help = t(k);
+    return help === k ? "" : help;
   };
 }
 
+/** Label for an i18n key, specific to the pantheon/god when such a variant exists. */
+export function useLabel(): (key: string, ctx?: HelpContext) => string {
+  const { t, locale } = useApp();
+  return (key, ctx) => t(contextKey(locale, key, ctx));
+}
+
 /** A UI label that explains itself in a tooltip (when help tips are on). */
-export function HelpText({ k, params }: { k: string; params?: Record<string, string | number> }) {
+export function HelpText({
+  k,
+  params,
+  ctx,
+}: {
+  k: string;
+  params?: Record<string, string | number>;
+  ctx?: HelpContext;
+}) {
   const { t } = useApp();
-  const help = useHelp()(k);
+  const help = useHelp()(k, ctx);
   const label = t(k, params);
   if (!help) return <>{label}</>;
   return (

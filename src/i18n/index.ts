@@ -29,6 +29,19 @@ export function translate(locale: Locale, key: string, params: Params = {}): str
   });
 }
 
+/** Most specific existing key: `<key>.<god>`, then `<key>.<pantheon>`, then `<key>`. */
+export function contextKey(
+  locale: Locale,
+  key: string,
+  ctx: { pantheon?: string; god?: string } = {},
+): string {
+  const messages = MESSAGES[locale];
+  for (const k of [ctx.god && `${key}.${ctx.god}`, ctx.pantheon && `${key}.${ctx.pantheon}`]) {
+    if (k && k in messages) return k;
+  }
+  return key;
+}
+
 export function formatNumber(locale: Locale, value: number, digits = 0): string {
   return new Intl.NumberFormat(locale, { maximumFractionDigits: digits }).format(value);
 }
