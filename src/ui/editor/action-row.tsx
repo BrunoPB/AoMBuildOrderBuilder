@@ -7,7 +7,7 @@ import { text } from "../../i18n/index.ts";
 import { useApp } from "../context.tsx";
 import { EntityIcon, Tip, HelpText, useHelp, useLabel } from "../icon.tsx";
 import { KIND_ICON, Svg } from "../svg.tsx";
-import { actionIcons, actionText, targetLabel, taskTargets } from "./labels.ts";
+import { actionIcons, actionText, targetLabel, taskTargets, actionTarget } from "./labels.ts";
 
 type Props = {
   build: Build;
@@ -162,12 +162,15 @@ export function ActionRow(props: Props) {
             </span>
           </Tip>
           <span class="action-label">
-            {actionIcons(a).map((id) => (
+            {actionIcons(a, p?.def.workers[0]).map((id) => (
               <EntityIcon key={id} id={id} pantheon={build.pantheon} size={28} />
             ))}
             <Tip label={[actionText(c, a), times, tip].filter(Boolean).join("\n")}>
               <span class="label-text">{actionText(c, a)}</span>
             </Tip>
+            {actionTarget(a) && (
+              <EntityIcon id={actionTarget(a)!} pantheon={build.pantheon} size={28} />
+            )}
           </span>
           {level && (
             <Tip label={tip} focusable>

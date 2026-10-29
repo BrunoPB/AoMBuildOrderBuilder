@@ -35,6 +35,9 @@ export function StepChips({ build, step, large }: { build: Build; step: Step; la
           ))}
           {a.byLabel && <span class="action-times">{a.byLabel} ·</span>}
           <span class="label-text">{a.text}</span>
+          {a.to && (
+            <EntityIcon id={a.to} pantheon={build.pantheon} size={large ? 40 : 24} tip={false} />
+          )}
         </button>
       ))}
       {step.notice && <span class="tl-notice">⚠ {step.notice}</span>}

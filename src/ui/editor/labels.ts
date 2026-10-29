@@ -15,8 +15,8 @@ export function targetLabel(c: Ctx, target: TaskTarget): string {
   return n(c, target).toLocaleLowerCase(c.locale);
 }
 
-/** Entity ids shown as icons for an action. */
-export function actionIcons(a: Action): string[] {
+/** Entity ids shown on the left of an action: who/what acts. */
+export function actionIcons(a: Action, worker?: string): string[] {
   switch (a.do) {
     case "train":
     case "autoTrain":
@@ -25,7 +25,7 @@ export function actionIcons(a: Action): string[] {
     case "summon":
       return [a.unit];
     case "empower":
-      return [a.by, a.building];
+      return [a.by];
     case "stopAutoTrain":
     case "stopTrainWhenAffordable":
       return a.unit ? [a.unit] : [];
@@ -37,9 +37,9 @@ export function actionIcons(a: Action): string[] {
     case "age":
       return [a.to, a.minor];
     case "power":
-      return a.target ? [a.power, a.target] : [a.power];
+      return [a.power];
     case "move":
-      return a.to === "idle" ? [] : [a.to];
+      return [a.unit ?? worker ?? a.to];
     case "event":
       return [
         ...Object.keys(a.lose ?? {}),
@@ -47,6 +47,21 @@ export function actionIcons(a: Action): string[] {
         ...(a.gainFavor ? ["favor"] : []),
       ];
   }
+}
+
+/** What the action points at, shown on the right: a resource/source, or a target building. */
+export function actionTarget(a: Action): string | undefined {
+  if (a.do === "empower") return a.building;
+  if (a.do === "power") return a.target;
+  const target =
+    a.do === "train" || a.do === "autoTrain" || a.do === "trainWhenAffordable"
+      ? a.rally
+      : a.do === "build"
+        ? a.then
+        : a.do === "move"
+          ? a.to
+          : undefined;
+  return target === "idle" ? undefined : target;
 }
 
 export function actionText(c: Ctx, a: Action): string {
