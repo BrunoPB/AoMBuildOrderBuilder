@@ -1440,3 +1440,28 @@ textarea {
   overflow: visible;
   min-width: 0;
 }
+
+.action-row {
+  cursor: pointer;
+}
+
+.action-row:hover {
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
+}
+
+.action-row .action-details,
+.action-row select,
+.action-row input {
+  cursor: auto;
+}
+
+.row-chevron {
+  margin-left: auto;
+  display: inline-flex;
+  color: var(--muted);
+  transition: transform 0.15s;
+}
+
+.action-row.open .row-chevron {
+  transform: rotate(90deg);
+}

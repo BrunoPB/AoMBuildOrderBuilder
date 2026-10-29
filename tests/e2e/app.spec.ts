@@ -234,3 +234,20 @@ test("builder choices only list earlier, matching actions", async ({ page }) => 
   await expect(options).toHaveCount(1);
   await expect(options.first()).toContainText("2. Treinar 3 Cidadãos");
 });
+
+test("clicking an action opens its details; its buttons do not", async ({ page }) => {
+  await createBuildWithActions(page);
+  const row = page.getByTestId("action-row").first();
+  const head = row.getByTestId("row-edit");
+  await expect(head).toHaveAttribute("aria-expanded", "false");
+  await row.locator(".label-text").click();
+  await expect(head).toHaveAttribute("aria-expanded", "true");
+  await expect(row.locator(".action-details")).toBeVisible();
+  await row.getByTestId("row-count").fill("2");
+  await expect(head).toHaveAttribute("aria-expanded", "true");
+  await row.locator(".label-text").click();
+  await expect(head).toHaveAttribute("aria-expanded", "false");
+  await head.focus();
+  await page.keyboard.press("Enter");
+  await expect(head).toHaveAttribute("aria-expanded", "true");
+});

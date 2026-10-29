@@ -139,8 +139,13 @@ export function ActionRow(props: Props) {
     <li
       id={`action-row-${index}`}
       tabIndex={-1}
-      class={`action-row kind-${a.do} ${level ? `bg-${level}` : ""} ${drag.from === index ? "dragging" : ""} ${drag.target === index && drag.from !== index ? "drop-target" : ""}`}
+      class={`action-row kind-${a.do} ${open ? "open" : ""} ${level ? `bg-${level}` : ""} ${drag.from === index ? "dragging" : ""} ${drag.target === index && drag.from !== index ? "drop-target" : ""}`}
       data-testid="action-row"
+      onClick={(e) => {
+        const el = e.target as HTMLElement;
+        if (el.closest("button, select, input, textarea, a, label, .action-details")) return;
+        setOpen(!open);
+      }}
       onDragOver={(e) => {
         if (drag.from === null) return;
         e.preventDefault();
@@ -152,7 +157,19 @@ export function ActionRow(props: Props) {
       }}
     >
       <div class="action-main">
-        <div class="action-head">
+        <div
+          class="action-head"
+          role="button"
+          tabIndex={0}
+          aria-expanded={open}
+          aria-label={`${t("row.edit")}: ${actionText(c, a)}`}
+          data-testid="row-edit"
+          onKeyDown={(e) => {
+            if (e.target !== e.currentTarget || (e.key !== "Enter" && e.key !== " ")) return;
+            e.preventDefault();
+            setOpen(!open);
+          }}
+        >
           {!readonly && (
             <Tip label={t("row.drag")}>
               <button
@@ -196,6 +213,9 @@ export function ActionRow(props: Props) {
               </span>
             </Tip>
           )}
+          <span class="row-chevron" aria-hidden="true">
+            <Svg name="chevron" />
+          </span>
         </div>
         <Tip label={help(`row.mode.${mode}`)}>
           <select
@@ -267,17 +287,6 @@ export function ActionRow(props: Props) {
         <span class="action-times num">
           {outcome?.startedAt !== undefined ? formatClock(outcome.startedAt) : "—"}
         </span>
-        <Tip label={t("row.edit")}>
-          <button
-            class="btn icon-only"
-            aria-expanded={open}
-            aria-label={t("row.edit")}
-            data-testid="row-edit"
-            onClick={() => setOpen(!open)}
-          >
-            <Svg name="gear" />
-          </button>
-        </Tip>
         {!readonly && (
           <>
             <Tip label={props.isMilestone ? t("editor.removeMilestone") : t("editor.addMilestone")}>
