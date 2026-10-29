@@ -6,6 +6,10 @@ Static website that builds and simulates build orders for **Age of Mythology: Re
 
 Node 22+ and npm.
 
+## Quick start (Windows)
+
+Double-click `start.bat` (or run `start.bat 5180` for another port). It installs the dependencies with `install.bat` the first time, then serves the site at http://localhost:5173.
+
 ## Commands
 
 ```bash
