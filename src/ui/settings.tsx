@@ -5,7 +5,7 @@ import { Svg } from "./svg.tsx";
 export function SettingsPage() {
   const { t, prefs, setPrefs, locale, data } = useApp();
   return (
-    <div class="stack" style={{ maxWidth: 560 }}>
+    <div class="stack" style={{ maxWidth: "560px" }}>
       <h1 class="row">
         <Svg name="gear" />
         {t("nav.settings")}

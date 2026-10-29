@@ -8,6 +8,8 @@ import { EntityIcon, Tip, HelpText, useHelp } from "../icon.tsx";
 import { duplicateBuild, useSimulation } from "../sim.ts";
 import { Svg } from "../svg.tsx";
 import { ActionRow } from "./action-row.tsx";
+import { ProductionChart } from "./production.tsx";
+import { BuildActions } from "../build-actions.tsx";
 import { nextActionId } from "./labels.ts";
 import { Palette } from "./palette.tsx";
 import { Charts, Matchups, Milestones, Timeline, WarningsPanel } from "./result.tsx";
@@ -231,7 +233,7 @@ function GodPicker({
   const god = data.gods.get(build.god);
   const pantheons = data.common.pantheons.filter((p) => data.pantheons.has(p.id));
   return (
-    <div class="panel stack" style={{ gap: 8 }}>
+    <div class="panel stack" style={{ gap: "8px" }}>
       <div class="row" role="group" aria-label={t("editor.pantheon")}>
         {pantheons.map((p) => (
           <button
@@ -279,7 +281,7 @@ function GodPicker({
               (a): a is Extract<Action, { do: "age" }> => a.do === "age" && a.to === age,
             )?.minor;
             return (
-              <div key={age} class="row" style={{ gap: 4 }}>
+              <div key={age} class="row" style={{ gap: "4px" }}>
                 <EntityIcon id={age} pantheon={build.pantheon} size={22} />
                 {god.minors[age].map((m) => {
                   const minor = data.minors.get(m);
@@ -314,6 +316,7 @@ export function Editor({ id }: { id: string }) {
   const found = api.findBuild(id);
   const [dragFrom, setDragFrom] = useState<number | null>(null);
   const [dragTarget, setDragTarget] = useState<number | null>(null);
+  const [tab, setTab] = useState<"build" | "timeline" | "details">("build");
   const build = found?.build;
   const readonly = found?.readonly ?? true;
   const sim = useSimulation(data, build, locale);
@@ -344,219 +347,280 @@ export function Editor({ id }: { id: string }) {
   const result = sim.result;
   const milestoneIds = new Set((build.milestones ?? []).map((m) => m.atAction));
 
+  const actionsPanel = (
+    <div class="panel">
+      <h3>
+        <Svg name="list" />
+        <HelpText k="editor.actions" /> <span class="num">{build.actions.length}</span>
+      </h3>
+      {build.actions.length === 0 ? (
+        <p class="action-times">{t("editor.empty")}</p>
+      ) : (
+        <ol class="actions-list" data-testid="actions-list">
+          {build.actions.map((a, i) => (
+            <ActionRow
+              key={a.id ?? i}
+              build={build}
+              index={i}
+              action={a}
+              outcome={result?.actions[i]}
+              warnings={(result?.warnings ?? []).filter(
+                (w) => w.action === i && w.level !== "info",
+              )}
+              readonly={readonly}
+              isMilestone={!!a.id && milestoneIds.has(a.id)}
+              onChange={(next) => {
+                const actions = [...build.actions];
+                actions[i] = next;
+                setActions(actions);
+              }}
+              onRemove={() => {
+                const removed = build.actions[i];
+                update({
+                  ...build,
+                  actions: build.actions.filter((_, k) => k !== i),
+                  milestones: (build.milestones ?? []).filter((m) => m.atAction !== removed?.id),
+                });
+              }}
+              onDuplicate={() => {
+                const actions = [...build.actions];
+                actions.splice(i + 1, 0, { ...structuredClone(a), id: nextActionId(build) });
+                setActions(actions);
+              }}
+              onMove={(delta) => move(i, i + delta)}
+              onToggleMilestone={() => {
+                const actionId = a.id ?? nextActionId(build);
+                const list = build.milestones ?? [];
+                const exists = list.some((m) => m.atAction === actionId);
+                const actions = a.id
+                  ? build.actions
+                  : build.actions.map((x, k) => (k === i ? { ...x, id: actionId } : x));
+                update({
+                  ...build,
+                  actions,
+                  milestones: exists
+                    ? list.filter((m) => m.atAction !== actionId)
+                    : [...list, { id: actionId, atAction: actionId }],
+                });
+              }}
+              drag={{
+                from: dragFrom,
+                target: dragTarget,
+                start: (k) => setDragFrom(k),
+                over: (k) => setDragTarget(k),
+                drop: (k) => {
+                  if (dragFrom !== null) move(dragFrom, k);
+                  setDragFrom(null);
+                  setDragTarget(null);
+                },
+                end: () => {
+                  setDragFrom(null);
+                  setDragTarget(null);
+                },
+              }}
+            />
+          ))}
+        </ol>
+      )}
+    </div>
+  );
+
+  const timelinePanel = result && (
+    <div class="panel">
+      <h3>
+        <Svg name="clock" />
+        <HelpText k="result.timeline" />
+      </h3>
+      <Timeline build={build} steps={sim.steps} />
+    </div>
+  );
+
+  const god = data.gods.get(build.god);
+  const tabs = [
+    { id: "build", icon: "list" },
+    { id: "timeline", icon: "clock" },
+    { id: "details", icon: "gear" },
+  ] as const;
+
   return (
-    <div class="editor">
-      <div class="stack">
-        <div class="panel stack" style={{ gap: 8 }}>
-          <div class="row">
+    <div class="build-page">
+      <header class={`panel build-header pan-${build.pantheon}`} data-testid="build-header">
+        <div class="row">
+          <Tip label={t("nav.back")}>
             <a class="btn icon-only" href="#/" aria-label={t("nav.back")}>
               <Svg name="home" />
             </a>
-            <input
-              type="text"
-              aria-label={t("editor.name")}
-              data-testid="build-name"
-              style={{ flex: 1, minWidth: 140, fontWeight: 700, fontSize: 18 }}
-              value={build.name}
-              maxLength={80}
-              disabled={readonly}
-              onInput={(e) => update({ ...build, name: e.currentTarget.value || build.name })}
-            />
-            <Tip label={t("card.play")}>
-              <a
-                class="btn icon-only"
-                href={`#/play/${encodeURIComponent(build.id)}`}
-                aria-label={t("card.play")}
-                data-testid="open-match"
-              >
-                <Svg name="clock" />
-              </a>
-            </Tip>
-            {readonly && (
-              <button
-                class="btn primary"
-                data-testid="duplicate-to-edit"
-                onClick={() => {
-                  const copy = duplicateBuild(build, "");
-                  api.saveBuild(copy);
-                  navigate(`/build/${encodeURIComponent(copy.id)}`);
-                }}
-              >
-                <Svg name="copy" />
-                {t("card.duplicateToEdit")}
-              </button>
-            )}
-          </div>
+          </Tip>
+          {god && <EntityIcon id={god.id} pantheon={build.pantheon} size={40} />}
+          <input
+            type="text"
+            class="name-input"
+            aria-label={t("editor.name")}
+            data-testid="build-name"
+            value={build.name}
+            maxLength={80}
+            disabled={readonly}
+            onInput={(e) => update({ ...build, name: e.currentTarget.value || build.name })}
+          />
+          <Tip label={help(`type.${build.type}`)} focusable>
+            <span class={`type-tag type-${build.type}`}>{t(`type.${build.type}`)}</span>
+          </Tip>
           {readonly && (
-            <span class="lvl-info row">
-              <Svg name="info" /> {t("editor.readonly")}
-            </span>
+            <Tip label={t("editor.readonly")} focusable>
+              <span class="lvl-info">
+                <Svg name="info" label={t("editor.readonly")} />
+              </span>
+            </Tip>
           )}
-          <div class="row" role="group" aria-label={t("editor.type")}>
-            {BUILD_TYPES.map((ty) => (
-              <button
-                key={ty}
-                class="chip"
-                aria-pressed={build.type === ty}
-                disabled={readonly}
-                onClick={() => update({ ...build, type: ty })}
-              >
-                <Tip label={help(`type.${ty}`)}>
-                  <span class={`type-tag type-${ty}`}>{t(`type.${ty}`)}</span>
-                </Tip>
-              </button>
-            ))}
-            <input
-              type="text"
-              aria-label={t("editor.author")}
-              placeholder={t("editor.author")}
-              value={build.author ?? ""}
-              maxLength={80}
-              disabled={readonly}
-              onInput={(e) => update({ ...build, author: e.currentTarget.value || undefined })}
-            />
-          </div>
+          <BuildActions
+            build={build}
+            readonly={readonly}
+            showDuplicate={!readonly}
+            onDeleted={() => navigate("/")}
+          />
+          {readonly && (
+            <button
+              class="btn primary"
+              data-testid="duplicate-to-edit"
+              onClick={() => {
+                const copy = duplicateBuild(build, "");
+                api.saveBuild(copy);
+                navigate(`/build/${encodeURIComponent(copy.id)}`);
+              }}
+            >
+              <Svg name="copy" />
+              {t("card.duplicateToEdit")}
+            </button>
+          )}
         </div>
-
-        <div class="panel stack" style={{ gap: 8 }}>
-          {(["objective", "end"] as const).map((field) => (
-            <label class="field" key={field}>
-              <HelpText k={`editor.${field}`} />
-              <textarea
-                rows={2}
-                maxLength={300}
-                disabled={readonly}
-                data-testid={`build-${field}`}
-                value={build[field]?.[locale] ?? ""}
-                onInput={(e) => {
-                  const value = e.currentTarget.value;
-                  const next = { ...(build[field] ?? {}), [locale]: value || undefined };
-                  if (!value) delete next[locale];
-                  update({ ...build, [field]: Object.keys(next).length ? next : undefined });
+        <div class="tabs" role="tablist" aria-label={build.name}>
+          {tabs.map((tb) => (
+            <Tip key={tb.id} label={help(`tab.${tb.id}`)}>
+              <button
+                role="tab"
+                class="tab"
+                aria-selected={tab === tb.id}
+                data-testid={`tab-${tb.id}`}
+                onClick={() => {
+                  setTab(tb.id);
+                  window.scrollTo({ top: 0 });
                 }}
-              />
-            </label>
+              >
+                <Svg name={tb.icon} />
+                {t(`tab.${tb.id}`)}
+              </button>
+            </Tip>
           ))}
         </div>
+      </header>
 
-        <GodPicker build={build} readonly={readonly} onChange={update} />
-        <SettingsPanel
-          build={build}
-          readonly={readonly}
-          onChange={(settings) => update({ ...build, settings })}
-        />
-        {!readonly && (
-          <Palette
-            build={build}
-            onAdd={(a) => setActions([...build.actions, { ...a, id: nextActionId(build) }])}
-          />
-        )}
-
-        <div class="panel">
-          <h3>
-            <Svg name="list" />
-            <HelpText k="editor.actions" /> <span class="num">{build.actions.length}</span>
-          </h3>
-          {build.actions.length === 0 ? (
-            <p class="action-times">{t("editor.empty")}</p>
-          ) : (
-            <ol class="actions-list" data-testid="actions-list">
-              {build.actions.map((a, i) => (
-                <ActionRow
-                  key={a.id ?? i}
-                  build={build}
-                  index={i}
-                  action={a}
-                  outcome={result?.actions[i]}
-                  warnings={(result?.warnings ?? []).filter(
-                    (w) => w.action === i && w.level !== "info",
-                  )}
-                  readonly={readonly}
-                  isMilestone={!!a.id && milestoneIds.has(a.id)}
-                  onChange={(next) => {
-                    const actions = [...build.actions];
-                    actions[i] = next;
-                    setActions(actions);
-                  }}
-                  onRemove={() => {
-                    const removed = build.actions[i];
-                    update({
-                      ...build,
-                      actions: build.actions.filter((_, k) => k !== i),
-                      milestones: (build.milestones ?? []).filter(
-                        (m) => m.atAction !== removed?.id,
-                      ),
-                    });
-                  }}
-                  onDuplicate={() => {
-                    const actions = [...build.actions];
-                    actions.splice(i + 1, 0, { ...structuredClone(a), id: nextActionId(build) });
-                    setActions(actions);
-                  }}
-                  onMove={(delta) => move(i, i + delta)}
-                  onToggleMilestone={() => {
-                    const actionId = a.id ?? nextActionId(build);
-                    const list = build.milestones ?? [];
-                    const exists = list.some((m) => m.atAction === actionId);
-                    const actions = a.id
-                      ? build.actions
-                      : build.actions.map((x, k) => (k === i ? { ...x, id: actionId } : x));
-                    update({
-                      ...build,
-                      actions,
-                      milestones: exists
-                        ? list.filter((m) => m.atAction !== actionId)
-                        : [...list, { id: actionId, atAction: actionId }],
-                    });
-                  }}
-                  drag={{
-                    from: dragFrom,
-                    target: dragTarget,
-                    start: (k) => setDragFrom(k),
-                    over: (k) => setDragTarget(k),
-                    drop: (k) => {
-                      if (dragFrom !== null) move(dragFrom, k);
-                      setDragFrom(null);
-                      setDragTarget(null);
-                    },
-                    end: () => {
-                      setDragFrom(null);
-                      setDragTarget(null);
-                    },
-                  }}
-                />
-              ))}
-            </ol>
-          )}
+      {sim.error && (
+        <div class="panel bg-error">
+          <Svg name="error" /> {sim.error}
         </div>
-      </div>
+      )}
 
-      <div class="stack" data-testid="result">
-        {sim.error && (
-          <div class="panel bg-error">
-            <Svg name="error" /> {sim.error}
+      {tab === "build" && (
+        <div class="editor">
+          <div class="stack">
+            <GodPicker build={build} readonly={readonly} onChange={update} />
+            {!readonly && (
+              <Palette
+                build={build}
+                onAdd={(a) => setActions([...build.actions, { ...a, id: nextActionId(build) }])}
+              />
+            )}
+            {actionsPanel}
           </div>
-        )}
-        {result && (
-          <>
-            <Milestones build={build} result={result} />
-            <WarningsPanel build={build} result={result} />
-            <div class="panel">
-              <h3>
-                <Svg name="clock" />
-                <HelpText k="result.timeline" />
-              </h3>
-              <Timeline build={build} steps={sim.steps} />
+          <div class="stack" data-testid="result">
+            {result && (
+              <>
+                <Milestones build={build} result={result} />
+                <WarningsPanel build={build} result={result} />
+                {timelinePanel}
+              </>
+            )}
+          </div>
+        </div>
+      )}
+
+      {tab === "timeline" && result && (
+        <div class="stack" data-testid="timeline-tab">
+          <ProductionChart build={build} result={result} />
+          <div class="details-grid">
+            {timelinePanel}
+            <div class="stack">
+              <Milestones build={build} result={result} />
+              <Charts result={result} />
             </div>
-            <Charts result={result} />
-          </>
-        )}
-        <Matchups
-          build={build}
-          readonly={readonly}
-          onChange={(matchups) => update({ ...build, matchups })}
-        />
-      </div>
+          </div>
+        </div>
+      )}
+
+      {tab === "details" && (
+        <div class="details-grid" data-testid="details-tab">
+          <div class="stack">
+            <div class="panel stack" style={{ gap: "8px" }}>
+              <div class="row" role="group" aria-label={t("editor.type")}>
+                {BUILD_TYPES.map((ty) => (
+                  <button
+                    key={ty}
+                    class="chip"
+                    aria-pressed={build.type === ty}
+                    disabled={readonly}
+                    onClick={() => update({ ...build, type: ty })}
+                  >
+                    <Tip label={help(`type.${ty}`)}>
+                      <span class={`type-tag type-${ty}`}>{t(`type.${ty}`)}</span>
+                    </Tip>
+                  </button>
+                ))}
+              </div>
+              <label class="field">
+                {t("editor.author")}
+                <input
+                  type="text"
+                  value={build.author ?? ""}
+                  maxLength={80}
+                  disabled={readonly}
+                  onInput={(e) => update({ ...build, author: e.currentTarget.value || undefined })}
+                />
+              </label>
+              {(["objective", "end"] as const).map((field) => (
+                <label class="field" key={field}>
+                  <HelpText k={`editor.${field}`} />
+                  <textarea
+                    rows={2}
+                    maxLength={300}
+                    disabled={readonly}
+                    data-testid={`build-${field}`}
+                    value={build[field]?.[locale] ?? ""}
+                    onInput={(e) => {
+                      const value = e.currentTarget.value;
+                      const next = { ...(build[field] ?? {}), [locale]: value || undefined };
+                      if (!value) delete next[locale];
+                      update({ ...build, [field]: Object.keys(next).length ? next : undefined });
+                    }}
+                  />
+                </label>
+              ))}
+            </div>
+            <SettingsPanel
+              build={build}
+              readonly={readonly}
+              onChange={(settings) => update({ ...build, settings })}
+            />
+          </div>
+          <div class="stack">
+            <Matchups
+              build={build}
+              readonly={readonly}
+              onChange={(matchups) => update({ ...build, matchups })}
+            />
+            {result && <Charts result={result} />}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

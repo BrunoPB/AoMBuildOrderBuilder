@@ -33,8 +33,10 @@ for (const locale of ["pt-BR", "en"] as const) {
     await expect(timeline.getByTestId("timeline-row").first()).toBeVisible();
     const word = locale === "pt-BR" ? "Treinar 1 Cidadão" : "Train 1 Citizen";
     await expect(timeline).toContainText(word);
-    await expect(page.getByTestId("chart-resources")).toBeVisible();
     await expect(page.getByTestId("warnings")).toBeVisible();
+    await page.getByTestId("tab-timeline").click();
+    await expect(page.getByTestId("chart-resources")).toBeVisible();
+    await expect(page.getByTestId("production-lane").first()).toBeVisible();
   });
 }
 
@@ -138,4 +140,33 @@ test("help tips explain titles and can be turned off", async ({ page }) => {
   await page.goto("/#/build/preset%3Akrush");
   await expect(page.locator(".tip.help")).toHaveCount(0);
   await expect(page.locator("h3", { hasText: "Ações" })).toBeVisible();
+});
+
+test("build screen header keeps the build actions", async ({ page }) => {
+  await createBuildWithActions(page);
+  const header = page.getByTestId("build-header");
+  for (const id of ["open-match", "duplicate", "export-one", "export-dashboard", "delete"]) {
+    await expect(header.getByTestId(id)).toBeVisible();
+  }
+  const download = page.waitForEvent("download");
+  await header.getByTestId("export-dashboard").click();
+  expect((await download).suggestedFilename()).toContain(".dashboard.json");
+  await header.getByTestId("delete").click();
+  await page.getByRole("button", { name: "Sim" }).click();
+  await expect(page).toHaveURL(/#\/$/);
+  await expect(page.getByTestId("my-builds")).toHaveCount(0);
+});
+
+test("timeline tab shows what each building produces", async ({ page }) => {
+  await page.goto("/#/build/preset%3Akrush");
+  await page.getByTestId("tab-timeline").click();
+  const lanes = page.getByTestId("production-lane");
+  await expect(lanes.first()).toContainText("Centro Urbano");
+  expect(await page.getByTestId("production-bar").count()).toBeGreaterThan(10);
+  await expect(page.getByTestId("production-bar").first()).toHaveAttribute(
+    "aria-label",
+    /0:00 → 0:28/,
+  );
+  await page.getByTestId("tab-details").click();
+  await expect(page.getByTestId("matchups")).toBeVisible();
 });

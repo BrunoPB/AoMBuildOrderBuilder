@@ -3,10 +3,8 @@ import type { PantheonId } from "../data/schema.ts";
 import { BUILD_TYPES, type Build, type BuildType } from "../engine/build.ts";
 import { formatClock } from "../engine/time.ts";
 import { simulate } from "../engine/simulate.ts";
-import { toDashboard } from "../io/dashboard.ts";
 import {
   allBuildsFileName,
-  buildFileName,
   downloadText,
   exportPayload,
   newBuildId,
@@ -14,9 +12,10 @@ import {
 } from "../io/files.ts";
 import { text } from "../i18n/index.ts";
 import { navigate } from "./app.tsx";
+import { BuildActions } from "./build-actions.tsx";
 import { useApp } from "./context.tsx";
 import { EntityIcon, Tip, HelpText, useHelp } from "./icon.tsx";
-import { duplicateBuild, newBuild } from "./sim.ts";
+import { newBuild } from "./sim.ts";
 import { Svg } from "./svg.tsx";
 
 function useAgeTimes(builds: Build[]) {
@@ -49,33 +48,15 @@ function BuildCard({
   const god = data.gods.get(build.god);
   const open = `#/build/${encodeURIComponent(build.id)}`;
 
-  const exportOne = () => downloadText(buildFileName(build), exportPayload([build]));
-  const exportDashboard = () => {
-    const result = simulate(data, build);
-    downloadText(
-      `${buildFileName(build).replace(".aomr-bob.json", "")}.dashboard.json`,
-      `${JSON.stringify(toDashboard(data, build, result), null, 2)}\n`,
-    );
-  };
-  const duplicate = () => {
-    const copy = duplicateBuild(build, readonly ? "" : `(${t("card.duplicate").toLowerCase()})`);
-    api.saveBuild(copy);
-    navigate(`/build/${encodeURIComponent(copy.id)}`);
-  };
-  const remove = async () => {
-    const answer = await api.confirm(t("card.confirmDelete", { name: build.name }));
-    if (answer === "yes") api.deleteBuild(build.id);
-  };
-
   return (
     <article class={`card pan-${build.pantheon}`} data-testid="build-card">
       <div class="card-head">
         {god && <EntityIcon id={god.id} pantheon={build.pantheon} size={56} />}
-        <div class="stack" style={{ gap: 4, minWidth: 0 }}>
+        <div class="stack" style={{ gap: "4px", minWidth: 0 }}>
           <a class="card-title" href={open}>
             {build.name}
           </a>
-          <div class="row" style={{ gap: 6 }}>
+          <div class="row" style={{ gap: "6px" }}>
             <EntityIcon id={build.pantheon} pantheon={build.pantheon} size={20} />
             <Tip label={help(`type.${build.type}`)} focusable>
               <span class={`type-tag type-${build.type}`}>{t(`type.${build.type}`)}</span>
@@ -111,69 +92,13 @@ function BuildCard({
       {build.end && (
         <span
           class="row action-times"
-          style={{ gap: 4, flexWrap: "nowrap", alignItems: "flex-start" }}
+          style={{ gap: "4px", flexWrap: "nowrap", alignItems: "flex-start" }}
         >
           <Svg name="flag" />
           {text(locale, build.end)}
         </span>
       )}
-      <div class="card-actions">
-        <Tip label={t("card.open")}>
-          <a class="btn icon-only" href={open} aria-label={t("card.open")}>
-            <Svg name="chevron" />
-          </a>
-        </Tip>
-        <Tip label={t("card.play")}>
-          <a
-            class="btn icon-only"
-            href={`#/play/${encodeURIComponent(build.id)}`}
-            aria-label={t("card.play")}
-          >
-            <Svg name="clock" />
-          </a>
-        </Tip>
-        <Tip label={readonly ? t("card.duplicateToEdit") : t("card.duplicate")}>
-          <button
-            class="btn icon-only"
-            onClick={duplicate}
-            aria-label={readonly ? t("card.duplicateToEdit") : t("card.duplicate")}
-            data-testid="duplicate"
-          >
-            <Svg name="copy" />
-          </button>
-        </Tip>
-        <Tip label={t("card.export")}>
-          <button
-            class="btn icon-only"
-            onClick={exportOne}
-            aria-label={t("card.export")}
-            data-testid="export-one"
-          >
-            <Svg name="download" />
-          </button>
-        </Tip>
-        <Tip label={t("card.exportDashboard")}>
-          <button
-            class="btn icon-only"
-            onClick={exportDashboard}
-            aria-label={t("card.exportDashboard")}
-          >
-            <Svg name="monitor" />
-          </button>
-        </Tip>
-        {!readonly && (
-          <Tip label={t("card.delete")}>
-            <button
-              class="btn icon-only danger"
-              onClick={remove}
-              aria-label={t("card.delete")}
-              data-testid="delete"
-            >
-              <Svg name="trash" />
-            </button>
-          </Tip>
-        )}
-      </div>
+      <BuildActions build={build} readonly={readonly} showOpen />
     </article>
   );
 }

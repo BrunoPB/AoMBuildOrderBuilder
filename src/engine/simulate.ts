@@ -22,6 +22,8 @@ import type {
   BuilderRef,
   MilestoneResult,
   Params,
+  ProductionLane,
+  ProductionSpan,
   SimEvent,
   SimResult,
   SimWarning,
@@ -62,9 +64,17 @@ type Job =
       rule?: number;
       rally?: TaskTarget;
       heldSince?: number;
+      span?: number;
     }
-  | { kind: "research"; research: string; remaining: number; action: number }
-  | { kind: "age"; age: AgeTo; minor: string; remaining: number; action: number };
+  | { kind: "research"; research: string; remaining: number; action: number; span?: number }
+  | {
+      kind: "age";
+      age: AgeTo;
+      minor: string;
+      remaining: number;
+      action: number;
+      span?: number;
+    };
 
 type Site = {
   uid: number;
@@ -79,6 +89,8 @@ type Site = {
   initial: boolean;
   shiftUntil?: number;
   shiftAction?: number;
+  span?: number;
+  shiftSpan?: number;
   jobs: Job[];
   slots: number;
 };
@@ -195,6 +207,19 @@ class Simulation {
   warnings: SimWarning[] = [];
   series: Snapshot[] = [];
   produced: { t: number; unit: string; action?: number; rule?: number }[] = [];
+  spans: ProductionSpan[] = [];
+
+  openSpan(site: Site, span: Omit<ProductionSpan, "lane" | "start">): number {
+    this.spans.push({ ...span, lane: site.uid, start: round(this.t) });
+    return this.spans.length - 1;
+  }
+
+  closeSpan(index: number | undefined, held?: number): void {
+    const span = index === undefined ? undefined : this.spans[index];
+    if (!span) return;
+    span.end = round(this.t);
+    if (held !== undefined) span.held = round(held);
+  }
   states: ActionState[];
   idIndex = new Map<string, number>();
   ageTimes: SimResult["ageTimes"] = {};
@@ -731,6 +756,7 @@ class Simulation {
       return this.noResource(cost, missing, opts.reserved);
     }
     this.pay(cost);
+    const ruleAction = opts.rule !== undefined ? this.rules[opts.rule]?.action : undefined;
     site.jobs.push({
       kind: "unit",
       unit: def.id,
@@ -739,6 +765,7 @@ class Simulation {
       action: opts.action,
       rule: opts.rule,
       rally: opts.rally,
+      span: this.openSpan(site, { kind: "unit", id: def.id, action: opts.action ?? ruleAction }),
     });
     return site;
   }
@@ -1019,6 +1046,7 @@ class Simulation {
       site.builders.push(w.uid);
     }
     this.sites.push(site);
+    site.span = this.openSpan(site, { kind: "build", id: def.id, action: i });
     this.start(i);
     this.emit({ kind: "buildStart", building: def.id, by, then: a.then, action: i, t: this.t });
   }
@@ -1056,7 +1084,13 @@ class Simulation {
     }
     this.pay(cost);
     const time = applyModifiers(def.time, "researchTime", mods, { id: def.id, tags: def.tags });
-    site.jobs.push({ kind: "research", research: def.id, remaining: time, action: i });
+    site.jobs.push({
+      kind: "research",
+      research: def.id,
+      remaining: time,
+      action: i,
+      span: this.openSpan(site, { kind: "research", id: def.id, action: i }),
+    });
     this.start(i);
     this.emit({ kind: "researchStart", research: def.id, action: i, t: this.t });
   }
@@ -1120,7 +1154,14 @@ class Simulation {
       id: `age-${a.to}`,
       tags: ["age"],
     });
-    site.jobs.push({ kind: "age", age: a.to, minor: a.minor, remaining: time, action: i });
+    site.jobs.push({
+      kind: "age",
+      age: a.to,
+      minor: a.minor,
+      remaining: time,
+      action: i,
+      span: this.openSpan(site, { kind: "age", id: a.to, minor: a.minor, action: i }),
+    });
     this.agingTo = { age: a.to, minor: a.minor };
     this.ageTimes[a.to] = { clicked: round(this.t) };
     this.start(i);
@@ -1222,6 +1263,7 @@ class Simulation {
     this.usePower(power);
     const duration = site.def.buildTime * (power.effect.buildTimeFraction ?? 1);
     site.state = "shifting";
+    site.shiftSpan = this.openSpan(site, { kind: "shift", id: site.def.id, action: i });
     site.shiftUntil = this.t + duration;
     site.shiftAction = i;
     this.start(i);
@@ -1382,6 +1424,7 @@ class Simulation {
         this.t + EPS >= site.shiftUntil
       ) {
         site.state = "ready";
+        this.closeSpan(site.shiftSpan);
         this.emit({
           kind: "timeShiftDone",
           building: site.def.id,
@@ -1395,7 +1438,9 @@ class Simulation {
       const done: Job[] = [];
       for (const job of site.jobs) {
         if (job.remaining > EPS) continue;
-        if (this.finishJob(job)) done.push(job);
+        if (!this.finishJob(job)) continue;
+        done.push(job);
+        this.closeSpan(job.span, job.kind === "unit" ? job.heldSince : undefined);
       }
       if (done.length) site.jobs = site.jobs.filter((j) => !done.includes(j));
     }
@@ -1407,6 +1452,7 @@ class Simulation {
 
   finishSite(site: Site): void {
     site.state = "ready";
+    this.closeSpan(site.span);
     site.progress = 1;
     let builderTo: ResourceId | "idle" | undefined;
     let builderUnit: string | undefined;
@@ -1748,6 +1794,19 @@ class Simulation {
     );
   }
 
+  lanes(): ProductionLane[] {
+    const used = new Set(this.spans.map((s) => s.lane));
+    const seen = new Map<string, number>();
+    const lanes: ProductionLane[] = [];
+    for (const site of this.sites) {
+      const n = (seen.get(site.def.id) ?? 0) + 1;
+      seen.set(site.def.id, n);
+      if (used.has(site.uid))
+        lanes.push({ uid: site.uid, building: site.def.id, n, initial: site.initial });
+    }
+    return lanes;
+  }
+
   result(): SimResult {
     const milestones: MilestoneResult[] = (this.build.milestones ?? []).map((m) => {
       const action = this.idIndex.get(m.atAction) ?? -1;
@@ -1770,6 +1829,7 @@ class Simulation {
       milestones,
       ageTimes: this.ageTimes,
       produced: this.produced,
+      production: { lanes: this.lanes(), spans: this.spans },
       endTime: round(this.t),
     };
   }

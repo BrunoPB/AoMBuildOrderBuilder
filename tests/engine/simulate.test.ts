@@ -287,3 +287,42 @@ describe("hero promotion", () => {
     expect(at(r, 10).resources.wood).toBeCloseTo(120);
   });
 });
+
+describe("production spans", () => {
+  it("records what each building is doing over time", () => {
+    const r = run([
+      { when: "0:00", do: "event", gainResource: { wood: 100 } },
+      { when: "0:00", do: "train", unit: "citizen", count: 2 },
+      { id: "b", when: "0:00", do: "build", building: "barracks", builder: { from: "idle" } },
+      { when: { after: "b" }, do: "timeShift", building: "barracks" },
+    ]);
+    const { lanes, spans } = r.production;
+    const tc = lanes.find((l) => l.building === "town-center")!;
+    expect(
+      spans.filter((s) => s.lane === tc.uid).map((s) => [s.kind, s.id, s.start, s.end]),
+    ).toEqual([
+      ["unit", "citizen", 0, 10],
+      ["unit", "citizen", 10, 20],
+    ]);
+    const barracks = lanes.find((l) => l.building === "barracks")!;
+    expect(
+      spans.filter((s) => s.lane === barracks.uid).map((s) => [s.kind, s.start, s.end]),
+    ).toEqual([
+      ["build", 0, 20],
+      ["shift", 20, 40],
+    ]);
+  });
+
+  it("marks a unit held inside the building by the population cap", () => {
+    const r = run(
+      [
+        { when: "0:00", do: "event", gainResource: { food: 1000 } },
+        { when: "0:00", do: "train", unit: "citizen", count: 8 },
+        { when: "1:30", do: "build", building: "manor", builder: { from: "idle" } },
+      ],
+      { popReservedAt: "end" },
+    );
+    const last = r.production.spans.filter((s) => s.kind === "unit").at(-1)!;
+    expect(last).toMatchObject({ start: 70, held: 80, end: 110 });
+  });
+});

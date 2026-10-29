@@ -102,7 +102,7 @@ export function GameIcon({ icon, name, size = 32 }: { icon: string; name: string
     return (
       <span
         class="icon placeholder"
-        style={{ width: size, height: size }}
+        style={{ width: `${size}px`, height: `${size}px` }}
         role="img"
         aria-label={name}
       >

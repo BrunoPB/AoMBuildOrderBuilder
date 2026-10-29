@@ -142,7 +142,7 @@ export function Palette({ build, onAdd }: { build: Build; onAdd: (a: Action) => 
       </div>
       {kind && (
         <>
-          <div class="row" style={{ marginTop: 8 }}>
+          <div class="row" style={{ marginTop: "8px" }}>
             <button class="chip" aria-pressed={age === null} onClick={() => setAge(null)}>
               <HelpText k="palette.allAges" />
             </button>

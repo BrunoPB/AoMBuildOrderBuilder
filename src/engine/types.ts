@@ -70,6 +70,23 @@ export type MilestoneResult = {
   label?: LocalizedText;
 };
 
+/** Something occupying a building over time (training, research, age up, construction, Time Shift). */
+export type ProductionSpan = {
+  lane: number;
+  kind: "unit" | "research" | "age" | "build" | "shift";
+  id: string;
+  minor?: string;
+  start: number;
+  /** Absent when still running at the end of the simulation. */
+  end?: number;
+  /** A finished unit waiting inside the building for population room, from this time. */
+  held?: number;
+  action?: number;
+};
+
+/** One building instance, in the order it was placed. */
+export type ProductionLane = { uid: number; building: string; n: number; initial: boolean };
+
 export type SimResult = {
   events: SimEvent[];
   warnings: SimWarning[];
@@ -78,5 +95,6 @@ export type SimResult = {
   milestones: MilestoneResult[];
   ageTimes: Partial<Record<Age, { clicked: number; reached?: number }>>;
   produced: { t: number; unit: string; action?: number; rule?: number }[];
+  production: { lanes: ProductionLane[]; spans: ProductionSpan[] };
   endTime: number;
 };

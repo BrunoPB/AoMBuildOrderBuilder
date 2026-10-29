@@ -142,7 +142,7 @@ export function WarningsPanel({ build, result }: { build: Build; result: SimResu
             key={lvl}
             label={[t(`level.${lvl}`), help(`level.${lvl}`)].filter(Boolean).join("\n")}
           >
-            <span class={`row lvl-${lvl}`} style={{ gap: 2 }}>
+            <span class={`row lvl-${lvl}`} style={{ gap: "2px" }}>
               <Svg
                 name={lvl === "error" ? "error" : lvl === "delay" ? "warning" : "info"}
                 label={t(`level.${lvl}`)}
@@ -171,7 +171,7 @@ export function WarningsPanel({ build, result }: { build: Build; result: SimResu
                 </span>
                 <span class="num">{formatClock(w.t)}</span>
                 {w.action !== undefined && build.actions[w.action] && (
-                  <span class="row" style={{ gap: 2 }}>
+                  <span class="row" style={{ gap: "2px" }}>
                     {actionIcons(build.actions[w.action]!)
                       .slice(0, 1)
                       .map((id) => (
@@ -202,7 +202,7 @@ function ResLine({ resources }: { resources?: Record<string, number> }) {
     <span class="res-line">
       {RES.map((r) => (
         <Tip key={r} label={t(`res.${r}`)}>
-          <span class={`res-${r} row`} style={{ gap: 2 }}>
+          <span class={`res-${r} row`} style={{ gap: "2px" }}>
             <span class="num">{Math.floor(resources[r] ?? 0)}</span>
           </span>
         </Tip>
@@ -266,7 +266,7 @@ export function Milestones({ build, result }: { build: Build; result: SimResult 
       <div class="milestones" data-testid="milestones">
         {cards.map((c) => (
           <div class="milestone" key={c.key}>
-            <span class="row" style={{ gap: 4 }}>
+            <span class="row" style={{ gap: "4px" }}>
               {c.icons.map((id) => (
                 <EntityIcon key={id} id={id} pantheon={build.pantheon} size={24} />
               ))}
@@ -352,7 +352,7 @@ export function Matchups({
         ))}
       </div>
       {!readonly && unset.length > 0 && (
-        <div class="portraits" style={{ marginTop: 8, opacity: 0.7 }}>
+        <div class="portraits" style={{ marginTop: "8px", opacity: 0.7 }}>
           {unset.map((g) => (
             <Tip key={g.id} label={text(locale, g.name)}>
               <button
@@ -377,7 +377,7 @@ export function Charts({ result }: { result: SimResult }) {
         <HelpText k="result.resources" />
       </h3>
       <ResourceChart series={result.series} />
-      <h3 style={{ marginTop: 12 }}>
+      <h3 style={{ marginTop: "12px" }}>
         <HelpText k="result.population" />
       </h3>
       <PopChart series={result.series} />
