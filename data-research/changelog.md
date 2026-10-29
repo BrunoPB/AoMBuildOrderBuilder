@@ -8,6 +8,7 @@
 - Thor: no Armory (`excludeGods`), free Dwarf per Dwarven Armory research (`research.spawn`).
 - Loki: +10% build speed on the builder (`builderRate`).
 - Greek heroes train in their own queue (`unit.splitQueue`).
+- Owner answers: Berserk transform needs a free population slot; Empower does not stack (strongest counts).
 
 ## 2026-10-29 — god-specific actions
 

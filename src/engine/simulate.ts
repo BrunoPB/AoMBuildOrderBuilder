@@ -1467,6 +1467,14 @@ class Simulation {
       });
     }
     const hero = this.unit(def.promotion.to);
+    const extraPop = (this.unitPop(hero) - this.unitPop(def)) * n;
+    if (extraPop > 0 && this.popUsed() + this.popReserved() + extraPop > this.popCap() + EPS) {
+      return this.block(i, {
+        key: "warn.popCapped",
+        level: "delay",
+        params: { unit: def.promotion.to },
+      });
+    }
     const cost = addCost({}, this.promotionCost(def), n);
     const missing = this.afford(cost);
     if (missing) return this.block(i, this.noResource(cost, missing));

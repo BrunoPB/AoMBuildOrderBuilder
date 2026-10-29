@@ -175,3 +175,22 @@ describe("god actions researched for the 12 major gods", () => {
     expect(loki).toBeLessThan(odin);
   });
 });
+
+describe("Berserk transform and population (owner)", () => {
+  it("waits for a free population slot, since a Berserk takes 2 pop instead of 1", () => {
+    const r = simulate(
+      data,
+      build("norse", "odin", [
+        { when: "0:00", do: "event", gainResource: { food: 2000, gold: 2000 } },
+        { when: "0:00", do: "train", unit: "gatherer", count: 10 },
+        { when: "3:00", do: "promote", unit: "gatherer" },
+      ]),
+    );
+    const at = r.series.find((s) => s.t === 180)!;
+    expect(at.pop).toBe(at.popCap);
+    expect(r.actions[2]!.startedAt).toBeUndefined();
+    expect(
+      r.warnings.some((w) => w.key === "warn.popCapped" || w.key === "warn.neverStarted"),
+    ).toBe(true);
+  });
+});
