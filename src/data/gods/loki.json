@@ -9,11 +9,13 @@
   "portrait": "gods/loki-portrait",
   "modifiers": [
     {
-      "target": "buildRate",
+      "target": "builderRate",
       "op": "pct",
       "value": 0.1,
-      "except": ["house", "farm", "ox-cart"],
-      "note": "Build WorkRate x1.1 BasePercent for AbstractInfantry and Godi builders. The simulator scopes buildRate by building, so it is applied to every building except those Gatherers/Dwarves build (House, Farm, Ox Cart)."
+      "note": "ArchaicAgeLoki: BuildRate +10% BasePercent on the builder (Norse infantry, heroes, Godi); Gatherers and Dwarves do not get it.",
+      "scope": {
+        "ids": ["berserk", "hersir", "godi", "hirdman", "throwing-axeman", "huskarl"]
+      }
     },
     {
       "target": "cost",

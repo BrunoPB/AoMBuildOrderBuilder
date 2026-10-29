@@ -65,6 +65,8 @@ type Job =
       rally?: TaskTarget;
       heldSince?: number;
       span?: number;
+      split?: boolean;
+      hunt?: boolean;
     }
   | { kind: "research"; research: string; remaining: number; action: number; span?: number }
   | {
@@ -91,6 +93,8 @@ type Site = {
   shiftAction?: number;
   span?: number;
   shiftSpan?: number;
+  /** A unit acting as a production building (Set's Pharaoh summoning). */
+  virtual?: boolean;
   jobs: Job[];
   slots: number;
 };
@@ -208,6 +212,8 @@ class Simulation {
   series: Snapshot[] = [];
   produced: { t: number; unit: string; action?: number; rule?: number }[] = [];
   spans: ProductionSpan[] = [];
+  /** Empowered buildings: "<unit>#<slot>" → site and strength. */
+  empowered = new Map<string, { site: number; strength: number }>();
 
   openSpan(site: Site, span: Omit<ProductionSpan, "lane" | "start">): number {
     this.spans.push({ ...span, lane: site.uid, start: round(this.t) });
@@ -268,6 +274,22 @@ class Simulation {
     const units = { ...start.units, ...extras.units };
     for (const [u, n] of Object.entries(units)) {
       for (let i = 0; i < n; i++) this.spawn(u, "idle");
+    }
+    const summon = this.p.def.summon;
+    const summoner = summon && this.unit(summon.by);
+    if (summon && summoner && summon.gods.includes(this.god.id)) {
+      const def: Building = {
+        id: summon.by,
+        name: summoner.name,
+        icon: summoner.icon,
+        pantheon: summoner.pantheon,
+        cost: {},
+        buildTime: 0,
+        age: "archaic",
+        trains: summon.units,
+        meta: summon.meta,
+      };
+      this.sites.push({ ...this.newSite(def, "ready", true), virtual: true });
     }
     const buildings = start.buildings ?? { [this.p.def.townCenter]: 1 };
     for (const [b, n] of Object.entries(buildings)) {
@@ -697,7 +719,7 @@ class Simulation {
     );
   }
 
-  freeSite(candidates: Site[], prefer?: number): Site | Reason {
+  freeSite(candidates: Site[], prefer?: number, split = false): Site | Reason {
     if (candidates.length === 0) {
       return { key: "warn.noBuilding", level: "error", params: {} };
     }
@@ -709,7 +731,11 @@ class Simulation {
         params: { building: candidates[0]!.def.id },
       };
     const free = ready
-      .filter((s) => s.jobs.length < s.slots && !this.claims.has(s.uid))
+      .filter((s) => {
+        if (this.claims.has(s.uid) && !split) return false;
+        const sideJobs = s.jobs.filter((j) => j.kind === "unit" && j.split).length;
+        return split ? sideJobs === 0 : s.jobs.length - sideJobs < s.slots;
+      })
       .sort((a, b) => (a.uid === prefer ? -1 : b.uid === prefer ? 1 : a.uid - b.uid));
     if (free.length === 0)
       return { key: "warn.queueBusy", level: "delay", params: { building: ready[0]!.def.id } };
@@ -735,12 +761,15 @@ class Simulation {
       rule?: number;
       rally?: TaskTarget;
       reserved?: Cost;
+      hunt?: boolean;
     },
   ): Reason | Site {
     const candidates = this.trainSites(def, opts.at);
+    const excluded = this.excluded(def);
+    if (excluded) return excluded;
     const req = this.requirement(def.requires, def.age);
     if (req) return req;
-    const site = this.freeSite(candidates, opts.prefer);
+    const site = this.freeSite(candidates, opts.prefer, def.splitQueue === true);
     if (!("uid" in site)) return site;
     if (
       this.s.popReservedAt === "start" &&
@@ -765,9 +794,46 @@ class Simulation {
       action: opts.action,
       rule: opts.rule,
       rally: opts.rally,
+      split: def.splitQueue === true || undefined,
+      hunt: opts.hunt || undefined,
       span: this.openSpan(site, { kind: "unit", id: def.id, action: opts.action ?? ruleAction }),
     });
     return site;
+  }
+
+  /** The selected major god does not have this unit/building/research. */
+  excluded(def: { id: string; excludeGods?: string[] }): Reason | null {
+    return def.excludeGods?.includes(this.god.id)
+      ? { key: "warn.notForGod", level: "error", params: { id: def.id } }
+      : null;
+  }
+
+  /** Strongest empower on a site, as a multiplier for `rate` (1 when not empowered). */
+  empowerFactor(site: Site, rate: number): number {
+    let strength = 0;
+    for (const e of this.empowered.values())
+      if (e.site === site.uid) strength = Math.max(strength, e.strength);
+    return strength ? 1 + (rate - 1) * strength : 1;
+  }
+
+  /** Bonus on resources dropped at an empowered dropsite for this source. */
+  dropsiteFactor(source: SourceId): number {
+    const empower = this.p.def.empower;
+    if (!empower || this.empowered.size === 0) return 1;
+    let best = 1;
+    for (const site of this.sites) {
+      if (site.state === "building" || !site.def.dropsiteFor?.includes(source)) continue;
+      best = Math.max(best, this.empowerFactor(site, empower.dropsiteRate));
+    }
+    return best;
+  }
+
+  jobFactor(site: Site, job: Job): number {
+    const empower = this.p.def.empower;
+    if (!empower || this.empowered.size === 0) return 1;
+    if (job.kind !== "unit") return this.empowerFactor(site, empower.researchRate);
+    if (empower.economicUnits.includes(job.unit)) return 1;
+    return this.empowerFactor(site, empower.militaryTrainRate);
   }
 
   // ---------- powers ----------
@@ -860,6 +926,10 @@ class Simulation {
         return this.actTimeShift(i, a.building);
       case "promote":
         return this.actPromote(i, a);
+      case "empower":
+        return this.actEmpower(i, a);
+      case "summon":
+        return this.actTrain(i, a, this.states[i]!);
       case "autoTrain":
       case "trainWhenAffordable": {
         const def = this.unit(a.unit);
@@ -903,14 +973,37 @@ class Simulation {
     }
   }
 
-  actTrain(i: number, a: Extract<Action, { do: "train" }>, st: ActionState): void {
+  actTrain(
+    i: number,
+    a: Extract<Action, { do: "train" }> | Extract<Action, { do: "summon" }>,
+    st: ActionState,
+  ): void {
     const def = this.unit(a.unit);
     if (!def)
       return this.block(i, { key: "warn.unknownId", level: "error", params: { id: a.unit } });
+    const summon = a.do === "summon";
+    const at = summon ? this.p.def.summon?.by : a.at;
+    const rally = summon ? undefined : a.rally;
+    if (summon) {
+      const rule = this.p.def.summon;
+      if (!rule || !rule.gods.includes(this.god.id) || !rule.units.includes(def.id)) {
+        return this.block(i, {
+          key: "warn.cannotSummon",
+          level: "error",
+          params: { unit: def.id },
+        });
+      }
+    }
     if (st.status === "pending" || st.status === "blocked") st.left = a.count ?? 1;
     this.flagLowConfidence(i, def);
     while (st.left > 0) {
-      const result = this.tryTrain(def, { at: a.at, prefer: st.site, action: i, rally: a.rally });
+      const result = this.tryTrain(def, {
+        at,
+        prefer: st.site,
+        action: i,
+        rally,
+        hunt: summon ? a.hunt : undefined,
+      });
       if (!("uid" in result)) {
         if (
           result.key !== "warn.queueBusy" ||
@@ -921,7 +1014,7 @@ class Simulation {
         } else {
           this.block(i, { ...result, level: "info" });
         }
-        this.claim(this.trainSites(def, a.at));
+        this.claim(this.trainSites(def, at));
         return;
       }
       st.site = result.uid;
@@ -932,7 +1025,8 @@ class Simulation {
           kind: "trainStart",
           unit: def.id,
           count: a.count ?? 1,
-          rally: a.rally,
+          rally,
+          summon: summon || undefined,
           action: i,
           t: this.t,
         });
@@ -1021,6 +1115,8 @@ class Simulation {
     if (!def)
       return this.block(i, { key: "warn.unknownId", level: "error", params: { id: a.building } });
     this.flagLowConfidence(i, def);
+    const excluded = this.excluded(def);
+    if (excluded) return this.block(i, excluded);
     const req = this.requirement(def.requires, def.age);
     if (req) return this.block(i, req);
     if (
@@ -1088,6 +1184,8 @@ class Simulation {
     if (!def)
       return this.block(i, { key: "warn.unknownId", level: "error", params: { id: a.research } });
     this.flagLowConfidence(i, def);
+    const excluded = this.excluded(def);
+    if (excluded) return this.block(i, excluded);
     if (this.researched.has(def.id)) {
       return this.block(i, {
         key: "warn.alreadyResearched",
@@ -1320,6 +1418,36 @@ class Simulation {
     });
   }
 
+  actEmpower(i: number, a: Extract<Action, { do: "empower" }>): void {
+    const empower = this.p.def.empower;
+    const source = empower?.sources.find(
+      (s) => s.unit === a.by && (!s.gods || s.gods.includes(this.god.id)),
+    );
+    if (!empower || !source || !empower.targets.includes(a.building)) {
+      return this.block(i, {
+        key: "warn.cannotEmpower",
+        level: "error",
+        params: { unit: a.by, building: a.building },
+      });
+    }
+    const slot = a.slot ?? 1;
+    if (this.unitCount(a.by) < slot) {
+      return this.block(i, { key: "warn.noUnitToEmpower", level: "delay", params: { unit: a.by } });
+    }
+    const site = [...this.sites].reverse().find((s) => s.def.id === a.building && !s.virtual);
+    if (!site) {
+      return this.block(i, {
+        key: "warn.missingRequirement",
+        level: "error",
+        params: { req: a.building },
+      });
+    }
+    this.empowered.set(`${a.by}#${slot}`, { site: site.uid, strength: source.strength });
+    this.start(i);
+    this.complete(i);
+    this.emit({ kind: "empower", unit: a.by, building: a.building, action: i, t: this.t });
+  }
+
   actPromote(i: number, a: Extract<Action, { do: "promote" }>): void {
     const def = this.unit(a.unit);
     if (!def?.promotion) {
@@ -1439,7 +1567,13 @@ class Simulation {
         const rates = site.builders
           .map((uid) => this.workers.find((x) => x.uid === uid))
           .filter((w): w is Worker => w !== undefined)
-          .map((w) => this.unit(w.unit)?.worker?.buildRate ?? 1)
+          .map((w) => {
+            const u = this.unit(w.unit);
+            return applyModifiers(u?.worker?.buildRate ?? 1, "builderRate", this.mods(), {
+              id: w.unit,
+              tags: u?.tags,
+            });
+          })
           .sort((a, b) => b - a);
         const d = this.data.common.defaults;
         const share = (k: number) =>
@@ -1449,9 +1583,11 @@ class Simulation {
               ? (d.secondBuilderEfficiency ?? 1)
               : (d.extraBuilderEfficiency ?? 1);
         const speed = rates.reduce((sum, r, k) => sum + r * share(k), 0);
-        site.progress += (dt * speed * site.speedMul) / Math.max(site.time, EPS);
+        const empower = this.p.def.empower;
+        const boost = empower ? this.empowerFactor(site, empower.buildRate) : 1;
+        site.progress += (dt * speed * site.speedMul * boost) / Math.max(site.time, EPS);
       }
-      for (const job of site.jobs) job.remaining -= dt;
+      for (const job of site.jobs) job.remaining -= dt * this.jobFactor(site, job);
     }
   }
 
@@ -1544,6 +1680,16 @@ class Simulation {
       const rally = job.rally ?? (isGatherer(def) ? "food" : undefined);
       const origin =
         job.action ?? (job.rule !== undefined ? this.rules[job.rule]?.action : undefined);
+      if (job.hunt && def?.carcass) {
+        this.remaining.set("hunt", (this.remaining.get("hunt") ?? 0) + def.carcass);
+        this.emit({ kind: "hunted", unit: job.unit, food: def.carcass, action: origin, t: this.t });
+        if (job.action !== undefined) {
+          const st = this.states[job.action]!;
+          st.open--;
+          if (st.left === 0 && st.open === 0) this.complete(job.action);
+        }
+        return true;
+      }
       this.spawn(job.unit, rally, origin);
       this.produced.push({ t: round(this.t), unit: job.unit, action: origin, rule: job.rule });
       if (job.action !== undefined || isGatherer(def)) {
@@ -1565,6 +1711,12 @@ class Simulation {
     }
     if (job.kind === "research") {
       this.researched.add(job.research);
+      for (const [u, n] of Object.entries(this.p.researches.get(job.research)?.spawn ?? {})) {
+        for (let k = 0; k < n; k++) {
+          this.spawn(u, isGatherer(this.unit(u)) ? "food" : undefined);
+          this.produced.push({ t: round(this.t), unit: u, action: job.action });
+        }
+      }
       this.dirty();
       this.emit({ kind: "researchDone", research: job.research, action: job.action, t: this.t });
       this.complete(job.action);
@@ -1658,7 +1810,7 @@ class Simulation {
         source,
         resource,
       });
-      const amount = (rate * this.s.efficiency * dt) / 60;
+      const amount = (rate * this.s.efficiency * this.dropsiteFactor(source) * dt) / 60;
       const list = bySource.get(source) ?? [];
       list.push({ w, amount });
       bySource.set(source, list);
@@ -1738,7 +1890,12 @@ class Simulation {
       case "monuments":
         for (const site of this.sites) {
           const base = rule.rates[site.def.id];
-          if (site.state !== "building" && base) perMin += rated(base, site.def.id, site.def.tags);
+          if (site.state === "building" || !base) continue;
+          const empower = this.p.def.empower;
+          const boost = empower
+            ? this.empowerFactor(site, empower.favorRateByGod?.[this.god.id] ?? empower.favorRate)
+            : 1;
+          perMin += rated(base, site.def.id, site.def.tags) * boost;
         }
         break;
       case "combat":

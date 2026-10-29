@@ -1,5 +1,14 @@
 # Data changelog
 
+## 2026-10-29 — actions of the 12 major gods
+
+- Research per god in `data-research/<pantheon>/ACTIONS.md` and summary in `data-research/GOD-ACTIONS.md`.
+- Egyptians: Pharaoh/Priest Empower (`pantheon.empower`: ×1.75 build/research/military training, ×1.2 dropsite and Monument favor; Ra's Priests at 60%; Isis Monument favor ×2).
+- Set: Animals of Set summoned by the Pharaoh (`pantheon.summon`), with their carcass food.
+- Thor: no Armory (`excludeGods`), free Dwarf per Dwarven Armory research (`research.spawn`).
+- Loki: +10% build speed on the builder (`builderRate`).
+- Greek heroes train in their own queue (`unit.splitQueue`).
+
 ## 2026-10-29 — god-specific actions
 
 - Time Shift rules come from `major_gods.xml` `<timeshifting>`: only Kronos, 2 at once, 12 buildings (Palace, Sentry Tower, Mirror Tower cost 50%).

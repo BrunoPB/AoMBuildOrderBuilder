@@ -93,6 +93,22 @@ export const ActionSchema = z.discriminatedUnion("do", [
   }),
   z.strictObject({ ...base, do: z.literal("timeShift"), building: z.string() }),
   z.strictObject({ ...base, do: z.literal("promote"), unit: z.string(), count }),
+  /** Egyptian Pharaoh/Priest boosts one building (`slot` picks which Pharaoh/Priest). */
+  z.strictObject({
+    ...base,
+    do: z.literal("empower"),
+    by: z.string(),
+    building: z.string(),
+    slot: z.number().int().positive().optional(),
+  }),
+  /** Set's Pharaoh summons Animals of Set; `hunt` kills them for their food. */
+  z.strictObject({
+    ...base,
+    do: z.literal("summon"),
+    unit: z.string(),
+    count,
+    hunt: z.boolean().optional(),
+  }),
   z.strictObject({
     ...base,
     do: z.literal("autoTrain"),
@@ -133,6 +149,8 @@ export const ACTION_KINDS: ActionKind[] = [
   "power",
   "timeShift",
   "promote",
+  "empower",
+  "summon",
   "autoTrain",
   "stopAutoTrain",
   "trainWhenAffordable",

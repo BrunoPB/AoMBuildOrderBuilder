@@ -616,8 +616,15 @@
           "checkedAt": "2026-10-18",
           "confidence": "high",
           "note": "Proto trainpoints 5 s. ClassicalAgeGreek, HeroicAgeGreek and MythicAgeGreek each apply TrainPoints x0.90 (Percent) to HeroShadowUpgraded, so the time is 5 s x 0.9^(age index). Value here = the age the hero unlocks; per age: archaic 5, classical 4.5, heroic 4.05, mythic 3.645. The schema has no per-age modifier."
+        },
+        "splitQueue": {
+          "source": "Game files 19.17020 (proto.xml flag SplitQueue)",
+          "checkedAt": "2026-10-29",
+          "confidence": "high",
+          "note": "STR_LOADINGSCREEN_TIP_58: Greek Heroes can be trained while other units or technologies (including Age Ups) are in the queue."
         }
-      }
+      },
+      "splitQueue": true
     },
     {
       "id": "ajax",
@@ -649,8 +656,15 @@
           "checkedAt": "2026-10-18",
           "confidence": "high",
           "note": "Proto trainpoints 5 s. ClassicalAgeGreek, HeroicAgeGreek and MythicAgeGreek each apply TrainPoints x0.90 (Percent) to HeroShadowUpgraded, so the time is 5 s x 0.9^(age index). Value here = the age the hero unlocks; per age: archaic 5, classical 4.5, heroic 4.05, mythic 3.645. The schema has no per-age modifier."
+        },
+        "splitQueue": {
+          "source": "Game files 19.17020 (proto.xml flag SplitQueue)",
+          "checkedAt": "2026-10-29",
+          "confidence": "high",
+          "note": "STR_LOADINGSCREEN_TIP_58: Greek Heroes can be trained while other units or technologies (including Age Ups) are in the queue."
         }
-      }
+      },
+      "splitQueue": true
     },
     {
       "id": "theseus",
@@ -682,8 +696,15 @@
           "checkedAt": "2026-10-18",
           "confidence": "high",
           "note": "Proto trainpoints 5 s. ClassicalAgeGreek, HeroicAgeGreek and MythicAgeGreek each apply TrainPoints x0.90 (Percent) to HeroShadowUpgraded, so the time is 5 s x 0.9^(age index). Value here = the age the hero unlocks; per age: archaic 5, classical 4.5, heroic 4.05, mythic 3.645. The schema has no per-age modifier."
+        },
+        "splitQueue": {
+          "source": "Game files 19.17020 (proto.xml flag SplitQueue)",
+          "checkedAt": "2026-10-29",
+          "confidence": "high",
+          "note": "STR_LOADINGSCREEN_TIP_58: Greek Heroes can be trained while other units or technologies (including Age Ups) are in the queue."
         }
-      }
+      },
+      "splitQueue": true
     },
     {
       "id": "heracles",
@@ -716,8 +737,15 @@
           "checkedAt": "2026-10-18",
           "confidence": "high",
           "note": "Proto trainpoints 20 s. ClassicalAgeGreek, HeroicAgeGreek and MythicAgeGreek each apply TrainPoints x0.90 (Percent) to HeroShadowUpgraded, so the time is 20 s x 0.9^(age index). Value here = the age the hero unlocks; per age: classical 18, heroic 16.2, mythic 14.58. The schema has no per-age modifier."
+        },
+        "splitQueue": {
+          "source": "Game files 19.17020 (proto.xml flag SplitQueue)",
+          "checkedAt": "2026-10-29",
+          "confidence": "high",
+          "note": "STR_LOADINGSCREEN_TIP_58: Greek Heroes can be trained while other units or technologies (including Age Ups) are in the queue."
         }
-      }
+      },
+      "splitQueue": true
     },
     {
       "id": "achilles",
@@ -750,8 +778,15 @@
           "checkedAt": "2026-10-18",
           "confidence": "high",
           "note": "Proto trainpoints 20 s. ClassicalAgeGreek, HeroicAgeGreek and MythicAgeGreek each apply TrainPoints x0.90 (Percent) to HeroShadowUpgraded, so the time is 20 s x 0.9^(age index). Value here = the age the hero unlocks; per age: classical 18, heroic 16.2, mythic 14.58. The schema has no per-age modifier."
+        },
+        "splitQueue": {
+          "source": "Game files 19.17020 (proto.xml flag SplitQueue)",
+          "checkedAt": "2026-10-29",
+          "confidence": "high",
+          "note": "STR_LOADINGSCREEN_TIP_58: Greek Heroes can be trained while other units or technologies (including Age Ups) are in the queue."
         }
-      }
+      },
+      "splitQueue": true
     },
     {
       "id": "atalanta",
@@ -784,8 +819,15 @@
           "checkedAt": "2026-10-18",
           "confidence": "high",
           "note": "Proto trainpoints 20 s. ClassicalAgeGreek, HeroicAgeGreek and MythicAgeGreek each apply TrainPoints x0.90 (Percent) to HeroShadowUpgraded, so the time is 20 s x 0.9^(age index). Value here = the age the hero unlocks; per age: classical 18, heroic 16.2, mythic 14.58. The schema has no per-age modifier."
+        },
+        "splitQueue": {
+          "source": "Game files 19.17020 (proto.xml flag SplitQueue)",
+          "checkedAt": "2026-10-29",
+          "confidence": "high",
+          "note": "STR_LOADINGSCREEN_TIP_58: Greek Heroes can be trained while other units or technologies (including Age Ups) are in the queue."
         }
-      }
+      },
+      "splitQueue": true
     },
     {
       "id": "odysseus",
@@ -818,8 +860,15 @@
           "checkedAt": "2026-10-18",
           "confidence": "high",
           "note": "Proto trainpoints 25 s. ClassicalAgeGreek, HeroicAgeGreek and MythicAgeGreek each apply TrainPoints x0.90 (Percent) to HeroShadowUpgraded, so the time is 25 s x 0.9^(age index). Value here = the age the hero unlocks; per age: heroic 20.25, mythic 18.225. The schema has no per-age modifier."
+        },
+        "splitQueue": {
+          "source": "Game files 19.17020 (proto.xml flag SplitQueue)",
+          "checkedAt": "2026-10-29",
+          "confidence": "high",
+          "note": "STR_LOADINGSCREEN_TIP_58: Greek Heroes can be trained while other units or technologies (including Age Ups) are in the queue."
         }
-      }
+      },
+      "splitQueue": true
     },
     {
       "id": "chiron",
@@ -852,8 +901,15 @@
           "checkedAt": "2026-10-18",
           "confidence": "high",
           "note": "Proto trainpoints 25 s. ClassicalAgeGreek, HeroicAgeGreek and MythicAgeGreek each apply TrainPoints x0.90 (Percent) to HeroShadowUpgraded, so the time is 25 s x 0.9^(age index). Value here = the age the hero unlocks; per age: heroic 20.25, mythic 18.225. The schema has no per-age modifier."
+        },
+        "splitQueue": {
+          "source": "Game files 19.17020 (proto.xml flag SplitQueue)",
+          "checkedAt": "2026-10-29",
+          "confidence": "high",
+          "note": "STR_LOADINGSCREEN_TIP_58: Greek Heroes can be trained while other units or technologies (including Age Ups) are in the queue."
         }
-      }
+      },
+      "splitQueue": true
     },
     {
       "id": "hippolyta",
@@ -886,8 +942,15 @@
           "checkedAt": "2026-10-18",
           "confidence": "high",
           "note": "Proto trainpoints 25 s. ClassicalAgeGreek, HeroicAgeGreek and MythicAgeGreek each apply TrainPoints x0.90 (Percent) to HeroShadowUpgraded, so the time is 25 s x 0.9^(age index). Value here = the age the hero unlocks; per age: heroic 20.25, mythic 18.225. The schema has no per-age modifier."
+        },
+        "splitQueue": {
+          "source": "Game files 19.17020 (proto.xml flag SplitQueue)",
+          "checkedAt": "2026-10-29",
+          "confidence": "high",
+          "note": "STR_LOADINGSCREEN_TIP_58: Greek Heroes can be trained while other units or technologies (including Age Ups) are in the queue."
         }
-      }
+      },
+      "splitQueue": true
     },
     {
       "id": "bellerophon",
@@ -919,8 +982,15 @@
           "checkedAt": "2026-10-18",
           "confidence": "high",
           "note": "Proto trainpoints 30 s. ClassicalAgeGreek, HeroicAgeGreek and MythicAgeGreek each apply TrainPoints x0.90 (Percent) to HeroShadowUpgraded, so the time is 30 s x 0.9^(age index). Value here = the age the hero unlocks; per age: mythic 21.87. The schema has no per-age modifier."
+        },
+        "splitQueue": {
+          "source": "Game files 19.17020 (proto.xml flag SplitQueue)",
+          "checkedAt": "2026-10-29",
+          "confidence": "high",
+          "note": "STR_LOADINGSCREEN_TIP_58: Greek Heroes can be trained while other units or technologies (including Age Ups) are in the queue."
         }
-      }
+      },
+      "splitQueue": true
     },
     {
       "id": "perseus",
@@ -952,8 +1022,15 @@
           "checkedAt": "2026-10-18",
           "confidence": "high",
           "note": "Proto trainpoints 30 s. ClassicalAgeGreek, HeroicAgeGreek and MythicAgeGreek each apply TrainPoints x0.90 (Percent) to HeroShadowUpgraded, so the time is 30 s x 0.9^(age index). Value here = the age the hero unlocks; per age: mythic 21.87. The schema has no per-age modifier."
+        },
+        "splitQueue": {
+          "source": "Game files 19.17020 (proto.xml flag SplitQueue)",
+          "checkedAt": "2026-10-29",
+          "confidence": "high",
+          "note": "STR_LOADINGSCREEN_TIP_58: Greek Heroes can be trained while other units or technologies (including Age Ups) are in the queue."
         }
-      }
+      },
+      "splitQueue": true
     },
     {
       "id": "polyphemus",
@@ -985,8 +1062,15 @@
           "checkedAt": "2026-10-18",
           "confidence": "high",
           "note": "Proto trainpoints 30 s. ClassicalAgeGreek, HeroicAgeGreek and MythicAgeGreek each apply TrainPoints x0.90 (Percent) to HeroShadowUpgraded, so the time is 30 s x 0.9^(age index). Value here = the age the hero unlocks; per age: mythic 21.87. The schema has no per-age modifier."
+        },
+        "splitQueue": {
+          "source": "Game files 19.17020 (proto.xml flag SplitQueue)",
+          "checkedAt": "2026-10-29",
+          "confidence": "high",
+          "note": "STR_LOADINGSCREEN_TIP_58: Greek Heroes can be trained while other units or technologies (including Age Ups) are in the queue."
         }
-      }
+      },
+      "splitQueue": true
     },
     {
       "id": "the-argo",
@@ -1018,8 +1102,15 @@
           "checkedAt": "2026-10-18",
           "confidence": "high",
           "note": "Proto trainpoints 25 s. ClassicalAgeGreek, HeroicAgeGreek and MythicAgeGreek each apply TrainPoints x0.90 (Percent) to HeroShadowUpgraded, so the time is 25 s x 0.9^(age index). Value here = the age the hero unlocks; per age: heroic 20.25, mythic 18.225. The schema has no per-age modifier."
+        },
+        "splitQueue": {
+          "source": "Game files 19.17020 (proto.xml flag SplitQueue)",
+          "checkedAt": "2026-10-29",
+          "confidence": "high",
+          "note": "STR_LOADINGSCREEN_TIP_58: Greek Heroes can be trained while other units or technologies (including Age Ups) are in the queue."
         }
-      }
+      },
+      "splitQueue": true
     },
     {
       "id": "pegasus",

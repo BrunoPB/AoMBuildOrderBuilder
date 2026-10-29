@@ -187,3 +187,19 @@ test("palette only offers actions the chosen god can use", async ({ page }) => {
   await page.getByTestId("kind-promote").click();
   await expect(page.getByTestId("pick-gatherer")).toBeVisible();
 });
+
+test("Egyptian palette offers Empower, and summons only for Set", async ({ page }) => {
+  await page.goto("/");
+  await page.getByTestId("new-build").click();
+  await page.getByTestId("pantheon-egyptians").click();
+  await page.getByTestId("god-ra").click();
+  await expect(page.getByTestId("kind-empower")).toBeVisible();
+  await expect(page.getByTestId("kind-summon")).toHaveCount(0);
+  await expect(page.getByTestId("kind-promote")).toHaveCount(0);
+  await page.getByTestId("god-set").click();
+  await expect(page.getByTestId("kind-summon")).toBeVisible();
+  await page.getByTestId("kind-empower").click();
+  await page.getByTestId("pick-town-center").click();
+  await expect(page.getByTestId("action-row")).toHaveCount(1);
+  await expect(page.getByTestId("action-row").first()).toContainText("Fortalecer");
+});

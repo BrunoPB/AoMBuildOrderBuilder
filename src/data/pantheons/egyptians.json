@@ -41,6 +41,82 @@
       "note": "Matches the owner's 4.5/6/7.5/9/12 per min. Pharaoh-empowered Monument x1.2 (Isis x2.0, Ra Priest x1.12); Necropolis x1.25; Eclipse x1.5. Rates are per Monument and stack. Favor cap: the game files (major_gods.xml, techtree.xml) define no favor cap; the wiki says favor has no cap since Retold; aomr-analyzer lists 100 (Greeks) / 200 (others) but the owner confirmed no cap for Greeks, so no favorCap is set (owner to verify in game)."
     }
   },
+  "empower": {
+    "sources": [
+      {
+        "unit": "pharaoh",
+        "strength": 1
+      },
+      {
+        "unit": "pharaoh-new-kingdom",
+        "strength": 1
+      },
+      {
+        "unit": "priest",
+        "strength": 0.6,
+        "gods": ["ra"]
+      }
+    ],
+    "targets": [
+      "town-center",
+      "village-center",
+      "house",
+      "granary",
+      "mining-camp",
+      "lumber-camp",
+      "temple",
+      "dock",
+      "sentry-tower",
+      "armory",
+      "market",
+      "wonder",
+      "monument-to-villagers",
+      "monument-to-soldiers",
+      "monument-to-priests",
+      "monument-to-pharaohs",
+      "monument-to-gods",
+      "barracks",
+      "migdol-stronghold",
+      "siege-works",
+      "obelisk",
+      "lighthouse"
+    ],
+    "buildRate": 1.75,
+    "researchRate": 1.75,
+    "militaryTrainRate": 1.75,
+    "dropsiteRate": 1.2,
+    "favorRate": 1.2,
+    "favorRateByGod": {
+      "isis": 2.0
+    },
+    "economicUnits": ["laborer", "fishing-ship", "camel-caravan", "transport-ship"],
+    "meta": {
+      "source": "Game files 19.17020 (tactics/pharaoh.tactics Empower, tactics/priest.tactics Empower, techtree ArchaicAgeRa/ArchaicAgeIsis)",
+      "checkedAt": "2026-10-29",
+      "confidence": "high",
+      "note": "One building per Pharaoh/Priest. Priests empower only for Ra (60% strength: x1.45, x1.12). Isis: an empowered Monument makes x2.0 favor. Not modelled: Son of Osiris (x1.90), Ra's Monument aura (Mandjet), Valley of the Kings, range 3."
+    }
+  },
+  "summon": {
+    "by": "pharaoh",
+    "gods": ["set"],
+    "units": [
+      "baboon-of-set",
+      "hyena-of-set",
+      "gazelle-of-set",
+      "giraffe-of-set",
+      "crocodile-of-set",
+      "hippopotamus-of-set",
+      "rhinoceros-of-set",
+      "elephant-of-set"
+    ],
+    "meta": {
+      "source": "Game files 19.17020 (proto.xml Pharaoh/PharaohNewKingdom commands, techtree ArchaicAgeSet CommandAdd)",
+      "checkedAt": "2026-10-29",
+      "confidence": "high",
+      "note": "Set's Pharaoh summons Animals of Set with favor. A killed animal leaves its food as a carcass (huntable)."
+    }
+  },
   "gods": ["ra", "isis", "set"],
   "ageUps": [
     {
@@ -908,6 +984,14 @@
         "checkedAt": "2026-10-18",
         "confidence": "high",
         "note": "Animal of Set: summoned by the Pharaoh for Favor only (Set). Free animals are also granted on each Set age-up (see god file). Summoned by the Pharaoh (Set), not trained at a building; not trainable in the simulator."
+      },
+      "carcass": 93.75,
+      "fieldMeta": {
+        "carcass": {
+          "source": "Game files 19.17020 (proto.xml InitialResource Food x 0.75 (Animals of Set))",
+          "checkedAt": "2026-10-29",
+          "confidence": "high"
+        }
       }
     },
     {
@@ -932,6 +1016,14 @@
         "checkedAt": "2026-10-18",
         "confidence": "high",
         "note": "Animal of Set: summoned by the Pharaoh for Favor only (Set). Free animals are also granted on each Set age-up (see god file). Summoned by the Pharaoh (Set), not trained at a building; not trainable in the simulator."
+      },
+      "carcass": 93.75,
+      "fieldMeta": {
+        "carcass": {
+          "source": "Game files 19.17020 (proto.xml InitialResource Food x 0.75 (Animals of Set))",
+          "checkedAt": "2026-10-29",
+          "confidence": "high"
+        }
       }
     },
     {
@@ -956,6 +1048,14 @@
         "checkedAt": "2026-10-18",
         "confidence": "high",
         "note": "Animal of Set: summoned by the Pharaoh for Favor only (Set). Free animals are also granted on each Set age-up (see god file). Summoned by the Pharaoh (Set), not trained at a building; not trainable in the simulator."
+      },
+      "carcass": 150,
+      "fieldMeta": {
+        "carcass": {
+          "source": "Game files 19.17020 (proto.xml InitialResource Food x 0.75 (Animals of Set))",
+          "checkedAt": "2026-10-29",
+          "confidence": "high"
+        }
       }
     },
     {
@@ -980,6 +1080,14 @@
         "checkedAt": "2026-10-18",
         "confidence": "high",
         "note": "Animal of Set: summoned by the Pharaoh for Favor only (Set). Free animals are also granted on each Set age-up (see god file). Summoned by the Pharaoh (Set), not trained at a building; not trainable in the simulator."
+      },
+      "carcass": 300,
+      "fieldMeta": {
+        "carcass": {
+          "source": "Game files 19.17020 (proto.xml InitialResource Food x 0.75 (Animals of Set))",
+          "checkedAt": "2026-10-29",
+          "confidence": "high"
+        }
       }
     },
     {
@@ -1004,6 +1112,14 @@
         "checkedAt": "2026-10-18",
         "confidence": "high",
         "note": "Animal of Set: summoned by the Pharaoh for Favor only (Set). Free animals are also granted on each Set age-up (see god file). Summoned by the Pharaoh (Set), not trained at a building; not trainable in the simulator."
+      },
+      "carcass": 187.5,
+      "fieldMeta": {
+        "carcass": {
+          "source": "Game files 19.17020 (proto.xml InitialResource Food x 0.75 (Animals of Set))",
+          "checkedAt": "2026-10-29",
+          "confidence": "high"
+        }
       }
     },
     {
@@ -1028,6 +1144,14 @@
         "checkedAt": "2026-10-18",
         "confidence": "high",
         "note": "Animal of Set: summoned by the Pharaoh for Favor only (Set). Free animals are also granted on each Set age-up (see god file). Summoned by the Pharaoh (Set), not trained at a building; not trainable in the simulator."
+      },
+      "carcass": 375,
+      "fieldMeta": {
+        "carcass": {
+          "source": "Game files 19.17020 (proto.xml InitialResource Food x 0.75 (Animals of Set))",
+          "checkedAt": "2026-10-29",
+          "confidence": "high"
+        }
       }
     },
     {
@@ -1052,6 +1176,14 @@
         "checkedAt": "2026-10-18",
         "confidence": "high",
         "note": "Animal of Set: summoned by the Pharaoh for Favor only (Set). Free animals are also granted on each Set age-up (see god file). Summoned by the Pharaoh (Set), not trained at a building; not trainable in the simulator."
+      },
+      "carcass": 487.5,
+      "fieldMeta": {
+        "carcass": {
+          "source": "Game files 19.17020 (proto.xml InitialResource Food x 0.75 (Animals of Set))",
+          "checkedAt": "2026-10-29",
+          "confidence": "high"
+        }
       }
     },
     {
@@ -1076,6 +1208,14 @@
         "checkedAt": "2026-10-18",
         "confidence": "high",
         "note": "Animal of Set: summoned by the Pharaoh for Favor only (Set). Free animals are also granted on each Set age-up (see god file). Summoned by the Pharaoh (Set), not trained at a building; not trainable in the simulator."
+      },
+      "carcass": 675,
+      "fieldMeta": {
+        "carcass": {
+          "source": "Game files 19.17020 (proto.xml InitialResource Food x 0.75 (Animals of Set))",
+          "checkedAt": "2026-10-29",
+          "confidence": "high"
+        }
       }
     }
   ],

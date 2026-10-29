@@ -19,7 +19,7 @@ export type BuilderRef =
   | { kind: "unit"; unit: string };
 
 export type SimEvent = { t: number; action?: number } & (
-  | { kind: "trainStart"; unit: string; count: number; rally?: TaskTarget }
+  | { kind: "trainStart"; unit: string; count: number; rally?: TaskTarget; summon?: boolean }
   | { kind: "unitReady"; unit: string; count: number; to?: ResourceId | "idle" }
   | { kind: "buildStart"; building: string; by: BuilderRef; then?: TaskTarget }
   | { kind: "buildDone"; building: string; builderTo?: ResourceId | "idle"; builderUnit?: string }
@@ -32,6 +32,8 @@ export type SimEvent = { t: number; action?: number } & (
   | { kind: "timeShiftStart"; building: string; duration: number }
   | { kind: "timeShiftDone"; building: string }
   | { kind: "promote"; unit: string; to: string; count: number }
+  | { kind: "empower"; unit: string; building: string }
+  | { kind: "hunted"; unit: string; food: number }
   | { kind: "autoTrainOn"; unit: string; rally?: TaskTarget }
   | { kind: "autoTrainOff"; unit?: string }
   | { kind: "affordableOn"; unit: string }

@@ -28,17 +28,26 @@ export function Palette({ build, onAdd }: { build: Build; onAdd: (a: Action) => 
   if (!p || !god) return null;
   const minors = Object.values(chosenMinors(build));
 
-  const allowed = (requires?: string[]) => {
+  const allowed = (requires?: string[], excludeGods?: string[]) => {
+    if (excludeGods?.includes(build.god)) return false;
     const minorReqs = (requires ?? []).filter((r) => data.minors.has(r));
     if (minorReqs.length && !minorReqs.some((r) => minors.includes(r))) return false;
     return (requires ?? []).every((r) => !data.gods.has(r) || r === build.god);
   };
 
-  /** Only actions this god can use: Time Shift (Kronos), promotions (Atlanteans, Norse). */
+  const empowerSources = (p.def.empower?.sources ?? []).filter(
+    (s) => !s.gods || s.gods.includes(build.god),
+  );
+  const summonUnits =
+    p.def.summon && p.def.summon.gods.includes(build.god) ? p.def.summon.units : [];
+
+  /** Only actions this god can use (Time Shift, promotions, Empower, summons…). */
   const available = (k: ActionKind): boolean => {
     if (k === "timeShift") return god.timeShift !== undefined;
+    if (k === "empower") return empowerSources.length > 0;
+    if (k === "summon") return summonUnits.length > 0;
     if (k === "promote")
-      return [...p.units.values()].some((u) => u.promotion && allowed(u.requires));
+      return [...p.units.values()].some((u) => u.promotion && allowed(u.requires, u.excludeGods));
     return true;
   };
 
@@ -50,7 +59,7 @@ export function Palette({ build, onAdd }: { build: Build; onAdd: (a: Action) => 
       case "autoTrain":
       case "trainWhenAffordable":
         return [...p.units.values()]
-          .filter((u) => u.trainedAt.length > 0 && allowed(u.requires))
+          .filter((u) => u.trainedAt.length > 0 && allowed(u.requires, u.excludeGods))
           .map((u) => ({
             id: u.id,
             age: u.age,
@@ -58,11 +67,28 @@ export function Palette({ build, onAdd }: { build: Build; onAdd: (a: Action) => 
           }));
       case "promote":
         return [...p.units.values()]
-          .filter((u) => u.promotion && allowed(u.requires))
+          .filter((u) => u.promotion && allowed(u.requires, u.excludeGods))
           .map((u) => ({
             id: u.id,
             age: u.age,
             detail: `→ ${text(locale, p.units.get(u.promotion!.to)?.name ?? u.name)} · ${costText(u.promotion!.cost, t)}`,
+          }));
+      case "empower":
+        return (p.def.empower?.targets ?? [])
+          .map((id) => p.buildings.get(id))
+          .filter(
+            (b): b is NonNullable<typeof b> =>
+              b !== undefined && allowed(b.requires, b.excludeGods),
+          )
+          .map((b) => ({ id: b.id, age: b.age }));
+      case "summon":
+        return summonUnits
+          .map((id) => p.units.get(id))
+          .filter((u): u is NonNullable<typeof u> => u !== undefined)
+          .map((u) => ({
+            id: u.id,
+            age: u.age,
+            detail: `${costText(u.cost, t)} · ${u.trainTime} s${u.carcass ? ` · ${u.carcass} ${t("res.food").toLowerCase()}` : ""}`,
           }));
       case "timeShift":
         return (god.timeShift?.buildings ?? [])
@@ -71,7 +97,7 @@ export function Palette({ build, onAdd }: { build: Build; onAdd: (a: Action) => 
           .map((b) => ({ id: b.id, age: b.age, detail: `${b.buildTime} s` }));
       case "build":
         return [...p.buildings.values()]
-          .filter((b) => allowed(b.requires) && b.id !== p.def.townCenter)
+          .filter((b) => allowed(b.requires, b.excludeGods) && b.id !== p.def.townCenter)
           .map((b) => ({
             id: b.id,
             age: b.age,
@@ -79,7 +105,7 @@ export function Palette({ build, onAdd }: { build: Build; onAdd: (a: Action) => 
           }));
       case "research":
         return [...p.researches.values()]
-          .filter((r) => allowed(r.requires))
+          .filter((r) => allowed(r.requires, r.excludeGods))
           .map((r) => ({ id: r.id, age: r.age, detail: `${costText(r.cost, t)} · ${r.time} s` }));
       case "power": {
         const ids = [...god.powers, ...minors.flatMap((m) => data.minors.get(m)?.powers ?? [])];
@@ -110,6 +136,10 @@ export function Palette({ build, onAdd }: { build: Build; onAdd: (a: Action) => 
         return onAdd({ when: "asap", do: "build", building: o.id });
       case "timeShift":
         return onAdd({ when: "asap", do: "timeShift", building: o.id });
+      case "empower":
+        return onAdd({ when: "asap", do: "empower", by: empowerSources[0]!.unit, building: o.id });
+      case "summon":
+        return onAdd({ when: "asap", do: "summon", unit: o.id, count: 1, hunt: true });
       case "research":
         return onAdd({ when: "asap", do: "research", research: o.id });
       case "power":

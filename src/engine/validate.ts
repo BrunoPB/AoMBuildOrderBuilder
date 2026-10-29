@@ -20,7 +20,12 @@ export function validateRefs(build: Build, data: GameData): string[] {
       case "autoTrain":
       case "trainWhenAffordable":
       case "promote":
+      case "summon":
         need(p.units.has(a.unit), "unit", a.unit, i);
+        break;
+      case "empower":
+        need(p.units.has(a.by), "unit", a.by, i);
+        need(p.buildings.has(a.building), "building", a.building, i);
         break;
       case "stopAutoTrain":
       case "stopTrainWhenAffordable":

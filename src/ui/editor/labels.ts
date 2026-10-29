@@ -22,7 +22,10 @@ export function actionIcons(a: Action): string[] {
     case "autoTrain":
     case "trainWhenAffordable":
     case "promote":
+    case "summon":
       return [a.unit];
+    case "empower":
+      return [a.by, a.building];
     case "stopAutoTrain":
     case "stopTrainWhenAffordable":
       return a.unit ? [a.unit] : [];
@@ -87,6 +90,13 @@ export function actionText(c: Ctx, a: Action): string {
           a.count ?? 1,
         ),
       });
+    case "empower":
+      return t("step.empower", { building: n(c, a.building), unit: n(c, a.by) });
+    case "summon": {
+      const count = a.count ?? 1;
+      const base = t("step.summon", { count, unit: n(c, a.unit, count) });
+      return a.hunt ? `${base} → ${t("row.huntIt").toLocaleLowerCase(c.locale)}` : base;
+    }
     case "autoTrain":
       return a.rally
         ? t("step.autoTrainTo", { unit: n(c, a.unit, 2), to: targetLabel(c, a.rally) })
@@ -147,6 +157,8 @@ export const PALETTE_KINDS: ActionKind[] = [
   "power",
   "timeShift",
   "promote",
+  "empower",
+  "summon",
   "autoTrain",
   "stopAutoTrain",
   "trainWhenAffordable",

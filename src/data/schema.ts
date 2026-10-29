@@ -60,6 +60,7 @@ export const ModifierSchema = z.strictObject({
     "pop",
     "promotionTime",
     "promotionCost",
+    "builderRate",
   ]),
   /** mul: × value · add: + value · pct: + value × base, summed with other pct (game "BasePercent"). */
   op: z.enum(["mul", "add", "pct"]),
@@ -111,6 +112,12 @@ export const UnitSchema = z.strictObject({
   favorRate: z.number().nonnegative().optional(),
   /** Resources per minute generated just by existing (e.g. Norse Hersir favor). */
   trickle: CostSchema.optional(),
+  /** Trained in its own queue, without blocking the building (Greek heroes). */
+  splitQueue: z.boolean().optional(),
+  /** Food left when the animal is killed (Set's animals). */
+  carcass: z.number().nonnegative().optional(),
+  /** Major gods that do not have this unit. */
+  excludeGods: z.array(z.string()).optional(),
   meta: MetaSchema,
   fieldMeta: FieldMetaSchema,
 });
@@ -138,6 +145,8 @@ export const BuildingSchema = z.strictObject({
   favorRate: z.number().nonnegative().optional(),
   /** Resources per minute generated while it stands. */
   trickle: CostSchema.optional(),
+  /** Major gods that do not have this building (e.g. Thor has no Armory). */
+  excludeGods: z.array(z.string()).optional(),
   meta: MetaSchema,
   fieldMeta: FieldMetaSchema,
 });
@@ -157,6 +166,9 @@ export const ResearchSchema = z.strictObject({
   effects: z.array(ModifierSchema),
   /** Resources per minute once researched (e.g. Vaults of Erebus). */
   trickle: CostSchema.optional(),
+  /** Units created when the research completes (e.g. Thor's free Dwarf). */
+  spawn: z.record(z.string(), z.number().int().positive()).optional(),
+  excludeGods: z.array(z.string()).optional(),
   meta: MetaSchema,
   fieldMeta: FieldMetaSchema,
 });
@@ -218,6 +230,41 @@ export const FavorRuleSchema = z.discriminatedUnion("type", [
 ]);
 export type FavorRule = z.infer<typeof FavorRuleSchema>;
 
+/** A building boost issued by a unit (Egyptian Pharaoh/Priest "Empower"). Rates are at full strength. */
+export const EmpowerSchema = z.strictObject({
+  sources: z.array(
+    z.strictObject({
+      unit: z.string(),
+      /** Share of the full effect (Ra's Priests: 0.6). */
+      strength: z.number().positive(),
+      gods: z.array(z.string()).optional(),
+    }),
+  ),
+  targets: z.array(z.string()),
+  buildRate: z.number().positive(),
+  researchRate: z.number().positive(),
+  /** Training speed for military units only. */
+  militaryTrainRate: z.number().positive(),
+  /** Resources dropped at an empowered dropsite. */
+  dropsiteRate: z.number().positive(),
+  /** Favor of an empowered Monument; per-god overrides (Isis). */
+  favorRate: z.number().positive(),
+  favorRateByGod: z.record(z.string(), z.number().positive()).optional(),
+  /** Units whose training is not sped up (economic units). */
+  economicUnits: z.array(z.string()),
+  meta: MetaSchema,
+});
+export type Empower = z.infer<typeof EmpowerSchema>;
+
+/** Units a unit can summon with favor (Set's Pharaoh: Animals of Set). */
+export const SummonSchema = z.strictObject({
+  by: z.string(),
+  gods: z.array(z.string()),
+  units: z.array(z.string()),
+  meta: MetaSchema,
+});
+export type Summon = z.infer<typeof SummonSchema>;
+
 export const PantheonSchema = z.strictObject({
   id: PantheonIdSchema,
   name: LocalizedTextSchema,
@@ -229,6 +276,8 @@ export const PantheonSchema = z.strictObject({
   favor: FavorRuleSchema,
   /** Maximum favor that can be stored; absent = no cap. */
   favorCap: z.number().positive().optional(),
+  empower: EmpowerSchema.optional(),
+  summon: SummonSchema.optional(),
   gods: z.array(z.string()).length(3),
   ageUps: z.array(AgeUpSchema),
   units: z.array(UnitSchema),

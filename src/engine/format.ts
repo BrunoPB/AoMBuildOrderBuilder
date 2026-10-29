@@ -66,7 +66,10 @@ function describe(c: Ctx, e: SimEvent): StepAction | null {
         ...base,
         kind: "train",
         icons: [icon(c, e.unit)],
-        text: t("step.train", { count: e.count, unit: name(c, e.unit, e.count) }),
+        text: t(e.summon ? "step.summon" : "step.train", {
+          count: e.count,
+          unit: name(c, e.unit, e.count),
+        }),
         to: resourceOf(c, e.rally),
       };
     case "unitReady":
@@ -189,6 +192,21 @@ function describe(c: Ctx, e: SimEvent): StepAction | null {
           unit: name(c, e.unit, e.count),
           to: name(c, e.to, e.count),
         }),
+      };
+    case "empower":
+      return {
+        ...base,
+        kind: "power",
+        icons: [icon(c, e.unit), icon(c, e.building)],
+        text: t("step.empower", { building: name(c, e.building), unit: name(c, e.unit) }),
+      };
+    case "hunted":
+      return {
+        ...base,
+        kind: "ready",
+        icons: [icon(c, e.unit)],
+        text: t("step.hunted", { unit: name(c, e.unit), food: Math.round(e.food) }),
+        to: "food",
       };
     case "autoTrainOn":
       return {

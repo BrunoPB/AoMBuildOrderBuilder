@@ -1,0 +1,828 @@
+[
+  {
+    "id": "gatherer-go-berserk",
+    "gods": ["odin", "thor", "loki"],
+    "name": {
+      "pt-BR": "Vire Berserker",
+      "en": "Go Berserk"
+    },
+    "issuer": "gatherer",
+    "kind": "transform",
+    "buildOrder": true,
+    "trigger": "player",
+    "targets": ["berserk"],
+    "effects": [
+      {
+        "target": "promotionCost",
+        "op": "pct",
+        "value": -0.5,
+        "scope": {
+          "ids": ["gatherer"]
+        },
+        "gods": ["loki"],
+        "note": "ArchaicAgeLoki: VillagerNorseToBerserk food and gold x0.5 BasePercent -> 15 food + 10 gold."
+      }
+    ],
+    "cost": {
+      "food": 30,
+      "gold": 20
+    },
+    "time": 0,
+    "cooldown": 0,
+    "source": "Game files 19.17020 (techtree.xml tech VillagerNorseToBerserk <cost>, <researchpoints>0; proto_unit_commands.xml VillagerNorseToBerserk; unit_transform.xml VillagerNorse->Berserk; proto.xml VillagerNorse <command>/<transformcommand>; techtree.xml ArchaicAgeNorse TechStatus active VillagerNorseToBerserk; ArchaicAgeLoki Cost x0.5)",
+    "notes": "Per unit, instant (researchpoints 0), techtype ResearchableCommand, <transformvillager/>. Available from the Archaic Age for every Norse god. Gatherer (pop 1) becomes a Berserk (pop 2); whether a free pop slot is required is not in the files. The Berserk cannot gather (no Gather protoaction) but builds every building except Farm and Ox Cart. Already in norse.json as unit.promotion."
+  },
+  {
+    "id": "dwarf-go-berserk",
+    "gods": ["odin", "thor", "loki"],
+    "name": {
+      "pt-BR": "Vire Berserker",
+      "en": "Go Berserk"
+    },
+    "issuer": "dwarf",
+    "kind": "transform",
+    "buildOrder": true,
+    "trigger": "player",
+    "targets": ["berserk"],
+    "effects": [
+      {
+        "target": "promotionCost",
+        "op": "pct",
+        "value": -0.5,
+        "scope": {
+          "ids": ["dwarf"]
+        },
+        "gods": ["loki"],
+        "note": "ArchaicAgeLoki: VillagerDwarfToBerserk food and gold x0.5 BasePercent -> 5 food + 15 gold."
+      }
+    ],
+    "cost": {
+      "food": 10,
+      "gold": 30
+    },
+    "time": 0,
+    "cooldown": 0,
+    "source": "Game files 19.17020 (techtree.xml tech VillagerDwarfToBerserk; proto_unit_commands.xml VillagerDwarfToBerserk; unit_transform.xml VillagerDwarf->Berserk; proto.xml VillagerDwarf <command>/<transformcommand>)",
+    "notes": "Same as the Gatherer transform (instant, per unit, pop 1 -> 2). The command also has <displayontarget/>. Thor's Dwarf discount (-10 gold on training) does not change this cost."
+  },
+  {
+    "id": "ox-cart-dropsite",
+    "gods": ["odin", "thor", "loki"],
+    "name": {
+      "pt-BR": "Carroça de Boi",
+      "en": "Ox Cart"
+    },
+    "issuer": "ox-cart",
+    "kind": "dropsite",
+    "buildOrder": true,
+    "trigger": "player",
+    "targets": ["hunt", "herd", "berries", "farm", "wood", "gold"],
+    "effects": [
+      {
+        "target": "cost",
+        "op": "pct",
+        "value": -0.5,
+        "scope": {
+          "ids": ["ox-cart"]
+        },
+        "gods": ["loki"],
+        "note": "ArchaicAgeLoki: OxCartBuilding food/wood x0.5 BasePercent (and OxCart x0.5 Percent) -> 20 food + 20 wood."
+      }
+    ],
+    "cost": {
+      "food": 40,
+      "wood": 40
+    },
+    "time": 15,
+    "cooldown": 0,
+    "params": {
+      "hp": 80,
+      "speed": 3.8,
+      "los": 6,
+      "pop": 0,
+      "buildPoints": 15,
+      "accepts": ["food", "wood", "gold"],
+      "builtBy": ["gatherer", "dwarf"]
+    },
+    "source": "Game files 19.17020 (proto.xml OxCartBuilding <buildreplacement>OxCart, <cost>, <buildpoints>15; proto.xml OxCart unittype FoodDropsite/WoodDropsite/GoldDropsite/LogicalTypeConvertsHerds, <tech> list, no populationcount; proto.xml VillagerNorse/VillagerDwarf <train>OxCartBuilding, Build rate OxCartBuilding 1.0)",
+    "notes": "A Gatherer/Dwarf places an OxCartBuilding foundation (immobile, 15 build points = 15 s for one builder at rate 1.0; Cancel Building is its only command); when finished it is replaced by the OxCart unit. The cart is a dropsite for food, wood and gold (not favor: only Town/Village Centers are FavorDropsite), claims herdables (LogicalTypeConvertsHerds) and researches Husbandry, Plow, Irrigation, Flood Control, Hunting Equipment, Hand Axe, Bow Saw, Carpenters, Pickaxe, Shaft Mine, Quarry, Winter Harvest. 0 population, no build limit. Infantry/heroes cannot place it (OxCartBuilding not in their <train> lists). Loki -50%."
+  },
+  {
+    "id": "ox-cart-move",
+    "gods": ["odin", "thor", "loki"],
+    "name": {
+      "pt-BR": "Carroça de Boi",
+      "en": "Ox Cart"
+    },
+    "issuer": "ox-cart",
+    "kind": "relocate",
+    "buildOrder": true,
+    "trigger": "player",
+    "targets": [],
+    "effects": [],
+    "cost": {},
+    "time": 0,
+    "cooldown": 0,
+    "params": {
+      "speed": 3.8,
+      "parkRange": 2
+    },
+    "source": "Game files 19.17020 (proto.xml OxCart <maxvelocity>3.8, <command>SeekShelter, tactics ox_cart.tactics; tactics/ox_cart.tactics action Gather maxrange 2, donotdepositresources 1)",
+    "notes": "No pack/unpack: the OxCart is an ordinary land unit that works as a dropsite wherever it stands. Move it like any unit; right-clicking a resource sends it to within 2 m of it (Gather tactic with Idle anim, deposits nothing). Its only extra command is Seek Shelter. Relocation cost = travel time at 3.8 m/s."
+  },
+  {
+    "id": "worker-build",
+    "gods": ["odin", "thor", "loki"],
+    "name": {
+      "pt-BR": "Construir",
+      "en": "Build"
+    },
+    "issuer": "gatherer",
+    "kind": "other",
+    "buildOrder": true,
+    "trigger": "player",
+    "targets": ["house", "farm", "ox-cart"],
+    "effects": [],
+    "cost": {},
+    "time": 0,
+    "cooldown": 0,
+    "params": {
+      "builders": ["gatherer", "dwarf"],
+      "buildRate": 1.0,
+      "repairs": ["house"],
+      "repairRate": 0.4
+    },
+    "source": "Game files 19.17020 (proto.xml VillagerNorse and VillagerDwarf <train> House/OxCartBuilding/Farm, Build protoaction rate Farm/House/OxCartBuilding 1.0, Repair rate House 0.4)",
+    "notes": "Gatherers and Dwarves (identical lists) can only build House, Farm (enabled in Classical by ClassicalAgeNorse) and Ox Cart, and only repair Houses."
+  },
+  {
+    "id": "infantry-build",
+    "gods": ["odin", "thor", "loki"],
+    "name": {
+      "pt-BR": "Construir",
+      "en": "Build"
+    },
+    "issuer": "berserk",
+    "kind": "other",
+    "buildOrder": true,
+    "trigger": "player",
+    "targets": [
+      "house",
+      "temple",
+      "dock",
+      "longhouse",
+      "great-hall",
+      "market",
+      "armory",
+      "dwarven-armory",
+      "town-center",
+      "village-center",
+      "wooden-wall",
+      "sentry-tower",
+      "hill-fort",
+      "wonder"
+    ],
+    "effects": [
+      {
+        "target": "buildRate",
+        "op": "pct",
+        "value": 0.1,
+        "gods": ["loki"],
+        "note": "ArchaicAgeLoki: Build WorkRate x1.1 BasePercent vs unittype Building for AbstractInfantry (Berserk, Hirdman, Throwing Axeman, Huskarl, Hersir) and Godi. Applies to Houses they build too."
+      }
+    ],
+    "cost": {},
+    "time": 0,
+    "cooldown": 0,
+    "params": {
+      "builders": ["berserk", "hirdman", "throwing-axeman", "huskarl", "hersir", "godi"],
+      "buildRate": 1.0,
+      "repairRate": 0.4,
+      "wallRepairRate": 0.2
+    },
+    "source": "Game files 19.17020 (proto.xml Berserk/Hirdman/ThrowingAxeman/Huskarl/Hersir/Godi <train> lists and Build protoaction rate Building 1.0, Repair Building 0.4 / AbstractWall 0.2; techtree.xml ArchaicAgeLoki WorkRate Build)",
+    "notes": "Berserk (Archaic), Hersir (Archaic), Hirdman, Throwing Axeman (Classical), Huskarl, Godi (Heroic) place every Norse building except Farm and Ox Cart (also wall pieces and Titan Gate). Their Build rate is type 'Building', so they may help finish a Farm/Ox Cart foundation placed by a worker (not verified in game). Jarl and Raiding Cavalry cannot build. Dock build range 2."
+  },
+  {
+    "id": "hero-favor-trickle",
+    "gods": ["odin", "thor", "loki"],
+    "name": {
+      "pt-BR": "Hersir (Herói)",
+      "en": "Hersir (Hero)"
+    },
+    "issuer": "hersir",
+    "kind": "other",
+    "buildOrder": true,
+    "trigger": "auto",
+    "targets": [],
+    "effects": [
+      {
+        "target": "favorRate",
+        "op": "add",
+        "value": 0.6,
+        "scope": {
+          "ids": ["hersir", "godi"]
+        },
+        "note": "AutoGather Favor 0.01/s persistent = 0.6/min per Hersir and per Godi while alive."
+      },
+      {
+        "target": "favorRate",
+        "op": "pct",
+        "value": 0.5,
+        "scope": {
+          "ids": ["hersir"]
+        },
+        "gods": ["thor"],
+        "note": "Hammer of Thunder (Thor, Dwarven Armory): Hersir AutoGather Favor x1.5 BasePercent -> 0.9/min."
+      }
+    ],
+    "cost": {},
+    "time": 0,
+    "cooldown": 0,
+    "source": "Game files 19.17020 (proto.xml Hersir/Godi protoaction AutoGather rate Favor 0.01 persistent; techtree.xml HammerOfThunder WorkRate AutoGather Favor 1.5)",
+    "notes": "Passive, no command. Already modelled as unit trickle in norse.json. Combat favor (major_gods.xml bountyresourceearning) is the main Norse favor source; Odin x1.25 for Hersir, Jarl, Godi, Raiding Cavalry."
+  },
+  {
+    "id": "hero-relic-pickup",
+    "gods": ["odin", "thor", "loki"],
+    "name": {
+      "pt-BR": "Mãos Sagradas (Passivo)",
+      "en": "Sacred Hands (Passive)"
+    },
+    "issuer": "hersir",
+    "kind": "other",
+    "buildOrder": false,
+    "trigger": "player",
+    "targets": ["temple"],
+    "effects": [],
+    "cost": {},
+    "time": 0,
+    "cooldown": 0,
+    "limit": 1,
+    "source": "Game files 19.17020 (proto.xml Hersir/Godi Pickup/DropOff protoactions, maxcontained 1; abilities/abilities.xml hersir/godi PassiveSacredHands; STR_ABILITY_SACRED_HANDS_LR)",
+    "notes": "Hersir and Godi carry one relic each and drop it at a Temple. Relic effects are out of scope."
+  },
+  {
+    "id": "auto-scout",
+    "gods": ["odin", "thor", "loki"],
+    "name": {
+      "pt-BR": "Reconhecimento Automático",
+      "en": "Auto Scouting"
+    },
+    "issuer": "berserk",
+    "kind": "other",
+    "buildOrder": false,
+    "trigger": "player",
+    "targets": [],
+    "effects": [],
+    "cost": {},
+    "time": 0,
+    "cooldown": 0,
+    "source": "Game files 19.17020 (abilities/abilities.xml berserk and raven AbilityAutoScout noautocast; proto_unit_commands.xml AutoScout/AutoScoutCancel; STR_PUC_AUTO_SCOUT)",
+    "notes": "Toggle on Berserks (every god) and Odin's Ravens. No official short name: taken from STR_PUC_AUTO_SCOUT ('Turn on Auto Scouting for the selected unit')."
+  },
+  {
+    "id": "odin-ravens",
+    "gods": ["odin"],
+    "name": {
+      "pt-BR": "Batedores Corvos",
+      "en": "Raven scouts"
+    },
+    "issuer": "temple",
+    "kind": "summon",
+    "buildOrder": false,
+    "trigger": "auto",
+    "targets": ["raven"],
+    "effects": [],
+    "cost": {},
+    "time": 0,
+    "cooldown": 180,
+    "limit": 2,
+    "params": {
+      "firstSpawn": 2,
+      "respawnDelay": 180,
+      "respawnQuantity": 1,
+      "hp": 30,
+      "regen": 0.5,
+      "speed": 4.0,
+      "los": 16,
+      "losPerAge": 2,
+      "pop": 0,
+      "flying": true
+    },
+    "source": "Game files 19.17020 (techtree.xml ArchaicAgeOdin TechStatus obtainable RavenFirstSpawn/RavenRespawn; RavenFirstSpawn prereqs Temple>0 and Raven<1, 2x CreateUnit Raven generator AbstractTemple; RavenRespawn delay 180, MultipleActivation, DelayedFirstActivation, prereqs Temple>0 and Raven<2, 1x CreateUnit; ClassicalAgeOdin/HeroicAgeOdin/MythicAgeOdin LOS +2 Raven; proto.xml Raven)",
+    "notes": "Free, no command: 2 Ravens appear at the first Temple. Every 180 s while a Temple exists and fewer than 2 Ravens live, 1 Raven is created at a Temple. Ravens are flying scouts, 0 pop, commands Patrol/Delete/Auto Scouting. 'raven' is not an id in norse.json. The OdinsRavens object added to the Wonder (AddDependentUnit) is decoration."
+  },
+  {
+    "id": "thor-free-dwarf",
+    "gods": ["thor"],
+    "name": {
+      "pt-BR": "Anão grátis",
+      "en": "Free Dwarf"
+    },
+    "issuer": "dwarven-armory",
+    "kind": "summon",
+    "buildOrder": true,
+    "trigger": "auto",
+    "targets": ["dwarf"],
+    "effects": [],
+    "cost": {},
+    "time": 0,
+    "cooldown": 0,
+    "params": {
+      "perResearch": 1,
+      "techs": [
+        "copper-weapons-thor",
+        "copper-armor-thor",
+        "copper-shields-thor",
+        "bronze-weapons-thor",
+        "bronze-armor-thor",
+        "bronze-shields-thor",
+        "iron-weapons-thor",
+        "iron-armor-thor",
+        "iron-shields-thor",
+        "ballistics-thor",
+        "burning-pitch-thor",
+        "dwarven-weapons",
+        "meteoric-iron-armor",
+        "dragonscale-shields",
+        "hammer-of-thunder",
+        "dwarven-breastplate-thor"
+      ]
+    },
+    "source": "Game files 19.17020 (techtree.xml ArchaicAgeThor SetOnTechResearchedTech techtype ArmoryTechnology -> ThorDwarfSpawn; ThorDwarfSpawn CreateUnit VillagerDwarf generator DwarvenArmory, flags InfiniteTech, IgnoreIfAutoActivated)",
+    "notes": "When any ArmoryTechnology finishes (all 16 Dwarven Armory techs, including Hammer of Thunder and Dwarven Breastplate), 1 Dwarf appears at a Dwarven Armory. Not for techs granted automatically. Whether the Dwarf needs free pop room is not in the files."
+  },
+  {
+    "id": "thor-dwarven-armory-research",
+    "gods": ["thor"],
+    "name": {
+      "pt-BR": "Armaria de Anões",
+      "en": "Dwarven Armory"
+    },
+    "issuer": "dwarven-armory",
+    "kind": "other",
+    "buildOrder": true,
+    "trigger": "player",
+    "targets": [
+      "copper-weapons-thor",
+      "copper-armor-thor",
+      "copper-shields-thor",
+      "bronze-weapons-thor",
+      "bronze-armor-thor",
+      "bronze-shields-thor",
+      "iron-weapons-thor",
+      "iron-armor-thor",
+      "iron-shields-thor",
+      "ballistics-thor",
+      "burning-pitch-thor",
+      "dwarven-weapons",
+      "meteoric-iron-armor",
+      "dragonscale-shields",
+      "hammer-of-thunder",
+      "dwarven-breastplate-thor"
+    ],
+    "effects": [
+      {
+        "target": "researchTime",
+        "op": "mul",
+        "value": 3.03,
+        "scope": {
+          "ids": ["dwarven-armory"]
+        },
+        "note": "Archaic Age only: researchrate 0.33."
+      },
+      {
+        "target": "researchTime",
+        "op": "mul",
+        "value": 0.667,
+        "scope": {
+          "ids": ["dwarven-armory"]
+        },
+        "note": "Heroic Age only: research rate 1.5."
+      },
+      {
+        "target": "researchTime",
+        "op": "mul",
+        "value": 0.5,
+        "scope": {
+          "ids": ["dwarven-armory"]
+        },
+        "note": "Mythic Age only: research rate 2.0."
+      }
+    ],
+    "cost": {
+      "wood": 135
+    },
+    "time": 40,
+    "cooldown": 0,
+    "params": {
+      "researchRateByAge": {
+        "archaic": 0.33,
+        "classical": 1.0,
+        "heroic": 1.5,
+        "mythic": 2.0
+      },
+      "techCostMultiplier": 0.9
+    },
+    "source": "Game files 19.17020 (proto.xml DwarvenArmory researchrate 0.33, cost Wood 135, buildpoints 40, <tech> list; techtree.xml ArchaicAgeThor Enable DwarvenArmory + TechStatus obtainable for every armory tech + ArmoryTechnology Cost x0.90 BasePercent; ClassicalAgeThor ResearchRate 0.67, HeroicAgeThor 0.5, MythicAgeThor 0.5 Absolute)",
+    "notes": "Thor has no Armory. The Dwarven Armory (built by infantry/heroes from the Archaic Age) researches every armory tech in any age (ArchaicAgeThor makes them all obtainable; only chain prereqs such as Copper before Bronze apply). Research rate 0.33 / 1.0 / 1.5 / 2.0 by age; ArmoryTechnology costs x0.9 (food, wood, gold, favor). The researchTime effects are alternatives per age, not cumulative."
+  },
+  {
+    "id": "loki-myth-unit-spawn",
+    "gods": ["loki"],
+    "name": {
+      "pt-BR": "Gerar unidades mitológicas",
+      "en": "Spawn myth units"
+    },
+    "issuer": "hersir",
+    "kind": "summon",
+    "buildOrder": false,
+    "trigger": "auto",
+    "targets": [],
+    "effects": [],
+    "cost": {},
+    "time": 0,
+    "cooldown": 0,
+    "params": {
+      "contributors": {
+        "hersir": 0.5,
+        "godi": 0.15,
+        "humanSoldier": 0.15
+      },
+      "pointCost": {
+        "food": 1,
+        "wood": 1,
+        "gold": 1,
+        "favor": 10
+      },
+      "excludedTargets": ["Building", "MythUnit", "Huntable"],
+      "excludedRewards": ["Kraken", "JormunElver", "Dryad", "Maquizcoatl"],
+      "spawnLocation": "DamageTarget"
+    },
+    "source": "Game files 19.17020 (major_gods.xml civ Loki <bonusunitspawning><damagegoal name=LokiSpawn rewardtracking=Single>)",
+    "notes": "Passive, no command. Damage dealt by Hersirs (x0.5), Godi (x0.15) and human soldiers (x0.15) to enemy units (not buildings, myth units or huntables) fills a meter; when it reaches the next myth unit's cost (food+wood+gold, favor x10) a random myth unit spawns at the damaged target. Candidate pool (age / minor-god rules), pop-room need and meter start are not in the files (unlike Shennong's goal, no agerestricted/archaicspawn flags). Combat-driven, so not schedulable in a build order."
+  },
+  {
+    "id": "norse-free-sea-myth-units",
+    "gods": ["odin", "thor", "loki"],
+    "name": {
+      "pt-BR": "Kraken",
+      "en": "Kraken"
+    },
+    "issuer": "dock",
+    "kind": "summon",
+    "buildOrder": false,
+    "trigger": "auto",
+    "targets": ["kraken", "jormun-elver"],
+    "effects": [],
+    "cost": {},
+    "time": 0,
+    "cooldown": 0,
+    "limit": 1,
+    "source": "Game files 19.17020 (techtree.xml HeroicAgeNorse CreateUnit Kraken generator Dock; MythicAgeNorse CreateUnit JormunElver generator Dock)",
+    "notes": "Reaching the Heroic Age gives 1 free Kraken, reaching the Mythic Age 1 free Jormun Elver, at a Dock (needs a Dock). Every Norse god. Name shown is the Kraken's; the Jormun Elver is the Mythic one."
+  },
+  {
+    "id": "hamask",
+    "gods": ["odin"],
+    "name": {
+      "pt-BR": "Hamask (Passivo)",
+      "en": "Hamask (Passive)"
+    },
+    "issuer": "berserk",
+    "kind": "other",
+    "buildOrder": false,
+    "trigger": "auto",
+    "targets": [],
+    "effects": [],
+    "cost": {},
+    "time": 0,
+    "cooldown": 0,
+    "source": "Game files 19.17020 (abilities/abilities.xml berserk PassiveHamask tech Hamask; STR_ABILITY_HAMASK_LR)",
+    "notes": "Odin tech Hamask: Berserks move and attack faster as they lose HP."
+  },
+  {
+    "id": "natures-eyes",
+    "gods": ["loki"],
+    "name": {
+      "pt-BR": "Olhos da Natureza (Passivo)",
+      "en": "Nature's Eyes (Passive)"
+    },
+    "issuer": "berserk",
+    "kind": "other",
+    "buildOrder": false,
+    "trigger": "auto",
+    "targets": [],
+    "effects": [],
+    "cost": {},
+    "time": 0,
+    "cooldown": 0,
+    "source": "Game files 19.17020 (abilities/abilities.xml PassiveNaturesEyes tech EyesInTheForest (every Norse unit))",
+    "notes": "Loki tech Eyes in the Forest."
+  },
+  {
+    "id": "lifesteal",
+    "gods": ["odin", "thor", "loki"],
+    "name": {
+      "pt-BR": "Roubo de Vida (Passivo)",
+      "en": "Lifesteal (Passive)"
+    },
+    "issuer": "berserk",
+    "kind": "other",
+    "buildOrder": false,
+    "trigger": "auto",
+    "targets": [],
+    "effects": [],
+    "cost": {},
+    "time": 0,
+    "cooldown": 0,
+    "source": "Game files 19.17020 (abilities/abilities.xml berserk PassiveLifesteal tech Berserkergang)",
+    "notes": "Tyr tech Berserkergang."
+  },
+  {
+    "id": "valhallas-chosen",
+    "gods": ["thor", "loki"],
+    "name": {
+      "pt-BR": "Escolhido de Valhalla (Passivo)",
+      "en": "Valhalla's Chosen (Passive)"
+    },
+    "issuer": "berserk",
+    "kind": "other",
+    "buildOrder": false,
+    "trigger": "auto",
+    "targets": [],
+    "effects": [],
+    "cost": {},
+    "time": 0,
+    "cooldown": 0,
+    "source": "Game files 19.17020 (abilities/abilities.xml berserk PassiveValhallasChosen tech CallOfValhalla)",
+    "notes": "Bragi tech Call of Valhalla: dying Berserks return favor (ResourceReturn Favor 0.5; meaning unclear)."
+  },
+  {
+    "id": "viking",
+    "gods": ["odin", "loki"],
+    "name": {
+      "pt-BR": "Viking (Passivo)",
+      "en": "Viking (Passive)"
+    },
+    "issuer": "raiding-cavalry",
+    "kind": "other",
+    "buildOrder": false,
+    "trigger": "auto",
+    "targets": [],
+    "effects": [],
+    "cost": {},
+    "time": 0,
+    "cooldown": 0,
+    "source": "Game files 19.17020 (abilities/abilities.xml raidingcavalry PassiveViking tech Vikings)",
+    "notes": "Njord tech Vikings: gold from damage dealt (10 gold per 80 damage)."
+  },
+  {
+    "id": "skaldic-inspiration",
+    "gods": ["thor", "loki"],
+    "name": {
+      "pt-BR": "Inspiração Escáldica (Passivo)",
+      "en": "Skaldic Inspiration (Passive)"
+    },
+    "issuer": "longboat",
+    "kind": "other",
+    "buildOrder": false,
+    "trigger": "auto",
+    "targets": [],
+    "effects": [],
+    "cost": {},
+    "time": 0,
+    "cooldown": 0,
+    "source": "Game files 19.17020 (abilities/abilities.xml longboat PassiveSkaldicInspiration tech LongSerpent)",
+    "notes": "Bragi tech Long Serpent."
+  },
+  {
+    "id": "skadis-breath",
+    "gods": ["odin", "thor"],
+    "name": {
+      "pt-BR": "Sopro de Skadi (Passivo)",
+      "en": "Skadi's Breath (Passive)"
+    },
+    "issuer": "dreki",
+    "kind": "other",
+    "buildOrder": false,
+    "trigger": "auto",
+    "targets": [],
+    "effects": [],
+    "cost": {},
+    "time": 0,
+    "cooldown": 0,
+    "source": "Game files 19.17020 (abilities/abilities.xml dreki PassiveSkadisBreath tech ArcticWinds)",
+    "notes": "Skadi tech Arctic Winds."
+  },
+  {
+    "id": "valkyrie-heal",
+    "gods": ["odin", "thor"],
+    "name": {
+      "pt-BR": "Curar",
+      "en": "Heal"
+    },
+    "issuer": "valkyrie",
+    "kind": "other",
+    "buildOrder": false,
+    "trigger": "player",
+    "targets": [],
+    "effects": [],
+    "cost": {},
+    "time": 0,
+    "cooldown": 0,
+    "source": "Game files 19.17020 (abilities/abilities.xml valkyrie AbilityValkyrie; proto.xml Valkyrie Heal rate 7.5, range 10)",
+    "notes": "Freyja myth unit."
+  },
+  {
+    "id": "einheri-horn-blast",
+    "gods": ["odin", "loki"],
+    "name": {
+      "pt-BR": "Estouro da Trombeta",
+      "en": "Horn Blast"
+    },
+    "issuer": "einheri",
+    "kind": "other",
+    "buildOrder": false,
+    "trigger": "player",
+    "targets": [],
+    "effects": [],
+    "cost": {},
+    "time": 0,
+    "cooldown": 0,
+    "source": "Game files 19.17020 (abilities/abilities.xml einheri AbilityEinheri; proto.xml Einheri AutoBoost range 5)",
+    "notes": "Heimdall myth unit."
+  },
+  {
+    "id": "troll-boulder-toss",
+    "gods": ["thor", "loki"],
+    "name": {
+      "pt-BR": "Lançamento de Pedregulho",
+      "en": "Boulder Toss"
+    },
+    "issuer": "troll",
+    "kind": "other",
+    "buildOrder": false,
+    "trigger": "player",
+    "targets": [],
+    "effects": [],
+    "cost": {},
+    "time": 0,
+    "cooldown": 0,
+    "source": "Game files 19.17020 (abilities/abilities.xml troll AbilityTroll; proto.xml Troll ChargedRangedAttack 45, area 1.5, range 14)",
+    "notes": "Forseti myth unit."
+  },
+  {
+    "id": "battle-boar-buck",
+    "gods": ["thor", "loki"],
+    "name": {
+      "pt-BR": "Pinote",
+      "en": "Buck"
+    },
+    "issuer": "battle-boar",
+    "kind": "other",
+    "buildOrder": false,
+    "trigger": "player",
+    "targets": [],
+    "effects": [],
+    "cost": {},
+    "time": 0,
+    "cooldown": 0,
+    "source": "Game files 19.17020 (abilities/abilities.xml battleboar AbilityBattleBoar; proto.xml BattleBoar BuckAttack 20)",
+    "notes": "Bragi myth unit."
+  },
+  {
+    "id": "frost-giant-frigid-breath",
+    "gods": ["odin", "thor", "loki"],
+    "name": {
+      "pt-BR": "Sopro Frígido",
+      "en": "Frigid Breath"
+    },
+    "issuer": "frost-giant",
+    "kind": "other",
+    "buildOrder": false,
+    "trigger": "player",
+    "targets": [],
+    "effects": [],
+    "cost": {},
+    "time": 0,
+    "cooldown": 0,
+    "source": "Game files 19.17020 (abilities/abilities.xml frostgiant AbilityFrostGiant; proto.xml FrostGiant FreezeAttack range 4)",
+    "notes": "Skadi (Odin, Thor) or Hel (Loki)."
+  },
+  {
+    "id": "mountain-giant-bludgeon",
+    "gods": ["odin", "loki"],
+    "name": {
+      "pt-BR": "Porrete",
+      "en": "Bludgeon"
+    },
+    "issuer": "mountain-giant",
+    "kind": "other",
+    "buildOrder": false,
+    "trigger": "player",
+    "targets": [],
+    "effects": [],
+    "cost": {},
+    "time": 0,
+    "cooldown": 0,
+    "source": "Game files 19.17020 (abilities/abilities.xml mountaingiant AbilityMountainGiantBludgeon/Punt/DwarvenPunt; proto.xml ChargedHandAttack 400 vs buildings, DwarvenPunt 100, Punt 250)",
+    "notes": "Njord or Hel. Jotuns enables Punt (Bote) and disables Dwarven Punt (Bote dos Anões, vs Dwarves)."
+  },
+  {
+    "id": "fire-giant-fire-storm",
+    "gods": ["odin", "thor", "loki"],
+    "name": {
+      "pt-BR": "Tempestade de Fogo",
+      "en": "Fire Storm"
+    },
+    "issuer": "fire-giant",
+    "kind": "other",
+    "buildOrder": false,
+    "trigger": "player",
+    "targets": [],
+    "effects": [],
+    "cost": {},
+    "time": 0,
+    "cooldown": 0,
+    "source": "Game files 19.17020 (abilities/abilities.xml firegiant AbilityFireGiant; proto.xml FireGiant ChargedRangedAttack 15, area 4, range 14)",
+    "notes": "Baldr (Odin, Thor) or Hel (Loki)."
+  },
+  {
+    "id": "fenris-pack",
+    "gods": ["odin", "thor", "loki"],
+    "name": {
+      "pt-BR": "Pacote (Passivo)",
+      "en": "Pack (Passive)"
+    },
+    "issuer": "fenris-wolf-brood",
+    "kind": "other",
+    "buildOrder": false,
+    "trigger": "auto",
+    "targets": [],
+    "effects": [],
+    "cost": {},
+    "time": 0,
+    "cooldown": 0,
+    "source": "Game files 19.17020 (abilities/abilities.xml fenriswolfbrood AbilityFenrisWolfBrood; proto.xml IncreaseDamageWithLikeUnits 0.10, range 30)",
+    "notes": "Tyr myth unit."
+  },
+  {
+    "id": "kraken-throw-capsize",
+    "gods": ["odin", "thor", "loki"],
+    "name": {
+      "pt-BR": "Arremessar",
+      "en": "Throw"
+    },
+    "issuer": "kraken",
+    "kind": "other",
+    "buildOrder": false,
+    "trigger": "player",
+    "targets": [],
+    "effects": [],
+    "cost": {},
+    "time": 0,
+    "cooldown": 0,
+    "source": "Game files 19.17020 (abilities/abilities.xml kraken AbilityKrakenThrow/AbilityKrakenCapsize; proto.xml Throw 40 area 5, Capsize 40 area 5)",
+    "notes": "Capsize (Emborcar) vs ships."
+  },
+  {
+    "id": "jormun-elver-wake",
+    "gods": ["odin", "thor", "loki"],
+    "name": {
+      "pt-BR": "Rastro da Destruição",
+      "en": "Wake of Destruction"
+    },
+    "issuer": "jormun-elver",
+    "kind": "other",
+    "buildOrder": false,
+    "trigger": "player",
+    "targets": [],
+    "effects": [],
+    "cost": {},
+    "time": 0,
+    "cooldown": 0,
+    "source": "Game files 19.17020 (abilities/abilities.xml jormunelver AbilityJormunElver; proto.xml ChargedHandAttack 150, area 6)",
+    "notes": "vs naval units."
+  },
+  {
+    "id": "nidhogg-blazing-strafe",
+    "gods": ["loki"],
+    "name": {
+      "pt-BR": "Bombardeio Flamejante",
+      "en": "Blazing Strafe"
+    },
+    "issuer": "nidhogg",
+    "kind": "other",
+    "buildOrder": false,
+    "trigger": "player",
+    "targets": [],
+    "effects": [],
+    "cost": {},
+    "time": 0,
+    "cooldown": 0,
+    "source": "Game files 19.17020 (abilities/abilities.xml nidhogg AbilityNidhoggBlazingStrafe; proto.xml BlazingStrafeAttack 15, area 6)",
+    "notes": "Hel god power Nidhogg; 'nidhogg' is not a unit id in norse.json."
+  }
+]

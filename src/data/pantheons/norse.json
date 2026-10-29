@@ -1239,6 +1239,14 @@
         "checkedAt": "2026-10-18",
         "confidence": "high",
         "note": "ArchaicAgeNorse: 135 wood. Enabled only by ClassicalAgeOdin and ClassicalAgeLoki: Thor has no Armory (requires cannot express 'Odin or Loki')."
+      },
+      "excludeGods": ["thor"],
+      "fieldMeta": {
+        "excludeGods": {
+          "source": "Game files 19.17020 (techtree.xml ArchaicAgeThor (Dwarven Armory replaces the Armory))",
+          "checkedAt": "2026-10-29",
+          "confidence": "high"
+        }
       }
     },
     {
@@ -3056,6 +3064,16 @@
         "checkedAt": "2026-10-18",
         "confidence": "high",
         "note": "Thor version at the Dwarven Armory (available in any age). Thor's Dwarven Armory researches at x0.33 speed in Archaic, x1 Classical, x1.5 Heroic, x2 Mythic; the base (Classical) time is given. Each Dwarven Armory research spawns 1 free Dwarf (Thor bonus; not expressible as a modifier). Thor pays 10% less (modifier in thor.json)."
+      },
+      "spawn": {
+        "dwarf": 1
+      },
+      "fieldMeta": {
+        "spawn": {
+          "source": "Game files 19.17020 (techtree.xml ArchaicAgeThor SetOnTechResearchedTech ThorDwarfSpawn)",
+          "checkedAt": "2026-10-29",
+          "confidence": "high"
+        }
       }
     },
     {
@@ -3081,6 +3099,16 @@
         "checkedAt": "2026-10-18",
         "confidence": "high",
         "note": "Thor version at the Dwarven Armory (available in any age). Thor's Dwarven Armory researches at x0.33 speed in Archaic, x1 Classical, x1.5 Heroic, x2 Mythic; the base (Classical) time is given. Each Dwarven Armory research spawns 1 free Dwarf (Thor bonus; not expressible as a modifier). Thor pays 10% less (modifier in thor.json)."
+      },
+      "spawn": {
+        "dwarf": 1
+      },
+      "fieldMeta": {
+        "spawn": {
+          "source": "Game files 19.17020 (techtree.xml ArchaicAgeThor SetOnTechResearchedTech ThorDwarfSpawn)",
+          "checkedAt": "2026-10-29",
+          "confidence": "high"
+        }
       }
     },
     {
@@ -3106,6 +3134,16 @@
         "checkedAt": "2026-10-18",
         "confidence": "high",
         "note": "Thor version at the Dwarven Armory (available in any age). Thor's Dwarven Armory researches at x0.33 speed in Archaic, x1 Classical, x1.5 Heroic, x2 Mythic; the base (Classical) time is given. Each Dwarven Armory research spawns 1 free Dwarf (Thor bonus; not expressible as a modifier). Thor pays 10% less (modifier in thor.json)."
+      },
+      "spawn": {
+        "dwarf": 1
+      },
+      "fieldMeta": {
+        "spawn": {
+          "source": "Game files 19.17020 (techtree.xml ArchaicAgeThor SetOnTechResearchedTech ThorDwarfSpawn)",
+          "checkedAt": "2026-10-29",
+          "confidence": "high"
+        }
       }
     },
     {
@@ -3131,6 +3169,16 @@
         "checkedAt": "2026-10-18",
         "confidence": "high",
         "note": "Thor version at the Dwarven Armory (available in any age). Thor's Dwarven Armory researches at x0.33 speed in Archaic, x1 Classical, x1.5 Heroic, x2 Mythic; the base (Classical) time is given. Each Dwarven Armory research spawns 1 free Dwarf (Thor bonus; not expressible as a modifier). Thor pays 10% less (modifier in thor.json)."
+      },
+      "spawn": {
+        "dwarf": 1
+      },
+      "fieldMeta": {
+        "spawn": {
+          "source": "Game files 19.17020 (techtree.xml ArchaicAgeThor SetOnTechResearchedTech ThorDwarfSpawn)",
+          "checkedAt": "2026-10-29",
+          "confidence": "high"
+        }
       }
     },
     {
@@ -3156,6 +3204,16 @@
         "checkedAt": "2026-10-18",
         "confidence": "high",
         "note": "Thor version at the Dwarven Armory (available in any age). Thor's Dwarven Armory researches at x0.33 speed in Archaic, x1 Classical, x1.5 Heroic, x2 Mythic; the base (Classical) time is given. Each Dwarven Armory research spawns 1 free Dwarf (Thor bonus; not expressible as a modifier). Thor pays 10% less (modifier in thor.json)."
+      },
+      "spawn": {
+        "dwarf": 1
+      },
+      "fieldMeta": {
+        "spawn": {
+          "source": "Game files 19.17020 (techtree.xml ArchaicAgeThor SetOnTechResearchedTech ThorDwarfSpawn)",
+          "checkedAt": "2026-10-29",
+          "confidence": "high"
+        }
       }
     },
     {
@@ -3181,6 +3239,16 @@
         "checkedAt": "2026-10-18",
         "confidence": "high",
         "note": "Thor version at the Dwarven Armory (available in any age). Thor's Dwarven Armory researches at x0.33 speed in Archaic, x1 Classical, x1.5 Heroic, x2 Mythic; the base (Classical) time is given. Each Dwarven Armory research spawns 1 free Dwarf (Thor bonus; not expressible as a modifier). Thor pays 10% less (modifier in thor.json)."
+      },
+      "spawn": {
+        "dwarf": 1
+      },
+      "fieldMeta": {
+        "spawn": {
+          "source": "Game files 19.17020 (techtree.xml ArchaicAgeThor SetOnTechResearchedTech ThorDwarfSpawn)",
+          "checkedAt": "2026-10-29",
+          "confidence": "high"
+        }
       }
     },
     {
@@ -3206,6 +3274,16 @@
         "checkedAt": "2026-10-18",
         "confidence": "high",
         "note": "Thor version at the Dwarven Armory (available in any age). Thor's Dwarven Armory researches at x0.33 speed in Archaic, x1 Classical, x1.5 Heroic, x2 Mythic; the base (Classical) time is given. Each Dwarven Armory research spawns 1 free Dwarf (Thor bonus; not expressible as a modifier). Thor pays 10% less (modifier in thor.json)."
+      },
+      "spawn": {
+        "dwarf": 1
+      },
+      "fieldMeta": {
+        "spawn": {
+          "source": "Game files 19.17020 (techtree.xml ArchaicAgeThor SetOnTechResearchedTech ThorDwarfSpawn)",
+          "checkedAt": "2026-10-29",
+          "confidence": "high"
+        }
       }
     },
     {
@@ -3231,6 +3309,16 @@
         "checkedAt": "2026-10-18",
         "confidence": "high",
         "note": "Thor version at the Dwarven Armory (available in any age). Thor's Dwarven Armory researches at x0.33 speed in Archaic, x1 Classical, x1.5 Heroic, x2 Mythic; the base (Classical) time is given. Each Dwarven Armory research spawns 1 free Dwarf (Thor bonus; not expressible as a modifier). Thor pays 10% less (modifier in thor.json)."
+      },
+      "spawn": {
+        "dwarf": 1
+      },
+      "fieldMeta": {
+        "spawn": {
+          "source": "Game files 19.17020 (techtree.xml ArchaicAgeThor SetOnTechResearchedTech ThorDwarfSpawn)",
+          "checkedAt": "2026-10-29",
+          "confidence": "high"
+        }
       }
     },
     {
@@ -3256,6 +3344,16 @@
         "checkedAt": "2026-10-18",
         "confidence": "high",
         "note": "Thor version at the Dwarven Armory (available in any age). Thor's Dwarven Armory researches at x0.33 speed in Archaic, x1 Classical, x1.5 Heroic, x2 Mythic; the base (Classical) time is given. Each Dwarven Armory research spawns 1 free Dwarf (Thor bonus; not expressible as a modifier). Thor pays 10% less (modifier in thor.json)."
+      },
+      "spawn": {
+        "dwarf": 1
+      },
+      "fieldMeta": {
+        "spawn": {
+          "source": "Game files 19.17020 (techtree.xml ArchaicAgeThor SetOnTechResearchedTech ThorDwarfSpawn)",
+          "checkedAt": "2026-10-29",
+          "confidence": "high"
+        }
       }
     },
     {
@@ -3281,6 +3379,16 @@
         "checkedAt": "2026-10-18",
         "confidence": "high",
         "note": "Thor version at the Dwarven Armory (available in any age). Thor's Dwarven Armory researches at x0.33 speed in Archaic, x1 Classical, x1.5 Heroic, x2 Mythic; the base (Classical) time is given. Each Dwarven Armory research spawns 1 free Dwarf (Thor bonus; not expressible as a modifier). Thor pays 10% less (modifier in thor.json)."
+      },
+      "spawn": {
+        "dwarf": 1
+      },
+      "fieldMeta": {
+        "spawn": {
+          "source": "Game files 19.17020 (techtree.xml ArchaicAgeThor SetOnTechResearchedTech ThorDwarfSpawn)",
+          "checkedAt": "2026-10-29",
+          "confidence": "high"
+        }
       }
     },
     {
@@ -3306,6 +3414,16 @@
         "checkedAt": "2026-10-18",
         "confidence": "high",
         "note": "Thor version at the Dwarven Armory (available in any age). Thor's Dwarven Armory researches at x0.33 speed in Archaic, x1 Classical, x1.5 Heroic, x2 Mythic; the base (Classical) time is given. Each Dwarven Armory research spawns 1 free Dwarf (Thor bonus; not expressible as a modifier). Thor pays 10% less (modifier in thor.json)."
+      },
+      "spawn": {
+        "dwarf": 1
+      },
+      "fieldMeta": {
+        "spawn": {
+          "source": "Game files 19.17020 (techtree.xml ArchaicAgeThor SetOnTechResearchedTech ThorDwarfSpawn)",
+          "checkedAt": "2026-10-29",
+          "confidence": "high"
+        }
       }
     },
     {
@@ -3331,6 +3449,16 @@
         "checkedAt": "2026-10-18",
         "confidence": "high",
         "note": "Thor only. Thor's Dwarven Armory researches at x0.33 speed in Archaic, x1 Classical, x1.5 Heroic, x2 Mythic; the base (Classical) time is given. Each Dwarven Armory research spawns 1 free Dwarf (Thor bonus; not expressible as a modifier). Thor pays 10% less (modifier in thor.json)."
+      },
+      "spawn": {
+        "dwarf": 1
+      },
+      "fieldMeta": {
+        "spawn": {
+          "source": "Game files 19.17020 (techtree.xml ArchaicAgeThor SetOnTechResearchedTech ThorDwarfSpawn)",
+          "checkedAt": "2026-10-29",
+          "confidence": "high"
+        }
       }
     },
     {
@@ -3356,6 +3484,16 @@
         "checkedAt": "2026-10-18",
         "confidence": "high",
         "note": "Thor only. Thor's Dwarven Armory researches at x0.33 speed in Archaic, x1 Classical, x1.5 Heroic, x2 Mythic; the base (Classical) time is given. Each Dwarven Armory research spawns 1 free Dwarf (Thor bonus; not expressible as a modifier). Thor pays 10% less (modifier in thor.json)."
+      },
+      "spawn": {
+        "dwarf": 1
+      },
+      "fieldMeta": {
+        "spawn": {
+          "source": "Game files 19.17020 (techtree.xml ArchaicAgeThor SetOnTechResearchedTech ThorDwarfSpawn)",
+          "checkedAt": "2026-10-29",
+          "confidence": "high"
+        }
       }
     },
     {
@@ -3381,6 +3519,16 @@
         "checkedAt": "2026-10-18",
         "confidence": "high",
         "note": "Thor only. Thor's Dwarven Armory researches at x0.33 speed in Archaic, x1 Classical, x1.5 Heroic, x2 Mythic; the base (Classical) time is given. Each Dwarven Armory research spawns 1 free Dwarf (Thor bonus; not expressible as a modifier). Thor pays 10% less (modifier in thor.json)."
+      },
+      "spawn": {
+        "dwarf": 1
+      },
+      "fieldMeta": {
+        "spawn": {
+          "source": "Game files 19.17020 (techtree.xml ArchaicAgeThor SetOnTechResearchedTech ThorDwarfSpawn)",
+          "checkedAt": "2026-10-29",
+          "confidence": "high"
+        }
       }
     },
     {
@@ -3422,7 +3570,15 @@
           "checkedAt": "2026-10-18",
           "confidence": "high",
           "note": "Game relativity BasePercent (+x% of the unmodified base value, summed with other BasePercent effects) -> op pct."
+        },
+        "spawn": {
+          "source": "Game files 19.17020 (techtree.xml ArchaicAgeThor SetOnTechResearchedTech ThorDwarfSpawn)",
+          "checkedAt": "2026-10-29",
+          "confidence": "high"
         }
+      },
+      "spawn": {
+        "dwarf": 1
       }
     },
     {
@@ -3899,6 +4055,16 @@
         "checkedAt": "2026-10-18",
         "confidence": "high",
         "note": "Thor version (Dwarven Armory). Spawns 1 free Dwarf (Thor bonus); Thor pays 10% less."
+      },
+      "spawn": {
+        "dwarf": 1
+      },
+      "fieldMeta": {
+        "spawn": {
+          "source": "Game files 19.17020 (techtree.xml ArchaicAgeThor SetOnTechResearchedTech ThorDwarfSpawn)",
+          "checkedAt": "2026-10-29",
+          "confidence": "high"
+        }
       }
     },
     {

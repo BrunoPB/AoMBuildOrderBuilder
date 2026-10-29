@@ -1,0 +1,734 @@
+[
+  {
+    "id": "citizen-promote-hero",
+    "gods": ["kronos", "oranos", "gaia"],
+    "name": { "pt-BR": "Promover a Herói", "en": "Promote to Hero" },
+    "issuer": "citizen",
+    "kind": "promote",
+    "buildOrder": true,
+    "trigger": "player",
+    "targets": ["citizen-hero"],
+    "effects": [
+      {
+        "target": "promotionCost",
+        "op": "pct",
+        "value": -0.25,
+        "scope": { "ids": ["citizen"], "resources": ["food", "wood", "favor"] },
+        "gods": ["gaia"],
+        "note": "ArchaicAgeGaia: VillagerAtlanteanToHero Cost Food/Wood/Favor x0.75 BasePercent -> 48.75 food, 7.5 wood, 1.5 favor."
+      },
+      {
+        "target": "promotionTime",
+        "op": "mul",
+        "value": 0.25,
+        "scope": { "ids": ["citizen-hero"] },
+        "requires": "heart-of-the-titans",
+        "gods": ["kronos", "oranos"],
+        "note": "HeartOfTheTitans (Prometheus): ResearchPoints x0.25 Percent on techType HeroPromotion -> 7 s becomes 1.75 s."
+      }
+    ],
+    "cost": { "food": 65, "wood": 10, "favor": 2 },
+    "time": 7,
+    "cooldown": 0,
+    "keepsWorking": false,
+    "source": "Game files 19.17020 (techtree.xml tech VillagerAtlanteanToHero <cost>, <researchpoints>7, techtype HeroPromotion; ArchaicAgeAtlantean TechStatus active VillagerAtlanteanToHero; unit_transform.xml VillagerAtlantean -> VillagerAtlanteanHero; proto_unit_commands.xml VillagerAtlanteanToHero <transformselected/>, STR_TRANSFORM_TO_HERO; proto.xml VillagerAtlantean <command>/<transformcommand>, VillagerAtlanteanHero flag UnitTransformFree)",
+    "notes": "Per unit, from the Archaic Age for every Atlantean god. The promotion is a tech researched on the unit itself: the tech cost is paid when it starts, then 7 s (researchpoints). The hero proto has UnitTransformFree, so the hero's own proto cost (150f 25w 2 favor) is NOT charged. Pop unchanged (2 -> 2). The unit does not work during the 7 s: fan wiki says it is immobile during the transformation (Age of Empires Series Wiki, Atlanteans page; not in the files) -> keepsWorking false, confidence medium. Hero gains: gather rates x~1.10 (Huntable 1.55->1.70, Herdable 1.40->1.53, Farm/WildCrops 1.09->1.19, Wood 1.55->1.70, Gold 1.32->1.45), Build 1.5->1.65, HP 100->125, relic pickup. Theft of Fire (Prometheus; Kronos/Oranos) adds +20% gather and build to Citizen Heroes only. Rheia's Gift (Kronos/Gaia) leaves promotion favor unchanged (x0 then x2 BasePercent). Gaia starts with 2 Citizen Heroes instead of 2 Citizens (see gaia-start-hero-citizens). Already in atlanteans.json as unit.promotion."
+  },
+  {
+    "id": "oracle-promote-hero",
+    "gods": ["kronos", "oranos", "gaia"],
+    "name": { "pt-BR": "Promover a Herói", "en": "Promote to Hero" },
+    "issuer": "oracle",
+    "kind": "promote",
+    "buildOrder": true,
+    "trigger": "player",
+    "targets": ["oracle-hero"],
+    "effects": [
+      {
+        "target": "promotionTime",
+        "op": "mul",
+        "value": 0.25,
+        "scope": { "ids": ["oracle-hero"] },
+        "requires": "heart-of-the-titans",
+        "gods": ["kronos", "oranos"],
+        "note": "HeartOfTheTitans: 7 s -> 1.75 s."
+      }
+    ],
+    "cost": { "food": 30, "gold": 45, "favor": 1 },
+    "time": 7,
+    "cooldown": 0,
+    "keepsWorking": false,
+    "source": "Game files 19.17020 (techtree.xml tech OracleToHero <cost>, <researchpoints>7; unit_transform.xml Oracle -> OracleHero; proto_unit_commands.xml OracleToHero; proto.xml Oracle <command row=1 column=5>OracleToHero, OracleHero AutoGatherFavor/AutoLOS)",
+    "notes": "Per unit, Archaic+. Oracle Hero: AutoLOS cap 30 (Oracle 25), AutoGatherFavor modifymultiplier 0.80 (Oracle 0.75), speed 4.3 (3.8), HP 105 (90), can attack (9 hack, x6 vs myth) and carry relics. During the promotion the Oracle cannot move (wiki, see citizen-promote-hero); moving also resets the Oracle's LOS growth, so favor dips. With Sons of the Sun (Hyperion; Kronos/Oranos) every Oracle becomes a Hero for free (see sons-of-the-sun-oracle-heroes)."
+  },
+  {
+    "id": "murmillo-promote-hero",
+    "gods": ["kronos", "oranos", "gaia"],
+    "name": { "pt-BR": "Promover a Herói", "en": "Promote to Hero" },
+    "issuer": "murmillo",
+    "kind": "promote",
+    "buildOrder": true,
+    "trigger": "player",
+    "targets": ["murmillo-hero"],
+    "effects": [
+      {
+        "target": "promotionCost",
+        "op": "pct",
+        "value": -0.2,
+        "scope": { "ids": ["murmillo"], "resources": ["food", "gold"] },
+        "requires": "frontline-heroics",
+        "gods": ["oranos", "gaia"],
+        "note": "FrontlineHeroics (Oceanus): techType HeroInfantry Cost Food/Gold x0.80 BasePercent."
+      },
+      {
+        "target": "promotionTime",
+        "op": "mul",
+        "value": 0.25,
+        "scope": { "ids": ["murmillo-hero"] },
+        "requires": "heart-of-the-titans",
+        "gods": ["kronos", "oranos"]
+      }
+    ],
+    "cost": { "food": 40, "gold": 25, "favor": 2 },
+    "time": 7,
+    "cooldown": 0,
+    "keepsWorking": false,
+    "source": "Game files 19.17020 (techtree.xml MurmilloToHero <cost>, <researchpoints>7, techtype HeroPromotion + HeroInfantry; FrontlineHeroics; HeartOfTheTitans; unit_transform.xml Murmillo -> MurmilloHero)",
+    "notes": "Classical unit. Pop 2 -> 2, HP 110 -> 125. Unit is immobile while promoting (wiki)."
+  },
+  {
+    "id": "katapeltes-promote-hero",
+    "gods": ["kronos", "oranos", "gaia"],
+    "name": { "pt-BR": "Promover a Herói", "en": "Promote to Hero" },
+    "issuer": "katapeltes",
+    "kind": "promote",
+    "buildOrder": true,
+    "trigger": "player",
+    "targets": ["katapeltes-hero"],
+    "effects": [
+      {
+        "target": "promotionCost",
+        "op": "pct",
+        "value": -0.2,
+        "scope": { "ids": ["katapeltes"], "resources": ["food", "gold"] },
+        "requires": "frontline-heroics",
+        "gods": ["oranos", "gaia"]
+      },
+      {
+        "target": "promotionTime",
+        "op": "mul",
+        "value": 0.25,
+        "scope": { "ids": ["katapeltes-hero"] },
+        "requires": "heart-of-the-titans",
+        "gods": ["kronos", "oranos"]
+      }
+    ],
+    "cost": { "food": 45, "gold": 25, "favor": 2 },
+    "time": 7,
+    "cooldown": 0,
+    "keepsWorking": false,
+    "source": "Game files 19.17020 (techtree.xml KatapeltesToHero <cost>, <researchpoints>7, techtype HeroInfantry; unit_transform.xml)",
+    "notes": "Classical unit. Pop 2 -> 2, HP 115 -> 130."
+  },
+  {
+    "id": "turma-promote-hero",
+    "gods": ["kronos", "oranos", "gaia"],
+    "name": { "pt-BR": "Promover a Herói", "en": "Promote to Hero" },
+    "issuer": "turma",
+    "kind": "promote",
+    "buildOrder": true,
+    "trigger": "player",
+    "targets": ["turma-hero"],
+    "effects": [
+      {
+        "target": "promotionCost",
+        "op": "pct",
+        "value": -0.1,
+        "scope": { "ids": ["turma"], "resources": ["food", "wood", "gold"] },
+        "requires": "poseidons-secret",
+        "gods": ["oranos", "gaia"],
+        "note": "PoseidonsSecret (Theia): TechType HeroCavalry Cost Food/Wood/Gold x0.90 BasePercent. Not yet in atlanteans.json (it only has the cavalry unit cost)."
+      },
+      {
+        "target": "promotionTime",
+        "op": "mul",
+        "value": 0.25,
+        "scope": { "ids": ["turma-hero"] },
+        "requires": "heart-of-the-titans",
+        "gods": ["kronos", "oranos"]
+      }
+    ],
+    "cost": { "wood": 35, "gold": 30, "favor": 2 },
+    "time": 7,
+    "cooldown": 0,
+    "keepsWorking": false,
+    "source": "Game files 19.17020 (techtree.xml TurmaToHero <cost>, <researchpoints>7, techtype HeroCavalry; PoseidonsSecret; unit_transform.xml)",
+    "notes": "Classical unit. Pop 2 -> 2, HP 85 -> 95; the hero also shoots flying units (RangedAttackFlying)."
+  },
+  {
+    "id": "cheiroballista-promote-hero",
+    "gods": ["kronos", "oranos", "gaia"],
+    "name": { "pt-BR": "Promover a Herói", "en": "Promote to Hero" },
+    "issuer": "cheiroballista",
+    "kind": "promote",
+    "buildOrder": true,
+    "trigger": "player",
+    "targets": ["cheiroballista-hero"],
+    "effects": [
+      {
+        "target": "promotionTime",
+        "op": "mul",
+        "value": 0.25,
+        "scope": { "ids": ["cheiroballista-hero"] },
+        "requires": "heart-of-the-titans",
+        "gods": ["kronos", "oranos"]
+      }
+    ],
+    "cost": { "wood": 85, "gold": 75, "favor": 4 },
+    "time": 7,
+    "cooldown": 0,
+    "keepsWorking": false,
+    "source": "Game files 19.17020 (techtree.xml CheiroballistaToHero <cost>, <researchpoints>7; unit_transform.xml)",
+    "notes": "Classical unit. Pop 4 -> 4, HP 105 -> 120; hero also shoots flying units."
+  },
+  {
+    "id": "arcus-promote-hero",
+    "gods": ["kronos", "oranos", "gaia"],
+    "name": { "pt-BR": "Promover a Herói", "en": "Promote to Hero" },
+    "issuer": "arcus",
+    "kind": "promote",
+    "buildOrder": true,
+    "trigger": "player",
+    "targets": ["arcus-hero"],
+    "effects": [
+      {
+        "target": "promotionTime",
+        "op": "mul",
+        "value": 0.25,
+        "scope": { "ids": ["arcus-hero"] },
+        "requires": "heart-of-the-titans",
+        "gods": ["kronos", "oranos"]
+      }
+    ],
+    "cost": { "wood": 45, "gold": 25, "favor": 2 },
+    "time": 7,
+    "cooldown": 0,
+    "keepsWorking": false,
+    "source": "Game files 19.17020 (techtree.xml ArcusToHero <cost>, <researchpoints>7; unit_transform.xml)",
+    "notes": "Heroic unit. Pop 2 -> 2, HP 65 -> 70; hero also shoots flying units."
+  },
+  {
+    "id": "contarius-promote-hero",
+    "gods": ["kronos", "oranos", "gaia"],
+    "name": { "pt-BR": "Promover a Herói", "en": "Promote to Hero" },
+    "issuer": "contarius",
+    "kind": "promote",
+    "buildOrder": true,
+    "trigger": "player",
+    "targets": ["contarius-hero"],
+    "effects": [
+      {
+        "target": "promotionCost",
+        "op": "pct",
+        "value": -0.1,
+        "scope": { "ids": ["contarius"], "resources": ["food", "wood", "gold"] },
+        "requires": "poseidons-secret",
+        "gods": ["oranos", "gaia"],
+        "note": "PoseidonsSecret: HeroCavalry promotion x0.90 BasePercent (not yet in atlanteans.json)."
+      },
+      {
+        "target": "promotionTime",
+        "op": "mul",
+        "value": 0.25,
+        "scope": { "ids": ["contarius-hero"] },
+        "requires": "heart-of-the-titans",
+        "gods": ["kronos", "oranos"]
+      }
+    ],
+    "cost": { "food": 55, "gold": 30, "favor": 3 },
+    "time": 7,
+    "cooldown": 0,
+    "keepsWorking": false,
+    "source": "Game files 19.17020 (techtree.xml ContariusToHero <cost>, <researchpoints>7, techtype HeroCavalry; unit_transform.xml)",
+    "notes": "Heroic unit. Pop 3 -> 3, HP 155 -> 170."
+  },
+  {
+    "id": "destroyer-promote-hero",
+    "gods": ["kronos", "oranos", "gaia"],
+    "name": { "pt-BR": "Promover a Herói", "en": "Promote to Hero" },
+    "issuer": "destroyer",
+    "kind": "promote",
+    "buildOrder": true,
+    "trigger": "player",
+    "targets": ["destroyer-hero"],
+    "effects": [
+      {
+        "target": "promotionCost",
+        "op": "pct",
+        "value": -0.2,
+        "scope": { "ids": ["destroyer"], "resources": ["food", "gold"] },
+        "requires": "frontline-heroics",
+        "gods": ["oranos", "gaia"]
+      },
+      {
+        "target": "promotionTime",
+        "op": "mul",
+        "value": 0.25,
+        "scope": { "ids": ["destroyer-hero"] },
+        "requires": "heart-of-the-titans",
+        "gods": ["kronos", "oranos"]
+      }
+    ],
+    "cost": { "food": 55, "gold": 45, "favor": 3 },
+    "time": 7,
+    "cooldown": 0,
+    "keepsWorking": false,
+    "source": "Game files 19.17020 (techtree.xml DestroyerToHero <cost>, <researchpoints>7, techtype HeroInfantry; unit_transform.xml)",
+    "notes": "Heroic unit. Pop 3 -> 3, HP 150 -> 165."
+  },
+  {
+    "id": "fanatic-promote-hero",
+    "gods": ["kronos", "oranos", "gaia"],
+    "name": { "pt-BR": "Promover a Herói", "en": "Promote to Hero" },
+    "issuer": "fanatic",
+    "kind": "promote",
+    "buildOrder": true,
+    "trigger": "player",
+    "targets": ["fanatic-hero"],
+    "effects": [
+      {
+        "target": "promotionCost",
+        "op": "pct",
+        "value": -0.2,
+        "scope": { "ids": ["fanatic"], "resources": ["food", "gold"] },
+        "requires": "frontline-heroics",
+        "gods": ["oranos", "gaia"]
+      },
+      {
+        "target": "promotionTime",
+        "op": "mul",
+        "value": 0.25,
+        "scope": { "ids": ["fanatic-hero"] },
+        "requires": "heart-of-the-titans",
+        "gods": ["kronos", "oranos"]
+      }
+    ],
+    "cost": { "food": 55, "gold": 40, "favor": 3 },
+    "time": 7,
+    "cooldown": 0,
+    "keepsWorking": false,
+    "source": "Game files 19.17020 (techtree.xml FanaticToHero <cost>, <researchpoints>7, techtype HeroInfantry, displaynameid STR_UNIT_FANATIC_HERO_NAME; unit_transform.xml)",
+    "notes": "Mythic unit (Heroic with Horns of Consecration). Pop 3 -> 3, HP 155 -> 170."
+  },
+  {
+    "id": "sons-of-the-sun-oracle-heroes",
+    "gods": ["kronos", "oranos"],
+    "name": { "pt-BR": "Filhos do Sol", "en": "Sons of the Sun" },
+    "issuer": "temple",
+    "kind": "transform",
+    "buildOrder": true,
+    "trigger": "research",
+    "targets": ["oracle", "oracle-hero"],
+    "effects": [
+      {
+        "target": "promotionCost",
+        "op": "mul",
+        "value": 0,
+        "scope": { "ids": ["oracle"], "resources": ["favor"] },
+        "note": "OracleHero proto favor cost Assign 0 (Temple-trained Oracle Heroes cost 30f 45g)."
+      }
+    ],
+    "cost": { "gold": 200, "favor": 15 },
+    "time": 40,
+    "cooldown": 0,
+    "limit": 1,
+    "source": "Game files 19.17020 (techtree.xml SonsOfTheSun: TransformUnit Oracle -> OracleHero includequeued, Enable OracleHero, cost Favor Assign 0, Temple CommandRemove Oracle / CommandAdd OracleHero)",
+    "notes": "Hyperion research (Heroic). Every existing and queued Oracle becomes an Oracle Hero at once, for free and without the 7 s promotion; afterwards the Temple trains Oracle Heroes (30f 45g, 11 s) instead of Oracles. Already in atlanteans.json (research sons-of-the-sun)."
+  },
+  {
+    "id": "oracle-gather-favor",
+    "gods": ["kronos", "oranos", "gaia"],
+    "name": { "pt-BR": "Coleta Automática de Favor", "en": "Auto Gather Favor" },
+    "issuer": "oracle",
+    "kind": "other",
+    "buildOrder": true,
+    "trigger": "passive",
+    "targets": [],
+    "effects": [],
+    "cost": {},
+    "time": 0,
+    "cooldown": 0,
+    "source": "Game files 19.17020 (proto.xml Oracle AutoLOS modifyamount 1, modifyratecap 25, modifydecay 0.3; AutoGatherFavor rate Favor 0.01, modifybase 100, modifymultiplier 0.75, modifyratecap 25; OracleHero cap 30, multiplier 0.80; tactics/oracle.tactics AutoLOS IdleStatBonus, AutoGatherFavor modifyrangeuselos; STR_UNIT_ORACLE_LR)",
+    "notes": "No command: an Oracle standing still grows its LOS (bonus LOS +1/s up to the cap, decays 0.3 when moving) and makes more favor the larger its LOS. The only player action is where to park Oracles (overlap reduces favor - engine rule) and Patrol (STR_HK_PATROL, military). Oranos: cap +4 (25 -> 29, 30 -> 34) and unit LOS -4 on Oracles (ArchaicAgeOranos); Prophetic Sight (Theia; Oranos/Gaia) x1.10 BasePercent WorkRate and FullCapacityMultiplier plus Reveal Enemy UI. Already modelled as favorRate in atlanteans.json and gods/oranos.json."
+  },
+  {
+    "id": "citizen-gather-no-dropsite",
+    "gods": ["kronos", "oranos", "gaia"],
+    "name": { "pt-BR": "Coletar", "en": "Gather" },
+    "issuer": "citizen",
+    "kind": "dropsite",
+    "buildOrder": true,
+    "trigger": "passive",
+    "targets": [],
+    "effects": [],
+    "cost": {},
+    "time": 0,
+    "cooldown": 0,
+    "source": "Game files 19.17020 (proto.xml VillagerAtlantean/VillagerAtlanteanHero unittype LogicalTypeGatherNoDropsite, carrycapacity 1 per resource; STR_UNIT_CITIZEN_LR 'They do not drop off their resources at drop sites.')",
+    "notes": "Citizens need no dropsite (needsDropsite false in atlanteans.json). Citizen commands besides gather/build: Promote to Hero, Repair, Seek Shelter, Attack Move (proto.xml VillagerAtlantean <command>). No auto-build, auto-farm or other Citizen-only command exists in the files. Farms (150 wood, 10 bp, infinite) are ordinary; site commands SetVillagerToGather on Farm and ResourceUnitConstructFarm / MoveNearbyLiveStockToUnit on the Town/Village Center are generic."
+  },
+  {
+    "id": "atlantean-free-ships",
+    "gods": ["kronos", "oranos", "gaia"],
+    "name": { "pt-BR": "Nereida", "en": "Nereid" },
+    "issuer": "dock",
+    "kind": "summon",
+    "buildOrder": true,
+    "trigger": "ageUp",
+    "targets": ["nereid", "man-o-war"],
+    "effects": [],
+    "cost": {},
+    "time": 0,
+    "cooldown": 0,
+    "source": "Game files 19.17020 (techtree.xml HeroicAgeAtlantean CreateUnit Nereid generator Dock; MythicAgeAtlantean CreateUnit ManOWar generator Dock)",
+    "notes": "Passive: 1 free Nereid on reaching the Heroic Age and 1 free Man O' War on reaching the Mythic Age, at a Dock (none without a Dock). Oceanus also gives a free Servant at a Dock. Listed in PENDING as not modelled."
+  },
+  {
+    "id": "hero-relic-pickup",
+    "gods": ["kronos", "oranos", "gaia"],
+    "name": { "pt-BR": "Pegada", "en": "Pickup" },
+    "issuer": "citizen-hero",
+    "kind": "other",
+    "buildOrder": false,
+    "trigger": "player",
+    "targets": ["temple"],
+    "effects": [],
+    "cost": {},
+    "time": 0,
+    "cooldown": 0,
+    "source": "Game files 19.17020 (techtree.xml EnableRelicPickup ActionEnable Pickup on OracleHero, VillagerAtlanteanHero; proto.xml *Hero protoaction Pickup / DropOff rate AbstractTemple)",
+    "notes": "Every Atlantean hero (Citizen, Oracle and military heroes) can carry a relic to a Temple once a Temple exists. Relic bonuses depend on the map."
+  },
+  {
+    "id": "time-shift",
+    "gods": ["kronos"],
+    "name": { "pt-BR": "Deslocamento Temporal", "en": "Time Shift" },
+    "issuer": "building",
+    "kind": "relocate",
+    "buildOrder": true,
+    "trigger": "player",
+    "targets": [
+      "manor",
+      "farm",
+      "economic-guild",
+      "military-barracks",
+      "counter-barracks",
+      "dock",
+      "temple",
+      "armory",
+      "market",
+      "palace",
+      "sentry-tower",
+      "mirror-tower"
+    ],
+    "effects": [],
+    "cost": {},
+    "time": 0,
+    "cooldown": 0,
+    "limit": 2,
+    "perBuilding": {
+      "manor": { "costRatio": 0, "time": 25, "timeWithTemporalChaos": 12.5 },
+      "farm": { "costRatio": 0, "time": 10, "timeWithTemporalChaos": 5 },
+      "economic-guild": { "costRatio": 0, "time": 15, "timeWithTemporalChaos": 7.5 },
+      "military-barracks": { "costRatio": 0, "time": 30, "timeWithTemporalChaos": 15 },
+      "counter-barracks": { "costRatio": 0, "time": 25, "timeWithTemporalChaos": 12.5 },
+      "dock": { "costRatio": 0, "time": 30, "timeWithTemporalChaos": 15 },
+      "temple": { "costRatio": 0, "time": 40, "timeWithTemporalChaos": 20, "keepsGarrison": true },
+      "armory": { "costRatio": 0, "time": 40, "timeWithTemporalChaos": 20 },
+      "market": { "costRatio": 0, "time": 40, "timeWithTemporalChaos": 20 },
+      "palace": {
+        "costRatio": 0.5,
+        "cost": { "wood": 150, "gold": 150, "favor": 4 },
+        "costRatioWithTemporalChaos": 0.25,
+        "time": 115,
+        "timeWithTemporalChaos": 57.5
+      },
+      "sentry-tower": {
+        "costRatio": 0.5,
+        "cost": { "wood": 75, "gold": 50 },
+        "costRatioWithTemporalChaos": 0.25,
+        "time": 60,
+        "timeWithTemporalChaos": 30
+      },
+      "mirror-tower": {
+        "costRatio": 0.5,
+        "cost": { "wood": 37.5, "gold": 25, "favor": 2.5 },
+        "costRatioWithTemporalChaos": 0.25,
+        "time": 60,
+        "timeWithTemporalChaos": 30
+      }
+    },
+    "upgrades": {
+      "temporal-chaos": {
+        "limit": 3,
+        "timeRatio": 0.5,
+        "costRatio": { "palace": 0.25, "sentry-tower": 0.25, "mirror-tower": 0.25 },
+        "source": "techtree.xml TemporalChaos: TimeShiftingConcurrentShifts +1 Absolute; TimeShiftingTimeRatio 0.5 Percent (Building and each listed type); TimeShiftingCost 0.50 BasePercent for Palace, SentryTower, MirrorTower"
+      }
+    },
+    "source": "Game files 19.17020 (major_gods.xml civ Kronos <timeshifting maxconcurrenttimeshifts=2> protounit costratio/timeratio; proto_unit_commands.xml Unbuild command uiUnbuildSelectedUnit, STR_PUC_UNBUILD; hotkeys/default_keymap.xml Timeshift alt-c doCommandInSelected(\"Unbuild\"), STR_HK_TIMESHIFT; proto.xml buildpoints and costs; Temple flag KeepGarrisonTimeshift; BANG_Documentation Core Data Guide Extended: 'costRatio: Time shifting cost ratio according to building's cost. timeRatio: Time shifting duration ratio according to building's build points.')",
+    "notes": "Kronos only (no other civ has <timeshifting>). Command on one of the 12 listed own buildings (not Town/Village Center, Sky Passage, walls, Wonder): the building is unbuilt where it stands and rebuilt at the chosen spot. Cost = costRatio x the building's cost, paid on start (error STR_ERROR_UNBUILD_CANT_PAY otherwise); costRatio is assumed to apply to every resource of the cost, favor included. Duration = timeRatio (1.0) x build points, in seconds, no builders involved (guide semantics; not measured). Max 2 concurrent shifts (STR_ERROR_UNBUILD_LIMIT), 3 with Temporal Chaos (Archaic myth tech at the Temple, 100w 50g 10 favor, 20 s), which also halves every shift duration and makes Palace/Towers cost 25%. Temple keeps its garrison (relics). Not in the files (wiki/forum, low confidence): whether the old building keeps training/researching during the shift (the old AoM wiki says queues are cancelled), whether Temporal Scaffolding speeds the shift, the LOS requirement for the new spot. Forum bug reports: a Manor's pop room is re-added when the shift finishes (so pop cap drops while a Manor is shifting), and a shifted Temple counts as the newest Temple for age-up myth unit spawns. Already in gods/kronos.json (timeShift) and powers.json (time-shift)."
+  },
+  {
+    "id": "temporal-scaffolding",
+    "gods": ["kronos"],
+    "name": { "pt-BR": "Andaime Temporal (Passivo)", "en": "Temporal Scaffolding (Passive)" },
+    "issuer": "manor",
+    "kind": "other",
+    "buildOrder": true,
+    "trigger": "passive",
+    "targets": [],
+    "effects": [
+      {
+        "target": "buildRate",
+        "op": "mul",
+        "value": 1.25,
+        "condition": "nearManor",
+        "except": ["wonder"],
+        "note": "Per Manor in range; several Manors stack additively (owner measurement, already in gods/kronos.json)."
+      }
+    ],
+    "cost": {},
+    "time": 0,
+    "cooldown": 0,
+    "source": "Game files 19.17020 (techtree.xml ArchaicAgeKronos ActionEnable TemporalScaffoldingSmall/Large on Manor, ProtoUnitFlag DisplayRange; tactics/manor.tactics AutoRangedModify BuildRate x1.25, maxrange 20, targetunbuilt, LogicalTypeBuildingSmall/Large; abilities.xml manor PassiveTemporalScaffolding)",
+    "notes": "No command. Unbuilt buildings within 20 m of a Manor build 25% faster. Sky Passage, Wonder and gates are not BuildingSmall/Large. Already modelled."
+  },
+  {
+    "id": "kronos-extra-myth-units",
+    "gods": ["kronos"],
+    "name": { "pt-BR": "Cronos", "en": "Kronos" },
+    "issuer": "temple",
+    "kind": "summon",
+    "buildOrder": true,
+    "trigger": "ageUp",
+    "targets": ["promethean", "automaton", "satyr", "behemoth", "argus", "centimanus"],
+    "effects": [],
+    "cost": {},
+    "time": 0,
+    "cooldown": 0,
+    "source": "Game files 19.17020 (techtree.xml ArchaicAgeKronos/ClassicalAgeKronos/HeroicAgeKronos TechStatus obtainable KronosExtraPromethean/Automaton/Satyr/Behemoth/Argus/Centimanus; STR_CIV_KRONOS_LR)",
+    "notes": "Passive: on each age up Kronos gets 2 free myth units of the chosen minor god instead of 1. Already modelled (ageUpFreeUnits 2)."
+  },
+  {
+    "id": "deconstruction",
+    "gods": ["kronos"],
+    "name": { "pt-BR": "Desconstrução", "en": "Deconstruction" },
+    "issuer": "god-power",
+    "kind": "other",
+    "buildOrder": false,
+    "trigger": "player",
+    "targets": [],
+    "effects": [],
+    "cost": { "favor": 0 },
+    "time": 0,
+    "cooldown": 180,
+    "source": "Game files 19.17020 (god_powers/atlantean.godpowers power Deconstruction: placement enemy fullybuiltonly, excluded VillageCenter/Tent/AsgardianHillFort, cost 10, repeatcost 10, timefactor 0.4; techtree.xml ArchaicAgeKronos GodPower Deconstruction cooldown 180; STR_POWER_DECONSTRUCTION_LR, STR_HISTORY_TECHS_DECONSTRUCTION)",
+    "notes": "Targets an ENEMY fully built building (not Town Centers, Village Centers, Wonders, Titan Gates). It is unbuilt over 0.4 x its build points and the owner gets the building cost back. First cast free, then 10 favor, +10 per cast. Own build order not affected. Already in powers.json."
+  },
+  {
+    "id": "kronos-lost-unit-refund",
+    "gods": ["kronos"],
+    "name": { "pt-BR": "Cronos", "en": "Kronos" },
+    "issuer": "player",
+    "kind": "other",
+    "buildOrder": false,
+    "trigger": "passive",
+    "targets": [],
+    "effects": [],
+    "cost": {},
+    "time": 0,
+    "cooldown": 0,
+    "source": "Game files 19.17020 (techtree.xml ArchaicAgeKronos ResourceReturnRate 0.20 wood/gold AbstractSiegeWeapon, food/wood/gold/favor MythUnit; 0 for PrometheanOffspring)",
+    "notes": "Lost siege weapons and myth units refund 20% of their cost. Combat only."
+  },
+  {
+    "id": "sky-passage-teleport",
+    "gods": ["oranos"],
+    "name": { "pt-BR": "Teletransporte", "en": "Teleport" },
+    "issuer": "sky-passage",
+    "kind": "relocate",
+    "buildOrder": false,
+    "trigger": "player",
+    "targets": ["sky-passage"],
+    "effects": [],
+    "cost": {},
+    "time": 0,
+    "cooldown": 0,
+    "limit": 2,
+    "source": "Game files 19.17020 (abilities/abilities.xml skypassage ability SkyPassageDeploy actioncommand 1 notcastable; abilities/atlantean.abilities power SkyPassageDeploy type GeneralEffect placement Skip, STR_ABILITY_SKY_PASSAGE / _LR; proto.xml SkyPassage: cost 25 wood 8 favor, buildpoints 30, HP 500, buildlimit 2, maxcontained 100, contain LogicalTypeGarrisonInShips, notcontain TradeUnit, flags SharedGarrison, DoNotAllowAlliedGarrison, AutoCommandSingleUnit, AutoCommandStartDisabled; techtree.xml ArchaicAgeOranos Enable SkyPassage, Classical/Heroic/MythicAgeOranos BuildLimit +1)",
+    "notes": "Oranos only. Citizens build Sky Passages (25w 8 favor, 30 bp = 20 s with one Citizen); limit 2 in Archaic, +1 per age (3/4/5). All passages share one garrison (SharedGarrison, up to 100) for Citizens, Oracles, land soldiers, siege and land myth units (not caravans, flyers or Titans). 'Teleport' is a toggle on one passage (off by default, only one passage at a time): everything garrisoned in your passages ungarrisons there, so travel is instant. Teleport cooldown: none in the files (building tooltip says 'This can be done periodically'; wikis give no number) -> unknown, see PENDING. Not a build-order action: the simulator has no map distances; building the passage is a normal build action (sky-passage in atlanteans.json)."
+  },
+  {
+    "id": "oranos-vision",
+    "gods": ["oranos"],
+    "name": { "pt-BR": "Urano", "en": "Oranos" },
+    "issuer": "player",
+    "kind": "other",
+    "buildOrder": true,
+    "trigger": "passive",
+    "targets": ["oracle", "oracle-hero"],
+    "effects": [
+      {
+        "target": "favorRate",
+        "op": "mul",
+        "value": 1.285,
+        "scope": { "ids": ["oracle"] },
+        "note": "Already in gods/oranos.json."
+      },
+      {
+        "target": "favorRate",
+        "op": "mul",
+        "value": 1.25,
+        "scope": { "ids": ["oracle-hero"] },
+        "note": "Already in gods/oranos.json."
+      }
+    ],
+    "cost": {},
+    "time": 0,
+    "cooldown": 0,
+    "source": "Game files 19.17020 (techtree.xml ArchaicAgeOranos: LOS +4 Unit, -4 AbstractOracle; AutoGatherFavor/AutoLOS ModifyRateCap +4 AbstractOracle; ActionAddAttachingUnit OranosRevealer on HumanSoldier/Hero attacks; proto.xml OranosRevealer lifespan 25)",
+    "notes": "No command. +4 LOS on every unit (Oracles excluded), Oracle LOS/favor cap +4. Military part: units hit by Oranos soldiers/heroes stay visible 25 s."
+  },
+  {
+    "id": "shockwave",
+    "gods": ["oranos"],
+    "name": { "pt-BR": "Onda de Choque", "en": "Shockwave" },
+    "issuer": "god-power",
+    "kind": "other",
+    "buildOrder": false,
+    "trigger": "player",
+    "targets": [],
+    "effects": [],
+    "cost": { "favor": 0 },
+    "time": 0,
+    "cooldown": 180,
+    "source": "Game files 19.17020 (god_powers/atlantean.godpowers Shockwave radius 5, stunlength 1, cost 20, repeatcost 15; techtree.xml ArchaicAgeOranos GodPower cooldown 180)",
+    "notes": "Military. First cast free, then 20 favor, +15 per cast. Already in powers.json."
+  },
+  {
+    "id": "gaia-start-hero-citizens",
+    "gods": ["gaia"],
+    "name": { "pt-BR": "Cidadão (Herói)", "en": "Citizen (Hero)" },
+    "issuer": "player",
+    "kind": "other",
+    "buildOrder": true,
+    "trigger": "start",
+    "targets": ["citizen-hero"],
+    "effects": [],
+    "cost": {},
+    "time": 0,
+    "cooldown": 0,
+    "source": "Game files 19.17020 (major_gods.xml civ Gaia startingunits 2 VillagerAtlanteanHero; startingqueue autotrain VillagerAtlantean)",
+    "notes": "Gaia starts with 2 Citizen Heroes instead of 2 Citizens; the Town Center auto queue still trains normal Citizens. Already in gods/gaia.json (startExtras)."
+  },
+  {
+    "id": "gaia-lush",
+    "gods": ["gaia"],
+    "name": { "pt-BR": "Exuberância (Passivo)", "en": "Lush (Passive)" },
+    "issuer": "town-center",
+    "kind": "other",
+    "buildOrder": false,
+    "trigger": "passive",
+    "targets": ["town-center", "village-center", "manor", "economic-guild", "market"],
+    "effects": [],
+    "cost": {},
+    "time": 0,
+    "cooldown": 0,
+    "source": "Game files 19.17020 (major_gods.xml civ Gaia <terraincreeps> GaiaCreep maxradius 24, growthrate 0.50, decayrate 0.5, update 3-4 s, protounits TownCenter/VillageCenter/CitadelCenter/Manor/EconomicGuild/Market; terrain_unit_effects.xml GaiaCreepHealEffect healRate 1.0 (self), GaiaCreepSpeedEffect speed 1.15 with tech Channels; abilities.xml PassiveLush; STR_ABILITY_LUSH_LR, STR_CIV_GAIA_LR)",
+    "notes": "No command. Lush spreads up to 24 m around those buildings (0.5 m/s growth, so ~48 s to full size) and heals Gaia's units and buildings on it by 1 HP/s (the 'building regeneration'). Channels (Gaia, 100g 10 favor, 40 s): units +15% speed on Lush. No buildability rule is set on GaiaCreep, so the files do not block enemy building on Lush. No economic effect."
+  },
+  {
+    "id": "gaia-forest",
+    "gods": ["gaia"],
+    "name": { "pt-BR": "Floresta de Gaia", "en": "Gaia Forest" },
+    "issuer": "god-power",
+    "kind": "summon",
+    "buildOrder": true,
+    "trigger": "player",
+    "targets": [],
+    "effects": [],
+    "cost": { "favor": 0 },
+    "time": 0,
+    "cooldown": 120,
+    "source": "Game files 19.17020 (god_powers/atlantean.godpowers GaiaForest: radius 30, totalnumberoftrees 20, treespawninterval 3-5 s, cost 0, repeatcost 10, treeproto TreeGaia; proto.xml TreeGaia initialresource Wood 250.01, gatherratemultiplier 1.05, workersoftlimit 2; techtree.xml ArchaicAgeGaia GodPower cooldown 120)",
+    "notes": "Wood source: 20 Gaia Trees (250 wood each, 5000 total) appearing one every 3-5 s within 30 m; wood is gathered 5% faster from them. First two casts free, then +10 favor per cast. Already in powers.json (not modelled as a source)."
+  },
+  {
+    "id": "gaia-guild-discount",
+    "gods": ["gaia"],
+    "name": { "pt-BR": "Gaia", "en": "Gaia" },
+    "issuer": "economic-guild",
+    "kind": "other",
+    "buildOrder": true,
+    "trigger": "passive",
+    "targets": ["economic-guild"],
+    "effects": [
+      {
+        "target": "cost",
+        "op": "mul",
+        "value": 0.65,
+        "scope": {
+          "ids": [
+            "economic-guild",
+            "husbandry",
+            "plow",
+            "survival-equipment",
+            "irrigation",
+            "flood-control",
+            "hand-axe",
+            "bow-saw",
+            "carpenters",
+            "pickaxe",
+            "shaft-mine",
+            "quarry"
+          ]
+        },
+        "note": "Already in gods/gaia.json (with the *-gaia entries)."
+      }
+    ],
+    "cost": {},
+    "time": 0,
+    "cooldown": 0,
+    "source": "Game files 19.17020 (techtree.xml ArchaicAgeGaia Cost x0.65 Percent; ClassicalAgeGaia/HeroicAgeGaia TechStatus obtainable BowSaw/ShaftMine/Irrigation, Carpenters/Quarry/FloodControl; ArchaicAgeGaia obtainable Plow/HuntingEquipment)",
+    "notes": "No command. Economic Guild and its techs cost 35% less and come one age earlier."
+  },
+  {
+    "id": "myth-unit-abilities",
+    "gods": ["kronos", "oranos", "gaia"],
+    "name": { "pt-BR": "Habilidades", "en": "Abilities" },
+    "issuer": "myth-units",
+    "kind": "other",
+    "buildOrder": false,
+    "trigger": "player",
+    "targets": [
+      "promethean",
+      "automaton",
+      "caladria",
+      "servant",
+      "satyr",
+      "behemoth",
+      "stymphalian-bird",
+      "argus",
+      "centimanus",
+      "lampades",
+      "nereid"
+    ],
+    "effects": [],
+    "cost": {},
+    "time": 0,
+    "cooldown": 0,
+    "source": "Game files 19.17020 (abilities/atlantean.abilities; abilities/abilities.xml)",
+    "notes": "Military only: Caladria Burst Heal / Pacify (Rajada de Cura / Pacificar), Automaton Robotic Repair (Reparo Robótico), Promethean Earthly Death (passive split), Satyr Piercing Throw, Nereid Shark Bite, Behemoth Directional Plating (passive), Stymphalian Bird Bladed Feathers (passive), Argus Acidic Spray, Centimanus Linear Shockwave, Lampades Chaotic Realignment / Transfiguration. Atlantean ranged heroes (Turma, Arcus, Cheiroballista) also attack flyers."
+  }
+]

@@ -30,6 +30,10 @@ Answers taken from the game files (build 19.17020) are written up in [game-files
 
 ## Not modelled yet (needs schema or engine work)
 
+- [ ] God actions not simulated (see `GOD-ACTIONS.md`): Son of Osiris and Ra's Monument aura, Valley of the Kings, Set's Priest converting animals, Oranos' Sky Passage, Gaia Forest as wood, Odin's ravens, Loki's combat spawns, free Hippocampus/Kraken/Jormun Elver/Nereid/Man O' War (need a Dock), Dwarven Armory research speed per age, Poseidon's Secret on promotions.
+- [ ] Empower: does it stack (Pharaoh + Priest on the same building)? The simulator uses the strongest. Dropsite bonus is applied to every gatherer of a resource whose dropsite is empowered (no map).
+- [ ] Turning into Berserk: does it need a free population slot (pop 1 → 2)?
+
 - [x] Every major god starts with the Town Center auto-training its villager (`<startingqueue autotrain="true">` in major_gods.xml). Owner decision (2026-10-29): keep it manual — the build decides when to turn the auto queue on.
 - [ ] Temporal Chaos (Kronos): Time Shift ×0.5 time, 3 at once, 25% cost.
 

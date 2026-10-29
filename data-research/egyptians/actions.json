@@ -1,0 +1,612 @@
+[
+  {
+    "id": "pharaoh-empower",
+    "gods": ["ra", "isis", "set"],
+    "name": { "pt-BR": "Fortalecer", "en": "Empower" },
+    "issuer": "pharaoh",
+    "alsoIssuedBy": ["pharaoh-new-kingdom"],
+    "kind": "empower",
+    "buildOrder": true,
+    "targets": [
+      "town-center",
+      "village-center",
+      "house",
+      "granary",
+      "mining-camp",
+      "lumber-camp",
+      "temple",
+      "dock",
+      "sentry-tower",
+      "armory",
+      "market",
+      "wonder",
+      "monument-to-villagers",
+      "monument-to-soldiers",
+      "monument-to-priests",
+      "monument-to-pharaohs",
+      "monument-to-gods",
+      "barracks",
+      "migdol-stronghold",
+      "siege-works",
+      "obelisk",
+      "lighthouse"
+    ],
+    "notTargets": ["farm", "wall"],
+    "effects": [
+      {
+        "target": "buildTime",
+        "op": "mul",
+        "value": 0.5714,
+        "note": "BuildRate x1.75 on the empowered foundation (any target, incl. Obelisk/Lighthouse and a Town Center foundation on a Settlement): build time / 1.75."
+      },
+      {
+        "target": "researchTime",
+        "op": "mul",
+        "value": 0.5714,
+        "note": "ResearchRate x1.75 for researches (and age-ups) running in the empowered building."
+      },
+      {
+        "target": "trainTime",
+        "op": "mul",
+        "value": 0.5714,
+        "except": ["laborer", "fishing-ship", "camel-caravan", "transport-ship"],
+        "note": "MilitaryTrainingRate x1.75: only units of type MilitaryUnit trained in the empowered building (Priests, Mercenaries, soldiers, siege, warships, myth units). Laborers, Fishing Ships and Camel Caravans (EconomicUnit) are NOT sped up; the Transport Ship has neither type (assumed not sped up). Not on Obelisk/Lighthouse."
+      },
+      {
+        "target": "gatherRate",
+        "op": "mul",
+        "value": 1.2,
+        "note": "DropsiteRate x1.2: resources dropped off AT the empowered dropsite are worth +20% (Laborers, Fishing Ships, Camel Caravans). Applies only to the sources that building accepts (town-center/village-center: all land sources; granary: hunt/herd/berries/farm; mining-camp: gold; lumber-camp: wood; dock: fish; market: caravan gold)."
+      },
+      {
+        "target": "favorRate",
+        "op": "mul",
+        "value": 1.2,
+        "scope": {
+          "ids": [
+            "monument-to-villagers",
+            "monument-to-soldiers",
+            "monument-to-priests",
+            "monument-to-pharaohs",
+            "monument-to-gods"
+          ]
+        },
+        "note": "FavorGatherRate x1.2 on an empowered Monument."
+      }
+    ],
+    "otherEffects": {
+      "ROF": 0.75,
+      "LOSFactor": 1.75,
+      "GodPowerBlockRadius": 2.0
+    },
+    "godModifiers": {
+      "isis": [
+        {
+          "target": "favorRate",
+          "op": "mul",
+          "value": 1.667,
+          "scope": {
+            "ids": [
+              "monument-to-villagers",
+              "monument-to-soldiers",
+              "monument-to-priests",
+              "monument-to-pharaohs",
+              "monument-to-gods"
+            ]
+          },
+          "note": "ArchaicAgeIsis EmpowerModify FavorGatherRate x1.667 BasePercent: empowered Monument favor x2.0 instead of x1.2 (civ text: +100%). Also the Monument god-power shield 25 -> 50 (GodPowerBlockRadius x2) and AreaHeal (1 HP/s, range 50) only while empowered."
+        }
+      ]
+    },
+    "upgrades": [
+      {
+        "research": "valley-of-the-kings",
+        "gods": ["isis", "set"],
+        "targets": ["barracks", "migdol-stronghold"],
+        "effects": [
+          {
+            "target": "trainTime",
+            "op": "mul",
+            "value": 1.4286,
+            "scope": {
+              "ids": [
+                "spearman",
+                "axeman",
+                "slinger",
+                "chariot-archer",
+                "camel-rider",
+                "war-elephant"
+              ]
+            },
+            "note": "Relative to an UNempowered building: MilitaryTrainingRate 1.75 x 0.4 (BasePercent) = 0.70, i.e. each batch takes 1/0.7 as long, but DoubleTrainChance = 1.0 (every trained unit spawns a second one). Net: 2 units per 1.43x time = 1.4x unit output vs 1.75x without the tech; the extra unit is presumed free (not in the files)."
+          }
+        ],
+        "source": "Game files 19.17020 (techtree.xml ValleyOfTheKings; tactics/pharaoh.tactics <logicaltypeaffectedbyvalleyofthekings>)"
+      }
+    ],
+    "range": 3,
+    "cost": {},
+    "time": 0,
+    "cooldown": 0,
+    "limit": 1,
+    "source": "Game files 19.17020 (tactics/pharaoh.tactics action Empower <empowerdata>/<natureempowerdata>; abilities/abilities.xml <pharaoh>/<pharaohnewkingdom> AbilityEmpower; abilities/egyptian.abilities AbilityEmpower; proto.xml unittype LogicalTypeBuildingThatCanBeEmpowered / LogicalTypeBuildingEmpoweredForLOS; string_table.txt STR_ABILITY_EMPOWER, STR_TUT_EGYPTIANS_CHAT_04..06)",
+    "confidence": "high",
+    "notes": "One Pharaoh empowers one building at a time and must stay within 3 of it (continuous unit action; the effect stops when he leaves — engine behaviour, not a file number). No cost, no cooldown, no auto-cast (noautocast). Can target allied buildings too (placement ally). Obelisk and Lighthouse only get BuildRate/ResearchRate/LOSFactor x1.75. A second Pharaoh (pharaoh-new-kingdom, Osiris' New Kingdom: Ra and Isis) doubles the empower count. The Pharaoh spawns 2 s after game start at the TC (PharaohFirstSpawn) and respawns free 90 s after dying (PharaohRespawn delay 90). Son of Osiris uses stronger values (see son-of-osiris-empower). Stacking with a Ra Priest or a Ra Monument aura on the same building is not defined in the files (assume the strongest applies, no stacking)."
+  },
+  {
+    "id": "priest-empower",
+    "gods": ["ra"],
+    "name": { "pt-BR": "Fortalecer", "en": "Empower" },
+    "issuer": "priest",
+    "kind": "empower",
+    "buildOrder": true,
+    "targets": [
+      "town-center",
+      "village-center",
+      "house",
+      "granary",
+      "mining-camp",
+      "lumber-camp",
+      "temple",
+      "dock",
+      "sentry-tower",
+      "armory",
+      "market",
+      "wonder",
+      "monument-to-villagers",
+      "monument-to-soldiers",
+      "monument-to-priests",
+      "monument-to-pharaohs",
+      "monument-to-gods",
+      "barracks",
+      "migdol-stronghold",
+      "siege-works",
+      "obelisk",
+      "lighthouse"
+    ],
+    "notTargets": ["farm", "wall"],
+    "effects": [
+      {
+        "target": "buildTime",
+        "op": "mul",
+        "value": 0.6897,
+        "note": "BuildRate x1.45 (foundations, incl. TC on a Settlement)."
+      },
+      { "target": "researchTime", "op": "mul", "value": 0.6897, "note": "ResearchRate x1.45." },
+      {
+        "target": "trainTime",
+        "op": "mul",
+        "value": 0.6897,
+        "except": ["laborer", "fishing-ship", "camel-caravan", "transport-ship"],
+        "note": "MilitaryTrainingRate x1.45 (military units only, as for the Pharaoh)."
+      },
+      {
+        "target": "gatherRate",
+        "op": "mul",
+        "value": 1.12,
+        "note": "DropsiteRate x1.12 on resources dropped at the empowered dropsite."
+      },
+      {
+        "target": "favorRate",
+        "op": "mul",
+        "value": 1.12,
+        "scope": {
+          "ids": [
+            "monument-to-villagers",
+            "monument-to-soldiers",
+            "monument-to-priests",
+            "monument-to-pharaohs",
+            "monument-to-gods"
+          ]
+        },
+        "note": "FavorGatherRate x1.12 on an empowered Monument."
+      }
+    ],
+    "otherEffects": { "ROF": 0.85, "LOSFactor": 1.45 },
+    "range": 3,
+    "cost": {},
+    "time": 0,
+    "cooldown": 0,
+    "limit": 1,
+    "source": "Game files 19.17020 (tactics/priest.tactics action Empower, active 0; techtree.xml ArchaicAgeRa ActionEnable Empower on Priest; abilities/abilities.xml <priest> AbilityEmpower tech ArchaicAgeRa; string_replacement_values.xml RA_PHARAOH_EFFICIENCY 60)",
+    "confidence": "high",
+    "notes": "Ra only (disabled for Isis/Set). 60% of the Pharaoh's bonus (0.45 vs 0.75; 0.12 vs 0.20). One building per Priest, range 3, no cost; every Priest (100 Gold, 2 pop, 10 s; the game starts with 1) is an extra empowerer, so Ra can empower many buildings at once. A Priest-empowered Monument does NOT trigger Ra's Monument aura (needs a Pharaoh). Priests have no Valley of the Kings section and no GodPowerBlockRadius (irrelevant: Ra has neither Thoth nor Isis' shield). A web patch note mentions 70% efficiency; the installed files say 60% (1.45) — files win."
+  },
+  {
+    "id": "monument-empower-aura",
+    "gods": ["ra"],
+    "name": { "pt-BR": "Mandjet (Passivo)", "en": "Mandjet (Passive)" },
+    "issuer": "pharaoh",
+    "kind": "empower",
+    "buildOrder": true,
+    "targets": [
+      "monument-to-villagers",
+      "monument-to-soldiers",
+      "monument-to-priests",
+      "monument-to-pharaohs",
+      "monument-to-gods"
+    ],
+    "effects": [
+      {
+        "target": "buildTime",
+        "op": "mul",
+        "value": 0.6897,
+        "note": "Every empowerable building (and foundation: includeunbuilt) within 30 of the Monument: BuildRate x1.45."
+      },
+      {
+        "target": "researchTime",
+        "op": "mul",
+        "value": 0.6897,
+        "note": "ResearchRate x1.45 in buildings within 30."
+      },
+      {
+        "target": "trainTime",
+        "op": "mul",
+        "value": 0.6897,
+        "except": ["laborer", "fishing-ship", "camel-caravan", "transport-ship"],
+        "note": "MilitaryTrainingRate x1.45 in buildings within 30."
+      },
+      {
+        "target": "gatherRate",
+        "op": "mul",
+        "value": 1.12,
+        "note": "DropsiteRate x1.12 at dropsites within 30."
+      },
+      {
+        "target": "favorRate",
+        "op": "mul",
+        "value": 1.12,
+        "scope": {
+          "ids": [
+            "monument-to-villagers",
+            "monument-to-soldiers",
+            "monument-to-priests",
+            "monument-to-pharaohs",
+            "monument-to-gods"
+          ]
+        },
+        "note": "FavorGatherRate x1.12 on other Monuments within 30 (the aura source itself has the Pharaoh's x1.2)."
+      }
+    ],
+    "otherEffects": { "ROF": 0.85, "LOSFactor": 1.45 },
+    "range": 30,
+    "cost": {},
+    "time": 0,
+    "cooldown": 0,
+    "limit": 1,
+    "source": "Game files 19.17020 (tactics/monument.tactics action MonumentEmpowerAura: maxrange 30, restrictifempowered 1, restrictempowertype AbstractPharaoh, nostack 1, includeunbuilt 1, modifyabstracttype Building; techtree.xml ArchaicAgeRa ActionEnable MonumentEmpowerAura on AbstractMonument; abilities.xml PassiveMandjet tech ArchaicAgeRa; string_table.txt STR_ABILITY_MANDJET_LR)",
+    "confidence": "high",
+    "notes": "Passive, triggered by the click 'Pharaoh empowers a Monument' (Pharaoh, New Kingdom Pharaoh or Son of Osiris; a Priest does not trigger it). While that lasts, the Monument empowers at Priest strength every building within 30, foundations included. Auras of several Monuments do not stack (nostack). The aura's own data only covers empowerable buildings (Farms/Walls excluded). Interaction with a building that is also directly empowered is not defined in the files."
+  },
+  {
+    "id": "son-of-osiris-empower",
+    "gods": ["ra", "isis"],
+    "name": { "pt-BR": "Fortalecer", "en": "Empower" },
+    "issuer": "pharaoh",
+    "kind": "empower",
+    "buildOrder": true,
+    "requires": ["son-of-osiris"],
+    "targets": [
+      "town-center",
+      "village-center",
+      "house",
+      "granary",
+      "mining-camp",
+      "lumber-camp",
+      "temple",
+      "dock",
+      "sentry-tower",
+      "armory",
+      "market",
+      "wonder",
+      "monument-to-villagers",
+      "monument-to-soldiers",
+      "monument-to-priests",
+      "monument-to-pharaohs",
+      "monument-to-gods",
+      "barracks",
+      "migdol-stronghold",
+      "siege-works",
+      "obelisk",
+      "lighthouse"
+    ],
+    "effects": [
+      { "target": "buildTime", "op": "mul", "value": 0.5263, "note": "BuildRate x1.90." },
+      { "target": "researchTime", "op": "mul", "value": 0.5263, "note": "ResearchRate x1.90." },
+      {
+        "target": "trainTime",
+        "op": "mul",
+        "value": 0.5263,
+        "except": ["laborer", "fishing-ship", "camel-caravan", "transport-ship"],
+        "note": "MilitaryTrainingRate x1.90."
+      },
+      { "target": "gatherRate", "op": "mul", "value": 1.24, "note": "DropsiteRate x1.24." },
+      {
+        "target": "favorRate",
+        "op": "mul",
+        "value": 1.24,
+        "scope": {
+          "ids": [
+            "monument-to-villagers",
+            "monument-to-soldiers",
+            "monument-to-priests",
+            "monument-to-pharaohs",
+            "monument-to-gods"
+          ]
+        },
+        "note": "FavorGatherRate x1.24 (Isis: x1.667 more => x2.07)."
+      }
+    ],
+    "otherEffects": { "ROF": 0.75, "LOSFactor": 1.9, "GodPowerBlockRadius": 2.4 },
+    "range": 3,
+    "cost": {},
+    "time": 0,
+    "cooldown": 0,
+    "limit": 1,
+    "source": "Game files 19.17020 (tactics/son_of_osiris.tactics action Empower; abilities.xml <sonofosiris> AbilityEmpower; techtree.xml MythicAgeOsiris GodPower SonOfOsiris cooldown 240)",
+    "confidence": "high",
+    "notes": "Only after the Son of Osiris god power (Osiris, Mythic: Ra and Isis) turns the Pharaoh into the Son of Osiris (proto SonOfOsiris, 420 HP, no lifespan in proto). Same rules as pharaoh-empower; Valley of the Kings would also apply (Isis has both Osiris and Thoth)."
+  },
+  {
+    "id": "summon-baboon-of-set",
+    "gods": ["set"],
+    "name": { "pt-BR": "Babuíno de Set", "en": "Baboon of Set" },
+    "issuer": "pharaoh",
+    "alsoIssuedBy": ["pharaoh-new-kingdom"],
+    "kind": "summon",
+    "buildOrder": true,
+    "unit": "baboon-of-set",
+    "age": "archaic",
+    "effects": [],
+    "cost": { "favor": 3 },
+    "pop": 1,
+    "time": 3,
+    "cooldown": 0,
+    "limit": 0,
+    "food": 93.75,
+    "source": "Game files 19.17020 (techtree.xml ArchaicAgeSet Enable BaboonOfSet + CommandAdd proto BaboonOfSet on Pharaoh/PharaohNewKingdom; proto.xml BaboonOfSet cost Favor 3, trainpoints 3, populationcount 1, initialresource Food 93.75)",
+    "confidence": "high",
+    "notes": "Set also starts with 1 free Baboon (major_gods.xml). Baboon is also an AbstractScout. Animals of Set are Huntable with DieAtZeroResources/DoNotDieAtZeroHitpoints: when killed they leave their Food as a carcass. limit 0 = no limit found in the files (pop-limited)."
+  },
+  {
+    "id": "summon-hyena-of-set",
+    "gods": ["set"],
+    "name": { "pt-BR": "Hiena de Set", "en": "Hyena of Set" },
+    "issuer": "pharaoh",
+    "alsoIssuedBy": ["pharaoh-new-kingdom"],
+    "kind": "summon",
+    "buildOrder": true,
+    "unit": "hyena-of-set",
+    "age": "classical",
+    "effects": [],
+    "cost": { "favor": 4 },
+    "pop": 1,
+    "time": 4,
+    "cooldown": 0,
+    "limit": 0,
+    "food": 93.75,
+    "source": "Game files 19.17020 (techtree.xml ArchaicAgeSet CommandAdd HyenaOfSet; ClassicalAgeSet Enable HyenaOfSet; proto.xml HyenaOfSet cost Favor 4, trainpoints 4, populationcount 1, initialresource Food 93.75)",
+    "confidence": "high",
+    "notes": "1 free Hyena of Set on reaching Classical (ClassicalAgeSet CreateUnit at a Temple)."
+  },
+  {
+    "id": "summon-gazelle-of-set",
+    "gods": ["set"],
+    "name": { "pt-BR": "Gazela de Set", "en": "Gazelle of Set" },
+    "issuer": "pharaoh",
+    "alsoIssuedBy": ["pharaoh-new-kingdom"],
+    "kind": "summon",
+    "buildOrder": true,
+    "unit": "gazelle-of-set",
+    "age": "classical",
+    "effects": [],
+    "cost": { "favor": 3 },
+    "pop": 1,
+    "time": 3,
+    "cooldown": 0,
+    "limit": 0,
+    "food": 150,
+    "source": "Game files 19.17020 (techtree.xml ArchaicAgeSet CommandAdd GazelleOfSet; ClassicalAgeSet Enable GazelleOfSet; proto.xml GazelleOfSet cost Favor 3, trainpoints 3, populationcount 1, initialresource Food 150)",
+    "confidence": "high",
+    "notes": "2 free Gazelles of Set on reaching Classical (at a Temple). 50 Food per Favor if hunted."
+  },
+  {
+    "id": "summon-giraffe-of-set",
+    "gods": ["set"],
+    "name": { "pt-BR": "Girafa de Set", "en": "Giraffe of Set" },
+    "issuer": "pharaoh",
+    "alsoIssuedBy": ["pharaoh-new-kingdom"],
+    "kind": "summon",
+    "buildOrder": true,
+    "unit": "giraffe-of-set",
+    "age": "heroic",
+    "effects": [],
+    "cost": { "favor": 5 },
+    "pop": 1,
+    "time": 4,
+    "cooldown": 0,
+    "limit": 0,
+    "food": 300,
+    "source": "Game files 19.17020 (techtree.xml ArchaicAgeSet CommandAdd GiraffeOfSet; HeroicAgeSet Enable GiraffeOfSet; proto.xml GiraffeOfSet cost Favor 5, trainpoints 4, populationcount 1, initialresource Food 300)",
+    "confidence": "high",
+    "notes": "2 free Giraffes of Set on reaching Heroic (at a Temple). 60 Food per Favor if hunted."
+  },
+  {
+    "id": "summon-crocodile-of-set",
+    "gods": ["set"],
+    "name": { "pt-BR": "Crocodilo de Set", "en": "Crocodile of Set" },
+    "issuer": "pharaoh",
+    "alsoIssuedBy": ["pharaoh-new-kingdom"],
+    "kind": "summon",
+    "buildOrder": true,
+    "unit": "crocodile-of-set",
+    "age": "heroic",
+    "effects": [],
+    "cost": { "favor": 6 },
+    "pop": 1,
+    "time": 4,
+    "cooldown": 0,
+    "limit": 0,
+    "food": 187.5,
+    "source": "Game files 19.17020 (techtree.xml ArchaicAgeSet CommandAdd CrocodileOfSet; HeroicAgeSet Enable CrocodileOfSet; proto.xml CrocodileOfSet cost Favor 6, trainpoints 4, populationcount 1, initialresource Food 187.5)",
+    "confidence": "high",
+    "notes": "1 free Crocodile of Set on reaching Heroic (at a Temple)."
+  },
+  {
+    "id": "summon-hippopotamus-of-set",
+    "gods": ["set"],
+    "name": { "pt-BR": "Hipopótamo de Set", "en": "Hippopotamus of Set" },
+    "issuer": "pharaoh",
+    "alsoIssuedBy": ["pharaoh-new-kingdom"],
+    "kind": "summon",
+    "buildOrder": true,
+    "unit": "hippopotamus-of-set",
+    "age": "mythic",
+    "effects": [],
+    "cost": { "favor": 7 },
+    "pop": 2,
+    "time": 6,
+    "cooldown": 0,
+    "limit": 0,
+    "food": 375,
+    "source": "Game files 19.17020 (techtree.xml ArchaicAgeSet CommandAdd HippopotamusOfSet; MythicAgeSet Enable HippopotamusOfSet; proto.xml HippopotamusOfSet cost Favor 7, trainpoints 6, populationcount 2, initialresource Food 375)",
+    "confidence": "high",
+    "notes": "2 free Hippopotamuses of Set on reaching Mythic (at a Temple)."
+  },
+  {
+    "id": "summon-rhinoceros-of-set",
+    "gods": ["set"],
+    "name": { "pt-BR": "Rinoceronte de Set", "en": "Rhinoceros of Set" },
+    "issuer": "pharaoh",
+    "alsoIssuedBy": ["pharaoh-new-kingdom"],
+    "kind": "summon",
+    "buildOrder": true,
+    "unit": "rhinoceros-of-set",
+    "age": "mythic",
+    "effects": [],
+    "cost": { "favor": 9 },
+    "pop": 2,
+    "time": 6,
+    "cooldown": 0,
+    "limit": 0,
+    "food": 487.5,
+    "source": "Game files 19.17020 (techtree.xml ArchaicAgeSet CommandAdd RhinocerosOfSet; MythicAgeSet Enable RhinocerosOfSet; proto.xml RhinocerosOfSet cost Favor 9, trainpoints 6, populationcount 2, initialresource Food 487.5)",
+    "confidence": "high",
+    "notes": "1 free Rhinoceros of Set on reaching Mythic (at a Temple)."
+  },
+  {
+    "id": "summon-elephant-of-set",
+    "gods": ["set"],
+    "name": { "pt-BR": "Elefante de Set", "en": "Elephant of Set" },
+    "issuer": "pharaoh",
+    "alsoIssuedBy": ["pharaoh-new-kingdom"],
+    "kind": "summon",
+    "buildOrder": true,
+    "unit": "elephant-of-set",
+    "age": "mythic",
+    "effects": [],
+    "cost": { "favor": 14 },
+    "pop": 2,
+    "time": 8,
+    "cooldown": 0,
+    "limit": 0,
+    "food": 675,
+    "source": "Game files 19.17020 (techtree.xml ArchaicAgeSet CommandAdd ElephantOfSet; MythicAgeSet Enable ElephantOfSet; proto.xml ElephantOfSet cost Favor 14, trainpoints 8, populationcount 2, initialresource Food 675)",
+    "confidence": "high",
+    "notes": "No free Elephant on age-up."
+  },
+  {
+    "id": "priest-convert-animal",
+    "gods": ["set"],
+    "name": { "pt-BR": "Converter Animal", "en": "Convert Animal" },
+    "issuer": "priest",
+    "kind": "convert",
+    "buildOrder": true,
+    "targets": ["hunt"],
+    "effects": [
+      {
+        "target": "gatherRate",
+        "op": "mul",
+        "value": 0.75,
+        "scope": { "sources": ["hunt"] },
+        "note": "Not a rate: the converted animal keeps 75% of its Food (Deer 200 -> 150, Elephant 900 -> 675...). Modelled here only as a marker; the simulator should reduce the hunt's amount."
+      }
+    ],
+    "range": 10,
+    "cost": {},
+    "time": 0,
+    "cooldown": 0,
+    "limit": 0,
+    "source": "Game files 19.17020 (proto.xml Priest protoaction Convert: maxrange 10, rate/minrate per species, conversionprotoid -> <Animal>OfSet; tactics/priest.tactics Convert active 0; techtree.xml ArchaicAgeSet ActionEnable Convert on Priest; abilities/egyptian.abilities AbilityConvertAnimal placement natureonly, target Huntable; string_replacement_values.xml SET_CONVERT_FOOD_LOSS 25)",
+    "confidence": "medium",
+    "notes": "Set only. Targets wild Huntable animals owned by Gaia (natureonly), incl. predators (Wolf, Lion, Bear, Hyena, Crocodile...); not Chickens (not Huntable) and not herdables (goats etc.). The animal becomes '<Animal> of Set', fights for you, takes population (1 or 2: Boar, Aurochs, Elephant, Hippo, Rhino, Walrus, Water Buffalo = 2), is faster (Deer/Gazelle/Zebra/Giraffe 2.2 -> 4.0) and can be walked to a dropsite and then hunted by your Laborers (it stays Huntable). Per-species 'rate' values (e.g. Deer 35, Boar 50, Elephant 105) exist but the files do not say what unit they are in (likely conversion speed/points), so conversion duration is unknown. Whether conversion is blocked at full population is not in the files."
+  },
+  {
+    "id": "pharaoh-heal",
+    "gods": ["ra", "isis", "set"],
+    "name": { "pt-BR": "Curar", "en": "Heal" },
+    "issuer": "pharaoh",
+    "alsoIssuedBy": ["pharaoh-new-kingdom"],
+    "kind": "other",
+    "buildOrder": false,
+    "effects": [],
+    "range": 10,
+    "cost": {},
+    "time": 0,
+    "cooldown": 0,
+    "limit": 1,
+    "source": "Game files 19.17020 (proto.xml Pharaoh protoaction Heal rate 10, maxrange 10, slowhealmultiplier 0.5; abilities.xml AbilityEgyptianHeal)",
+    "confidence": "high",
+    "notes": "Heals 10 HP/s (Priest 7.5 HP/s) a unit of type LogicalTypeHealed within 10. Military/utility only."
+  },
+  {
+    "id": "priest-heal",
+    "gods": ["ra", "isis", "set"],
+    "name": { "pt-BR": "Curar", "en": "Heal" },
+    "issuer": "priest",
+    "kind": "other",
+    "buildOrder": false,
+    "effects": [],
+    "range": 10,
+    "cost": {},
+    "time": 0,
+    "cooldown": 0,
+    "limit": 1,
+    "source": "Game files 19.17020 (proto.xml Priest protoaction Heal rate 7.5, maxrange 10)",
+    "confidence": "high",
+    "notes": "Military/utility only."
+  },
+  {
+    "id": "pharaoh-relic-pickup",
+    "gods": ["ra", "isis", "set"],
+    "name": { "pt-BR": "Mãos Sagradas (Passivo)", "en": "Sacred Hands (Passive)" },
+    "issuer": "pharaoh",
+    "alsoIssuedBy": ["pharaoh-new-kingdom", "priest"],
+    "kind": "other",
+    "buildOrder": false,
+    "effects": [],
+    "cost": {},
+    "time": 0,
+    "cooldown": 0,
+    "limit": 1,
+    "source": "Game files 19.17020 (techtree.xml EnableRelicPickup ActionEnable Pickup on Pharaoh; abilities.xml PassiveSacredHands on <pharaoh> (tech EnableRelicPickup) and <priest> (tech HandsOfThePharaoh); proto.xml Pharaoh/Priest Pickup + DropOff AbstractTemple)",
+    "confidence": "high",
+    "notes": "Pharaoh carries 1 Relic (maxcontained 1) to a Temple. Priests only after Hands of the Pharaoh (75 Gold, Temple). Generic relic gathering; while carrying, the Pharaoh is not empowering."
+  },
+  {
+    "id": "egyptian-myth-abilities",
+    "gods": ["ra", "isis", "set"],
+    "name": { "pt-BR": "Habilidades de unidades mitológicas", "en": "Myth unit abilities" },
+    "issuer": "temple",
+    "kind": "other",
+    "buildOrder": false,
+    "effects": [],
+    "cost": {},
+    "time": 0,
+    "cooldown": 0,
+    "limit": 0,
+    "source": "Game files 19.17020 (abilities/egyptian.abilities; string_table.txt STR_ABILITY_*)",
+    "confidence": "high",
+    "notes": "Military only, listed so we know they exist: Sphinx Whirlwind (Turbilhão), Anubite Jump (Salto), Scarab Causticity (passive), Petsuchos Illuminate (passive), Roc Land/Fly (Terra/Voar: transport), Scorpion Man Sting (Picar), Mummy Reincarnation (Reencarnação: cursed units rise as Minions), Avenger Spin (Girar), War Turtle Buck (Pinote), Phoenix Rebirth (passive). Also passives: Kebenit/Solar Barque Apep's Spawn, War Barge/Funeral Barge Call of Lotan, Mercenary Sellsword (limited lifespan), Deathly Donative (Funeral Rites). The names here are a group label, not an official string."
+  }
+]

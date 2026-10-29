@@ -68,6 +68,8 @@ export const KIND_ICON: Record<string, string> = {
   power: "bolt",
   timeShift: "hourglass",
   promote: "star",
+  empower: "sun",
+  summon: "user",
   autoTrain: "repeat",
   stopAutoTrain: "stop",
   trainWhenAffordable: "coin",

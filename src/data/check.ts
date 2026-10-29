@@ -35,6 +35,15 @@ export function checkReferences(data: GameData): string[] {
     if (favor.type === "monuments")
       for (const b of Object.keys(favor.rates))
         need(p.buildings.has(b), `${pid}/favor`, "building", b);
+    const empower = p.def.empower;
+    for (const src of empower?.sources ?? [])
+      need(p.units.has(src.unit), `${pid}/empower`, "unit", src.unit);
+    for (const b of empower?.targets ?? [])
+      need(p.buildings.has(b), `${pid}/empower`, "building", b);
+    for (const u of empower?.economicUnits ?? []) need(p.units.has(u), `${pid}/empower`, "unit", u);
+    const summon = p.def.summon;
+    if (summon) need(p.units.has(summon.by), `${pid}/summon`, "unit", summon.by);
+    for (const u of summon?.units ?? []) need(p.units.has(u), `${pid}/summon`, "unit", u);
     for (const a of p.def.ageUps) {
       need(p.buildings.has(a.at), `${pid}/ageUp ${a.to}`, "building", a.at);
       for (const group of a.requiresAnyOf ?? [])
@@ -72,6 +81,10 @@ export function checkReferences(data: GameData): string[] {
         else if (minor.age !== age)
           issues.push(`god "${g.id}": minor "${m}" is ${minor.age}, listed as ${age}`);
       }
+    }
+    for (const b of g.timeShift?.buildings ?? []) {
+      if (!p.buildings.has(b.id))
+        issues.push(`god "${g.id}": unknown Time Shift building "${b.id}"`);
     }
     for (const u of g.unlocks ?? []) {
       if (!p.units.has(u) && !p.buildings.has(u) && !p.researches.has(u))

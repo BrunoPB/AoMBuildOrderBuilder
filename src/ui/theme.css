@@ -486,6 +486,7 @@ label.field > * {
 .kind-train {
   --kind: var(--kind-train);
 }
+.kind-summon,
 .kind-ready {
   --kind: var(--kind-train);
 }
@@ -499,6 +500,7 @@ label.field > * {
 .kind-timeShift {
   --kind: var(--kind-power);
 }
+.kind-empower,
 .kind-promote {
   --kind: var(--kind-power);
 }

@@ -320,6 +320,76 @@ export function ActionRow(props: Props) {
             <HelpText k="row.when" />
             <span class="num">{times}</span>
           </label>
+          {a.do === "empower" && (
+            <>
+              <label class="field">
+                <HelpText k="row.by" ctx={ctx} />
+                <select
+                  value={a.by}
+                  data-testid="empower-by"
+                  onChange={(e) => set({ by: e.currentTarget.value })}
+                >
+                  {(p?.def.empower?.sources ?? [])
+                    .filter((src) => !src.gods || src.gods.includes(build.god))
+                    .map((src) => (
+                      <option key={src.unit} value={src.unit}>
+                        {name(src.unit)}
+                      </option>
+                    ))}
+                </select>
+              </label>
+              <label class="field">
+                <HelpText k="row.slot" />
+                <input
+                  class="small"
+                  type="number"
+                  min={1}
+                  value={a.slot ?? 1}
+                  onChange={(e) => {
+                    const v = Math.max(1, Math.round(Number(e.currentTarget.value) || 1));
+                    set({ slot: v > 1 ? v : undefined });
+                  }}
+                />
+              </label>
+              <label class="field">
+                <HelpText k="row.target" />
+                <select
+                  value={a.building}
+                  onChange={(e) => set({ building: e.currentTarget.value })}
+                >
+                  {(p?.def.empower?.targets ?? []).map((id) => (
+                    <option key={id} value={id}>
+                      {name(id)}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            </>
+          )}
+          {a.do === "summon" && (
+            <>
+              <label class="field">
+                <HelpText k="row.count" />
+                <input
+                  class="small"
+                  type="number"
+                  min={1}
+                  value={a.count ?? 1}
+                  onChange={(e) =>
+                    set({ count: Math.max(1, Math.round(Number(e.currentTarget.value) || 1)) })
+                  }
+                />
+              </label>
+              <label class="field">
+                <HelpText k="row.huntIt" />
+                <input
+                  type="checkbox"
+                  checked={a.hunt === true}
+                  onChange={(e) => set({ hunt: e.currentTarget.checked || undefined })}
+                />
+              </label>
+            </>
+          )}
           {(a.do === "train" || a.do === "promote") && (
             <label class="field">
               <HelpText k="row.count" />

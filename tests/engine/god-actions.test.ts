@@ -69,3 +69,109 @@ describe("god-specific actions (game files)", () => {
     }
   });
 });
+
+describe("god actions researched for the 12 major gods", () => {
+  const gain = (food = 0, wood = 0, gold = 0, favor = 0) => ({
+    when: "0:00" as const,
+    do: "event" as const,
+    gainResource: { food, wood, gold, favor },
+  });
+
+  it("the Pharaoh empowering the Town Center speeds up the age up ×1.75", () => {
+    const base: Build["actions"] = [
+      gain(1000, 1000, 1000),
+      { id: "t", when: "0:00", do: "build", building: "temple", builder: { from: "idle" } },
+      { id: "c", when: { after: "t" }, do: "age", to: "classical", minor: "bast" },
+    ];
+    const plain = simulate(data, build("egyptians", "ra", base));
+    const empowered = simulate(
+      data,
+      build("egyptians", "ra", [
+        ...base,
+        { when: "0:00", do: "empower", by: "pharaoh", building: "town-center" },
+      ]),
+    );
+    const dur = (r: ReturnType<typeof simulate>) =>
+      r.ageTimes.classical!.reached! - r.ageTimes.classical!.clicked;
+    expect(dur(plain)).toBe(60);
+    expect(dur(empowered)).toBeCloseTo(60 / 1.75, -1);
+    expect(empowered.warnings.filter((w) => w.level === "error")).toEqual([]);
+  });
+
+  it("only Ra's Priests can empower", () => {
+    const action: Build["actions"] = [
+      { when: "0:00", do: "empower", by: "priest", building: "town-center" },
+    ];
+    expect(
+      simulate(data, build("egyptians", "ra", action)).warnings.some((w) => w.level === "error"),
+    ).toBe(false);
+    expect(
+      simulate(data, build("egyptians", "isis", action)).warnings.some(
+        (w) => w.key === "warn.cannotEmpower",
+      ),
+    ).toBe(true);
+  });
+
+  it("Set summons a Gazelle with favor and hunting it adds its food to the hunt", () => {
+    const r = simulate(
+      data,
+      build("egyptians", "set", [
+        gain(0, 0, 0, 10),
+        { when: "0:00", do: "summon", unit: "baboon-of-set", count: 1, hunt: true },
+      ]),
+    );
+    expect(r.events.some((e) => e.kind === "hunted" && e.food === 93.75)).toBe(true);
+    expect(r.warnings.filter((w) => w.level === "error")).toEqual([]);
+    const other = simulate(
+      data,
+      build("egyptians", "ra", [{ when: "0:00", do: "summon", unit: "baboon-of-set" }]),
+    );
+    expect(other.warnings.some((w) => w.key === "warn.cannotSummon")).toBe(true);
+  });
+
+  it("Thor has no Armory and gets a free Dwarf per Dwarven Armory research", () => {
+    const r = simulate(
+      data,
+      build("norse", "thor", [
+        gain(1000, 1000, 1000),
+        {
+          id: "a",
+          when: "0:00",
+          do: "build",
+          building: "dwarven-armory",
+          builder: { unit: "berserk" },
+        },
+        { when: { after: "a" }, do: "research", research: "copper-weapons-thor" },
+        { when: "0:00", do: "build", building: "armory", builder: { unit: "berserk" } },
+      ]),
+    );
+    expect(r.produced.some((p) => p.unit === "dwarf")).toBe(true);
+    expect(r.warnings.some((w) => w.key === "warn.notForGod")).toBe(true);
+  });
+
+  it("Greek heroes train in their own queue without blocking the Town Center", () => {
+    const r = simulate(
+      data,
+      build("greeks", "zeus", [
+        gain(2000, 2000, 2000),
+        { id: "t", when: "0:00", do: "build", building: "temple", builder: { from: "idle" } },
+        { when: { after: "t" }, do: "train", unit: "villager", count: 2 },
+        { when: { after: "t" }, do: "train", unit: "jason" },
+      ]),
+    );
+    const done = (u: string) => r.produced.filter((p) => p.unit === u).map((p) => p.t);
+    const t = r.actions[1]!.completedAt!;
+    expect(done("jason")[0]).toBeLessThan(t + 6);
+    expect(done("villager")[0]).toBeLessThan(t + 20);
+  });
+
+  it("Loki's +10% build speed is on the builder", () => {
+    const actions: Build["actions"] = [
+      gain(1000, 1000, 1000),
+      { id: "t", when: "0:00", do: "build", building: "temple", builder: { unit: "berserk" } },
+    ];
+    const odin = simulate(data, build("norse", "odin", actions)).actions[1]!.completedAt!;
+    const loki = simulate(data, build("norse", "loki", actions)).actions[1]!.completedAt!;
+    expect(loki).toBeLessThan(odin);
+  });
+});
