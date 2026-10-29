@@ -184,7 +184,11 @@ function describe(c: Ctx, e: SimEvent): StepAction | null {
         ...base,
         kind: "promote",
         icons: [icon(c, e.to)],
-        text: t("step.promote", { count: e.count, unit: name(c, e.unit, e.count) }),
+        text: t("step.promote", {
+          count: e.count,
+          unit: name(c, e.unit, e.count),
+          to: name(c, e.to, e.count),
+        }),
       };
     case "autoTrainOn":
       return {

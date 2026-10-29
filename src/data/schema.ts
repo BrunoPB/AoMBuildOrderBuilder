@@ -59,6 +59,7 @@ export const ModifierSchema = z.strictObject({
     "buildRate",
     "pop",
     "promotionTime",
+    "promotionCost",
   ]),
   /** mul: × value · add: + value · pct: + value × base, summed with other pct (game "BasePercent"). */
   op: z.enum(["mul", "add", "pct"]),
@@ -253,6 +254,21 @@ export const MajorGodSchema = z.strictObject({
     heroic: z.array(z.string()),
     mythic: z.array(z.string()),
   }),
+  /** Kronos: which buildings can be Time Shifted (major_gods.xml <timeshifting>). */
+  timeShift: z
+    .strictObject({
+      maxConcurrent: z.number().int().positive(),
+      buildings: z.array(
+        z.strictObject({
+          id: z.string(),
+          /** Share of the building cost paid to shift it. */
+          costRatio: z.number().nonnegative(),
+          /** Share of the building's build time the shift takes. */
+          timeRatio: z.number().positive(),
+        }),
+      ),
+    })
+    .optional(),
   /** Ids of units/buildings/researches only this god has access to. */
   unlocks: z.array(z.string()).optional(),
   meta: MetaSchema,

@@ -78,7 +78,15 @@ export function actionText(c: Ctx, a: Action): string {
     case "timeShift":
       return `${t("action.timeShift")}: ${n(c, a.building)}`;
     case "promote":
-      return t("step.promote", { count: a.count ?? 1, unit: n(c, a.unit, a.count ?? 1) });
+      return t("step.promote", {
+        count: a.count ?? 1,
+        unit: n(c, a.unit, a.count ?? 1),
+        to: n(
+          c,
+          c.data.pantheons.get(c.pantheon)?.units.get(a.unit)?.promotion?.to ?? a.unit,
+          a.count ?? 1,
+        ),
+      });
     case "autoTrain":
       return a.rally
         ? t("step.autoTrainTo", { unit: n(c, a.unit, 2), to: targetLabel(c, a.rally) })

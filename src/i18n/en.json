@@ -86,7 +86,7 @@
   "action.move": "Move villagers",
   "action.power": "God power",
   "action.timeShift": "Time Shift",
-  "action.promote": "Promote hero",
+  "action.promote": "Promote",
   "action.autoTrain": "Auto queue",
   "action.stopAutoTrain": "Stop auto queue",
   "action.trainWhenAffordable": "Train when affordable",
@@ -169,7 +169,7 @@
   "step.powerOn": "{power} → {target}",
   "step.timeShift": "Time Shift: {building} ({seconds} s)",
   "step.timeShiftDone": "{building} arrived",
-  "step.promote": "Promote {count} {unit}",
+  "step.promote": "Promote {count} {unit} → {to}",
   "step.autoTrain": "Auto queue {unit}",
   "step.autoTrainTo": "Auto queue {unit} → {to}",
   "step.autoTrainOff": "Stop auto queue",
@@ -273,8 +273,8 @@
   "help.action.age": "Ages up, choosing the minor god.",
   "help.action.move": "Moves villagers from one resource to another.",
   "help.action.power": "Uses a god power.",
-  "help.action.timeShift": "Atlanteans: moves a finished building elsewhere; it is unavailable for its build time.",
-  "help.action.promote": "Atlanteans: turns a unit into a hero. A villager stops gathering while promoted.",
+  "help.action.timeShift": "Kronos: moves a finished building elsewhere. It takes the building's build time; Palace, Sentry Tower and Mirror Tower cost 50% of their price. At most 2 at once.",
+  "help.action.promote": "Turns a unit into another. Atlanteans: unit → hero (a villager stops gathering while promoted). Norse: Gatherer or Dwarf → Berserk (instant).",
   "help.action.autoTrain": "Turns the auto queue on: the building trains the unit nonstop while resources last.",
   "help.action.stopAutoTrain": "Turns the auto queue off.",
   "help.action.trainWhenAffordable": "Trains the unit whenever resources are left over, without delaying upcoming timed actions.",
@@ -340,5 +340,7 @@
   "production.kind.research": "Research",
   "production.kind.age": "Age",
   "production.kind.build": "Construction",
-  "production.kind.shift": "Time Shift"
+  "production.kind.shift": "Time Shift",
+  "warn.cannotTimeShift": "This building cannot be Time Shifted: {building}",
+  "warn.timeShiftLimit": "At most {count} Time Shifts at once; waited {waited} s"
 }

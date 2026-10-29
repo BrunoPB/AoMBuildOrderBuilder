@@ -86,7 +86,7 @@
   "action.move": "Mover aldeões",
   "action.power": "Poder divino",
   "action.timeShift": "Time Shift",
-  "action.promote": "Promover herói",
+  "action.promote": "Promover",
   "action.autoTrain": "Produção automática",
   "action.stopAutoTrain": "Parar produção automática",
   "action.trainWhenAffordable": "Treinar sempre que der",
@@ -169,7 +169,7 @@
   "step.powerOn": "{power} → {target}",
   "step.timeShift": "Time Shift: {building} ({seconds} s)",
   "step.timeShiftDone": "{building} chegou",
-  "step.promote": "Promover {count} {unit}",
+  "step.promote": "Promover {count} {unit} → {to}",
   "step.autoTrain": "Produção automática de {unit}",
   "step.autoTrainTo": "Produção automática de {unit} → {to}",
   "step.autoTrainOff": "Parar produção automática",
@@ -273,8 +273,8 @@
   "help.action.age": "Sobe de Era escolhendo o deus menor.",
   "help.action.move": "Muda aldeões de um recurso para outro.",
   "help.action.power": "Usa um poder divino.",
-  "help.action.timeShift": "Atlantes: move um prédio pronto para outro lugar; ele fica indisponível pelo tempo de construção.",
-  "help.action.promote": "Atlantes: transforma uma unidade em herói. O aldeão para de coletar durante a promoção.",
+  "help.action.timeShift": "Cronos: move um prédio pronto para outro lugar. Leva o tempo de construção dele; Palácio, Torre Sentinela e Torre Espelho custam 50% do preço. No máximo 2 ao mesmo tempo.",
+  "help.action.promote": "Transforma uma unidade em outra. Atlantes: unidade → herói (o aldeão para de coletar durante a promoção). Nórdicos: Coletor ou Anão → Berserker (instantâneo).",
   "help.action.autoTrain": "Liga a fila automática: o prédio treina a unidade sem parar enquanto houver recursos.",
   "help.action.stopAutoTrain": "Desliga a fila automática.",
   "help.action.trainWhenAffordable": "Treina a unidade sempre que sobrar recurso, sem atrasar as próximas ações com horário.",
@@ -340,5 +340,7 @@
   "production.kind.research": "Pesquisa",
   "production.kind.age": "Era",
   "production.kind.build": "Construção",
-  "production.kind.shift": "Time Shift"
+  "production.kind.shift": "Time Shift",
+  "warn.cannotTimeShift": "Este prédio não pode receber Time Shift: {building}",
+  "warn.timeShiftLimit": "Máximo de {count} Time Shifts ao mesmo tempo; esperou {waited} s"
 }

@@ -582,10 +582,10 @@ class Simulation {
       case "power":
         return this.data.powers.get(a.power)?.cost ?? {};
       case "timeShift":
-        return this.timeShiftPower()?.cost ?? {};
+        return this.timeShiftCost(a.building);
       case "promote": {
-        const promo = this.unit(a.unit)?.promotion;
-        return promo ? addCost({}, promo.cost, a.count ?? 1) : {};
+        const def = this.unit(a.unit);
+        return def?.promotion ? addCost({}, this.promotionCost(def), a.count ?? 1) : {};
       }
       default:
         return {};
@@ -776,6 +776,31 @@ class Simulation {
     const set = new Set(this.god.powers);
     for (const m of this.minors) for (const p of this.data.minors.get(m)?.powers ?? []) set.add(p);
     return set;
+  }
+
+  /** Building cost × the god's cost ratio for shifting it (Kronos: free or 50%). */
+  timeShiftCost(buildingId: string): Cost {
+    const rule = this.god.timeShift?.buildings.find((b) => b.id === buildingId);
+    const def = this.p.buildings.get(buildingId);
+    if (!rule || !def || rule.costRatio === 0) return {};
+    const out: Cost = {};
+    for (const [r, v] of Object.entries(def.cost) as [ResourceId, number][])
+      out[r] = v * rule.costRatio;
+    return out;
+  }
+
+  promotionCost(def: Unit): Cost {
+    const mods = this.mods();
+    const out: Cost = {};
+    for (const [r, v] of Object.entries(def.promotion?.cost ?? {}) as [ResourceId, number][]) {
+      const cost = applyModifiers(v, "promotionCost", mods, {
+        id: def.id,
+        tags: def.tags,
+        resource: r,
+      });
+      out[r] = Math.max(0, round(cost));
+    }
+    return out;
   }
 
   timeShiftPower(): Power | undefined {
@@ -1234,13 +1259,23 @@ class Simulation {
   }
 
   actTimeShift(i: number, buildingId: string, power = this.timeShiftPower()): void {
-    if (!power)
+    const rules = this.god.timeShift;
+    if (!rules) {
       return this.block(i, {
         key: "warn.powerUnavailable",
         level: "error",
         params: { power: "time-shift" },
       });
-    this.flagLowConfidence(i, power);
+    }
+    const rule = rules.buildings.find((b) => b.id === buildingId);
+    if (!rule) {
+      return this.block(i, {
+        key: "warn.cannotTimeShift",
+        level: "error",
+        params: { building: buildingId },
+      });
+    }
+    if (power) this.flagLowConfidence(i, power);
     const candidates = this.sites.filter((s) => s.def.id === buildingId);
     if (candidates.length === 0) {
       return this.block(i, {
@@ -1258,10 +1293,19 @@ class Simulation {
         params: { building: buildingId },
       });
     }
-    const reason = this.powerCheck(power);
-    if (reason) return this.block(i, reason);
-    this.usePower(power);
-    const duration = site.def.buildTime * (power.effect.buildTimeFraction ?? 1);
+    const shifting = this.sites.filter((s) => s.state === "shifting").length;
+    if (shifting >= rules.maxConcurrent) {
+      return this.block(i, {
+        key: "warn.timeShiftLimit",
+        level: "delay",
+        params: { count: rules.maxConcurrent },
+      });
+    }
+    const cost = this.timeShiftCost(buildingId);
+    const missing = this.afford(cost);
+    if (missing) return this.block(i, this.noResource(cost, missing));
+    this.pay(cost);
+    const duration = site.def.buildTime * rule.timeRatio;
     site.state = "shifting";
     site.shiftSpan = this.openSpan(site, { kind: "shift", id: site.def.id, action: i });
     site.shiftUntil = this.t + duration;
@@ -1295,11 +1339,7 @@ class Simulation {
       });
     }
     const hero = this.unit(def.promotion.to);
-    const each = applyCostModifiers(def.promotion.cost, this.mods(), {
-      id: def.promotion.to,
-      tags: hero?.tags,
-    });
-    const cost = addCost({}, each, n);
+    const cost = addCost({}, this.promotionCost(def), n);
     const missing = this.afford(cost);
     if (missing) return this.block(i, this.noResource(cost, missing));
     this.pay(cost);
@@ -1576,9 +1616,11 @@ class Simulation {
     if (due.length === 0) return;
     this.promotions = this.promotions.filter((p) => !due.includes(p));
     for (const p of due) {
+      const toArmy = !isGatherer(this.unit(p.to));
       for (const w of this.workers) {
         if (!p.workers.includes(w.uid)) continue;
         w.unit = p.to;
+        if (toArmy) continue;
         if (w.task.kind === "busy") {
           const resume = w.task.resume;
           w.task =
@@ -1586,6 +1628,11 @@ class Simulation {
               ? this.resolveTask(w.lastTarget)
               : resume;
         }
+      }
+      if (toArmy) {
+        const leaving = this.workers.filter((w) => p.workers.includes(w.uid));
+        this.workers = this.workers.filter((w) => !p.workers.includes(w.uid));
+        this.others.set(p.to, (this.others.get(p.to) ?? 0) + leaving.length);
       }
       const n = Math.min(p.others, this.others.get(p.from) ?? 0);
       if (n > 0) {

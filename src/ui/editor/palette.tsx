@@ -32,8 +32,18 @@ export function Palette({ build, onAdd }: { build: Build; onAdd: (a: Action) => 
     return (requires ?? []).every((r) => !data.gods.has(r) || r === build.god);
   };
 
+  /** Only actions this god can use: Time Shift (Kronos), promotions (Atlanteans, Norse). */
+  const available = (k: ActionKind): boolean => {
+    if (k === "timeShift") return god.timeShift !== undefined;
+    if (k === "promote")
+      return [...p.units.values()].some((u) => u.promotion && allowed(u.requires));
+    return true;
+  };
+
+  const current = kind && available(kind) ? kind : null;
+
   const options = (): Option[] => {
-    switch (kind) {
+    switch (current) {
       case "train":
       case "autoTrain":
       case "trainWhenAffordable":
@@ -46,10 +56,18 @@ export function Palette({ build, onAdd }: { build: Build; onAdd: (a: Action) => 
           }));
       case "promote":
         return [...p.units.values()]
-          .filter((u) => u.promotion)
-          .map((u) => ({ id: u.id, age: u.age }));
-      case "build":
+          .filter((u) => u.promotion && allowed(u.requires))
+          .map((u) => ({
+            id: u.id,
+            age: u.age,
+            detail: `→ ${text(locale, p.units.get(u.promotion!.to)?.name ?? u.name)} · ${costText(u.promotion!.cost, t)}`,
+          }));
       case "timeShift":
+        return (god.timeShift?.buildings ?? [])
+          .map((r) => p.buildings.get(r.id))
+          .filter((b): b is NonNullable<typeof b> => b !== undefined)
+          .map((b) => ({ id: b.id, age: b.age, detail: `${b.buildTime} s` }));
+      case "build":
         return [...p.buildings.values()]
           .filter((b) => allowed(b.requires) && b.id !== p.def.townCenter)
           .map((b) => ({
@@ -77,7 +95,7 @@ export function Palette({ build, onAdd }: { build: Build; onAdd: (a: Action) => 
   };
 
   const pick = (o: Option) => {
-    switch (kind) {
+    switch (current) {
       case "train":
         return onAdd({ when: "asap", do: "train", unit: o.id, count: 1 });
       case "autoTrain":
@@ -126,7 +144,7 @@ export function Palette({ build, onAdd }: { build: Build; onAdd: (a: Action) => 
         <HelpText k="editor.add" />
       </h3>
       <div class="palette-kinds" role="toolbar" aria-label={t("editor.add")}>
-        {PALETTE_KINDS.map((k) => (
+        {PALETTE_KINDS.filter(available).map((k) => (
           <Tip key={k} label={[t(`action.${k}`), help(`action.${k}`)].filter(Boolean).join("\n")}>
             <button
               class={`btn icon-only kind-btn kind-${k}`}
@@ -140,7 +158,7 @@ export function Palette({ build, onAdd }: { build: Build; onAdd: (a: Action) => 
           </Tip>
         ))}
       </div>
-      {kind && (
+      {current && (
         <>
           <div class="row" style={{ marginTop: "8px" }}>
             <button class="chip" aria-pressed={age === null} onClick={() => setAge(null)}>

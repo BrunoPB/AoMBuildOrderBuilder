@@ -30,6 +30,9 @@ Answers taken from the game files (build 19.17020) are written up in [game-files
 
 ## Not modelled yet (needs schema or engine work)
 
+- [ ] Every major god starts with the Town Center auto-training its villager (`<startingqueue autotrain="true">` in major_gods.xml). Builds must add the auto queue themselves for now.
+- [ ] Temporal Chaos (Kronos): Time Shift ×0.5 time, 3 at once, 25% cost.
+
 - [x] Multiple builders (engine applies it): the game uses `buildingefficiency` 0.6 (2nd builder) and `extrabuildingefficiency` 0.3 (each further builder), major_gods.xml, same for all 12 gods. Builders are sorted by rate; the fastest counts fully.
 - [x] Kronos Manor bonus stacking per Manor in range (manors count per build action).
 - [ ] Egyptian Pharaoh/Priest empower (×1.75 build/research/train, ×1.2 monument favor), Isis/Set monument auras.
@@ -44,7 +47,7 @@ Answers taken from the game files (build 19.17020) are written up in [game-files
 - [ ] Per-age hero train time for Greeks.
 - [ ] Thor: Dwarven Armory replaces the Armory; free Dwarf per Dwarven Armory tech.
 - [ ] Norse infantry building (only gatherers/dwarves build in the simulator). Files: Norse infantry/heroes build at rate 1.0; Gatherers/Dwarves can only build Farm, House and Ox Cart.
-- [ ] Loki: Berserk promotion (Gatherer/Dwarf → Berserk) costs −50%; Poseidon's Secret −10% on Turma/Contarius promotions. Promotions of Norse workers are not modelled.
+- [x] Norse Gatherer/Dwarf → Berserk promotion, Loki −50% (`promotionCost`). Poseidon's Secret −10% on Turma/Contarius promotions is still a `cost` note.
 - [ ] Set's Animals of Set (summoned by the Pharaoh) and free Leviathan/War Turtle.
 - [x] Favor caps: none in the game files (see open question above).
 - [ ] Hunt decay (12 food/min once killed).

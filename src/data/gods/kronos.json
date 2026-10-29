@@ -19,6 +19,71 @@
   ],
   "ageUpFreeUnits": 2,
   "powers": ["deconstruction", "time-shift"],
+  "timeShift": {
+    "maxConcurrent": 2,
+    "buildings": [
+      {
+        "id": "manor",
+        "costRatio": 0.0,
+        "timeRatio": 1.0
+      },
+      {
+        "id": "farm",
+        "costRatio": 0.0,
+        "timeRatio": 1.0
+      },
+      {
+        "id": "economic-guild",
+        "costRatio": 0.0,
+        "timeRatio": 1.0
+      },
+      {
+        "id": "military-barracks",
+        "costRatio": 0.0,
+        "timeRatio": 1.0
+      },
+      {
+        "id": "counter-barracks",
+        "costRatio": 0.0,
+        "timeRatio": 1.0
+      },
+      {
+        "id": "dock",
+        "costRatio": 0.0,
+        "timeRatio": 1.0
+      },
+      {
+        "id": "temple",
+        "costRatio": 0.0,
+        "timeRatio": 1.0
+      },
+      {
+        "id": "armory",
+        "costRatio": 0.0,
+        "timeRatio": 1.0
+      },
+      {
+        "id": "market",
+        "costRatio": 0.0,
+        "timeRatio": 1.0
+      },
+      {
+        "id": "palace",
+        "costRatio": 0.5,
+        "timeRatio": 1.0
+      },
+      {
+        "id": "sentry-tower",
+        "costRatio": 0.5,
+        "timeRatio": 1.0
+      },
+      {
+        "id": "mirror-tower",
+        "costRatio": 0.5,
+        "timeRatio": 1.0
+      }
+    ]
+  },
   "minors": {
     "classical": ["prometheus", "leto"],
     "heroic": ["hyperion", "rheia"],
@@ -30,5 +95,13 @@
     "checkedAt": "2026-10-18",
     "confidence": "high",
     "note": "Power: Deconstruction (cooldown 180). Not expressed as modifiers: Time Shift of own buildings (major_gods.xml timeshifting, see power 'time-shift'); lost siege weapons (wood, gold) and myth units (all resources incl. favor) refund 20% (ResourceReturnRate 0.20; not Promethean Offspring). Age up: KronosExtra<Unit> techs create 1 more myth unit at the Temple on top of the minor god's 1, so 2 in total for every Kronos minor god."
+  },
+  "fieldMeta": {
+    "timeShift": {
+      "source": "Game files 19.17020 (major_gods.xml <timeshifting>)",
+      "checkedAt": "2026-10-29",
+      "confidence": "high",
+      "note": "Only Kronos has <timeshifting>: 2 concurrent shifts; Palace, Sentry Tower and Mirror Tower cost 50% of their price."
+    }
   }
 }

@@ -170,3 +170,20 @@ test("timeline tab shows what each building produces", async ({ page }) => {
   await page.getByTestId("tab-details").click();
   await expect(page.getByTestId("matchups")).toBeVisible();
 });
+
+test("palette only offers actions the chosen god can use", async ({ page }) => {
+  await page.goto("/");
+  await page.getByTestId("new-build").click();
+  await page.getByTestId("god-kronos").click();
+  await expect(page.getByTestId("kind-timeShift")).toBeVisible();
+  await expect(page.getByTestId("kind-promote")).toBeVisible();
+  await page.getByTestId("god-gaia").click();
+  await expect(page.getByTestId("kind-timeShift")).toHaveCount(0);
+  await expect(page.getByTestId("kind-promote")).toBeVisible();
+  await page.getByTestId("pantheon-greeks").click();
+  await expect(page.getByTestId("kind-promote")).toHaveCount(0);
+  await expect(page.getByTestId("kind-timeShift")).toHaveCount(0);
+  await page.getByTestId("pantheon-norse").click();
+  await page.getByTestId("kind-promote").click();
+  await expect(page.getByTestId("pick-gatherer")).toBeVisible();
+});

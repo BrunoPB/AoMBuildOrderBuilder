@@ -39,11 +39,11 @@
       "note": "ArchaicAgeGaia: Economic Guild and Husbandry, Plow, Survival Equipment, Irrigation, Flood Control, Hand Axe, Bow Saw, Carpenters, Pickaxe, Shaft Mine, Quarry cost x0.65 Percent (both of each tech's resources)."
     },
     {
-      "target": "cost",
+      "target": "promotionCost",
       "op": "pct",
       "value": -0.25,
       "scope": {
-        "ids": ["citizen-hero"]
+        "ids": ["citizen"]
       },
       "note": "VillagerAtlanteanToHero promotion cost x0.75 BasePercent (food, wood and favor): 48.75f 7.5w 1.5 favor."
     }

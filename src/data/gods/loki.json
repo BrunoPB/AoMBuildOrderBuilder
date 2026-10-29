@@ -23,6 +23,15 @@
         "ids": ["ox-cart"]
       },
       "note": "OxCartBuilding food and wood cost x0.5 BasePercent: 20 food + 20 wood."
+    },
+    {
+      "target": "promotionCost",
+      "op": "pct",
+      "value": -0.5,
+      "scope": {
+        "ids": ["gatherer", "dwarf"]
+      },
+      "note": "ArchaicAgeLoki: VillagerNorseToBerserk and VillagerDwarfToBerserk food and gold cost x0.5 BasePercent."
     }
   ],
   "powers": ["spy"],

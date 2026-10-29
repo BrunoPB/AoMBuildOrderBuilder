@@ -1,5 +1,11 @@
 # Data changelog
 
+## 2026-10-29 — god-specific actions
+
+- Time Shift rules come from `major_gods.xml` `<timeshifting>`: only Kronos, 2 at once, 12 buildings (Palace, Sentry Tower, Mirror Tower cost 50%).
+- Norse Gatherer/Dwarf → Berserk promotion (`VillagerNorseToBerserk` 30 food + 20 gold, `VillagerDwarfToBerserk` 10 food + 30 gold, instant; Loki −50%).
+- Promotion discounts use the new `promotionCost` modifier (Gaia, Loki, Frontline Heroics, Sons of the Sun).
+
 ## 2026-10-18 — Krush as reference only
 
 - Krush preset back to the default settings (no calibration); the measured match is a reference (`npm run compare:krush`).

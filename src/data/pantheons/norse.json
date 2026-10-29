@@ -134,7 +134,21 @@
           "checkedAt": "2026-10-18",
           "confidence": "high",
           "note": "Gatherers and Dwarves can only build House, Farm and Ox Cart; Norse infantry and heroes build the rest."
+        },
+        "promotion": {
+          "source": "Game files 19.17020 (techtree.xml VillagerNorseToBerserk)",
+          "checkedAt": "2026-10-29",
+          "confidence": "high",
+          "note": "Enabled for every Norse god by ArchaicAgeNorse; instant (0 research points); Loki -50%."
         }
+      },
+      "promotion": {
+        "to": "berserk",
+        "cost": {
+          "food": 30,
+          "gold": 20
+        },
+        "time": 0
       }
     },
     {
@@ -179,7 +193,21 @@
           "checkedAt": "2026-10-18",
           "confidence": "high",
           "note": "Gatherers and Dwarves can only build House, Farm and Ox Cart; Norse infantry and heroes build the rest."
+        },
+        "promotion": {
+          "source": "Game files 19.17020 (techtree.xml VillagerDwarfToBerserk)",
+          "checkedAt": "2026-10-29",
+          "confidence": "high",
+          "note": "Enabled for every Norse god by ArchaicAgeNorse; instant (0 research points); Loki -50%."
         }
+      },
+      "promotion": {
+        "to": "berserk",
+        "cost": {
+          "food": 10,
+          "gold": 30
+        },
+        "time": 0
       }
     },
     {

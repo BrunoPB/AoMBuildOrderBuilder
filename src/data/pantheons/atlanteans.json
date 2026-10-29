@@ -3408,11 +3408,11 @@
       "requires": ["oceanus"],
       "effects": [
         {
-          "target": "cost",
+          "target": "promotionCost",
           "op": "pct",
           "value": -0.2,
           "scope": {
-            "ids": ["murmillo-hero", "katapeltes-hero", "destroyer-hero", "fanatic-hero"],
+            "ids": ["murmillo", "katapeltes", "destroyer", "fanatic"],
             "resources": ["food", "gold"]
           },
           "note": "HeroInfantry promotion techs (Murmillo, Katapeltes, Destroyer, Fanatic) food/gold cost x0.80 BasePercent. Not modelled: HeroInfantry unit cost x0.90."
@@ -3535,11 +3535,11 @@
           "note": "Approximation: every Oracle (existing and queued) becomes an Oracle Hero (TransformUnit), x1.44 favor."
         },
         {
-          "target": "cost",
+          "target": "promotionCost",
           "op": "mul",
           "value": 0,
           "scope": {
-            "ids": ["oracle-hero"],
+            "ids": ["oracle"],
             "resources": ["favor"]
           },
           "note": "OracleHero favor cost Assign 0."
