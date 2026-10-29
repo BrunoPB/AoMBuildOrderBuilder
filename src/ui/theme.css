@@ -431,7 +431,8 @@ label.field > * {
 }
 
 .tip:hover > .tip-bubble,
-.tip:focus-within > .tip-bubble,
+.tip:focus-visible > .tip-bubble,
+.tip:has(:focus-visible) > .tip-bubble,
 .tip[data-open="true"] > .tip-bubble {
   display: block;
 }
@@ -1214,4 +1215,15 @@ textarea {
   gap: 6px;
   font-weight: 600;
   border-left: 4px solid var(--pan);
+}
+
+.tip.help {
+  cursor: help;
+  border-bottom: 1px dotted color-mix(in srgb, currentColor 55%, transparent);
+  line-height: 1.2;
+}
+
+.tip.help > .tip-bubble {
+  font-weight: 400;
+  text-align: left;
 }

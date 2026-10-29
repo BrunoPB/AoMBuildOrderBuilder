@@ -5,7 +5,7 @@ import { formatClock } from "../../engine/time.ts";
 import type { SimResult } from "../../engine/types.ts";
 import { text } from "../../i18n/index.ts";
 import { useApp } from "../context.tsx";
-import { EntityIcon, Tip } from "../icon.tsx";
+import { EntityIcon, Tip, HelpText, useHelp } from "../icon.tsx";
 import { Svg } from "../svg.tsx";
 import { PopChart, ResourceChart } from "./charts.tsx";
 import { actionIcons } from "./labels.ts";
@@ -124,6 +124,7 @@ export function Timeline({ build, steps }: { build: Build; steps: Step[] }) {
 
 export function WarningsPanel({ build, result }: { build: Build; result: SimResult }) {
   const { t, data, locale } = useApp();
+  const help = useHelp();
   const shown = result.warnings.filter(
     (w) =>
       w.level !== "info" || w.key === "warn.lowConfidenceData" || w.key === "warn.sourceDepleted",
@@ -133,11 +134,14 @@ export function WarningsPanel({ build, result }: { build: Build; result: SimResu
     <div class="panel" data-testid="warnings">
       <h3>
         <Svg name="warning" />
-        {t("result.warnings")}
+        <HelpText k="result.warnings" />
       </h3>
       <div class="warn-summary">
         {(["error", "delay", "info"] as const).map((lvl) => (
-          <Tip key={lvl} label={t(`level.${lvl}`)}>
+          <Tip
+            key={lvl}
+            label={[t(`level.${lvl}`), help(`level.${lvl}`)].filter(Boolean).join("\n")}
+          >
             <span class={`row lvl-${lvl}`} style={{ gap: 2 }}>
               <Svg
                 name={lvl === "error" ? "error" : lvl === "delay" ? "warning" : "info"}
@@ -209,6 +213,7 @@ function ResLine({ resources }: { resources?: Record<string, number> }) {
 
 export function Milestones({ build, result }: { build: Build; result: SimResult }) {
   const { t, locale } = useApp();
+  const help = useHelp();
   const at = (sec?: number) =>
     sec === undefined ? undefined : result.series.find((s) => s.t >= sec)?.resources;
   const cards: {
@@ -217,6 +222,7 @@ export function Milestones({ build, result }: { build: Build; result: SimResult 
     label: string;
     t?: number;
     resources?: Record<string, number>;
+    help?: string;
   }[] = [];
   for (const age of ["classical", "heroic", "mythic"] as const) {
     const times = result.ageTimes[age];
@@ -225,6 +231,7 @@ export function Milestones({ build, result }: { build: Build; result: SimResult 
       key: `${age}-c`,
       icons: [age],
       label: t("result.clicked"),
+      help: help("result.clicked"),
       t: times.clicked,
       resources: at(times.clicked),
     });
@@ -233,6 +240,7 @@ export function Milestones({ build, result }: { build: Build; result: SimResult 
         key: `${age}-r`,
         icons: [age],
         label: t("result.reached"),
+        help: help("result.reached"),
         t: times.reached,
         resources: at(times.reached),
       });
@@ -253,7 +261,7 @@ export function Milestones({ build, result }: { build: Build; result: SimResult 
     <div class="panel">
       <h3>
         <Svg name="milestone" />
-        {t("editor.milestones")}
+        <HelpText k="editor.milestones" />
       </h3>
       <div class="milestones" data-testid="milestones">
         {cards.map((c) => (
@@ -262,7 +270,9 @@ export function Milestones({ build, result }: { build: Build; result: SimResult 
               {c.icons.map((id) => (
                 <EntityIcon key={id} id={id} pantheon={build.pantheon} size={24} />
               ))}
-              <span class="action-times">{c.label}</span>
+              <Tip label={c.help ?? ""} focusable>
+                <span class="action-times">{c.label}</span>
+              </Tip>
             </span>
             <span class="big">{c.t !== undefined ? formatClock(c.t) : "—"}</span>
             <ResLine resources={c.resources} />
@@ -282,7 +292,7 @@ export function Matchups({
   readonly: boolean;
   onChange: (m: Matchup[]) => void;
 }) {
-  const { t, data, locale } = useApp();
+  const { data, locale } = useApp();
   const list = build.matchups ?? [];
   const cycle = (god: string) => {
     const order: (Matchup["fit"] | undefined)[] = [undefined, "good", "neutral", "bad"];
@@ -301,14 +311,14 @@ export function Matchups({
     <div class="panel" data-testid="matchups">
       <h3>
         <Svg name="sword" />
-        {t("editor.matchups")}
+        <HelpText k="editor.matchups" />
       </h3>
       <div class="matchups">
         {cols.map((c) => (
           <div key={c.fit} class={`matchup-col ${c.fit}`}>
             <h3 class={c.fit === "good" ? "lvl-info" : ""}>
               <Svg name={c.fit === "good" ? "check" : c.fit === "bad" ? "error" : "info"} />
-              {t(`result.${c.fit}`)}
+              <HelpText k={`result.${c.fit}`} />
             </h3>
             <div class="portraits">
               {c.items.map((m) => {
@@ -361,12 +371,15 @@ export function Matchups({
 }
 
 export function Charts({ result }: { result: SimResult }) {
-  const { t } = useApp();
   return (
     <div class="panel">
-      <h3>{t("result.resources")}</h3>
+      <h3>
+        <HelpText k="result.resources" />
+      </h3>
       <ResourceChart series={result.series} />
-      <h3 style={{ marginTop: 12 }}>{t("result.population")}</h3>
+      <h3 style={{ marginTop: 12 }}>
+        <HelpText k="result.population" />
+      </h3>
       <PopChart series={result.series} />
     </div>
   );

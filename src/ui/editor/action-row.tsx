@@ -5,7 +5,7 @@ import type { ActionOutcome, SimWarning } from "../../engine/types.ts";
 import { warningText } from "../../engine/format.ts";
 import { text } from "../../i18n/index.ts";
 import { useApp } from "../context.tsx";
-import { EntityIcon, Tip } from "../icon.tsx";
+import { EntityIcon, Tip, HelpText, useHelp } from "../icon.tsx";
 import { KIND_ICON, Svg } from "../svg.tsx";
 import { actionIcons, actionText, targetLabel, taskTargets } from "./labels.ts";
 
@@ -71,6 +71,7 @@ function TargetSelect({
 export function ActionRow(props: Props) {
   const { build, index, action: a, outcome, warnings, readonly, onChange } = props;
   const { data, locale, t } = useApp();
+  const help = useHelp();
   const [open, setOpen] = useState(false);
   const p = data.pantheons.get(build.pantheon);
   const c = { data, pantheon: build.pantheon, locale };
@@ -168,20 +169,22 @@ export function ActionRow(props: Props) {
             </span>
           </Tip>
         )}
-        <select
-          value={mode}
-          disabled={readonly}
-          aria-label={t("row.when")}
-          data-testid="when-mode"
-          onChange={(e) => setWhen(e.currentTarget.value)}
-        >
-          <option value="time">{t("row.atTime")}</option>
-          <option value="asap">{t("row.asap")}</option>
-          <option value="after" disabled={others.length === 0}>
-            {t("row.after")}
-          </option>
-          <option value="always">{t("row.always")}</option>
-        </select>
+        <Tip label={help(`row.mode.${mode}`)}>
+          <select
+            value={mode}
+            disabled={readonly}
+            aria-label={t("row.when")}
+            data-testid="when-mode"
+            onChange={(e) => setWhen(e.currentTarget.value)}
+          >
+            <option value="time">{t("row.atTime")}</option>
+            <option value="asap">{t("row.asap")}</option>
+            <option value="after" disabled={others.length === 0}>
+              {t("row.after")}
+            </option>
+            <option value="always">{t("row.always")}</option>
+          </select>
+        </Tip>
         {mode === "time" && (
           <input
             class="time"
@@ -306,12 +309,12 @@ export function ActionRow(props: Props) {
       {open && (
         <fieldset class="action-details" disabled={readonly} style={{ border: 0, margin: 0 }}>
           <label class="field">
-            {t("row.when")}
+            <HelpText k="row.when" />
             <span class="num">{times}</span>
           </label>
           {(a.do === "train" || a.do === "promote") && (
             <label class="field">
-              {t("row.count")}
+              <HelpText k="row.count" />
               <input
                 class="small"
                 type="number"
@@ -326,7 +329,7 @@ export function ActionRow(props: Props) {
           )}
           {(a.do === "train" || a.do === "autoTrain" || a.do === "trainWhenAffordable") && (
             <label class="field">
-              {t("row.rally")}
+              <HelpText k="row.rally" />
               <TargetSelect
                 build={build}
                 value={a.rally}
@@ -338,7 +341,7 @@ export function ActionRow(props: Props) {
           )}
           {(a.do === "train" || a.do === "autoTrain" || a.do === "trainWhenAffordable") && (
             <label class="field">
-              {t("row.target")}
+              <HelpText k="row.target" />
               <select
                 value={(a.do === "trainWhenAffordable" ? a.from : a.at) ?? ""}
                 onChange={(e) => {
@@ -363,7 +366,7 @@ export function ActionRow(props: Props) {
           {a.do === "build" && (
             <>
               <label class="field">
-                {t("row.builder")}
+                <HelpText k="row.builder" />
                 <select
                   value={a.builder ? Object.keys(a.builder)[0] : "auto"}
                   onChange={(e) => {
@@ -392,7 +395,7 @@ export function ActionRow(props: Props) {
               </label>
               {a.builder && "unit" in a.builder && (
                 <label class="field">
-                  {t("row.unit")}
+                  <HelpText k="row.unit" />
                   <select
                     value={a.builder.unit}
                     onChange={(e) => set({ builder: { unit: e.currentTarget.value } })}
@@ -407,7 +410,7 @@ export function ActionRow(props: Props) {
               )}
               {a.builder && "from" in a.builder && (
                 <label class="field">
-                  {t("row.from")}
+                  <HelpText k="row.from" />
                   <TargetSelect
                     build={build}
                     value={a.builder.from}
@@ -417,7 +420,7 @@ export function ActionRow(props: Props) {
               )}
               {a.builder && ("new" in a.builder || "same" in a.builder) && (
                 <label class="field">
-                  {t("row.builder")}
+                  <HelpText k="row.builder" />
                   <select
                     value={"new" in a.builder ? a.builder.new : a.builder.same}
                     onChange={(e) => {
@@ -434,7 +437,7 @@ export function ActionRow(props: Props) {
                 </label>
               )}
               <label class="field">
-                {t("row.count")}
+                <HelpText k="row.count" />
                 <input
                   class="small"
                   type="number"
@@ -447,7 +450,7 @@ export function ActionRow(props: Props) {
                 />
               </label>
               <label class="field">
-                {t("row.then")}
+                <HelpText k="row.then" />
                 <TargetSelect
                   build={build}
                   value={a.then}
@@ -457,7 +460,7 @@ export function ActionRow(props: Props) {
               </label>
               {data.gods.get(build.god)?.modifiers.some((m) => m.condition === "nearManor") && (
                 <label class="field">
-                  {t("row.nearManor")}
+                  <HelpText k="row.nearManor" />
                   <input
                     class="small"
                     type="number"
@@ -478,7 +481,7 @@ export function ActionRow(props: Props) {
           )}
           {a.do === "age" && (
             <label class="field">
-              {t("row.minor")}
+              <HelpText k="row.minor" />
               <select value={a.minor} onChange={(e) => set({ minor: e.currentTarget.value })}>
                 {(data.gods.get(build.god)?.minors[a.to] ?? []).map((m) => (
                   <option key={m} value={m}>
@@ -491,7 +494,7 @@ export function ActionRow(props: Props) {
           {a.do === "move" && (
             <>
               <label class="field">
-                {t("row.count")}
+                <HelpText k="row.count" />
                 <input
                   class="small"
                   type="number"
@@ -503,7 +506,7 @@ export function ActionRow(props: Props) {
                 />
               </label>
               <label class="field">
-                {t("row.from")}
+                <HelpText k="row.from" />
                 <TargetSelect
                   build={build}
                   value={a.from}
@@ -512,7 +515,7 @@ export function ActionRow(props: Props) {
                 />
               </label>
               <label class="field">
-                {t("row.to")}
+                <HelpText k="row.to" />
                 <TargetSelect
                   build={build}
                   value={a.to}
@@ -524,7 +527,7 @@ export function ActionRow(props: Props) {
           )}
           {a.do === "power" && (
             <label class="field">
-              {t("row.target")}
+              <HelpText k="row.target" />
               <select
                 value={a.target ?? ""}
                 onChange={(e) => set({ target: e.currentTarget.value || undefined })}
@@ -540,7 +543,7 @@ export function ActionRow(props: Props) {
           )}
           {(a.do === "stopAutoTrain" || a.do === "stopTrainWhenAffordable") && (
             <label class="field">
-              {t("row.unit")}
+              <HelpText k="row.unit" />
               <select
                 value={a.unit ?? ""}
                 onChange={(e) => set({ unit: e.currentTarget.value || undefined })}
@@ -559,7 +562,7 @@ export function ActionRow(props: Props) {
           {a.do === "event" && (
             <>
               <label class="field">
-                {t("row.lose")}
+                <HelpText k="row.lose" />
                 <span class="row">
                   <select
                     value={Object.keys(a.lose ?? {})[0] ?? ""}
@@ -594,7 +597,7 @@ export function ActionRow(props: Props) {
                 </span>
               </label>
               <label class="field">
-                {t("row.gainFavor")}
+                <HelpText k="row.gainFavor" />
                 <input
                   class="small"
                   type="number"
@@ -625,7 +628,7 @@ export function ActionRow(props: Props) {
                 </label>
               ))}
               <label class="field" style={{ flex: 1 }}>
-                {t("row.note")}
+                <HelpText k="row.note" />
                 <input
                   type="text"
                   value={a.note ?? ""}

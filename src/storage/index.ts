@@ -11,6 +11,8 @@ export const PrefsSchema = z.object({
   efficiency: z.number().positive().max(1.5).optional(),
   sound: z.boolean().default(true),
   countdown: z.number().int().nonnegative().default(0),
+  /** Explanation tooltips on titles and fields. */
+  tooltips: z.boolean().default(true),
 });
 export type Prefs = z.infer<typeof PrefsSchema>;
 

@@ -64,6 +64,29 @@ function initials(name: string): string {
     .join("");
 }
 
+/** Help text for an i18n key, from `help.<key>`; empty when there is none or tips are off. */
+export function useHelp(): (key: string) => string {
+  const { t, prefs } = useApp();
+  return (key) => {
+    if (!prefs.tooltips) return "";
+    const help = t(`help.${key}`);
+    return help === `help.${key}` ? "" : help;
+  };
+}
+
+/** A UI label that explains itself in a tooltip (when help tips are on). */
+export function HelpText({ k, params }: { k: string; params?: Record<string, string | number> }) {
+  const { t } = useApp();
+  const help = useHelp()(k);
+  const label = t(k, params);
+  if (!help) return <>{label}</>;
+  return (
+    <Tip label={help} focusable class="help">
+      {label}
+    </Tip>
+  );
+}
+
 /** A game icon by icon id; falls back to a neutral placeholder with initials. */
 export function GameIcon({ icon, name, size = 32 }: { icon: string; name: string; size?: number }) {
   const { data } = useApp();

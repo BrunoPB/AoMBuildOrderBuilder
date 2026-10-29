@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "preact/hooks";
 import { formatClock } from "../engine/time.ts";
 import { useApp } from "./context.tsx";
 import { StepChips } from "./editor/result.tsx";
-import { Tip } from "./icon.tsx";
+import { Tip, HelpText } from "./icon.tsx";
 import { useSimulation } from "./sim.ts";
 import { Svg } from "./svg.tsx";
 
@@ -128,10 +128,10 @@ export function MatchMode({ id }: { id: string }) {
           }}
         >
           <Svg name="reset" />
-          {t("match.reset")}
+          <HelpText k="match.reset" />
         </button>
         <label class="field">
-          {t("match.countdown")}
+          <HelpText k="match.countdown" />
           <input
             class="small"
             type="number"
@@ -148,7 +148,9 @@ export function MatchMode({ id }: { id: string }) {
       </div>
       <div class="match-step now" data-testid="match-current">
         <div class="row">
-          <span class="lvl-info">{t("match.now")}</span>
+          <span class="lvl-info">
+            <HelpText k="match.now" />
+          </span>
           <span class="step-time">{current?.t ?? "—"}</span>
           {current && (
             <span class="num">
@@ -160,7 +162,9 @@ export function MatchMode({ id }: { id: string }) {
       </div>
       <div class="match-step" data-testid="match-next">
         <div class="row">
-          <span class="lvl-info">{t("match.next")}</span>
+          <span class="lvl-info">
+            <HelpText k="match.next" />
+          </span>
           <span class="step-time">{next?.t ?? t("match.done")}</span>
           {next && <span class="num">−{formatClock(Math.max(0, next.seconds - elapsed))}</span>}
         </div>

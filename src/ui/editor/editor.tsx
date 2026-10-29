@@ -4,7 +4,7 @@ import { type Action, BUILD_TYPES, type Build, type Settings } from "../../engin
 import { text } from "../../i18n/index.ts";
 import { navigate } from "../app.tsx";
 import { useApp } from "../context.tsx";
-import { EntityIcon, Tip } from "../icon.tsx";
+import { EntityIcon, Tip, HelpText, useHelp } from "../icon.tsx";
 import { duplicateBuild, useSimulation } from "../sim.ts";
 import { Svg } from "../svg.tsx";
 import { ActionRow } from "./action-row.tsx";
@@ -38,7 +38,7 @@ function SettingsPanel({
     <details class="panel collapsible">
       <summary>
         <Svg name="gear" />
-        {t("editor.settings")}
+        <HelpText k="editor.settings" />
       </summary>
       <fieldset
         disabled={readonly}
@@ -46,7 +46,7 @@ function SettingsPanel({
         style={{ border: 0, padding: 0, margin: "8px 0 0" }}
       >
         <label class="field">
-          {t("editor.efficiency")}
+          <HelpText k="editor.efficiency" />
           <input
             type="number"
             step="0.01"
@@ -59,7 +59,7 @@ function SettingsPanel({
           />
         </label>
         <label class="field">
-          {t("editor.tick")}
+          <HelpText k="editor.tick" />
           <select
             value={String(s.tick ?? d.tick)}
             onChange={(e) => set({ tick: Number(e.currentTarget.value) })}
@@ -73,7 +73,7 @@ function SettingsPanel({
         </label>
         {favor?.type === "oracles" && (
           <label class="field">
-            {t("editor.oracleRate")}
+            <HelpText k="editor.oracleRate" />
             <input
               type="number"
               step="0.1"
@@ -87,7 +87,7 @@ function SettingsPanel({
         )}
         {favor?.type === "combat" && (
           <label class="field">
-            {t("editor.norseFavor")}
+            <HelpText k="editor.norseFavor" />
             <input
               type="number"
               step="0.5"
@@ -99,7 +99,7 @@ function SettingsPanel({
           </label>
         )}
         <label class="field">
-          {t("editor.popReserved")}
+          <HelpText k="editor.popReserved" />
           <select
             value={s.popReservedAt ?? d.popReservedAt}
             onChange={(e) => set({ popReservedAt: e.currentTarget.value as "start" | "end" })}
@@ -109,7 +109,7 @@ function SettingsPanel({
           </select>
         </label>
         <label class="field">
-          {t("editor.window")}
+          <HelpText k="editor.window" />
           <input
             type="number"
             min="0"
@@ -122,7 +122,10 @@ function SettingsPanel({
           .filter((x) => data.sources.has(x))
           .map((x) => (
             <label class="field" key={x}>
-              {t("editor.sourceAmount", { source: text(locale, data.sources.get(x)!.name) })}
+              <HelpText
+                k="editor.sourceAmount"
+                params={{ source: text(locale, data.sources.get(x)!.name) }}
+              />
               <input
                 type="number"
                 min="1"
@@ -139,7 +142,7 @@ function SettingsPanel({
             </label>
           ))}
         <div class="field" style={{ gridColumn: "1 / -1" }}>
-          {t("editor.foodChain")}
+          <HelpText k="editor.foodChain" />
           <div class="row">
             {chain.map((src, i) => (
               <span class="chip" key={`${src}-${i}`}>
@@ -306,6 +309,7 @@ function GodPicker({
 
 export function Editor({ id }: { id: string }) {
   const api = useApp();
+  const help = useHelp();
   const { t, data, locale } = api;
   const found = api.findBuild(id);
   const [dragFrom, setDragFrom] = useState<number | null>(null);
@@ -397,7 +401,9 @@ export function Editor({ id }: { id: string }) {
                 disabled={readonly}
                 onClick={() => update({ ...build, type: ty })}
               >
-                <span class={`type-tag type-${ty}`}>{t(`type.${ty}`)}</span>
+                <Tip label={help(`type.${ty}`)}>
+                  <span class={`type-tag type-${ty}`}>{t(`type.${ty}`)}</span>
+                </Tip>
               </button>
             ))}
             <input
@@ -415,7 +421,7 @@ export function Editor({ id }: { id: string }) {
         <div class="panel stack" style={{ gap: 8 }}>
           {(["objective", "end"] as const).map((field) => (
             <label class="field" key={field}>
-              {t(`editor.${field}`)}
+              <HelpText k={`editor.${field}`} />
               <textarea
                 rows={2}
                 maxLength={300}
@@ -449,7 +455,7 @@ export function Editor({ id }: { id: string }) {
         <div class="panel">
           <h3>
             <Svg name="list" />
-            {t("editor.actions")} <span class="num">{build.actions.length}</span>
+            <HelpText k="editor.actions" /> <span class="num">{build.actions.length}</span>
           </h3>
           {build.actions.length === 0 ? (
             <p class="action-times">{t("editor.empty")}</p>
@@ -538,7 +544,7 @@ export function Editor({ id }: { id: string }) {
             <div class="panel">
               <h3>
                 <Svg name="clock" />
-                {t("result.timeline")}
+                <HelpText k="result.timeline" />
               </h3>
               <Timeline build={build} steps={sim.steps} />
             </div>

@@ -15,7 +15,7 @@ import {
 import { text } from "../i18n/index.ts";
 import { navigate } from "./app.tsx";
 import { useApp } from "./context.tsx";
-import { EntityIcon, Tip } from "./icon.tsx";
+import { EntityIcon, Tip, HelpText, useHelp } from "./icon.tsx";
 import { duplicateBuild, newBuild } from "./sim.ts";
 import { Svg } from "./svg.tsx";
 
@@ -44,6 +44,7 @@ function BuildCard({
   ages: ReturnType<typeof simulate>["ageTimes"];
 }) {
   const api = useApp();
+  const help = useHelp();
   const { t, data, locale } = api;
   const god = data.gods.get(build.god);
   const open = `#/build/${encodeURIComponent(build.id)}`;
@@ -76,7 +77,9 @@ function BuildCard({
           </a>
           <div class="row" style={{ gap: 6 }}>
             <EntityIcon id={build.pantheon} pantheon={build.pantheon} size={20} />
-            <span class={`type-tag type-${build.type}`}>{t(`type.${build.type}`)}</span>
+            <Tip label={help(`type.${build.type}`)} focusable>
+              <span class={`type-tag type-${build.type}`}>{t(`type.${build.type}`)}</span>
+            </Tip>
             {readonly && (
               <Tip label={t("card.readonly")} focusable>
                 <Svg name="info" label={t("card.readonly")} />
@@ -177,6 +180,7 @@ function BuildCard({
 
 export function Library() {
   const api = useApp();
+  const help = useHelp();
   const { t, data, builds, presets, locale } = api;
   const [pantheon, setPantheon] = useState<PantheonId | null>(null);
   const [god, setGod] = useState<string | null>(null);
@@ -256,11 +260,11 @@ export function Library() {
       <div class="toolbar">
         <button class="btn primary" onClick={create} data-testid="new-build">
           <Svg name="plus" />
-          {t("library.new")}
+          <HelpText k="library.new" />
         </button>
         <button class="btn" onClick={() => fileInput.current?.click()} data-testid="import">
           <Svg name="upload" />
-          {t("library.import")}
+          <HelpText k="library.import" />
         </button>
         <input
           ref={fileInput}
@@ -281,7 +285,7 @@ export function Library() {
           data-testid="export-all"
         >
           <Svg name="download" />
-          {t("library.exportAll")}
+          <HelpText k="library.exportAll" />
         </button>
       </div>
 
@@ -295,7 +299,7 @@ export function Library() {
               setGod(null);
             }}
           >
-            {t("library.all")}
+            <HelpText k="library.all" />
           </button>
           {pantheonList.map((p) => (
             <button
@@ -335,20 +339,22 @@ export function Library() {
               aria-pressed={type === ty}
               onClick={() => setType(type === ty ? null : ty)}
             >
-              <span class={`type-tag type-${ty}`}>{t(`type.${ty}`)}</span>
+              <Tip label={help(`type.${ty}`)}>
+                <span class={`type-tag type-${ty}`}>{t(`type.${ty}`)}</span>
+              </Tip>
             </button>
           ))}
         </div>
       </div>
 
       <div class={`dropzone ${over ? "over" : ""}`}>
-        <Svg name="upload" /> {t("library.drop")}
+        <Svg name="upload" /> <HelpText k="library.drop" />
       </div>
 
       <section>
         <h2>
           <Svg name="user" />
-          {t("library.mine")}
+          <HelpText k="library.mine" />
         </h2>
         {mine.length === 0 ? (
           <p class="action-times">{builds.length ? t("library.noMatch") : t("library.empty")}</p>
@@ -364,7 +370,7 @@ export function Library() {
       <section>
         <h2>
           <Svg name="star" />
-          {t("library.presets")}
+          <HelpText k="library.presets" />
         </h2>
         {standard.length === 0 ? (
           <p class="action-times">{t("library.noMatch")}</p>

@@ -1,3 +1,4 @@
+import { HelpText } from "./icon.tsx";
 import { useApp } from "./context.tsx";
 import { Svg } from "./svg.tsx";
 
@@ -11,7 +12,7 @@ export function SettingsPage() {
       </h1>
       <div class="panel stack">
         <label class="field">
-          {t("settings.language")}
+          <HelpText k="settings.language" />
           <select
             value={locale}
             data-testid="settings-locale"
@@ -22,7 +23,7 @@ export function SettingsPage() {
           </select>
         </label>
         <div class="field">
-          {t("settings.theme")}
+          <HelpText k="settings.theme" />
           <div class="row">
             {(["light", "dark", "system"] as const).map((theme) => (
               <button
@@ -38,7 +39,7 @@ export function SettingsPage() {
           </div>
         </div>
         <label class="field">
-          {t("settings.efficiency")}
+          <HelpText k="settings.efficiency" />
           <input
             type="number"
             step="0.01"
@@ -53,7 +54,30 @@ export function SettingsPage() {
           />
         </label>
         <div class="field">
-          {t("settings.sound")}
+          <HelpText k="settings.tooltips" />
+          <div class="row">
+            <button
+              class="chip"
+              aria-pressed={prefs.tooltips}
+              data-testid="tooltips-on"
+              onClick={() => setPrefs({ tooltips: true })}
+            >
+              <Svg name="info" />
+              {t("settings.on")}
+            </button>
+            <button
+              class="chip"
+              aria-pressed={!prefs.tooltips}
+              data-testid="tooltips-off"
+              onClick={() => setPrefs({ tooltips: false })}
+            >
+              <Svg name="stop" />
+              {t("settings.off")}
+            </button>
+          </div>
+        </div>
+        <div class="field">
+          <HelpText k="settings.sound" />
           <div class="row">
             <button
               class="chip"
@@ -75,11 +99,15 @@ export function SettingsPage() {
         </div>
       </div>
       <div class="panel stack">
-        <h3>{t("settings.data")}</h3>
+        <h3>
+          <HelpText k="settings.data" />
+        </h3>
         <span>
-          {t("settings.patch")}: <span class="num">{data.common.patch}</span>
+          <HelpText k="settings.patch" />: <span class="num">{data.common.patch}</span>
         </span>
-        <a href={`${import.meta.env.BASE_URL}api/v1/index.json`}>{t("settings.api")}</a>
+        <a href={`${import.meta.env.BASE_URL}api/v1/index.json`}>
+          <HelpText k="settings.api" />
+        </a>
       </div>
     </div>
   );

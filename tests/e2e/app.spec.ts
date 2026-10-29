@@ -122,3 +122,20 @@ test("has no horizontal scroll on a phone", async ({ page }) => {
     expect(overflow, path).toBeLessThanOrEqual(0);
   }
 });
+
+test("help tips explain titles and can be turned off", async ({ page }) => {
+  await page.goto("/#/build/preset%3Akrush");
+  const title = page
+    .locator("h3 .tip.help")
+    .filter({ hasText: /^Ações/ })
+    .first();
+  await title.hover();
+  await expect(title.locator(".tip-bubble")).toBeVisible();
+  await expect(title.locator(".tip-bubble")).toContainText("Arraste para reordenar");
+
+  await page.goto("/#/settings");
+  await page.getByTestId("tooltips-off").click();
+  await page.goto("/#/build/preset%3Akrush");
+  await expect(page.locator(".tip.help")).toHaveCount(0);
+  await expect(page.locator("h3", { hasText: "Ações" })).toBeVisible();
+});
