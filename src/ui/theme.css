@@ -1726,3 +1726,17 @@ textarea {
   margin-left: auto;
   gap: 2px;
 }
+
+/* ---------- palette groups ---------- */
+
+.palette-group + .palette-group {
+  margin-top: 8px;
+}
+
+.palette-group-label {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+}

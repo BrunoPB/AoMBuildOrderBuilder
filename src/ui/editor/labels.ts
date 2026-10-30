@@ -163,22 +163,15 @@ export function nextActionId(build: Build): string {
   return `a${i}`;
 }
 
-export const PALETTE_KINDS: ActionKind[] = [
-  "train",
-  "build",
-  "research",
-  "age",
-  "move",
-  "power",
-  "timeShift",
-  "promote",
-  "empower",
-  "summon",
-  "autoTrain",
-  "stopAutoTrain",
-  "trainWhenAffordable",
-  "stopTrainWhenAffordable",
-  "event",
+/** Palette action kinds by group, most common first; god-specific actions last. */
+export const PALETTE_GROUPS: { id: string; kinds: ActionKind[] }[] = [
+  { id: "economy", kinds: ["move", "train", "build", "research", "age"] },
+  {
+    id: "auto",
+    kinds: ["autoTrain", "stopAutoTrain", "trainWhenAffordable", "stopTrainWhenAffordable"],
+  },
+  { id: "god", kinds: ["power", "timeShift", "promote", "empower", "summon"] },
+  { id: "other", kinds: ["event"] },
 ];
 
 /** What the build starts with: the pantheon's start state plus the major god's extras. */

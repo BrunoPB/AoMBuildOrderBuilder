@@ -398,5 +398,13 @@
   "warn.idleUntilEnd.other": "{count} villagers stayed idle until the end",
   "help.editor.view.list": "The build actions in order, with the time each one starts.",
   "help.editor.view.production": "Bar chart over time: what each building is training, researching or building.",
-  "help.production.zoom": "Time scale: the higher, the wider the bars."
+  "help.production.zoom": "Time scale: the higher, the wider the bars.",
+  "palette.group.economy": "Economy",
+  "palette.group.auto": "Automatic",
+  "palette.group.god": "God",
+  "palette.group.other": "Other",
+  "help.palette.group.economy": "The basics of every build: move villagers, train, build, research and age up.",
+  "help.palette.group.auto": "Rules that keep running until turned off: auto queue and train whenever affordable.",
+  "help.palette.group.god": "Powers and actions that depend on the chosen god.",
+  "help.palette.group.other": "Notes on the timeline, such as a raid or lost units."
 }

@@ -398,5 +398,13 @@
   "warn.idleUntilEnd.other": "{count} aldeões ficaram ociosos até o fim",
   "help.editor.view.list": "As ações da build em ordem, com o tempo em que cada uma começa.",
   "help.editor.view.production": "Gráfico de barras no tempo: o que cada prédio está treinando, pesquisando ou construindo.",
-  "help.production.zoom": "Escala do tempo: quanto maior, mais largas as barras."
+  "help.production.zoom": "Escala do tempo: quanto maior, mais largas as barras.",
+  "palette.group.economy": "Economia",
+  "palette.group.auto": "Automático",
+  "palette.group.god": "Do deus",
+  "palette.group.other": "Outros",
+  "help.palette.group.economy": "O básico de toda build: mover aldeões, treinar, construir, pesquisar e subir de idade.",
+  "help.palette.group.auto": "Regras que continuam valendo até serem desligadas: produção automática e treinar sempre que der.",
+  "help.palette.group.god": "Poderes e ações que dependem do deus escolhido.",
+  "help.palette.group.other": "Anotações na linha do tempo, como um ataque ou uma perda de unidades."
 }

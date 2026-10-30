@@ -5,7 +5,7 @@ import { text } from "../../i18n/index.ts";
 import { useApp } from "../context.tsx";
 import { EntityIcon, Tip, HelpText, useHelp, useLabel } from "../icon.tsx";
 import { KIND_ICON, Svg } from "../svg.tsx";
-import { ageRank, chosenMinors, PALETTE_KINDS } from "./labels.ts";
+import { ageRank, chosenMinors, PALETTE_GROUPS } from "./labels.ts";
 
 type Option = { id: string; age?: Age; detail?: string };
 
@@ -189,24 +189,37 @@ export function Palette({
         <Svg name="plus" />
         <HelpText k="editor.add" />
       </h3>
-      <div class="palette-kinds" role="toolbar" aria-label={t("editor.add")}>
-        {PALETTE_KINDS.filter(available).map((k) => (
-          <Tip
-            key={k}
-            label={[label(`action.${k}`, ctx), help(`action.${k}`, ctx)].filter(Boolean).join("\n")}
-          >
-            <button
-              class={`btn icon-only kind-btn kind-${k}`}
-              aria-pressed={kind === k}
-              aria-label={label(`action.${k}`, ctx)}
-              data-testid={`kind-${k}`}
-              onClick={() => choose(k)}
-            >
-              <Svg name={KIND_ICON[k] ?? "plus"} />
-            </button>
-          </Tip>
-        ))}
-      </div>
+      {PALETTE_GROUPS.map((g) => {
+        const kinds = g.kinds.filter(available);
+        if (kinds.length === 0) return null;
+        return (
+          <div key={g.id} class="palette-group" data-testid={`palette-${g.id}`}>
+            <span class="palette-group-label">
+              <HelpText k={`palette.group.${g.id}`} />
+            </span>
+            <div class="palette-kinds" role="toolbar" aria-label={t(`palette.group.${g.id}`)}>
+              {kinds.map((k) => (
+                <Tip
+                  key={k}
+                  label={[label(`action.${k}`, ctx), help(`action.${k}`, ctx)]
+                    .filter(Boolean)
+                    .join("\n")}
+                >
+                  <button
+                    class={`btn icon-only kind-btn kind-${k}`}
+                    aria-pressed={kind === k}
+                    aria-label={label(`action.${k}`, ctx)}
+                    data-testid={`kind-${k}`}
+                    onClick={() => choose(k)}
+                  >
+                    <Svg name={KIND_ICON[k] ?? "plus"} />
+                  </button>
+                </Tip>
+              ))}
+            </div>
+          </div>
+        );
+      })}
       {current && (
         <>
           <div class="row" style={{ marginTop: "8px" }}>
