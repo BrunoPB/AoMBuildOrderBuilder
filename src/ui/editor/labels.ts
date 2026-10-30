@@ -190,3 +190,6 @@ export function startState(data: GameData, build: Build) {
     resources: Object.entries(resources),
   };
 }
+
+/** Drag-and-drop type for an action dragged from the palette into the list. */
+export const ACTION_MIME = "application/x-aomr-action";

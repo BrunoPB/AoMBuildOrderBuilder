@@ -5,7 +5,7 @@ import { text } from "../../i18n/index.ts";
 import { useApp } from "../context.tsx";
 import { EntityIcon, Tip, HelpText, useHelp, useLabel } from "../icon.tsx";
 import { KIND_ICON, Svg } from "../svg.tsx";
-import { ageRank, chosenMinors, PALETTE_GROUPS } from "./labels.ts";
+import { ACTION_MIME, ageRank, chosenMinors, PALETTE_GROUPS } from "./labels.ts";
 
 type Option = { id: string; age?: Age; detail?: string };
 
@@ -131,52 +131,60 @@ export function Palette({
     }
   };
 
-  const pick = (o: Option) => {
+  const actionFor = (o: Option): Action | undefined => {
     switch (current) {
       case "train":
-        return onAdd({ when: "asap", do: "train", unit: o.id, count: 1 });
+        return { when: "asap", do: "train", unit: o.id, count: 1 };
       case "autoTrain":
-        return onAdd({ when: "asap", do: "autoTrain", unit: o.id });
+        return { when: "asap", do: "autoTrain", unit: o.id };
       case "trainWhenAffordable":
-        return onAdd({ when: "asap", do: "trainWhenAffordable", unit: o.id });
+        return { when: "asap", do: "trainWhenAffordable", unit: o.id };
       case "promote":
-        return onAdd({ when: "asap", do: "promote", unit: o.id });
+        return { when: "asap", do: "promote", unit: o.id };
       case "build":
-        return onAdd({ when: "asap", do: "build", building: o.id });
+        return { when: "asap", do: "build", building: o.id };
       case "timeShift":
-        return onAdd({ when: "asap", do: "timeShift", building: o.id });
+        return { when: "asap", do: "timeShift", building: o.id };
       case "empower":
-        return onAdd({ when: "asap", do: "empower", by: empowerSources[0]!.unit, building: o.id });
+        return { when: "asap", do: "empower", by: empowerSources[0]!.unit, building: o.id };
       case "summon":
-        return onAdd({ when: "asap", do: "summon", unit: o.id, count: 1, hunt: true });
+        return { when: "asap", do: "summon", unit: o.id, count: 1, hunt: true };
       case "research":
-        return onAdd({ when: "asap", do: "research", research: o.id });
+        return { when: "asap", do: "research", research: o.id };
       case "power":
-        return onAdd({ when: "asap", do: "power", power: o.id });
+        return { when: "asap", do: "power", power: o.id };
       case "age":
-        return onAdd({
-          when: "asap",
-          do: "age",
-          to: o.age as Exclude<Age, "archaic">,
-          minor: o.id,
-        });
+        return { when: "asap", do: "age", to: o.age as Exclude<Age, "archaic">, minor: o.id };
     }
+    return undefined;
+  };
+
+  /** Kinds that add an action right away (no entity to pick). */
+  const immediate = (k: ActionKind): Action | undefined => {
+    if (k === "move")
+      return idle > 0
+        ? { when: "asap", do: "move", count: idle, from: "idle", to: "food" }
+        : { when: "asap", do: "move", count: 1, from: "food", to: "wood" };
+    if (k === "stopAutoTrain") return { when: "asap", do: "stopAutoTrain" };
+    if (k === "stopTrainWhenAffordable") return { when: "asap", do: "stopTrainWhenAffordable" };
+    if (k === "event") return { when: "asap", do: "event", note: "" };
+    return undefined;
   };
 
   const choose = (k: ActionKind) => {
-    if (k === "move") {
-      return onAdd(
-        idle > 0
-          ? { when: "asap", do: "move", count: idle, from: "idle", to: "food" }
-          : { when: "asap", do: "move", count: 1, from: "food", to: "wood" },
-      );
-    }
-    if (k === "stopAutoTrain") return onAdd({ when: "asap", do: "stopAutoTrain" });
-    if (k === "stopTrainWhenAffordable")
-      return onAdd({ when: "asap", do: "stopTrainWhenAffordable" });
-    if (k === "event") return onAdd({ when: "asap", do: "event", note: "" });
+    const a = immediate(k);
+    if (a) return onAdd(a);
     setKind(kind === k ? null : k);
   };
+
+  /** Drag an action from the palette into a position of the action list. */
+  const draggable = (a: Action | undefined) =>
+    a
+      ? {
+          draggable: true,
+          onDragStart: (e: DragEvent) => e.dataTransfer?.setData(ACTION_MIME, JSON.stringify(a)),
+        }
+      : {};
 
   const list = options().filter((o) => !age || !o.age || o.age === age);
   const sorted = [...list].sort(
@@ -211,6 +219,7 @@ export function Palette({
                     aria-label={label(`action.${k}`, ctx)}
                     data-testid={`kind-${k}`}
                     onClick={() => choose(k)}
+                    {...draggable(immediate(k))}
                   >
                     <Svg name={KIND_ICON[k] ?? "plus"} />
                   </button>
@@ -254,7 +263,11 @@ export function Palette({
                     class="entity-btn"
                     aria-label={name}
                     data-testid={`pick-${o.id}`}
-                    onClick={() => pick(o)}
+                    onClick={() => {
+                      const a = actionFor(o);
+                      if (a) onAdd(a);
+                    }}
+                    {...draggable(actionFor(o))}
                   >
                     <EntityIcon id={o.id} pantheon={build.pantheon} size={40} tip={false} />
                     {o.age && o.age !== "archaic" && (

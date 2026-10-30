@@ -8,7 +8,14 @@ import { text } from "../../i18n/index.ts";
 import { useApp } from "../context.tsx";
 import { EntityIcon, Tip, HelpText, useHelp, useLabel } from "../icon.tsx";
 import { KIND_ICON, Svg } from "../svg.tsx";
-import { actionIcons, actionText, targetLabel, taskTargets, actionTarget } from "./labels.ts";
+import {
+  ACTION_MIME,
+  actionIcons,
+  actionText,
+  targetLabel,
+  taskTargets,
+  actionTarget,
+} from "./labels.ts";
 
 type Props = {
   build: Build;
@@ -29,6 +36,8 @@ type Props = {
     start: (i: number) => void;
     over: (i: number) => void;
     drop: (i: number) => void;
+    /** A new action dragged in from the palette, inserted before row i. */
+    insert: (i: number, a: Action) => void;
     end: () => void;
     from: number | null;
     target: number | null;
@@ -158,13 +167,16 @@ export function ActionRow(props: Props) {
         setOpen(!open);
       }}
       onDragOver={(e) => {
-        if (drag.from === null) return;
+        if (drag.from === null && !e.dataTransfer?.types.includes(ACTION_MIME)) return;
         e.preventDefault();
         drag.over(index);
       }}
       onDrop={(e) => {
         e.preventDefault();
-        drag.drop(index);
+        e.stopPropagation();
+        const added = e.dataTransfer?.getData(ACTION_MIME);
+        if (added) drag.insert(index, JSON.parse(added) as Action);
+        else drag.drop(index);
       }}
     >
       <div class="action-main">

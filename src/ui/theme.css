@@ -1904,3 +1904,106 @@ textarea {
   border-radius: 8px;
   background: var(--surface);
 }
+
+.minor-cards > .god-card-tip {
+  display: flex;
+  flex: 1 1 88px;
+  max-width: 132px;
+}
+
+.minor-cards > .god-card-tip > .god-card.small {
+  flex: 1;
+  max-width: none;
+}
+
+/* ---------- drag and drop ---------- */
+
+.food-chain {
+  list-style: none;
+  margin: 0;
+  padding: 4px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  min-height: 40px;
+  border-radius: 8px;
+}
+
+.chain-item {
+  cursor: grab;
+  padding-left: 4px;
+}
+
+.chain-item.dragging,
+.portrait-btn.dragging {
+  opacity: 0.4;
+}
+
+.chain-body {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.chain-num {
+  display: inline-grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  font-size: 11px;
+  background: var(--accent);
+  color: var(--surface);
+}
+
+.chain-item.drop-target {
+  box-shadow: -3px 0 0 var(--accent);
+}
+
+.food-chain.drop-end,
+.chain-pool.drop-target,
+.matchup-col.drop-target,
+.matchup-pool.drop-target {
+  outline: 2px dashed var(--accent);
+  outline-offset: 2px;
+}
+
+.chain-pool {
+  margin-top: 4px;
+  padding: 4px;
+  border-radius: 8px;
+  min-height: 36px;
+}
+
+.matchup-col {
+  min-height: 92px;
+}
+
+.matchup-pool {
+  margin-top: 8px;
+  padding: 4px;
+  border-radius: 8px;
+}
+
+.drop-hint {
+  display: inline-grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 2px dashed var(--border);
+  border-radius: 10px;
+  color: var(--muted);
+}
+
+.portrait-btn[draggable="true"] {
+  cursor: grab;
+}
+
+.actions-list.drop-end > :last-child {
+  box-shadow: 0 3px 0 var(--accent);
+}
+
+.entity-btn[draggable="true"],
+.kind-btn[draggable="true"] {
+  cursor: grab;
+}

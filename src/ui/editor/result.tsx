@@ -415,14 +415,79 @@ export function Matchups({
   readonly: boolean;
   onChange: (m: Matchup[]) => void;
 }) {
-  const { data, locale } = useApp();
+  const { t, data, locale } = useApp();
+  const help = useHelp();
+  const [dragging, setDragging] = useState<string | null>(null);
+  const [over, setOver] = useState<Matchup["fit"] | "none" | null>(null);
   const list = build.matchups ?? [];
+  const setFit = (god: string, fit: Matchup["fit"] | undefined) => {
+    const cur = list.find((m) => m.god === god);
+    if (cur?.fit === fit) return;
+    const rest = list.filter((m) => m.god !== god);
+    onChange(fit ? [...rest, { ...cur, god, fit }] : rest);
+  };
   const cycle = (god: string) => {
     const order: (Matchup["fit"] | undefined)[] = [undefined, "good", "neutral", "bad"];
-    const cur = list.find((m) => m.god === god);
-    const next = order[(order.indexOf(cur?.fit) + 1) % order.length];
-    const rest = list.filter((m) => m.god !== god);
-    onChange(next ? [...rest, { ...cur, god, fit: next }] : rest);
+    const cur = list.find((m) => m.god === god)?.fit;
+    setFit(god, order[(order.indexOf(cur) + 1) % order.length]);
+  };
+  /** Drop target for a column (or the unrated pool, `none`). */
+  const target = (fit: Matchup["fit"] | "none") =>
+    readonly
+      ? {}
+      : {
+          onDragOver: (e: DragEvent) => {
+            if (!dragging) return;
+            e.preventDefault();
+            setOver(fit);
+          },
+          onDragLeave: (e: DragEvent) => {
+            if (!(e.currentTarget as Node).contains(e.relatedTarget as Node | null)) setOver(null);
+          },
+          onDrop: (e: DragEvent) => {
+            e.preventDefault();
+            if (dragging) setFit(dragging, fit === "none" ? undefined : fit);
+            setDragging(null);
+            setOver(null);
+          },
+        };
+  const portrait = (god: string, size: number) => {
+    const g = data.gods.get(god);
+    const m = list.find((x) => x.god === god);
+    const label = [g ? text(locale, g.name) : god, m?.why ? text(locale, m.why) : ""]
+      .filter(Boolean)
+      .join("\n");
+    if (readonly)
+      return (
+        <EntityIcon
+          key={god}
+          id={god}
+          pantheon={g?.pantheon ?? build.pantheon}
+          size={size}
+          detail={m?.why ? text(locale, m.why) : undefined}
+        />
+      );
+    return (
+      <Tip key={god} label={[label, help("editor.matchupGod")].filter(Boolean).join("\n")}>
+        <button
+          class={`portrait-btn ${dragging === god ? "dragging" : ""}`}
+          aria-label={label}
+          draggable
+          data-testid={`matchup-${god}`}
+          onDragStart={(e) => {
+            e.dataTransfer?.setData("text/plain", god);
+            setDragging(god);
+          }}
+          onDragEnd={() => {
+            setDragging(null);
+            setOver(null);
+          }}
+          onClick={() => cycle(god)}
+        >
+          <EntityIcon id={god} pantheon={g?.pantheon ?? build.pantheon} size={size} tip={false} />
+        </button>
+      </Tip>
+    );
   };
   const cols = (["good", "neutral", "bad"] as const).map((fit) => ({
     fit,
@@ -438,55 +503,36 @@ export function Matchups({
       </h3>
       <div class="matchups">
         {cols.map((c) => (
-          <div key={c.fit} class={`matchup-col ${c.fit}`}>
+          <div
+            key={c.fit}
+            class={`matchup-col ${c.fit} ${over === c.fit ? "drop-target" : ""}`}
+            data-testid={`matchup-col-${c.fit}`}
+            {...target(c.fit)}
+          >
             <h3 class={c.fit === "good" ? "lvl-info" : ""}>
               <Svg name={c.fit === "good" ? "check" : c.fit === "bad" ? "error" : "info"} />
               <HelpText k={`result.${c.fit}`} />
             </h3>
             <div class="portraits">
-              {c.items.map((m) => {
-                const g = data.gods.get(m.god);
-                const label = [g ? text(locale, g.name) : m.god, m.why ? text(locale, m.why) : ""]
-                  .filter(Boolean)
-                  .join("\n");
-                return readonly ? (
-                  <EntityIcon
-                    key={m.god}
-                    id={m.god}
-                    pantheon={g?.pantheon ?? build.pantheon}
-                    size={36}
-                    detail={m.why ? text(locale, m.why) : undefined}
-                  />
-                ) : (
-                  <Tip key={m.god} label={label}>
-                    <button class="portrait-btn" aria-label={label} onClick={() => cycle(m.god)}>
-                      <EntityIcon
-                        id={m.god}
-                        pantheon={g?.pantheon ?? build.pantheon}
-                        size={36}
-                        tip={false}
-                      />
-                    </button>
-                  </Tip>
-                );
-              })}
+              {c.items.map((m) => portrait(m.god, 36))}
+              {!readonly && c.items.length === 0 && (
+                <span class="drop-hint" aria-hidden="true">
+                  <Svg name="plus" />
+                </span>
+              )}
             </div>
           </div>
         ))}
       </div>
-      {!readonly && unset.length > 0 && (
-        <div class="portraits" style={{ marginTop: "8px", opacity: 0.7 }}>
-          {unset.map((g) => (
-            <Tip key={g.id} label={text(locale, g.name)}>
-              <button
-                class="portrait-btn"
-                aria-label={text(locale, g.name)}
-                onClick={() => cycle(g.id)}
-              >
-                <EntityIcon id={g.id} pantheon={g.pantheon} size={28} tip={false} />
-              </button>
-            </Tip>
-          ))}
+      {!readonly && (
+        <div
+          class={`portraits matchup-pool ${over === "none" ? "drop-target" : ""}`}
+          role="group"
+          aria-label={t("editor.matchupPool")}
+          data-testid="matchup-pool"
+          {...target("none")}
+        >
+          {unset.map((g) => portrait(g.id, 28))}
         </div>
       )}
     </div>

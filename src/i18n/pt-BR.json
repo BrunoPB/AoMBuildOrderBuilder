@@ -261,11 +261,11 @@
   "help.editor.popReserved": "Quando a unidade passa a contar na população: ao começar o treino ou ao sair do prédio (como no jogo).",
   "help.editor.window": "“Treinar sempre que der” não gasta recursos reservados para ações com horário marcado dentro desta janela.",
   "help.editor.sourceAmount": "Quanta comida esta fonte tem perto da base. Quando acaba, os aldeões vão para a próxima da cadeia.",
-  "help.editor.foodChain": "Ordem das fontes de comida. Aldeões mandados para “comida” usam a primeira que ainda tiver recurso.",
+  "help.editor.foodChain": "Ordem das fontes de comida. Aldeões mandados para “comida” usam a primeira que ainda tiver recurso. Arraste para reordenar.",
   "help.editor.actions": "Os passos da build, em ordem, com o tempo de início. Arraste para reordenar; clique para ver os detalhes.",
-  "help.editor.add": "Escolha o tipo de ação e depois a unidade, prédio ou pesquisa.",
+  "help.editor.add": "Escolha o tipo de ação e depois a unidade, prédio ou pesquisa. Clique para pôr no fim, ou arraste para uma posição da lista.",
   "help.editor.milestones": "Momentos importantes: tempo e recursos em cada um.",
-  "help.editor.matchups": "Como a build se sai contra cada deus. Clique num retrato para mudar a avaliação.",
+  "help.editor.matchups": "Como a build se sai contra cada deus. Arraste os retratos entre as colunas, ou clique para trocar a avaliação.",
   "help.palette.allAges": "Mostra itens de todas as Eras. Use os ícones para filtrar por Era.",
   "help.action.train": "Treina unidades num prédio. O custo é pago quando cada unidade começa.",
   "help.action.build": "Constrói um prédio com um ou mais aldeões.",
@@ -433,5 +433,11 @@
   "help.warn.lowConfidenceData": "Algum número usado aqui é incerto nos dados; o resultado pode variar na partida real.",
   "help.warn.waitingBuilder": "Nenhum construtor estava livre; a construção esperou alguém terminar.",
   "help.warn.notEnoughWorkers": "Pediu para mover mais aldeões do que havia nessa tarefa naquele momento.",
-  "help.warn.powerCooldown": "O poder ainda estava recarregando desde o último uso."
+  "help.warn.powerCooldown": "O poder ainda estava recarregando desde o último uso.",
+  "editor.matchupPool": "Deuses sem avaliação",
+  "editor.clearMinorLater": "Remover a subida de idade também remove as idades seguintes ({ages}). Continuar?",
+  "help.editor.chainItem": "Arraste para mudar a prioridade (ou use ← →). Arraste para baixo, fora da lista, para remover.",
+  "help.editor.matchupGod": "Arraste para uma coluna ou clique para trocar a avaliação.",
+  "help.editor.minorChosen": "Escolhido. Clique de novo para tirar (a build não chega a essa idade).",
+  "help.editor.minorPick": "Clique para escolher este deus menor ao subir de idade."
 }

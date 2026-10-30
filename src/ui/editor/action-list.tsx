@@ -9,7 +9,7 @@ import { useApp } from "../context.tsx";
 import { EntityIcon, HelpText, Tip, useHelp } from "../icon.tsx";
 import { KIND_ICON, Svg } from "../svg.tsx";
 import { ActionRow } from "./action-row.tsx";
-import { nextActionId, startState } from "./labels.ts";
+import { ACTION_MIME, nextActionId, startState } from "./labels.ts";
 import { ProductionChart } from "./production.tsx";
 import { EntityIconByIcon } from "./result.tsx";
 
@@ -149,6 +149,11 @@ export function ActionList({
     actions.splice(to, 0, item!);
     setActions(actions);
   };
+  const insert = (at: number, added: Action) => {
+    const actions = [...build.actions];
+    actions.splice(at, 0, { ...added, id: nextActionId(build) });
+    setActions(actions);
+  };
   const milestoneIds = new Set((build.milestones ?? []).map((m) => m.atAction));
 
   const snaps = new Map<number, Snapshot>();
@@ -220,8 +225,27 @@ export function ActionList({
         <ProductionChart build={build} result={result} />
       ) : (
         <ol
-          class={`actions-list ${events ? "with-events" : ""}`}
+          class={`actions-list ${events ? "with-events" : ""} ${
+            dragTarget === build.actions.length ? "drop-end" : ""
+          }`}
           data-testid={events ? "timeline" : "actions-list"}
+          onDragOver={(e) => {
+            if (readonly || !e.dataTransfer?.types.includes(ACTION_MIME)) return;
+            e.preventDefault();
+            if (!(e.target as HTMLElement).closest(".action-row"))
+              setDragTarget(build.actions.length);
+          }}
+          onDragLeave={(e) => {
+            if (!(e.currentTarget as Node).contains(e.relatedTarget as Node | null))
+              setDragTarget(null);
+          }}
+          onDrop={(e) => {
+            const added = e.dataTransfer?.getData(ACTION_MIME);
+            if (!added) return;
+            e.preventDefault();
+            insert(build.actions.length, JSON.parse(added) as Action);
+            setDragTarget(null);
+          }}
         >
           <StartRow
             build={build}
@@ -283,6 +307,10 @@ export function ActionList({
                   drop: (k) => {
                     if (dragFrom !== null) move(dragFrom, k);
                     setDragFrom(null);
+                    setDragTarget(null);
+                  },
+                  insert: (k, added) => {
+                    insert(k, added);
                     setDragTarget(null);
                   },
                   end: () => {

@@ -8,6 +8,7 @@ import { EntityIcon, Tip, HelpText, useHelp } from "../icon.tsx";
 import { duplicateBuild, useSimulation } from "../sim.ts";
 import { Svg } from "../svg.tsx";
 import { ActionList } from "./action-list.tsx";
+import { FoodChain } from "./food-chain.tsx";
 import { ProductionChart } from "./production.tsx";
 import { BuildActions } from "../build-actions.tsx";
 import { useHistory } from "./history.ts";
@@ -151,45 +152,14 @@ function SettingsPanel({
               />
             </label>
           ))}
-        <div class="field" style={{ gridColumn: "1 / -1" }}>
-          <HelpText k="editor.foodChain" />
-          <div class="row">
-            {chain.map((src, i) => (
-              <span class="chip" key={`${src}-${i}`}>
-                <EntityIcon id={src} pantheon={build.pantheon} size={20} />
-                {!readonly && chain.length > 1 && (
-                  <button
-                    class="grip"
-                    aria-label={t("row.remove")}
-                    onClick={() => set({ foodChain: chain.filter((_, k) => k !== i) })}
-                  >
-                    ×
-                  </button>
-                )}
-              </span>
-            ))}
-            {!readonly &&
-              foodSources
-                .filter((x) => !chain.includes(x))
-                .map((x) => (
-                  <Tip key={x} label={text(locale, data.sources.get(x)!.name)}>
-                    <button
-                      class="chip"
-                      aria-label={text(locale, data.sources.get(x)!.name)}
-                      onClick={() => set({ foodChain: [...chain, x] })}
-                    >
-                      <Svg name="plus" />
-                      <EntityIcon id={x} pantheon={build.pantheon} size={18} tip={false} />
-                    </button>
-                  </Tip>
-                ))}
-            {!readonly && s.foodChain && (
-              <button class="chip" onClick={() => set({ foodChain: undefined })}>
-                {t("editor.reset")}
-              </button>
-            )}
-          </div>
-        </div>
+        <FoodChain
+          build={build}
+          chain={chain}
+          sources={foodSources}
+          readonly={readonly}
+          custom={!!s.foodChain}
+          onChange={(foodChain) => set({ foodChain })}
+        />
       </fieldset>
     </details>
   );
@@ -205,6 +175,7 @@ function GodPicker({
   onChange: (b: Build) => void;
 }) {
   const api = useApp();
+  const help = useHelp();
   const { t, data, locale } = api;
   const changePantheon = async (id: PantheonId) => {
     if (id === build.pantheon) return;
@@ -237,6 +208,26 @@ function GodPicker({
         ],
       });
     }
+  };
+  /** Removes the age up (and the later ones: no Heroic without Classical). */
+  const clearMinor = async (age: "classical" | "heroic" | "mythic") => {
+    const from = AGE_ORDER.indexOf(age);
+    const drop = build.actions.filter(
+      (a): a is Extract<Action, { do: "age" }> => a.do === "age" && AGE_ORDER.indexOf(a.to) >= from,
+    );
+    if (drop.some((a) => a.to !== age)) {
+      const later = drop
+        .filter((a) => a.to !== age)
+        .map((a) => text(locale, data.common.ages.find((x) => x.id === a.to)!.name))
+        .join(", ");
+      if ((await api.confirm(t("editor.clearMinorLater", { ages: later }))) !== "yes") return;
+    }
+    const ids = new Set(drop.map((a) => a.id).filter(Boolean));
+    onChange({
+      ...build,
+      actions: build.actions.filter((a) => !drop.includes(a as Extract<Action, { do: "age" }>)),
+      milestones: (build.milestones ?? []).filter((m) => !ids.has(m.atAction)),
+    });
   };
   const god = data.gods.get(build.god);
   const pantheons = data.common.pantheons.filter((p) => data.pantheons.has(p.id));
@@ -308,17 +299,26 @@ function GodPicker({
                       const minor = data.minors.get(m);
                       const label = minor ? text(locale, minor.name) : m;
                       return (
-                        <button
+                        <Tip
                           key={m}
-                          class="god-card small"
-                          aria-pressed={chosen === m}
-                          disabled={readonly}
-                          data-testid={`minor-${m}`}
-                          onClick={() => setMinor(age, m)}
+                          class="god-card-tip"
+                          label={
+                            readonly
+                              ? ""
+                              : help(chosen === m ? "editor.minorChosen" : "editor.minorPick")
+                          }
                         >
-                          <EntityIcon id={m} pantheon={build.pantheon} size={56} tip={false} />
-                          <span>{label}</span>
-                        </button>
+                          <button
+                            class="god-card small"
+                            aria-pressed={chosen === m}
+                            disabled={readonly}
+                            data-testid={`minor-${m}`}
+                            onClick={() => (chosen === m ? void clearMinor(age) : setMinor(age, m))}
+                          >
+                            <EntityIcon id={m} pantheon={build.pantheon} size={56} tip={false} />
+                            <span>{label}</span>
+                          </button>
+                        </Tip>
                       );
                     })}
                   </div>
@@ -331,6 +331,8 @@ function GodPicker({
     </div>
   );
 }
+
+const AGE_ORDER = ["classical", "heroic", "mythic"] as const;
 
 const STAGES = [
   { id: "gods", icon: "crown" },

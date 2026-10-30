@@ -261,11 +261,11 @@
   "help.editor.popReserved": "When a unit starts counting toward population: when training starts or when it leaves the building (as in game).",
   "help.editor.window": "“Train when affordable” does not spend resources reserved for timed actions within this window.",
   "help.editor.sourceAmount": "How much food this source has near the base. When it runs out, villagers move to the next one in the chain.",
-  "help.editor.foodChain": "Order of food sources. Villagers sent to “food” use the first one that still has food.",
+  "help.editor.foodChain": "Order of food sources. Villagers sent to “food” use the first one that still has food. Drag to reorder.",
   "help.editor.actions": "The build steps, in order, with their start time. Drag to reorder; click to see the details.",
-  "help.editor.add": "Pick the action type, then the unit, building or research.",
+  "help.editor.add": "Pick the action type, then the unit, building or research. Click to add it at the end, or drag it to a position in the list.",
   "help.editor.milestones": "Key moments: time and resources at each.",
-  "help.editor.matchups": "How the build fares against each god. Click a portrait to change the rating.",
+  "help.editor.matchups": "How the build fares against each god. Drag the portraits between columns, or click to change the rating.",
   "help.palette.allAges": "Shows items of every age. Use the icons to filter by age.",
   "help.action.train": "Trains units at a building. The cost is paid when each unit starts.",
   "help.action.build": "Builds a building with one or more villagers.",
@@ -433,5 +433,11 @@
   "help.warn.lowConfidenceData": "A number used here is uncertain in the data; the real match may differ.",
   "help.warn.waitingBuilder": "No builder was free; the construction waited for one to finish.",
   "help.warn.notEnoughWorkers": "Asked to move more villagers than that task had at the time.",
-  "help.warn.powerCooldown": "The power was still recharging since its last use."
+  "help.warn.powerCooldown": "The power was still recharging since its last use.",
+  "editor.matchupPool": "Unrated gods",
+  "editor.clearMinorLater": "Removing this age up also removes the later ages ({ages}). Continue?",
+  "help.editor.chainItem": "Drag to change the priority (or use ← →). Drag it down, out of the list, to remove it.",
+  "help.editor.matchupGod": "Drag to a column or click to change the rating.",
+  "help.editor.minorChosen": "Picked. Click again to remove it (the build does not reach this age).",
+  "help.editor.minorPick": "Click to pick this minor god when aging up."
 }

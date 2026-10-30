@@ -147,6 +147,55 @@ test("a warning explains the wait with the numbers behind it", async ({ page, is
   await expect(card).toContainText("Fila ocupada");
 });
 
+test("drag and drop: food chain, matchups and palette", async ({ page, isMobile }) => {
+  test.skip(isMobile, "HTML drag and drop needs a mouse");
+  await page.goto("/");
+  await page.getByTestId("new-build").click();
+  await page.getByTestId("tab-details").click();
+  await page.locator("details.collapsible > summary").click();
+  const chain = page.getByTestId("food-chain").locator("li");
+  await expect(chain.first()).toHaveAttribute("data-testid", "chain-hunt");
+  await page.getByTestId("chain-berries").dragTo(page.getByTestId("chain-hunt"));
+  await expect(chain.first()).toHaveAttribute("data-testid", "chain-berries");
+  await page.getByTestId("chain-farm").dragTo(page.getByTestId("food-pool"));
+  await expect(chain).toHaveCount(2);
+
+  await page.getByTestId("matchup-zeus").dragTo(page.getByTestId("matchup-col-good"));
+  await expect(page.getByTestId("matchup-col-good").getByTestId("matchup-zeus")).toBeVisible();
+  await page.getByTestId("matchup-zeus").dragTo(page.getByTestId("matchup-col-bad"));
+  await expect(page.getByTestId("matchup-col-bad").getByTestId("matchup-zeus")).toBeVisible();
+  await page.getByTestId("matchup-zeus").dragTo(page.getByTestId("matchup-pool"));
+  await expect(page.getByTestId("matchup-pool").getByTestId("matchup-zeus")).toBeVisible();
+
+  await page.getByTestId("tab-actions").click();
+  await page.getByTestId("kind-build").click();
+  await page.getByTestId("pick-manor").click();
+  await page.getByTestId("kind-train").click();
+  await page.getByTestId("pick-citizen").dragTo(page.getByTestId("action-row").first());
+  const rows = page.getByTestId("action-row");
+  await expect(rows).toHaveCount(2);
+  await expect(rows.first()).toContainText("Cidadão");
+  await page.getByTestId("kind-move").dragTo(page.getByTestId("action-row").nth(1));
+  await expect(rows.nth(1)).toContainText("ocioso");
+});
+
+test("a picked minor god can be removed", async ({ page }) => {
+  await page.goto("/");
+  await page.getByTestId("new-build").click();
+  await page.getByTestId("minor-prometheus").click();
+  await page.getByTestId("minor-rheia").click();
+  await expect(page.getByTestId("minor-prometheus")).toHaveAttribute("aria-pressed", "true");
+  await page.getByTestId("minor-rheia").click();
+  await expect(page.getByTestId("minor-rheia")).toHaveAttribute("aria-pressed", "false");
+  await page.getByTestId("minor-rheia").click();
+  await page.getByTestId("minor-prometheus").click();
+  await page.getByRole("button", { name: "Sim" }).click();
+  await expect(page.getByTestId("minor-prometheus")).toHaveAttribute("aria-pressed", "false");
+  await expect(page.getByTestId("minor-rheia")).toHaveAttribute("aria-pressed", "false");
+  await page.getByTestId("tab-actions").click();
+  await expect(page.getByTestId("action-row")).toHaveCount(0);
+});
+
 test("warnings drawer jumps to the action", async ({ page, isMobile }) => {
   await page.goto("/#/build/preset%3Akrush");
   await page.getByTestId("warnings-toggle").click();
