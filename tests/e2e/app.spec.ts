@@ -392,3 +392,16 @@ test("a new fixed time moves the action to its place in the list", async ({ page
   await expect(rows.first()).not.toContainText("Treinar 1 Cidadão");
   await expect(rows.last()).toContainText("Treinar 1 Cidadão");
 });
+
+test("actions only show the fields that apply to them", async ({ page }) => {
+  await page.goto("/#/build/preset%3Akrush");
+  const rows = page.getByTestId("action-row");
+  const promethean = rows.filter({ hasText: "Prometeanos" }).first();
+  await promethean.locator(".label-text").click();
+  await expect(promethean.locator(".action-details")).toBeVisible();
+  await expect(promethean.getByTestId("row-rally")).toHaveCount(0);
+  await expect(promethean.locator(".action-details")).not.toContainText("Prédio");
+  const citizens = rows.filter({ hasText: "Treinar 3 Cidadãos" }).first();
+  await citizens.locator(".label-text").click();
+  await expect(citizens.getByTestId("row-rally")).toBeVisible();
+});

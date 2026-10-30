@@ -143,10 +143,27 @@ export function actionText(c: Ctx, a: Action): string {
   }
 }
 
-export function taskTargets(data: GameData, pantheon: PantheonId): TaskTarget[] {
-  const favor = data.pantheons.get(pantheon)?.def.favor.type === "templeWorkers";
-  const sources = SOURCE_IDS.filter((s) => data.sources.has(s) && s !== "wood" && s !== "gold");
-  return ["food", "wood", "gold", ...(favor ? (["favor"] as const) : []), ...sources, "idle"];
+/** Where workers can be sent; with `unit`, only what that unit gathers (plus idle). */
+export function taskTargets(data: GameData, pantheon: PantheonId, unit?: string): TaskTarget[] {
+  const def = data.pantheons.get(pantheon)?.def;
+  const rates = unit
+    ? data.pantheons.get(pantheon)?.units.get(unit)?.worker?.gatherRates
+    : undefined;
+  const gathers = (s: string) => !unit || (rates?.[s as keyof typeof rates] ?? 0) > 0;
+  const favor = def?.favor.type === "templeWorkers" && (!unit || def.workers[0] === unit);
+  const resources = (["food", "wood", "gold"] as const).filter((r) =>
+    SOURCE_IDS.some((s) => gathers(s) && data.sources.get(s)?.resource === r),
+  );
+  const sources = SOURCE_IDS.filter(
+    (s) => data.sources.has(s) && s !== "wood" && s !== "gold" && gathers(s),
+  );
+  return [...resources, ...(favor ? (["favor"] as const) : []), ...sources, "idle"];
+}
+
+/** Units that gather resources (villagers, fishing ships…): only they have a rally target. */
+export function isGatherer(data: GameData, pantheon: PantheonId, unit: string): boolean {
+  const rates = data.pantheons.get(pantheon)?.units.get(unit)?.worker?.gatherRates ?? {};
+  return Object.values(rates).some((v) => (v ?? 0) > 0);
 }
 
 /** Minor gods picked in the build's age-up actions, by age. */

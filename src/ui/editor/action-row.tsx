@@ -15,6 +15,7 @@ import {
   targetLabel,
   taskTargets,
   actionTarget,
+  isGatherer,
 } from "./labels.ts";
 
 type Props = {
@@ -61,12 +62,15 @@ function TargetSelect({
   value,
   onChange,
   build,
+  unit,
   allowEmpty,
   testid,
 }: {
   value: TaskTarget | undefined;
   onChange: (v: TaskTarget | undefined) => void;
   build: Build;
+  /** Only targets this unit can gather. */
+  unit?: string;
   allowEmpty?: boolean;
   testid?: string;
 }) {
@@ -79,7 +83,7 @@ function TargetSelect({
       onChange={(e) => onChange((e.currentTarget.value || undefined) as TaskTarget | undefined)}
     >
       {allowEmpty && <option value="">{t("row.none")}</option>}
-      {taskTargets(data, build.pantheon).map((target) => (
+      {taskTargets(data, build.pantheon, unit).map((target) => (
         <option key={target} value={target}>
           {targetLabel(c, target)}
         </option>
@@ -133,6 +137,29 @@ export function ActionRow(props: Props) {
       u.trainedAt.length > 0,
   );
   const buildings = p ? [...p.buildings.values()] : [];
+  const worker = p?.def.workers[0];
+  /** Only powers aimed at a building have a target: Time Shift and Deconstruction. */
+  const powerKind = a.do === "power" ? data.powers.get(a.power)?.effect.kind : undefined;
+  const powerTargets =
+    powerKind === "timeShift"
+      ? (data.gods.get(build.god)?.timeShift?.buildings ?? []).map((r) => r.id)
+      : powerKind === "deconstruction"
+        ? buildings.map((b) => b.id)
+        : undefined;
+  const trainSites =
+    a.do === "train" || a.do === "autoTrain" || a.do === "trainWhenAffordable"
+      ? buildings.filter(
+          (b) => b.trains?.includes(a.unit) || p?.units.get(a.unit)?.trainedAt.includes(b.id),
+        )
+      : [];
+  /** Units a stop action can refer to: those with an earlier rule of the matching kind. */
+  const rule = a.do === "stopAutoTrain" ? "autoTrain" : "trainWhenAffordable";
+  const stoppable = [
+    ...new Set([
+      ...earlier.flatMap((x) => (x.do === rule ? [x.unit] : [])),
+      ...("unit" in a && a.unit ? [a.unit] : []),
+    ]),
+  ];
   const name = (id: string) =>
     text(locale, p?.units.get(id)?.name ?? p?.buildings.get(id)?.name ?? { en: id, "pt-BR": id });
 
@@ -389,14 +416,16 @@ export function ActionRow(props: Props) {
                   }
                 />
               </label>
-              <label class="field">
-                <HelpText k="row.huntIt" />
-                <input
-                  type="checkbox"
-                  checked={a.hunt === true}
-                  onChange={(e) => set({ hunt: e.currentTarget.checked || undefined })}
-                />
-              </label>
+              {p?.units.get(a.unit)?.carcass !== undefined && (
+                <label class="field">
+                  <HelpText k="row.huntIt" />
+                  <input
+                    type="checkbox"
+                    checked={a.hunt === true}
+                    onChange={(e) => set({ hunt: e.currentTarget.checked || undefined })}
+                  />
+                </label>
+              )}
             </>
           )}
           {(a.do === "train" || a.do === "promote") && (
@@ -414,42 +443,40 @@ export function ActionRow(props: Props) {
               />
             </label>
           )}
-          {(a.do === "train" || a.do === "autoTrain" || a.do === "trainWhenAffordable") && (
-            <label class="field">
-              <HelpText k="row.rally" />
-              <TargetSelect
-                build={build}
-                value={a.rally}
-                allowEmpty
-                onChange={(rally) => set({ rally })}
-                testid="row-rally"
-              />
-            </label>
-          )}
-          {(a.do === "train" || a.do === "autoTrain" || a.do === "trainWhenAffordable") && (
-            <label class="field">
-              <HelpText k="row.target" />
-              <select
-                value={(a.do === "trainWhenAffordable" ? a.from : a.at) ?? ""}
-                onChange={(e) => {
-                  const v = e.currentTarget.value || undefined;
-                  set(a.do === "trainWhenAffordable" ? { from: v } : { at: v });
-                }}
-              >
-                <option value="">{t("row.any")}</option>
-                {buildings
-                  .filter(
-                    (b) =>
-                      b.trains?.includes(a.unit) || p?.units.get(a.unit)?.trainedAt.includes(b.id),
-                  )
-                  .map((b) => (
+          {(a.do === "train" || a.do === "autoTrain" || a.do === "trainWhenAffordable") &&
+            isGatherer(data, build.pantheon, a.unit) && (
+              <label class="field">
+                <HelpText k="row.rally" />
+                <TargetSelect
+                  build={build}
+                  unit={a.unit}
+                  value={a.rally}
+                  allowEmpty
+                  onChange={(rally) => set({ rally })}
+                  testid="row-rally"
+                />
+              </label>
+            )}
+          {(a.do === "train" || a.do === "autoTrain" || a.do === "trainWhenAffordable") &&
+            trainSites.length > 1 && (
+              <label class="field">
+                <HelpText k="row.trainAt" />
+                <select
+                  value={(a.do === "trainWhenAffordable" ? a.from : a.at) ?? ""}
+                  onChange={(e) => {
+                    const v = e.currentTarget.value || undefined;
+                    set(a.do === "trainWhenAffordable" ? { from: v } : { at: v });
+                  }}
+                >
+                  <option value="">{t("row.any")}</option>
+                  {trainSites.map((b) => (
                     <option key={b.id} value={b.id}>
                       {text(locale, b.name)}
                     </option>
                   ))}
-              </select>
-            </label>
-          )}
+                </select>
+              </label>
+            )}
           {a.do === "build" && (
             <>
               <label class="field">
@@ -496,6 +523,7 @@ export function ActionRow(props: Props) {
                   <HelpText k="row.from" />
                   <TargetSelect
                     build={build}
+                    unit={worker}
                     value={a.builder.from}
                     onChange={(from) => set({ builder: { from: from ?? "food" } })}
                   />
@@ -536,15 +564,18 @@ export function ActionRow(props: Props) {
                   }}
                 />
               </label>
-              <label class="field">
-                <HelpText k="row.then" />
-                <TargetSelect
-                  build={build}
-                  value={a.then}
-                  allowEmpty
-                  onChange={(then) => set({ then })}
-                />
-              </label>
+              {!(a.builder && "unit" in a.builder) && (
+                <label class="field">
+                  <HelpText k="row.then" />
+                  <TargetSelect
+                    build={build}
+                    unit={worker}
+                    value={a.then}
+                    allowEmpty
+                    onChange={(then) => set({ then })}
+                  />
+                </label>
+              )}
               {data.gods.get(build.god)?.modifiers.some((m) => m.condition === "nearManor") && (
                 <label class="field">
                   <HelpText k="row.nearManor" />
@@ -596,6 +627,7 @@ export function ActionRow(props: Props) {
                 <HelpText k="row.from" />
                 <TargetSelect
                   build={build}
+                  unit={a.unit ?? worker}
                   value={a.from}
                   onChange={(from) => set({ from: from ?? "food" })}
                   testid="move-from"
@@ -605,6 +637,7 @@ export function ActionRow(props: Props) {
                 <HelpText k="row.to" />
                 <TargetSelect
                   build={build}
+                  unit={a.unit ?? worker}
                   value={a.to}
                   onChange={(to) => set({ to: to ?? "wood" })}
                   testid="move-to"
@@ -612,7 +645,7 @@ export function ActionRow(props: Props) {
               </label>
             </>
           )}
-          {a.do === "power" && (
+          {a.do === "power" && powerTargets && (
             <label class="field">
               <HelpText k="row.target" />
               <select
@@ -620,9 +653,9 @@ export function ActionRow(props: Props) {
                 onChange={(e) => set({ target: e.currentTarget.value || undefined })}
               >
                 <option value="">{t("row.none")}</option>
-                {buildings.map((b) => (
-                  <option key={b.id} value={b.id}>
-                    {text(locale, b.name)}
+                {powerTargets?.map((id) => (
+                  <option key={id} value={id}>
+                    {name(id)}
                   </option>
                 ))}
               </select>
@@ -636,13 +669,11 @@ export function ActionRow(props: Props) {
                 onChange={(e) => set({ unit: e.currentTarget.value || undefined })}
               >
                 <option value="">{t("row.any")}</option>
-                {units
-                  .filter((u) => u.trainedAt.length)
-                  .map((u) => (
-                    <option key={u.id} value={u.id}>
-                      {name(u.id)}
-                    </option>
-                  ))}
+                {stoppable.map((u) => (
+                  <option key={u} value={u}>
+                    {name(u)}
+                  </option>
+                ))}
               </select>
             </label>
           )}
