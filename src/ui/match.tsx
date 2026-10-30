@@ -26,7 +26,7 @@ export function MatchMode({ id }: { id: string }) {
   const countdown = prefs.countdown;
   const [elapsed, setElapsed] = useState(-countdown);
   const [running, setRunning] = useState(false);
-  const [sound, setSound] = useState(prefs.sound);
+  const sound = prefs.sound;
   const startRef = useRef<{ wall: number; base: number } | null>(null);
   const audio = useRef<AudioContext | null>(null);
   const lastBeep = useRef<number>(-1);
@@ -93,7 +93,7 @@ export function MatchMode({ id }: { id: string }) {
             class="btn icon-only"
             aria-pressed={sound}
             aria-label={t("match.sound")}
-            onClick={() => setSound(!sound)}
+            onClick={() => api.setPrefs({ sound: !sound })}
           >
             <Svg name={sound ? "volume" : "mute"} />
           </button>

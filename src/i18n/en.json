@@ -154,6 +154,8 @@
   "step.ready": "+1 {unit} → {to}",
   "step.readyMilitary": "+1 {unit}",
   "step.build": "Build {building}",
+  "step.builderFrom.one": "from {from}",
+  "step.builderFrom.other": "{count} from {from}",
   "step.byNew": "new {unit}",
   "step.bySame": "same builder",
   "step.byFrom": "1 {unit} from {from}",

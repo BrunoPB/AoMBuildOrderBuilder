@@ -154,6 +154,8 @@
   "step.ready": "+1 {unit} → {to}",
   "step.readyMilitary": "+1 {unit}",
   "step.build": "Construir {building}",
+  "step.builderFrom.one": "de {from}",
+  "step.builderFrom.other": "{count} de {from}",
   "step.byNew": "{unit} novo",
   "step.bySame": "mesmo construtor",
   "step.byFrom": "1 {unit} de {from}",

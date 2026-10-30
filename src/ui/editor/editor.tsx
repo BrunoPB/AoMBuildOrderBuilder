@@ -3,7 +3,7 @@ import { type PantheonId, SOURCE_IDS, type SourceId } from "../../data/schema.ts
 import { type Action, BUILD_TYPES, type Build, type Settings } from "../../engine/build.ts";
 import { text } from "../../i18n/index.ts";
 import { navigate } from "../app.tsx";
-import { useApp } from "../context.tsx";
+import { useApp, useViewPref } from "../context.tsx";
 import { EntityIcon, Tip, HelpText, useHelp } from "../icon.tsx";
 import { duplicateBuild, useSimulation } from "../sim.ts";
 import { Svg } from "../svg.tsx";
@@ -45,8 +45,9 @@ function SettingsPanel({
   const num = (v: string) => (v.trim() === "" ? undefined : Number(v));
   const chain = s.foodChain ?? d.foodChain;
   const foodSources = SOURCE_IDS.filter((x) => data.sources.get(x)?.resource === "food");
+  const [open, setOpen] = useViewPref<boolean>("editor.settingsOpen", false);
   return (
-    <details class="panel collapsible">
+    <details class="panel collapsible" open={open} onToggle={(e) => setOpen(e.currentTarget.open)}>
       <summary>
         <Svg name="gear" />
         <HelpText k="editor.settings" />
@@ -348,7 +349,12 @@ export function Editor({ id }: { id: string }) {
   const { t, data, locale } = api;
   const found = api.findBuild(id);
   const build = found?.build;
-  const [stage, setStage] = useState<Stage>(build?.actions.length ? "actions" : "gods");
+  const [firstStage] = useState<Stage>(build?.actions.length ? "actions" : "gods");
+  const [stage, setStage] = useViewPref<Stage>(
+    `editor.stage.${id}`,
+    firstStage,
+    STAGES.map((s) => s.id),
+  );
   const [warningsOpen, setWarningsOpen] = useState(false);
   const history = useHistory();
   const readonly = found?.readonly ?? true;

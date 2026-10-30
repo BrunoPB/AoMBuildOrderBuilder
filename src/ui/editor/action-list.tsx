@@ -5,13 +5,14 @@ import type { Step, StepAction } from "../../engine/format.ts";
 import { formatClock } from "../../engine/time.ts";
 import type { SimResult, Snapshot } from "../../engine/types.ts";
 import { entityName } from "../../data/catalog.ts";
-import { useApp } from "../context.tsx";
+import { useApp, useViewPref } from "../context.tsx";
 import { EntityIcon, HelpText, Tip, useHelp } from "../icon.tsx";
 import { KIND_ICON, Svg } from "../svg.tsx";
 import { ActionRow } from "./action-row.tsx";
 import { ACTION_MIME, nextActionId, startState } from "./labels.ts";
 import { ProductionChart } from "./production.tsx";
-import { EntityIconByIcon } from "./result.tsx";
+import { fixedTime, moveWithTime, placeByTime } from "./order.ts";
+import { EntityIconByIcon, focusAction } from "./result.tsx";
 
 const RES = ["food", "wood", "gold", "favor"] as const;
 
@@ -137,17 +138,18 @@ export function ActionList({
 }) {
   const { t } = useApp();
   const help = useHelp();
-  const [view, setView] = useState<"list" | "production">("list");
-  const [events, setEvents] = useState(false);
+  const [view, setView] = useViewPref<"list" | "production">("actions.view", "list", [
+    "list",
+    "production",
+  ]);
+  const [events, setEvents] = useViewPref<boolean>("actions.events", true);
   const [dragFrom, setDragFrom] = useState<number | null>(null);
   const [dragTarget, setDragTarget] = useState<number | null>(null);
   const setActions = (actions: Action[]) => update({ ...build, actions });
+  const times = build.actions.map((a, i) => fixedTime(a.when) ?? result?.actions[i]?.startedAt);
   const move = (from: number, to: number) => {
     if (to < 0 || to >= build.actions.length || from === to) return;
-    const actions = [...build.actions];
-    const [item] = actions.splice(from, 1);
-    actions.splice(to, 0, item!);
-    setActions(actions);
+    setActions(moveWithTime(build.actions, times, from, to));
   };
   const insert = (at: number, added: Action) => {
     const actions = [...build.actions];
@@ -268,7 +270,12 @@ export function ActionList({
                 onChange={(next) => {
                   const actions = [...build.actions];
                   actions[i] = next;
-                  setActions(actions);
+                  if (next.when === a.when || fixedTime(next.when) === undefined)
+                    return setActions(actions);
+                  actions[i] = { ...next, id: next.id ?? nextActionId(build) };
+                  const placed = placeByTime(actions, times, i);
+                  setActions(placed.actions);
+                  if (placed.index !== i) requestAnimationFrame(() => focusAction(placed.index));
                 }}
                 onRemove={() => {
                   const removed = build.actions[i];

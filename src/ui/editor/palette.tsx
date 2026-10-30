@@ -1,8 +1,7 @@
-import { useState } from "preact/hooks";
 import { AGES, type Age } from "../../data/schema.ts";
 import type { Action, ActionKind, Build } from "../../engine/build.ts";
 import { text } from "../../i18n/index.ts";
-import { useApp } from "../context.tsx";
+import { useApp, useViewPref } from "../context.tsx";
 import { EntityIcon, Tip, HelpText, useHelp, useLabel } from "../icon.tsx";
 import { KIND_ICON, Svg } from "../svg.tsx";
 import { ACTION_MIME, ageRank, chosenMinors, PALETTE_GROUPS } from "./labels.ts";
@@ -28,8 +27,11 @@ export function Palette({
 }) {
   const { data, t, locale } = useApp();
   const help = useHelp();
-  const [kind, setKind] = useState<ActionKind | null>(null);
-  const [age, setAge] = useState<Age | null>(null);
+  const [kind, setKind] = useViewPref<ActionKind | null>("palette.kind", null, [
+    null,
+    ...PALETTE_GROUPS.flatMap((g) => g.kinds),
+  ]);
+  const [age, setAge] = useViewPref<Age | null>("palette.age", null, [null, ...AGES]);
   const p = data.pantheons.get(build.pantheon);
   const god = data.gods.get(build.god);
   const label = useLabel();

@@ -32,7 +32,7 @@ for (const locale of ["pt-BR", "en"] as const) {
     if (locale === "en") await page.getByTestId("toggle-locale").click();
     await createBuildWithActions(page);
     const word = locale === "pt-BR" ? "Treinar 1 Cidadão" : "Train 1 Citizen";
-    await expect(page.getByTestId("actions-list")).toContainText(word);
+    await expect(page.locator("ol.actions-list")).toContainText(word);
     await expect(page.getByTestId("action-row").first()).toContainText("0:00");
     await page.getByTestId("show-events").check();
     const timeline = page.getByTestId("timeline");
@@ -95,7 +95,7 @@ test("opens a preset read-only and duplicates it", async ({ page }) => {
   await page.goto("/");
   await page.getByTestId("presets").getByText("Krush").click();
   await expect(page.getByTestId("palette")).toHaveCount(0);
-  await expect(page.getByTestId("actions-list")).toContainText("Clássica");
+  await expect(page.locator("ol.actions-list")).toContainText("Clássica");
   await page.getByTestId("duplicate-to-edit").click();
   await expect(page).toHaveURL(/#\/build\/u-/);
   await expect(page.getByTestId("palette")).toBeVisible();
@@ -361,4 +361,34 @@ test("clicking an action opens its details; its buttons do not", async ({ page }
   await head.focus();
   await page.keyboard.press("Enter");
   await expect(head).toHaveAttribute("aria-expanded", "true");
+});
+
+test("screen choices are remembered after leaving the page", async ({ page }) => {
+  await createBuildWithActions(page);
+  const url = page.url();
+  await expect(page.getByTestId("show-events")).toBeChecked();
+  await page.getByTestId("show-events").uncheck();
+  await page.getByTestId("tab-result").click();
+  await page.goto("/");
+  await page.getByTestId("filter-greeks").click();
+  await page.reload();
+  await expect(page.getByTestId("filter-greeks")).toHaveAttribute("aria-pressed", "true");
+  await page.goto(url);
+  await expect(page.getByTestId("chart-resources")).toBeVisible();
+  await page.getByTestId("tab-actions").click();
+  await expect(page.getByTestId("show-events")).not.toBeChecked();
+  await expect(page.getByTestId("actions-list")).toBeVisible();
+});
+
+test("a new fixed time moves the action to its place in the list", async ({ page }) => {
+  await createBuildWithActions(page);
+  const rows = page.getByTestId("action-row");
+  const first = rows.first();
+  await expect(first).toContainText("Treinar 1 Cidadão");
+  await first.locator(".label-text").click();
+  await first.getByTestId("when-mode").selectOption("time");
+  await first.getByTestId("when-time").fill("1:00");
+  await first.getByTestId("when-time").press("Tab");
+  await expect(rows.first()).not.toContainText("Treinar 1 Cidadão");
+  await expect(rows.last()).toContainText("Treinar 1 Cidadão");
 });

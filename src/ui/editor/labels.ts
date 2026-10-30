@@ -74,10 +74,14 @@ export function actionText(c: Ctx, a: Action): string {
       const base = t("step.train", { count, unit: n(c, a.unit, count) });
       return a.rally ? `${base} → ${targetLabel(c, a.rally)}` : base;
     }
-    case "build":
-      return a.then
-        ? `${t("step.build", { building: n(c, a.building) })} → ${targetLabel(c, a.then)}`
-        : t("step.build", { building: n(c, a.building) });
+    case "build": {
+      const from =
+        a.builder && "from" in a.builder
+          ? ` (${t("step.builderFrom", { count: a.builders ?? 1, from: targetLabel(c, a.builder.from) })}${a.then ? "" : " ↩"})`
+          : "";
+      const base = `${t("step.build", { building: n(c, a.building) })}${from}`;
+      return a.then ? `${base} → ${targetLabel(c, a.then)}` : base;
+    }
     case "research":
       return t("step.research", { research: n(c, a.research) });
     case "age":

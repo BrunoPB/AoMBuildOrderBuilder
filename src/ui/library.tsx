@@ -13,7 +13,7 @@ import {
 import { text } from "../i18n/index.ts";
 import { navigate } from "./app.tsx";
 import { BuildActions } from "./build-actions.tsx";
-import { useApp } from "./context.tsx";
+import { useApp, useViewPref } from "./context.tsx";
 import { EntityIcon, Tip, HelpText, useHelp } from "./icon.tsx";
 import { newBuild } from "./sim.ts";
 import { Svg } from "./svg.tsx";
@@ -107,9 +107,18 @@ export function Library() {
   const api = useApp();
   const help = useHelp();
   const { t, data, builds, presets, locale } = api;
-  const [pantheon, setPantheon] = useState<PantheonId | null>(null);
-  const [god, setGod] = useState<string | null>(null);
-  const [type, setType] = useState<BuildType | null>(null);
+  const [pantheon, setPantheon] = useViewPref<PantheonId | null>("library.pantheon", null, [
+    null,
+    ...data.pantheons.keys(),
+  ]);
+  const [god, setGod] = useViewPref<string | null>("library.god", null, [
+    null,
+    ...data.gods.keys(),
+  ]);
+  const [type, setType] = useViewPref<BuildType | null>("library.type", null, [
+    null,
+    ...BUILD_TYPES,
+  ]);
   const [over, setOver] = useState(false);
   const fileInput = useRef<HTMLInputElement>(null);
   const ages = useAgeTimes(useMemo(() => [...builds, ...presets], [builds, presets]));

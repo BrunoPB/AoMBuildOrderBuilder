@@ -45,6 +45,7 @@ export function App({ data }: { data: GameData }) {
   const [route, setRoute] = useState<Route>(() => parseRoute(window.location.hash));
   const [toasts, setToasts] = useState<Toast[]>([]);
   const [dialog, setDialog] = useState<Dialog | null>(null);
+  const prefsRef = useRef(prefs);
   const saveTimer = useRef<number | undefined>(undefined);
   const locale = prefs.locale ?? detectLocale(navigator.language);
 
@@ -94,7 +95,9 @@ export function App({ data }: { data: GameData }) {
     t: (key, params) => translate(locale, key, params),
     prefs,
     setPrefs: (patch) => {
-      const next = { ...prefs, ...patch };
+      const current = prefsRef.current;
+      const next = { ...current, ...(typeof patch === "function" ? patch(current) : patch) };
+      prefsRef.current = next;
       setPrefsState(next);
       store.savePrefs(next);
       setStorageOk(store.ok);
@@ -118,7 +121,14 @@ export function App({ data }: { data: GameData }) {
         return next;
       });
     },
-    deleteBuild: (id) => setBuilds((list) => list.filter((b) => b.id !== id)),
+    deleteBuild: (id) => {
+      setBuilds((list) => list.filter((b) => b.id !== id));
+      api.setPrefs((p) => {
+        const view = { ...p.view };
+        delete view[`editor.stage.${id}`];
+        return { view };
+      });
+    },
     addBuilds: (added) =>
       setBuilds((list) => {
         const next = [...list];

@@ -101,6 +101,16 @@ describe("storage", () => {
     expect(new Store(new MemoryStorage()).loadPrefs()).toMatchObject({
       theme: "system",
       sound: true,
+      view: {},
     });
+  });
+
+  it("keeps remembered screen state", () => {
+    const store = new Store(new MemoryStorage());
+    store.savePrefs({
+      ...store.loadPrefs(),
+      view: { "actions.events": false, "palette.age": null },
+    });
+    expect(store.loadPrefs().view).toEqual({ "actions.events": false, "palette.age": null });
   });
 });

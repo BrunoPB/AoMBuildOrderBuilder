@@ -1,0 +1,58 @@
+import type { Action, When } from "../../engine/build.ts";
+import { formatClock, parseClock } from "../../engine/time.ts";
+
+/** Seconds of a fixed-time action ("m:ss"); undefined for asap, always and "after". */
+export function fixedTime(w: When): number | undefined {
+  return typeof w === "string" && w !== "asap" && w !== "always" ? parseClock(w) : undefined;
+}
+
+type Times = readonly (number | undefined)[];
+
+function neighbours(order: number[], at: number, times: Times) {
+  let prev: number | undefined;
+  let next: number | undefined;
+  for (let k = at - 1; k >= 0 && prev === undefined; k--) prev = times[order[k]!];
+  for (let k = at + 1; k < order.length && next === undefined; k++) next = times[order[k]!];
+  return { prev, next };
+}
+
+/** Action `i` got a new fixed time: move it after the last action that happens no later.
+ *  `times[k]`: when action k happens (fixed time, else simulated start; undefined if unknown). */
+export function placeByTime(
+  actions: Action[],
+  times: Times,
+  i: number,
+): { actions: Action[]; index: number } {
+  const own = fixedTime(actions[i]!.when);
+  if (own === undefined) return { actions, index: i };
+  const all = actions.map((_, k) => k);
+  const { prev, next } = neighbours(all, i, times);
+  if ((prev === undefined || prev <= own) && (next === undefined || own <= next))
+    return { actions, index: i };
+  const rest = all.filter((k) => k !== i);
+  let at = 0;
+  rest.forEach((k, p) => {
+    const t = times[k];
+    if (t !== undefined && t <= own) at = p + 1;
+  });
+  rest.splice(at, 0, i);
+  return { actions: rest.map((k) => actions[k]!), index: at };
+}
+
+/** Moves action `from` to position `to`; a fixed-time action takes a time between its new
+ *  neighbours (dropped after a 0:40 action, a 0:30 one becomes 0:40). */
+export function moveWithTime(actions: Action[], times: Times, from: number, to: number): Action[] {
+  const order = actions.map((_, k) => k);
+  order.splice(from, 1);
+  order.splice(to, 0, from);
+  const moved = actions[from]!;
+  const own = fixedTime(moved.when);
+  const out = order.map((k) => actions[k]!);
+  if (own === undefined) return out;
+  const { prev, next } = neighbours(order, to, times);
+  let t = own;
+  if (prev !== undefined && t < prev) t = prev;
+  if (next !== undefined && t > next && (prev === undefined || next >= prev)) t = next;
+  if (t !== own) out[to] = { ...moved, when: formatClock(t) } as Action;
+  return out;
+}

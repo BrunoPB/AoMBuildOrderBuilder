@@ -3,7 +3,7 @@ import { entityName } from "../../data/catalog.ts";
 import type { Build } from "../../engine/build.ts";
 import { formatClock } from "../../engine/time.ts";
 import type { ProductionSpan, SimResult } from "../../engine/types.ts";
-import { useApp } from "../context.tsx";
+import { useApp, useViewPref } from "../context.tsx";
 import { EntityIcon, HelpText, Tip, useHelp } from "../icon.tsx";
 import { Svg } from "../svg.tsx";
 
@@ -20,7 +20,7 @@ const KIND_CLASS: Record<ProductionSpan["kind"], string> = {
 export function ProductionChart({ build, result }: { build: Build; result: SimResult }) {
   const { t, data, locale } = useApp();
   const help = useHelp();
-  const [zoom, setZoom] = useState<number>(2);
+  const [zoom, setZoom] = useViewPref<number>("production.zoom", 2, ZOOMS);
   const [hover, setHover] = useState<number | null>(null);
   const [tip, setTip] = useState<{ text: string; x: number; y: number } | null>(null);
   const showTip = (el: Element, text: string) => {

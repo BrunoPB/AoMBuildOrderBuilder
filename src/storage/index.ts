@@ -13,8 +13,11 @@ export const PrefsSchema = z.object({
   countdown: z.number().int().nonnegative().default(0),
   /** Explanation tooltips on titles and fields. */
   tooltips: z.boolean().default(true),
+  /** Remembered screen state: open tab, filters, toggles. */
+  view: z.record(z.string(), z.union([z.string(), z.number(), z.boolean(), z.null()])).default({}),
 });
 export type Prefs = z.infer<typeof PrefsSchema>;
+export type ViewValue = Prefs["view"][string];
 
 /** localStorage with an in-memory fallback; `ok` turns false once a read or write fails. */
 export class Store {
