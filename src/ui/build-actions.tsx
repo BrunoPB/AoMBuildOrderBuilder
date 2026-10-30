@@ -5,20 +5,19 @@ import { buildFileName, downloadText, exportPayload } from "../io/files.ts";
 import { navigate } from "./app.tsx";
 import { useApp } from "./context.tsx";
 import { Tip } from "./icon.tsx";
+import { Menu, MenuItem } from "./menu.tsx";
 import { duplicateBuild } from "./sim.ts";
 import { Svg } from "./svg.tsx";
 
-/** Icon buttons shared by the library card and the build screen header. */
+/** Play button plus a menu of the other actions; shared by the library card and the build header. */
 export function BuildActions({
   build,
   readonly,
-  showOpen = false,
   showDuplicate = true,
   onDeleted,
 }: {
   build: Build;
   readonly: boolean;
-  showOpen?: boolean;
   showDuplicate?: boolean;
   onDeleted?: () => void;
 }) {
@@ -49,13 +48,6 @@ export function BuildActions({
 
   return (
     <div class="card-actions" role="toolbar" aria-label={build.name}>
-      {showOpen && (
-        <Tip label={t("card.open")}>
-          <a class="btn icon-only" href={`#/build/${id}`} aria-label={t("card.open")}>
-            <Svg name="chevron" />
-          </a>
-        </Tip>
-      )}
       <Tip label={t("card.play")}>
         <a
           class="btn icon-only"
@@ -66,50 +58,32 @@ export function BuildActions({
           <Svg name="clock" />
         </a>
       </Tip>
-      {showDuplicate && (
-        <Tip label={duplicateLabel}>
-          <button
-            class="btn icon-only"
-            onClick={duplicate}
-            aria-label={duplicateLabel}
-            data-testid="duplicate"
-          >
-            <Svg name="copy" />
-          </button>
-        </Tip>
-      )}
-      <Tip label={t("card.export")}>
-        <button
-          class="btn icon-only"
+      <Menu label={t("editor.more")} testid="build-menu">
+        {showDuplicate && (
+          <MenuItem icon="copy" label={duplicateLabel} onClick={duplicate} testid="duplicate" />
+        )}
+        <MenuItem
+          icon="download"
+          label={t("card.export")}
           onClick={exportOne}
-          aria-label={t("card.export")}
-          data-testid="export-one"
-        >
-          <Svg name="download" />
-        </button>
-      </Tip>
-      <Tip label={t("card.exportDashboard")}>
-        <button
-          class="btn icon-only"
+          testid="export-one"
+        />
+        <MenuItem
+          icon="monitor"
+          label={t("card.exportDashboard")}
           onClick={exportDashboard}
-          aria-label={t("card.exportDashboard")}
-          data-testid="export-dashboard"
-        >
-          <Svg name="monitor" />
-        </button>
-      </Tip>
-      {!readonly && (
-        <Tip label={t("card.delete")}>
-          <button
-            class="btn icon-only danger"
+          testid="export-dashboard"
+        />
+        {!readonly && (
+          <MenuItem
+            icon="trash"
+            label={t("card.delete")}
             onClick={() => void remove()}
-            aria-label={t("card.delete")}
-            data-testid="delete"
-          >
-            <Svg name="trash" />
-          </button>
-        </Tip>
-      )}
+            danger
+            testid="delete"
+          />
+        )}
+      </Menu>
     </div>
   );
 }

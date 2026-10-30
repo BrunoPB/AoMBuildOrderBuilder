@@ -7,13 +7,20 @@ import { useApp } from "../context.tsx";
 import { EntityIcon, Tip, HelpText, useHelp } from "../icon.tsx";
 import { duplicateBuild, useSimulation } from "../sim.ts";
 import { Svg } from "../svg.tsx";
-import { ActionRow } from "./action-row.tsx";
+import { ActionList } from "./action-list.tsx";
 import { ProductionChart } from "./production.tsx";
 import { BuildActions } from "../build-actions.tsx";
 import { useHistory } from "./history.ts";
 import { nextActionId } from "./labels.ts";
 import { Palette } from "./palette.tsx";
-import { Charts, Matchups, Milestones, Timeline, WarningsPanel } from "./result.tsx";
+import {
+  Charts,
+  focusAction,
+  Matchups,
+  Milestones,
+  WarningsButton,
+  WarningsDrawer,
+} from "./result.tsx";
 
 function SettingsPanel({
   build,
@@ -234,92 +241,114 @@ function GodPicker({
   const god = data.gods.get(build.god);
   const pantheons = data.common.pantheons.filter((p) => data.pantheons.has(p.id));
   return (
-    <div class="panel stack" style={{ gap: "8px" }}>
-      <div class="row" role="group" aria-label={t("editor.pantheon")}>
-        {pantheons.map((p) => (
-          <button
-            key={p.id}
-            class={`chip pan-chip pan-${p.id}`}
-            aria-pressed={build.pantheon === p.id}
-            disabled={readonly}
-            data-testid={`pantheon-${p.id}`}
-            onClick={() => void changePantheon(p.id)}
-          >
-            <EntityIcon id={p.id} pantheon={p.id} size={32} tip={false} />
-            {text(locale, p.name)}
-          </button>
-        ))}
-      </div>
-      <div class="portraits" role="group" aria-label={t("editor.god")}>
-        {(data.pantheons.get(build.pantheon)?.def.gods ?? []).map((id) => {
-          const g = data.gods.get(id);
-          if (!g) return null;
-          return (
-            <Tip key={id} label={text(locale, g.name)}>
+    <div class="stack gods-stage">
+      <section class="panel">
+        <h3>
+          <HelpText k="editor.pantheon" />
+        </h3>
+        <div class="row" role="group" aria-label={t("editor.pantheon")}>
+          {pantheons.map((p) => (
+            <button
+              key={p.id}
+              class={`chip pan-chip pan-${p.id}`}
+              aria-pressed={build.pantheon === p.id}
+              disabled={readonly}
+              data-testid={`pantheon-${p.id}`}
+              onClick={() => void changePantheon(p.id)}
+            >
+              <EntityIcon id={p.id} pantheon={p.id} size={32} tip={false} />
+              {text(locale, p.name)}
+            </button>
+          ))}
+        </div>
+      </section>
+      <section class="panel">
+        <h3>
+          <HelpText k="editor.god" />
+        </h3>
+        <div class="god-cards" role="group" aria-label={t("editor.god")}>
+          {(data.pantheons.get(build.pantheon)?.def.gods ?? []).map((id) => {
+            const g = data.gods.get(id);
+            if (!g) return null;
+            return (
               <button
-                class="portrait-btn"
+                key={id}
+                class="god-card"
                 aria-pressed={build.god === id}
-                aria-label={text(locale, g.name)}
                 disabled={readonly}
                 data-testid={`god-${id}`}
                 onClick={() => changeGod(id)}
               >
-                <EntityIcon id={id} pantheon={build.pantheon} size={72} tip={false} />
+                <EntityIcon id={id} pantheon={build.pantheon} size={88} tip={false} />
+                <span>{text(locale, g.name)}</span>
               </button>
-            </Tip>
-          );
-        })}
-      </div>
-      {god && (
-        <div
-          class="row"
-          role="group"
-          aria-label={t("editor.minors")}
-          style={{ alignItems: "flex-start" }}
-        >
-          {(["classical", "heroic", "mythic"] as const).map((age) => {
-            const chosen = build.actions.find(
-              (a): a is Extract<Action, { do: "age" }> => a.do === "age" && a.to === age,
-            )?.minor;
-            return (
-              <div key={age} class="row" style={{ gap: "4px" }}>
-                <EntityIcon id={age} pantheon={build.pantheon} size={22} />
-                {god.minors[age].map((m) => {
-                  const minor = data.minors.get(m);
-                  const label = minor ? text(locale, minor.name) : m;
-                  return (
-                    <Tip key={m} label={label}>
-                      <button
-                        class="portrait-btn"
-                        aria-pressed={chosen === m}
-                        aria-label={label}
-                        disabled={readonly}
-                        onClick={() => setMinor(age, m)}
-                      >
-                        <EntityIcon id={m} pantheon={build.pantheon} size={34} tip={false} />
-                      </button>
-                    </Tip>
-                  );
-                })}
-              </div>
             );
           })}
         </div>
+      </section>
+      {god && (
+        <section class="panel">
+          <h3>
+            <HelpText k="editor.minors" />
+          </h3>
+          <div class="minor-ages" role="group" aria-label={t("editor.minors")}>
+            {(["classical", "heroic", "mythic"] as const).map((age) => {
+              const chosen = build.actions.find(
+                (a): a is Extract<Action, { do: "age" }> => a.do === "age" && a.to === age,
+              )?.minor;
+              const ageName = text(locale, data.common.ages.find((x) => x.id === age)!.name);
+              return (
+                <div key={age} class="minor-age" role="group" aria-label={ageName}>
+                  <span class="row minor-age-title">
+                    <EntityIcon id={age} pantheon={build.pantheon} size={24} tip={false} />
+                    {ageName}
+                  </span>
+                  <div class="row minor-cards">
+                    {god.minors[age].map((m) => {
+                      const minor = data.minors.get(m);
+                      const label = minor ? text(locale, minor.name) : m;
+                      return (
+                        <button
+                          key={m}
+                          class="god-card small"
+                          aria-pressed={chosen === m}
+                          disabled={readonly}
+                          data-testid={`minor-${m}`}
+                          onClick={() => setMinor(age, m)}
+                        >
+                          <EntityIcon id={m} pantheon={build.pantheon} size={56} tip={false} />
+                          <span>{label}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
       )}
     </div>
   );
 }
+
+const STAGES = [
+  { id: "gods", icon: "crown" },
+  { id: "actions", icon: "list" },
+  { id: "result", icon: "chart" },
+  { id: "details", icon: "gear" },
+] as const;
+type Stage = (typeof STAGES)[number]["id"];
 
 export function Editor({ id }: { id: string }) {
   const api = useApp();
   const help = useHelp();
   const { t, data, locale } = api;
   const found = api.findBuild(id);
-  const [dragFrom, setDragFrom] = useState<number | null>(null);
-  const [dragTarget, setDragTarget] = useState<number | null>(null);
-  const [tab, setTab] = useState<"build" | "timeline" | "details">("build");
-  const history = useHistory();
   const build = found?.build;
+  const [stage, setStage] = useState<Stage>(build?.actions.length ? "actions" : "gods");
+  const [warningsOpen, setWarningsOpen] = useState(false);
+  const history = useHistory();
   const readonly = found?.readonly ?? true;
   const sim = useSimulation(data, build, locale);
 
@@ -367,116 +396,23 @@ export function Editor({ id }: { id: string }) {
     if (next) api.saveBuild({ ...next, updatedAt: new Date().toISOString() });
   };
   keys.current = readonly ? null : { undo, redo };
-  const setActions = (actions: Action[]) => update({ ...build, actions });
-  const move = (from: number, to: number) => {
-    if (to < 0 || to >= build.actions.length || from === to) return;
-    const actions = [...build.actions];
-    const [item] = actions.splice(from, 1);
-    actions.splice(to, 0, item!);
-    setActions(actions);
-  };
   const result = sim.result;
-  const milestoneIds = new Set((build.milestones ?? []).map((m) => m.atAction));
-
-  const actionsPanel = (
-    <div class="panel">
-      <h3>
-        <Svg name="list" />
-        <HelpText k="editor.actions" /> <span class="num">{build.actions.length}</span>
-      </h3>
-      {build.actions.length === 0 ? (
-        <p class="action-times">{t("editor.empty")}</p>
-      ) : (
-        <ol class="actions-list" data-testid="actions-list">
-          {build.actions.map((a, i) => (
-            <ActionRow
-              key={a.id ?? i}
-              build={build}
-              index={i}
-              action={a}
-              outcome={result?.actions[i]}
-              warnings={(result?.warnings ?? []).filter(
-                (w) => w.action === i && w.level !== "info",
-              )}
-              readonly={readonly}
-              isMilestone={!!a.id && milestoneIds.has(a.id)}
-              onChange={(next) => {
-                const actions = [...build.actions];
-                actions[i] = next;
-                setActions(actions);
-              }}
-              onRemove={() => {
-                const removed = build.actions[i];
-                update({
-                  ...build,
-                  actions: build.actions.filter((_, k) => k !== i),
-                  milestones: (build.milestones ?? []).filter((m) => m.atAction !== removed?.id),
-                });
-              }}
-              onDuplicate={() => {
-                const actions = [...build.actions];
-                actions.splice(i + 1, 0, { ...structuredClone(a), id: nextActionId(build) });
-                setActions(actions);
-              }}
-              onMove={(delta) => move(i, i + delta)}
-              onToggleMilestone={() => {
-                const actionId = a.id ?? nextActionId(build);
-                const list = build.milestones ?? [];
-                const exists = list.some((m) => m.atAction === actionId);
-                const actions = a.id
-                  ? build.actions
-                  : build.actions.map((x, k) => (k === i ? { ...x, id: actionId } : x));
-                update({
-                  ...build,
-                  actions,
-                  milestones: exists
-                    ? list.filter((m) => m.atAction !== actionId)
-                    : [...list, { id: actionId, atAction: actionId }],
-                });
-              }}
-              drag={{
-                from: dragFrom,
-                target: dragTarget,
-                start: (k) => setDragFrom(k),
-                over: (k) => setDragTarget(k),
-                drop: (k) => {
-                  if (dragFrom !== null) move(dragFrom, k);
-                  setDragFrom(null);
-                  setDragTarget(null);
-                },
-                end: () => {
-                  setDragFrom(null);
-                  setDragTarget(null);
-                },
-              }}
-            />
-          ))}
-        </ol>
-      )}
-    </div>
-  );
-
-  const timelinePanel = result && (
-    <div class="panel">
-      <h3>
-        <Svg name="clock" />
-        <HelpText k="result.timeline" />
-      </h3>
-      <Timeline build={build} steps={sim.steps} />
-    </div>
-  );
-
+  const go = (to: Stage) => {
+    setStage(to);
+    window.scrollTo({ top: 0 });
+  };
+  const pickWarning = (action?: number) => {
+    setWarningsOpen(false);
+    setStage("actions");
+    requestAnimationFrame(() => focusAction(action));
+  };
   const god = data.gods.get(build.god);
-  const tabs = [
-    { id: "build", icon: "list" },
-    { id: "timeline", icon: "clock" },
-    { id: "details", icon: "gear" },
-  ] as const;
+  const next = STAGES[STAGES.findIndex((s) => s.id === stage) + 1];
 
   return (
     <div class="build-page">
       <header class={`panel build-header pan-${build.pantheon}`} data-testid="build-header">
-        <div class="row">
+        <div class="row header-row">
           <Tip label={t("nav.back")}>
             <a class="btn icon-only" href="#/" aria-label={t("nav.back")}>
               <Svg name="home" />
@@ -493,9 +429,6 @@ export function Editor({ id }: { id: string }) {
             disabled={readonly}
             onInput={(e) => update({ ...build, name: e.currentTarget.value || build.name }, "name")}
           />
-          <Tip label={help(`type.${build.type}`)} focusable>
-            <span class={`type-tag type-${build.type}`}>{t(`type.${build.type}`)}</span>
-          </Tip>
           {readonly && (
             <Tip label={t("editor.readonly")} focusable>
               <span class="lvl-info">
@@ -503,72 +436,78 @@ export function Editor({ id }: { id: string }) {
               </span>
             </Tip>
           )}
-          {!readonly && (
-            <>
-              <Tip label={t("editor.undo")}>
-                <button
-                  class="btn icon-only"
-                  aria-label={t("editor.undo")}
-                  data-testid="undo"
-                  disabled={!history.canUndo}
-                  onClick={undo}
-                >
-                  <Svg name="undo" />
-                </button>
-              </Tip>
-              <Tip label={t("editor.redo")}>
-                <button
-                  class="btn icon-only"
-                  aria-label={t("editor.redo")}
-                  data-testid="redo"
-                  disabled={!history.canRedo}
-                  onClick={redo}
-                >
-                  <Svg name="redo" />
-                </button>
-              </Tip>
-            </>
-          )}
-          <BuildActions
-            build={build}
-            readonly={readonly}
-            showDuplicate={!readonly}
-            onDeleted={() => navigate("/")}
-          />
-          {readonly && (
-            <button
-              class="btn primary"
-              data-testid="duplicate-to-edit"
-              onClick={() => {
-                const copy = duplicateBuild(build, "");
-                api.saveBuild(copy);
-                navigate(`/build/${encodeURIComponent(copy.id)}`);
-              }}
-            >
-              <Svg name="copy" />
-              {t("card.duplicateToEdit")}
-            </button>
-          )}
-        </div>
-        <div class="tabs" role="tablist" aria-label={build.name}>
-          {tabs.map((tb) => (
-            <Tip key={tb.id} label={help(`tab.${tb.id}`)}>
+          <div class="row header-tools">
+            {!readonly && (
+              <>
+                <Tip label={t("editor.undo")}>
+                  <button
+                    class="btn icon-only"
+                    aria-label={t("editor.undo")}
+                    data-testid="undo"
+                    disabled={!history.canUndo}
+                    onClick={undo}
+                  >
+                    <Svg name="undo" />
+                  </button>
+                </Tip>
+                <Tip label={t("editor.redo")}>
+                  <button
+                    class="btn icon-only"
+                    aria-label={t("editor.redo")}
+                    data-testid="redo"
+                    disabled={!history.canRedo}
+                    onClick={redo}
+                  >
+                    <Svg name="redo" />
+                  </button>
+                </Tip>
+              </>
+            )}
+            {result && (
+              <WarningsButton
+                result={result}
+                open={warningsOpen}
+                onToggle={() => setWarningsOpen(!warningsOpen)}
+              />
+            )}
+            <BuildActions
+              build={build}
+              readonly={readonly}
+              showDuplicate={!readonly}
+              onDeleted={() => navigate("/")}
+            />
+            {readonly && (
               <button
-                role="tab"
-                class="tab"
-                aria-selected={tab === tb.id}
-                data-testid={`tab-${tb.id}`}
+                class="btn primary"
+                data-testid="duplicate-to-edit"
                 onClick={() => {
-                  setTab(tb.id);
-                  window.scrollTo({ top: 0 });
+                  const copy = duplicateBuild(build, "");
+                  api.saveBuild(copy);
+                  navigate(`/build/${encodeURIComponent(copy.id)}`);
                 }}
               >
-                <Svg name={tb.icon} />
-                {t(`tab.${tb.id}`)}
+                <Svg name="copy" />
+                {t("card.duplicateToEdit")}
+              </button>
+            )}
+          </div>
+        </div>
+        <nav class="stages" aria-label={build.name}>
+          {STAGES.map((st, i) => (
+            <Tip key={st.id} label={help(`tab.${st.id}`)}>
+              <button
+                class="stage"
+                aria-current={stage === st.id ? "step" : undefined}
+                data-testid={`tab-${st.id}`}
+                onClick={() => go(st.id)}
+              >
+                <span class="stage-num num">{i + 1}</span>
+                <Svg name={st.icon} />
+                <span class="stage-label">{t(`tab.${st.id}`)}</span>
               </button>
             </Tip>
           ))}
-        </div>
+        </nav>
       </header>
 
       {sim.error && (
@@ -577,44 +516,42 @@ export function Editor({ id }: { id: string }) {
         </div>
       )}
 
-      {tab === "build" && (
-        <div class="editor">
-          <div class="stack">
-            <GodPicker build={build} readonly={readonly} onChange={update} />
-            {!readonly && (
+      {stage === "gods" && <GodPicker build={build} readonly={readonly} onChange={update} />}
+
+      {stage === "actions" && (
+        <div class={`editor ${readonly ? "readonly" : ""}`}>
+          {!readonly && (
+            <div class="palette-col">
               <Palette
                 build={build}
-                onAdd={(a) => setActions([...build.actions, { ...a, id: nextActionId(build) }])}
+                onAdd={(a) =>
+                  update({
+                    ...build,
+                    actions: [...build.actions, { ...a, id: nextActionId(build) }],
+                  })
+                }
               />
-            )}
-            {actionsPanel}
-          </div>
-          <div class="stack" data-testid="result">
-            {result && (
-              <>
-                <Milestones build={build} result={result} />
-                <WarningsPanel build={build} result={result} />
-                {timelinePanel}
-              </>
-            )}
-          </div>
-        </div>
-      )}
-
-      {tab === "timeline" && result && (
-        <div class="stack" data-testid="timeline-tab">
-          <ProductionChart build={build} result={result} />
-          <div class="details-grid">
-            {timelinePanel}
-            <div class="stack">
-              <Milestones build={build} result={result} />
-              <Charts result={result} />
             </div>
-          </div>
+          )}
+          <ActionList
+            build={build}
+            result={result}
+            steps={sim.steps}
+            readonly={readonly}
+            update={update}
+          />
         </div>
       )}
 
-      {tab === "details" && (
+      {stage === "result" && result && (
+        <div class="stack" data-testid="result">
+          <Milestones build={build} result={result} />
+          <ProductionChart build={build} result={result} />
+          <Charts result={result} />
+        </div>
+      )}
+
+      {stage === "details" && (
         <div class="details-grid" data-testid="details-tab">
           <div class="stack">
             <div class="panel stack" style={{ gap: "8px" }}>
@@ -656,10 +593,10 @@ export function Editor({ id }: { id: string }) {
                     value={build[field]?.[locale] ?? ""}
                     onInput={(e) => {
                       const value = e.currentTarget.value;
-                      const next = { ...(build[field] ?? {}), [locale]: value || undefined };
-                      if (!value) delete next[locale];
+                      const patch = { ...(build[field] ?? {}), [locale]: value || undefined };
+                      if (!value) delete patch[locale];
                       update(
-                        { ...build, [field]: Object.keys(next).length ? next : undefined },
+                        { ...build, [field]: Object.keys(patch).length ? patch : undefined },
                         field,
                       );
                     }}
@@ -673,15 +610,31 @@ export function Editor({ id }: { id: string }) {
               onChange={(settings) => update({ ...build, settings })}
             />
           </div>
-          <div class="stack">
-            <Matchups
-              build={build}
-              readonly={readonly}
-              onChange={(matchups) => update({ ...build, matchups })}
-            />
-            {result && <Charts result={result} />}
-          </div>
+          <Matchups
+            build={build}
+            readonly={readonly}
+            onChange={(matchups) => update({ ...build, matchups })}
+          />
         </div>
+      )}
+
+      {next && (
+        <div class="stage-next">
+          <button class="btn" data-testid="next-stage" onClick={() => go(next.id)}>
+            <span class="stage-num num">{STAGES.indexOf(next) + 1}</span>
+            {t(`tab.${next.id}`)}
+            <Svg name="chevron" />
+          </button>
+        </div>
+      )}
+
+      {warningsOpen && result && (
+        <WarningsDrawer
+          build={build}
+          result={result}
+          onClose={() => setWarningsOpen(false)}
+          onPick={pickWarning}
+        />
       )}
     </div>
   );

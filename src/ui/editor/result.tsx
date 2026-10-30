@@ -1,4 +1,4 @@
-import type { Age } from "../../data/schema.ts";
+import type { ComponentChildren } from "preact";
 import type { Build, Matchup } from "../../engine/build.ts";
 import { type Step, warningText } from "../../engine/format.ts";
 import { formatClock } from "../../engine/time.ts";
@@ -46,7 +46,15 @@ export function StepChips({ build, step, large }: { build: Build; step: Step; la
 }
 
 /** Steps carry icon ids; find the entity behind an icon id to show its name. */
-function EntityIconByIcon({ icon, build, size }: { icon: string; build: Build; size: number }) {
+export function EntityIconByIcon({
+  icon,
+  build,
+  size,
+}: {
+  icon: string;
+  build: Build;
+  size: number;
+}) {
   const { data } = useApp();
   const p = data.pantheons.get(build.pantheon);
   const all = [
@@ -62,83 +70,131 @@ function EntityIconByIcon({ icon, build, size }: { icon: string; build: Build; s
   return <EntityIcon id={match?.id ?? icon} pantheon={build.pantheon} size={size} tip={false} />;
 }
 
-export function Timeline({ build, steps }: { build: Build; steps: Step[] }) {
-  const { t, data, locale } = useApp();
-  let lastAge: Age | undefined;
-  let prev: number[] | null = null;
-  return (
-    <div class="timeline" data-testid="timeline">
-      {steps.map((step) => {
-        const alloc = step.alloc.split("/").map(Number);
-        const delta = prev ? alloc.map((v, i) => v - (prev![i] ?? 0)) : alloc.map(() => 0);
-        prev = alloc;
-        const sep = step.age && step.age !== lastAge && lastAge !== undefined;
-        lastAge = step.age ?? lastAge;
-        const [used, cap] = step.pop.split("/").map(Number) as [number, number];
-        const full = used >= cap;
-        return (
-          <div key={step.seconds}>
-            {sep && step.age && (
-              <div class="age-sep">
-                <EntityIcon id={step.age} pantheon={build.pantheon} size={24} />
-                {text(locale, data.common.ages.find((a) => a.id === step.age)!.name)}
-              </div>
-            )}
-            <div class="tl-row" data-testid="timeline-row">
-              <span class="tl-time">{step.t}</span>
-              <StepChips build={build} step={step} />
-              <div class="tl-side">
-                <Tip label={`${t("result.pop")} ${step.pop}`}>
-                  <span class="pop">
-                    <span class="num">{step.pop}</span>
-                    <span class={`popbar ${full ? "full" : ""}`} aria-hidden="true">
-                      <div
-                        style={{ width: `${Math.min(100, (used / Math.max(cap, 1)) * 100)}%` }}
-                      />
-                    </span>
-                  </span>
-                </Tip>
-                <Tip label={t("result.alloc")}>
-                  <span class="alloc">
-                    {RES.map((r, i) => (
-                      <span
-                        key={r}
-                        class={`alloc-chip res-${r} ${delta[i] ? "changed" : ""}`}
-                        aria-label={`${t(`res.${r}`)} ${alloc[i]}`}
-                      >
-                        {alloc[i]}
-                        {delta[i] ? (
-                          <span class="delta">
-                            {delta[i]! > 0 ? `+${delta[i]}` : `−${-delta[i]!}`}
-                          </span>
-                        ) : null}
-                      </span>
-                    ))}
-                  </span>
-                </Tip>
-              </div>
-            </div>
-          </div>
-        );
-      })}
-    </div>
-  );
-}
-
-export function WarningsPanel({ build, result }: { build: Build; result: SimResult }) {
-  const { t, data, locale } = useApp();
-  const help = useHelp();
-  const shown = result.warnings.filter(
+function shownWarnings(result: SimResult) {
+  return result.warnings.filter(
     (w) =>
       w.level !== "info" || w.key === "warn.lowConfidenceData" || w.key === "warn.sourceDepleted",
   );
+}
+
+/** Header button with the warning counts; opens the warnings drawer. */
+export function WarningsButton({
+  result,
+  open,
+  onToggle,
+}: {
+  result: SimResult;
+  open: boolean;
+  onToggle: () => void;
+}) {
+  const { t } = useApp();
+  const shown = shownWarnings(result);
+  const errors = shown.filter((w) => w.level === "error").length;
+  const delays = shown.filter((w) => w.level === "delay").length;
+  const label = `${t("result.warnings")}: ${errors} ${t("level.error")}, ${delays} ${t("level.delay")}`;
+  return (
+    <Tip label={label}>
+      <button
+        class={`btn warn-btn ${errors ? "has-error" : delays ? "has-delay" : "is-ok"}`}
+        aria-label={label}
+        aria-expanded={open}
+        data-testid="warnings-toggle"
+        onClick={onToggle}
+      >
+        {errors === 0 && delays === 0 ? (
+          <span class="lvl-info">
+            <Svg name="check" />
+          </span>
+        ) : (
+          <>
+            {errors > 0 && (
+              <span class="lvl-error row">
+                <Svg name="error" />
+                <span class="num">{errors}</span>
+              </span>
+            )}
+            {delays > 0 && (
+              <span class="lvl-delay row">
+                <Svg name="warning" />
+                <span class="num">{delays}</span>
+              </span>
+            )}
+          </>
+        )}
+      </button>
+    </Tip>
+  );
+}
+
+/** Side panel with every warning; closes with Escape or the close button. */
+export function WarningsDrawer({
+  build,
+  result,
+  onClose,
+  onPick,
+}: {
+  build: Build;
+  result: SimResult;
+  onClose: () => void;
+  onPick: (action?: number) => void;
+}) {
+  const { t } = useApp();
+  return (
+    <>
+      <div class="drawer-backdrop" onClick={onClose} aria-hidden="true" />
+      <div
+        class="drawer"
+        role="dialog"
+        aria-label={t("result.warnings")}
+        onKeyDown={(e) => e.key === "Escape" && onClose()}
+      >
+        <WarningsPanel
+          build={build}
+          result={result}
+          onPick={onPick}
+          close={
+            <Tip label={t("nav.close")}>
+              <button
+                class="btn icon-only"
+                aria-label={t("nav.close")}
+                data-testid="warnings-close"
+                ref={(el) => el?.focus()}
+                onClick={onClose}
+              >
+                <Svg name="x" />
+              </button>
+            </Tip>
+          }
+        />
+      </div>
+    </>
+  );
+}
+
+export function WarningsPanel({
+  build,
+  result,
+  onPick = focusAction,
+  close,
+}: {
+  build: Build;
+  result: SimResult;
+  onPick?: (action?: number) => void;
+  close?: ComponentChildren;
+}) {
+  const { t, data, locale } = useApp();
+  const help = useHelp();
+  const shown = shownWarnings(result);
   const count = (lvl: string) => shown.filter((w) => w.level === lvl).length;
   return (
     <div class="panel" data-testid="warnings">
-      <h3>
-        <Svg name="warning" />
-        <HelpText k="result.warnings" />
-      </h3>
+      <div class="list-head">
+        <h3>
+          <Svg name="warning" />
+          <HelpText k="result.warnings" />
+        </h3>
+        {close}
+      </div>
       <div class="warn-summary">
         {(["error", "delay", "info"] as const).map((lvl) => (
           <Tip
@@ -165,7 +221,7 @@ export function WarningsPanel({ build, result }: { build: Build; result: SimResu
         <ul class="warn-list">
           {shown.map((w, i) => (
             <li key={i}>
-              <button class="warn-item" onClick={() => focusAction(w.action)}>
+              <button class="warn-item" onClick={() => onPick(w.action)}>
                 <span class={`lvl-${w.level}`}>
                   <Svg
                     name={w.level === "error" ? "error" : w.level === "delay" ? "warning" : "info"}

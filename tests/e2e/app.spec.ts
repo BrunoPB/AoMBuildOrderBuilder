@@ -16,6 +16,8 @@ async function createBuildWithActions(page: import("@playwright/test").Page) {
   await page.getByTestId("new-build").click();
   await expect(page).toHaveURL(/#\/build\/u-/);
   await page.getByTestId("build-name").fill("E2E Build");
+  await expect(page.getByTestId("god-kronos")).toBeVisible();
+  await page.getByTestId("next-stage").click();
   await page.getByTestId("kind-train").click();
   await page.getByTestId("pick-citizen").click();
   await page.getByTestId("kind-build").click();
@@ -29,12 +31,17 @@ for (const locale of ["pt-BR", "en"] as const) {
     await page.goto("/");
     if (locale === "en") await page.getByTestId("toggle-locale").click();
     await createBuildWithActions(page);
+    const word = locale === "pt-BR" ? "Treinar 1 Cidadão" : "Train 1 Citizen";
+    await expect(page.getByTestId("actions-list")).toContainText(word);
+    await expect(page.getByTestId("action-row").first()).toContainText("0:00");
+    await page.getByTestId("show-events").check();
     const timeline = page.getByTestId("timeline");
     await expect(timeline.getByTestId("timeline-row").first()).toBeVisible();
-    const word = locale === "pt-BR" ? "Treinar 1 Cidadão" : "Train 1 Citizen";
-    await expect(timeline).toContainText(word);
+    await page.getByTestId("warnings-toggle").click();
     await expect(page.getByTestId("warnings")).toBeVisible();
-    await page.getByTestId("tab-timeline").click();
+    await page.getByTestId("warnings-close").click();
+    await expect(page.getByTestId("warnings")).toHaveCount(0);
+    await page.getByTestId("tab-result").click();
     await expect(page.getByTestId("chart-resources")).toBeVisible();
     await expect(page.getByTestId("production-lane").first()).toBeVisible();
   });
@@ -53,12 +60,14 @@ test("exports and re-imports a build", async ({ page }) => {
   await createBuildWithActions(page);
   await page.goto("/");
   const download = page.waitForEvent("download");
-  await page.getByTestId("export-one").first().click();
+  await page.getByTestId("my-builds").getByTestId("build-menu").click();
+  await page.getByTestId("export-one").click();
   const file = await (await download).path();
   const content = readFileSync(file, "utf8");
   expect(JSON.parse(content).builds[0].name).toBe("E2E Build");
 
-  await page.getByTestId("delete").first().click();
+  await page.getByTestId("my-builds").getByTestId("build-menu").click();
+  await page.getByTestId("delete").click();
   await page.getByRole("button", { name: "Sim" }).click();
   await expect(page.getByTestId("my-builds")).toHaveCount(0);
 
@@ -86,7 +95,7 @@ test("opens a preset read-only and duplicates it", async ({ page }) => {
   await page.goto("/");
   await page.getByTestId("presets").getByText("Krush").click();
   await expect(page.getByTestId("palette")).toHaveCount(0);
-  await expect(page.getByTestId("timeline")).toContainText("Clássica");
+  await expect(page.getByTestId("actions-list")).toContainText("Clássica");
   await page.getByTestId("duplicate-to-edit").click();
   await expect(page).toHaveURL(/#\/build\/u-/);
   await expect(page.getByTestId("palette")).toBeVisible();
@@ -111,6 +120,16 @@ test("match mode clock runs, shifts and resets", async ({ page }) => {
   await expect(page.getByTestId("match-current")).toContainText(next);
   await page.getByTestId("match-reset").click();
   await expect(clock).toHaveText("0:00");
+});
+
+test("warnings drawer jumps to the action", async ({ page }) => {
+  await page.goto("/#/build/preset%3Akrush");
+  await page.getByTestId("warnings-toggle").click();
+  const item = page.getByTestId("warnings").locator(".warn-item").first();
+  await expect(item).toContainText("3:38");
+  await item.click();
+  await expect(page.getByTestId("warnings")).toHaveCount(0);
+  await expect(page.locator(".action-row:focus")).toContainText("3:38");
 });
 
 test("has no horizontal scroll on a phone", async ({ page }) => {
@@ -145,21 +164,29 @@ test("help tips explain titles and can be turned off", async ({ page }) => {
 test("build screen header keeps the build actions", async ({ page }) => {
   await createBuildWithActions(page);
   const header = page.getByTestId("build-header");
-  for (const id of ["open-match", "duplicate", "export-one", "export-dashboard", "delete"]) {
+  await expect(header.getByTestId("open-match")).toBeVisible();
+  await expect(header.getByTestId("export-one")).toHaveCount(0);
+  await header.getByTestId("build-menu").click();
+  for (const id of ["duplicate", "export-one", "export-dashboard", "delete"]) {
     await expect(header.getByTestId(id)).toBeVisible();
   }
+  await page.keyboard.press("Escape");
+  await expect(header.getByTestId("export-one")).toHaveCount(0);
+  await header.getByTestId("build-menu").click();
   const download = page.waitForEvent("download");
   await header.getByTestId("export-dashboard").click();
   expect((await download).suggestedFilename()).toContain(".dashboard.json");
+  await header.getByTestId("build-menu").click();
   await header.getByTestId("delete").click();
   await page.getByRole("button", { name: "Sim" }).click();
   await expect(page).toHaveURL(/#\/$/);
   await expect(page.getByTestId("my-builds")).toHaveCount(0);
 });
 
-test("timeline tab shows what each building produces", async ({ page }) => {
+test("result stage shows what each building produces", async ({ page }) => {
   await page.goto("/#/build/preset%3Akrush");
-  await page.getByTestId("tab-timeline").click();
+  await page.getByTestId("tab-result").click();
+  await expect(page.getByTestId("milestones")).toBeVisible();
   const lanes = page.getByTestId("production-lane");
   await expect(lanes.first()).toContainText("Centro Urbano");
   expect(await page.getByTestId("production-bar").count()).toBeGreaterThan(10);
@@ -174,16 +201,21 @@ test("timeline tab shows what each building produces", async ({ page }) => {
 test("palette only offers actions the chosen god can use", async ({ page }) => {
   await page.goto("/");
   await page.getByTestId("new-build").click();
-  await page.getByTestId("god-kronos").click();
+  const pick = async (id: string) => {
+    await page.getByTestId("tab-gods").click();
+    await page.getByTestId(id).click();
+    await page.getByTestId("tab-actions").click();
+  };
+  await pick("god-kronos");
   await expect(page.getByTestId("kind-timeShift")).toBeVisible();
   await expect(page.getByTestId("kind-promote")).toBeVisible();
-  await page.getByTestId("god-gaia").click();
+  await pick("god-gaia");
   await expect(page.getByTestId("kind-timeShift")).toHaveCount(0);
   await expect(page.getByTestId("kind-promote")).toBeVisible();
-  await page.getByTestId("pantheon-greeks").click();
+  await pick("pantheon-greeks");
   await expect(page.getByTestId("kind-promote")).toHaveCount(0);
   await expect(page.getByTestId("kind-timeShift")).toHaveCount(0);
-  await page.getByTestId("pantheon-norse").click();
+  await pick("pantheon-norse");
   await page.getByTestId("kind-promote").click();
   await expect(page.getByTestId("pick-gatherer")).toBeVisible();
 });
@@ -193,10 +225,13 @@ test("Egyptian palette offers Empower, and summons only for Set", async ({ page 
   await page.getByTestId("new-build").click();
   await page.getByTestId("pantheon-egyptians").click();
   await page.getByTestId("god-ra").click();
+  await page.getByTestId("next-stage").click();
   await expect(page.getByTestId("kind-empower")).toBeVisible();
   await expect(page.getByTestId("kind-summon")).toHaveCount(0);
   await expect(page.getByTestId("kind-promote")).toHaveCount(0);
+  await page.getByTestId("tab-gods").click();
   await page.getByTestId("god-set").click();
+  await page.getByTestId("tab-actions").click();
   await expect(page.getByTestId("kind-summon")).toBeVisible();
   await page.getByTestId("kind-empower").click();
   await page.getByTestId("pick-town-center").click();
@@ -219,6 +254,7 @@ test("undo and redo changes in the build", async ({ page }) => {
   await expect(rows).toHaveCount(1);
   await page.keyboard.press("Control+y");
   await expect(rows).toHaveCount(2);
+  await rows.first().locator(".label-text").click();
   await page.getByTestId("row-remove").first().click();
   await expect(rows).toHaveCount(1);
   await page.getByTestId("undo").click();

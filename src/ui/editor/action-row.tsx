@@ -1,3 +1,4 @@
+import type { ComponentChildren } from "preact";
 import { useState } from "preact/hooks";
 import type { Action, Build, TaskTarget, When } from "../../engine/build.ts";
 import { formatClock, isClock } from "../../engine/time.ts";
@@ -22,6 +23,8 @@ type Props = {
   onDuplicate: () => void;
   onMove: (delta: number) => void;
   onToggleMilestone: () => void;
+  /** Extra content at the end of the row head (population in the timeline view). */
+  extra?: ComponentChildren;
   drag: {
     start: (i: number) => void;
     over: (i: number) => void;
@@ -31,6 +34,14 @@ type Props = {
     target: number | null;
   };
 };
+
+const MODE_ICON = { time: "pin", after: "link", always: "repeat", asap: "" } as const;
+const MODE_LABEL = {
+  time: "row.atTime",
+  after: "row.after",
+  always: "row.always",
+  asap: "row.asap",
+} as const;
 
 function whenMode(w: When): "time" | "asap" | "after" | "always" {
   if (w === "asap" || w === "always") return w;
@@ -186,6 +197,10 @@ export function ActionRow(props: Props) {
               </button>
             </Tip>
           )}
+          <span class={`row-time num ${outcome?.startedAt === undefined ? "lvl-error" : ""}`}>
+            {mode !== "asap" && <Svg name={MODE_ICON[mode]} label={t(MODE_LABEL[mode])} />}
+            {outcome?.startedAt !== undefined ? formatClock(outcome.startedAt) : "—"}
+          </span>
           <Tip
             label={[label(`action.${a.do}`, ctx), help(`action.${a.do}`, ctx)]
               .filter(Boolean)
@@ -213,142 +228,91 @@ export function ActionRow(props: Props) {
               </span>
             </Tip>
           )}
+          {props.isMilestone && (
+            <span class="lvl-info milestone-flag">
+              <Svg name="milestone" label={t("editor.milestones")} />
+            </span>
+          )}
+          {props.extra}
           <span class="row-chevron" aria-hidden="true">
             <Svg name="chevron" />
           </span>
         </div>
-        <Tip label={help(`row.mode.${mode}`)}>
-          <select
-            value={mode}
-            disabled={readonly}
-            aria-label={t("row.when")}
-            data-testid="when-mode"
-            onChange={(e) => setWhen(e.currentTarget.value)}
-          >
-            <option value="time">{t("row.atTime")}</option>
-            <option value="asap">{t("row.asap")}</option>
-            <option value="after" disabled={others.length === 0}>
-              {t("row.after")}
-            </option>
-            <option value="always">{t("row.always")}</option>
-          </select>
-        </Tip>
-        {mode === "time" && (
-          <input
-            class="time"
-            type="text"
-            inputMode="numeric"
-            aria-label={t("row.atTime")}
-            data-testid="when-time"
-            disabled={readonly}
-            value={a.when as string}
-            onChange={(e) => {
-              const v = e.currentTarget.value.trim();
-              if (isClock(v)) set({ when: v });
-              else e.currentTarget.value = a.when as string;
-            }}
-          />
-        )}
-        {mode === "after" && typeof a.when === "object" && (
-          <>
-            <select
-              value={a.when.after}
-              disabled={readonly}
-              aria-label={t("row.after")}
-              onChange={(e) =>
-                set({ when: { ...(a.when as object), after: e.currentTarget.value } as When })
-              }
-            >
-              {others.map((x) => (
-                <option key={x.id} value={x.id}>
-                  {build.actions.indexOf(x) + 1}. {actionText(c, x)}
-                </option>
-              ))}
-            </select>
-            <input
-              class="small"
-              type="number"
-              min={0}
-              aria-label={t("row.delay")}
-              disabled={readonly}
-              value={a.when.delay ?? 0}
-              onChange={(e) => {
-                const delay = Number(e.currentTarget.value);
-                set({
-                  when: {
-                    after: (a.when as { after: string }).after,
-                    ...(delay > 0 ? { delay } : {}),
-                  },
-                });
-              }}
-            />
-          </>
-        )}
-        <span class="action-times num">
-          {outcome?.startedAt !== undefined ? formatClock(outcome.startedAt) : "—"}
-        </span>
-        {!readonly && (
-          <>
-            <Tip label={props.isMilestone ? t("editor.removeMilestone") : t("editor.addMilestone")}>
-              <button
-                class="btn icon-only"
-                aria-pressed={props.isMilestone}
-                aria-label={
-                  props.isMilestone ? t("editor.removeMilestone") : t("editor.addMilestone")
-                }
-                onClick={props.onToggleMilestone}
-              >
-                <Svg name="milestone" />
-              </button>
-            </Tip>
-            <Tip label={t("row.up")}>
-              <button
-                class="btn icon-only"
-                aria-label={t("row.up")}
-                disabled={index === 0}
-                onClick={() => props.onMove(-1)}
-              >
-                <Svg name="up" />
-              </button>
-            </Tip>
-            <Tip label={t("row.down")}>
-              <button
-                class="btn icon-only"
-                aria-label={t("row.down")}
-                disabled={index === build.actions.length - 1}
-                onClick={() => props.onMove(1)}
-              >
-                <Svg name="down" />
-              </button>
-            </Tip>
-            <Tip label={t("row.duplicate")}>
-              <button
-                class="btn icon-only"
-                aria-label={t("row.duplicate")}
-                onClick={props.onDuplicate}
-              >
-                <Svg name="copy" />
-              </button>
-            </Tip>
-            <Tip label={t("row.remove")}>
-              <button
-                class="btn icon-only danger"
-                aria-label={t("row.remove")}
-                data-testid="row-remove"
-                onClick={props.onRemove}
-              >
-                <Svg name="trash" />
-              </button>
-            </Tip>
-          </>
-        )}
       </div>
       {open && (
         <fieldset class="action-details" disabled={readonly} style={{ border: 0, margin: 0 }}>
-          <label class="field">
+          <div class="field when-field">
             <HelpText k="row.when" />
-            <span class="num">{times}</span>
-          </label>
+            <div class="row">
+              <Tip label={help(`row.mode.${mode}`)}>
+                <select
+                  value={mode}
+                  aria-label={t("row.when")}
+                  data-testid="when-mode"
+                  onChange={(e) => setWhen(e.currentTarget.value)}
+                >
+                  <option value="time">{t("row.atTime")}</option>
+                  <option value="asap">{t("row.asap")}</option>
+                  <option value="after" disabled={others.length === 0}>
+                    {t("row.after")}
+                  </option>
+                  <option value="always">{t("row.always")}</option>
+                </select>
+              </Tip>
+              {mode === "time" && (
+                <input
+                  class="time"
+                  type="text"
+                  inputMode="numeric"
+                  aria-label={t("row.atTime")}
+                  data-testid="when-time"
+                  disabled={readonly}
+                  value={a.when as string}
+                  onChange={(e) => {
+                    const v = e.currentTarget.value.trim();
+                    if (isClock(v)) set({ when: v });
+                    else e.currentTarget.value = a.when as string;
+                  }}
+                />
+              )}
+              {mode === "after" && typeof a.when === "object" && (
+                <>
+                  <select
+                    value={a.when.after}
+                    disabled={readonly}
+                    aria-label={t("row.after")}
+                    onChange={(e) =>
+                      set({ when: { ...(a.when as object), after: e.currentTarget.value } as When })
+                    }
+                  >
+                    {others.map((x) => (
+                      <option key={x.id} value={x.id}>
+                        {build.actions.indexOf(x) + 1}. {actionText(c, x)}
+                      </option>
+                    ))}
+                  </select>
+                  <input
+                    class="small"
+                    type="number"
+                    min={0}
+                    aria-label={t("row.delay")}
+                    disabled={readonly}
+                    value={a.when.delay ?? 0}
+                    onChange={(e) => {
+                      const delay = Number(e.currentTarget.value);
+                      set({
+                        when: {
+                          after: (a.when as { after: string }).after,
+                          ...(delay > 0 ? { delay } : {}),
+                        },
+                      });
+                    }}
+                  />
+                </>
+              )}
+              <span class="action-times num">{times}</span>
+            </div>
+          </div>
           {a.do === "empower" && (
             <>
               <label class="field">
@@ -744,6 +708,63 @@ export function ActionRow(props: Props) {
                 />
               </label>
             </>
+          )}
+          {!readonly && (
+            <div class="row-tools" role="toolbar" aria-label={t("row.edit")}>
+              <Tip
+                label={props.isMilestone ? t("editor.removeMilestone") : t("editor.addMilestone")}
+              >
+                <button
+                  class="btn icon-only"
+                  aria-pressed={props.isMilestone}
+                  aria-label={
+                    props.isMilestone ? t("editor.removeMilestone") : t("editor.addMilestone")
+                  }
+                  onClick={props.onToggleMilestone}
+                >
+                  <Svg name="milestone" />
+                </button>
+              </Tip>
+              <Tip label={t("row.up")}>
+                <button
+                  class="btn icon-only"
+                  aria-label={t("row.up")}
+                  disabled={index === 0}
+                  onClick={() => props.onMove(-1)}
+                >
+                  <Svg name="up" />
+                </button>
+              </Tip>
+              <Tip label={t("row.down")}>
+                <button
+                  class="btn icon-only"
+                  aria-label={t("row.down")}
+                  disabled={index === build.actions.length - 1}
+                  onClick={() => props.onMove(1)}
+                >
+                  <Svg name="down" />
+                </button>
+              </Tip>
+              <Tip label={t("row.duplicate")}>
+                <button
+                  class="btn icon-only"
+                  aria-label={t("row.duplicate")}
+                  onClick={props.onDuplicate}
+                >
+                  <Svg name="copy" />
+                </button>
+              </Tip>
+              <Tip label={t("row.remove")}>
+                <button
+                  class="btn icon-only danger"
+                  aria-label={t("row.remove")}
+                  data-testid="row-remove"
+                  onClick={props.onRemove}
+                >
+                  <Svg name="trash" />
+                </button>
+              </Tip>
+            </div>
           )}
         </fieldset>
       )}

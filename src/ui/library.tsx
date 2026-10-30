@@ -98,7 +98,7 @@ function BuildCard({
           {text(locale, build.end)}
         </span>
       )}
-      <BuildActions build={build} readonly={readonly} showOpen />
+      <BuildActions build={build} readonly={readonly} />
     </article>
   );
 }
@@ -173,9 +173,11 @@ export function Library() {
     <div
       onDragOver={(e) => {
         e.preventDefault();
-        setOver(true);
+        if (e.dataTransfer?.types.includes("Files")) setOver(true);
       }}
-      onDragLeave={() => setOver(false)}
+      onDragLeave={(e) => {
+        if (!e.relatedTarget) setOver(false);
+      }}
       onDrop={(e) => {
         e.preventDefault();
         setOver(false);
@@ -242,20 +244,22 @@ export function Library() {
             </button>
           ))}
         </div>
-        <div class="filter-group">
-          {godList.map((g) => (
-            <Tip key={g.id} label={text(locale, g.name)}>
-              <button
-                class="portrait-btn"
-                aria-pressed={god === g.id}
-                aria-label={text(locale, g.name)}
-                onClick={() => setGod(god === g.id ? null : g.id)}
-              >
-                <EntityIcon id={g.id} pantheon={g.pantheon} size={56} tip={false} />
-              </button>
-            </Tip>
-          ))}
-        </div>
+        {pantheon && (
+          <div class="filter-group">
+            {godList.map((g) => (
+              <Tip key={g.id} label={text(locale, g.name)}>
+                <button
+                  class="portrait-btn"
+                  aria-pressed={god === g.id}
+                  aria-label={text(locale, g.name)}
+                  onClick={() => setGod(god === g.id ? null : g.id)}
+                >
+                  <EntityIcon id={g.id} pantheon={g.pantheon} size={56} tip={false} />
+                </button>
+              </Tip>
+            ))}
+          </div>
+        )}
         <div class="filter-group">
           {BUILD_TYPES.map((ty) => (
             <button
@@ -272,9 +276,11 @@ export function Library() {
         </div>
       </div>
 
-      <div class={`dropzone ${over ? "over" : ""}`}>
-        <Svg name="upload" /> <HelpText k="library.drop" />
-      </div>
+      {over && (
+        <div class="dropzone over" aria-hidden="true">
+          <Svg name="upload" /> {t("library.drop")}
+        </div>
+      )}
 
       <section>
         <h2>

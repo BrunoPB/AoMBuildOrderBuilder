@@ -42,6 +42,12 @@ const PATHS: Record<string, string> = {
   volume: "M11 5L6 9H2v6h4l5 4zM15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14",
   mute: "M11 5L6 9H2v6h4l5 4zM22 9l-6 6M16 9l6 6",
   milestone: "M12 2v20M5 5h11l-2 3 2 3H5",
+  dots: "M5 12h.01M12 12h.01M19 12h.01",
+  x: "M6 6l12 12M18 6L6 18",
+  chart: "M4 20V10M10 20V4M16 20v-8M22 20H2",
+  crown: "M3 18h18M4 18l-1-11 5 4 4-7 4 7 5-4-1 11",
+  pin: "M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 12h.01",
+  link: "M10 14a4 4 0 0 0 6 0l3-3a4 4 0 0 0-6-6l-1 1M14 10a4 4 0 0 0-6 0l-3 3a4 4 0 0 0 6 6l1-1",
 };
 
 export type SvgName = keyof typeof PATHS;
