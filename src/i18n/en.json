@@ -395,5 +395,8 @@
   "editor.startIdle.one": "{count} starting villager is idle: use Move (from idle).",
   "editor.startIdle.other": "{count} starting villagers are idle: use Move (from idle).",
   "warn.idleUntilEnd.one": "{count} villager stayed idle until the end",
-  "warn.idleUntilEnd.other": "{count} villagers stayed idle until the end"
+  "warn.idleUntilEnd.other": "{count} villagers stayed idle until the end",
+  "help.editor.view.list": "The build actions in order, with the time each one starts.",
+  "help.editor.view.production": "Bar chart over time: what each building is training, researching or building.",
+  "help.production.zoom": "Time scale: the higher, the wider the bars."
 }

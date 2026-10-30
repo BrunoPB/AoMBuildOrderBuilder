@@ -621,11 +621,13 @@ export function Editor({ id }: { id: string }) {
 
       {next && (
         <div class="stage-next">
-          <button class="btn" data-testid="next-stage" onClick={() => go(next.id)}>
-            <span class="stage-num num">{STAGES.indexOf(next) + 1}</span>
-            {t(`tab.${next.id}`)}
-            <Svg name="chevron" />
-          </button>
+          <Tip label={help(`tab.${next.id}`)}>
+            <button class="btn" data-testid="next-stage" onClick={() => go(next.id)}>
+              <span class="stage-num num">{STAGES.indexOf(next) + 1}</span>
+              {t(`tab.${next.id}`)}
+              <Svg name="chevron" />
+            </button>
+          </Tip>
         </div>
       )}
 

@@ -4,7 +4,7 @@ import type { Build } from "../../engine/build.ts";
 import { formatClock } from "../../engine/time.ts";
 import type { ProductionSpan, SimResult } from "../../engine/types.ts";
 import { useApp } from "../context.tsx";
-import { EntityIcon, HelpText } from "../icon.tsx";
+import { EntityIcon, HelpText, Tip, useHelp } from "../icon.tsx";
 import { Svg } from "../svg.tsx";
 
 const ZOOMS = [1, 2, 4] as const;
@@ -19,6 +19,7 @@ const KIND_CLASS: Record<ProductionSpan["kind"], string> = {
 /** Gantt of what every building is doing over time: training, research, age ups, construction. */
 export function ProductionChart({ build, result }: { build: Build; result: SimResult }) {
   const { t, data, locale } = useApp();
+  const help = useHelp();
   const [zoom, setZoom] = useState<number>(2);
   const [hover, setHover] = useState<number | null>(null);
   const [tip, setTip] = useState<{ text: string; x: number; y: number } | null>(null);
@@ -61,15 +62,17 @@ export function ProductionChart({ build, result }: { build: Build; result: SimRe
         <div class="row" role="group" aria-label={t("production.zoom")}>
           <Svg name="clock" />
           {ZOOMS.map((z) => (
-            <button
-              key={z}
-              class="chip"
-              aria-pressed={zoom === z}
-              onClick={() => setZoom(z)}
-              data-testid={`zoom-${z}`}
-            >
-              {z}×
-            </button>
+            <Tip key={z} label={help("production.zoom") || t("production.zoom")}>
+              <button
+                class="chip"
+                aria-pressed={zoom === z}
+                aria-label={`${t("production.zoom")} ${z}×`}
+                onClick={() => setZoom(z)}
+                data-testid={`zoom-${z}`}
+              >
+                {z}×
+              </button>
+            </Tip>
           ))}
         </div>
       </div>

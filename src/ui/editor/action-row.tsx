@@ -198,7 +198,11 @@ export function ActionRow(props: Props) {
             </Tip>
           )}
           <span class={`row-time num ${outcome?.startedAt === undefined ? "lvl-error" : ""}`}>
-            {mode !== "asap" && <Svg name={MODE_ICON[mode]} label={t(MODE_LABEL[mode])} />}
+            {mode !== "asap" && (
+              <Tip label={[t(MODE_LABEL[mode]), help(`row.mode.${mode}`)].join("\n")}>
+                <Svg name={MODE_ICON[mode]} label={t(MODE_LABEL[mode])} />
+              </Tip>
+            )}
             {outcome?.startedAt !== undefined ? formatClock(outcome.startedAt) : "—"}
           </span>
           <Tip

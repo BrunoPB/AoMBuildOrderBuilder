@@ -6,7 +6,7 @@ import { formatClock } from "../../engine/time.ts";
 import type { SimResult, Snapshot } from "../../engine/types.ts";
 import { entityName } from "../../data/catalog.ts";
 import { useApp } from "../context.tsx";
-import { EntityIcon, HelpText, Tip } from "../icon.tsx";
+import { EntityIcon, HelpText, Tip, useHelp } from "../icon.tsx";
 import { KIND_ICON, Svg } from "../svg.tsx";
 import { ActionRow } from "./action-row.tsx";
 import { nextActionId, startState } from "./labels.ts";
@@ -136,6 +136,7 @@ export function ActionList({
   update: (b: Build) => void;
 }) {
   const { t } = useApp();
+  const help = useHelp();
   const [view, setView] = useState<"list" | "production">("list");
   const [events, setEvents] = useState(false);
   const [dragFrom, setDragFrom] = useState<number | null>(null);
@@ -189,16 +190,17 @@ export function ActionList({
         </h3>
         <div class="segmented" role="group" aria-label={t("editor.actions")}>
           {(["list", "production"] as const).map((v) => (
-            <button
-              key={v}
-              class="chip"
-              aria-pressed={view === v}
-              data-testid={`view-${v}`}
-              onClick={() => setView(v)}
-            >
-              <Svg name={v === "list" ? "list" : "hammer"} />
-              {t(`editor.view.${v}`)}
-            </button>
+            <Tip key={v} label={help(`editor.view.${v}`)}>
+              <button
+                class="chip"
+                aria-pressed={view === v}
+                data-testid={`view-${v}`}
+                onClick={() => setView(v)}
+              >
+                <Svg name={v === "list" ? "list" : "hammer"} />
+                {t(`editor.view.${v}`)}
+              </button>
+            </Tip>
           ))}
         </div>
         {view === "list" && result && (
