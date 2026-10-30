@@ -1,4 +1,5 @@
 import type { ComponentChildren } from "preact";
+import { useState } from "preact/hooks";
 import type { Build, Matchup } from "../../engine/build.ts";
 import { type Step, warningText } from "../../engine/format.ts";
 import { formatClock } from "../../engine/time.ts";
@@ -9,6 +10,7 @@ import { EntityIcon, Tip, HelpText, useHelp } from "../icon.tsx";
 import { Svg } from "../svg.tsx";
 import { PopChart, ResourceChart } from "./charts.tsx";
 import { actionIcons } from "./labels.ts";
+import { WarningCard } from "./warning-card.tsx";
 
 const RES = ["food", "wood", "gold", "favor"] as const;
 
@@ -186,6 +188,9 @@ export function WarningsPanel({
   const help = useHelp();
   const shown = shownWarnings(result);
   const count = (lvl: string) => shown.filter((w) => w.level === lvl).length;
+  const [expanded, setExpanded] = useState<number | null>(null);
+  /** Touch screens have no hover: a tap opens the explanation inline instead. */
+  const touch = typeof matchMedia === "function" && matchMedia("(hover: none)").matches;
   return (
     <div class="panel" data-testid="warnings">
       <div class="list-head">
@@ -221,31 +226,90 @@ export function WarningsPanel({
         <ul class="warn-list">
           {shown.map((w, i) => (
             <li key={i}>
-              <button class="warn-item" onClick={() => onPick(w.action)}>
-                <span class={`lvl-${w.level}`}>
-                  <Svg
-                    name={w.level === "error" ? "error" : w.level === "delay" ? "warning" : "info"}
-                    label={t(`level.${w.level}`)}
-                  />
-                </span>
-                <span class="num">{formatClock(w.t)}</span>
-                {w.action !== undefined && build.actions[w.action] && (
-                  <span class="row" style={{ gap: "2px" }}>
-                    {actionIcons(build.actions[w.action]!)
-                      .slice(0, 1)
-                      .map((id) => (
-                        <EntityIcon
-                          key={id}
-                          id={id}
-                          pantheon={build.pantheon}
-                          size={20}
-                          tip={false}
-                        />
-                      ))}
+              {touch ? (
+                <button
+                  class="warn-item"
+                  aria-expanded={touch ? expanded === i : undefined}
+                  onClick={() => {
+                    if (!touch) return onPick(w.action);
+                    setExpanded(expanded === i ? null : i);
+                  }}
+                >
+                  <span class={`lvl-${w.level}`}>
+                    <Svg
+                      name={
+                        w.level === "error" ? "error" : w.level === "delay" ? "warning" : "info"
+                      }
+                      label={t(`level.${w.level}`)}
+                    />
                   </span>
-                )}
-                <span>{warningText(data, build, w, locale)}</span>
-              </button>
+                  <span class="num">{formatClock(w.t)}</span>
+                  {w.action !== undefined && build.actions[w.action] && (
+                    <span class="row" style={{ gap: "2px" }}>
+                      {actionIcons(build.actions[w.action]!)
+                        .slice(0, 1)
+                        .map((id) => (
+                          <EntityIcon
+                            key={id}
+                            id={id}
+                            pantheon={build.pantheon}
+                            size={20}
+                            tip={false}
+                          />
+                        ))}
+                    </span>
+                  )}
+                  <span>{warningText(data, build, w, locale)}</span>
+                </button>
+              ) : (
+                <Tip label="" card={<WarningCard build={build} result={result} w={w} />}>
+                  <button
+                    class="warn-item"
+                    aria-expanded={touch ? expanded === i : undefined}
+                    onClick={() => {
+                      if (!touch) return onPick(w.action);
+                      setExpanded(expanded === i ? null : i);
+                    }}
+                  >
+                    <span class={`lvl-${w.level}`}>
+                      <Svg
+                        name={
+                          w.level === "error" ? "error" : w.level === "delay" ? "warning" : "info"
+                        }
+                        label={t(`level.${w.level}`)}
+                      />
+                    </span>
+                    <span class="num">{formatClock(w.t)}</span>
+                    {w.action !== undefined && build.actions[w.action] && (
+                      <span class="row" style={{ gap: "2px" }}>
+                        {actionIcons(build.actions[w.action]!)
+                          .slice(0, 1)
+                          .map((id) => (
+                            <EntityIcon
+                              key={id}
+                              id={id}
+                              pantheon={build.pantheon}
+                              size={20}
+                              tip={false}
+                            />
+                          ))}
+                      </span>
+                    )}
+                    <span>{warningText(data, build, w, locale)}</span>
+                  </button>
+                </Tip>
+              )}
+              {touch && expanded === i && (
+                <div class="warn-expanded">
+                  <WarningCard build={build} result={result} w={w} />
+                  {w.action !== undefined && (
+                    <button class="btn" data-testid="warning-go" onClick={() => onPick(w.action)}>
+                      <Svg name="chevron" />
+                      {t("wd.goTo")}
+                    </button>
+                  )}
+                </div>
+              )}
             </li>
           ))}
         </ul>

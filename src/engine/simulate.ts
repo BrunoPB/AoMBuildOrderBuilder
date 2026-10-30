@@ -28,6 +28,8 @@ import type {
   SimResult,
   SimWarning,
   Snapshot,
+  Spend,
+  WaitDetail,
   WarningLevel,
 } from "./types.ts";
 
@@ -99,7 +101,12 @@ type Site = {
   slots: number;
 };
 
-type Reason = { key: string; level: WarningLevel; params: Params };
+type Reason = {
+  key: string;
+  level: WarningLevel;
+  params: Params;
+  detail?: Omit<WaitDetail, "since">;
+};
 
 type ActionState = {
   status: ActionOutcome["status"];
@@ -107,6 +114,9 @@ type ActionState = {
   completedAt?: number;
   blockedSince?: number;
   reason?: Reason;
+  /** Reason and stock when the current kind of wait began. */
+  first?: { reason: Reason; t: number; have: Record<ResourceId, number> };
+  phases: { t: number; key: string; params: Params }[];
   reported: Set<string>;
   waited: number;
   left: number;
@@ -231,6 +241,9 @@ class Simulation {
   ageTimes: SimResult["ageTimes"] = {};
   uid = 0;
   idleSince?: number;
+  /** Action being run (or whose rule is running), credited with what gets paid. */
+  acting?: number;
+  spends: Spend[] = [];
   modsCache?: Modifier[];
 
   constructor(
@@ -249,6 +262,7 @@ class Simulation {
     this.states = build.actions.map(() => ({
       status: "pending",
       reported: new Set<string>(),
+      phases: [],
       waited: 0,
       left: 0,
       open: 0,
@@ -567,10 +581,11 @@ class Simulation {
     return null;
   }
 
-  pay(cost: Cost): void {
+  pay(cost: Cost, action = this.acting): void {
     for (const [r, v] of Object.entries(cost) as [ResourceId, number][]) {
       this.res[r] = Math.max(0, this.res[r] - v);
     }
+    if (Object.values(cost).some((v) => v)) this.spends.push({ t: round(this.t), action, cost });
   }
 
   unitCost(def: Unit): Cost {
@@ -579,7 +594,16 @@ class Simulation {
 
   noResource(cost: Cost, missing: ResourceId, reserved: Cost = {}): Reason {
     const need = Math.ceil((cost[missing] ?? 0) - (this.res[missing] - (reserved[missing] ?? 0)));
-    return { key: "warn.noResource", level: "delay", params: { resource: missing, missing: need } };
+    return {
+      key: "warn.noResource",
+      level: "delay",
+      params: { resource: missing, missing: need },
+      detail: {
+        resource: missing,
+        need: cost[missing] ?? 0,
+        reserved: Math.max(0, reserved[missing] ?? 0),
+      },
+    };
   }
 
   actionCost(a: Action, st: ActionState): Cost {
@@ -666,6 +690,12 @@ class Simulation {
     const st = this.states[i]!;
     const escalated = st.reason?.level === "info" && reason.level !== "info";
     if (st.blockedSince === undefined || escalated) st.blockedSince = this.t;
+    if (st.first?.reason.key !== reason.key) {
+      st.first = { reason, t: this.t, have: { ...this.res } };
+      if (reason.level !== "info") {
+        st.phases.push({ t: round(this.t), key: reason.key, params: reason.params });
+      }
+    }
     st.reason = reason;
     if (reason.level === "error") {
       st.status = st.status === "pending" ? "blocked" : st.status;
@@ -679,11 +709,35 @@ class Simulation {
       const waited = round(this.t - st.blockedSince, 1);
       if (waited >= this.s.tick - EPS && st.reason.level !== "info") {
         st.waited += waited;
-        this.warn("delay", st.reason.key, { ...st.reason.params, waited }, i);
+        const first = st.first?.reason.key === st.reason.key ? st.first : undefined;
+        const since = round(first?.t ?? st.blockedSince);
+        const d = first?.reason.detail;
+        const detail: WaitDetail = { since };
+        if (st.phases.length > 1) detail.phases = st.phases.slice(0, -1);
+        if (d?.resource) {
+          const r = d.resource;
+          detail.resource = r;
+          detail.need = round(d.need ?? 0, 1);
+          detail.have = Math.floor(first!.have[r]);
+          if (d.reserved) detail.reserved = Math.floor(d.reserved);
+          detail.spent = this.spends.filter(
+            (x) => x.t >= since && x.t <= this.t + EPS && x.action !== i && (x.cost[r] ?? 0) > 0,
+          );
+        }
+        this.warnings.push({
+          t: round(this.t),
+          level: "delay",
+          key: st.reason.key,
+          params: { ...(first ?? st).reason!.params, waited },
+          action: i,
+          detail,
+        });
       }
     }
     st.blockedSince = undefined;
     st.reason = undefined;
+    st.first = undefined;
+    st.phases = [];
   }
 
   start(i: number): void {
@@ -907,6 +961,7 @@ class Simulation {
   // ---------- one-shot actions ----------
 
   runAction(i: number): void {
+    this.acting = i;
     const a = this.build.actions[i]!;
     const st = this.states[i]!;
     switch (a.do) {
@@ -1535,6 +1590,7 @@ class Simulation {
     const reserved = this.reserved();
     this.rules.forEach((rule, ri) => {
       if (!rule.active) return;
+      this.acting = rule.action;
       const def = this.unit(rule.unit);
       if (!def) return;
       let capped = false;

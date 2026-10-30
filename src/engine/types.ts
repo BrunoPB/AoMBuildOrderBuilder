@@ -4,12 +4,32 @@ import type { TaskTarget } from "./build.ts";
 export type WarningLevel = "info" | "delay" | "error";
 export type Params = Record<string, string | number>;
 
+/** Resources paid by an action (or a rule's action) at time t. */
+export type Spend = { t: number; action?: number; cost: Cost };
+
+/** Why a delay happened: when the wait began and, for missing resources, the numbers. */
+export type WaitDetail = {
+  since: number;
+  resource?: ResourceId;
+  /** What the action costs in that resource. */
+  need?: number;
+  /** Stock when the wait began. */
+  have?: number;
+  /** Part of the stock kept for other actions due soon (train when affordable). */
+  reserved?: number;
+  /** Other spends of that resource during the wait. */
+  spent?: Spend[];
+  /** Earlier reasons of the same wait, when it changed (e.g. queue busy, then no food). */
+  phases?: { t: number; key: string; params: Params }[];
+};
+
 export type SimWarning = {
   t: number;
   level: WarningLevel;
   key: string;
   params: Params;
   action?: number;
+  detail?: WaitDetail;
 };
 
 export type BuilderRef =

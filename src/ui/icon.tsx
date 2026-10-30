@@ -24,7 +24,11 @@ function place(host: HTMLElement): void {
       .filter((el) => !el.contains(host) && getComputedStyle(el).position !== "static")
       .map((el) => el.getBoundingClientRect().bottom);
     const above = h.top - b.height - 6;
-    const y = above >= Math.max(8, ...covered) ? above : h.bottom + 6;
+    const vh = document.documentElement.clientHeight;
+    const y = Math.max(
+      8,
+      Math.min(above >= Math.max(8, ...covered) ? above : h.bottom + 6, vh - b.height - 8),
+    );
     bubble.style.left = `${Math.round(x)}px`;
     bubble.style.top = `${Math.round(y)}px`;
   };
@@ -44,17 +48,20 @@ function unfollow(host: HTMLElement): void {
 
 export function Tip({
   label,
+  card,
   children,
   focusable = false,
   class: cls,
 }: {
   label: string;
+  /** Rich content shown instead of the plain label (formatted explanations). */
+  card?: ComponentChildren;
   children: ComponentChildren;
   focusable?: boolean;
   class?: string;
 }) {
   const [open, setOpen] = useState(false);
-  if (!label) return <>{children}</>;
+  if (!label && !card) return <>{children}</>;
   return (
     <span
       class={`tip ${cls ?? ""}`}
@@ -76,8 +83,8 @@ export function Tip({
       }}
     >
       {children}
-      <span class="tip-bubble" role="tooltip">
-        {label}
+      <span class={`tip-bubble ${card ? "tip-card" : ""}`} role="tooltip">
+        {card ?? label}
       </span>
     </span>
   );

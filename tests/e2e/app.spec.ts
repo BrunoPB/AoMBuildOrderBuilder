@@ -134,12 +134,26 @@ test("shows the starting units and sends idle ones to work", async ({ page }) =>
   await expect(page.getByTestId("start-idle")).toHaveCount(0);
 });
 
-test("warnings drawer jumps to the action", async ({ page }) => {
+test("a warning explains the wait with the numbers behind it", async ({ page, isMobile }) => {
+  await page.goto("/#/build/preset%3Akrush");
+  await page.getByTestId("warnings-toggle").click();
+  const item = page.getByTestId("warnings").locator(".warn-item").filter({ hasText: "Comida" });
+  if (isMobile) await item.click();
+  else await item.hover();
+  const card = page.locator(".wd-card:visible").filter({ hasText: "Custo" });
+  await expect(card).toBeVisible();
+  await expect(card).toContainText("800");
+  await expect(card).toContainText("340");
+  await expect(card).toContainText("Fila ocupada");
+});
+
+test("warnings drawer jumps to the action", async ({ page, isMobile }) => {
   await page.goto("/#/build/preset%3Akrush");
   await page.getByTestId("warnings-toggle").click();
   const item = page.getByTestId("warnings").locator(".warn-item").first();
   await expect(item).toContainText("3:38");
   await item.click();
+  if (isMobile) await page.getByTestId("warning-go").click();
   await expect(page.getByTestId("warnings")).toHaveCount(0);
   await expect(page.locator(".action-row:focus")).toContainText("3:38");
 });

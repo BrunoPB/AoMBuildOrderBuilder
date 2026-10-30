@@ -69,6 +69,23 @@ describe("payment", () => {
     expect(delay).toMatchObject({ level: "delay", params: { resource: "food", waited: 50 } });
     expect(Math.min(...r.series.map((s) => s.resources.food))).toBeGreaterThanOrEqual(0);
   });
+
+  it("explains a resource wait: cost, stock at the start and other spends", () => {
+    const r = run([
+      { when: "0:00", do: "move", count: 2, from: "idle", to: "wood" },
+      { when: "0:00", do: "build", building: "barracks" },
+      { when: "0:00", do: "build", building: "manor" },
+      { when: "0:00", do: "autoTrain", unit: "soldier" },
+      { when: "0:00", do: "build", building: "temple" },
+    ]);
+    const w = r.warnings.find((x) => x.key === "warn.noResource" && x.action === 4);
+    expect(w?.detail).toMatchObject({ resource: "wood", need: 50, have: 0 });
+    expect(w?.params.missing).toBe(50);
+    const spent = w?.detail?.spent ?? [];
+    expect(spent.length).toBeGreaterThan(0);
+    expect(spent.every((x) => x.action === 3 && x.cost.wood === 20)).toBe(true);
+    expect(spent.every((x) => x.t >= w!.detail!.since && x.t <= w!.t)).toBe(true);
+  });
 });
 
 describe("queues and population", () => {
