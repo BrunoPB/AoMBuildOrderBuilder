@@ -16,7 +16,16 @@ function costText(cost: Partial<Record<string, number>>, t: (k: string) => strin
     .join(" · ");
 }
 
-export function Palette({ build, onAdd }: { build: Build; onAdd: (a: Action) => void }) {
+/** `idle`: workers idle at the start of the simulation; "Move" sends them to work first. */
+export function Palette({
+  build,
+  idle = 0,
+  onAdd,
+}: {
+  build: Build;
+  idle?: number;
+  onAdd: (a: Action) => void;
+}) {
   const { data, t, locale } = useApp();
   const help = useHelp();
   const [kind, setKind] = useState<ActionKind | null>(null);
@@ -155,8 +164,13 @@ export function Palette({ build, onAdd }: { build: Build; onAdd: (a: Action) => 
   };
 
   const choose = (k: ActionKind) => {
-    if (k === "move")
-      return onAdd({ when: "asap", do: "move", count: 1, from: "food", to: "wood" });
+    if (k === "move") {
+      return onAdd(
+        idle > 0
+          ? { when: "asap", do: "move", count: idle, from: "idle", to: "food" }
+          : { when: "asap", do: "move", count: 1, from: "food", to: "wood" },
+      );
+    }
     if (k === "stopAutoTrain") return onAdd({ when: "asap", do: "stopAutoTrain" });
     if (k === "stopTrainWhenAffordable")
       return onAdd({ when: "asap", do: "stopTrainWhenAffordable" });

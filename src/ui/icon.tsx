@@ -7,17 +7,39 @@ import { useApp } from "./context.tsx";
 
 const BASE = import.meta.env.BASE_URL;
 
-/** Keeps the tooltip bubble inside the viewport. */
-function clamp(host: HTMLElement): void {
-  requestAnimationFrame(() => {
-    const bubble = host.querySelector<HTMLElement>(":scope > .tip-bubble");
-    if (!bubble) return;
-    bubble.style.setProperty("--shift", "0px");
-    const r = bubble.getBoundingClientRect();
-    const max = document.documentElement.clientWidth - 8;
-    const shift = r.right > max ? max - r.right : r.left < 8 ? 8 - r.left : 0;
-    bubble.style.setProperty("--shift", `${Math.round(shift)}px`);
-  });
+/** Places the tooltip bubble in viewport coordinates: above the host, below when there is no
+ *  room (or a sticky header covers it), always inside the screen. Fixed positioning keeps it
+ *  out of scrolling containers. */
+function place(host: HTMLElement): void {
+  const bubble = host.querySelector<HTMLElement>(":scope > .tip-bubble");
+  if (!bubble) return;
+  bubble.style.left = "-9999px";
+  bubble.style.top = "-9999px";
+  const update = () => {
+    const h = host.getBoundingClientRect();
+    const b = bubble.getBoundingClientRect();
+    const vw = document.documentElement.clientWidth;
+    const x = Math.min(Math.max(h.left + h.width / 2 - b.width / 2, 8), vw - b.width - 8);
+    const covered = [...document.querySelectorAll<HTMLElement>(".topbar, .build-header")]
+      .filter((el) => !el.contains(host) && getComputedStyle(el).position !== "static")
+      .map((el) => el.getBoundingClientRect().bottom);
+    const above = h.top - b.height - 6;
+    const y = above >= Math.max(8, ...covered) ? above : h.bottom + 6;
+    bubble.style.left = `${Math.round(x)}px`;
+    bubble.style.top = `${Math.round(y)}px`;
+  };
+  requestAnimationFrame(update);
+  unfollow(host);
+  window.addEventListener("scroll", update, { capture: true, passive: true });
+  following.set(host, update);
+}
+
+const following = new WeakMap<HTMLElement, () => void>();
+
+function unfollow(host: HTMLElement): void {
+  const update = following.get(host);
+  if (update) window.removeEventListener("scroll", update, { capture: true });
+  following.delete(host);
 }
 
 export function Tip({
@@ -38,14 +60,20 @@ export function Tip({
       class={`tip ${cls ?? ""}`}
       data-open={open}
       tabIndex={focusable ? 0 : undefined}
-      onMouseEnter={(e) => clamp(e.currentTarget)}
-      onFocusCapture={(e) => clamp(e.currentTarget as HTMLElement)}
+      onMouseEnter={(e) => place(e.currentTarget)}
+      onFocusCapture={(e) => place(e.currentTarget as HTMLElement)}
       onTouchStart={(e) => {
-        clamp(e.currentTarget);
+        place(e.currentTarget);
         setOpen((o) => !o);
       }}
-      onMouseLeave={() => setOpen(false)}
-      onBlur={() => setOpen(false)}
+      onMouseLeave={(e) => {
+        unfollow(e.currentTarget);
+        setOpen(false);
+      }}
+      onBlur={(e) => {
+        unfollow(e.currentTarget as HTMLElement);
+        setOpen(false);
+      }}
     >
       {children}
       <span class="tip-bubble" role="tooltip">

@@ -4,11 +4,12 @@ import type { Action, Build } from "../../engine/build.ts";
 import type { Step, StepAction } from "../../engine/format.ts";
 import { formatClock } from "../../engine/time.ts";
 import type { SimResult, Snapshot } from "../../engine/types.ts";
+import { entityName } from "../../data/catalog.ts";
 import { useApp } from "../context.tsx";
 import { EntityIcon, HelpText, Tip } from "../icon.tsx";
 import { KIND_ICON, Svg } from "../svg.tsx";
 import { ActionRow } from "./action-row.tsx";
-import { nextActionId } from "./labels.ts";
+import { nextActionId, startState } from "./labels.ts";
 import { ProductionChart } from "./production.tsx";
 import { EntityIconByIcon } from "./result.tsx";
 
@@ -70,6 +71,51 @@ function EventRow({ build, event, snap }: { build: Build; event: Event; snap?: S
         </span>
       )}
       <Pop snap={snap} />
+    </li>
+  );
+}
+
+/** Row 0:00: units, buildings and resources the pantheon (and god) start with. */
+function StartRow({ build, idleAtStart }: { build: Build; idleAtStart: number }) {
+  const { t, data, locale } = useApp();
+  const start = startState(data, build);
+  const name = (id: string, count: number) =>
+    `${count} ${entityName(data, build.pantheon, id, locale, count)}`;
+  const tip = [
+    t("editor.start"),
+    start.units.map(([id, n]) => name(id, n)).join(", "),
+    start.buildings.map(([id, n]) => name(id, n)).join(", "),
+    start.resources.map(([r, n]) => `${n} ${t(`res.${r}`).toLowerCase()}`).join(" · "),
+    idleAtStart > 0 ? t("editor.startIdle", { count: idleAtStart }) : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+  return (
+    <li class="start-row" data-testid="start-row">
+      <span class="row-time num">0:00</span>
+      <Tip label={tip} focusable>
+        <span class="start-items">
+          <Svg name="flag" label={t("editor.start")} />
+          {start.units.map(([id, n]) => (
+            <span key={id} class="start-item">
+              <EntityIcon id={id} pantheon={build.pantheon} size={26} tip={false} />
+              <span class="num">{n}</span>
+            </span>
+          ))}
+          {start.resources.map(([r, n]) => (
+            <span key={r} class={`start-item res-${r}`}>
+              <EntityIcon id={r} pantheon={build.pantheon} size={18} tip={false} />
+              <span class="num">{n}</span>
+            </span>
+          ))}
+        </span>
+      </Tip>
+      {idleAtStart > 0 && (
+        <span class="lvl-delay row start-idle" data-testid="start-idle">
+          <Svg name="warning" label={t("editor.startIdle", { count: idleAtStart })} />
+          <span class="num">{idleAtStart}</span>
+        </span>
+      )}
     </li>
   );
 }
@@ -170,13 +216,15 @@ export function ActionList({
       </div>
       {view === "production" && result ? (
         <ProductionChart build={build} result={result} />
-      ) : build.actions.length === 0 ? (
-        <p class="action-times">{t("editor.empty")}</p>
       ) : (
         <ol
           class={`actions-list ${events ? "with-events" : ""}`}
           data-testid={events ? "timeline" : "actions-list"}
         >
+          <StartRow
+            build={build}
+            idleAtStart={result?.series.find((x) => x.t >= 5)?.alloc.idle ?? 0}
+          />
           {eventRows(-1)}
           {build.actions.map((a, i) => (
             <Fragment key={a.id ?? i}>
@@ -245,6 +293,9 @@ export function ActionList({
             </Fragment>
           ))}
         </ol>
+      )}
+      {view === "list" && build.actions.length === 0 && (
+        <p class="action-times">{t("editor.empty")}</p>
       )}
     </div>
   );

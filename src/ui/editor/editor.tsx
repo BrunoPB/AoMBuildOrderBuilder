@@ -524,6 +524,7 @@ export function Editor({ id }: { id: string }) {
             <div class="palette-col">
               <Palette
                 build={build}
+                idle={result?.series.find((x) => x.t >= 5)?.alloc.idle ?? 0}
                 onAdd={(a) =>
                   update({
                     ...build,

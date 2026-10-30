@@ -18,6 +18,18 @@ describe("gathering", () => {
     expect(at(r, 10).alloc.wood).toBe(2);
   });
 
+  it("warns when starting workers stay idle until the end", () => {
+    const idle = run([{ when: "0:20", do: "event", note: "end" }]);
+    const w = idle.warnings.find((x) => x.key === "warn.idleUntilEnd");
+    expect(w?.params.count).toBe(at(idle, 0).alloc.idle);
+    expect(w?.t).toBe(0);
+    const busy = run([
+      { when: "0:00", do: "move", count: at(idle, 0).alloc.idle, from: "idle", to: "wood" },
+      { when: "0:20", do: "event", note: "end" },
+    ]);
+    expect(busy.warnings.some((x) => x.key === "warn.idleUntilEnd")).toBe(false);
+  });
+
   it("applies efficiency", () => {
     const r = run(
       [

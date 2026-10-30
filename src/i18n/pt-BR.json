@@ -390,5 +390,10 @@
   "help.tab.actions": "Monte a build com a paleta. Cada ação mostra quando começa na simulação.",
   "help.tab.result": "Marcos, o que cada prédio produz e os gráficos de recursos e população.",
   "help.editor.events": "Mostra entre as ações o que acontece sozinho (unidades prontas, prédios concluídos, recursos esgotados) e a população.",
-  "help.editor.minors": "O deus menor escolhido ao avançar para cada idade."
+  "help.editor.minors": "O deus menor escolhido ao avançar para cada idade.",
+  "editor.start": "Início da partida",
+  "editor.startIdle.one": "{count} aldeão inicial está ocioso: use Mover (de ocioso).",
+  "editor.startIdle.other": "{count} aldeões iniciais estão ociosos: use Mover (de ocioso).",
+  "warn.idleUntilEnd.one": "{count} aldeão ficou ocioso até o fim",
+  "warn.idleUntilEnd.other": "{count} aldeões ficaram ociosos até o fim"
 }

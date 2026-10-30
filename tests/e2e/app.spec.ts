@@ -122,6 +122,18 @@ test("match mode clock runs, shifts and resets", async ({ page }) => {
   await expect(clock).toHaveText("0:00");
 });
 
+test("shows the starting units and sends idle ones to work", async ({ page }) => {
+  await page.goto("/");
+  await page.getByTestId("new-build").click();
+  await page.getByTestId("next-stage").click();
+  const start = page.getByTestId("start-row");
+  await expect(start).toContainText("275");
+  await expect(page.getByTestId("start-idle")).toContainText("2");
+  await page.getByTestId("kind-move").click();
+  await expect(page.getByTestId("action-row").first()).toContainText("2 Cidadãos de ocioso");
+  await expect(page.getByTestId("start-idle")).toHaveCount(0);
+});
+
 test("warnings drawer jumps to the action", async ({ page }) => {
   await page.goto("/#/build/preset%3Akrush");
   await page.getByTestId("warnings-toggle").click();

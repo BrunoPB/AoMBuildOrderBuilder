@@ -390,5 +390,10 @@
   "help.tab.actions": "Build it with the palette. Each action shows when it starts in the simulation.",
   "help.tab.result": "Milestones, what each building produces and the resource and population charts.",
   "help.editor.events": "Shows between the actions what happens on its own (units ready, buildings done, resources depleted) and the population.",
-  "help.editor.minors": "The minor god picked when advancing to each age."
+  "help.editor.minors": "The minor god picked when advancing to each age.",
+  "editor.start": "Match start",
+  "editor.startIdle.one": "{count} starting villager is idle: use Move (from idle).",
+  "editor.startIdle.other": "{count} starting villagers are idle: use Move (from idle).",
+  "warn.idleUntilEnd.one": "{count} villager stayed idle until the end",
+  "warn.idleUntilEnd.other": "{count} villagers stayed idle until the end"
 }

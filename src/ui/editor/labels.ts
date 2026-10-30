@@ -180,3 +180,20 @@ export const PALETTE_KINDS: ActionKind[] = [
   "stopTrainWhenAffordable",
   "event",
 ];
+
+/** What the build starts with: the pantheon's start state plus the major god's extras. */
+export function startState(data: GameData, build: Build) {
+  const start = data.pantheons.get(build.pantheon)?.def.start;
+  const extras = data.gods.get(build.god)?.startExtras ?? {};
+  const units: Record<string, number> = { ...start?.units, ...extras.units };
+  const resources: Record<string, number> = {};
+  for (const r of ["food", "wood", "gold", "favor"] as const) {
+    const v = (start?.resources[r] ?? 0) + (extras.resources?.[r] ?? 0);
+    if (v > 0) resources[r] = v;
+  }
+  return {
+    units: Object.entries(units).filter(([, count]) => count > 0),
+    buildings: Object.entries(start?.buildings ?? {}).filter(([, count]) => count > 0),
+    resources: Object.entries(resources),
+  };
+}

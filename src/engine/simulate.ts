@@ -1988,6 +1988,15 @@ class Simulation {
       if (settledAt !== undefined && this.t >= settledAt + this.s.tail - EPS) break;
       if (this.t >= hardCap) break;
     }
+    const idle = this.allocation().idle;
+    if (idle > 0 && this.idleSince !== undefined && this.t - this.idleSince >= 5) {
+      this.warnings.push({
+        t: round(this.idleSince),
+        level: "delay",
+        key: "warn.idleUntilEnd",
+        params: { count: idle },
+      });
+    }
     this.build.actions.forEach((_, i) => {
       const st = this.states[i]!;
       if (st.status !== "done" && st.status !== "active" && st.reason?.level !== "error") {
