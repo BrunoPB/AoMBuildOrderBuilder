@@ -510,10 +510,7 @@ label.field > * {
   --kind: var(--kind-move);
 }
 .kind-rule,
-.kind-autoTrain,
-.kind-stopAutoTrain,
-.kind-trainWhenAffordable,
-.kind-stopTrainWhenAffordable {
+.kind-stopTrain {
   --kind: var(--kind-rule);
 }
 .kind-event {

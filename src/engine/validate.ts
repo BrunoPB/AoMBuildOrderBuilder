@@ -17,8 +17,6 @@ export function validateRefs(build: Build, data: GameData): string[] {
     if (typeof a.when === "object") need(ids.has(a.when.after), "action", a.when.after, i);
     switch (a.do) {
       case "train":
-      case "autoTrain":
-      case "trainWhenAffordable":
       case "promote":
       case "summon":
         need(p.units.has(a.unit), "unit", a.unit, i);
@@ -27,8 +25,7 @@ export function validateRefs(build: Build, data: GameData): string[] {
         need(p.units.has(a.by), "unit", a.by, i);
         need(p.buildings.has(a.building), "building", a.building, i);
         break;
-      case "stopAutoTrain":
-      case "stopTrainWhenAffordable":
+      case "stopTrain":
         if (a.unit) need(p.units.has(a.unit), "unit", a.unit, i);
         break;
       case "build":

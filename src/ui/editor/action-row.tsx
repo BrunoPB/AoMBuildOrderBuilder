@@ -7,10 +7,12 @@ import { warningText } from "../../engine/format.ts";
 import { text } from "../../i18n/index.ts";
 import { useApp } from "../context.tsx";
 import { EntityIcon, Tip, HelpText, useHelp, useLabel } from "../icon.tsx";
-import { KIND_ICON, Svg } from "../svg.tsx";
+import { Svg } from "../svg.tsx";
 import {
   ACTION_MIME,
   actionIcons,
+  actionKind,
+  actionKindIcon,
   actionText,
   targetLabel,
   taskTargets,
@@ -110,6 +112,7 @@ export function ActionRow(props: Props) {
     .map((w) => `${t(`level.${w.level}`)}: ${warningText(data, build, w, locale)}`)
     .join("\n");
   const mode = whenMode(a.when);
+  const kind = actionKind(a);
   const others = build.actions.filter((x, i) => i !== index && x.id);
   const set = (patch: Partial<Action>) => onChange({ ...a, ...patch } as Action);
   const units = p ? [...p.units.values()] : [];
@@ -117,7 +120,8 @@ export function ActionRow(props: Props) {
   /** "New villager from": earlier actions that produce villagers. */
   const trainSources = earlier.filter(
     (x) =>
-      (x.do === "train" || x.do === "autoTrain") &&
+      x.do === "train" &&
+      x.mode !== "affordable" &&
       Object.keys(p?.units.get(x.unit)?.worker?.gatherRates ?? {}).length > 0,
   );
   /** "Same builder as": earlier constructions. */
@@ -147,16 +151,18 @@ export function ActionRow(props: Props) {
         ? buildings.map((b) => b.id)
         : undefined;
   const trainSites =
-    a.do === "train" || a.do === "autoTrain" || a.do === "trainWhenAffordable"
+    a.do === "train"
       ? buildings.filter(
           (b) => b.trains?.includes(a.unit) || p?.units.get(a.unit)?.trainedAt.includes(b.id),
         )
       : [];
-  /** Units a stop action can refer to: those with an earlier rule of the matching kind. */
-  const rule = a.do === "stopAutoTrain" ? "autoTrain" : "trainWhenAffordable";
+  /** Units a stop action can refer to: those with an earlier train of the matching mode. */
+  const stopMode = a.do === "stopTrain" ? a.mode : undefined;
   const stoppable = [
     ...new Set([
-      ...earlier.flatMap((x) => (x.do === rule ? [x.unit] : [])),
+      ...earlier.flatMap((x) =>
+        x.do === "train" && x.mode && (!stopMode || x.mode === stopMode) ? [x.unit] : [],
+      ),
       ...("unit" in a && a.unit ? [a.unit] : []),
     ]),
   ];
@@ -186,7 +192,7 @@ export function ActionRow(props: Props) {
     <li
       id={`action-row-${index}`}
       tabIndex={-1}
-      class={`action-row tl-row kind-${a.do} ${open ? "open" : ""} ${level ? `bg-${level}` : ""} ${drag.from === index ? "dragging" : ""} ${drag.target === index && drag.from !== index ? "drop-target" : ""}`}
+      class={`action-row tl-row kind-${a.do === "train" && a.mode ? "rule" : a.do} ${open ? "open" : ""} ${level ? `bg-${level}` : ""} ${drag.from === index ? "dragging" : ""} ${drag.target === index && drag.from !== index ? "drop-target" : ""}`}
       data-testid="action-row"
       onClick={(e) => {
         const el = e.target as HTMLElement;
@@ -245,12 +251,12 @@ export function ActionRow(props: Props) {
             {outcome?.startedAt !== undefined ? formatClock(outcome.startedAt) : "—"}
           </span>
           <Tip
-            label={[label(`action.${a.do}`, ctx), help(`action.${a.do}`, ctx)]
+            label={[label(`action.${kind}`, ctx), help(`action.${kind}`, ctx)]
               .filter(Boolean)
               .join("\n")}
           >
-            <span class="lvl-info" aria-label={label(`action.${a.do}`, ctx)}>
-              <Svg name={KIND_ICON[a.do] ?? "info"} />
+            <span class="lvl-info" aria-label={label(`action.${kind}`, ctx)}>
+              <Svg name={actionKindIcon(a)} />
             </span>
           </Tip>
           <span class="action-label">
@@ -428,7 +434,30 @@ export function ActionRow(props: Props) {
               )}
             </>
           )}
-          {(a.do === "train" || a.do === "promote") && (
+          {a.do === "train" && (
+            <label class="field">
+              <HelpText k="row.trainMode" />
+              <select
+                value={a.mode ?? "count"}
+                data-testid="row-train-mode"
+                onChange={(e) => {
+                  const m = e.currentTarget.value;
+                  set(
+                    m === "auto" || m === "affordable"
+                      ? { mode: m, count: undefined }
+                      : { mode: undefined, count: 1 },
+                  );
+                }}
+              >
+                {(["count", "auto", "affordable"] as const).map((m) => (
+                  <option key={m} value={m}>
+                    {t(`row.trainMode.${m}`)}
+                  </option>
+                ))}
+              </select>
+            </label>
+          )}
+          {((a.do === "train" && !a.mode) || a.do === "promote") && (
             <label class="field">
               <HelpText k="row.count" />
               <input
@@ -443,40 +472,35 @@ export function ActionRow(props: Props) {
               />
             </label>
           )}
-          {(a.do === "train" || a.do === "autoTrain" || a.do === "trainWhenAffordable") &&
-            isGatherer(data, build.pantheon, a.unit) && (
-              <label class="field">
-                <HelpText k="row.rally" />
-                <TargetSelect
-                  build={build}
-                  unit={a.unit}
-                  value={a.rally}
-                  allowEmpty
-                  onChange={(rally) => set({ rally })}
-                  testid="row-rally"
-                />
-              </label>
-            )}
-          {(a.do === "train" || a.do === "autoTrain" || a.do === "trainWhenAffordable") &&
-            trainSites.length > 1 && (
-              <label class="field">
-                <HelpText k="row.trainAt" />
-                <select
-                  value={(a.do === "trainWhenAffordable" ? a.from : a.at) ?? ""}
-                  onChange={(e) => {
-                    const v = e.currentTarget.value || undefined;
-                    set(a.do === "trainWhenAffordable" ? { from: v } : { at: v });
-                  }}
-                >
-                  <option value="">{t("row.any")}</option>
-                  {trainSites.map((b) => (
-                    <option key={b.id} value={b.id}>
-                      {text(locale, b.name)}
-                    </option>
-                  ))}
-                </select>
-              </label>
-            )}
+          {a.do === "train" && isGatherer(data, build.pantheon, a.unit) && (
+            <label class="field">
+              <HelpText k="row.rally" />
+              <TargetSelect
+                build={build}
+                unit={a.unit}
+                value={a.rally}
+                allowEmpty
+                onChange={(rally) => set({ rally })}
+                testid="row-rally"
+              />
+            </label>
+          )}
+          {a.do === "train" && trainSites.length > 1 && (
+            <label class="field">
+              <HelpText k="row.trainAt" />
+              <select
+                value={a.at ?? ""}
+                onChange={(e) => set({ at: e.currentTarget.value || undefined })}
+              >
+                <option value="">{t("row.any")}</option>
+                {trainSites.map((b) => (
+                  <option key={b.id} value={b.id}>
+                    {text(locale, b.name)}
+                  </option>
+                ))}
+              </select>
+            </label>
+          )}
           {a.do === "build" && (
             <>
               <label class="field">
@@ -661,7 +685,24 @@ export function ActionRow(props: Props) {
               </select>
             </label>
           )}
-          {(a.do === "stopAutoTrain" || a.do === "stopTrainWhenAffordable") && (
+          {a.do === "stopTrain" && (
+            <label class="field">
+              <HelpText k="row.trainMode" />
+              <select
+                value={a.mode ?? ""}
+                data-testid="row-stop-mode"
+                onChange={(e) => {
+                  const m = e.currentTarget.value;
+                  set({ mode: m === "auto" || m === "affordable" ? m : undefined });
+                }}
+              >
+                <option value="">{t("row.trainMode.both")}</option>
+                <option value="auto">{t("row.trainMode.auto")}</option>
+                <option value="affordable">{t("row.trainMode.affordable")}</option>
+              </select>
+            </label>
+          )}
+          {a.do === "stopTrain" && (
             <label class="field">
               <HelpText k="row.unit" />
               <select

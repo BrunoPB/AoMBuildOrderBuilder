@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { loadGameData } from "../../src/data/load.ts";
 import { readRawData } from "../../src/data/raw-node.ts";
-import type { Build } from "../../src/engine/build.ts";
+import { BUILD_VERSION, type Build } from "../../src/engine/build.ts";
 import { simulate } from "../../src/engine/simulate.ts";
 
 const data = loadGameData(readRawData());
@@ -9,7 +9,7 @@ const data = loadGameData(readRawData());
 function build(pantheon: Build["pantheon"], god: string, actions: Build["actions"]): Build {
   return {
     format: "aomr-bob",
-    version: 1,
+    version: BUILD_VERSION,
     id: "t",
     name: "t",
     createdAt: "2026-10-29T00:00:00Z",

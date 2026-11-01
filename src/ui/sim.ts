@@ -1,7 +1,7 @@
 import { useMemo } from "preact/hooks";
 import type { GameData } from "../data/load.ts";
 import type { Locale, PantheonId } from "../data/schema.ts";
-import type { Build } from "../engine/build.ts";
+import { BUILD_VERSION, type Build } from "../engine/build.ts";
 import { buildSteps, type Step } from "../engine/format.ts";
 import { simulate } from "../engine/simulate.ts";
 import type { SimResult } from "../engine/types.ts";
@@ -33,7 +33,7 @@ export function newBuild(data: GameData, name: string, efficiency?: number): Bui
   const now = new Date().toISOString();
   return {
     format: "aomr-bob",
-    version: 1,
+    version: BUILD_VERSION,
     id: newBuildId(),
     name,
     createdAt: now,

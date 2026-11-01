@@ -1,5 +1,5 @@
 import { loadGameData, type GameData, type RawData } from "../../src/data/load.ts";
-import type { Build } from "../../src/engine/build.ts";
+import { BUILD_VERSION, type Build } from "../../src/engine/build.ts";
 
 const meta = { source: "test", checkedAt: "2026-10-17", confidence: "high" as const };
 const name = (en: string) => ({ "pt-BR": en, en });
@@ -344,7 +344,7 @@ export function testData(overrides: { oracleRate?: number; favorCap?: number } =
 export function testBuild(actions: Build["actions"], settings: Build["settings"] = {}): Build {
   return {
     format: "aomr-bob",
-    version: 1,
+    version: BUILD_VERSION,
     id: "test",
     name: "Test",
     createdAt: "2026-10-17T00:00:00Z",

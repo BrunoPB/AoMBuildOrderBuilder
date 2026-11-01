@@ -81,10 +81,9 @@ export const KIND_ICON: Record<string, string> = {
   promote: "star",
   empower: "sun",
   summon: "user",
-  autoTrain: "repeat",
-  stopAutoTrain: "stop",
-  trainWhenAffordable: "coin",
-  stopTrainWhenAffordable: "stop",
+  "train.auto": "repeat",
+  "train.affordable": "coin",
+  stopTrain: "stop",
   event: "flag",
   rule: "repeat",
 };

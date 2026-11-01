@@ -2,7 +2,9 @@ import { entityName } from "../../data/catalog.ts";
 import type { GameData } from "../../data/load.ts";
 import { AGES, type Age, type Locale, type PantheonId, SOURCE_IDS } from "../../data/schema.ts";
 import type { Action, ActionKind, Build, TaskTarget } from "../../engine/build.ts";
+import { stopTrainText } from "../../engine/format.ts";
 import { translate } from "../../i18n/index.ts";
+import { KIND_ICON } from "../svg.tsx";
 
 type Ctx = { data: GameData; pantheon: PantheonId; locale: Locale };
 
@@ -15,19 +17,25 @@ export function targetLabel(c: Ctx, target: TaskTarget): string {
   return n(c, target).toLocaleLowerCase(c.locale);
 }
 
+/** Kind of an action for its icon, color and name; a train that keeps going is its mode. */
+export function actionKind(a: Action): string {
+  return a.do === "train" && a.mode ? `train.${a.mode}` : a.do;
+}
+
+export function actionKindIcon(a: Action): string {
+  return KIND_ICON[actionKind(a)] ?? "info";
+}
+
 /** Entity ids shown on the left of an action: who/what acts. */
 export function actionIcons(a: Action, worker?: string): string[] {
   switch (a.do) {
     case "train":
-    case "autoTrain":
-    case "trainWhenAffordable":
     case "promote":
     case "summon":
       return [a.unit];
     case "empower":
       return [a.by];
-    case "stopAutoTrain":
-    case "stopTrainWhenAffordable":
+    case "stopTrain":
       return a.unit ? [a.unit] : [];
     case "build":
     case "timeShift":
@@ -54,13 +62,7 @@ export function actionTarget(a: Action): string | undefined {
   if (a.do === "empower") return a.building;
   if (a.do === "power") return a.target;
   const target =
-    a.do === "train" || a.do === "autoTrain" || a.do === "trainWhenAffordable"
-      ? a.rally
-      : a.do === "build"
-        ? a.then
-        : a.do === "move"
-          ? a.to
-          : undefined;
+    a.do === "train" ? a.rally : a.do === "build" ? a.then : a.do === "move" ? a.to : undefined;
   return target === "idle" ? undefined : target;
 }
 
@@ -71,7 +73,9 @@ export function actionText(c: Ctx, a: Action): string {
   switch (a.do) {
     case "train": {
       const count = a.count ?? 1;
-      const base = t("step.train", { count, unit: n(c, a.unit, count) });
+      const base = a.mode
+        ? t(a.mode === "auto" ? "step.autoTrain" : "step.affordable", { unit: n(c, a.unit, 2) })
+        : t("step.train", { count, unit: n(c, a.unit, count) });
       return a.rally ? `${base} → ${targetLabel(c, a.rally)}` : base;
     }
     case "build": {
@@ -116,18 +120,8 @@ export function actionText(c: Ctx, a: Action): string {
       const base = t("step.summon", { count, unit: n(c, a.unit, count) });
       return a.hunt ? `${base} → ${t("row.huntIt").toLocaleLowerCase(c.locale)}` : base;
     }
-    case "autoTrain":
-      return a.rally
-        ? t("step.autoTrainTo", { unit: n(c, a.unit, 2), to: targetLabel(c, a.rally) })
-        : t("step.autoTrain", { unit: n(c, a.unit, 2) });
-    case "stopAutoTrain":
-      return t("step.autoTrainOff");
-    case "trainWhenAffordable":
-      return t("step.affordable", { unit: n(c, a.unit, 2) });
-    case "stopTrainWhenAffordable":
-      return a.unit
-        ? t("step.affordableOffUnit", { unit: n(c, a.unit, 2) })
-        : t("step.affordableOff");
+    case "stopTrain":
+      return stopTrainText(c.locale, a.mode, a.unit && n(c, a.unit, 2));
     case "event": {
       const parts: string[] = [];
       for (const [u, k] of Object.entries(a.lose ?? {}))
@@ -186,11 +180,7 @@ export function nextActionId(build: Build): string {
 
 /** Palette action kinds by group, most common first; god-specific actions last. */
 export const PALETTE_GROUPS: { id: string; kinds: ActionKind[] }[] = [
-  { id: "economy", kinds: ["move", "train", "build", "research", "age"] },
-  {
-    id: "auto",
-    kinds: ["autoTrain", "stopAutoTrain", "trainWhenAffordable", "stopTrainWhenAffordable"],
-  },
+  { id: "economy", kinds: ["move", "train", "build", "research", "age", "stopTrain"] },
   { id: "god", kinds: ["power", "timeShift", "promote", "empower", "summon"] },
   { id: "other", kinds: ["event"] },
 ];

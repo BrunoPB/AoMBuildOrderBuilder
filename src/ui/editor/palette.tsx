@@ -69,8 +69,6 @@ export function Palette({
   const options = (): Option[] => {
     switch (current) {
       case "train":
-      case "autoTrain":
-      case "trainWhenAffordable":
         return [...p.units.values()]
           .filter((u) => u.trainedAt.length > 0 && allowed(u.requires, u.excludeGods))
           .map((u) => ({
@@ -139,10 +137,6 @@ export function Palette({
     switch (current) {
       case "train":
         return { when: "asap", do: "train", unit: o.id, count: 1 };
-      case "autoTrain":
-        return { when: "asap", do: "autoTrain", unit: o.id };
-      case "trainWhenAffordable":
-        return { when: "asap", do: "trainWhenAffordable", unit: o.id };
       case "promote":
         return { when: "asap", do: "promote", unit: o.id };
       case "build":
@@ -169,8 +163,7 @@ export function Palette({
       return idle > 0
         ? { when: "asap", do: "move", count: idle, from: "idle", to: "food" }
         : { when: "asap", do: "move", count: 1, from: "food", to: "wood" };
-    if (k === "stopAutoTrain") return { when: "asap", do: "stopAutoTrain" };
-    if (k === "stopTrainWhenAffordable") return { when: "asap", do: "stopTrainWhenAffordable" };
+    if (k === "stopTrain") return { when: "asap", do: "stopTrain" };
     if (k === "event") return { when: "asap", do: "event", note: "" };
     return undefined;
   };

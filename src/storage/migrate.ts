@@ -5,7 +5,32 @@ export type MigrateResult =
   { ok: true; build: Build } | { ok: false; error: string; newer?: number };
 
 /** One step per old version: migrations[n] turns a version-n build into version n+1. */
-const migrations: Record<number, (b: Record<string, unknown>) => Record<string, unknown>> = {};
+const migrations: Record<number, (b: Record<string, unknown>) => Record<string, unknown>> = {
+  /** autoTrain / trainWhenAffordable (and their stops) became modes of train / stopTrain. */
+  1: (b) => ({
+    ...b,
+    actions: Array.isArray(b.actions) ? b.actions.map(trainModesV2) : b.actions,
+  }),
+};
+
+function trainModesV2(raw: unknown): unknown {
+  if (typeof raw !== "object" || raw === null) return raw;
+  const a = raw as Record<string, unknown>;
+  switch (a.do) {
+    case "autoTrain":
+      return { ...a, do: "train", mode: "auto" };
+    case "trainWhenAffordable": {
+      const { from, ...rest } = a;
+      return { ...rest, do: "train", mode: "affordable", ...(from !== undefined && { at: from }) };
+    }
+    case "stopAutoTrain":
+      return { ...a, do: "stopTrain", mode: "auto" };
+    case "stopTrainWhenAffordable":
+      return { ...a, do: "stopTrain", mode: "affordable" };
+    default:
+      return raw;
+  }
+}
 
 export function migrateBuild(raw: unknown): MigrateResult {
   if (typeof raw !== "object" || raw === null) return { ok: false, error: "not an object" };

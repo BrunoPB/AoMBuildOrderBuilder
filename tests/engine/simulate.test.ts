@@ -78,7 +78,7 @@ describe("payment", () => {
       { when: "0:00", do: "move", count: 2, from: "idle", to: "wood" },
       { when: "0:00", do: "build", building: "barracks" },
       { when: "0:00", do: "build", building: "manor" },
-      { when: "0:00", do: "autoTrain", unit: "soldier" },
+      { when: "0:00", do: "train", mode: "auto", unit: "soldier" },
       { when: "0:00", do: "build", building: "temple" },
     ]);
     const w = r.warnings.find((x) => x.key === "warn.noResource" && x.action === 4);
@@ -215,10 +215,10 @@ describe("age ups, powers and promotions", () => {
 });
 
 describe("continuous rules", () => {
-  it("trainWhenAffordable keeps the cost of upcoming timed actions", () => {
+  it("train when affordable keeps the cost of upcoming timed actions", () => {
     const r = run([
       { when: "0:00", do: "build", building: "barracks", builder: { from: "idle" } },
-      { when: "always", do: "trainWhenAffordable", unit: "soldier", from: "barracks" },
+      { when: "always", do: "train", mode: "affordable", unit: "soldier", at: "barracks" },
       { when: "0:40", do: "build", building: "manor", builder: { from: "idle" } },
     ]);
     expect(r.produced.filter((p) => p.unit === "soldier")).toHaveLength(0);
@@ -226,11 +226,11 @@ describe("continuous rules", () => {
     expect(r.warnings.filter((w) => w.action === 2 && w.level === "delay")).toHaveLength(0);
   });
 
-  it("autoTrain keeps the building busy until stopped", () => {
+  it("auto train keeps the building busy until stopped", () => {
     const r = run([
       { when: "0:00", do: "event", gainResource: { food: 1000 } },
-      { when: "0:00", do: "autoTrain", unit: "citizen", rally: "wood" },
-      { when: "0:35", do: "stopAutoTrain" },
+      { when: "0:00", do: "train", mode: "auto", unit: "citizen", rally: "wood" },
+      { when: "0:35", do: "stopTrain", mode: "auto" },
     ]);
     expect(r.produced.map((p) => p.t)).toEqual([10, 20, 30, 40]);
   });

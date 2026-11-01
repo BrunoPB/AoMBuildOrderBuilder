@@ -1,5 +1,5 @@
 import type { Age, Cost, LocalizedText, ResourceId, SourceId } from "../data/schema.ts";
-import type { TaskTarget } from "./build.ts";
+import type { TaskTarget, TrainMode } from "./build.ts";
 
 /** `attention`: something the game does not do by itself; the player must act. */
 export type WarningLevel = "info" | "attention" | "delay" | "error";
@@ -55,10 +55,8 @@ export type SimEvent = { t: number; action?: number } & (
   | { kind: "promote"; unit: string; to: string; count: number }
   | { kind: "empower"; unit: string; building: string }
   | { kind: "hunted"; unit: string; food: number }
-  | { kind: "autoTrainOn"; unit: string; rally?: TaskTarget }
-  | { kind: "autoTrainOff"; unit?: string }
-  | { kind: "affordableOn"; unit: string }
-  | { kind: "affordableOff"; unit?: string }
+  | { kind: "trainOn"; mode: TrainMode; unit: string; rally?: TaskTarget }
+  | { kind: "trainOff"; mode?: TrainMode; unit?: string }
   | { kind: "lose"; units: Record<string, number> }
   | { kind: "gain"; cost: Cost }
   | { kind: "note"; text: string }

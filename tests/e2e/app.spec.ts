@@ -392,6 +392,29 @@ test("a new fixed time moves the action to its place in the list", async ({ page
   await expect(rows.last()).toContainText("Treinar 1 Cidadão");
 });
 
+test("train has a mode: fixed count, auto queue or when affordable", async ({ page }) => {
+  await createBuildWithActions(page);
+  await expect(page.getByTestId("kind-autoTrain")).toHaveCount(0);
+  const row = page.getByTestId("action-row").first();
+  await row.locator(".label-text").click();
+  await expect(row.getByTestId("row-count")).toBeVisible();
+  await row.getByTestId("row-train-mode").selectOption("auto");
+  await expect(row.getByTestId("row-count")).toHaveCount(0);
+  await expect(row).toContainText("Produção automática de Cidadãos");
+  await expect(row).toHaveClass(/kind-rule/);
+  await row.getByTestId("row-train-mode").selectOption("affordable");
+  await expect(row).toContainText("Cidadãos sempre que der");
+  await row.getByTestId("row-train-mode").selectOption("count");
+  await expect(row).toContainText("Treinar 1 Cidadão");
+
+  await page.getByTestId("kind-stopTrain").click();
+  const stop = page.getByTestId("action-row").last();
+  await expect(stop).toContainText("Parar produção contínua");
+  await stop.locator(".label-text").click();
+  await stop.getByTestId("row-stop-mode").selectOption("auto");
+  await expect(stop).toContainText("Parar produção automática");
+});
+
 test("actions only show the fields that apply to them", async ({ page }) => {
   await page.goto("/#/build/preset%3Akrush");
   const rows = page.getByTestId("action-row");

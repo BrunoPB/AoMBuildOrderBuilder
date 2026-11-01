@@ -2,7 +2,7 @@ import { entityIcon, entityName } from "../data/catalog.ts";
 import type { GameData } from "../data/load.ts";
 import type { Age, Locale, PantheonId, ResourceId } from "../data/schema.ts";
 import { translate } from "../i18n/index.ts";
-import type { Build, TaskTarget } from "./build.ts";
+import type { Build, TaskTarget, TrainMode } from "./build.ts";
 import { formatClock } from "./time.ts";
 import type { SimEvent, SimResult, SimWarning, Snapshot } from "./types.ts";
 
@@ -54,6 +54,12 @@ function resourceOf(c: Ctx, target: TaskTarget | undefined): ResourceId | undefi
   if (target === "food" || target === "wood" || target === "gold" || target === "favor")
     return target;
   return c.data.sources.get(target)?.resource;
+}
+
+/** "Stop …" text of a stopTrain action: names the unit, else the mode, else both. */
+export function stopTrainText(locale: Locale, mode?: TrainMode, unit?: string): string {
+  if (unit) return translate(locale, "step.stopTrainUnit", { unit });
+  return translate(locale, mode ? `step.stopTrain.${mode}` : "step.stopTrain");
 }
 
 function describe(c: Ctx, e: SimEvent): StepAction | null {
@@ -208,38 +214,23 @@ function describe(c: Ctx, e: SimEvent): StepAction | null {
         text: t("step.hunted", { unit: name(c, e.unit), food: Math.round(e.food) }),
         to: "food",
       };
-    case "autoTrainOn":
+    case "trainOn": {
+      const unit = name(c, e.unit, 2);
+      const on = t(e.mode === "auto" ? "step.autoTrain" : "step.affordable", { unit });
       return {
         ...base,
         kind: "rule",
         icons: [icon(c, e.unit)],
-        text: e.rally
-          ? t("step.autoTrainTo", { unit: name(c, e.unit, 2), to: targetName(c, e.rally) })
-          : t("step.autoTrain", { unit: name(c, e.unit, 2) }),
+        text: e.rally ? `${on} → ${targetName(c, e.rally)}` : on,
         to: resourceOf(c, e.rally),
       };
-    case "autoTrainOff":
+    }
+    case "trainOff":
       return {
         ...base,
         kind: "rule",
         icons: e.unit ? [icon(c, e.unit)] : [],
-        text: t("step.autoTrainOff"),
-      };
-    case "affordableOn":
-      return {
-        ...base,
-        kind: "rule",
-        icons: [icon(c, e.unit)],
-        text: t("step.affordable", { unit: name(c, e.unit, 2) }),
-      };
-    case "affordableOff":
-      return {
-        ...base,
-        kind: "rule",
-        icons: e.unit ? [icon(c, e.unit)] : [],
-        text: e.unit
-          ? t("step.affordableOffUnit", { unit: name(c, e.unit, 2) })
-          : t("step.affordableOff"),
+        text: stopTrainText(c.locale, e.mode, e.unit && name(c, e.unit, 2)),
       };
     case "lose":
       return {

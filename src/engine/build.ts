@@ -10,7 +10,7 @@ import {
 import { isClock } from "./time.ts";
 
 export const BUILD_FORMAT = "aomr-bob";
-export const BUILD_VERSION = 1;
+export const BUILD_VERSION = 2;
 
 export const BUILD_TYPES = ["rush", "eco", "timing", "water", "other"] as const;
 export const BuildTypeSchema = z.enum(BUILD_TYPES);
@@ -45,12 +45,18 @@ export type Builder = z.infer<typeof BuilderSchema>;
 
 const count = z.number().int().positive().optional();
 
+/** How a train action keeps going: `auto` = the building's auto queue, `affordable` = whenever
+ *  there is spare stock after the next timed actions. Without a mode it trains `count` units. */
+export const TrainModeSchema = z.enum(["auto", "affordable"]);
+export type TrainMode = z.infer<typeof TrainModeSchema>;
+
 export const ActionSchema = z.discriminatedUnion("do", [
   z.strictObject({
     ...base,
     do: z.literal("train"),
     unit: z.string(),
     count,
+    mode: TrainModeSchema.optional(),
     rally: TaskTargetSchema.optional(),
     at: z.string().optional(),
   }),
@@ -109,25 +115,12 @@ export const ActionSchema = z.discriminatedUnion("do", [
     count,
     hunt: z.boolean().optional(),
   }),
+  /** Ends continuous training: of one unit or all, of one mode or both. */
   z.strictObject({
     ...base,
-    do: z.literal("autoTrain"),
-    unit: z.string(),
-    rally: TaskTargetSchema.optional(),
-    at: z.string().optional(),
-  }),
-  z.strictObject({ ...base, do: z.literal("stopAutoTrain"), unit: z.string().optional() }),
-  z.strictObject({
-    ...base,
-    do: z.literal("trainWhenAffordable"),
-    unit: z.string(),
-    from: z.string().optional(),
-    rally: TaskTargetSchema.optional(),
-  }),
-  z.strictObject({
-    ...base,
-    do: z.literal("stopTrainWhenAffordable"),
+    do: z.literal("stopTrain"),
     unit: z.string().optional(),
+    mode: TrainModeSchema.optional(),
   }),
   z.strictObject({
     ...base,
@@ -151,10 +144,7 @@ export const ACTION_KINDS: ActionKind[] = [
   "promote",
   "empower",
   "summon",
-  "autoTrain",
-  "stopAutoTrain",
-  "trainWhenAffordable",
-  "stopTrainWhenAffordable",
+  "stopTrain",
   "event",
 ];
 

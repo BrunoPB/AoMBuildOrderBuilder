@@ -36,15 +36,7 @@ export const SPAN_KIND: Record<ProductionSpan["kind"], string> = {
 };
 
 /** Actions that happen in an instant: drawn as a diamond, not a bar. */
-const INSTANT = new Set<Action["do"]>([
-  "move",
-  "power",
-  "event",
-  "stopAutoTrain",
-  "stopTrainWhenAffordable",
-  "empower",
-]);
-const RULES = new Set<Action["do"]>(["autoTrain", "trainWhenAffordable"]);
+const INSTANT = new Set<Action["do"]>(["move", "power", "event", "stopTrain", "empower"]);
 
 /** A tooltip that floats above the hovered bar (bars are absolutely placed, so no Tip host). */
 export type FloatTip = {
@@ -382,15 +374,16 @@ export function ActionTrack({
   const start = outcome?.startedAt;
   const spans = (result?.production.spans ?? []).filter((s) => s.action === index);
   const waits = warnings.filter((w) => w.detail?.since !== undefined && w.t > w.detail.since);
-  const rule = RULES.has(action.do);
+  const mode = action.do === "train" ? action.mode : undefined;
+  const rule = mode !== undefined;
   const instant = INSTANT.has(action.do);
   /** A rule runs until a later stop action for it starts (or to the end). */
-  const stopKind = action.do === "autoTrain" ? "stopAutoTrain" : "stopTrainWhenAffordable";
   const stopAt = rule
     ? build.actions.findIndex(
         (x, k) =>
           k > index &&
-          x.do === stopKind &&
+          x.do === "stopTrain" &&
+          (!x.mode || x.mode === mode) &&
           (!x.unit || x.unit === (action as { unit: string }).unit) &&
           result?.actions[k]?.startedAt !== undefined,
       )
@@ -451,7 +444,7 @@ export function ActionTrack({
       ))}
       {rule && start !== undefined && (
         <span
-          class={`tl-rule kind-${action.do}`}
+          class="tl-rule kind-rule"
           style={{
             left: scale.pct(start),
             width: `calc(${scale.pct(ruleEnd)} - ${scale.pct(start)})`,
@@ -472,7 +465,7 @@ export function ActionTrack({
       ))}
       {start !== undefined && (instant || spans.length === 0 || rule) && (
         <span
-          class={`tl-mark kind-${action.do} ${instant ? "diamond" : "pin"} ${readonly ? "" : "movable"}`}
+          class={`tl-mark kind-${rule ? "rule" : action.do} ${instant ? "diamond" : "pin"} ${readonly ? "" : "movable"}`}
           style={{ left: scale.pct(start) }}
           tabIndex={-1}
           aria-hidden="true"

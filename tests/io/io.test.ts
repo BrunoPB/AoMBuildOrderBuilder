@@ -93,8 +93,29 @@ describe("storage", () => {
   });
 
   it("validates versions on load", () => {
-    expect(migrateBuild({ ...krush, version: 2 })).toMatchObject({ ok: false, newer: 2 });
+    expect(migrateBuild({ ...krush, version: 3 })).toMatchObject({ ok: false, newer: 3 });
     expect(migrateBuild({ ...krush, version: 0 }).ok).toBe(false);
+  });
+
+  it("migrates version 1 auto queue and train-when-affordable to train modes", () => {
+    const v1 = {
+      ...krush,
+      version: 1,
+      actions: [
+        { when: "0:00", do: "autoTrain", unit: "citizen", rally: "food" },
+        { when: "always", do: "trainWhenAffordable", unit: "turma", from: "counter-barracks" },
+        { when: "5:00", do: "stopAutoTrain", unit: "citizen" },
+        { when: "5:00", do: "stopTrainWhenAffordable" },
+      ],
+      milestones: [],
+    };
+    const r = migrateBuild(v1);
+    expect(r.ok && r.build.actions).toEqual([
+      { when: "0:00", do: "train", mode: "auto", unit: "citizen", rally: "food" },
+      { when: "always", do: "train", mode: "affordable", unit: "turma", at: "counter-barracks" },
+      { when: "5:00", do: "stopTrain", mode: "auto", unit: "citizen" },
+      { when: "5:00", do: "stopTrain", mode: "affordable" },
+    ]);
   });
 
   it("defaults preferences", () => {

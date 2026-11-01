@@ -13,7 +13,7 @@ import {
   type SourceId,
   type Unit,
 } from "../data/schema.ts";
-import type { Action, Build, TaskTarget } from "./build.ts";
+import type { Action, Build, TaskTarget, TrainMode } from "./build.ts";
 import { applyCostModifiers, applyModifiers, type ModContext } from "./modifiers.ts";
 import { parseClock } from "./time.ts";
 import type {
@@ -126,7 +126,7 @@ type ActionState = {
 
 type Rule = {
   action: number;
-  kind: "autoTrain" | "trainWhenAffordable";
+  mode: TrainMode;
   unit: string;
   rally?: TaskTarget;
   at?: string;
@@ -611,7 +611,7 @@ class Simulation {
     switch (a.do) {
       case "train": {
         const def = this.unit(a.unit);
-        if (!def) return {};
+        if (!def || a.mode) return {};
         const left = st.status === "pending" ? (a.count ?? 1) : st.left;
         return addCost({}, this.unitCost(def), left);
       }
@@ -966,7 +966,7 @@ class Simulation {
     const st = this.states[i]!;
     switch (a.do) {
       case "train":
-        return this.actTrain(i, a, st);
+        return a.mode ? this.startRule(i, a, a.mode) : this.actTrain(i, a, st);
       case "build":
         return this.actBuild(i, a);
       case "research":
@@ -985,42 +985,14 @@ class Simulation {
         return this.actEmpower(i, a);
       case "summon":
         return this.actTrain(i, a, this.states[i]!);
-      case "autoTrain":
-      case "trainWhenAffordable": {
-        const def = this.unit(a.unit);
-        if (!def)
-          return this.block(i, { key: "warn.unknownId", level: "error", params: { id: a.unit } });
-        this.flagLowConfidence(i, def);
-        this.rules.push({
-          action: i,
-          kind: a.do,
-          unit: a.unit,
-          rally: a.rally,
-          at: a.do === "autoTrain" ? a.at : a.from,
-          active: true,
-        });
-        this.start(i);
-        this.complete(i);
-        this.emit(
-          a.do === "autoTrain"
-            ? { kind: "autoTrainOn", unit: a.unit, rally: a.rally, action: i, t: this.t }
-            : { kind: "affordableOn", unit: a.unit, action: i, t: this.t },
-        );
-        return;
-      }
-      case "stopAutoTrain":
-      case "stopTrainWhenAffordable": {
-        const kind = a.do === "stopAutoTrain" ? "autoTrain" : "trainWhenAffordable";
+      case "stopTrain": {
         for (const r of this.rules) {
-          if (r.kind === kind && r.active && (!a.unit || r.unit === a.unit)) r.active = false;
+          if (r.active && (!a.mode || r.mode === a.mode) && (!a.unit || r.unit === a.unit))
+            r.active = false;
         }
         this.start(i);
         this.complete(i);
-        this.emit(
-          kind === "autoTrain"
-            ? { kind: "autoTrainOff", unit: a.unit, action: i, t: this.t }
-            : { kind: "affordableOff", unit: a.unit, action: i, t: this.t },
-        );
+        this.emit({ kind: "trainOff", mode: a.mode, unit: a.unit, action: i, t: this.t });
         return;
       }
       case "event":
@@ -1559,6 +1531,18 @@ class Simulation {
     this.finishPromotions();
   }
 
+  /** A train action with a mode: keeps training from now on, until a stop action. */
+  startRule(i: number, a: Extract<Action, { do: "train" }>, mode: TrainMode): void {
+    const def = this.unit(a.unit);
+    if (!def)
+      return this.block(i, { key: "warn.unknownId", level: "error", params: { id: a.unit } });
+    this.flagLowConfidence(i, def);
+    this.rules.push({ action: i, mode, unit: a.unit, rally: a.rally, at: a.at, active: true });
+    this.start(i);
+    this.complete(i);
+    this.emit({ kind: "trainOn", mode, unit: a.unit, rally: a.rally, action: i, t: this.t });
+  }
+
   actEvent(i: number, a: Extract<Action, { do: "event" }>): void {
     if (a.lose) {
       const lost: Record<string, number> = {};
@@ -1599,7 +1583,7 @@ class Simulation {
           at: rule.at,
           rule: ri,
           rally: rule.rally,
-          reserved: rule.kind === "trainWhenAffordable" ? reserved : undefined,
+          reserved: rule.mode === "affordable" ? reserved : undefined,
         });
         if ("uid" in result) continue;
         if (result.key === "warn.popCapped") capped = true;
