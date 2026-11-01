@@ -61,34 +61,24 @@ export function BuildActions({
   return (
     <div class="card-actions" role="toolbar" aria-label={build.name}>
       <span class="mode-links row" role="group">
-        {MODES.map((m) => {
+        {MODES.filter((m) => !(readonly && m.id === "edit")).map((m) => {
+          /** A standard build cannot change, so it has no edit screen (duplicate it instead). */
           const label = t(`mode.${m.id}`);
-          /** A preset cannot change: "edit" makes a copy and opens it. */
-          const copyFirst = m.id === "edit" && readonly;
-          const tip = `${label}\n${t(copyFirst ? "help.mode.editPreset" : `help.mode.${m.id}`)}`;
           return (
-            <Tip key={m.id} label={tip}>
-              {copyFirst ? (
-                <button
-                  type="button"
-                  class="btn icon-only"
-                  aria-label={label}
-                  data-testid={m.testid}
-                  onClick={duplicate}
-                >
-                  <Svg name={m.icon} />
-                </button>
-              ) : (
-                <a
-                  class="btn icon-only"
-                  href={`#/${m.route}/${id}`}
-                  aria-label={label}
-                  aria-current={current === m.id ? "page" : undefined}
-                  data-testid={m.testid}
-                >
-                  <Svg name={m.icon} />
-                </a>
-              )}
+            <Tip
+              key={m.id}
+              label={`${label}
+${t(`help.mode.${m.id}`)}`}
+            >
+              <a
+                class="btn icon-only"
+                href={`#/${m.route}/${id}`}
+                aria-label={label}
+                aria-current={current === m.id ? "page" : undefined}
+                data-testid={m.testid}
+              >
+                <Svg name={m.icon} />
+              </a>
             </Tip>
           );
         })}

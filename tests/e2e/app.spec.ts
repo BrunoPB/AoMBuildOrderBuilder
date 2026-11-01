@@ -92,12 +92,17 @@ test("rejects an invalid import", async ({ page }) => {
 
 test("opens a preset in the overview and duplicates it to edit", async ({ page }) => {
   await page.goto("/");
+  await expect(page.getByTestId("presets").getByTestId("open-view").first()).toBeVisible();
+  await expect(page.getByTestId("presets").getByTestId("open-edit")).toHaveCount(0);
   await page.getByTestId("presets").getByText("Krush").click();
   await expect(page).toHaveURL(/#\/view\/preset/);
   await expect(page.getByTestId("overview")).toBeVisible();
   await expect(page.getByTestId("palette")).toHaveCount(0);
   await expect(page.getByTestId("order-list")).toContainText("Clássica");
-  await page.getByTestId("build-header").getByTestId("open-edit").click();
+  const header = page.getByTestId("build-header");
+  await expect(header.getByTestId("open-edit")).toHaveCount(0);
+  await header.getByTestId("build-menu").click();
+  await page.getByTestId("duplicate").click();
   await expect(page).toHaveURL(/#\/build\/u-/);
   await expect(page.getByTestId("palette")).toBeVisible();
   await page.goto("/");

@@ -463,6 +463,5 @@
   "help.mode.view": "The whole build at once: timeline, resources and villagers, nothing to edit.",
   "help.mode.edit": "Create or change the build: actions, gods, settings.",
   "help.mode.play": "Follow the build during a match with a timer.",
-  "help.mode.editPreset": "A preset cannot change: makes your own copy and opens it for editing.",
   "help.overview.full": "Shows everything: timeline with villagers and events, production by building, resources and population. Unchecked: only the ages and the order of the actions."
 }
