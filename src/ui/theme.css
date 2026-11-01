@@ -2092,10 +2092,12 @@ textarea {
   min-width: 100%;
 }
 
-.tl-row {
+.tl-row,
+.tl-list .tl-row {
   display: grid;
   grid-template-columns: var(--tl-label) var(--tl-track);
   align-items: stretch;
+  gap: 0;
 }
 
 .tl-label {
@@ -2209,6 +2211,12 @@ textarea {
 }
 .alloc-idle {
   fill: var(--bad);
+}
+
+.tl-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .tl-list.actions-list {
@@ -2616,14 +2624,6 @@ textarea {
   align-items: center;
   gap: 10px;
   margin-left: auto;
-}
-
-.tl-title {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  margin: 0;
-  font-size: 14px;
 }
 
 .palette {

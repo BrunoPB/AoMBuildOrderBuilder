@@ -147,7 +147,6 @@ export function ActionList({
 }) {
   const { t } = useApp();
   const help = useHelp();
-  const [events, setEvents] = useViewPref<boolean>("actions.events", true);
   const [lanesOpen, setLanesOpen] = useViewPref<boolean>("actions.lanes", false);
   const [zoom, setZoom] = useViewPref<number>("actions.zoom", 0, ZOOMS);
   const [dragFrom, setDragFrom] = useState<number | null>(null);
@@ -195,7 +194,7 @@ export function ActionList({
 
   /** Events go after the last action that started at or before them. */
   const placed = new Map<number, Event[]>();
-  if (events && result) {
+  if (result) {
     for (const e of sideEvents(steps)) {
       let at = -1;
       result.actions.forEach((o, i) => {
@@ -214,9 +213,6 @@ export function ActionList({
       <div class="tl-toolbar">
         {palette}
         <div class="tl-tools">
-          <h3 class="tl-title">
-            <HelpText k="editor.actions" /> <span class="num">{build.actions.length}</span>
-          </h3>
           <div class="segmented" role="group" aria-label={t("production.zoom")}>
             {ZOOMS.map((z) => (
               <Tip key={z} label={help(z ? "production.zoom" : "tl.fit")}>
@@ -232,18 +228,6 @@ export function ActionList({
               </Tip>
             ))}
           </div>
-          {result && (
-            <label class="switch">
-              <input
-                type="checkbox"
-                checked={events}
-                data-testid="show-events"
-                onChange={(e) => setEvents(e.currentTarget.checked)}
-              />
-              <Svg name="clock" />
-              <HelpText k="editor.events" />
-            </label>
-          )}
         </div>
       </div>
       <div
@@ -258,7 +242,9 @@ export function ActionList({
         <div class="tl-head">
           <div class="tl-row tl-axis-row">
             <div class="tl-label tl-corner">
-              <Svg name="clock" />
+              <Tip label={help("editor.actions")} focusable>
+                <Svg name="clock" label={t("editor.actions")} />
+              </Tip>
             </div>
             <div class="tl-track">
               <Axis scale={scale} />
@@ -281,10 +267,10 @@ export function ActionList({
           )}
         </div>
         <ol
-          class={`actions-list tl-list ${events ? "with-events" : ""} ${
+          class={`actions-list tl-list ${result ? "with-events" : ""} ${
             dragTarget === build.actions.length ? "drop-end" : ""
           }`}
-          data-testid={events ? "timeline" : "actions-list"}
+          data-testid="timeline"
           onDragOver={(e) => {
             if (readonly || !e.dataTransfer?.types.includes(ACTION_MIME)) return;
             e.preventDefault();

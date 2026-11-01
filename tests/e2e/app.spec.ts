@@ -34,7 +34,6 @@ for (const locale of ["pt-BR", "en"] as const) {
     const word = locale === "pt-BR" ? "Treinar 1 Cidadão" : "Train 1 Citizen";
     await expect(page.locator("ol.actions-list")).toContainText(word);
     await expect(page.getByTestId("action-row").first()).toContainText("0:00");
-    await page.getByTestId("show-events").check();
     const timeline = page.getByTestId("timeline");
     await expect(timeline.getByTestId("timeline-row").first()).toBeVisible();
     await page.getByTestId("warnings-toggle").click();
@@ -222,18 +221,18 @@ test("has no horizontal scroll on a phone", async ({ page }) => {
 test("help tips explain titles and can be turned off", async ({ page }) => {
   await page.goto("/#/build/preset%3Akrush");
   const title = page
-    .locator("h3 .tip.help")
-    .filter({ hasText: /^Ações/ })
+    .locator(".tip.help")
+    .filter({ hasText: /^Prédios/ })
     .first();
   await title.hover();
   await expect(title.locator(".tip-bubble")).toBeVisible();
-  await expect(title.locator(".tip-bubble")).toContainText("Arraste pela alça para reordenar");
+  await expect(title.locator(".tip-bubble")).toContainText("Uma linha por prédio");
 
   await page.goto("/#/settings");
   await page.getByTestId("tooltips-off").click();
   await page.goto("/#/build/preset%3Akrush");
   await expect(page.locator(".tip.help")).toHaveCount(0);
-  await expect(page.locator("h3", { hasText: "Ações" })).toBeVisible();
+  await expect(page.getByTestId("toggle-lanes")).toContainText("Prédios");
 });
 
 test("build screen header keeps the build actions", async ({ page }) => {
@@ -366,8 +365,8 @@ test("clicking an action opens its details; its buttons do not", async ({ page }
 test("screen choices are remembered after leaving the page", async ({ page }) => {
   await createBuildWithActions(page);
   const url = page.url();
-  await expect(page.getByTestId("show-events")).toBeChecked();
-  await page.getByTestId("show-events").uncheck();
+  await expect(page.getByTestId("zoom-fit")).toHaveAttribute("aria-pressed", "true");
+  await page.getByTestId("zoom-2").click();
   await page.getByTestId("tab-result").click();
   await page.goto("/");
   await page.getByTestId("filter-greeks").click();
@@ -376,8 +375,8 @@ test("screen choices are remembered after leaving the page", async ({ page }) =>
   await page.goto(url);
   await expect(page.getByTestId("chart-resources")).toBeVisible();
   await page.getByTestId("tab-actions").click();
-  await expect(page.getByTestId("show-events")).not.toBeChecked();
-  await expect(page.getByTestId("actions-list")).toBeVisible();
+  await expect(page.getByTestId("zoom-2")).toHaveAttribute("aria-pressed", "true");
+  await expect(page.getByTestId("timeline")).toBeVisible();
 });
 
 test("a new fixed time moves the action to its place in the list", async ({ page }) => {
@@ -434,15 +433,21 @@ test("on desktop only the timeline scrolls, not the page", async ({ page, isMobi
   await page.setViewportSize({ width: 1900, height: 900 });
   await page.goto("/#/build/preset%3Akrush");
   await page.getByTestId("tab-actions").click();
+  await page.getByTestId("toggle-lanes").click();
+  await expect(page.getByTestId("production-lane").first()).toBeVisible();
   const sizes = await page.evaluate(() => {
     const tl = document.querySelector<HTMLElement>(".tl")!;
     return {
       page: document.documentElement.scrollHeight - window.innerHeight,
       inner: tl.scrollHeight - tl.clientHeight,
       width: tl.getBoundingClientRect().width / window.innerWidth,
+      trackStarts: new Set(
+        [...tl.querySelectorAll(".tl-row > .tl-track")].map((e) => e.getBoundingClientRect().x),
+      ).size,
     };
   });
   expect(sizes.page).toBeLessThanOrEqual(1);
   expect(sizes.inner).toBeGreaterThan(0);
   expect(sizes.width).toBeGreaterThan(0.95);
+  expect(sizes.trackStarts).toBe(1);
 });
