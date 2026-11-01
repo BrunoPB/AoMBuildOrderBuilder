@@ -24,7 +24,12 @@ export const WhenSchema = z.union([
   z.literal("asap"),
   z.literal("always"),
   z.string().refine(isClock, "expected m:ss"),
-  z.strictObject({ after: z.string(), delay: z.number().nonnegative().optional() }),
+  /** After another action finishes (default) or, with `on: "start"`, after it starts. */
+  z.strictObject({
+    after: z.string(),
+    on: z.literal("start").optional(),
+    delay: z.number().nonnegative().optional(),
+  }),
 ]);
 export type When = z.infer<typeof WhenSchema>;
 

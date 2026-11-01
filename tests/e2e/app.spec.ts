@@ -434,6 +434,22 @@ test("train has a mode: fixed count, auto queue or when affordable", async ({ pa
   await expect(stop).toContainText("Parar produção automática");
 });
 
+test("'after' lists when other actions end (✓) and when they start", async ({ page }) => {
+  await createBuildWithActions(page);
+  const row = page.getByTestId("action-row").last();
+  await row.locator(".label-text").click();
+  await row.getByTestId("when-mode").selectOption("after");
+  const after = row.getByTestId("when-after");
+  await expect(after.locator("optgroup")).toHaveCount(2);
+  await expect(after.locator("optgroup").first().locator("option").nth(1)).toContainText("✓");
+  const start = after.locator("optgroup").last().locator("option").first();
+  await after.selectOption((await start.getAttribute("value"))!);
+  await expect(after).toHaveValue(/@start$/);
+  await row.locator("input[type=number]").first().fill("5");
+  await row.locator("input[type=number]").first().press("Tab");
+  await expect(after).toHaveValue(/@start$/);
+});
+
 test("actions only show the fields that apply to them", async ({ page }) => {
   await page.goto("/#/build/preset%3Akrush");
   const rows = page.getByTestId("action-row");

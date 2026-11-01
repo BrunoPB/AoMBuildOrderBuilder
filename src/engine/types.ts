@@ -117,5 +117,8 @@ export type SimResult = {
   ageTimes: Partial<Record<Age, { clicked: number; reached?: number }>>;
   produced: { t: number; unit: string; action?: number; rule?: number }[];
   production: { lanes: ProductionLane[]; spans: ProductionSpan[] };
+  /** Last moment of the simulation (the build end plus the `tail`). */
   endTime: number;
+  /** When every action is done: the build ends here; what follows is only context. */
+  buildEnd: number;
 };

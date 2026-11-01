@@ -14,6 +14,8 @@ import {
   actionKind,
   actionKindIcon,
   actionText,
+  doneText,
+  hasDuration,
   targetLabel,
   taskTargets,
   actionTarget,
@@ -327,18 +329,38 @@ export function ActionRow(props: Props) {
               {mode === "after" && typeof a.when === "object" && (
                 <>
                   <select
-                    value={a.when.after}
+                    value={a.when.on === "start" ? `${a.when.after}@start` : a.when.after}
                     disabled={readonly}
                     aria-label={t("row.after")}
-                    onChange={(e) =>
-                      set({ when: { ...(a.when as object), after: e.currentTarget.value } as When })
-                    }
+                    data-testid="when-after"
+                    onChange={(e) => {
+                      const [after, on] = e.currentTarget.value.split("@");
+                      const { delay } = a.when as { delay?: number };
+                      set({
+                        when: {
+                          after: after!,
+                          ...(on === "start" ? { on: "start" as const } : {}),
+                          ...(delay ? { delay } : {}),
+                        },
+                      });
+                    }}
                   >
-                    {others.map((x) => (
-                      <option key={x.id} value={x.id}>
-                        {build.actions.indexOf(x) + 1}. {actionText(c, x)}
-                      </option>
-                    ))}
+                    <optgroup label={t("row.afterDone")}>
+                      {others.map((x) => (
+                        <option key={x.id} value={x.id}>
+                          {build.actions.indexOf(x) + 1}. {doneText(c, x)}
+                        </option>
+                      ))}
+                    </optgroup>
+                    {others.some(hasDuration) && (
+                      <optgroup label={t("row.afterStart")}>
+                        {others.filter(hasDuration).map((x) => (
+                          <option key={x.id} value={`${x.id}@start`}>
+                            {build.actions.indexOf(x) + 1}. {actionText(c, x)}
+                          </option>
+                        ))}
+                      </optgroup>
+                    )}
                   </select>
                   <input
                     class="small"
@@ -349,11 +371,9 @@ export function ActionRow(props: Props) {
                     value={a.when.delay ?? 0}
                     onChange={(e) => {
                       const delay = Number(e.currentTarget.value);
+                      const { after, on } = a.when as { after: string; on?: "start" };
                       set({
-                        when: {
-                          after: (a.when as { after: string }).after,
-                          ...(delay > 0 ? { delay } : {}),
-                        },
+                        when: { after, ...(on ? { on } : {}), ...(delay > 0 ? { delay } : {}) },
                       });
                     }}
                   />

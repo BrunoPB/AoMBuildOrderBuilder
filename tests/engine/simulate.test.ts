@@ -58,6 +58,33 @@ describe("gathering", () => {
     expect(r.events.some((e) => e.kind === "sourceDepleted" && e.next === "berries")).toBe(true);
     expect(at(r, 20).resources.food).toBeCloseTo(240);
   });
+
+  it("ignores what happens after the build ends (the tail is only context)", () => {
+    const r = run(
+      [
+        { when: "0:00", do: "move", count: 2, from: "idle", to: "food" },
+        { when: "0:05", do: "event", note: "end" },
+      ],
+      { sourceAmounts: { hunt: 20 }, tail: 30 },
+    );
+    expect(r.buildEnd).toBe(5);
+    expect(r.events.some((e) => e.kind === "sourceDepleted" && e.t > 5)).toBe(true);
+    expect(r.warnings.filter((w) => w.t > r.buildEnd)).toEqual([]);
+  });
+});
+
+describe("after another action", () => {
+  it("starts when that action ends, or when it starts with on: start", () => {
+    const r = run([
+      { when: "0:00", do: "move", count: 3, from: "idle", to: "wood" },
+      { id: "b", when: "0:00", do: "build", building: "manor" },
+      { when: { after: "b" }, do: "event", note: "done" },
+      { when: { after: "b", on: "start", delay: 2 }, do: "event", note: "started" },
+    ]);
+    expect(r.actions[1]!.completedAt).toBeGreaterThan(r.actions[1]!.startedAt! + 2);
+    expect(r.actions[2]!.startedAt).toBe(r.actions[1]!.completedAt);
+    expect(r.actions[3]!.startedAt).toBe(r.actions[1]!.startedAt! + 2);
+  });
 });
 
 describe("payment", () => {

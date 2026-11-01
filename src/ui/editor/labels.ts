@@ -66,6 +66,29 @@ export function actionTarget(a: Action): string | undefined {
   return target === "idle" ? undefined : target;
 }
 
+/** Actions that take time: their start and their end are different moments. */
+export function hasDuration(a: Action): boolean {
+  if (a.do === "train") return !a.mode;
+  return ["build", "research", "age", "timeShift", "promote", "summon"].includes(a.do);
+}
+
+/** The moment an action is done, as the timeline shows it ("Heroic ✓", "Temple ✓"…). */
+export function doneText(c: Ctx, a: Action): string {
+  const t = (key: string, params: Record<string, string>) => translate(c.locale, key, params);
+  switch (a.do) {
+    case "age":
+      return t("step.ageDone", { age: n(c, a.to) });
+    case "build":
+      return t("step.buildDoneAlone", { building: n(c, a.building) });
+    case "research":
+      return t("step.researchDone", { research: n(c, a.research) });
+    case "timeShift":
+      return t("step.timeShiftDone", { building: n(c, a.building) });
+    default:
+      return hasDuration(a) ? `${actionText(c, a)} ✓` : actionText(c, a);
+  }
+}
+
 export function actionText(c: Ctx, a: Action): string {
   const t = (key: string, params: Record<string, string | number | undefined> = {}) =>
     translate(c.locale, key, params);

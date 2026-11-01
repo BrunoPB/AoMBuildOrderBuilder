@@ -293,7 +293,8 @@ export function buildSteps(
     const actions = events.map((e) => describe(c, e)).filter((a): a is StepAction => a !== null);
     const notices = events
       .filter(
-        (e): e is Extract<SimEvent, { kind: "sourceDepleted" }> => e.kind === "sourceDepleted",
+        (e): e is Extract<SimEvent, { kind: "sourceDepleted" }> =>
+          e.kind === "sourceDepleted" && e.t <= result.buildEnd,
       )
       .map((e) =>
         e.next

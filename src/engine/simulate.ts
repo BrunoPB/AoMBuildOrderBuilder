@@ -673,8 +673,9 @@ class Simulation {
       this.report(i, { key: "warn.unknownAction", level: "error", params: { id: w.after } });
       return false;
     }
-    const done = this.states[target]!.completedAt;
-    return done !== undefined && this.t + EPS >= done + (w.delay ?? 0);
+    const st = this.states[target]!;
+    const at = w.on === "start" ? st.startedAt : st.completedAt;
+    return at !== undefined && this.t + EPS >= at + (w.delay ?? 0);
   }
 
   report(i: number, reason: Reason): void {
@@ -2045,7 +2046,7 @@ class Simulation {
         this.warn("error", "warn.neverStarted", { reason: st.reason?.key ?? "" }, i);
       }
     });
-    return this.result();
+    return this.result(settledAt ?? round(this.t));
   }
 
   allJobsIdle(): boolean {
@@ -2070,7 +2071,8 @@ class Simulation {
     return lanes;
   }
 
-  result(): SimResult {
+  /** Warnings after the build ends are dropped (nobody follows the build there), except errors. */
+  result(buildEnd: number): SimResult {
     const milestones: MilestoneResult[] = (this.build.milestones ?? []).map((m) => {
       const action = this.idIndex.get(m.atAction) ?? -1;
       const st = this.states[action];
@@ -2080,7 +2082,9 @@ class Simulation {
     });
     return {
       events: this.events,
-      warnings: this.warnings.sort((a, b) => a.t - b.t),
+      warnings: this.warnings
+        .filter((w) => w.level === "error" || w.t <= buildEnd + EPS)
+        .sort((a, b) => a.t - b.t),
       series: this.series,
       actions: this.states.map((st, index) => ({
         index,
@@ -2094,6 +2098,7 @@ class Simulation {
       produced: this.produced,
       production: { lanes: this.lanes(), spans: this.spans },
       endTime: round(this.t),
+      buildEnd: round(buildEnd),
     };
   }
 }
