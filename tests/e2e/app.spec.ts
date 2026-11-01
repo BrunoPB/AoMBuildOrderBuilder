@@ -494,6 +494,25 @@ test("on desktop only the timeline scrolls, not the page", async ({ page, isMobi
   expect(sizes.trackStarts).toBe(1);
 });
 
+test("hovering an event row highlights it like an action row", async ({ page, isMobile }) => {
+  test.skip(isMobile, "needs a mouse");
+  await page.setViewportSize({ width: 1400, height: 800 });
+  await page.goto("/#/build/preset%3Akrush");
+  await page.getByTestId("tab-actions").click();
+  const bg = (row: import("@playwright/test").Locator) =>
+    row.locator(".tl-track").evaluate((el) => getComputedStyle(el).backgroundColor);
+  const action = page.getByTestId("action-row").nth(2);
+  const event = page.locator(".event-row").first();
+  const restAction = await bg(action);
+  const restEvent = await bg(event);
+  await action.locator(".tl-track").hover();
+  const hoverAction = await bg(action);
+  expect(hoverAction).not.toBe(restAction);
+  await event.locator(".tl-track").hover();
+  expect(await bg(event)).not.toBe(restEvent);
+  expect(await bg(event)).toBe(hoverAction);
+});
+
 test("hovering the timeline draws a time line through every row", async ({ page, isMobile }) => {
   test.skip(isMobile, "needs a mouse");
   await page.setViewportSize({ width: 1400, height: 800 });

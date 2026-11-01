@@ -2275,7 +2275,9 @@ textarea {
 }
 
 .tl-list .action-row:hover > .tl-label,
-.tl-list .action-row:hover > .tl-track {
+.tl-list .action-row:hover > .tl-track,
+.tl-list .event-row:hover > .tl-label,
+.tl-list .event-row:hover > .tl-track {
   background-color: color-mix(in srgb, var(--accent) 6%, var(--surface));
 }
 
