@@ -50,7 +50,10 @@ describe("gathering", () => {
       { sourceAmounts: { hunt: 20 } },
     );
     expect(
-      r.warnings.some((w) => w.key === "warn.sourceDepleted" && w.params.source === "hunt"),
+      r.warnings.some(
+        (w) =>
+          w.key === "warn.sourceDepleted" && w.level === "attention" && w.params.source === "hunt",
+      ),
     ).toBe(true);
     expect(r.events.some((e) => e.kind === "sourceDepleted" && e.next === "berries")).toBe(true);
     expect(at(r, 20).resources.food).toBeCloseTo(240);

@@ -305,10 +305,12 @@ export function buildSteps(
         (e): e is Extract<SimEvent, { kind: "sourceDepleted" }> => e.kind === "sourceDepleted",
       )
       .map((e) =>
-        translate(locale, "step.depleted", {
-          source: name(c, e.source),
-          next: e.next ? name(c, e.next) : translate(locale, "res.idle"),
-        }),
+        e.next
+          ? translate(locale, "step.depleted", {
+              source: name(c, e.source),
+              next: name(c, e.next),
+            })
+          : translate(locale, "step.depletedIdle", { source: name(c, e.source) }),
       );
     if (actions.length === 0 && notices.length === 0) continue;
     steps.push({

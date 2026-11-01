@@ -10,7 +10,7 @@ import { EntityIcon, Tip, HelpText, useHelp } from "../icon.tsx";
 import { Svg } from "../svg.tsx";
 import { PopChart, ResourceChart } from "./charts.tsx";
 import { actionIcons } from "./labels.ts";
-import { WarningCard } from "./warning-card.tsx";
+import { LEVEL_ICON, WarningCard } from "./warning-card.tsx";
 
 const RES = ["food", "wood", "gold", "favor"] as const;
 
@@ -42,7 +42,11 @@ export function StepChips({ build, step, large }: { build: Build; step: Step; la
           )}
         </button>
       ))}
-      {step.notice && <span class="tl-notice">⚠ {step.notice}</span>}
+      {step.notice && (
+        <span class="tl-notice lvl-attention row">
+          <Svg name={LEVEL_ICON.attention} /> {step.notice}
+        </span>
+      )}
     </div>
   );
 }
@@ -73,10 +77,7 @@ export function EntityIconByIcon({
 }
 
 function shownWarnings(result: SimResult) {
-  return result.warnings.filter(
-    (w) =>
-      w.level !== "info" || w.key === "warn.lowConfidenceData" || w.key === "warn.sourceDepleted",
-  );
+  return result.warnings.filter((w) => w.level !== "info" || w.key === "warn.lowConfidenceData");
 }
 
 /** Header button with the warning counts; opens the warnings drawer. */
@@ -93,17 +94,18 @@ export function WarningsButton({
   const shown = shownWarnings(result);
   const errors = shown.filter((w) => w.level === "error").length;
   const delays = shown.filter((w) => w.level === "delay").length;
-  const label = `${t("result.warnings")}: ${errors} ${t("level.error")}, ${delays} ${t("level.delay")}`;
+  const attention = shown.filter((w) => w.level === "attention").length;
+  const label = `${t("result.warnings")}: ${errors} ${t("level.error")}, ${delays} ${t("level.delay")}, ${attention} ${t("level.attention")}`;
   return (
     <Tip label={label}>
       <button
-        class={`btn warn-btn ${errors ? "has-error" : delays ? "has-delay" : "is-ok"}`}
+        class={`btn warn-btn ${errors ? "has-error" : delays || attention ? "has-delay" : "is-ok"}`}
         aria-label={label}
         aria-expanded={open}
         data-testid="warnings-toggle"
         onClick={onToggle}
       >
-        {errors === 0 && delays === 0 ? (
+        {errors === 0 && delays === 0 && attention === 0 ? (
           <span class="lvl-info">
             <Svg name="check" />
           </span>
@@ -119,6 +121,12 @@ export function WarningsButton({
               <span class="lvl-delay row">
                 <Svg name="warning" />
                 <span class="num">{delays}</span>
+              </span>
+            )}
+            {attention > 0 && (
+              <span class="lvl-attention row">
+                <Svg name={LEVEL_ICON.attention} />
+                <span class="num">{attention}</span>
               </span>
             )}
           </>
@@ -201,16 +209,13 @@ export function WarningsPanel({
         {close}
       </div>
       <div class="warn-summary">
-        {(["error", "delay", "info"] as const).map((lvl) => (
+        {(["error", "delay", "attention", "info"] as const).map((lvl) => (
           <Tip
             key={lvl}
             label={[t(`level.${lvl}`), help(`level.${lvl}`)].filter(Boolean).join("\n")}
           >
             <span class={`row lvl-${lvl}`} style={{ gap: "2px" }}>
-              <Svg
-                name={lvl === "error" ? "error" : lvl === "delay" ? "warning" : "info"}
-                label={t(`level.${lvl}`)}
-              />
+              <Svg name={LEVEL_ICON[lvl]} label={t(`level.${lvl}`)} />
               <span class="num" data-testid={`warn-count-${lvl}`}>
                 {count(lvl)}
               </span>
@@ -236,12 +241,7 @@ export function WarningsPanel({
                   }}
                 >
                   <span class={`lvl-${w.level}`}>
-                    <Svg
-                      name={
-                        w.level === "error" ? "error" : w.level === "delay" ? "warning" : "info"
-                      }
-                      label={t(`level.${w.level}`)}
-                    />
+                    <Svg name={LEVEL_ICON[w.level]} label={t(`level.${w.level}`)} />
                   </span>
                   <span class="num">{formatClock(w.t)}</span>
                   {w.action !== undefined && build.actions[w.action] && (
@@ -272,12 +272,7 @@ export function WarningsPanel({
                     }}
                   >
                     <span class={`lvl-${w.level}`}>
-                      <Svg
-                        name={
-                          w.level === "error" ? "error" : w.level === "delay" ? "warning" : "info"
-                        }
-                        label={t(`level.${w.level}`)}
-                      />
+                      <Svg name={LEVEL_ICON[w.level]} label={t(`level.${w.level}`)} />
                     </span>
                     <span class="num">{formatClock(w.t)}</span>
                     {w.action !== undefined && build.actions[w.action] && (

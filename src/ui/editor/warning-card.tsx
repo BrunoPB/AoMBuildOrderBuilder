@@ -1,13 +1,18 @@
 import type { Build } from "../../engine/build.ts";
 import { warningText } from "../../engine/format.ts";
 import { formatClock } from "../../engine/time.ts";
-import type { SimResult, SimWarning, Snapshot } from "../../engine/types.ts";
+import type { SimResult, SimWarning, Snapshot, WarningLevel } from "../../engine/types.ts";
 import { useApp } from "../context.tsx";
 import { EntityIcon } from "../icon.tsx";
-import { Svg } from "../svg.tsx";
+import { Svg, type SvgName } from "../svg.tsx";
 import { actionIcons, actionText } from "./labels.ts";
 
-const LEVEL_ICON = { error: "error", delay: "warning", info: "info" } as const;
+export const LEVEL_ICON = {
+  error: "error",
+  delay: "warning",
+  attention: "arrows",
+  info: "info",
+} as const satisfies Record<WarningLevel, SvgName>;
 
 function snapAt(series: Snapshot[], t: number): Snapshot | undefined {
   let found: Snapshot | undefined;

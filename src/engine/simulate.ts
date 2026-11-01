@@ -1891,7 +1891,8 @@ class Simulation {
           for (const { w } of list) {
             w.task = next ? { kind: "gather", source: next } : { kind: "idle" };
           }
-          this.warn("info", "warn.sourceDepleted", { source, next: next ?? "idle" });
+          if (next) this.warn("attention", "warn.sourceDepleted", { source, next });
+          else this.warn("attention", "warn.sourceDepletedIdle", { source });
           this.emit({ kind: "sourceDepleted", source, next, t: this.t });
         } else {
           this.remaining.set(source, left - total);

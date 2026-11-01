@@ -11,6 +11,7 @@ import { KIND_ICON, Svg } from "../svg.tsx";
 import { ActionRow } from "./action-row.tsx";
 import { ACTION_MIME, nextActionId, startState } from "./labels.ts";
 import { fixedTime, moveWithTime, placeByTime } from "./order.ts";
+import { LEVEL_ICON } from "./warning-card.tsx";
 import { EntityIconByIcon, focusAction } from "./result.tsx";
 import {
   ActionTrack,
@@ -46,6 +47,7 @@ function sideEvents(steps: Step[]): Event[] {
 }
 
 function EventRow({ build, event, scale }: { build: Build; event: Event; scale: Scale }) {
+  const help = useHelp();
   const { item } = event;
   const kind = "notice" in item ? "notice" : item.kind;
   return (
@@ -53,9 +55,11 @@ function EventRow({ build, event, scale }: { build: Build; event: Event; scale: 
       <div class="tl-label">
         <span class="row-time num">{formatClock(event.seconds)}</span>
         {"notice" in item ? (
-          <span class="event-text lvl-delay">
-            <Svg name="warning" /> {item.notice}
-          </span>
+          <Tip label={help("level.attention")}>
+            <span class="event-text lvl-attention">
+              <Svg name={LEVEL_ICON.attention} /> {item.notice}
+            </span>
+          </Tip>
         ) : (
           <span class="event-text">
             <Svg name={KIND_ICON[item.kind] ?? "info"} />
