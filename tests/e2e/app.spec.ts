@@ -272,6 +272,25 @@ test("result stage shows what each building produces", async ({ page }) => {
   await expect(page.getByTestId("matchups")).toBeVisible();
 });
 
+test("Oracle Hero is promoted, not trained, until Sons of the Sun is researched", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await page.getByTestId("new-build").click();
+  await page.getByTestId("next-stage").click();
+  await page.getByTestId("kind-train").click();
+  await expect(page.getByTestId("pick-oracle")).toBeVisible();
+  await expect(page.getByTestId("pick-oracle-hero")).toHaveCount(0);
+  await expect(page.getByTestId("pick-citizen-hero")).toHaveCount(0);
+  await page.getByTestId("kind-age").click();
+  await page.getByTestId("pick-prometheus").click();
+  await page.getByTestId("pick-hyperion").click();
+  await page.getByTestId("kind-research").click();
+  await page.getByTestId("pick-sons-of-the-sun").click();
+  await page.getByTestId("kind-train").click();
+  await expect(page.getByTestId("pick-oracle-hero")).toBeVisible();
+});
+
 test("palette only offers actions the chosen god can use", async ({ page }) => {
   await page.goto("/");
   await page.getByTestId("new-build").click();

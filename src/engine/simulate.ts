@@ -726,7 +726,8 @@ class Simulation {
         }
         this.warnings.push({
           t: round(this.t),
-          level: "delay",
+          // asap has no planned time to miss: it starts when it can, so the wait is not a delay
+          level: this.build.actions[i]!.when === "asap" ? "info" : "delay",
           key: st.reason.key,
           params: { ...(first ?? st).reason!.params, waited },
           action: i,

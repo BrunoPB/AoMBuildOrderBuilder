@@ -64,13 +64,24 @@ describe("payment", () => {
   it("waits for resources, never goes negative, and reports the delay", () => {
     const r = run([
       { when: "0:00", do: "move", count: 2, from: "idle", to: "food" },
-      { id: "cl", when: "asap", do: "age", to: "classical", minor: "minor-a" },
+      { id: "cl", when: "0:00", do: "age", to: "classical", minor: "minor-a" },
     ]);
     expect(r.ageTimes.classical?.clicked).toBe(50);
     expect(r.ageTimes.classical?.reached).toBe(80);
     const delay = r.warnings.find((w) => w.key === "warn.noResource");
     expect(delay).toMatchObject({ level: "delay", params: { resource: "food", waited: 50 } });
     expect(Math.min(...r.series.map((s) => s.resources.food))).toBeGreaterThanOrEqual(0);
+  });
+
+  it("an asap action that waits for resources starts when it can, without a delay", () => {
+    const r = run([
+      { when: "0:00", do: "move", count: 2, from: "idle", to: "food" },
+      { id: "cl", when: "asap", do: "age", to: "classical", minor: "minor-a" },
+    ]);
+    expect(r.ageTimes.classical?.clicked).toBe(50);
+    const wait = r.warnings.find((w) => w.key === "warn.noResource");
+    expect(wait).toMatchObject({ level: "info", params: { resource: "food", waited: 50 } });
+    expect(r.warnings.filter((w) => w.level === "delay")).toEqual([]);
   });
 
   it("explains a resource wait: cost, stock at the start and other spends", () => {
