@@ -41,11 +41,18 @@ export function Palette({
   if (!p || !god) return null;
   const minors = Object.values(chosenMinors(build));
 
+  const researched = new Set(
+    build.actions.flatMap((a) => (a.do === "research" ? [a.research] : [])),
+  );
+  /** Like the game: an entity unlocked by a research (Oracle Hero by Sons of the Sun, the next
+   *  upgrade tier…) only shows once the build has that research. */
   const allowed = (requires?: string[], excludeGods?: string[]) => {
     if (excludeGods?.includes(build.god)) return false;
     const minorReqs = (requires ?? []).filter((r) => data.minors.has(r));
     if (minorReqs.length && !minorReqs.some((r) => minors.includes(r))) return false;
-    return (requires ?? []).every((r) => !data.gods.has(r) || r === build.god);
+    return (requires ?? []).every(
+      (r) => (!data.gods.has(r) || r === build.god) && (!p.researches.has(r) || researched.has(r)),
+    );
   };
 
   const empowerSources = (p.def.empower?.sources ?? []).filter(
