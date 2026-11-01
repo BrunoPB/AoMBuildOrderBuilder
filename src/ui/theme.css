@@ -3061,3 +3061,77 @@ textarea {
     top: 0;
   }
 }
+
+@media (min-width: 900px) {
+  /* build screens use the whole window width */
+  html.build-route main {
+    max-width: none;
+    padding: 12px 16px;
+  }
+}
+
+.overview-ages {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+}
+
+.overview-age {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+}
+
+.order-list {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 4px 0;
+  list-style: none;
+}
+
+.order-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 34px;
+  padding: 3px 12px;
+  border-left: 4px solid var(--kind, var(--border));
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+}
+
+.order-row:last-child {
+  border-bottom: 0;
+}
+
+.order-row:hover {
+  background: color-mix(in srgb, var(--accent) 6%, var(--surface));
+}
+
+.order-time {
+  flex: 0 0 44px;
+  font-weight: 700;
+}
+
+.order-kind {
+  display: inline-flex;
+  color: var(--muted);
+}
+
+.order-text {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.order-notice {
+  border-left-style: dashed;
+  border-left-color: var(--warn);
+  font-size: 13px;
+}
+
+.order-notice .order-kind,
+.order-notice .order-time {
+  color: var(--warn);
+}

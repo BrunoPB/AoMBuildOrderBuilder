@@ -96,7 +96,7 @@ test("opens a preset in the overview and duplicates it to edit", async ({ page }
   await expect(page).toHaveURL(/#\/view\/preset/);
   await expect(page.getByTestId("overview")).toBeVisible();
   await expect(page.getByTestId("palette")).toHaveCount(0);
-  await expect(page.locator("ol.actions-list")).toContainText("Clássica");
+  await expect(page.getByTestId("order-list")).toContainText("Clássica");
   await page.getByTestId("build-header").getByTestId("open-edit").click();
   await expect(page).toHaveURL(/#\/build\/u-/);
   await expect(page.getByTestId("palette")).toBeVisible();
@@ -111,13 +111,19 @@ test("a build has three screens: overview, editor and match mode", async ({ page
   await expect(page).toHaveURL(/#\/view\/u-/);
   const overview = page.getByTestId("overview");
   await expect(overview.getByTestId("build-title")).toHaveText("E2E Build");
+  // simple by default: ages and the order of the actions
+  await expect(overview.getByTestId("order-list").locator("li")).toHaveCount(3);
+  await expect(overview.getByTestId("order-list")).toContainText("Treinar 1 Cidadão");
+  await expect(overview.getByTestId("timeline")).toHaveCount(0);
+  await overview.getByTestId("overview-full").check();
   await expect(overview.getByTestId("timeline")).toBeVisible();
   await expect(overview.getByTestId("chart-resources")).toBeVisible();
   await expect(overview.getByTestId("production-lane").first()).toBeVisible();
-  await expect(overview.locator("input, select, textarea").filter({ visible: true })).toHaveCount(
-    0,
-  );
+  const fields = overview.locator(".overview > :not(header) :is(input, select, textarea)");
+  await expect(fields.filter({ visible: true })).toHaveCount(0);
   await expect(page.getByTestId("palette")).toHaveCount(0);
+  await page.reload();
+  await expect(overview.getByTestId("overview-full")).toBeChecked();
   await expect(overview.getByTestId("open-view")).toHaveAttribute("aria-current", "page");
 
   await overview.getByTestId("open-match").click();

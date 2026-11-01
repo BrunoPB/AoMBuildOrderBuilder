@@ -30,6 +30,7 @@
   "mode.view": "Visão geral",
   "mode.edit": "Editar",
   "mode.play": "Modo partida",
+  "overview.full": "Visão completa",
   "card.confirmDelete": "Apagar “{name}”?",
   "card.readonly": "Somente leitura",
   "confirm.yes": "Sim",
@@ -462,5 +463,6 @@
   "help.mode.view": "A build inteira de uma vez: linha do tempo, recursos e aldeões, sem editar nada.",
   "help.mode.edit": "Monte ou mude a build: ações, deuses, ajustes.",
   "help.mode.play": "Acompanhe a build durante a partida com um cronômetro.",
-  "help.mode.editPreset": "Build padrão não muda: cria uma cópia sua e abre para editar."
+  "help.mode.editPreset": "Build padrão não muda: cria uma cópia sua e abre para editar.",
+  "help.overview.full": "Mostra tudo: linha do tempo com aldeões e eventos, produção por prédio, recursos e população. Desmarcado: só as Eras e a ordem das ações."
 }
