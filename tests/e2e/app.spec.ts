@@ -431,6 +431,7 @@ test("actions share one timeline with villagers, buildings and draggable bars", 
 
 test("on desktop only the timeline scrolls, not the page", async ({ page, isMobile }) => {
   test.skip(isMobile, "building is done on desktop");
+  await page.setViewportSize({ width: 1900, height: 900 });
   await page.goto("/#/build/preset%3Akrush");
   await page.getByTestId("tab-actions").click();
   const sizes = await page.evaluate(() => {
@@ -438,8 +439,10 @@ test("on desktop only the timeline scrolls, not the page", async ({ page, isMobi
     return {
       page: document.documentElement.scrollHeight - window.innerHeight,
       inner: tl.scrollHeight - tl.clientHeight,
+      width: tl.getBoundingClientRect().width / window.innerWidth,
     };
   });
   expect(sizes.page).toBeLessThanOrEqual(1);
   expect(sizes.inner).toBeGreaterThan(0);
+  expect(sizes.width).toBeGreaterThan(0.95);
 });
