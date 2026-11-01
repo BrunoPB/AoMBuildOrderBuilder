@@ -9,11 +9,13 @@ import { Editor } from "./editor/editor.tsx";
 import { GlobalTools } from "./global-tools.tsx";
 import { Library } from "./library.tsx";
 import { MatchMode } from "./match.tsx";
+import { Overview } from "./overview.tsx";
 import { SettingsPage } from "./settings.tsx";
 import { Svg } from "./svg.tsx";
 
 type Route =
   | { page: "library" }
+  | { page: "view"; id: string }
   | { page: "build"; id: string }
   | { page: "play"; id: string }
   | { page: "settings" };
@@ -21,6 +23,7 @@ type Route =
 function parseRoute(hash: string): Route {
   const [, page, ...rest] = hash.replace(/^#/, "").split("/");
   const id = decodeURIComponent(rest.join("/"));
+  if (page === "view" && id) return { page: "view", id };
   if (page === "build" && id) return { page: "build", id };
   if (page === "play" && id) return { page: "play", id };
   if (page === "settings") return { page: "settings" };
@@ -171,6 +174,7 @@ export function App({ data }: { data: GameData }) {
         </header>
         <main>
           {route.page === "library" && <Library />}
+          {route.page === "view" && <Overview key={route.id} id={route.id} />}
           {route.page === "build" && <Editor key={route.id} id={route.id} />}
           {route.page === "play" && <MatchMode key={route.id} id={route.id} />}
           {route.page === "settings" && <SettingsPage />}

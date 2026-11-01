@@ -27,6 +27,9 @@
   "card.exportDashboard": "Export for the dashboard",
   "card.delete": "Delete",
   "card.play": "Match mode",
+  "mode.view": "Overview",
+  "mode.edit": "Edit",
+  "mode.play": "Match mode",
   "card.confirmDelete": "Delete “{name}”?",
   "card.readonly": "Read-only",
   "confirm.yes": "Yes",
@@ -455,5 +458,9 @@
   "help.level.attention": "The game does not do this by itself: you have to act. E.g. the hunt ran out, select the villagers and send them to the next food.",
   "step.depletedIdle": "{source} depleted → villagers idle",
   "warn.sourceDepletedIdle": "{source} depleted → villagers idle",
-  "help.warn.sourceDepletedIdle": "The source ran out and no other food in the chain is available: the villagers stay idle until you send them elsewhere."
+  "help.warn.sourceDepletedIdle": "The source ran out and no other food in the chain is available: the villagers stay idle until you send them elsewhere.",
+  "help.mode.view": "The whole build at once: timeline, resources and villagers, nothing to edit.",
+  "help.mode.edit": "Create or change the build: actions, gods, settings.",
+  "help.mode.play": "Follow the build during a match with a timer.",
+  "help.mode.editPreset": "A preset cannot change: makes your own copy and opens it for editing."
 }

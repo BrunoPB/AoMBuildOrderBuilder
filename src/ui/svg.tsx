@@ -37,6 +37,8 @@ const PATHS: Record<string, string> = {
   list: "M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01",
   user: "M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4 21a8 8 0 0 1 16 0",
   home: "M3 11l9-8 9 8M5 9v12h14V9",
+  eye: "M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12zM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6z",
+  pencil: "M4 20h4L19 9l-4-4L4 16zM14 6l4 4",
   chevron: "M9 6l6 6-6 6",
   monitor: "M3 4h18v12H3zM8 20h8M12 16v4",
   volume: "M11 5L6 9H2v6h4l5 4zM15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14",

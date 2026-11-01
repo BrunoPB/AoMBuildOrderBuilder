@@ -90,16 +90,44 @@ test("rejects an invalid import", async ({ page }) => {
   await expect(page.getByTestId("my-builds")).toHaveCount(0);
 });
 
-test("opens a preset read-only and duplicates it", async ({ page }) => {
+test("opens a preset in the overview and duplicates it to edit", async ({ page }) => {
   await page.goto("/");
   await page.getByTestId("presets").getByText("Krush").click();
+  await expect(page).toHaveURL(/#\/view\/preset/);
+  await expect(page.getByTestId("overview")).toBeVisible();
   await expect(page.getByTestId("palette")).toHaveCount(0);
   await expect(page.locator("ol.actions-list")).toContainText("Clássica");
-  await page.getByTestId("duplicate-to-edit").click();
+  await page.getByTestId("build-header").getByTestId("open-edit").click();
   await expect(page).toHaveURL(/#\/build\/u-/);
   await expect(page.getByTestId("palette")).toBeVisible();
   await page.goto("/");
   await expect(page.getByTestId("my-builds")).toContainText("Krush");
+});
+
+test("a build has three screens: overview, editor and match mode", async ({ page }) => {
+  await createBuildWithActions(page);
+  await page.goto("/");
+  await page.getByTestId("my-builds").getByText("E2E Build").click();
+  await expect(page).toHaveURL(/#\/view\/u-/);
+  const overview = page.getByTestId("overview");
+  await expect(overview.getByTestId("build-title")).toHaveText("E2E Build");
+  await expect(overview.getByTestId("timeline")).toBeVisible();
+  await expect(overview.getByTestId("chart-resources")).toBeVisible();
+  await expect(overview.getByTestId("production-lane").first()).toBeVisible();
+  await expect(overview.locator("input, select, textarea").filter({ visible: true })).toHaveCount(
+    0,
+  );
+  await expect(page.getByTestId("palette")).toHaveCount(0);
+  await expect(overview.getByTestId("open-view")).toHaveAttribute("aria-current", "page");
+
+  await overview.getByTestId("open-match").click();
+  await expect(page).toHaveURL(/#\/play\/u-/);
+  await expect(page.getByTestId("open-match")).toHaveAttribute("aria-current", "page");
+  await page.getByTestId("open-edit").click();
+  await expect(page).toHaveURL(/#\/build\/u-/);
+  await expect(page.getByTestId("palette")).toBeVisible();
+  await page.getByTestId("build-header").getByTestId("open-view").click();
+  await expect(page).toHaveURL(/#\/view\/u-/);
 });
 
 test("match mode clock runs, shifts and resets", async ({ page }) => {
@@ -208,7 +236,10 @@ test("warnings drawer jumps to the action", async ({ page, isMobile }) => {
 
 test("has no horizontal scroll on a phone", async ({ page }) => {
   await page.setViewportSize({ width: 360, height: 780 });
-  for (const path of ["/", "/#/build/preset%3Akrush", "/#/play/preset%3Akrush", "/#/settings"]) {
+  const paths = ["/", "/#/view/", "/#/build/", "/#/play/"].map((p) =>
+    p === "/" ? p : `${p}preset%3Akrush`,
+  );
+  for (const path of [...paths, "/#/settings"]) {
     await page.goto(path);
     await page.waitForTimeout(200);
     const overflow = await page.evaluate(

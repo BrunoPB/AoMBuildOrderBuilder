@@ -46,7 +46,7 @@ function BuildCard({
   const help = useHelp();
   const { t, data, locale } = api;
   const god = data.gods.get(build.god);
-  const open = `#/build/${encodeURIComponent(build.id)}`;
+  const open = `#/view/${encodeURIComponent(build.id)}`;
 
   return (
     <article class={`card pan-${build.pantheon}`} data-testid="build-card">

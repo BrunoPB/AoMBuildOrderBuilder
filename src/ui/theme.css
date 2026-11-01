@@ -3012,3 +3012,52 @@ textarea {
 .tl-list .action-row.flash > .tl-track {
   animation: row-flash 1.6s ease-out;
 }
+
+/* ---------- overview: the build at a glance ---------- */
+
+.overview-name {
+  margin: 0;
+  min-width: 0;
+  overflow: hidden;
+  font-size: 18px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.overview-goal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.overview-goal .row {
+  gap: 4px;
+}
+
+.mode-links {
+  gap: 2px;
+  padding-right: 4px;
+  margin-right: 2px;
+  border-right: 1px solid var(--border);
+}
+
+.mode-links [aria-current="page"] {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 14%, var(--surface));
+  color: var(--accent);
+}
+
+@media (min-width: 900px) {
+  /* the timeline scrolls in its own box; the page scrolls around it */
+  .overview-timeline .tl {
+    max-height: 72vh;
+    overflow: auto;
+  }
+  .overview-timeline .tl .tl-head,
+  .overview-timeline .tl.zoomed .tl-head {
+    top: 0;
+  }
+}

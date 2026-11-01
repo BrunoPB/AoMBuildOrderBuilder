@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "preact/hooks";
 import { formatClock } from "../engine/time.ts";
+import { BuildActions } from "./build-actions.tsx";
 import { useApp } from "./context.tsx";
 import { StepChips } from "./editor/result.tsx";
 import { Tip, HelpText } from "./icon.tsx";
@@ -84,10 +85,11 @@ export function MatchMode({ id }: { id: string }) {
   return (
     <div class="match" data-testid="match">
       <div class="row" style={{ alignSelf: "stretch", justifyContent: "space-between" }}>
-        <a class="btn" href={`#/build/${encodeURIComponent(build.id)}`}>
+        <a class="btn" href={`#/view/${encodeURIComponent(build.id)}`} data-testid="match-back">
           <Svg name="chevron" />
           {build.name}
         </a>
+        <BuildActions build={build} readonly={found.readonly} current="play" />
         <Tip label={t("match.sound")}>
           <button
             class="btn icon-only"

@@ -27,6 +27,9 @@
   "card.exportDashboard": "Exportar para o dashboard",
   "card.delete": "Apagar",
   "card.play": "Modo partida",
+  "mode.view": "Visão geral",
+  "mode.edit": "Editar",
+  "mode.play": "Modo partida",
   "card.confirmDelete": "Apagar “{name}”?",
   "card.readonly": "Somente leitura",
   "confirm.yes": "Sim",
@@ -455,5 +458,9 @@
   "help.level.attention": "O jogo não faz isso sozinho: você precisa agir. Ex.: a caça acabou, selecione os aldeões e mande-os para a próxima comida.",
   "step.depletedIdle": "{source} esgotou → aldeões ociosos",
   "warn.sourceDepletedIdle": "{source} esgotou → aldeões ociosos",
-  "help.warn.sourceDepletedIdle": "A fonte acabou e não há outra comida disponível na cadeia: os aldeões ficam parados até você mandá-los para outra coisa."
+  "help.warn.sourceDepletedIdle": "A fonte acabou e não há outra comida disponível na cadeia: os aldeões ficam parados até você mandá-los para outra coisa.",
+  "help.mode.view": "A build inteira de uma vez: linha do tempo, recursos e aldeões, sem editar nada.",
+  "help.mode.edit": "Monte ou mude a build: ações, deuses, ajustes.",
+  "help.mode.play": "Acompanhe a build durante a partida com um cronômetro.",
+  "help.mode.editPreset": "Build padrão não muda: cria uma cópia sua e abre para editar."
 }

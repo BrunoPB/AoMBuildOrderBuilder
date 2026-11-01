@@ -520,6 +520,7 @@ export function Editor({ id }: { id: string }) {
             <BuildActions
               build={build}
               readonly={readonly}
+              current="edit"
               showDuplicate={!readonly}
               onDeleted={() => navigate("/")}
             />

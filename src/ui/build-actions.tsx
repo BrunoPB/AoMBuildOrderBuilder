@@ -9,15 +9,27 @@ import { Menu, MenuItem } from "./menu.tsx";
 import { duplicateBuild } from "./sim.ts";
 import { Svg } from "./svg.tsx";
 
-/** Play button plus a menu of the other actions; shared by the library card and the build header. */
+export type BuildMode = "view" | "edit" | "play";
+
+const MODES = [
+  { id: "view", icon: "eye", route: "view", testid: "open-view" },
+  { id: "edit", icon: "pencil", route: "build", testid: "open-edit" },
+  { id: "play", icon: "clock", route: "play", testid: "open-match" },
+] as const;
+
+/** The three screens of a build (overview, editor, match) plus a menu of the other actions;
+ *  shared by the library card and the build headers. */
 export function BuildActions({
   build,
   readonly,
+  current,
   showDuplicate = true,
   onDeleted,
 }: {
   build: Build;
   readonly: boolean;
+  /** The screen showing it, marked as current. */
+  current?: BuildMode;
   showDuplicate?: boolean;
   onDeleted?: () => void;
 }) {
@@ -48,16 +60,39 @@ export function BuildActions({
 
   return (
     <div class="card-actions" role="toolbar" aria-label={build.name}>
-      <Tip label={t("card.play")}>
-        <a
-          class="btn icon-only"
-          href={`#/play/${id}`}
-          aria-label={t("card.play")}
-          data-testid="open-match"
-        >
-          <Svg name="clock" />
-        </a>
-      </Tip>
+      <span class="mode-links row" role="group">
+        {MODES.map((m) => {
+          const label = t(`mode.${m.id}`);
+          /** A preset cannot change: "edit" makes a copy and opens it. */
+          const copyFirst = m.id === "edit" && readonly;
+          const tip = `${label}\n${t(copyFirst ? "help.mode.editPreset" : `help.mode.${m.id}`)}`;
+          return (
+            <Tip key={m.id} label={tip}>
+              {copyFirst ? (
+                <button
+                  type="button"
+                  class="btn icon-only"
+                  aria-label={label}
+                  data-testid={m.testid}
+                  onClick={duplicate}
+                >
+                  <Svg name={m.icon} />
+                </button>
+              ) : (
+                <a
+                  class="btn icon-only"
+                  href={`#/${m.route}/${id}`}
+                  aria-label={label}
+                  aria-current={current === m.id ? "page" : undefined}
+                  data-testid={m.testid}
+                >
+                  <Svg name={m.icon} />
+                </a>
+              )}
+            </Tip>
+          );
+        })}
+      </span>
       <Menu label={t("editor.more")} testid="build-menu">
         {showDuplicate && (
           <MenuItem icon="copy" label={duplicateLabel} onClick={duplicate} testid="duplicate" />
