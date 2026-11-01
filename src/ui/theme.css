@@ -2150,6 +2150,43 @@ textarea {
   background-image: none;
 }
 
+.tl-track::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: -1px;
+  left: var(--tl-cursor, 0);
+  z-index: 1;
+  display: none;
+  width: 1px;
+  background: var(--accent);
+  pointer-events: none;
+}
+
+.tl.cursor-on .tl-track::after {
+  display: block;
+}
+
+.tl-cursor-time {
+  position: absolute;
+  top: 2px;
+  left: var(--tl-cursor, 0);
+  z-index: 2;
+  display: none;
+  padding: 0 4px;
+  border-radius: 3px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 11px;
+  line-height: 16px;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.tl.cursor-on .tl-cursor-time {
+  display: block;
+}
+
 .tl-corner {
   color: var(--muted);
   justify-content: flex-end;

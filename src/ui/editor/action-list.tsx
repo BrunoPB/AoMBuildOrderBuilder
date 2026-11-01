@@ -1,5 +1,5 @@
 import { type ComponentChildren, Fragment } from "preact";
-import { useState } from "preact/hooks";
+import { useRef, useState } from "preact/hooks";
 import type { Action, Build } from "../../engine/build.ts";
 import type { Step, StepAction } from "../../engine/format.ts";
 import { formatClock } from "../../engine/time.ts";
@@ -196,6 +196,21 @@ export function ActionList({
   const scale = makeScale(end, trackPx);
   const minute = 60 * scale.pxPerSec;
 
+  /** Vertical line through every row at the mouse position, with its time on the axis.
+   *  Set straight on the DOM so moving the mouse does not re-render the list. */
+  const axisRef = useRef<HTMLDivElement>(null);
+  const cursorTimeRef = useRef<HTMLSpanElement>(null);
+  const moveCursor = (clientX: number | null) => {
+    const box = boxRef.current;
+    const axis = axisRef.current?.getBoundingClientRect();
+    if (!box || !axis) return;
+    const at = clientX === null ? -1 : (clientX - axis.left) / axis.width;
+    if (at < 0 || at > 1) return box.classList.remove("cursor-on");
+    box.classList.add("cursor-on");
+    box.style.setProperty("--tl-cursor", `${at * 100}%`);
+    if (cursorTimeRef.current) cursorTimeRef.current.textContent = formatClock(at * scale.end);
+  };
+
   /** Events go after the last action that started at or before them. */
   const placed = new Map<number, Event[]>();
   if (result) {
@@ -242,6 +257,8 @@ export function ActionList({
           "--tl-track": zoom ? `${trackPx}px` : "minmax(0, 1fr)",
           "--tl-minute": `${minute}px`,
         }}
+        onPointerMove={(e) => e.pointerType === "mouse" && moveCursor(e.clientX)}
+        onPointerLeave={() => moveCursor(null)}
       >
         <div class="tl-head">
           <div class="tl-row tl-axis-row">
@@ -250,8 +267,9 @@ export function ActionList({
                 <Svg name="clock" label={t("editor.actions")} />
               </Tip>
             </div>
-            <div class="tl-track">
+            <div class="tl-track" ref={axisRef}>
               <Axis scale={scale} />
+              <span class="tl-cursor-time num" ref={cursorTimeRef} aria-hidden="true" />
             </div>
           </div>
           {result && (

@@ -451,3 +451,26 @@ test("on desktop only the timeline scrolls, not the page", async ({ page, isMobi
   expect(sizes.width).toBeGreaterThan(0.95);
   expect(sizes.trackStarts).toBe(1);
 });
+
+test("hovering the timeline draws a time line through every row", async ({ page, isMobile }) => {
+  test.skip(isMobile, "needs a mouse");
+  await page.setViewportSize({ width: 1400, height: 800 });
+  await page.goto("/#/build/preset%3Akrush");
+  await page.getByTestId("tab-actions").click();
+  const axis = page.locator(".tl-axis-row .tl-track");
+  const box = (await axis.boundingBox())!;
+  const row = page.getByTestId("action-row").nth(3).locator(".tl-track");
+  const rowBox = (await row.boundingBox())!;
+  await page.mouse.move(box.x + box.width / 2, rowBox.y + rowBox.height / 2);
+  await expect(page.locator(".tl-cursor-time")).toBeVisible();
+  await expect(page.locator(".tl-cursor-time")).toHaveText(/^\d+:\d\d$/);
+  const line = await row.evaluate((el) => {
+    const s = getComputedStyle(el, "::after");
+    return { display: s.display, x: el.getBoundingClientRect().x + parseFloat(s.left) };
+  });
+  expect(line.display).toBe("block");
+  expect(Math.abs(line.x - (box.x + box.width / 2))).toBeLessThan(2);
+  await page.screenshot({ path: "test-results/timeline-cursor.png" });
+  await page.mouse.move(5, 5);
+  await expect(page.locator(".tl-cursor-time")).toBeHidden();
+});
