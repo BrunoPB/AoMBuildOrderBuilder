@@ -167,6 +167,7 @@ export function ActionList({
     const actions = [...build.actions];
     actions.splice(at, 0, { ...added, id: nextActionId(build) });
     setActions(actions);
+    requestAnimationFrame(() => focusAction(at));
   };
   /** Replaces action i, keeping the list in time order when its fixed time changed. */
   const change = (i: number, next: Action) => {

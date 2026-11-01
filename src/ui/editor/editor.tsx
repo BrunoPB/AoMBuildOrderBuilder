@@ -565,12 +565,13 @@ export function Editor({ id }: { id: string }) {
                 <Palette
                   build={build}
                   idle={result?.series.find((x) => x.t >= 5)?.alloc.idle ?? 0}
-                  onAdd={(a) =>
+                  onAdd={(a) => {
                     update({
                       ...build,
                       actions: [...build.actions, { ...a, id: nextActionId(build) }],
-                    })
-                  }
+                    });
+                    requestAnimationFrame(() => focusAction(build.actions.length));
+                  }}
                 />
               )
             }

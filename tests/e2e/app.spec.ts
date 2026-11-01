@@ -450,6 +450,21 @@ test("'after' lists when other actions end (✓) and when they start", async ({ 
   await expect(after).toHaveValue(/@start$/);
 });
 
+test("a clicked palette action scrolls into view and flashes", async ({ page, isMobile }) => {
+  test.skip(isMobile, "building is desktop-only");
+  await page.setViewportSize({ width: 1400, height: 600 });
+  await createBuildWithActions(page);
+  for (let k = 0; k < 14; k++) await page.getByTestId("kind-move").click();
+  const rows = page.getByTestId("action-row");
+  await expect(rows).toHaveCount(17);
+  await page.locator(".tl").evaluate((el) => el.scrollTo({ top: 0 }));
+  await expect(rows.last()).not.toBeInViewport();
+  await page.getByTestId("kind-move").click();
+  await expect(rows).toHaveCount(18);
+  await expect(rows.last()).toHaveClass(/flash/);
+  await expect(rows.last()).toBeInViewport();
+});
+
 test("actions only show the fields that apply to them", async ({ page }) => {
   await page.goto("/#/build/preset%3Akrush");
   const rows = page.getByTestId("action-row");

@@ -14,11 +14,21 @@ import { LEVEL_ICON, WarningCard } from "./warning-card.tsx";
 
 const RES = ["food", "wood", "gold", "favor"] as const;
 
-export function focusAction(index: number | undefined): void {
+/** Scrolls to an action row, focuses it and flashes it so the eye finds it. The row may not be
+ *  rendered yet right after it is added, so it retries for a few frames. */
+export function focusAction(index: number | undefined, tries = 10): void {
   if (index === undefined) return;
   const row = document.getElementById(`action-row-${index}`);
-  row?.scrollIntoView({ behavior: "smooth", block: "center" });
-  row?.focus({ preventScroll: true });
+  if (!row) {
+    if (tries > 0) requestAnimationFrame(() => focusAction(index, tries - 1));
+    return;
+  }
+  row.scrollIntoView({ behavior: "smooth", block: "center" });
+  row.focus({ preventScroll: true });
+  row.classList.remove("flash");
+  void row.offsetWidth;
+  row.classList.add("flash");
+  row.addEventListener("animationend", () => row.classList.remove("flash"), { once: true });
 }
 
 export function StepChips({ build, step, large }: { build: Build; step: Step; large?: boolean }) {

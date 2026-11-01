@@ -2996,3 +2996,19 @@ textarea {
   color: var(--muted);
   margin-right: auto;
 }
+
+/* an action just added or jumped to: a short highlight so the eye finds it */
+@keyframes row-flash {
+  0%,
+  40% {
+    background-color: color-mix(in srgb, var(--accent) 28%, var(--surface));
+  }
+  100% {
+    background-color: var(--surface);
+  }
+}
+
+.tl-list .action-row.flash > .tl-label,
+.tl-list .action-row.flash > .tl-track {
+  animation: row-flash 1.6s ease-out;
+}
