@@ -41,4 +41,4 @@ Since 2026-10-18 (owner decision) the game installation is the absolute source o
 
 ## Icons
 
-Since 2026-10-18 every icon is taken from the installed game (`game/ui/UITextureCache4K.bar`, DDS → WebP) by `scripts/game-icons.py`; `public/icons/manifest.json` records the path of each one inside the game. Icons are game assets © Microsoft, used as fan content under the Game Content Usage Rules.
+Since 2026-10-18 every icon is taken from the installed game (`game/ui/UITextureCache4K.bar`, DDS → WebP) by `scripts/game-icons.py`; `src/data/icons.json` records the path of each one inside the game. Icons are game assets © Microsoft, used as fan content under the Game Content Usage Rules.

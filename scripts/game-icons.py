@@ -3,7 +3,7 @@
 Copies the icons used by the site from an installed Age of Mythology: Retold.
 
 Reads the game's archives (never writes inside the game folder), finds the icon of every entity
-listed in public/icons/manifest.json, and writes public/icons/<id>-64.webp and <id>-128.webp plus
+listed in src/data/icons.json, and writes public/icons/<id>-64.webp and <id>-128.webp plus
 the manifest entry (origin = the path inside the game). Entries it cannot find are left as they are.
 
     python scripts/game-icons.py "C:/Program Files (x86)/Steam/steamapps/common/Age of Mythology Retold"
@@ -465,7 +465,7 @@ def main() -> None:
     ap.add_argument("--project", type=Path, default=Path(__file__).resolve().parent.parent)
     ap.add_argument("--report", action="store_true", help="print the mapping and write nothing")
     ap.add_argument("--only", nargs="*", help="icon ids to process")
-    ap.add_argument("--out", type=Path, help="write the WebP files and manifest here instead of public/icons")
+    ap.add_argument("--out", type=Path, help="write the WebP files and manifest here instead of public/icons and src/data")
     args = ap.parse_args()
 
     game_root = args.game.resolve()
@@ -477,7 +477,8 @@ def main() -> None:
 
     game = Game(game_root)
     entities = load_entities(project)
-    manifest = json.loads((icons_dir / "manifest.json").read_text(encoding="utf-8"))
+    manifest_file = project / "src" / "data" / "icons.json"
+    manifest = json.loads(manifest_file.read_text(encoding="utf-8"))
 
     # Icons the data uses that the manifest does not list yet get a new entry.
     listed = {e["id"] for e in manifest["icons"]}
@@ -521,7 +522,8 @@ def main() -> None:
         manifest["generatedAt"] = datetime.now(timezone.utc).isoformat(timespec="milliseconds").replace("+00:00", "Z")
         out_dir.mkdir(parents=True, exist_ok=True)
         text = json.dumps(manifest, indent=2, ensure_ascii=False) + "\n"
-        (out_dir / "manifest.json").write_text(text, encoding="utf-8", newline="\n")
+        target = manifest_file if out_dir == icons_dir.resolve() else out_dir / "manifest.json"
+        target.write_text(text, encoding="utf-8", newline="\n")
     print(f"from the game: {found} - not found: {len(missing)}")
     for icon_id, note, placeholder in missing:
         print(f"  {icon_id}{' (placeholder)' if placeholder else ''}: {note}")

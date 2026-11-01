@@ -4,9 +4,7 @@ import { fileURLToPath } from "node:url";
 import type { RawData } from "./load.ts";
 
 export const DATA_DIR = fileURLToPath(new URL(".", import.meta.url));
-export const ICON_MANIFEST = fileURLToPath(
-  new URL("../../public/icons/manifest.json", import.meta.url),
-);
+export const ICON_MANIFEST = fileURLToPath(new URL("icons.json", import.meta.url));
 
 function readJson(file: string): unknown {
   return JSON.parse(readFileSync(file, "utf8"));

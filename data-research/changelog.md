@@ -1,5 +1,9 @@
 # Data changelog
 
+## 2026-11-01 — icon manifest moved
+
+- `public/icons/manifest.json` → `src/data/icons.json`: the app imports it, and Vite does not allow importing from `public/`. The WebP files stay in `public/icons/`.
+
 ## 2026-10-29 — actions of the 12 major gods
 
 - Research per god in `data-research/<pantheon>/ACTIONS.md` and summary in `data-research/GOD-ACTIONS.md`.
