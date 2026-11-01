@@ -356,6 +356,21 @@ export function Editor({ id }: { id: string }) {
     STAGES.map((s) => s.id),
   );
   const [warningsOpen, setWarningsOpen] = useState(false);
+  const pageRef = useRef<HTMLDivElement>(null);
+  /** Header and palette heights, so the palette and the time axis stick right below them. */
+  useEffect(() => {
+    const page = pageRef.current;
+    if (!page) return;
+    const parts = [".build-header", ".palette-col"].map((q) => page.querySelector<HTMLElement>(q));
+    const measure = () => {
+      page.style.setProperty("--hdr-h", `${parts[0]?.offsetHeight ?? 0}px`);
+      page.style.setProperty("--pal-h", `${parts[1]?.offsetHeight ?? 0}px`);
+    };
+    const ro = new ResizeObserver(measure);
+    for (const el of parts) if (el) ro.observe(el);
+    measure();
+    return () => ro.disconnect();
+  }, [stage, found?.readonly]);
   const history = useHistory();
   const readonly = found?.readonly ?? true;
   const sim = useSimulation(data, build, locale);
@@ -418,7 +433,7 @@ export function Editor({ id }: { id: string }) {
   const next = STAGES[STAGES.findIndex((s) => s.id === stage) + 1];
 
   return (
-    <div class="build-page">
+    <div class="build-page" ref={pageRef}>
       <header class={`panel build-header pan-${build.pantheon}`} data-testid="build-header">
         <div class="row header-row">
           <Tip label={t("nav.back")}>

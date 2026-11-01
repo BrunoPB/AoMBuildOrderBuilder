@@ -31,8 +31,8 @@ type Props = {
   onDuplicate: () => void;
   onMove: (delta: number) => void;
   onToggleMilestone: () => void;
-  /** Extra content at the end of the row head (population in the timeline view). */
-  extra?: ComponentChildren;
+  /** The action's time track, beside the head. */
+  track?: ComponentChildren;
   drag: {
     start: (i: number) => void;
     over: (i: number) => void;
@@ -186,7 +186,7 @@ export function ActionRow(props: Props) {
     <li
       id={`action-row-${index}`}
       tabIndex={-1}
-      class={`action-row kind-${a.do} ${open ? "open" : ""} ${level ? `bg-${level}` : ""} ${drag.from === index ? "dragging" : ""} ${drag.target === index && drag.from !== index ? "drop-target" : ""}`}
+      class={`action-row tl-row kind-${a.do} ${open ? "open" : ""} ${level ? `bg-${level}` : ""} ${drag.from === index ? "dragging" : ""} ${drag.target === index && drag.from !== index ? "drop-target" : ""}`}
       data-testid="action-row"
       onClick={(e) => {
         const el = e.target as HTMLElement;
@@ -206,7 +206,7 @@ export function ActionRow(props: Props) {
         else drag.drop(index);
       }}
     >
-      <div class="action-main">
+      <div class="tl-label action-main">
         <div
           class="action-head"
           role="button"
@@ -255,13 +255,13 @@ export function ActionRow(props: Props) {
           </Tip>
           <span class="action-label">
             {actionIcons(a, p?.def.workers[0]).map((id) => (
-              <EntityIcon key={id} id={id} pantheon={build.pantheon} size={28} />
+              <EntityIcon key={id} id={id} pantheon={build.pantheon} size={24} />
             ))}
             <Tip label={[actionText(c, a), times, tip].filter(Boolean).join("\n")}>
               <span class="label-text">{actionText(c, a)}</span>
             </Tip>
             {actionTarget(a) && (
-              <EntityIcon id={actionTarget(a)!} pantheon={build.pantheon} size={28} />
+              <EntityIcon id={actionTarget(a)!} pantheon={build.pantheon} size={24} />
             )}
           </span>
           {level && (
@@ -276,12 +276,12 @@ export function ActionRow(props: Props) {
               <Svg name="milestone" label={t("editor.milestones")} />
             </span>
           )}
-          {props.extra}
           <span class="row-chevron" aria-hidden="true">
             <Svg name="chevron" />
           </span>
         </div>
       </div>
+      {props.track}
       {open && (
         <fieldset class="action-details" disabled={readonly} style={{ border: 0, margin: 0 }}>
           <div class="field when-field">

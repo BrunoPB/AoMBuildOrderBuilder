@@ -48,6 +48,9 @@ const PATHS: Record<string, string> = {
   crown: "M3 18h18M4 18l-1-11 5 4 4-7 4 7 5-4-1 11",
   pin: "M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 12h.01",
   link: "M10 14a4 4 0 0 0 6 0l3-3a4 4 0 0 0-6-6l-1 1M14 10a4 4 0 0 0-6 0l-3 3a4 4 0 0 0 6 6l1-1",
+  users:
+    "M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM2 21a7 7 0 0 1 14 0M16 3.5a4 4 0 0 1 0 7M18 14a6 6 0 0 1 4 7",
+  fit: "M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5M8 12h8",
 };
 
 export type SvgName = keyof typeof PATHS;

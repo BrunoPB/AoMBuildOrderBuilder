@@ -194,46 +194,48 @@ export function Palette({
   );
 
   return (
-    <div class="panel" data-testid="palette">
-      <h3>
-        <Svg name="plus" />
-        <HelpText k="editor.add" />
-      </h3>
-      {PALETTE_GROUPS.map((g) => {
-        const kinds = g.kinds.filter(available);
-        if (kinds.length === 0) return null;
-        return (
-          <div key={g.id} class="palette-group" data-testid={`palette-${g.id}`}>
-            <span class="palette-group-label">
-              <HelpText k={`palette.group.${g.id}`} />
-            </span>
-            <div class="palette-kinds" role="toolbar" aria-label={t(`palette.group.${g.id}`)}>
-              {kinds.map((k) => (
-                <Tip
-                  key={k}
-                  label={[label(`action.${k}`, ctx), help(`action.${k}`, ctx)]
-                    .filter(Boolean)
-                    .join("\n")}
-                >
-                  <button
-                    class={`btn icon-only kind-btn kind-${k}`}
-                    aria-pressed={kind === k}
-                    aria-label={label(`action.${k}`, ctx)}
-                    data-testid={`kind-${k}`}
-                    onClick={() => choose(k)}
-                    {...draggable(immediate(k))}
+    <div class="panel palette" data-testid="palette">
+      <div class="palette-bar">
+        <h3>
+          <Svg name="plus" />
+          <HelpText k="editor.add" />
+        </h3>
+        {PALETTE_GROUPS.map((g) => {
+          const kinds = g.kinds.filter(available);
+          if (kinds.length === 0) return null;
+          return (
+            <div key={g.id} class="palette-group" data-testid={`palette-${g.id}`}>
+              <span class="palette-group-label">
+                <HelpText k={`palette.group.${g.id}`} />
+              </span>
+              <div class="palette-kinds" role="toolbar" aria-label={t(`palette.group.${g.id}`)}>
+                {kinds.map((k) => (
+                  <Tip
+                    key={k}
+                    label={[label(`action.${k}`, ctx), help(`action.${k}`, ctx)]
+                      .filter(Boolean)
+                      .join("\n")}
                   >
-                    <Svg name={KIND_ICON[k] ?? "plus"} />
-                  </button>
-                </Tip>
-              ))}
+                    <button
+                      class={`btn icon-only kind-btn kind-${k}`}
+                      aria-pressed={kind === k}
+                      aria-label={label(`action.${k}`, ctx)}
+                      data-testid={`kind-${k}`}
+                      onClick={() => choose(k)}
+                      {...draggable(immediate(k))}
+                    >
+                      <Svg name={KIND_ICON[k] ?? "plus"} />
+                    </button>
+                  </Tip>
+                ))}
+              </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
       {current && (
         <>
-          <div class="row" style={{ marginTop: "8px" }}>
+          <div class="row palette-ages">
             <button class="chip" aria-pressed={age === null} onClick={() => setAge(null)}>
               <HelpText k="palette.allAges" />
             </button>

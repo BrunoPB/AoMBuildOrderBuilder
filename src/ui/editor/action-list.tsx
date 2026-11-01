@@ -3,18 +3,28 @@ import { useState } from "preact/hooks";
 import type { Action, Build } from "../../engine/build.ts";
 import type { Step, StepAction } from "../../engine/format.ts";
 import { formatClock } from "../../engine/time.ts";
-import type { SimResult, Snapshot } from "../../engine/types.ts";
+import type { SimResult } from "../../engine/types.ts";
 import { entityName } from "../../data/catalog.ts";
 import { useApp, useViewPref } from "../context.tsx";
 import { EntityIcon, HelpText, Tip, useHelp } from "../icon.tsx";
 import { KIND_ICON, Svg } from "../svg.tsx";
 import { ActionRow } from "./action-row.tsx";
 import { ACTION_MIME, nextActionId, startState } from "./labels.ts";
-import { ProductionChart } from "./production.tsx";
 import { fixedTime, moveWithTime, placeByTime } from "./order.ts";
 import { EntityIconByIcon, focusAction } from "./result.tsx";
+import {
+  ActionTrack,
+  Axis,
+  BuildingLanes,
+  EconomyStrip,
+  makeScale,
+  type Scale,
+  useFloatTip,
+  useWidth,
+} from "./timeline.tsx";
 
-const RES = ["food", "wood", "gold", "favor"] as const;
+/** Seconds per pixel choices; 0 fits the whole build in the available width. */
+const ZOOMS = [0, 2, 4] as const;
 
 type Event = { seconds: number; item: StepAction | { notice: string } };
 
@@ -35,43 +45,34 @@ function sideEvents(steps: Step[]): Event[] {
   return out;
 }
 
-function Pop({ snap }: { snap?: Snapshot }) {
-  const { t } = useApp();
-  if (!snap) return <span class="row-pop" />;
-  const alloc = RES.map((r) => `${t(`res.${r}`)} ${snap.alloc[r] ?? 0}`).join(" · ");
-  const full = snap.pop >= snap.popCap;
-  return (
-    <Tip label={`${t("result.pop")} ${snap.pop}/${snap.popCap}\n${alloc}`}>
-      <span class={`row-pop num ${full ? "lvl-delay" : ""}`}>
-        {snap.pop}/{snap.popCap}
-      </span>
-    </Tip>
-  );
-}
-
-function EventRow({ build, event, snap }: { build: Build; event: Event; snap?: Snapshot }) {
+function EventRow({ build, event, scale }: { build: Build; event: Event; scale: Scale }) {
   const { item } = event;
+  const kind = "notice" in item ? "notice" : item.kind;
   return (
-    <li class="event-row" data-testid="timeline-row">
-      <span class="row-time num">{formatClock(event.seconds)}</span>
-      {"notice" in item ? (
-        <span class="event-text lvl-delay">
-          <Svg name="warning" /> {item.notice}
-        </span>
-      ) : (
-        <span class={`event-text kind-${item.kind}`}>
-          <Svg name={KIND_ICON[item.kind] ?? "info"} />
-          {item.icons.map((icon, k) => (
-            <EntityIconByIcon key={k} icon={icon} build={build} size={22} />
-          ))}
-          <span class="label-text">
-            {item.byLabel ? `${item.byLabel} · ` : ""}
-            {item.text}
+    <li class={`event-row tl-row kind-${kind}`} data-testid="timeline-row">
+      <div class="tl-label">
+        <span class="row-time num">{formatClock(event.seconds)}</span>
+        {"notice" in item ? (
+          <span class="event-text lvl-delay">
+            <Svg name="warning" /> {item.notice}
           </span>
-          {item.to && <EntityIcon id={item.to} pantheon={build.pantheon} size={22} tip={false} />}
-        </span>
-      )}
-      <Pop snap={snap} />
+        ) : (
+          <span class="event-text">
+            <Svg name={KIND_ICON[item.kind] ?? "info"} />
+            {item.icons.map((icon, k) => (
+              <EntityIconByIcon key={k} icon={icon} build={build} size={20} />
+            ))}
+            <span class="label-text">
+              {item.byLabel ? `${item.byLabel} · ` : ""}
+              {item.text}
+            </span>
+            {item.to && <EntityIcon id={item.to} pantheon={build.pantheon} size={20} tip={false} />}
+          </span>
+        )}
+      </div>
+      <div class="tl-track">
+        <span class="tl-dot" style={{ left: scale.pct(event.seconds) }} />
+      </div>
     </li>
   );
 }
@@ -92,37 +93,42 @@ function StartRow({ build, idleAtStart }: { build: Build; idleAtStart: number })
     .filter(Boolean)
     .join("\n");
   return (
-    <li class="start-row" data-testid="start-row">
-      <span class="row-time num">0:00</span>
-      <Tip label={tip} focusable>
-        <span class="start-items">
-          <Svg name="flag" label={t("editor.start")} />
-          {start.units.map(([id, n]) => (
-            <span key={id} class="start-item">
-              <EntityIcon id={id} pantheon={build.pantheon} size={26} tip={false} />
-              <span class="num">{n}</span>
-            </span>
-          ))}
-          {start.resources.map(([r, n]) => (
-            <span key={r} class={`start-item res-${r}`}>
-              <EntityIcon id={r} pantheon={build.pantheon} size={18} tip={false} />
-              <span class="num">{n}</span>
-            </span>
-          ))}
-        </span>
-      </Tip>
-      {idleAtStart > 0 && (
-        <span class="lvl-delay row start-idle" data-testid="start-idle">
-          <Svg name="warning" label={t("editor.startIdle", { count: idleAtStart })} />
-          <span class="num">{idleAtStart}</span>
-        </span>
-      )}
+    <li class="start-row tl-row" data-testid="start-row">
+      <div class="tl-label">
+        <span class="row-time num">0:00</span>
+        <Tip label={tip} focusable>
+          <span class="start-items">
+            <Svg name="flag" label={t("editor.start")} />
+            {start.units.map(([id, n]) => (
+              <span key={id} class="start-item">
+                <EntityIcon id={id} pantheon={build.pantheon} size={24} tip={false} />
+                <span class="num">{n}</span>
+              </span>
+            ))}
+          </span>
+        </Tip>
+        {idleAtStart > 0 && (
+          <span class="lvl-delay row start-idle" data-testid="start-idle">
+            <Svg name="warning" label={t("editor.startIdle", { count: idleAtStart })} />
+            <span class="num">{idleAtStart}</span>
+          </span>
+        )}
+      </div>
+      <div class="tl-track start-res">
+        {start.resources.map(([r, n]) => (
+          <span key={r} class={`start-item res-${r}`}>
+            <EntityIcon id={r} pantheon={build.pantheon} size={16} tip={false} />
+            <span class="num">{n}</span>
+          </span>
+        ))}
+      </div>
     </li>
   );
 }
 
-/** The build actions in order, each with its simulated start; optionally interleaved with the
- *  simulation events (the timeline), or shown as the production chart. */
+/** The build actions in order, each beside its time track (start, waits, units, buildings),
+ *  under a shared time axis with the workers strip; building lanes and simulation events
+ *  can be shown in the same grid. */
 export function ActionList({
   build,
   result,
@@ -138,13 +144,13 @@ export function ActionList({
 }) {
   const { t } = useApp();
   const help = useHelp();
-  const [view, setView] = useViewPref<"list" | "production">("actions.view", "list", [
-    "list",
-    "production",
-  ]);
   const [events, setEvents] = useViewPref<boolean>("actions.events", true);
+  const [lanesOpen, setLanesOpen] = useViewPref<boolean>("actions.lanes", false);
+  const [zoom, setZoom] = useViewPref<number>("actions.zoom", 0, ZOOMS);
   const [dragFrom, setDragFrom] = useState<number | null>(null);
   const [dragTarget, setDragTarget] = useState<number | null>(null);
+  const [tip, tipNode] = useFloatTip();
+  const [boxRef, boxWidth] = useWidth<HTMLDivElement>();
   const setActions = (actions: Action[]) => update({ ...build, actions });
   const times = build.actions.map((a, i) => fixedTime(a.when) ?? result?.actions[i]?.startedAt);
   const move = (from: number, to: number) => {
@@ -156,21 +162,33 @@ export function ActionList({
     actions.splice(at, 0, { ...added, id: nextActionId(build) });
     setActions(actions);
   };
+  /** Replaces action i, keeping the list in time order when its fixed time changed. */
+  const change = (i: number, next: Action) => {
+    const prev = build.actions[i]!;
+    const actions = [...build.actions];
+    actions[i] = next;
+    if (next.when === prev.when || fixedTime(next.when) === undefined) return setActions(actions);
+    actions[i] = { ...next, id: next.id ?? nextActionId(build) };
+    const placed = placeByTime(actions, times, i);
+    setActions(placed.actions);
+    if (placed.index !== i) requestAnimationFrame(() => focusAction(placed.index));
+  };
   const milestoneIds = new Set((build.milestones ?? []).map((m) => m.atAction));
 
-  const snaps = new Map<number, Snapshot>();
-  for (const s of result?.series ?? []) {
-    const k = Math.floor(s.t);
-    if (!snaps.has(k)) snaps.set(k, s);
-  }
-  const snapAt = (sec?: number) => {
-    if (sec === undefined) return undefined;
-    for (let k = Math.round(sec); k >= 0; k--) {
-      const s = snaps.get(k);
-      if (s) return s;
-    }
-    return undefined;
-  };
+  const spans = result?.production.spans ?? [];
+  const end = Math.max(
+    60,
+    result?.endTime ?? 0,
+    ...spans.map((x) => x.end ?? x.start),
+    ...times.map((x) => x ?? 0),
+  );
+  const width = boxWidth || 800;
+  /** Narrow screens put the track under the label instead of beside it. */
+  const stacked = width < 600;
+  const labelPx = stacked ? 0 : Math.min(380, Math.round(width * 0.4));
+  const trackPx = zoom ? Math.ceil(end * zoom) : Math.max(120, width - labelPx - 2);
+  const scale = makeScale(end, trackPx);
+  const minute = 60 * scale.pxPerSec;
 
   /** Events go after the last action that started at or before them. */
   const placed = new Map<number, Event[]>();
@@ -185,32 +203,32 @@ export function ActionList({
   }
   const eventRows = (at: number) =>
     (placed.get(at) ?? []).map((e, k) => (
-      <EventRow key={`e${at}-${k}`} build={build} event={e} snap={snapAt(e.seconds)} />
+      <EventRow key={`e${at}-${k}`} build={build} event={e} scale={scale} />
     ));
 
   return (
-    <div class="panel">
+    <div class="panel tl-panel">
       <div class="list-head">
         <h3>
           <Svg name="list" />
           <HelpText k="editor.actions" /> <span class="num">{build.actions.length}</span>
         </h3>
-        <div class="segmented" role="group" aria-label={t("editor.actions")}>
-          {(["list", "production"] as const).map((v) => (
-            <Tip key={v} label={help(`editor.view.${v}`)}>
+        <div class="segmented" role="group" aria-label={t("production.zoom")}>
+          {ZOOMS.map((z) => (
+            <Tip key={z} label={help(z ? "production.zoom" : "tl.fit")}>
               <button
                 class="chip"
-                aria-pressed={view === v}
-                data-testid={`view-${v}`}
-                onClick={() => setView(v)}
+                aria-pressed={zoom === z}
+                aria-label={z ? `${t("production.zoom")} ${z}×` : t("tl.fit")}
+                data-testid={`zoom-${z || "fit"}`}
+                onClick={() => setZoom(z)}
               >
-                <Svg name={v === "list" ? "list" : "hammer"} />
-                {t(`editor.view.${v}`)}
+                {z ? `${z}×` : <Svg name="fit" />}
               </button>
             </Tip>
           ))}
         </div>
-        {view === "list" && result && (
+        {result && (
           <label class="switch">
             <input
               type="checkbox"
@@ -223,11 +241,42 @@ export function ActionList({
           </label>
         )}
       </div>
-      {view === "production" && result ? (
-        <ProductionChart build={build} result={result} />
-      ) : (
+      <div
+        ref={boxRef}
+        class={`tl ${zoom ? "zoomed" : ""} ${stacked ? "stacked" : ""}`}
+        style={{
+          "--tl-label": stacked ? "minmax(0, 1fr)" : `${labelPx}px`,
+          "--tl-track": zoom ? `${trackPx}px` : "minmax(0, 1fr)",
+          "--tl-minute": `${minute}px`,
+        }}
+      >
+        <div class="tl-head">
+          <div class="tl-row tl-axis-row">
+            <div class="tl-label tl-corner">
+              <Svg name="clock" />
+            </div>
+            <div class="tl-track">
+              <Axis scale={scale} />
+            </div>
+          </div>
+          {result && (
+            <div class="tl-row tl-strip" data-testid="workers-strip">
+              <div class="tl-label">
+                <Tip label={help("tl.workers")}>
+                  <span class="row">
+                    <Svg name="users" />
+                    {t("tl.workers")}
+                  </span>
+                </Tip>
+              </div>
+              <div class="tl-track">
+                <EconomyStrip series={result.series} scale={scale} tip={tip} />
+              </div>
+            </div>
+          )}
+        </div>
         <ol
-          class={`actions-list ${events ? "with-events" : ""} ${
+          class={`actions-list tl-list ${events ? "with-events" : ""} ${
             dragTarget === build.actions.length ? "drop-end" : ""
           }`}
           data-testid={events ? "timeline" : "actions-list"}
@@ -254,86 +303,117 @@ export function ActionList({
             idleAtStart={result?.series.find((x) => x.t >= 5)?.alloc.idle ?? 0}
           />
           {eventRows(-1)}
-          {build.actions.map((a, i) => (
-            <Fragment key={a.id ?? i}>
-              <ActionRow
-                build={build}
-                index={i}
-                action={a}
-                outcome={result?.actions[i]}
-                warnings={(result?.warnings ?? []).filter(
-                  (w) => w.action === i && w.level !== "info",
-                )}
-                readonly={readonly}
-                isMilestone={!!a.id && milestoneIds.has(a.id)}
-                extra={events ? <Pop snap={snapAt(result?.actions[i]?.startedAt)} /> : undefined}
-                onChange={(next) => {
-                  const actions = [...build.actions];
-                  actions[i] = next;
-                  if (next.when === a.when || fixedTime(next.when) === undefined)
-                    return setActions(actions);
-                  actions[i] = { ...next, id: next.id ?? nextActionId(build) };
-                  const placed = placeByTime(actions, times, i);
-                  setActions(placed.actions);
-                  if (placed.index !== i) requestAnimationFrame(() => focusAction(placed.index));
-                }}
-                onRemove={() => {
-                  const removed = build.actions[i];
-                  update({
-                    ...build,
-                    actions: build.actions.filter((_, k) => k !== i),
-                    milestones: (build.milestones ?? []).filter((m) => m.atAction !== removed?.id),
-                  });
-                }}
-                onDuplicate={() => {
-                  const actions = [...build.actions];
-                  actions.splice(i + 1, 0, { ...structuredClone(a), id: nextActionId(build) });
-                  setActions(actions);
-                }}
-                onMove={(delta) => move(i, i + delta)}
-                onToggleMilestone={() => {
-                  const actionId = a.id ?? nextActionId(build);
-                  const list = build.milestones ?? [];
-                  const exists = list.some((m) => m.atAction === actionId);
-                  const actions = a.id
-                    ? build.actions
-                    : build.actions.map((x, k) => (k === i ? { ...x, id: actionId } : x));
-                  update({
-                    ...build,
-                    actions,
-                    milestones: exists
-                      ? list.filter((m) => m.atAction !== actionId)
-                      : [...list, { id: actionId, atAction: actionId }],
-                  });
-                }}
-                drag={{
-                  from: dragFrom,
-                  target: dragTarget,
-                  start: (k) => setDragFrom(k),
-                  over: (k) => setDragTarget(k),
-                  drop: (k) => {
-                    if (dragFrom !== null) move(dragFrom, k);
-                    setDragFrom(null);
-                    setDragTarget(null);
-                  },
-                  insert: (k, added) => {
-                    insert(k, added);
-                    setDragTarget(null);
-                  },
-                  end: () => {
-                    setDragFrom(null);
-                    setDragTarget(null);
-                  },
-                }}
-              />
-              {eventRows(i)}
-            </Fragment>
-          ))}
+          {build.actions.map((a, i) => {
+            const warnings = (result?.warnings ?? []).filter(
+              (w) => w.action === i && w.level !== "info",
+            );
+            return (
+              <Fragment key={a.id ?? i}>
+                <ActionRow
+                  build={build}
+                  index={i}
+                  action={a}
+                  outcome={result?.actions[i]}
+                  warnings={warnings}
+                  readonly={readonly}
+                  isMilestone={!!a.id && milestoneIds.has(a.id)}
+                  track={
+                    <ActionTrack
+                      build={build}
+                      action={a}
+                      index={i}
+                      result={result}
+                      warnings={warnings}
+                      scale={scale}
+                      tip={tip}
+                      readonly={readonly}
+                      onTime={(sec) => change(i, { ...a, when: formatClock(sec) } as Action)}
+                    />
+                  }
+                  onChange={(next) => change(i, next)}
+                  onRemove={() => {
+                    const removed = build.actions[i];
+                    update({
+                      ...build,
+                      actions: build.actions.filter((_, k) => k !== i),
+                      milestones: (build.milestones ?? []).filter(
+                        (m) => m.atAction !== removed?.id,
+                      ),
+                    });
+                  }}
+                  onDuplicate={() => {
+                    const actions = [...build.actions];
+                    actions.splice(i + 1, 0, { ...structuredClone(a), id: nextActionId(build) });
+                    setActions(actions);
+                  }}
+                  onMove={(delta) => move(i, i + delta)}
+                  onToggleMilestone={() => {
+                    const actionId = a.id ?? nextActionId(build);
+                    const list = build.milestones ?? [];
+                    const exists = list.some((m) => m.atAction === actionId);
+                    const actions = a.id
+                      ? build.actions
+                      : build.actions.map((x, k) => (k === i ? { ...x, id: actionId } : x));
+                    update({
+                      ...build,
+                      actions,
+                      milestones: exists
+                        ? list.filter((m) => m.atAction !== actionId)
+                        : [...list, { id: actionId, atAction: actionId }],
+                    });
+                  }}
+                  drag={{
+                    from: dragFrom,
+                    target: dragTarget,
+                    start: (k) => setDragFrom(k),
+                    over: (k) => setDragTarget(k),
+                    drop: (k) => {
+                      if (dragFrom !== null) move(dragFrom, k);
+                      setDragFrom(null);
+                      setDragTarget(null);
+                    },
+                    insert: (k, added) => {
+                      insert(k, added);
+                      setDragTarget(null);
+                    },
+                    end: () => {
+                      setDragFrom(null);
+                      setDragTarget(null);
+                    },
+                  }}
+                />
+                {eventRows(i)}
+              </Fragment>
+            );
+          })}
         </ol>
-      )}
-      {view === "list" && build.actions.length === 0 && (
-        <p class="action-times">{t("editor.empty")}</p>
-      )}
+        {build.actions.length === 0 && <p class="action-times tl-empty">{t("editor.empty")}</p>}
+        {result && result.production.lanes.length > 0 && (
+          <div class="tl-lanes" data-testid="building-lanes">
+            <button
+              type="button"
+              class="tl-row tl-lanes-toggle"
+              aria-expanded={lanesOpen}
+              data-testid="toggle-lanes"
+              onClick={() => setLanesOpen(!lanesOpen)}
+            >
+              <span class="tl-label">
+                <Svg name="chevron" />
+                <Svg name="hammer" />
+                <HelpText k="tl.lanes" />
+                <span class="num">{result.production.lanes.length}</span>
+              </span>
+              <span class="tl-track" />
+            </button>
+            {lanesOpen && (
+              <ol class="tl-list">
+                <BuildingLanes build={build} result={result} scale={scale} tip={tip} />
+              </ol>
+            )}
+          </div>
+        )}
+      </div>
+      {tipNode}
     </div>
   );
 }

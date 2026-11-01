@@ -227,7 +227,7 @@ test("help tips explain titles and can be turned off", async ({ page }) => {
     .first();
   await title.hover();
   await expect(title.locator(".tip-bubble")).toBeVisible();
-  await expect(title.locator(".tip-bubble")).toContainText("Arraste para reordenar");
+  await expect(title.locator(".tip-bubble")).toContainText("Arraste pela alça para reordenar");
 
   await page.goto("/#/settings");
   await page.getByTestId("tooltips-off").click();
@@ -404,4 +404,27 @@ test("actions only show the fields that apply to them", async ({ page }) => {
   const citizens = rows.filter({ hasText: "Treinar 3 Cidadãos" }).first();
   await citizens.locator(".label-text").click();
   await expect(citizens.getByTestId("row-rally")).toBeVisible();
+});
+
+test("actions share one timeline with villagers, buildings and draggable bars", async ({
+  page,
+  isMobile,
+}) => {
+  await createBuildWithActions(page);
+  await expect(page.getByTestId("workers-strip")).toBeVisible();
+  await page.getByTestId("toggle-lanes").click();
+  await expect(page.getByTestId("production-lane").first()).toBeVisible();
+  test.skip(isMobile, "pointer drag is tested on desktop");
+  const row = page.getByTestId("action-row").first();
+  await expect(row).toContainText("Treinar 1 Cidadão");
+  const bar = row.locator(".tl-bar").first();
+  const box = (await bar.boundingBox())!;
+  await page.mouse.move(box.x + 4, box.y + box.height / 2);
+  await page.mouse.down();
+  await page.mouse.move(box.x + 60, box.y + box.height / 2, { steps: 5 });
+  await page.mouse.move(box.x + 120, box.y + box.height / 2, { steps: 5 });
+  await page.mouse.up();
+  const moved = page.getByTestId("action-row").filter({ hasText: "Treinar 1 Cidadão" });
+  await expect(moved.locator(".row-time")).not.toContainText("0:00");
+  await expect(moved.locator(".row-time")).toContainText("No tempo");
 });
