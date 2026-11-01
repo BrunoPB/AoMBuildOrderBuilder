@@ -208,6 +208,8 @@ export function ActionList({
     if (at < 0 || at > 1) return box.classList.remove("cursor-on");
     box.classList.add("cursor-on");
     box.style.setProperty("--tl-cursor", `${at * 100}%`);
+    /** The label slides from right of the line to left of it, so it never leaves the track. */
+    box.style.setProperty("--tl-cursor-shift", `${-at * 100}%`);
     if (cursorTimeRef.current) cursorTimeRef.current.textContent = formatClock(at * scale.end);
   };
 

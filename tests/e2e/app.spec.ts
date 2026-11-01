@@ -471,6 +471,19 @@ test("hovering the timeline draws a time line through every row", async ({ page,
   expect(line.display).toBe("block");
   expect(Math.abs(line.x - (box.x + box.width / 2))).toBeLessThan(2);
   await page.screenshot({ path: "test-results/timeline-cursor.png" });
+  for (const x of [box.x + 1, box.x + box.width - 1]) {
+    await page.mouse.move(x, rowBox.y + rowBox.height / 2);
+    const fits = await page.evaluate(() => {
+      const tl = document.querySelector<HTMLElement>(".tl")!;
+      const track = document.querySelector(".tl-axis-row .tl-track")!.getBoundingClientRect();
+      const label = document.querySelector(".tl-cursor-time")!.getBoundingClientRect();
+      return {
+        scroll: tl.scrollWidth - tl.clientWidth,
+        inside: label.left >= track.left - 0.5 && label.right <= track.right + 0.5,
+      };
+    });
+    expect(fits).toEqual({ scroll: 0, inside: true });
+  }
   await page.mouse.move(5, 5);
   await expect(page.locator(".tl-cursor-time")).toBeHidden();
 });

@@ -2155,7 +2155,7 @@ textarea {
   position: absolute;
   top: 0;
   bottom: -1px;
-  left: var(--tl-cursor, 0);
+  left: min(var(--tl-cursor, 0%), calc(100% - 1px));
   z-index: 1;
   display: none;
   width: 1px;
@@ -2179,7 +2179,7 @@ textarea {
   color: #fff;
   font-size: 11px;
   line-height: 16px;
-  transform: translateX(-50%);
+  transform: translateX(var(--tl-cursor-shift, 0%));
   pointer-events: none;
 }
 
