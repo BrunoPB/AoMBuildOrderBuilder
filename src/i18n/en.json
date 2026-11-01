@@ -439,6 +439,7 @@
   "help.editor.minorChosen": "Picked. Click again to remove it (the build does not reach this age).",
   "help.editor.minorPick": "Click to pick this minor god when aging up.",
   "tl.workers": "Villagers",
+  "tl.stock": "Stock",
   "tl.building": "building",
   "tl.lanes": "Buildings",
   "tl.fit": "Fit",

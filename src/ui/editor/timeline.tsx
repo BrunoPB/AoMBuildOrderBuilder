@@ -3,9 +3,11 @@ import { useEffect, useRef, useState } from "preact/hooks";
 import { entityName } from "../../data/catalog.ts";
 import type { Action, Build } from "../../engine/build.ts";
 import { formatClock } from "../../engine/time.ts";
+import type { PantheonId } from "../../data/schema.ts";
 import type { ProductionSpan, SimResult, SimWarning, Snapshot } from "../../engine/types.ts";
 import { useApp } from "../context.tsx";
 import { EntityIcon } from "../icon.tsx";
+import { Svg } from "../svg.tsx";
 
 /** Seconds → position on the track, as a percentage of the timeline length. */
 export type Scale = { end: number; pct: (t: number) => string; pxPerSec: number };
@@ -45,25 +47,38 @@ const INSTANT = new Set<Action["do"]>([
 const RULES = new Set<Action["do"]>(["autoTrain", "trainWhenAffordable"]);
 
 /** A tooltip that floats above the hovered bar (bars are absolutely placed, so no Tip host). */
-export type FloatTip = { show: (el: Element, text: string) => void; hide: () => void };
+export type FloatTip = {
+  /** `card`: rich content (icons, colors) instead of plain text. */
+  show: (el: Element, content: ComponentChildren, card?: boolean) => void;
+  hide: () => void;
+};
 
 export function useFloatTip(): [FloatTip, ComponentChildren] {
-  const [tip, setTip] = useState<{ text: string; x: number; y: number } | null>(null);
+  const [tip, setTip] = useState<{
+    content: ComponentChildren;
+    card: boolean;
+    below: boolean;
+    x: number;
+    y: number;
+  } | null>(null);
   const api: FloatTip = {
-    show: (el, text) => {
+    show: (el, content, card = false) => {
       const r = el.getBoundingClientRect();
-      const x = Math.min(Math.max(r.left + r.width / 2, 130), window.innerWidth - 130);
-      setTip({ text, x, y: r.top });
+      const half = card ? 140 : 130;
+      const x = Math.min(Math.max(r.left + r.width / 2, half), window.innerWidth - half);
+      /** Below the host when the space above is too small (cards are taller). */
+      const below = r.top < (card ? 200 : 60);
+      setTip({ content, card, below, x, y: below ? r.bottom : r.top });
     },
     hide: () => setTip(null),
   };
   const node = tip ? (
     <div
-      class="tip-bubble gantt-float"
+      class={`tip-bubble gantt-float ${tip.card ? "gantt-card" : ""} ${tip.below ? "below" : ""}`}
       role="tooltip"
       style={{ left: `${tip.x}px`, top: `${tip.y}px` }}
     >
-      {tip.text}
+      {tip.content}
     </div>
   ) : null;
   return [api, node];
@@ -107,14 +122,66 @@ export function Axis({ scale, hover }: { scale: Scale; hover?: number | null }) 
 const ALLOC = ["food", "wood", "gold", "favor", "build", "idle"] as const;
 
 /** Stacked area of what the workers are doing over time. */
+const STOCK = ["food", "wood", "gold", "favor"] as const;
+
+/** What the workers do at one moment, plus population and stockpile. */
+function EconomyCard({ s, at, pantheon }: { s: Snapshot; at: number; pantheon: PantheonId }) {
+  const { t } = useApp();
+  const workers = ALLOC.reduce((n, k) => n + (s.alloc[k] ?? 0), 0);
+  const capped = s.pop >= s.popCap;
+  return (
+    <div class="eco-card" data-testid="economy-card">
+      <div class="eco-head">
+        <span class="num eco-time">{formatClock(at)}</span>
+        <EntityIcon id={s.age} pantheon={pantheon} size={18} tip={false} />
+        <span class={`row eco-pop ${capped ? "lvl-delay" : ""}`}>
+          <Svg name="users" label={t("result.pop")} />
+          <span class="num">
+            {s.pop}/{s.popCap}
+          </span>
+        </span>
+      </div>
+      <ul class="eco-rows">
+        {ALLOC.filter((k) => s.alloc[k]).map((k) => (
+          <li key={k} class={`eco-row eco-${k} ${k === "idle" ? "lvl-error" : ""}`}>
+            {k === "build" ? (
+              <Svg name="hammer" />
+            ) : k === "idle" ? (
+              <Svg name="pause" />
+            ) : (
+              <EntityIcon id={k} pantheon={pantheon} size={18} tip={false} />
+            )}
+            <span class="eco-name">{t(k === "build" ? "tl.building" : `res.${k}`)}</span>
+            <span class="eco-bar">
+              <i style={{ width: `${((s.alloc[k] ?? 0) / Math.max(1, workers)) * 100}%` }} />
+            </span>
+            <span class="num eco-count">{s.alloc[k]}</span>
+          </li>
+        ))}
+      </ul>
+      <div class="eco-stock">
+        <span class="eco-stock-label">{t("tl.stock")}</span>
+        {STOCK.filter((r) => r !== "favor" || s.resources.favor !== undefined).map((r) => (
+          <span key={r} class="row">
+            <EntityIcon id={r} pantheon={pantheon} size={16} tip={false} />
+            <span class="num">{Math.floor(s.resources[r] ?? 0)}</span>
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export function EconomyStrip({
   series,
   scale,
   tip,
+  pantheon,
 }: {
   series: Snapshot[];
   scale: Scale;
   tip: FloatTip;
+  pantheon: PantheonId;
 }) {
   const { t } = useApp();
   if (series.length === 0) return null;
@@ -132,13 +199,6 @@ export function EconomyStrip({
     }
     return { k, points: [...top, ...bottom].join(" ") };
   });
-  const describe = (s: Snapshot) =>
-    [
-      `${formatClock(s.t)} · ${t("result.pop")} ${s.pop}/${s.popCap}`,
-      ALLOC.filter((k) => s.alloc[k])
-        .map((k) => `${t(k === "build" ? "tl.building" : `res.${k}`)} ${s.alloc[k]}`)
-        .join(" · "),
-    ].join("\n");
   return (
     <svg
       class="tl-economy"
@@ -152,10 +212,12 @@ export function EconomyStrip({
         const snap = [...series].reverse().find((s) => s.t <= sec) ?? series[0]!;
         const host = (e.currentTarget as SVGElement).parentElement!;
         const fake = {
-          getBoundingClientRect: () =>
-            new DOMRect(e.clientX - 1, host.getBoundingClientRect().top, 2, 2),
+          getBoundingClientRect: () => {
+            const h = host.getBoundingClientRect();
+            return new DOMRect(e.clientX - 1, h.top, 2, h.height);
+          },
         } as Element;
-        tip.show(fake, describe(snap));
+        tip.show(fake, <EconomyCard s={snap} at={sec} pantheon={pantheon} />, true);
       }}
       onPointerLeave={tip.hide}
     >

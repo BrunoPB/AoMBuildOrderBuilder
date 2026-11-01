@@ -1241,6 +1241,10 @@ textarea {
   z-index: 60;
 }
 
+.tip-bubble.gantt-float.below {
+  transform: translate(-50%, 6px);
+}
+
 .gantt-bar {
   position: absolute;
   top: 5px;
@@ -2872,4 +2876,120 @@ textarea {
     top: auto;
     z-index: 20;
   }
+}
+
+/* hovered timeline cell above its neighbours, so its tooltip is not painted under them */
+.tl-label:hover,
+.tl-label:focus-within {
+  z-index: 4;
+}
+
+.tip-bubble.gantt-card {
+  width: 260px;
+  max-width: calc(100vw - 16px);
+  padding: 0;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  white-space: normal;
+  text-align: left;
+  font-weight: 400;
+}
+
+.eco-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px 10px;
+  font-size: 12px;
+}
+
+.eco-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+}
+
+.eco-time {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.eco-pop {
+  margin-left: auto;
+  gap: 4px;
+  font-weight: 700;
+}
+
+.eco-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.eco-row {
+  display: grid;
+  grid-template-columns: 18px 72px 1fr 24px;
+  align-items: center;
+  gap: 6px;
+}
+
+.eco-bar {
+  height: 6px;
+  border-radius: 3px;
+  background: color-mix(in srgb, var(--border) 60%, transparent);
+  overflow: hidden;
+}
+
+.eco-bar > i {
+  display: block;
+  height: 100%;
+  border-radius: 3px;
+  background: var(--eco, var(--muted));
+}
+
+.eco-food {
+  --eco: var(--res-food);
+}
+.eco-wood {
+  --eco: var(--res-wood);
+}
+.eco-gold {
+  --eco: var(--res-gold);
+}
+.eco-favor {
+  --eco: var(--res-favor);
+}
+.eco-build {
+  --eco: var(--kind-build);
+}
+.eco-idle {
+  --eco: var(--bad);
+}
+
+.eco-count {
+  text-align: right;
+  font-weight: 700;
+}
+
+.eco-stock {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-top: 6px;
+  border-top: 1px solid var(--border);
+}
+
+.eco-stock .row {
+  gap: 2px;
+}
+
+.eco-stock-label {
+  color: var(--muted);
+  margin-right: auto;
 }

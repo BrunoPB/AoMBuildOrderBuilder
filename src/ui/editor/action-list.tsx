@@ -285,7 +285,12 @@ export function ActionList({
                 </Tip>
               </div>
               <div class="tl-track">
-                <EconomyStrip series={result.series} scale={scale} tip={tip} />
+                <EconomyStrip
+                  series={result.series}
+                  scale={scale}
+                  tip={tip}
+                  pantheon={build.pantheon}
+                />
               </div>
             </div>
           )}

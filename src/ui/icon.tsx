@@ -20,7 +20,7 @@ function place(host: HTMLElement): void {
     const b = bubble.getBoundingClientRect();
     const vw = document.documentElement.clientWidth;
     const x = Math.min(Math.max(h.left + h.width / 2 - b.width / 2, 8), vw - b.width - 8);
-    const covered = [...document.querySelectorAll<HTMLElement>(".topbar, .build-header")]
+    const covered = [...document.querySelectorAll<HTMLElement>(".topbar, .build-header, .tl-head")]
       .filter((el) => !el.contains(host) && getComputedStyle(el).position !== "static")
       .map((el) => el.getBoundingClientRect().bottom);
     const above = h.top - b.height - 6;

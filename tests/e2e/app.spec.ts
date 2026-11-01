@@ -487,3 +487,38 @@ test("hovering the timeline draws a time line through every row", async ({ page,
   await page.mouse.move(5, 5);
   await expect(page.locator(".tl-cursor-time")).toBeHidden();
 });
+
+test("timeline tooltips: villager card and a clock tip that is not covered", async ({
+  page,
+  isMobile,
+}) => {
+  test.skip(isMobile, "needs a mouse");
+  await page.setViewportSize({ width: 1400, height: 800 });
+  await page.goto("/#/build/preset%3Akrush");
+  await page.getByTestId("tab-actions").click();
+  const strip = (await page.locator(".tl-economy").boundingBox())!;
+  await page.mouse.move(strip.x + strip.width * 0.6, strip.y + strip.height / 2);
+  const card = page.getByTestId("economy-card");
+  await expect(card).toBeVisible();
+  await expect(card.locator(".eco-row").first()).toBeVisible();
+  await expect(card.locator(".eco-time")).toHaveText(/^\d+:\d\d$/);
+  const cardBox = (await card.boundingBox())!;
+  expect(cardBox.y).toBeGreaterThanOrEqual(0);
+  expect(cardBox.y + cardBox.height).toBeLessThanOrEqual(800);
+  await page.screenshot({ path: "test-results/economy-card.png" });
+
+  await page.locator(".tl-corner .tip").hover();
+  const bubble = page.locator(".tl-corner .tip-bubble");
+  await expect(bubble).toBeVisible();
+  const covered = await bubble.evaluate((el) => {
+    el.style.pointerEvents = "auto";
+    const r = el.getBoundingClientRect();
+    return [0.1, 0.5, 0.9].some((fx) =>
+      [0.2, 0.5, 0.8].some((fy) => {
+        const hit = document.elementFromPoint(r.left + r.width * fx, r.top + r.height * fy);
+        return !el.contains(hit);
+      }),
+    );
+  });
+  expect(covered).toBe(false);
+});
