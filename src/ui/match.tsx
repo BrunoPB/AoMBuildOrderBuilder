@@ -1,9 +1,12 @@
 import { useEffect, useRef, useState } from "preact/hooks";
+import type { PantheonId } from "../data/schema.ts";
+import { snapshotAt } from "../engine/format.ts";
 import { formatClock } from "../engine/time.ts";
+import type { Snapshot } from "../engine/types.ts";
 import { BuildActions } from "./build-actions.tsx";
 import { useApp } from "./context.tsx";
 import { StepChips } from "./editor/result.tsx";
-import { Tip, HelpText } from "./icon.tsx";
+import { EntityIcon, Tip, HelpText, useHelp } from "./icon.tsx";
 import { useSimulation } from "./sim.ts";
 import { Svg } from "./svg.tsx";
 
@@ -17,6 +20,61 @@ function beep(ctx: AudioContext | null, freq = 880): void {
   osc.connect(gain).connect(ctx.destination);
   osc.start();
   osc.stop(ctx.currentTime + 0.25);
+}
+
+const WORK = ["food", "wood", "gold", "favor", "build", "idle"] as const;
+
+/** Where the villagers should be right now, and the population: to check the game against. */
+function Workers({
+  s,
+  pantheon,
+  favor,
+}: {
+  s: Snapshot | undefined;
+  pantheon: PantheonId;
+  favor: boolean;
+}) {
+  const { t } = useApp();
+  const help = useHelp();
+  const capped = s !== undefined && s.pop >= s.popCap;
+  return (
+    <aside class="panel match-eco" data-testid="match-eco">
+      <h2 class="match-eco-title">
+        <Tip label={help("match.workers")}>
+          <span>{t("match.workers")}</span>
+        </Tip>
+        {s && <EntityIcon id={s.age} pantheon={pantheon} size={28} />}
+      </h2>
+      <ul class="match-eco-rows">
+        {WORK.filter((k) => k !== "favor" || favor).map((k) => {
+          const n = s?.alloc[k] ?? 0;
+          const label = t(k === "build" ? "tl.building" : `res.${k}`);
+          return (
+            <li
+              key={k}
+              class={`match-eco-row eco-${k} ${k === "idle" && n > 0 ? "lvl-error" : ""}`}
+              data-testid={`match-eco-${k}`}
+            >
+              {k === "build" ? (
+                <Svg name="hammer" label={label} />
+              ) : k === "idle" ? (
+                <Svg name="pause" label={label} />
+              ) : (
+                <EntityIcon id={k} pantheon={pantheon} size={32} />
+              )}
+              <span class="match-eco-name">{label}</span>
+              <span class="num match-eco-count">{n}</span>
+            </li>
+          );
+        })}
+      </ul>
+      <div class={`match-eco-row match-pop ${capped ? "lvl-delay" : ""}`} data-testid="match-pop">
+        <Svg name="users" label={t("result.pop")} />
+        <span class="match-eco-name">{t("result.pop")}</span>
+        <span class="num match-eco-count">{s ? `${s.pop}/${s.popCap}` : "—"}</span>
+      </div>
+    </aside>
+  );
 }
 
 export function MatchMode({ id }: { id: string }) {
@@ -46,7 +104,8 @@ export function MatchMode({ id }: { id: string }) {
   const now = Math.floor(elapsed);
   const currentIndex = steps.reduce((acc, s, i) => (s.seconds <= now ? i : acc), -1);
   const current = currentIndex >= 0 ? steps[currentIndex] : undefined;
-  const next = steps[currentIndex + 1];
+  const upcoming = steps.slice(currentIndex + 1, currentIndex + 4);
+  const next = upcoming[0];
 
   useEffect(() => {
     if (!running || !sound || !next) return;
@@ -82,13 +141,18 @@ export function MatchMode({ id }: { id: string }) {
     setRunning(!running);
   };
 
+  const series = sim.result?.series ?? [];
+  const snap = snapshotAt(series, Math.max(0, elapsed));
+  const favor = series.some((x) => (x.alloc.favor ?? 0) > 0);
+
   return (
     <div class="match" data-testid="match">
-      <div class="row" style={{ alignSelf: "stretch", justifyContent: "space-between" }}>
+      <div class="row match-bar">
         <a class="btn" href={`#/view/${encodeURIComponent(build.id)}`} data-testid="match-back">
           <Svg name="chevron" />
           {build.name}
         </a>
+        <span class="spacer" />
         <BuildActions build={build} readonly={found.readonly} current="play" />
         <Tip label={t("match.sound")}>
           <button
@@ -101,10 +165,10 @@ export function MatchMode({ id }: { id: string }) {
           </button>
         </Tip>
       </div>
-      <div class="clock" data-testid="clock" aria-live="off">
-        {elapsed < 0 ? `-${formatClock(-elapsed)}` : formatClock(Math.floor(elapsed))}
-      </div>
-      <div class="match-controls">
+      <div class="panel match-controls">
+        <div class="clock" data-testid="clock" aria-live="off">
+          {elapsed < 0 ? `-${formatClock(-elapsed)}` : formatClock(Math.floor(elapsed))}
+        </div>
         <button
           class="btn primary"
           onClick={toggle}
@@ -120,19 +184,21 @@ export function MatchMode({ id }: { id: string }) {
         <button class="btn" onClick={() => shift(5)} data-testid="match-plus">
           {t("match.plus5")}
         </button>
-        <button
-          class="btn"
-          data-testid="match-reset"
-          onClick={() => {
-            setRunning(false);
-            setElapsed(-countdown);
-            lastBeep.current = -1;
-          }}
-        >
-          <Svg name="reset" />
-          <HelpText k="match.reset" />
-        </button>
-        <label class="field">
+        <Tip label={t("match.reset")}>
+          <button
+            class="btn icon-only"
+            data-testid="match-reset"
+            aria-label={t("match.reset")}
+            onClick={() => {
+              setRunning(false);
+              setElapsed(-countdown);
+              lastBeep.current = -1;
+            }}
+          >
+            <Svg name="reset" />
+          </button>
+        </Tip>
+        <label class="field match-countdown">
           <HelpText k="match.countdown" />
           <input
             class="small"
@@ -148,29 +214,44 @@ export function MatchMode({ id }: { id: string }) {
           />
         </label>
       </div>
-      <div class="match-step now" data-testid="match-current">
-        <div class="row">
-          <span class="lvl-info">
-            <HelpText k="match.now" />
-          </span>
-          <span class="step-time">{current?.t ?? "—"}</span>
-          {current && (
-            <span class="num">
-              {current.pop} · {current.alloc}
-            </span>
-          )}
+      <div class="match-body">
+        <div class="match-steps">
+          <section class="match-step now" data-testid="match-current">
+            <div class="row match-step-head">
+              <span class="match-step-label">
+                <HelpText k="match.now" />
+              </span>
+              <span class="step-time num">{current?.t ?? "—"}</span>
+            </div>
+            {current ? (
+              <StepChips build={build} step={current} large />
+            ) : (
+              <p class="match-empty">{t("match.notStarted")}</p>
+            )}
+          </section>
+          <ol class="match-next" data-testid="match-next">
+            {upcoming.map((step, k) => (
+              <li key={step.seconds} class="match-step upcoming">
+                <div class="row match-step-head">
+                  {k === 0 && (
+                    <span class="match-step-label">
+                      <HelpText k="match.next" />
+                    </span>
+                  )}
+                  <span class="step-time num">{step.t}</span>
+                  <span class="num match-until">
+                    −{formatClock(Math.max(0, step.seconds - elapsed))}
+                  </span>
+                </div>
+                <StepChips build={build} step={step} large />
+              </li>
+            ))}
+            {upcoming.length === 0 && (
+              <li class="match-step upcoming match-empty">{t("match.done")}</li>
+            )}
+          </ol>
         </div>
-        {current && <StepChips build={build} step={current} large />}
-      </div>
-      <div class="match-step" data-testid="match-next">
-        <div class="row">
-          <span class="lvl-info">
-            <HelpText k="match.next" />
-          </span>
-          <span class="step-time">{next?.t ?? t("match.done")}</span>
-          {next && <span class="num">−{formatClock(Math.max(0, next.seconds - elapsed))}</span>}
-        </div>
-        {next && <StepChips build={build} step={next} large />}
+        <Workers s={snap} pantheon={build.pantheon} favor={favor} />
       </div>
     </div>
   );

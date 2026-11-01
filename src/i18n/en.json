@@ -235,6 +235,8 @@
   "match.next": "Next",
   "match.done": "End of build",
   "match.exit": "Leave match mode",
+  "match.workers": "Villagers now",
+  "match.notStarted": "The build has not started yet.",
   "settings.language": "Language",
   "settings.theme": "Theme",
   "settings.themeLight": "Light",
@@ -326,7 +328,7 @@
   "help.level.info": "Information: low-confidence data, a resource the unit does not gather…",
   "help.match.countdown": "Countdown seconds before 0:00, to sync with the start of the match.",
   "help.match.now": "The current step of the build.",
-  "help.match.next": "The next step and how long until it.",
+  "help.match.next": "The next 3 actions and how long until each.",
   "help.match.reset": "Puts the clock back to the start.",
   "help.settings.language": "Site language.",
   "help.settings.theme": "Light, dark or the same as your system.",
@@ -463,5 +465,6 @@
   "help.mode.view": "The whole build at once: timeline, resources and villagers, nothing to edit.",
   "help.mode.edit": "Create or change the build: actions, gods, settings.",
   "help.mode.play": "Follow the build during a match with a timer.",
-  "help.overview.full": "Shows everything: timeline with villagers and events, production by building, resources and population. Unchecked: only the ages and the order of the actions."
+  "help.overview.full": "Shows everything: timeline with villagers and events, production by building, resources and population. Unchecked: only the ages and the order of the actions.",
+  "help.match.workers": "Where the villagers should be right now according to the build, and the population. Compare with the game to spot what you forgot."
 }

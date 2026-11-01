@@ -151,13 +151,31 @@ test("match mode clock runs, shifts and resets", async ({ page }) => {
   await expect(clock).toHaveText("0:06", { timeout: 3000 });
   await page.getByTestId("match-toggle").click();
   await expect(page.getByTestId("match-current")).toContainText("0:00");
-  const next = (await page.getByTestId("match-next").locator(".step-time").textContent())!.trim();
+  const next = (await page
+    .getByTestId("match-next")
+    .locator(".step-time")
+    .first()
+    .textContent())!.trim();
   const [m, sec] = next.split(":").map(Number) as [number, number];
   for (let k = 0; k < Math.ceil((m * 60 + sec - 5) / 5); k++)
     await page.getByTestId("match-plus").click();
   await expect(page.getByTestId("match-current")).toContainText(next);
   await page.getByTestId("match-reset").click();
   await expect(clock).toHaveText("0:00");
+});
+
+test("match mode shows the next 3 steps and where the villagers should be", async ({ page }) => {
+  await page.goto("/#/play/preset%3Akrush");
+  await expect(page.getByTestId("match-next").locator(".match-step")).toHaveCount(3);
+  const eco = page.getByTestId("match-eco");
+  await expect(eco).toBeVisible();
+  await expect(page.getByTestId("match-pop")).toContainText("/");
+  const food = page.getByTestId("match-eco-food").locator(".match-eco-count");
+  const before = await food.textContent();
+  for (let k = 0; k < 12; k++) await page.getByTestId("match-plus").click();
+  await expect(page.getByTestId("clock")).toHaveText("1:00");
+  await expect(food).not.toHaveText(before!);
+  await expect(eco).toBeInViewport();
 });
 
 test("shows the starting units and sends idle ones to work", async ({ page }) => {

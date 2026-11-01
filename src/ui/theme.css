@@ -1019,59 +1019,221 @@ details.collapsible > summary::-webkit-details-marker {
   color: #fff;
 }
 
-/* ---------- match mode ---------- */
+/* ---------- match mode: the actions first, the clock small, the villagers always in view ---------- */
 
 .match {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 16px;
-  text-align: center;
+  gap: 10px;
 }
 
-.clock {
-  font-family: var(--mono);
-  font-size: clamp(64px, 18vw, 160px);
-  font-weight: 800;
-  line-height: 1;
+.match-bar {
+  gap: 6px;
 }
 
-.match-step {
-  width: 100%;
-  max-width: 900px;
-  padding: 16px;
-  border-radius: var(--radius);
-  border: 2px solid var(--border);
-  background: var(--surface);
-  text-align: left;
-}
-
-.match-step.now {
-  border-color: var(--accent);
-}
-
-.match-step .tl-chip {
-  font-size: clamp(16px, 2.4vw, 22px);
-  padding: 4px 10px 4px 4px;
-}
-
-.match-step .step-time {
-  font-family: var(--mono);
-  font-size: 28px;
-  font-weight: 700;
+.match-bar .spacer {
+  flex: 1;
 }
 
 .match-controls {
   display: flex;
-  gap: 8px;
   flex-wrap: wrap;
-  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+}
+
+.clock {
+  min-width: 3.6em;
+  font-family: var(--mono);
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 1;
 }
 
 .match-controls .btn {
-  min-height: 48px;
-  min-width: 64px;
+  min-height: 44px;
+  font-size: 16px;
+}
+
+.match-countdown {
+  margin-left: auto;
+}
+
+.match-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 300px);
+  gap: 10px;
+  align-items: start;
+}
+
+.match-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.match-next {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.match-step {
+  padding: 12px 14px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.match-step.now {
+  padding: 16px;
+  border: 3px solid var(--accent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 15%, transparent);
+}
+
+.match-step-head {
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.match-step-label {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.match-step .step-time {
   font-size: 18px;
+  font-weight: 700;
+}
+
+.match-until {
+  margin-left: auto;
+  color: var(--muted);
+  font-size: 16px;
+}
+
+.match-step .tl-chip {
+  font-size: clamp(16px, 2.2vw, 22px);
+  padding: 4px 10px 4px 4px;
+}
+
+.match-step.now .tl-chip {
+  font-size: clamp(18px, 2.6vw, 26px);
+}
+
+.match-step .tl-notice {
+  font-size: 17px;
+}
+
+.match-empty {
+  margin: 0;
+  color: var(--muted);
+  font-size: 17px;
+}
+
+.match-eco {
+  position: sticky;
+  top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.match-eco-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 0 4px;
+  font-size: 17px;
+}
+
+.match-eco-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.match-eco-row {
+  display: grid;
+  grid-template-columns: 32px 1fr auto;
+  align-items: center;
+  gap: 10px;
+  min-height: 40px;
+  padding: 2px 10px 2px 6px;
+  border-left: 5px solid var(--eco, var(--border));
+  border-radius: 6px;
+  background: var(--surface-2);
+  font-size: 16px;
+}
+
+.match-eco-row > .svg-icon {
+  width: 26px;
+  height: 26px;
+  justify-self: center;
+}
+
+.match-eco-count {
+  font-size: 26px;
+  font-weight: 800;
+}
+
+.match-pop {
+  margin-top: 4px;
+  border-left-color: var(--accent);
+}
+
+@media (max-width: 899px) {
+  .match-body {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  /* on a phone the villagers stay in view as a compact strip above the actions */
+  .match-eco {
+    order: -1;
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    padding: 8px;
+  }
+  .match-eco-rows {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(64px, 1fr));
+    gap: 4px;
+  }
+  .match-eco-row {
+    grid-template-columns: auto auto;
+    justify-content: center;
+    gap: 4px;
+    min-height: 36px;
+    padding: 2px 6px;
+    border-left-width: 0;
+    border-bottom: 4px solid var(--eco, var(--border));
+  }
+  .match-eco-row .match-eco-name {
+    display: none;
+  }
+  .match-eco-count {
+    font-size: 20px;
+  }
+  .match-pop {
+    margin-top: 0;
+    border-bottom-color: var(--accent);
+  }
+  .clock {
+    font-size: 32px;
+  }
+  .match-countdown {
+    margin-left: 0;
+  }
 }
 
 .action-label > .tip,

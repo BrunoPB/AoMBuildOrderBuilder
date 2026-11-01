@@ -235,6 +235,8 @@
   "match.next": "Próxima",
   "match.done": "Fim da build",
   "match.exit": "Sair do modo partida",
+  "match.workers": "Aldeões agora",
+  "match.notStarted": "A build ainda não começou.",
   "settings.language": "Idioma",
   "settings.theme": "Tema",
   "settings.themeLight": "Claro",
@@ -326,7 +328,7 @@
   "help.level.info": "Informação: dado de baixa confiança, coleta que a unidade não faz…",
   "help.match.countdown": "Segundos de contagem antes do 0:00, para sincronizar com o início da partida.",
   "help.match.now": "O passo atual da build.",
-  "help.match.next": "O próximo passo e quanto falta para ele.",
+  "help.match.next": "As próximas 3 ações e quanto falta para cada uma.",
   "help.match.reset": "Volta o relógio ao início.",
   "help.settings.language": "Idioma do site.",
   "help.settings.theme": "Claro, escuro ou igual ao sistema.",
@@ -463,5 +465,6 @@
   "help.mode.view": "A build inteira de uma vez: linha do tempo, recursos e aldeões, sem editar nada.",
   "help.mode.edit": "Monte ou mude a build: ações, deuses, ajustes.",
   "help.mode.play": "Acompanhe a build durante a partida com um cronômetro.",
-  "help.overview.full": "Mostra tudo: linha do tempo com aldeões e eventos, produção por prédio, recursos e população. Desmarcado: só as Eras e a ordem das ações."
+  "help.overview.full": "Mostra tudo: linha do tempo com aldeões e eventos, produção por prédio, recursos e população. Desmarcado: só as Eras e a ordem das ações.",
+  "help.match.workers": "Onde os aldeões deveriam estar agora, segundo a build, e a população. Compare com o jogo para ver se esqueceu algo."
 }
