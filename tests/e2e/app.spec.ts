@@ -428,3 +428,18 @@ test("actions share one timeline with villagers, buildings and draggable bars", 
   await expect(moved.locator(".row-time")).not.toContainText("0:00");
   await expect(moved.locator(".row-time")).toContainText("No tempo");
 });
+
+test("on desktop only the timeline scrolls, not the page", async ({ page, isMobile }) => {
+  test.skip(isMobile, "building is done on desktop");
+  await page.goto("/#/build/preset%3Akrush");
+  await page.getByTestId("tab-actions").click();
+  const sizes = await page.evaluate(() => {
+    const tl = document.querySelector<HTMLElement>(".tl")!;
+    return {
+      page: document.documentElement.scrollHeight - window.innerHeight,
+      inner: tl.scrollHeight - tl.clientHeight,
+    };
+  });
+  expect(sizes.page).toBeLessThanOrEqual(1);
+  expect(sizes.inner).toBeGreaterThan(0);
+});

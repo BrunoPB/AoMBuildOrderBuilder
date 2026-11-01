@@ -4,6 +4,7 @@ import { type Action, BUILD_TYPES, type Build, type Settings } from "../../engin
 import { text } from "../../i18n/index.ts";
 import { navigate } from "../app.tsx";
 import { useApp, useViewPref } from "../context.tsx";
+import { GlobalTools } from "../global-tools.tsx";
 import { EntityIcon, Tip, HelpText, useHelp } from "../icon.tsx";
 import { duplicateBuild, useSimulation } from "../sim.ts";
 import { Svg } from "../svg.tsx";
@@ -357,11 +358,18 @@ export function Editor({ id }: { id: string }) {
   );
   const [warningsOpen, setWarningsOpen] = useState(false);
   const pageRef = useRef<HTMLDivElement>(null);
+  /** On wide screens the build screen fills the window; the actions stage scrolls inside. */
+  useEffect(() => {
+    const root = document.documentElement;
+    root.classList.add("build-route");
+    root.classList.toggle("workspace", stage === "actions");
+    return () => root.classList.remove("build-route", "workspace");
+  }, [stage]);
   /** Header and palette heights, so the palette and the time axis stick right below them. */
   useEffect(() => {
     const page = pageRef.current;
     if (!page) return;
-    const parts = [".build-header", ".palette-col"].map((q) => page.querySelector<HTMLElement>(q));
+    const parts = [".build-header", ".tl-toolbar"].map((q) => page.querySelector<HTMLElement>(q));
     const measure = () => {
       page.style.setProperty("--hdr-h", `${parts[0]?.offsetHeight ?? 0}px`);
       page.style.setProperty("--pal-h", `${parts[1]?.offsetHeight ?? 0}px`);
@@ -441,7 +449,7 @@ export function Editor({ id }: { id: string }) {
               <Svg name="home" />
             </a>
           </Tip>
-          {god && <EntityIcon id={god.id} pantheon={build.pantheon} size={40} />}
+          {god && <EntityIcon id={god.id} pantheon={build.pantheon} size={30} />}
           <input
             type="text"
             class="name-input"
@@ -459,6 +467,22 @@ export function Editor({ id }: { id: string }) {
               </span>
             </Tip>
           )}
+          <nav class="stages" aria-label={build.name}>
+            {STAGES.map((st, i) => (
+              <Tip key={st.id} label={help(`tab.${st.id}`)}>
+                <button
+                  class="stage"
+                  aria-current={stage === st.id ? "step" : undefined}
+                  data-testid={`tab-${st.id}`}
+                  onClick={() => go(st.id)}
+                >
+                  <span class="stage-num num">{i + 1}</span>
+                  <Svg name={st.icon} />
+                  <span class="stage-label">{t(`tab.${st.id}`)}</span>
+                </button>
+              </Tip>
+            ))}
+          </nav>
           <div class="row header-tools">
             {!readonly && (
               <>
@@ -513,24 +537,11 @@ export function Editor({ id }: { id: string }) {
                 {t("card.duplicateToEdit")}
               </button>
             )}
+            <span class="header-global row">
+              <GlobalTools />
+            </span>
           </div>
         </div>
-        <nav class="stages" aria-label={build.name}>
-          {STAGES.map((st, i) => (
-            <Tip key={st.id} label={help(`tab.${st.id}`)}>
-              <button
-                class="stage"
-                aria-current={stage === st.id ? "step" : undefined}
-                data-testid={`tab-${st.id}`}
-                onClick={() => go(st.id)}
-              >
-                <span class="stage-num num">{i + 1}</span>
-                <Svg name={st.icon} />
-                <span class="stage-label">{t(`tab.${st.id}`)}</span>
-              </button>
-            </Tip>
-          ))}
-        </nav>
       </header>
 
       {sim.error && (
@@ -543,26 +554,26 @@ export function Editor({ id }: { id: string }) {
 
       {stage === "actions" && (
         <div class={`editor ${readonly ? "readonly" : ""}`}>
-          {!readonly && (
-            <div class="palette-col">
-              <Palette
-                build={build}
-                idle={result?.series.find((x) => x.t >= 5)?.alloc.idle ?? 0}
-                onAdd={(a) =>
-                  update({
-                    ...build,
-                    actions: [...build.actions, { ...a, id: nextActionId(build) }],
-                  })
-                }
-              />
-            </div>
-          )}
           <ActionList
             build={build}
             result={result}
             steps={sim.steps}
             readonly={readonly}
             update={update}
+            palette={
+              readonly ? undefined : (
+                <Palette
+                  build={build}
+                  idle={result?.series.find((x) => x.t >= 5)?.alloc.idle ?? 0}
+                  onAdd={(a) =>
+                    update({
+                      ...build,
+                      actions: [...build.actions, { ...a, id: nextActionId(build) }],
+                    })
+                  }
+                />
+              )
+            }
           />
         </div>
       )}

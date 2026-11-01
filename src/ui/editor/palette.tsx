@@ -1,6 +1,7 @@
 import { AGES, type Age } from "../../data/schema.ts";
 import type { Action, ActionKind, Build } from "../../engine/build.ts";
 import { text } from "../../i18n/index.ts";
+import { useState } from "preact/hooks";
 import { useApp, useViewPref } from "../context.tsx";
 import { EntityIcon, Tip, HelpText, useHelp, useLabel } from "../icon.tsx";
 import { KIND_ICON, Svg } from "../svg.tsx";
@@ -31,6 +32,7 @@ export function Palette({
     null,
     ...PALETTE_GROUPS.flatMap((g) => g.kinds),
   ]);
+  const [dragging, setDragging] = useState(false);
   const [age, setAge] = useViewPref<Age | null>("palette.age", null, [null, ...AGES]);
   const p = data.pantheons.get(build.pantheon);
   const god = data.gods.get(build.god);
@@ -179,12 +181,17 @@ export function Palette({
     setKind(kind === k ? null : k);
   };
 
-  /** Drag an action from the palette into a position of the action list. */
+  /** Drag an action from the palette into a position of the action list; the picker lets
+   *  drops through to the rows it covers while dragging. */
   const draggable = (a: Action | undefined) =>
     a
       ? {
           draggable: true,
-          onDragStart: (e: DragEvent) => e.dataTransfer?.setData(ACTION_MIME, JSON.stringify(a)),
+          onDragStart: (e: DragEvent) => {
+            e.dataTransfer?.setData(ACTION_MIME, JSON.stringify(a));
+            requestAnimationFrame(() => setDragging(true));
+          },
+          onDragEnd: () => setDragging(false),
         }
       : {};
 
@@ -194,20 +201,18 @@ export function Palette({
   );
 
   return (
-    <div class="panel palette" data-testid="palette">
+    <div class="palette" data-testid="palette">
       <div class="palette-bar">
-        <h3>
-          <Svg name="plus" />
-          <HelpText k="editor.add" />
-        </h3>
+        <Tip label={[t("editor.add"), help("editor.add")].filter(Boolean).join("\n")}>
+          <span class="palette-plus" aria-label={t("editor.add")}>
+            <Svg name="plus" />
+          </span>
+        </Tip>
         {PALETTE_GROUPS.map((g) => {
           const kinds = g.kinds.filter(available);
           if (kinds.length === 0) return null;
           return (
             <div key={g.id} class="palette-group" data-testid={`palette-${g.id}`}>
-              <span class="palette-group-label">
-                <HelpText k={`palette.group.${g.id}`} />
-              </span>
               <div class="palette-kinds" role="toolbar" aria-label={t(`palette.group.${g.id}`)}>
                 {kinds.map((k) => (
                   <Tip
@@ -234,7 +239,11 @@ export function Palette({
         })}
       </div>
       {current && (
-        <>
+        <div
+          class={`palette-pop ${dragging ? "dragging" : ""}`}
+          data-testid="palette-pop"
+          onKeyDown={(e) => e.key === "Escape" && setKind(null)}
+        >
           <div class="row palette-ages">
             <button class="chip" aria-pressed={age === null} onClick={() => setAge(null)}>
               <HelpText k="palette.allAges" />
@@ -250,6 +259,15 @@ export function Palette({
                 </button>
               </Tip>
             ))}
+            <span class="palette-pop-title">{label(`action.${current}`, ctx)}</span>
+            <button
+              class="btn icon-only"
+              aria-label={t("nav.close")}
+              data-testid="palette-close"
+              onClick={() => setKind(null)}
+            >
+              <Svg name="x" />
+            </button>
           </div>
           <div class="entity-grid" data-testid="entity-grid">
             {sorted.map((o) => {
@@ -273,7 +291,7 @@ export function Palette({
                     }}
                     {...draggable(actionFor(o))}
                   >
-                    <EntityIcon id={o.id} pantheon={build.pantheon} size={40} tip={false} />
+                    <EntityIcon id={o.id} pantheon={build.pantheon} size={36} tip={false} />
                     {o.age && o.age !== "archaic" && (
                       <span class="age-badge">
                         <EntityIcon id={o.age} pantheon={build.pantheon} size={14} tip={false} />
@@ -284,7 +302,7 @@ export function Palette({
               );
             })}
           </div>
-        </>
+        </div>
       )}
     </div>
   );

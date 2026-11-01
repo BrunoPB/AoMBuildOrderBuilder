@@ -1,4 +1,4 @@
-import { Fragment } from "preact";
+import { type ComponentChildren, Fragment } from "preact";
 import { useState } from "preact/hooks";
 import type { Action, Build } from "../../engine/build.ts";
 import type { Step, StepAction } from "../../engine/format.ts";
@@ -135,12 +135,15 @@ export function ActionList({
   steps,
   readonly,
   update,
+  palette,
 }: {
   build: Build;
   result?: SimResult;
   steps: Step[];
   readonly: boolean;
   update: (b: Build) => void;
+  /** The add-action palette, shown at the start of the toolbar. */
+  palette?: ComponentChildren;
 }) {
   const { t } = useApp();
   const help = useHelp();
@@ -208,38 +211,40 @@ export function ActionList({
 
   return (
     <div class="panel tl-panel">
-      <div class="list-head">
-        <h3>
-          <Svg name="list" />
-          <HelpText k="editor.actions" /> <span class="num">{build.actions.length}</span>
-        </h3>
-        <div class="segmented" role="group" aria-label={t("production.zoom")}>
-          {ZOOMS.map((z) => (
-            <Tip key={z} label={help(z ? "production.zoom" : "tl.fit")}>
-              <button
-                class="chip"
-                aria-pressed={zoom === z}
-                aria-label={z ? `${t("production.zoom")} ${z}×` : t("tl.fit")}
-                data-testid={`zoom-${z || "fit"}`}
-                onClick={() => setZoom(z)}
-              >
-                {z ? `${z}×` : <Svg name="fit" />}
-              </button>
-            </Tip>
-          ))}
+      <div class="tl-toolbar">
+        {palette}
+        <div class="tl-tools">
+          <h3 class="tl-title">
+            <HelpText k="editor.actions" /> <span class="num">{build.actions.length}</span>
+          </h3>
+          <div class="segmented" role="group" aria-label={t("production.zoom")}>
+            {ZOOMS.map((z) => (
+              <Tip key={z} label={help(z ? "production.zoom" : "tl.fit")}>
+                <button
+                  class="chip"
+                  aria-pressed={zoom === z}
+                  aria-label={z ? `${t("production.zoom")} ${z}×` : t("tl.fit")}
+                  data-testid={`zoom-${z || "fit"}`}
+                  onClick={() => setZoom(z)}
+                >
+                  {z ? `${z}×` : <Svg name="fit" />}
+                </button>
+              </Tip>
+            ))}
+          </div>
+          {result && (
+            <label class="switch">
+              <input
+                type="checkbox"
+                checked={events}
+                data-testid="show-events"
+                onChange={(e) => setEvents(e.currentTarget.checked)}
+              />
+              <Svg name="clock" />
+              <HelpText k="editor.events" />
+            </label>
+          )}
         </div>
-        {result && (
-          <label class="switch">
-            <input
-              type="checkbox"
-              checked={events}
-              data-testid="show-events"
-              onChange={(e) => setEvents(e.currentTarget.checked)}
-            />
-            <Svg name="clock" />
-            <HelpText k="editor.events" />
-          </label>
-        )}
       </div>
       <div
         ref={boxRef}

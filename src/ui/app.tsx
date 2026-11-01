@@ -6,11 +6,11 @@ import { PRESETS, isPreset } from "../presets/index.ts";
 import { browserStorage, type Prefs, Store } from "../storage/index.ts";
 import { AppContext, type AppApi, type Toast } from "./context.tsx";
 import { Editor } from "./editor/editor.tsx";
+import { GlobalTools } from "./global-tools.tsx";
 import { Library } from "./library.tsx";
 import { MatchMode } from "./match.tsx";
 import { SettingsPage } from "./settings.tsx";
 import { Svg } from "./svg.tsx";
-import { Tip } from "./icon.tsx";
 
 type Route =
   | { page: "library" }
@@ -167,34 +167,7 @@ export function App({ data }: { data: GameData }) {
             <span>{api.t("app.title")}</span>
           </a>
           <span class="spacer" />
-          {!storageOk && (
-            <Tip label={api.t("storage.unavailable")} focusable>
-              <span class="lvl-delay" data-testid="storage-warning">
-                <Svg name="warning" label={api.t("storage.unavailable")} />
-              </span>
-            </Tip>
-          )}
-          <Tip label={api.t("settings.language")}>
-            <button
-              class="btn"
-              data-testid="toggle-locale"
-              onClick={() => api.setPrefs({ locale: locale === "pt-BR" ? "en" : "pt-BR" })}
-              aria-label={api.t("settings.language")}
-            >
-              <Svg name="globe" />
-              {locale === "pt-BR" ? "PT" : "EN"}
-            </button>
-          </Tip>
-          <Tip label={api.t("nav.library")}>
-            <a class="btn icon-only" href="#/" aria-label={api.t("nav.library")}>
-              <Svg name="home" />
-            </a>
-          </Tip>
-          <Tip label={api.t("nav.settings")}>
-            <a class="btn icon-only" href="#/settings" aria-label={api.t("nav.settings")}>
-              <Svg name="gear" />
-            </a>
-          </Tip>
+          <GlobalTools home />
         </header>
         <main>
           {route.page === "library" && <Library />}
