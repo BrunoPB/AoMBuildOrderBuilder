@@ -2616,6 +2616,10 @@ textarea {
   html.build-route .topbar {
     display: none;
   }
+  /* no top bar above it here, so it sticks to the top of the window */
+  html.build-route .build-header {
+    top: 0;
+  }
   html.build-route .header-global {
     display: inline-flex;
     gap: 6px;

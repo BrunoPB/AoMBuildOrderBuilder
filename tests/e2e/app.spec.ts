@@ -522,3 +522,17 @@ test("timeline tooltips: villager card and a clock tip that is not covered", asy
   });
   expect(covered).toBe(false);
 });
+
+test("on desktop the build header sticks to the top of the window", async ({ page, isMobile }) => {
+  test.skip(isMobile, "desktop layout");
+  await page.setViewportSize({ width: 1400, height: 700 });
+  await page.goto("/#/build/preset%3Akrush");
+  await page.getByTestId("tab-result").click();
+  await expect(page.getByTestId("result")).toBeVisible();
+  await page.mouse.wheel(0, 600);
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(100);
+  const top = await page
+    .getByTestId("build-header")
+    .evaluate((el) => el.getBoundingClientRect().top);
+  expect(top).toBeLessThanOrEqual(1);
+});
