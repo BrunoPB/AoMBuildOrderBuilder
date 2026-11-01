@@ -1,5 +1,6 @@
 import { Fragment, type ComponentChildren } from "preact";
 import { useEffect, useState } from "preact/hooks";
+import { AGES } from "../data/schema.ts";
 import type { Build } from "../engine/build.ts";
 import type { Step } from "../engine/format.ts";
 import { formatClock } from "../engine/time.ts";
@@ -8,7 +9,7 @@ import { text } from "../i18n/index.ts";
 import { BuildActions } from "./build-actions.tsx";
 import { useApp, useViewPref } from "./context.tsx";
 import { ActionList } from "./editor/action-list.tsx";
-import { actionIcons, actionKindIcon, actionTarget, actionText } from "./editor/labels.ts";
+import { actionIcons, actionTarget, actionText } from "./editor/labels.ts";
 import { ProductionChart } from "./editor/production.tsx";
 import {
   Charts,
@@ -23,44 +24,13 @@ import { EntityIcon, Tip, useHelp } from "./icon.tsx";
 import { useSimulation } from "./sim.ts";
 import { Svg } from "./svg.tsx";
 
-/** When each age is clicked and reached. */
-function AgeTimes({ build, result }: { build: Build; result: SimResult }) {
-  const { t } = useApp();
-  const ages = (["classical", "heroic", "mythic"] as const).filter((a) => result.ageTimes[a]);
-  if (ages.length === 0) return null;
-  return (
-    <div class="overview-ages" data-testid="overview-ages">
-      {ages.map((age) => {
-        const time = result.ageTimes[age]!;
-        return (
-          <span key={age} class="overview-age">
-            <EntityIcon id={age} pantheon={build.pantheon} size={28} />
-            <span class="num">
-              <Tip label={t("result.clicked")}>
-                <span>{formatClock(time.clicked)}</span>
-              </Tip>
-              {time.reached !== undefined && (
-                <>
-                  {" → "}
-                  <Tip label={t("result.reached")}>
-                    <strong>{formatClock(time.reached)}</strong>
-                  </Tip>
-                </>
-              )}
-            </span>
-          </span>
-        );
-      })}
-    </div>
-  );
-}
+type Item = { t: number; key: string; node: ComponentChildren };
 
-/** The build order as a plain list, in time order: when, what, and the reminders to act. */
-function OrderList({ build, result, steps }: { build: Build; result: SimResult; steps: Step[] }) {
-  const { data, locale } = useApp();
+/** The build order split by age, one column each: what to do and when, in big type. */
+function AgeColumns({ build, result, steps }: { build: Build; result: SimResult; steps: Step[] }) {
+  const { t, data, locale } = useApp();
   const c = { data, pantheon: build.pantheon, locale };
   const worker = data.pantheons.get(build.pantheon)?.def.workers[0];
-  type Item = { t: number; key: string; node: ComponentChildren };
   const items: Item[] = build.actions.map((a, i) => {
     const at = result.actions[i]?.startedAt;
     const target = actionTarget(a);
@@ -70,14 +40,15 @@ function OrderList({ build, result, steps }: { build: Build; result: SimResult; 
       node: (
         <li class={`order-row kind-${a.do === "train" && a.mode ? "rule" : a.do}`}>
           <span class="num order-time">{at === undefined ? "—" : formatClock(at)}</span>
-          <span class="order-kind">
-            <Svg name={actionKindIcon(a)} />
+          <span class="order-icons">
+            {actionIcons(a, worker)
+              .slice(0, 2)
+              .map((id) => (
+                <EntityIcon key={id} id={id} pantheon={build.pantheon} size={36} />
+              ))}
           </span>
-          {actionIcons(a, worker).map((id) => (
-            <EntityIcon key={id} id={id} pantheon={build.pantheon} size={24} />
-          ))}
           <span class="order-text">{actionText(c, a)}</span>
-          {target && <EntityIcon id={target} pantheon={build.pantheon} size={20} />}
+          {target && <EntityIcon id={target} pantheon={build.pantheon} size={28} />}
         </li>
       ),
     };
@@ -90,7 +61,7 @@ function OrderList({ build, result, steps }: { build: Build; result: SimResult; 
       node: (
         <li class="order-row order-notice lvl-attention">
           <span class="num order-time">{s.t}</span>
-          <span class="order-kind">
+          <span class="order-icons">
             <Svg name="arrows" />
           </span>
           <span class="order-text">{s.notice}</span>
@@ -99,12 +70,72 @@ function OrderList({ build, result, steps }: { build: Build; result: SimResult; 
     });
   }
   items.sort((x, y) => x.t - y.t);
+
+  /** An action belongs to the age the player is in when it starts. */
+  const ageName = (age: string) => {
+    const name = data.common.ages.find((a) => a.id === age)?.name;
+    return name ? text(locale, name) : age;
+  };
+  const reachedAges = AGES.filter(
+    (a) => a === "archaic" || result.ageTimes[a]?.reached !== undefined,
+  );
+  const column = (time: number) =>
+    reachedAges.reduce(
+      (k, a, i) => (a !== "archaic" && time >= result.ageTimes[a]!.reached! ? i : k),
+      0,
+    );
+  const grouped = reachedAges.map(() => [] as Item[]);
+  for (const x of items) grouped[column(x.t)]!.push(x);
+  /** An age reached when nothing is left to do (the build's goal) closes the previous column. */
+  const ages = reachedAges.filter((_, k) => grouped[k]!.length > 0);
+  const columns = grouped.filter((g) => g.length > 0);
+  for (const age of reachedAges.filter((a) => !ages.includes(a))) {
+    const reached = result.ageTimes[age]!.reached!;
+    columns.at(-1)!.push({
+      t: reached,
+      key: `age-${age}`,
+      node: (
+        <li class="order-row order-age kind-age">
+          <span class="num order-time">{formatClock(reached)}</span>
+          <span class="order-icons">
+            <EntityIcon id={age} pantheon={build.pantheon} size={36} />
+          </span>
+          <strong class="order-text">{t("step.ageDone", { age: ageName(age) })}</strong>
+        </li>
+      ),
+    });
+  }
+
   return (
-    <ol class="panel order-list" data-testid="order-list">
-      {items.map((x) => (
-        <Fragment key={x.key}>{x.node}</Fragment>
-      ))}
-    </ol>
+    <div class="age-columns" data-testid="order-list" style={{ "--cols": ages.length }}>
+      {ages.map((age, k) => {
+        const time = result.ageTimes[age];
+        return (
+          <section key={age} class="age-column" data-testid={`age-column-${age}`}>
+            <h2 class="age-column-head">
+              <EntityIcon id={age} pantheon={build.pantheon} size={44} />
+              <span class="age-column-name">{ageName(age)}</span>
+              {time && (
+                <span class="num age-column-time">
+                  <Tip label={t("result.clicked")}>
+                    <span>{formatClock(time.clicked)}</span>
+                  </Tip>
+                  {" → "}
+                  <Tip label={t("result.reached")}>
+                    <strong>{formatClock(time.reached!)}</strong>
+                  </Tip>
+                </span>
+              )}
+            </h2>
+            <ol class="order-list">
+              {columns[k]!.map((x) => (
+                <Fragment key={x.key}>{x.node}</Fragment>
+              ))}
+            </ol>
+          </section>
+        );
+      })}
+    </div>
   );
 }
 
@@ -199,8 +230,7 @@ export function Overview({ id }: { id: string }) {
 
       {result && !full && (
         <div class="stack overview-simple">
-          <AgeTimes build={build} result={result} />
-          <OrderList build={build} result={result} steps={sim.steps} />
+          <AgeColumns build={build} result={result} steps={sim.steps} />
         </div>
       )}
 
