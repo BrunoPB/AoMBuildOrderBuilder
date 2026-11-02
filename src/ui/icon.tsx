@@ -46,6 +46,43 @@ function unfollow(host: HTMLElement): void {
   following.delete(host);
 }
 
+function bold(line: string): ComponentChildren {
+  return line
+    .split(/\*\*(.+?)\*\*/)
+    .map((part, k) => (k % 2 ? <strong key={k}>{part}</strong> : part));
+}
+
+/** Tooltip text with a little formatting: lines starting with "• " become a list, **x** is bold. */
+function formatTip(text: string): ComponentChildren {
+  if (!text.includes("\n• ") && !text.includes("**")) return text;
+  const out: ComponentChildren[] = [];
+  let items: string[] = [];
+  const flush = () => {
+    if (items.length)
+      out.push(
+        <ul key={out.length}>
+          {items.map((x, k) => (
+            <li key={k}>{bold(x)}</li>
+          ))}
+        </ul>,
+      );
+    items = [];
+  };
+  for (const line of text.split("\n")) {
+    if (line.startsWith("• ")) items.push(line.slice(2));
+    else {
+      flush();
+      out.push(
+        <span key={out.length} class="tip-line">
+          {bold(line)}
+        </span>,
+      );
+    }
+  }
+  flush();
+  return out;
+}
+
 export function Tip({
   label,
   card,
@@ -84,7 +121,7 @@ export function Tip({
     >
       {children}
       <span class={`tip-bubble ${card ? "tip-card" : ""}`} role="tooltip">
-        {card ?? label}
+        {card ?? formatTip(label)}
       </span>
     </span>
   );

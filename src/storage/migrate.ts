@@ -11,6 +11,19 @@ const migrations: Record<number, (b: Record<string, unknown>) => Record<string, 
     ...b,
     actions: Array.isArray(b.actions) ? b.actions.map(trainModesV2) : b.actions,
   }),
+  /** The build-wide reserve window became a setting of each "when affordable" train action. */
+  2: (b) => {
+    const { affordableWindow, ...settings } = (b.settings ?? {}) as Record<string, unknown>;
+    if (affordableWindow === undefined) return b;
+    const actions = Array.isArray(b.actions)
+      ? b.actions.map((a: Record<string, unknown>) =>
+          a.do === "train" && a.mode === "affordable" && a.window === undefined
+            ? { ...a, window: affordableWindow }
+            : a,
+        )
+      : b.actions;
+    return { ...b, settings, actions };
+  },
 };
 
 function trainModesV2(raw: unknown): unknown {

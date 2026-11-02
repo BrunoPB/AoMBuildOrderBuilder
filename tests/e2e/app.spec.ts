@@ -530,8 +530,17 @@ test("train has a mode: fixed count, auto queue or when affordable", async ({ pa
   await expect(row.getByTestId("row-count")).toHaveCount(0);
   await expect(row).toContainText("Produção automática de Cidadãos");
   await expect(row).toHaveClass(/kind-rule/);
+  await expect(row.getByTestId("row-window")).toHaveCount(0);
   await row.getByTestId("row-train-mode").selectOption("affordable");
   await expect(row).toContainText("Cidadãos sempre que der");
+  await row.getByTestId("row-window").fill("60");
+  await row.getByTestId("row-window").press("Tab");
+  await expect(row.getByTestId("row-window")).toHaveValue("60");
+  // the mode explanation is a bulleted list
+  const help = row.locator(".action-details .tip.help").filter({ hasText: "Modo" });
+  await help.hover();
+  await expect(help.locator(".tip-bubble li")).toHaveCount(3);
+  await expect(help.locator(".tip-bubble li strong").first()).toHaveText("Quantidade fixa");
   await row.getByTestId("row-train-mode").selectOption("count");
   await expect(row).toContainText("Treinar 1 Cidadão");
 

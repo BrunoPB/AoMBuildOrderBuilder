@@ -10,7 +10,7 @@ import {
 import { isClock } from "./time.ts";
 
 export const BUILD_FORMAT = "aomr-bob";
-export const BUILD_VERSION = 2;
+export const BUILD_VERSION = 3;
 
 export const BUILD_TYPES = ["rush", "eco", "timing", "water", "other"] as const;
 export const BuildTypeSchema = z.enum(BUILD_TYPES);
@@ -62,6 +62,8 @@ export const ActionSchema = z.discriminatedUnion("do", [
     unit: z.string(),
     count,
     mode: TrainModeSchema.optional(),
+    /** `affordable`: seconds ahead whose timed actions keep their cost reserved (default in data). */
+    window: z.number().nonnegative().optional(),
     rally: TaskTargetSchema.optional(),
     at: z.string().optional(),
   }),
@@ -161,7 +163,6 @@ export const SettingsSchema = z.strictObject({
   oracleRate: z.number().nonnegative().optional(),
   norseFavorPerMinute: z.number().nonnegative().optional(),
   popReservedAt: z.enum(["start", "end"]).optional(),
-  affordableWindow: z.number().nonnegative().optional(),
   /** Override the amount of each source (e.g. a bigger hunt). */
   sourceAmounts: z.partialRecord(SourceIdSchema, z.number().positive()).optional(),
   /** Seconds to simulate after the last action; default 30. */

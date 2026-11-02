@@ -130,6 +130,7 @@ type Rule = {
   unit: string;
   rally?: TaskTarget;
   at?: string;
+  window?: number;
   active: boolean;
   cappedSince?: number;
   errorReported?: boolean;
@@ -166,7 +167,7 @@ export function resolveSettings(build: Build, data: GameData): ResolvedSettings 
     oracleRate: s.oracleRate,
     norseFavorPerMinute: s.norseFavorPerMinute ?? d.norseFavorPerMinute,
     popReservedAt: s.popReservedAt ?? d.popReservedAt,
-    affordableWindow: s.affordableWindow ?? d.affordableWindow,
+    affordableWindow: d.affordableWindow,
     sourceAmounts: s.sourceAmounts ?? {},
     tail: s.tail ?? 30,
   };
@@ -638,8 +639,8 @@ class Simulation {
     }
   }
 
-  /** Costs of one-shot actions waiting now or due within the affordable window. */
-  reserved(): Cost {
+  /** Costs of one-shot actions waiting now or due within `window` seconds. */
+  reserved(window: number): Cost {
     let total: Cost = {};
     this.build.actions.forEach((a, i) => {
       const st = this.states[i]!;
@@ -648,9 +649,7 @@ class Simulation {
       const w = a.when;
       const due =
         this.eligible(i) ||
-        (typeof w === "string" &&
-          w !== "asap" &&
-          parseClock(w) <= this.t + this.s.affordableWindow);
+        (typeof w === "string" && w !== "asap" && parseClock(w) <= this.t + window);
       if (due) total = addCost(total, this.actionCost(a, st));
     });
     return total;
@@ -1539,7 +1538,15 @@ class Simulation {
     if (!def)
       return this.block(i, { key: "warn.unknownId", level: "error", params: { id: a.unit } });
     this.flagLowConfidence(i, def);
-    this.rules.push({ action: i, mode, unit: a.unit, rally: a.rally, at: a.at, active: true });
+    this.rules.push({
+      action: i,
+      mode,
+      unit: a.unit,
+      rally: a.rally,
+      at: a.at,
+      window: a.window,
+      active: true,
+    });
     this.start(i);
     this.complete(i);
     this.emit({ kind: "trainOn", mode, unit: a.unit, rally: a.rally, action: i, t: this.t });
@@ -1573,7 +1580,11 @@ class Simulation {
   // ---------- rules ----------
 
   runRules(): void {
-    const reserved = this.reserved();
+    const reserves = new Map<number, Cost>();
+    const reserveFor = (window: number) => {
+      if (!reserves.has(window)) reserves.set(window, this.reserved(window));
+      return reserves.get(window)!;
+    };
     this.rules.forEach((rule, ri) => {
       if (!rule.active) return;
       this.acting = rule.action;
@@ -1585,7 +1596,10 @@ class Simulation {
           at: rule.at,
           rule: ri,
           rally: rule.rally,
-          reserved: rule.mode === "affordable" ? reserved : undefined,
+          reserved:
+            rule.mode === "affordable"
+              ? reserveFor(rule.window ?? this.s.affordableWindow)
+              : undefined,
         });
         if ("uid" in result) continue;
         if (result.key === "warn.popCapped") capped = true;

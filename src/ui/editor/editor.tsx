@@ -121,16 +121,6 @@ function SettingsPanel({
             <option value="end">{t("editor.popEnd")}</option>
           </select>
         </label>
-        <label class="field">
-          <HelpText k="editor.window" />
-          <input
-            type="number"
-            min="0"
-            placeholder={String(d.affordableWindow)}
-            value={s.affordableWindow ?? ""}
-            onChange={(e) => set({ affordableWindow: num(e.currentTarget.value) })}
-          />
-        </label>
         {(["hunt", "berries", "herd"] as SourceId[])
           .filter((x) => data.sources.has(x))
           .map((x) => (

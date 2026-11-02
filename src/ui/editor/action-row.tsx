@@ -464,8 +464,8 @@ export function ActionRow(props: Props) {
                   const m = e.currentTarget.value;
                   set(
                     m === "auto" || m === "affordable"
-                      ? { mode: m, count: undefined }
-                      : { mode: undefined, count: 1 },
+                      ? { mode: m, count: undefined, window: undefined }
+                      : { mode: undefined, count: 1, window: undefined },
                   );
                 }}
               >
@@ -475,6 +475,24 @@ export function ActionRow(props: Props) {
                   </option>
                 ))}
               </select>
+            </label>
+          )}
+          {a.do === "train" && a.mode === "affordable" && (
+            <label class="field">
+              <HelpText k="row.window" />
+              <input
+                class="small"
+                type="number"
+                min={0}
+                step={5}
+                placeholder={String(data.common.defaults.affordableWindow)}
+                value={a.window ?? ""}
+                data-testid="row-window"
+                onChange={(e) => {
+                  const v = e.currentTarget.value.trim();
+                  set({ window: v === "" ? undefined : Math.max(0, Math.round(Number(v) || 0)) });
+                }}
+              />
             </label>
           )}
           {((a.do === "train" && !a.mode) || a.do === "promote") && (

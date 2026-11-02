@@ -93,7 +93,7 @@ describe("storage", () => {
   });
 
   it("validates versions on load", () => {
-    expect(migrateBuild({ ...krush, version: 3 })).toMatchObject({ ok: false, newer: 3 });
+    expect(migrateBuild({ ...krush, version: 4 })).toMatchObject({ ok: false, newer: 4 });
     expect(migrateBuild({ ...krush, version: 0 }).ok).toBe(false);
   });
 
@@ -115,6 +115,27 @@ describe("storage", () => {
       { when: "always", do: "train", mode: "affordable", unit: "turma", at: "counter-barracks" },
       { when: "5:00", do: "stopTrain", mode: "auto", unit: "citizen" },
       { when: "5:00", do: "stopTrain", mode: "affordable" },
+    ]);
+  });
+
+  it("migrates the build-wide reserve window into each 'when affordable' action", () => {
+    const v2 = {
+      ...krush,
+      version: 2,
+      settings: { efficiency: 0.9, affordableWindow: 60 },
+      actions: [
+        { when: "always", do: "train", mode: "affordable", unit: "turma" },
+        { when: "always", do: "train", mode: "affordable", unit: "promethean", window: 10 },
+        { when: "0:00", do: "train", mode: "auto", unit: "citizen" },
+      ],
+      milestones: [],
+    };
+    const r = migrateBuild(v2);
+    expect(r.ok && r.build.settings).toEqual({ efficiency: 0.9 });
+    expect(r.ok && r.build.actions.map((a) => ("window" in a ? a.window : undefined))).toEqual([
+      60,
+      10,
+      undefined,
     ]);
   });
 

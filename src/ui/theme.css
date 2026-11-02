@@ -3345,3 +3345,17 @@ textarea {
 .share-banner .spacer {
   flex: 1;
 }
+
+/* tooltip lists: help with several options reads better as bullets */
+.tip-bubble ul {
+  margin: 4px 0 2px;
+  padding-left: 16px;
+}
+
+.tip-bubble li {
+  margin: 2px 0;
+}
+
+.tip-bubble .tip-line {
+  display: block;
+}

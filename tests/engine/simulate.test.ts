@@ -264,6 +264,20 @@ describe("continuous rules", () => {
     expect(r.warnings.filter((w) => w.action === 2 && w.level === "delay")).toHaveLength(0);
   });
 
+  it("each 'when affordable' action has its own reserve window", () => {
+    const actions = (window?: number): Build["actions"] => [
+      { when: "0:00", do: "build", building: "barracks", builder: { from: "idle" } },
+      { when: "always", do: "train", mode: "affordable", unit: "soldier", at: "barracks", window },
+      { when: "1:30", do: "build", building: "manor", builder: { from: "idle" } },
+    ];
+    const soldiers = (window?: number) =>
+      run(actions(window)).produced.filter((p) => p.unit === "soldier" && p.t < 60).length;
+    // the default (30 s) only starts guarding the 1:30 cost at 1:00; 120 s guards it from the start
+    expect(soldiers()).toBeGreaterThan(0);
+    expect(soldiers(120)).toBe(0);
+    expect(soldiers(0)).toBe(soldiers());
+  });
+
   it("auto train keeps the building busy until stopped", () => {
     const r = run([
       { when: "0:00", do: "event", gainResource: { food: 1000 } },
