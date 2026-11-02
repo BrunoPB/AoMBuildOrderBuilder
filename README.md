@@ -42,7 +42,16 @@ One-time setup on GitHub:
 
 - the repository is public (players need to see it to open issues);
 - a label named `build-proposal` exists (the form applies it);
-- Settings → Actions → General → Workflow permissions: **Read and write**, and **Allow GitHub Actions to create and approve pull requests**.
+- Settings → Actions → General → **Allow GitHub Actions to create and approve pull requests** (the default token can stay read-only: the workflow asks for its own write permissions);
+- optional: Settings → General → **Automatically delete head branches**, so merged proposal branches go away.
+
+With `gh` (owner login) the last three are:
+
+```bash
+gh label create build-proposal --color 7c3aed --description "A build proposed as a standard build"
+gh api -X PUT repos/{owner}/{repo}/actions/permissions/workflow -f default_workflow_permissions=read -F can_approve_pull_request_reviews=true
+gh repo edit --delete-branch-on-merge
+```
 
 Pull requests opened by the workflow do not start `ci.yml` by themselves (GitHub rule for `GITHUB_TOKEN`); the proposal workflow already runs the preset test, and CI runs again on `master` after the merge.
 
