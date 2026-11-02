@@ -734,6 +734,32 @@ test("timeline tooltips: villager card and a clock tip that is not covered", asy
   expect(covered).toBe(false);
 });
 
+test("tooltips inside an open action are drawn over the timeline rows", async ({
+  page,
+  isMobile,
+}) => {
+  test.skip(isMobile, "needs a mouse");
+  await page.setViewportSize({ width: 1400, height: 800 });
+  await createBuildWithActions(page);
+  const row = page.getByTestId("action-row").first();
+  await row.locator(".label-text").click();
+  const help = row.locator(".action-details .tip.help").filter({ hasText: "Modo" });
+  await help.hover();
+  const bubble = help.locator(".tip-bubble");
+  await expect(bubble).toBeVisible();
+  const covered = await bubble.evaluate((el) => {
+    el.style.pointerEvents = "auto";
+    const r = el.getBoundingClientRect();
+    return [0.1, 0.5, 0.9].some((fx) =>
+      [0.1, 0.5, 0.9].some((fy) => {
+        const hit = document.elementFromPoint(r.left + r.width * fx, r.top + r.height * fy);
+        return !el.contains(hit);
+      }),
+    );
+  });
+  expect(covered).toBe(false);
+});
+
 test("on desktop the build header sticks to the top of the window", async ({ page, isMobile }) => {
   test.skip(isMobile, "desktop layout");
   await page.setViewportSize({ width: 1400, height: 700 });

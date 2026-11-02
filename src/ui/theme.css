@@ -2487,6 +2487,12 @@ textarea {
   background: var(--surface-2);
 }
 
+/* sticky makes its own layer: lift it over the rows' sticky labels so its tooltips are not covered */
+.tl-list .action-row > .action-details:hover,
+.tl-list .action-row > .action-details:focus-within {
+  z-index: 5;
+}
+
 .tl.zoomed .action-row > .action-details {
   width: min(100%, calc(100vw - 72px));
 }
