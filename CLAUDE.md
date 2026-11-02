@@ -7,7 +7,7 @@ Build order builder/simulator for Age of Mythology: Retold. Full requirements: t
 - Code, file names, identifiers and commits in **English**; few comments. UI text only through `src/i18n/{pt-BR,en}.json` (same keys in both; test enforces it).
 - TypeScript strict, Vite, Preact, zod, Vitest, Playwright, ESLint + Prettier. npm. Default branch `master`.
 - Frontend-only static site: no backend, no accounts. Builds in `localStorage` (`aomr-bob:builds:v1`, prefs `aomr-bob:prefs:v1`), always via `src/storage` (try/catch, in-memory fallback).
-- Hash routing (`#/view/<id>` overview, the default when a build is opened; `#/build/<id>` editor; `#/play/<id>` match mode; `#/settings`) and relative base so the site works under any sub-folder (GitHub Pages).
+- Hash routing (`#/view/<id>` overview, the default when a build is opened; `#/build/<id>` editor; `#/play/<id>` match mode; `#/import/<code>` a build shared by link, gzipped in the URL; `#/settings`) and relative base so the site works under any sub-folder (GitHub Pages).
 - Small commits per step.
 
 ## Data rules

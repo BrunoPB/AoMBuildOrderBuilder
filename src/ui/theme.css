@@ -3328,3 +3328,14 @@ textarea {
 .order-notice .order-time {
   color: var(--warn);
 }
+
+.share-banner {
+  gap: 10px;
+  margin-bottom: 10px;
+  border-color: var(--accent);
+  font-size: 15px;
+}
+
+.share-banner .spacer {
+  flex: 1;
+}

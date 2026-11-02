@@ -10,12 +10,15 @@ import { GlobalTools } from "./global-tools.tsx";
 import { Library } from "./library.tsx";
 import { MatchMode } from "./match.tsx";
 import { Overview } from "./overview.tsx";
+import { SharedBuild } from "./shared.tsx";
+import { SHARED_ID } from "../io/share.ts";
 import { SettingsPage } from "./settings.tsx";
 import { Svg } from "./svg.tsx";
 
 type Route =
   | { page: "library" }
   | { page: "view"; id: string }
+  | { page: "import"; code: string }
   | { page: "build"; id: string }
   | { page: "play"; id: string }
   | { page: "settings" };
@@ -24,6 +27,7 @@ function parseRoute(hash: string): Route {
   const [, page, ...rest] = hash.replace(/^#/, "").split("/");
   const id = decodeURIComponent(rest.join("/"));
   if (page === "view" && id) return { page: "view", id };
+  if (page === "import" && id) return { page: "import", code: id };
   if (page === "build" && id) return { page: "build", id };
   if (page === "play" && id) return { page: "play", id };
   if (page === "settings") return { page: "settings" };
@@ -48,6 +52,8 @@ export function App({ data }: { data: GameData }) {
   const [route, setRoute] = useState<Route>(() => parseRoute(window.location.hash));
   const [toasts, setToasts] = useState<Toast[]>([]);
   const [dialog, setDialog] = useState<Dialog | null>(null);
+  /** The build opened from a share link, kept in memory until the user saves a copy. */
+  const [shared, setShared] = useState<Build | null>(null);
   const prefsRef = useRef(prefs);
   const saveTimer = useRef<number | undefined>(undefined);
   const locale = prefs.locale ?? detectLocale(navigator.language);
@@ -109,13 +115,14 @@ export function App({ data }: { data: GameData }) {
     presets: PRESETS,
     storageOk,
     findBuild: (id) => {
+      if (id === SHARED_ID) return shared ? { build: shared, readonly: true } : undefined;
       const preset = PRESETS.find((b) => b.id === id);
       if (preset) return { build: preset, readonly: true };
       const own = builds.find((b) => b.id === id);
       return own ? { build: own, readonly: false } : undefined;
     },
     saveBuild: (build) => {
-      if (isPreset(build.id)) return;
+      if (isPreset(build.id) || build.id === SHARED_ID) return;
       setBuilds((list) => {
         const i = list.findIndex((b) => b.id === build.id);
         if (i < 0) return [...list, build];
@@ -175,6 +182,13 @@ export function App({ data }: { data: GameData }) {
         <main>
           {route.page === "library" && <Library />}
           {route.page === "view" && <Overview key={route.id} id={route.id} />}
+          {route.page === "import" && (
+            <SharedBuild
+              key={route.code}
+              code={route.code}
+              onLoad={(b) => setShared({ ...b, id: SHARED_ID })}
+            />
+          )}
           {route.page === "build" && <Editor key={route.id} id={route.id} />}
           {route.page === "play" && <MatchMode key={route.id} id={route.id} />}
           {route.page === "settings" && <SettingsPage />}

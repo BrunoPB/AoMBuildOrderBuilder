@@ -109,6 +109,30 @@ test("opens a preset in the overview and duplicates it to edit", async ({ page }
   await expect(page.getByTestId("my-builds")).toContainText("Krush");
 });
 
+test("a share link opens the build for anyone, who can save a copy", async ({ page, context }) => {
+  await context.grantPermissions(["clipboard-read", "clipboard-write"]);
+  await page.goto("/#/view/preset%3Akrush");
+  await page.getByTestId("build-header").getByTestId("build-menu").click();
+  await page.getByTestId("share-link").click();
+  await expect(page.locator(".toast")).toContainText("Link copiado");
+  const url = await page.evaluate(() => navigator.clipboard.readText());
+  expect(url).toMatch(/#\/import\/[A-Za-z0-9_-]+$/);
+
+  await page.goto("/");
+  await page.evaluate(() => localStorage.clear());
+  await page.goto(url);
+  await expect(page.getByTestId("share-banner")).toBeVisible();
+  await expect(page.getByTestId("build-title")).toHaveText("Krush");
+  await expect(page.getByTestId("order-list")).toContainText("Clássica");
+  await page.getByTestId("share-save").click();
+  await expect(page).toHaveURL(/#\/view\/u-/);
+  await page.goto("/");
+  await expect(page.getByTestId("my-builds")).toContainText("Krush");
+
+  await page.goto("/#/import/broken-link");
+  await expect(page.getByTestId("share-error")).toBeVisible();
+});
+
 test("a build has three screens: overview, editor and match mode", async ({ page }) => {
   await createBuildWithActions(page);
   await page.goto("/");

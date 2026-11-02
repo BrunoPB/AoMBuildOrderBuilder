@@ -2,6 +2,7 @@ import type { Build } from "../engine/build.ts";
 import { simulate } from "../engine/simulate.ts";
 import { toDashboard } from "../io/dashboard.ts";
 import { buildFileName, downloadText, exportPayload } from "../io/files.ts";
+import { encodeBuild, shareUrl } from "../io/share.ts";
 import { navigate } from "./app.tsx";
 import { useApp } from "./context.tsx";
 import { Tip } from "./icon.tsx";
@@ -50,6 +51,16 @@ export function BuildActions({
     api.saveBuild(copy);
     navigate(`/build/${encodeURIComponent(copy.id)}`);
   };
+  /** The link carries the whole build: whoever opens it sees it and can save a copy. */
+  const copyLink = async () => {
+    const url = shareUrl(await encodeBuild(build));
+    try {
+      await navigator.clipboard.writeText(url);
+      api.toast(t("share.copied"));
+    } catch {
+      window.prompt(t("share.copyManually"), url);
+    }
+  };
   const remove = async () => {
     const answer = await api.confirm(t("card.confirmDelete", { name: build.name }));
     if (answer !== "yes") return;
@@ -87,6 +98,12 @@ ${t(`help.mode.${m.id}`)}`}
         {showDuplicate && (
           <MenuItem icon="copy" label={duplicateLabel} onClick={duplicate} testid="duplicate" />
         )}
+        <MenuItem
+          icon="link"
+          label={t("share.copy")}
+          onClick={() => void copyLink()}
+          testid="share-link"
+        />
         <MenuItem
           icon="download"
           label={t("card.export")}
