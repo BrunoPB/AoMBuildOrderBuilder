@@ -377,8 +377,15 @@ export function ActionTrack({
   const mode = action.do === "train" ? action.mode : undefined;
   const rule = mode !== undefined;
   const instant = INSTANT.has(action.do);
-  /** An auto queue runs until its `until` time (or to the end). */
-  const until = action.do === "train" && action.until ? parseClock(action.until) : undefined;
+  /** An auto queue runs for its duration (or to its old `until`, or to the end). */
+  const until =
+    action.do !== "train"
+      ? undefined
+      : action.duration !== undefined && start !== undefined
+        ? start + action.duration
+        : action.until
+          ? parseClock(action.until)
+          : undefined;
   const ruleEnd = Math.min(until ?? scale.end, scale.end);
 
   const handle = readonly

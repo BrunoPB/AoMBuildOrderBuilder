@@ -1,6 +1,6 @@
 {
   "format": "aomr-bob",
-  "version": 4,
+  "version": 5,
   "id": "preset:krush",
   "name": "Krush",
   "author": "Bruno",
@@ -201,8 +201,8 @@
       "do": "train",
       "unit": "promethean",
       "mode": "auto",
-      "until": "6:15",
-      "at": "temple"
+      "at": "temple",
+      "duration": 200
     },
     {
       "id": "o1",
@@ -236,7 +236,7 @@
       "do": "train",
       "unit": "citizen",
       "mode": "auto",
-      "until": "7:25",
+      "duration": 240,
       "rally": "food"
     },
     {
@@ -253,8 +253,8 @@
       "do": "train",
       "unit": "turma",
       "mode": "auto",
-      "until": "6:15",
-      "at": "counter-barracks"
+      "at": "counter-barracks",
+      "duration": 151
     },
     {
       "id": "r1",

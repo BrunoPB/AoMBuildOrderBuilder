@@ -253,10 +253,10 @@ describe("age ups, powers and promotions", () => {
 });
 
 describe("continuous rules", () => {
-  it("an auto queue keeps the building busy until its 'until' time", () => {
+  it("an auto queue keeps the building busy for its duration", () => {
     const r = run([
       { when: "0:00", do: "event", gainResource: { food: 1000 } },
-      { when: "0:00", do: "train", mode: "auto", unit: "citizen", rally: "wood", until: "0:35" },
+      { when: "0:00", do: "train", mode: "auto", unit: "citizen", rally: "wood", duration: 35 },
     ]);
     // the unit started at 0:30 still finishes; none starts after 0:35
     expect(r.produced.map((p) => p.t)).toEqual([10, 20, 30, 40]);
@@ -264,14 +264,22 @@ describe("continuous rules", () => {
   });
 
   it("an auto queue without 'until' runs to the end of the build", () => {
-    const made = (until?: string) =>
+    const made = (duration?: number) =>
       run([
         { when: "0:00", do: "event", gainResource: { food: 1000 } },
-        { when: "0:00", do: "train", mode: "auto", unit: "citizen", rally: "wood", until },
+        { when: "0:00", do: "train", mode: "auto", unit: "citizen", rally: "wood", duration },
         { when: "0:35", do: "event", note: "end" },
       ]).produced.length;
-    expect(made("0:15")).toBe(2);
+    expect(made(15)).toBe(2);
     expect(made()).toBe(4);
+  });
+
+  it("the duration counts from when the queue starts, not from 0:00", () => {
+    const r = run([
+      { when: "0:00", do: "event", gainResource: { food: 1000 } },
+      { when: "0:20", do: "train", mode: "auto", unit: "citizen", rally: "wood", duration: 15 },
+    ]);
+    expect(r.events.some((e) => e.kind === "trainOff" && e.t === 35)).toBe(true);
   });
 });
 

@@ -1469,7 +1469,7 @@ class Simulation {
     this.finishPromotions();
   }
 
-  /** An auto queue: keeps training from now on, until its `until` time. */
+  /** An auto queue: keeps training from now on, for its `duration` (or to its old `until`). */
   startRule(i: number, a: Extract<Action, { do: "train" }>, mode: TrainMode): void {
     const def = this.unit(a.unit);
     if (!def)
@@ -1481,7 +1481,12 @@ class Simulation {
       unit: a.unit,
       rally: a.rally,
       at: a.at,
-      until: a.until !== undefined ? parseClock(a.until) : undefined,
+      until:
+        a.duration !== undefined
+          ? this.t + a.duration
+          : a.until !== undefined
+            ? parseClock(a.until)
+            : undefined,
       active: true,
     });
     this.start(i);

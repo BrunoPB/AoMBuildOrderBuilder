@@ -525,22 +525,25 @@ test("a new fixed time moves the action to its place in the list", async ({ page
   await expect(rows.last()).toContainText("Treinar 1 Cidadão");
 });
 
-test("train has a mode: fixed count or an auto queue with an end time", async ({ page }) => {
+test("train has a mode: fixed count or an auto queue for some time", async ({ page }) => {
   await createBuildWithActions(page);
   await expect(page.getByTestId("kind-stopTrain")).toHaveCount(0);
   const row = page.getByTestId("action-row").first();
   await row.locator(".label-text").click();
   await expect(row.getByTestId("row-count")).toBeVisible();
   await expect(row.getByTestId("row-train-mode").locator("option")).toHaveCount(2);
-  await expect(row.getByTestId("row-until")).toHaveCount(0);
+  await expect(row.getByTestId("row-duration")).toHaveCount(0);
   await row.getByTestId("row-train-mode").selectOption("auto");
   await expect(row.getByTestId("row-count")).toHaveCount(0);
   await expect(row).toContainText("Produção automática de Cidadãos");
   await expect(row).toHaveClass(/kind-rule/);
-  await row.getByTestId("row-until").fill("1:30");
-  await row.getByTestId("row-until").press("Tab");
-  await expect(row).toContainText("Produção automática de Cidadãos até 1:30");
-  // the queue's bar ends at 1:30, and its end shows as an event
+  await row.getByTestId("row-duration").fill("30");
+  await row.getByTestId("row-duration").press("Tab");
+  await expect(row).toContainText("Produção automática de Cidadãos por 30 s");
+  await row.getByTestId("row-duration").fill("90");
+  await row.getByTestId("row-duration").press("Tab");
+  await expect(row).toContainText("Produção automática de Cidadãos por 1:30");
+  // the queue's end shows as an event
   await expect(page.locator("ol.actions-list")).toContainText("Fim da produção automática");
   // the mode explanation is a bulleted list
   const help = row.locator(".action-details .tip.help").filter({ hasText: "Modo" });
@@ -549,6 +552,40 @@ test("train has a mode: fixed count or an auto queue with an end time", async ({
   await expect(help.locator(".tip-bubble li strong").first()).toHaveText("Quantidade fixa");
   await row.getByTestId("row-train-mode").selectOption("count");
   await expect(row).toContainText("Treinar 1 Cidadão");
+});
+
+test("the editor turns an old auto queue end time into a duration", async ({ page }) => {
+  // stored before the app starts, so its first save does not overwrite it
+  await page.addInitScript(() => {
+    if (localStorage.getItem("aomr-bob:builds:v1")) return;
+    const now = new Date().toISOString();
+    const build = {
+      format: "aomr-bob",
+      version: 4,
+      id: "u-old",
+      name: "Old queue",
+      createdAt: now,
+      updatedAt: now,
+      pantheon: "atlanteans",
+      god: "kronos",
+      type: "eco",
+      actions: [
+        { id: "a", when: "0:10", do: "move", count: 2, from: "idle", to: "food" },
+        {
+          id: "b",
+          when: { after: "a" },
+          do: "train",
+          mode: "auto",
+          unit: "citizen",
+          until: "1:10",
+        },
+      ],
+    };
+    localStorage.setItem("aomr-bob:builds:v1", JSON.stringify([build]));
+  });
+  await page.goto("/#/build/u-old");
+  await page.getByTestId("tab-actions").click();
+  await expect(page.getByTestId("action-row").last()).toContainText("por 1:00");
 });
 
 test("'after' lists when other actions end (✓) and when they start", async ({ page }) => {

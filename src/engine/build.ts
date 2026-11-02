@@ -10,7 +10,7 @@ import {
 import { isClock } from "./time.ts";
 
 export const BUILD_FORMAT = "aomr-bob";
-export const BUILD_VERSION = 4;
+export const BUILD_VERSION = 5;
 
 export const BUILD_TYPES = ["rush", "eco", "timing", "water", "other"] as const;
 export const BuildTypeSchema = z.enum(BUILD_TYPES);
@@ -50,8 +50,8 @@ export type Builder = z.infer<typeof BuilderSchema>;
 
 const count = z.number().int().positive().optional();
 
-/** `auto` = the building's auto queue (trains whenever it is free and the stock pays, until
- *  `until`). Without a mode a train action trains `count` units. */
+/** `auto` = the building's auto queue (trains whenever it is free and the stock pays, for
+ *  `duration` seconds). Without a mode a train action trains `count` units. */
 export const TrainModeSchema = z.enum(["auto"]);
 export type TrainMode = z.infer<typeof TrainModeSchema>;
 
@@ -63,6 +63,9 @@ export const ActionSchema = z.discriminatedUnion("do", [
     count,
     mode: TrainModeSchema.optional(),
     /** `auto`: the queue stops at this time (m:ss); without it, it runs to the end. */
+    /** `auto`: seconds the queue stays on, from when the action starts; none = to the end. */
+    duration: z.number().positive().optional(),
+    /** Version 4 end time (m:ss), kept until the editor turns it into `duration`. */
     until: z.string().refine(isClock, "expected m:ss").optional(),
     rally: TaskTargetSchema.optional(),
     at: z.string().optional(),

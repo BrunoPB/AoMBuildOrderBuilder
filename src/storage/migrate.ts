@@ -27,7 +27,28 @@ const migrations: Record<number, (b: Record<string, unknown>) => Record<string, 
   /** "When affordable" is gone (it becomes an auto queue) and so is the stop action: an auto queue
    *  ends at its own `until`, taken from the stop at a fixed time that ended it. */
   3: (b) => untilV4(b),
+  /** An auto queue runs for a duration instead of until a time: computed here when the action
+   *  starts at a fixed time; otherwise the editor does it once it knows the start. */
+  4: (b) => ({
+    ...b,
+    actions: Array.isArray(b.actions)
+      ? (b.actions as Record<string, unknown>[]).map(durationV5)
+      : b.actions,
+  }),
 };
+
+const clock = (v: unknown) =>
+  typeof v === "string" && /^\d+:\d\d$/.test(v)
+    ? Number(v.split(":")[0]) * 60 + Number(v.split(":")[1])
+    : undefined;
+
+function durationV5(a: Record<string, unknown>): Record<string, unknown> {
+  const start = clock(a.when);
+  const end = clock(a.until);
+  if (a.do !== "train" || start === undefined || end === undefined) return a;
+  const { until: _until, ...rest } = a;
+  return end > start ? { ...rest, duration: end - start } : rest;
+}
 
 function untilV4(b: Record<string, unknown>): Record<string, unknown> {
   if (!Array.isArray(b.actions)) return b;

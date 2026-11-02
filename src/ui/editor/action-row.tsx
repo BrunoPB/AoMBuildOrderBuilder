@@ -452,8 +452,8 @@ export function ActionRow(props: Props) {
                   const m = e.currentTarget.value;
                   set(
                     m === "auto"
-                      ? { mode: m, count: undefined, until: undefined }
-                      : { mode: undefined, count: 1, until: undefined },
+                      ? { mode: m, count: undefined, duration: undefined, until: undefined }
+                      : { mode: undefined, count: 1, duration: undefined, until: undefined },
                   );
                 }}
               >
@@ -467,19 +467,18 @@ export function ActionRow(props: Props) {
           )}
           {a.do === "train" && a.mode === "auto" && (
             <label class="field">
-              <HelpText k="row.until" />
+              <HelpText k="row.duration" />
               <input
-                class="time"
-                type="text"
-                inputMode="numeric"
-                placeholder="m:ss"
-                value={a.until ?? ""}
-                data-testid="row-until"
+                class="small"
+                type="number"
+                min={1}
+                step={5}
+                placeholder="—"
+                value={a.duration ?? ""}
+                data-testid="row-duration"
                 onChange={(e) => {
-                  const v = e.currentTarget.value.trim();
-                  if (v === "") set({ until: undefined });
-                  else if (isClock(v)) set({ until: v });
-                  else e.currentTarget.value = a.until ?? "";
+                  const v = Math.round(Number(e.currentTarget.value) || 0);
+                  set({ duration: v > 0 ? v : undefined, until: undefined });
                 }}
               />
             </label>

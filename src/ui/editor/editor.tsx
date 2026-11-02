@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "preact/hooks";
 import { type PantheonId, SOURCE_IDS, type SourceId } from "../../data/schema.ts";
 import { type Action, BUILD_TYPES, type Build, type Settings } from "../../engine/build.ts";
+import { parseClock } from "../../engine/time.ts";
 import { text } from "../../i18n/index.ts";
 import { navigate } from "../app.tsx";
 import { useApp, useViewPref } from "../context.tsx";
@@ -391,6 +392,21 @@ export function Editor({ id }: { id: string }) {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, []);
+
+  /** Version 4 builds ended auto queues at a time; now they run for a duration from their start. */
+  useEffect(() => {
+    const result = sim.result;
+    if (readonly || !result || !build) return;
+    let changed = false;
+    const actions = build.actions.map((a, i) => {
+      const start = result.actions[i]?.startedAt;
+      if (a.do !== "train" || !a.until || start === undefined) return a;
+      changed = true;
+      const duration = Math.round(parseClock(a.until) - start);
+      return { ...a, until: undefined, duration: duration > 0 ? duration : undefined };
+    });
+    if (changed) api.saveBuild({ ...build, actions });
+  }, [sim.result]);
 
   if (!build) {
     return (

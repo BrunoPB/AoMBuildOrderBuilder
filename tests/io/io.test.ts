@@ -93,7 +93,7 @@ describe("storage", () => {
   });
 
   it("validates versions on load", () => {
-    expect(migrateBuild({ ...krush, version: 5 })).toMatchObject({ ok: false, newer: 5 });
+    expect(migrateBuild({ ...krush, version: 6 })).toMatchObject({ ok: false, newer: 6 });
     expect(migrateBuild({ ...krush, version: 0 }).ok).toBe(false);
   });
 
@@ -111,7 +111,7 @@ describe("storage", () => {
     };
     const r = migrateBuild(v1);
     expect(r.ok && r.build.actions).toEqual([
-      { when: "0:00", do: "train", mode: "auto", unit: "citizen", rally: "food", until: "5:00" },
+      { when: "0:00", do: "train", mode: "auto", unit: "citizen", rally: "food", duration: 300 },
       {
         when: "always",
         do: "train",
@@ -141,13 +141,31 @@ describe("storage", () => {
     };
     const r = migrateBuild(v3);
     expect(r.ok && r.build.actions).toEqual([
-      { id: "a", when: "0:00", do: "train", mode: "auto", unit: "turma", until: "3:00" },
-      { id: "b", when: "0:00", do: "train", mode: "auto", unit: "citizen", until: "4:00" },
+      { id: "a", when: "0:00", do: "train", mode: "auto", unit: "turma", duration: 180 },
+      { id: "b", when: "0:00", do: "train", mode: "auto", unit: "citizen", duration: 240 },
       // a stop without a fixed time cannot become a time: the queue runs to the end
       { id: "c", when: "0:00", do: "train", mode: "auto", unit: "oracle" },
       { id: "x", when: "asap", do: "event", note: "after the stop" },
     ]);
     expect(r.ok && r.build.milestones).toEqual([]);
+  });
+
+  it("turns an auto queue's end time into a duration when its start is fixed", () => {
+    const v4 = {
+      ...krush,
+      version: 4,
+      actions: [
+        { when: "1:00", do: "train", mode: "auto", unit: "citizen", until: "3:30" },
+        { when: "asap", do: "train", mode: "auto", unit: "turma", until: "5:00" },
+      ],
+      milestones: [],
+    };
+    const r = migrateBuild(v4);
+    expect(r.ok && r.build.actions).toEqual([
+      { when: "1:00", do: "train", mode: "auto", unit: "citizen", duration: 150 },
+      // the start is only known after simulating: the editor converts it
+      { when: "asap", do: "train", mode: "auto", unit: "turma", until: "5:00" },
+    ]);
   });
 
   it("drops the old build-wide reserve window", () => {

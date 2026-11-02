@@ -2,6 +2,7 @@ import { entityName } from "../../data/catalog.ts";
 import type { GameData } from "../../data/load.ts";
 import { AGES, type Age, type Locale, type PantheonId, SOURCE_IDS } from "../../data/schema.ts";
 import type { Action, ActionKind, Build, TaskTarget } from "../../engine/build.ts";
+import { formatClock } from "../../engine/time.ts";
 import { translate } from "../../i18n/index.ts";
 import { KIND_ICON } from "../svg.tsx";
 
@@ -86,6 +87,11 @@ export function doneText(c: Ctx, a: Action): string {
   }
 }
 
+/** "45 s" under a minute, "2:30" from there. */
+export function durationLabel(seconds: number): string {
+  return seconds < 60 ? `${seconds} s` : formatClock(seconds);
+}
+
 export function actionText(c: Ctx, a: Action): string {
   const t = (key: string, params: Record<string, string | number | undefined> = {}) =>
     translate(c.locale, key, params);
@@ -95,9 +101,11 @@ export function actionText(c: Ctx, a: Action): string {
       const count = a.count ?? 1;
       const base = !a.mode
         ? t("step.train", { count, unit: n(c, a.unit, count) })
-        : a.until
-          ? t("step.autoTrainUntil", { unit: n(c, a.unit, 2), until: a.until })
-          : t("step.autoTrain", { unit: n(c, a.unit, 2) });
+        : a.duration !== undefined
+          ? t("step.autoTrainFor", { unit: n(c, a.unit, 2), time: durationLabel(a.duration) })
+          : a.until
+            ? t("step.autoTrainUntil", { unit: n(c, a.unit, 2), until: a.until })
+            : t("step.autoTrain", { unit: n(c, a.unit, 2) });
       return a.rally ? `${base} → ${targetLabel(c, a.rally)}` : base;
     }
     case "build": {
