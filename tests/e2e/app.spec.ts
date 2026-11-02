@@ -634,6 +634,16 @@ test("on desktop only the timeline scrolls, not the page", async ({ page, isMobi
   expect(sizes.trackStarts).toBe(1);
 });
 
+test("at the same second an event comes before the actions", async ({ page }) => {
+  await page.goto("/#/build/preset%3Akrush");
+  await page.getByTestId("tab-actions").click();
+  const rows = await page.locator("ol.actions-list > .tl-row").allTextContents();
+  const age = rows.findIndex((r) => r.includes("2:55") && r.includes("Clássica ✓"));
+  const firstAction = rows.findIndex((r) => r.includes("2:55") && r.includes("Treinar 1 Cidadão"));
+  expect(age).toBeGreaterThanOrEqual(0);
+  expect(firstAction).toBeGreaterThan(age);
+});
+
 test("hovering an event row highlights it like an action row", async ({ page, isMobile }) => {
   test.skip(isMobile, "needs a mouse");
   await page.setViewportSize({ width: 1400, height: 800 });

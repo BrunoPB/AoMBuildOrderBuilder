@@ -24,7 +24,8 @@ import { EntityIcon, Tip, useHelp } from "./icon.tsx";
 import { useSimulation } from "./sim.ts";
 import { Svg } from "./svg.tsx";
 
-type Item = { t: number; key: string; node: ComponentChildren };
+/** `event`: something that happens (not a player action); at the same second it comes first. */
+type Item = { t: number; key: string; node: ComponentChildren; event?: boolean };
 
 /** The build order split by age, one column each: what to do and when, in big type. */
 function AgeColumns({ build, result, steps }: { build: Build; result: SimResult; steps: Step[] }) {
@@ -58,6 +59,7 @@ function AgeColumns({ build, result, steps }: { build: Build; result: SimResult;
     items.push({
       t: s.seconds,
       key: `n${s.seconds}`,
+      event: true,
       node: (
         <li class="order-row order-notice lvl-attention">
           <span class="num order-time">{s.t}</span>
@@ -69,7 +71,7 @@ function AgeColumns({ build, result, steps }: { build: Build; result: SimResult;
       ),
     });
   }
-  items.sort((x, y) => x.t - y.t);
+  items.sort((x, y) => Math.round(x.t) - Math.round(y.t) || Number(!!y.event) - Number(!!x.event));
 
   /** An action belongs to the age the player is in when it starts. */
   const ageName = (age: string) => {

@@ -214,13 +214,17 @@ export function ActionList({
     if (cursorTimeRef.current) cursorTimeRef.current.textContent = formatClock(at * scale.end);
   };
 
-  /** Events go after the last action that started at or before them. */
+  /** Events go after the last action that started before them: at the same second the event comes
+   *  first (an age reached before the action that needs it), unless it is that action's own effect. */
   const placed = new Map<number, Event[]>();
   if (result) {
     for (const e of sideEvents(steps)) {
+      const own = "action" in e.item ? e.item.action : undefined;
       let at = -1;
       result.actions.forEach((o, i) => {
-        if (o.startedAt !== undefined && Math.round(o.startedAt) <= e.seconds) at = i;
+        if (o.startedAt === undefined) return;
+        const s = Math.round(o.startedAt);
+        if (s < e.seconds || (s === e.seconds && own === i)) at = i;
       });
       placed.set(at, [...(placed.get(at) ?? []), e]);
     }
