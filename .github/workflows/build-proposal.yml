@@ -1,0 +1,65 @@
+name: Build proposal
+
+# An issue made with the "Propose a standard build" form: check the build, comment the result and,
+# when it passes, open a pull request that adds it to src/presets. Merging that PR is the approval.
+on:
+  issues:
+    types: [opened, edited, labeled]
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+concurrency:
+  group: build-proposal-${{ github.event.issue.number }}
+  cancel-in-progress: true
+
+jobs:
+  propose:
+    if: contains(github.event.issue.labels.*.name, 'build-proposal') && github.event.issue.state == 'open'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - id: check
+        # The issue text is untrusted: it only reaches the script through env and is parsed, never run.
+        run: npx tsx scripts/propose-build.ts
+        env:
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          ISSUE_AUTHOR: ${{ github.event.issue.user.login }}
+      - name: Test the new standard build
+        if: steps.check.outputs.ok == 'true'
+        run: npx prettier --write "$FILE" && npx vitest run tests/engine/pantheons.test.ts
+        env:
+          FILE: ${{ steps.check.outputs.file }}
+      - name: Comment on the issue
+        if: always() && steps.check.outcome != 'skipped'
+        run: gh issue comment "$ISSUE" --body-file proposal-report.md
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE: ${{ github.event.issue.number }}
+      - name: Open the pull request
+        if: steps.check.outputs.ok == 'true'
+        run: |
+          branch="build-proposal/issue-$ISSUE"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$branch"
+          git add "$FILE"
+          git commit -m "feat(presets): $NAME (proposal #$ISSUE)"
+          git push --force origin "$branch"
+          if [ -z "$(gh pr list --head "$branch" --json number --jq '.[].number')" ]; then
+            gh pr create --head "$branch" --base "${{ github.event.repository.default_branch }}" \
+              --title "Standard build: $NAME" \
+              --body "Adds the build proposed in #$ISSUE. Merging it publishes the build on the site. Closes #$ISSUE"
+          fi
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE: ${{ github.event.issue.number }}
+          FILE: ${{ steps.check.outputs.file }}
+          NAME: ${{ steps.check.outputs.name }}

@@ -133,6 +133,29 @@ test("a share link opens the build for anyone, who can save a copy", async ({ pa
   await expect(page.getByTestId("share-error")).toBeVisible();
 });
 
+test("an own build can be proposed as standard on GitHub, a preset cannot", async ({
+  page,
+  context,
+}) => {
+  await context.route("https://github.com/**", (route) => route.fulfill({ body: "ok" }));
+  await createBuildWithActions(page);
+  await page.getByTestId("build-header").getByTestId("build-menu").click();
+  await page.getByTestId("propose").click();
+  const popup = page.waitForEvent("popup");
+  await page.locator(".modal .btn").first().click();
+  const url = new URL((await popup).url());
+  expect(url.host).toBe("github.com");
+  expect(url.pathname).toMatch(/\/issues\/new$/);
+  expect(url.searchParams.get("template")).toBe("propose-build.yml");
+  expect(url.searchParams.get("title")).toBe("[Build] E2E Build");
+  expect(url.searchParams.get("link")).toMatch(/#\/import\/[A-Za-z0-9_-]+$/);
+
+  await page.goto("/#/view/preset%3Akrush");
+  await page.getByTestId("build-header").getByTestId("build-menu").click();
+  await expect(page.getByTestId("share-link")).toBeVisible();
+  await expect(page.getByTestId("propose")).toHaveCount(0);
+});
+
 test("a build has three screens: overview, editor and match mode", async ({ page }) => {
   await createBuildWithActions(page);
   await page.goto("/");

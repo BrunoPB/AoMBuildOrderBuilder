@@ -34,6 +34,18 @@ BASE_PATH=/AoMBuildOrderBuilder/ SITE_URL=https://<user>.github.io/AoMBuildOrder
 
 GitHub Pages: `.github/workflows/ci.yml` deploys `master` when the repository variable `PAGES_ENABLED` is `true` (Settings → Pages → Source: GitHub Actions). GitHub Pages on a private repository needs a paid plan.
 
+### Standard builds proposed by players
+
+Standard builds are the files in `src/presets/`; a merge is the approval. Players propose one from the app (build menu → **Propose as standard build**), which opens the issue form `.github/ISSUE_TEMPLATE/propose-build.yml` filled in with the build's share link. `.github/workflows/build-proposal.yml` then checks the build (`scripts/propose-build.ts`: decode, validate, simulate without errors), comments the result on the issue and, when it passes, opens a pull request adding `src/presets/<name>.json`.
+
+One-time setup on GitHub:
+
+- the repository is public (players need to see it to open issues);
+- a label named `build-proposal` exists (the form applies it);
+- Settings → Actions → General → Workflow permissions: **Read and write**, and **Allow GitHub Actions to create and approve pull requests**.
+
+Pull requests opened by the workflow do not start `ci.yml` by themselves (GitHub rule for `GITHUB_TOKEN`); the proposal workflow already runs the preset test, and CI runs again on `master` after the merge.
+
 ### Static API
 
 `npm run build` writes `dist/api/v1/` (index, presets, dashboard format, simulated timelines in pt-BR and en, game data, icon manifest). GitHub Pages already sends `Access-Control-Allow-Origin: *`. On other hosts, add that header for `/api/*` so other sites can read it, e.g. Netlify `_headers`:

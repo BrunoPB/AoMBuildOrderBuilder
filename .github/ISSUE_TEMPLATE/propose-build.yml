@@ -1,0 +1,32 @@
+name: Propor build padrão / Propose a standard build
+description: Envie uma build para virar build padrão no site. / Send a build to become a standard build on the site.
+title: "[Build] "
+labels: ["build-proposal"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        No app, abra a sua build → menu **…** → **Propor como build padrão**: este formulário já vem preenchido.
+        Um robô confere a build e comenta aqui; se ela passar, abre um pull request para revisão.
+
+        In the app, open your build → **…** menu → **Propose as standard build**: this form comes filled in.
+        A bot checks the build and comments here; if it passes, it opens a pull request for review.
+  - type: textarea
+    id: link
+    attributes:
+      label: Link da build / Build link
+      description: O link de compartilhamento da build (menu … → Copiar link). / The build's share link (… menu → Copy link).
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Comentários / Notes
+      description: Contra quem ela funciona, de onde veio, partidas de exemplo… / What it works against, where it comes from, sample matches…
+  - type: checkboxes
+    id: consent
+    attributes:
+      label: Publicação / Publishing
+      options:
+        - label: Concordo que a build seja publicada no site, com o nome de autor dela. / I agree that the build is published on the site, under its author name.
+          required: true

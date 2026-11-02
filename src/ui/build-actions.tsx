@@ -2,7 +2,9 @@ import type { Build } from "../engine/build.ts";
 import { simulate } from "../engine/simulate.ts";
 import { toDashboard } from "../io/dashboard.ts";
 import { buildFileName, downloadText, exportPayload } from "../io/files.ts";
-import { encodeBuild, shareUrl } from "../io/share.ts";
+import { proposalUrl } from "../io/proposal.ts";
+import { encodeBuild, SHARED_ID, shareUrl } from "../io/share.ts";
+import { isPreset } from "../presets/index.ts";
 import { navigate } from "./app.tsx";
 import { useApp } from "./context.tsx";
 import { Tip } from "./icon.tsx";
@@ -50,6 +52,20 @@ export function BuildActions({
     const copy = duplicateBuild(build, readonly ? "" : `(${t("card.duplicate").toLowerCase()})`);
     api.saveBuild(copy);
     navigate(`/build/${encodeURIComponent(copy.id)}`);
+  };
+  /** Opens the GitHub form that proposes the build as a standard build (see build-proposal.yml). */
+  const propose = async () => {
+    if (simulate(data, build).warnings.some((w) => w.level === "error")) {
+      api.toast(t("propose.hasErrors"), "error");
+      return;
+    }
+    const url = proposalUrl(build, shareUrl(await encodeBuild(build)));
+    const answer = await api.confirm(t("propose.confirm"), [
+      { label: t("propose.go"), value: "yes" },
+      { label: t("confirm.no"), value: "no" },
+    ]);
+    if (answer !== "yes") return;
+    if (!window.open(url, "_blank", "noopener")) window.location.assign(url);
   };
   /** The link carries the whole build: whoever opens it sees it and can save a copy. */
   const copyLink = async () => {
@@ -104,6 +120,14 @@ ${t(`help.mode.${m.id}`)}`}
           onClick={() => void copyLink()}
           testid="share-link"
         />
+        {!readonly && !isPreset(build.id) && build.id !== SHARED_ID && (
+          <MenuItem
+            icon="star"
+            label={t("propose.menu")}
+            onClick={() => void propose()}
+            testid="propose"
+          />
+        )}
         <MenuItem
           icon="download"
           label={t("card.export")}
