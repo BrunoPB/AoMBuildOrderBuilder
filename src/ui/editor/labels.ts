@@ -2,7 +2,6 @@ import { entityName } from "../../data/catalog.ts";
 import type { GameData } from "../../data/load.ts";
 import { AGES, type Age, type Locale, type PantheonId, SOURCE_IDS } from "../../data/schema.ts";
 import type { Action, ActionKind, Build, TaskTarget } from "../../engine/build.ts";
-import { stopTrainText } from "../../engine/format.ts";
 import { translate } from "../../i18n/index.ts";
 import { KIND_ICON } from "../svg.tsx";
 
@@ -35,8 +34,6 @@ export function actionIcons(a: Action, worker?: string): string[] {
       return [a.unit];
     case "empower":
       return [a.by];
-    case "stopTrain":
-      return a.unit ? [a.unit] : [];
     case "build":
     case "timeShift":
       return [a.building];
@@ -96,9 +93,11 @@ export function actionText(c: Ctx, a: Action): string {
   switch (a.do) {
     case "train": {
       const count = a.count ?? 1;
-      const base = a.mode
-        ? t(a.mode === "auto" ? "step.autoTrain" : "step.affordable", { unit: n(c, a.unit, 2) })
-        : t("step.train", { count, unit: n(c, a.unit, count) });
+      const base = !a.mode
+        ? t("step.train", { count, unit: n(c, a.unit, count) })
+        : a.until
+          ? t("step.autoTrainUntil", { unit: n(c, a.unit, 2), until: a.until })
+          : t("step.autoTrain", { unit: n(c, a.unit, 2) });
       return a.rally ? `${base} → ${targetLabel(c, a.rally)}` : base;
     }
     case "build": {
@@ -143,8 +142,6 @@ export function actionText(c: Ctx, a: Action): string {
       const base = t("step.summon", { count, unit: n(c, a.unit, count) });
       return a.hunt ? `${base} → ${t("row.huntIt").toLocaleLowerCase(c.locale)}` : base;
     }
-    case "stopTrain":
-      return stopTrainText(c.locale, a.mode, a.unit && n(c, a.unit, 2));
     case "event": {
       const parts: string[] = [];
       for (const [u, k] of Object.entries(a.lose ?? {}))
@@ -203,7 +200,7 @@ export function nextActionId(build: Build): string {
 
 /** Palette action kinds by group, most common first; god-specific actions last. */
 export const PALETTE_GROUPS: { id: string; kinds: ActionKind[] }[] = [
-  { id: "economy", kinds: ["move", "train", "build", "research", "age", "stopTrain"] },
+  { id: "economy", kinds: ["move", "train", "build", "research", "age"] },
   { id: "god", kinds: ["power", "timeShift", "promote", "empower", "summon"] },
   { id: "other", kinds: ["event"] },
 ];

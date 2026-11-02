@@ -2,7 +2,7 @@
 
 Research from the game files (build 19.17020), with the web as support. Full details, numbers and file references: `data-research/<pantheon>/ACTIONS.md` and `actions.json`.
 
-Every god has the generic actions: train, build, research, age up, move villagers, god powers, auto queue, train when affordable, manual event. The table lists what changes per god.
+Every god has the generic actions: train, build, research, age up, move villagers, god powers, auto queue, manual event. The table lists what changes per god.
 
 | God          | Extra actions in the editor                                              | Passive rules the simulator applies                                                  | Not simulated (no economic effect or needs a map) |
 | ------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------- |

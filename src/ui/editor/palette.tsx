@@ -170,7 +170,6 @@ export function Palette({
       return idle > 0
         ? { when: "asap", do: "move", count: idle, from: "idle", to: "food" }
         : { when: "asap", do: "move", count: 1, from: "food", to: "wood" };
-    if (k === "stopTrain") return { when: "asap", do: "stopTrain" };
     if (k === "event") return { when: "asap", do: "event", note: "" };
     return undefined;
   };

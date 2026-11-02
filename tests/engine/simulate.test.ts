@@ -253,38 +253,25 @@ describe("age ups, powers and promotions", () => {
 });
 
 describe("continuous rules", () => {
-  it("train when affordable keeps the cost of upcoming timed actions", () => {
-    const r = run([
-      { when: "0:00", do: "build", building: "barracks", builder: { from: "idle" } },
-      { when: "always", do: "train", mode: "affordable", unit: "soldier", at: "barracks" },
-      { when: "0:40", do: "build", building: "manor", builder: { from: "idle" } },
-    ]);
-    expect(r.produced.filter((p) => p.unit === "soldier")).toHaveLength(0);
-    expect(r.actions[2]!.startedAt).toBe(40);
-    expect(r.warnings.filter((w) => w.action === 2 && w.level === "delay")).toHaveLength(0);
-  });
-
-  it("each 'when affordable' action has its own reserve window", () => {
-    const actions = (window?: number): Build["actions"] => [
-      { when: "0:00", do: "build", building: "barracks", builder: { from: "idle" } },
-      { when: "always", do: "train", mode: "affordable", unit: "soldier", at: "barracks", window },
-      { when: "1:30", do: "build", building: "manor", builder: { from: "idle" } },
-    ];
-    const soldiers = (window?: number) =>
-      run(actions(window)).produced.filter((p) => p.unit === "soldier" && p.t < 60).length;
-    // the default (30 s) only starts guarding the 1:30 cost at 1:00; 120 s guards it from the start
-    expect(soldiers()).toBeGreaterThan(0);
-    expect(soldiers(120)).toBe(0);
-    expect(soldiers(0)).toBe(soldiers());
-  });
-
-  it("auto train keeps the building busy until stopped", () => {
+  it("an auto queue keeps the building busy until its 'until' time", () => {
     const r = run([
       { when: "0:00", do: "event", gainResource: { food: 1000 } },
-      { when: "0:00", do: "train", mode: "auto", unit: "citizen", rally: "wood" },
-      { when: "0:35", do: "stopTrain", mode: "auto" },
+      { when: "0:00", do: "train", mode: "auto", unit: "citizen", rally: "wood", until: "0:35" },
     ]);
+    // the unit started at 0:30 still finishes; none starts after 0:35
     expect(r.produced.map((p) => p.t)).toEqual([10, 20, 30, 40]);
+    expect(r.events.some((e) => e.kind === "trainOff" && e.t === 35 && e.action === 1)).toBe(true);
+  });
+
+  it("an auto queue without 'until' runs to the end of the build", () => {
+    const made = (until?: string) =>
+      run([
+        { when: "0:00", do: "event", gainResource: { food: 1000 } },
+        { when: "0:00", do: "train", mode: "auto", unit: "citizen", rally: "wood", until },
+        { when: "0:35", do: "event", note: "end" },
+      ]).produced.length;
+    expect(made("0:15")).toBe(2);
+    expect(made()).toBe(4);
   });
 });
 

@@ -24,7 +24,40 @@ const migrations: Record<number, (b: Record<string, unknown>) => Record<string, 
       : b.actions;
     return { ...b, settings, actions };
   },
+  /** "When affordable" is gone (it becomes an auto queue) and so is the stop action: an auto queue
+   *  ends at its own `until`, taken from the stop at a fixed time that ended it. */
+  3: (b) => untilV4(b),
 };
+
+function untilV4(b: Record<string, unknown>): Record<string, unknown> {
+  if (!Array.isArray(b.actions)) return b;
+  const actions = (b.actions as Record<string, unknown>[]).map((a) => ({ ...a }));
+  actions.forEach((stop, i) => {
+    if (stop.do !== "stopTrain") return;
+    if (typeof stop.when !== "string" || !/^\d+:\d\d$/.test(stop.when)) return;
+    for (const a of actions.slice(0, i)) {
+      if (a.do !== "train" || !a.mode || a.until !== undefined) continue;
+      if (stop.mode && a.mode !== stop.mode) continue;
+      if (!stop.unit || a.unit === stop.unit) a.until = stop.when;
+    }
+  });
+  const stops = new Set(actions.filter((a) => a.do === "stopTrain").map((a) => a.id));
+  stops.delete(undefined);
+  const kept = actions
+    .filter((a) => a.do !== "stopTrain")
+    .map((a) => {
+      if (a.do !== "train" || !a.mode) return a;
+      const { window: _window, ...rest } = a;
+      return { ...rest, mode: "auto" };
+    })
+    .map((a) =>
+      stops.has((a.when as { after?: unknown } | undefined)?.after) ? { ...a, when: "asap" } : a,
+    );
+  const milestones = Array.isArray(b.milestones)
+    ? (b.milestones as { atAction?: unknown }[]).filter((m) => !stops.has(m.atAction))
+    : b.milestones;
+  return { ...b, actions: kept, milestones };
+}
 
 function trainModesV2(raw: unknown): unknown {
   if (typeof raw !== "object" || raw === null) return raw;

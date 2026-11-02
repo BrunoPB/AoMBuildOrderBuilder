@@ -509,8 +509,7 @@ label.field > * {
 .kind-move {
   --kind: var(--kind-move);
 }
-.kind-rule,
-.kind-stopTrain {
+.kind-rule {
   --kind: var(--kind-rule);
 }
 .kind-event {

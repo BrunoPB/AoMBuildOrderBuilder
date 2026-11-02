@@ -240,14 +240,19 @@ test("shows the starting units and sends idle ones to work", async ({ page }) =>
 test("a warning explains the wait with the numbers behind it", async ({ page, isMobile }) => {
   await page.goto("/#/build/preset%3Akrush");
   await page.getByTestId("warnings-toggle").click();
-  const item = page.getByTestId("warnings").locator(".warn-item").filter({ hasText: "Comida" });
+  // the Heroic age: the longest wait for food
+  const item = page
+    .getByTestId("warnings")
+    .locator(".warn-item")
+    .filter({ hasText: "Comida" })
+    .last();
   if (isMobile) await item.click();
   else await item.hover();
   const card = page.locator(".wd-card:visible").filter({ hasText: "Custo" });
   await expect(card).toBeVisible();
   await expect(card).toContainText("800");
-  await expect(card).toContainText("340");
-  await expect(card).toContainText("Fila ocupada");
+  await expect(card).toContainText("562");
+  await expect(card).toContainText("Coletando");
 });
 
 test("drag and drop: food chain, matchups and palette", async ({ page, isMobile }) => {
@@ -520,36 +525,30 @@ test("a new fixed time moves the action to its place in the list", async ({ page
   await expect(rows.last()).toContainText("Treinar 1 Cidadão");
 });
 
-test("train has a mode: fixed count, auto queue or when affordable", async ({ page }) => {
+test("train has a mode: fixed count or an auto queue with an end time", async ({ page }) => {
   await createBuildWithActions(page);
-  await expect(page.getByTestId("kind-autoTrain")).toHaveCount(0);
+  await expect(page.getByTestId("kind-stopTrain")).toHaveCount(0);
   const row = page.getByTestId("action-row").first();
   await row.locator(".label-text").click();
   await expect(row.getByTestId("row-count")).toBeVisible();
+  await expect(row.getByTestId("row-train-mode").locator("option")).toHaveCount(2);
+  await expect(row.getByTestId("row-until")).toHaveCount(0);
   await row.getByTestId("row-train-mode").selectOption("auto");
   await expect(row.getByTestId("row-count")).toHaveCount(0);
   await expect(row).toContainText("Produção automática de Cidadãos");
   await expect(row).toHaveClass(/kind-rule/);
-  await expect(row.getByTestId("row-window")).toHaveCount(0);
-  await row.getByTestId("row-train-mode").selectOption("affordable");
-  await expect(row).toContainText("Cidadãos sempre que der");
-  await row.getByTestId("row-window").fill("60");
-  await row.getByTestId("row-window").press("Tab");
-  await expect(row.getByTestId("row-window")).toHaveValue("60");
+  await row.getByTestId("row-until").fill("1:30");
+  await row.getByTestId("row-until").press("Tab");
+  await expect(row).toContainText("Produção automática de Cidadãos até 1:30");
+  // the queue's bar ends at 1:30, and its end shows as an event
+  await expect(page.locator("ol.actions-list")).toContainText("Fim da produção automática");
   // the mode explanation is a bulleted list
   const help = row.locator(".action-details .tip.help").filter({ hasText: "Modo" });
   await help.hover();
-  await expect(help.locator(".tip-bubble li")).toHaveCount(3);
+  await expect(help.locator(".tip-bubble li")).toHaveCount(2);
   await expect(help.locator(".tip-bubble li strong").first()).toHaveText("Quantidade fixa");
   await row.getByTestId("row-train-mode").selectOption("count");
   await expect(row).toContainText("Treinar 1 Cidadão");
-
-  await page.getByTestId("kind-stopTrain").click();
-  const stop = page.getByTestId("action-row").last();
-  await expect(stop).toContainText("Parar produção contínua");
-  await stop.locator(".label-text").click();
-  await stop.getByTestId("row-stop-mode").selectOption("auto");
-  await expect(stop).toContainText("Parar produção automática");
 });
 
 test("'after' lists when other actions end (✓) and when they start", async ({ page }) => {

@@ -1,5 +1,9 @@
 # Data changelog
 
+## 2026-11-02 — no more reserve window
+
+- `common.json` `defaults.affordableWindow` removed: the "train when affordable" mode it served is gone (auto queues end at their own time).
+
 ## 2026-11-01 — icon manifest moved
 
 - `public/icons/manifest.json` → `src/data/icons.json`: the app imports it, and Vite does not allow importing from `public/`. The WebP files stay in `public/icons/`.

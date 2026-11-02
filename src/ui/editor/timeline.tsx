@@ -2,7 +2,7 @@ import type { ComponentChildren } from "preact";
 import { useEffect, useRef, useState } from "preact/hooks";
 import { entityName } from "../../data/catalog.ts";
 import type { Action, Build } from "../../engine/build.ts";
-import { formatClock } from "../../engine/time.ts";
+import { formatClock, parseClock } from "../../engine/time.ts";
 import type { PantheonId } from "../../data/schema.ts";
 import type { ProductionSpan, SimResult, SimWarning, Snapshot } from "../../engine/types.ts";
 import { useApp } from "../context.tsx";
@@ -36,7 +36,7 @@ export const SPAN_KIND: Record<ProductionSpan["kind"], string> = {
 };
 
 /** Actions that happen in an instant: drawn as a diamond, not a bar. */
-const INSTANT = new Set<Action["do"]>(["move", "power", "event", "stopTrain", "empower"]);
+const INSTANT = new Set<Action["do"]>(["move", "power", "event", "empower"]);
 
 /** A tooltip that floats above the hovered bar (bars are absolutely placed, so no Tip host). */
 export type FloatTip = {
@@ -377,18 +377,9 @@ export function ActionTrack({
   const mode = action.do === "train" ? action.mode : undefined;
   const rule = mode !== undefined;
   const instant = INSTANT.has(action.do);
-  /** A rule runs until a later stop action for it starts (or to the end). */
-  const stopAt = rule
-    ? build.actions.findIndex(
-        (x, k) =>
-          k > index &&
-          x.do === "stopTrain" &&
-          (!x.mode || x.mode === mode) &&
-          (!x.unit || x.unit === (action as { unit: string }).unit) &&
-          result?.actions[k]?.startedAt !== undefined,
-      )
-    : -1;
-  const ruleEnd = stopAt >= 0 ? result!.actions[stopAt]!.startedAt! : scale.end;
+  /** An auto queue runs until its `until` time (or to the end). */
+  const until = action.do === "train" && action.until ? parseClock(action.until) : undefined;
+  const ruleEnd = Math.min(until ?? scale.end, scale.end);
 
   const handle = readonly
     ? {}

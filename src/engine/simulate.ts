@@ -130,7 +130,7 @@ type Rule = {
   unit: string;
   rally?: TaskTarget;
   at?: string;
-  window?: number;
+  until?: number;
   active: boolean;
   cappedSince?: number;
   errorReported?: boolean;
@@ -152,7 +152,6 @@ export type ResolvedSettings = {
   oracleRate?: number;
   norseFavorPerMinute: number;
   popReservedAt: "start" | "end";
-  affordableWindow: number;
   sourceAmounts: Partial<Record<SourceId, number>>;
   tail: number;
 };
@@ -167,7 +166,6 @@ export function resolveSettings(build: Build, data: GameData): ResolvedSettings 
     oracleRate: s.oracleRate,
     norseFavorPerMinute: s.norseFavorPerMinute ?? d.norseFavorPerMinute,
     popReservedAt: s.popReservedAt ?? d.popReservedAt,
-    affordableWindow: d.affordableWindow,
     sourceAmounts: s.sourceAmounts ?? {},
     tail: s.tail ?? 30,
   };
@@ -575,9 +573,9 @@ class Simulation {
 
   // ---------- costs ----------
 
-  afford(cost: Cost, reserved: Cost = {}): ResourceId | null {
+  afford(cost: Cost): ResourceId | null {
     for (const [r, v] of Object.entries(cost) as [ResourceId, number][]) {
-      if (this.res[r] - (reserved[r] ?? 0) + EPS < v) return r;
+      if (this.res[r] + EPS < v) return r;
     }
     return null;
   }
@@ -593,8 +591,8 @@ class Simulation {
     return applyCostModifiers(def.cost, this.mods(), { id: def.id, tags: def.tags });
   }
 
-  noResource(cost: Cost, missing: ResourceId, reserved: Cost = {}): Reason {
-    const need = Math.ceil((cost[missing] ?? 0) - (this.res[missing] - (reserved[missing] ?? 0)));
+  noResource(cost: Cost, missing: ResourceId): Reason {
+    const need = Math.ceil((cost[missing] ?? 0) - this.res[missing]);
     return {
       key: "warn.noResource",
       level: "delay",
@@ -602,57 +600,8 @@ class Simulation {
       detail: {
         resource: missing,
         need: cost[missing] ?? 0,
-        reserved: Math.max(0, reserved[missing] ?? 0),
       },
     };
-  }
-
-  actionCost(a: Action, st: ActionState): Cost {
-    const mods = this.mods();
-    switch (a.do) {
-      case "train": {
-        const def = this.unit(a.unit);
-        if (!def || a.mode) return {};
-        const left = st.status === "pending" ? (a.count ?? 1) : st.left;
-        return addCost({}, this.unitCost(def), left);
-      }
-      case "build": {
-        const def = this.p.buildings.get(a.building);
-        return def ? applyCostModifiers(def.cost, mods, { id: def.id, tags: def.tags }) : {};
-      }
-      case "research": {
-        const def = this.p.researches.get(a.research);
-        return def ? applyCostModifiers(def.cost, mods, { id: def.id, tags: def.tags }) : {};
-      }
-      case "age":
-        return this.p.ageUps.get(a.to)?.cost ?? {};
-      case "power":
-        return this.data.powers.get(a.power)?.cost ?? {};
-      case "timeShift":
-        return this.timeShiftCost(a.building);
-      case "promote": {
-        const def = this.unit(a.unit);
-        return def?.promotion ? addCost({}, this.promotionCost(def), a.count ?? 1) : {};
-      }
-      default:
-        return {};
-    }
-  }
-
-  /** Costs of one-shot actions waiting now or due within `window` seconds. */
-  reserved(window: number): Cost {
-    let total: Cost = {};
-    this.build.actions.forEach((a, i) => {
-      const st = this.states[i]!;
-      if (st.status === "done" || a.when === "always" || st.reason?.level === "error") return;
-      if (st.status === "active" && !(a.do === "train" && st.left > 0)) return;
-      const w = a.when;
-      const due =
-        this.eligible(i) ||
-        (typeof w === "string" && w !== "asap" && parseClock(w) <= this.t + window);
-      if (due) total = addCost(total, this.actionCost(a, st));
-    });
-    return total;
   }
 
   // ---------- eligibility ----------
@@ -719,7 +668,6 @@ class Simulation {
           detail.resource = r;
           detail.need = round(d.need ?? 0, 1);
           detail.have = Math.floor(first!.have[r]);
-          if (d.reserved) detail.reserved = Math.floor(d.reserved);
           detail.spent = this.spends.filter(
             (x) => x.t >= since && x.t <= this.t + EPS && x.action !== i && (x.cost[r] ?? 0) > 0,
           );
@@ -815,7 +763,6 @@ class Simulation {
       action?: number;
       rule?: number;
       rally?: TaskTarget;
-      reserved?: Cost;
       hunt?: boolean;
     },
   ): Reason | Site {
@@ -834,10 +781,10 @@ class Simulation {
       return { key: "warn.popCapped", level: "delay", params: { unit: def.id } };
     }
     const cost = this.unitCost(def);
-    const missing = this.afford(cost, opts.reserved);
+    const missing = this.afford(cost);
     if (missing) {
       this.claims.add(site.uid);
-      return this.noResource(cost, missing, opts.reserved);
+      return this.noResource(cost, missing);
     }
     this.pay(cost);
     const ruleAction = opts.rule !== undefined ? this.rules[opts.rule]?.action : undefined;
@@ -986,16 +933,6 @@ class Simulation {
         return this.actEmpower(i, a);
       case "summon":
         return this.actTrain(i, a, this.states[i]!);
-      case "stopTrain": {
-        for (const r of this.rules) {
-          if (r.active && (!a.mode || r.mode === a.mode) && (!a.unit || r.unit === a.unit))
-            r.active = false;
-        }
-        this.start(i);
-        this.complete(i);
-        this.emit({ kind: "trainOff", mode: a.mode, unit: a.unit, action: i, t: this.t });
-        return;
-      }
       case "event":
         return this.actEvent(i, a);
     }
@@ -1532,7 +1469,7 @@ class Simulation {
     this.finishPromotions();
   }
 
-  /** A train action with a mode: keeps training from now on, until a stop action. */
+  /** An auto queue: keeps training from now on, until its `until` time. */
   startRule(i: number, a: Extract<Action, { do: "train" }>, mode: TrainMode): void {
     const def = this.unit(a.unit);
     if (!def)
@@ -1544,7 +1481,7 @@ class Simulation {
       unit: a.unit,
       rally: a.rally,
       at: a.at,
-      window: a.window,
+      until: a.until !== undefined ? parseClock(a.until) : undefined,
       active: true,
     });
     this.start(i);
@@ -1580,13 +1517,13 @@ class Simulation {
   // ---------- rules ----------
 
   runRules(): void {
-    const reserves = new Map<number, Cost>();
-    const reserveFor = (window: number) => {
-      if (!reserves.has(window)) reserves.set(window, this.reserved(window));
-      return reserves.get(window)!;
-    };
     this.rules.forEach((rule, ri) => {
       if (!rule.active) return;
+      if (rule.until !== undefined && this.t + EPS >= rule.until) {
+        rule.active = false;
+        this.emit({ kind: "trainOff", unit: rule.unit, action: rule.action, t: this.t });
+        return;
+      }
       this.acting = rule.action;
       const def = this.unit(rule.unit);
       if (!def) return;
@@ -1596,10 +1533,6 @@ class Simulation {
           at: rule.at,
           rule: ri,
           rally: rule.rally,
-          reserved:
-            rule.mode === "affordable"
-              ? reserveFor(rule.window ?? this.s.affordableWindow)
-              : undefined,
         });
         if ("uid" in result) continue;
         if (result.key === "warn.popCapped") capped = true;
@@ -2009,6 +1942,8 @@ class Simulation {
   // ---------- main loop ----------
 
   settled(): boolean {
+    /** An auto queue with an end time is part of the build until that time. */
+    if (this.rules.some((r) => r.active && r.until !== undefined)) return false;
     return this.build.actions.every((_, i) => {
       const st = this.states[i]!;
       if (st.status === "done") return true;

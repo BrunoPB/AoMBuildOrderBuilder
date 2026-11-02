@@ -122,9 +122,7 @@ export function ActionRow(props: Props) {
   /** "New villager from": earlier actions that produce villagers. */
   const trainSources = earlier.filter(
     (x) =>
-      x.do === "train" &&
-      x.mode !== "affordable" &&
-      Object.keys(p?.units.get(x.unit)?.worker?.gatherRates ?? {}).length > 0,
+      x.do === "train" && Object.keys(p?.units.get(x.unit)?.worker?.gatherRates ?? {}).length > 0,
   );
   /** "Same builder as": earlier constructions. */
   const buildSources = earlier.filter((x) => x.do === "build");
@@ -158,16 +156,6 @@ export function ActionRow(props: Props) {
           (b) => b.trains?.includes(a.unit) || p?.units.get(a.unit)?.trainedAt.includes(b.id),
         )
       : [];
-  /** Units a stop action can refer to: those with an earlier train of the matching mode. */
-  const stopMode = a.do === "stopTrain" ? a.mode : undefined;
-  const stoppable = [
-    ...new Set([
-      ...earlier.flatMap((x) =>
-        x.do === "train" && x.mode && (!stopMode || x.mode === stopMode) ? [x.unit] : [],
-      ),
-      ...("unit" in a && a.unit ? [a.unit] : []),
-    ]),
-  ];
   const name = (id: string) =>
     text(locale, p?.units.get(id)?.name ?? p?.buildings.get(id)?.name ?? { en: id, "pt-BR": id });
 
@@ -463,13 +451,13 @@ export function ActionRow(props: Props) {
                 onChange={(e) => {
                   const m = e.currentTarget.value;
                   set(
-                    m === "auto" || m === "affordable"
-                      ? { mode: m, count: undefined, window: undefined }
-                      : { mode: undefined, count: 1, window: undefined },
+                    m === "auto"
+                      ? { mode: m, count: undefined, until: undefined }
+                      : { mode: undefined, count: 1, until: undefined },
                   );
                 }}
               >
-                {(["count", "auto", "affordable"] as const).map((m) => (
+                {(["count", "auto"] as const).map((m) => (
                   <option key={m} value={m}>
                     {t(`row.trainMode.${m}`)}
                   </option>
@@ -477,20 +465,21 @@ export function ActionRow(props: Props) {
               </select>
             </label>
           )}
-          {a.do === "train" && a.mode === "affordable" && (
+          {a.do === "train" && a.mode === "auto" && (
             <label class="field">
-              <HelpText k="row.window" />
+              <HelpText k="row.until" />
               <input
-                class="small"
-                type="number"
-                min={0}
-                step={5}
-                placeholder={String(data.common.defaults.affordableWindow)}
-                value={a.window ?? ""}
-                data-testid="row-window"
+                class="time"
+                type="text"
+                inputMode="numeric"
+                placeholder="m:ss"
+                value={a.until ?? ""}
+                data-testid="row-until"
                 onChange={(e) => {
                   const v = e.currentTarget.value.trim();
-                  set({ window: v === "" ? undefined : Math.max(0, Math.round(Number(v) || 0)) });
+                  if (v === "") set({ until: undefined });
+                  else if (isClock(v)) set({ until: v });
+                  else e.currentTarget.value = a.until ?? "";
                 }}
               />
             </label>
@@ -718,39 +707,6 @@ export function ActionRow(props: Props) {
                 {powerTargets?.map((id) => (
                   <option key={id} value={id}>
                     {name(id)}
-                  </option>
-                ))}
-              </select>
-            </label>
-          )}
-          {a.do === "stopTrain" && (
-            <label class="field">
-              <HelpText k="row.trainMode" />
-              <select
-                value={a.mode ?? ""}
-                data-testid="row-stop-mode"
-                onChange={(e) => {
-                  const m = e.currentTarget.value;
-                  set({ mode: m === "auto" || m === "affordable" ? m : undefined });
-                }}
-              >
-                <option value="">{t("row.trainMode.both")}</option>
-                <option value="auto">{t("row.trainMode.auto")}</option>
-                <option value="affordable">{t("row.trainMode.affordable")}</option>
-              </select>
-            </label>
-          )}
-          {a.do === "stopTrain" && (
-            <label class="field">
-              <HelpText k="row.unit" />
-              <select
-                value={a.unit ?? ""}
-                onChange={(e) => set({ unit: e.currentTarget.value || undefined })}
-              >
-                <option value="">{t("row.any")}</option>
-                {stoppable.map((u) => (
-                  <option key={u} value={u}>
-                    {name(u)}
                   </option>
                 ))}
               </select>

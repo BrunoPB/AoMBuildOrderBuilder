@@ -16,8 +16,6 @@ export type WaitDetail = {
   need?: number;
   /** Stock when the wait began. */
   have?: number;
-  /** Part of the stock kept for other actions due soon (train when affordable). */
-  reserved?: number;
   /** Other spends of that resource during the wait. */
   spent?: Spend[];
   /** Earlier reasons of the same wait, when it changed (e.g. queue busy, then no food). */
@@ -56,7 +54,7 @@ export type SimEvent = { t: number; action?: number } & (
   | { kind: "empower"; unit: string; building: string }
   | { kind: "hunted"; unit: string; food: number }
   | { kind: "trainOn"; mode: TrainMode; unit: string; rally?: TaskTarget }
-  | { kind: "trainOff"; mode?: TrainMode; unit?: string }
+  | { kind: "trainOff"; unit: string }
   | { kind: "lose"; units: Record<string, number> }
   | { kind: "gain"; cost: Cost }
   | { kind: "note"; text: string }

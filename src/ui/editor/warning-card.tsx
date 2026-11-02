@@ -31,8 +31,7 @@ function ResourceWait({ build, result, w }: { build: Build; result: SimResult; w
   const resName = t(`res.${r}`).toLowerCase();
   const need = d.need ?? 0;
   const have = d.have ?? 0;
-  const reserved = d.reserved ?? 0;
-  const missing = Math.max(0, Math.ceil(need - (have - reserved)));
+  const missing = Math.max(0, Math.ceil(need - have));
   const spent = d.spent ?? [];
   const spentTotal = Math.round(spent.reduce((sum, x) => sum + (x.cost[r] ?? 0), 0));
   const end = Math.max(d.since, w.t - 1);
@@ -70,12 +69,6 @@ function ResourceWait({ build, result, w }: { build: Build; result: SimResult; w
         <dd class="num">
           {have} {icon}
         </dd>
-        {reserved > 0 && (
-          <>
-            <dt>{t("wd.reserved")}</dt>
-            <dd class="num lvl-delay">−{reserved}</dd>
-          </>
-        )}
         <dt>{t("wd.missing")}</dt>
         <dd class="num lvl-error wd-strong">{missing}</dd>
         <dt>{t("wd.gathering")}</dt>

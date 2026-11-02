@@ -25,9 +25,6 @@ export function validateRefs(build: Build, data: GameData): string[] {
         need(p.units.has(a.by), "unit", a.by, i);
         need(p.buildings.has(a.building), "building", a.building, i);
         break;
-      case "stopTrain":
-        if (a.unit) need(p.units.has(a.unit), "unit", a.unit, i);
-        break;
       case "build":
         need(p.buildings.has(a.building), "building", a.building, i);
         if (a.builder && "new" in a.builder)

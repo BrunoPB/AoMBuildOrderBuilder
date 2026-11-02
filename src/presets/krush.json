@@ -1,6 +1,6 @@
 {
   "format": "aomr-bob",
-  "version": 3,
+  "version": 4,
   "id": "preset:krush",
   "name": "Krush",
   "author": "Bruno",
@@ -200,7 +200,8 @@
       },
       "do": "train",
       "unit": "promethean",
-      "mode": "affordable",
+      "mode": "auto",
+      "until": "6:15",
       "at": "temple"
     },
     {
@@ -234,8 +235,9 @@
       "when": "3:25",
       "do": "train",
       "unit": "citizen",
-      "rally": "food",
-      "mode": "auto"
+      "mode": "auto",
+      "until": "7:25",
+      "rally": "food"
     },
     {
       "id": "o2",
@@ -250,17 +252,18 @@
       },
       "do": "train",
       "unit": "turma",
-      "mode": "affordable",
+      "mode": "auto",
+      "until": "6:15",
       "at": "counter-barracks"
     },
     {
       "id": "r1",
       "when": "4:25",
+      "note": "raid",
       "do": "event",
       "lose": {
         "turma": 2
-      },
-      "note": "raid"
+      }
     },
     {
       "id": "m2",
@@ -275,12 +278,12 @@
     {
       "id": "r2",
       "when": "4:50",
+      "note": "raid",
       "do": "event",
       "lose": {
         "turma": 2,
         "promethean": 1
-      },
-      "note": "raid"
+      }
     },
     {
       "id": "ar",
@@ -311,25 +314,12 @@
       "then": "gold"
     },
     {
-      "id": "sp",
-      "when": "6:15",
-      "do": "stopTrain",
-      "mode": "affordable"
-    },
-    {
       "id": "g3",
       "when": "7:25",
       "do": "move",
       "count": 1,
       "from": "food",
       "to": "gold"
-    },
-    {
-      "id": "sa",
-      "when": "7:25",
-      "do": "stopTrain",
-      "unit": "citizen",
-      "mode": "auto"
     },
     {
       "id": "h1",

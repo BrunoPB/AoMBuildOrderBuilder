@@ -93,11 +93,11 @@ describe("storage", () => {
   });
 
   it("validates versions on load", () => {
-    expect(migrateBuild({ ...krush, version: 4 })).toMatchObject({ ok: false, newer: 4 });
+    expect(migrateBuild({ ...krush, version: 5 })).toMatchObject({ ok: false, newer: 5 });
     expect(migrateBuild({ ...krush, version: 0 }).ok).toBe(false);
   });
 
-  it("migrates version 1 auto queue and train-when-affordable to train modes", () => {
+  it("migrates version 1 auto queue and train-when-affordable to auto queues with an end", () => {
     const v1 = {
       ...krush,
       version: 1,
@@ -105,37 +105,63 @@ describe("storage", () => {
         { when: "0:00", do: "autoTrain", unit: "citizen", rally: "food" },
         { when: "always", do: "trainWhenAffordable", unit: "turma", from: "counter-barracks" },
         { when: "5:00", do: "stopAutoTrain", unit: "citizen" },
-        { when: "5:00", do: "stopTrainWhenAffordable" },
+        { when: "6:00", do: "stopTrainWhenAffordable" },
       ],
       milestones: [],
     };
     const r = migrateBuild(v1);
     expect(r.ok && r.build.actions).toEqual([
-      { when: "0:00", do: "train", mode: "auto", unit: "citizen", rally: "food" },
-      { when: "always", do: "train", mode: "affordable", unit: "turma", at: "counter-barracks" },
-      { when: "5:00", do: "stopTrain", mode: "auto", unit: "citizen" },
-      { when: "5:00", do: "stopTrain", mode: "affordable" },
+      { when: "0:00", do: "train", mode: "auto", unit: "citizen", rally: "food", until: "5:00" },
+      {
+        when: "always",
+        do: "train",
+        mode: "auto",
+        unit: "turma",
+        at: "counter-barracks",
+        until: "6:00",
+      },
     ]);
   });
 
-  it("migrates the build-wide reserve window into each 'when affordable' action", () => {
+  it("drops stop actions: a timed one becomes the queues' 'until', references are fixed", () => {
+    const v3 = {
+      ...krush,
+      version: 3,
+      settings: {},
+      actions: [
+        { id: "a", when: "0:00", do: "train", mode: "affordable", unit: "turma", window: 60 },
+        { id: "b", when: "0:00", do: "train", mode: "auto", unit: "citizen" },
+        { id: "c", when: "0:00", do: "train", mode: "auto", unit: "oracle" },
+        { id: "s1", when: "3:00", do: "stopTrain", mode: "affordable", unit: "turma" },
+        { id: "s2", when: "4:00", do: "stopTrain", mode: "auto", unit: "citizen" },
+        { id: "s3", when: { after: "b" }, do: "stopTrain", mode: "auto" },
+        { id: "x", when: { after: "s2" }, do: "event", note: "after the stop" },
+      ],
+      milestones: [{ id: "m", atAction: "s1" }],
+    };
+    const r = migrateBuild(v3);
+    expect(r.ok && r.build.actions).toEqual([
+      { id: "a", when: "0:00", do: "train", mode: "auto", unit: "turma", until: "3:00" },
+      { id: "b", when: "0:00", do: "train", mode: "auto", unit: "citizen", until: "4:00" },
+      // a stop without a fixed time cannot become a time: the queue runs to the end
+      { id: "c", when: "0:00", do: "train", mode: "auto", unit: "oracle" },
+      { id: "x", when: "asap", do: "event", note: "after the stop" },
+    ]);
+    expect(r.ok && r.build.milestones).toEqual([]);
+  });
+
+  it("drops the old build-wide reserve window", () => {
     const v2 = {
       ...krush,
       version: 2,
       settings: { efficiency: 0.9, affordableWindow: 60 },
-      actions: [
-        { when: "always", do: "train", mode: "affordable", unit: "turma" },
-        { when: "always", do: "train", mode: "affordable", unit: "promethean", window: 10 },
-        { when: "0:00", do: "train", mode: "auto", unit: "citizen" },
-      ],
+      actions: [{ when: "always", do: "train", mode: "affordable", unit: "turma" }],
       milestones: [],
     };
     const r = migrateBuild(v2);
     expect(r.ok && r.build.settings).toEqual({ efficiency: 0.9 });
-    expect(r.ok && r.build.actions.map((a) => ("window" in a ? a.window : undefined))).toEqual([
-      60,
-      10,
-      undefined,
+    expect(r.ok && r.build.actions).toEqual([
+      { when: "always", do: "train", mode: "auto", unit: "turma" },
     ]);
   });
 
