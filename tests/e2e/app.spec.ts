@@ -257,6 +257,8 @@ test("drag and drop: food chain, matchups and palette", async ({ page, isMobile 
   await page.getByTestId("tab-details").click();
   await page.locator("details.collapsible > summary").click();
   const chain = page.getByTestId("food-chain").locator("li");
+  // dragging near the window edge makes the browser scroll mid-drag: keep the chain in the middle
+  await page.getByTestId("food-pool").evaluate((el) => el.scrollIntoView({ block: "center" }));
   await expect(chain.first()).toHaveAttribute("data-testid", "chain-hunt");
   await page.getByTestId("chain-berries").dragTo(page.getByTestId("chain-hunt"));
   await expect(chain.first()).toHaveAttribute("data-testid", "chain-berries");
