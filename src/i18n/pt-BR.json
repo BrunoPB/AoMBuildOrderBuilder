@@ -230,7 +230,7 @@
   "match.minus5": "−5 s",
   "match.plus5": "+5 s",
   "match.countdown": "Contagem regressiva (s)",
-  "match.sound": "Som a cada ação",
+  "match.sound": "Som de contagem para cada ação",
   "match.now": "Agora",
   "match.next": "Próxima",
   "match.done": "Fim da build",

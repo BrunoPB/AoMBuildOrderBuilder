@@ -230,7 +230,7 @@
   "match.minus5": "−5 s",
   "match.plus5": "+5 s",
   "match.countdown": "Countdown (s)",
-  "match.sound": "Sound on each action",
+  "match.sound": "Countdown sound for each action",
   "match.now": "Now",
   "match.next": "Next",
   "match.done": "End of build",

@@ -218,6 +218,51 @@ test("match mode clock runs, shifts and resets", async ({ page }) => {
   await expect(clock).toHaveText("0:00");
 });
 
+test("match mode counts down to each step: beeps 2 s and 1 s before, a higher one on it", async ({
+  page,
+}) => {
+  await page.addInitScript(() => {
+    const beeps: number[] = [];
+    (window as unknown as { beeps: number[] }).beeps = beeps;
+    class FakeAudio {
+      currentTime = 0;
+      destination = {};
+      createOscillator() {
+        const osc = {
+          frequency: { value: 0 },
+          connect: (x: unknown) => x,
+          start: () => beeps.push(osc.frequency.value),
+          stop: () => undefined,
+        };
+        return osc;
+      }
+      createGain() {
+        const gain = {
+          gain: { setValueAtTime: () => undefined, exponentialRampToValueAtTime: () => undefined },
+          connect: (x: unknown) => x,
+        };
+        return gain;
+      }
+    }
+    (window as unknown as { AudioContext: unknown }).AudioContext = FakeAudio;
+  });
+  await page.goto("/#/play/preset%3Akrush");
+  await page.locator(".match-countdown input").fill("0");
+  await page.locator(".match-countdown input").press("Tab");
+  const sound = page.getByRole("button", { name: /Som de contagem/ });
+  if ((await sound.getAttribute("aria-pressed")) !== "true") await sound.click();
+  const next = (await page.getByTestId("match-next").locator(".step-time").first().textContent())!;
+  const [m, sec] = next.trim().split(":").map(Number) as [number, number];
+  const clicks = Math.floor((m * 60 + sec - 2.5) / 5);
+  for (let k = 0; k < clicks; k++) await page.getByTestId("match-plus").click();
+  await page.getByTestId("match-toggle").click();
+  await expect
+    .poll(() => page.evaluate(() => (window as unknown as { beeps: number[] }).beeps), {
+      timeout: 9000,
+    })
+    .toEqual([660, 660, 1320]);
+});
+
 test("match mode shows the next 3 steps and where the villagers should be", async ({ page }) => {
   await page.goto("/#/play/preset%3Akrush");
   await expect(page.getByTestId("match-next").locator(".match-step")).toHaveCount(3);

@@ -88,7 +88,8 @@ export function MatchMode({ id }: { id: string }) {
   const sound = prefs.sound;
   const startRef = useRef<{ wall: number; base: number } | null>(null);
   const audio = useRef<AudioContext | null>(null);
-  const lastBeep = useRef<number>(-1);
+  /** Beeps already played, as "<step second>:<seconds before it>". */
+  const beeped = useRef(new Set<string>());
 
   useEffect(() => {
     if (!running) return;
@@ -108,12 +109,24 @@ export function MatchMode({ id }: { id: string }) {
   const previous = currentIndex >= 1 ? steps[currentIndex - 1] : undefined;
   const upcoming = steps.slice(currentIndex + 1, currentIndex + 4);
 
-  /** A beep when a step becomes "now" (not when the clock is moved past it by hand). */
+  /** A countdown for the next step: short beeps 2 s and 1 s before, a higher one when it is due.
+   *  A beep whose moment the clock jumped past by hand is skipped. */
+  const next = upcoming[0];
   useEffect(() => {
-    if (!running || !sound || !current || lastBeep.current === current.seconds) return;
-    lastBeep.current = current.seconds;
-    if (elapsed - current.seconds < 1.5) beep(audio.current);
-  }, [elapsed, running, sound, current]);
+    if (!running || !sound) return;
+    const play = (step: number, before: number, freq: number) => {
+      const key = `${step}:${before}`;
+      if (beeped.current.has(key)) return;
+      beeped.current.add(key);
+      const late = elapsed - (step - before);
+      if (late >= 0 && late < 0.9) beep(audio.current, freq);
+    };
+    if (current) play(current.seconds, 0, 1320);
+    if (!next) return;
+    const until = next.seconds - elapsed;
+    if (until <= 2 && until > 1) play(next.seconds, 2, 660);
+    else if (until <= 1 && until > 0) play(next.seconds, 1, 660);
+  }, [elapsed, running, sound, current, next]);
 
   if (!found) {
     return (
@@ -191,7 +204,7 @@ export function MatchMode({ id }: { id: string }) {
             onClick={() => {
               setRunning(false);
               setElapsed(-countdown);
-              lastBeep.current = -1;
+              beeped.current.clear();
             }}
           >
             <Svg name="reset" />
