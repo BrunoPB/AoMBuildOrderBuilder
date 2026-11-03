@@ -1,6 +1,7 @@
 import { HelpText } from "./icon.tsx";
 import { useApp } from "./context.tsx";
 import { Svg } from "./svg.tsx";
+import { LiveNumber } from "./fields.tsx";
 
 export function SettingsPage() {
   const { t, prefs, setPrefs, locale, data } = useApp();
@@ -40,15 +41,14 @@ export function SettingsPage() {
         </div>
         <label class="field">
           <HelpText k="settings.efficiency" />
-          <input
-            type="number"
+          <LiveNumber
             step="0.01"
             min="0.1"
             max="1.5"
             placeholder={String(data.common.defaults.efficiency)}
             value={prefs.efficiency ?? ""}
-            onChange={(e) => {
-              const v = e.currentTarget.value;
+            onValue={(raw) => {
+              const v = raw;
               setPrefs({ efficiency: v ? Number(v) : undefined });
             }}
           />

@@ -306,7 +306,7 @@ export function Overview({ id }: { id: string }) {
             />
           </div>
           <ProductionChart build={build} result={result} />
-          <Charts result={result} />
+          <Charts build={build} result={result} />
         </div>
       )}
 

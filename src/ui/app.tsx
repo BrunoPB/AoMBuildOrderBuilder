@@ -3,7 +3,7 @@ import type { GameData } from "../data/load.ts";
 import type { Build } from "../engine/build.ts";
 import { detectLocale, translate } from "../i18n/index.ts";
 import { PRESETS, isPreset } from "../presets/index.ts";
-import { browserStorage, type Prefs, Store } from "../storage/index.ts";
+import { BUILDS_KEY, browserStorage, PREFS_KEY, type Prefs, Store } from "../storage/index.ts";
 import { AppContext, type AppApi, type Toast } from "./context.tsx";
 import { Editor } from "./editor/editor.tsx";
 import { GlobalTools } from "./global-tools.tsx";
@@ -83,14 +83,47 @@ export function App({ data }: { data: GameData }) {
     return () => window.removeEventListener("pagehide", flush);
   }, [store]);
 
+  /** Builds just read from storage (another tab saved them): nothing to save back. */
+  const loaded = useRef<Build[] | null>(null);
+  /** An edit here not saved yet (saves wait half a second). */
+  const pending = useRef(false);
   useEffect(() => {
     window.clearTimeout(saveTimer.current);
+    if (builds === loaded.current) return;
+    pending.current = true;
     saveTimer.current = window.setTimeout(() => {
+      pending.current = false;
       store.saveBuilds(builds);
       setStorageOk(store.ok);
     }, 500);
     return () => window.clearTimeout(saveTimer.current);
   }, [builds, store]);
+
+  /** Another tab changed the builds or the preferences: this one follows (an editor here and the
+   *  overview or match mode there stay the same build). An edit here not saved yet wins over an
+   *  older copy of the same build. */
+  useEffect(() => {
+    const onStorage = (e: StorageEvent) => {
+      if (e.key === BUILDS_KEY || e.key === null) {
+        const theirs = store.loadBuilds();
+        setBuilds((mine) => {
+          if (!pending.current) return (loaded.current = theirs);
+          const newer = (b: Build) => {
+            const other = mine.find((x) => x.id === b.id);
+            return other && other.updatedAt > b.updatedAt ? other : b;
+          };
+          return [...theirs.map(newer), ...mine.filter((b) => !theirs.some((x) => x.id === b.id))];
+        });
+      }
+      if (e.key === PREFS_KEY || e.key === null) {
+        const next = store.loadPrefs();
+        prefsRef.current = next;
+        setPrefsState(next);
+      }
+    };
+    window.addEventListener("storage", onStorage);
+    return () => window.removeEventListener("storage", onStorage);
+  }, [store]);
 
   const toast = useCallback((text: string, kind?: "error") => {
     const id = Date.now() + Math.random();

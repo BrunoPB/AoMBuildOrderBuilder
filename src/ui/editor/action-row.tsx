@@ -21,6 +21,7 @@ import {
   actionTarget,
   isGatherer,
 } from "./labels.ts";
+import { LiveNumber, LiveText } from "../fields.tsx";
 
 type Props = {
   build: Build;
@@ -350,15 +351,15 @@ export function ActionRow(props: Props) {
                       </optgroup>
                     )}
                   </select>
-                  <input
+                  <LiveNumber
                     class="small"
-                    type="number"
                     min={0}
                     aria-label={t("row.delay")}
+                    data-testid="when-delay"
                     disabled={readonly}
                     value={a.when.delay ?? 0}
-                    onChange={(e) => {
-                      const delay = Number(e.currentTarget.value);
+                    onValue={(raw) => {
+                      const delay = Number(raw);
                       const { after, on } = a.when as { after: string; on?: "start" };
                       set({
                         when: { after, ...(on ? { on } : {}), ...(delay > 0 ? { delay } : {}) },
@@ -390,13 +391,12 @@ export function ActionRow(props: Props) {
               </label>
               <label class="field">
                 <HelpText k="row.slot" />
-                <input
+                <LiveNumber
                   class="small"
-                  type="number"
                   min={1}
                   value={a.slot ?? 1}
-                  onChange={(e) => {
-                    const v = Math.max(1, Math.round(Number(e.currentTarget.value) || 1));
+                  onValue={(raw) => {
+                    const v = Math.max(1, Math.round(Number(raw) || 1));
                     set({ slot: v > 1 ? v : undefined });
                   }}
                 />
@@ -420,14 +420,11 @@ export function ActionRow(props: Props) {
             <>
               <label class="field">
                 <HelpText k="row.count" />
-                <input
+                <LiveNumber
                   class="small"
-                  type="number"
                   min={1}
                   value={a.count ?? 1}
-                  onChange={(e) =>
-                    set({ count: Math.max(1, Math.round(Number(e.currentTarget.value) || 1)) })
-                  }
+                  onValue={(raw) => set({ count: Math.max(1, Math.round(Number(raw) || 1)) })}
                 />
               </label>
               {p?.units.get(a.unit)?.carcass !== undefined && (
@@ -468,16 +465,15 @@ export function ActionRow(props: Props) {
           {a.do === "train" && a.mode === "auto" && (
             <label class="field">
               <HelpText k="row.duration" />
-              <input
+              <LiveNumber
                 class="small"
-                type="number"
                 min={1}
                 step={5}
                 placeholder="—"
                 value={a.duration ?? ""}
                 data-testid="row-duration"
-                onChange={(e) => {
-                  const v = Math.round(Number(e.currentTarget.value) || 0);
+                onValue={(raw) => {
+                  const v = Math.round(Number(raw) || 0);
                   set({ duration: v > 0 ? v : undefined, until: undefined });
                 }}
               />
@@ -486,15 +482,12 @@ export function ActionRow(props: Props) {
           {((a.do === "train" && !a.mode) || a.do === "promote") && (
             <label class="field">
               <HelpText k="row.count" />
-              <input
+              <LiveNumber
                 class="small"
-                type="number"
                 min={1}
                 value={a.count ?? 1}
                 data-testid="row-count"
-                onChange={(e) =>
-                  set({ count: Math.max(1, Math.round(Number(e.currentTarget.value) || 1)) })
-                }
+                onValue={(raw) => set({ count: Math.max(1, Math.round(Number(raw) || 1)) })}
               />
             </label>
           )}
@@ -604,13 +597,12 @@ export function ActionRow(props: Props) {
               )}
               <label class="field">
                 <HelpText k="row.count" />
-                <input
+                <LiveNumber
                   class="small"
-                  type="number"
                   min={1}
                   value={a.builders ?? 1}
-                  onChange={(e) => {
-                    const v = Math.max(1, Math.round(Number(e.currentTarget.value) || 1));
+                  onValue={(raw) => {
+                    const v = Math.max(1, Math.round(Number(raw) || 1));
                     set({ builders: v > 1 ? v : undefined });
                   }}
                 />
@@ -630,17 +622,13 @@ export function ActionRow(props: Props) {
               {data.gods.get(build.god)?.modifiers.some((m) => m.condition === "nearManor") && (
                 <label class="field">
                   <HelpText k="row.nearManor" />
-                  <input
+                  <LiveNumber
                     class="small"
-                    type="number"
                     min={0}
                     max={8}
                     value={a.nearManor === false ? 0 : (a.manors ?? 1)}
-                    onChange={(e) => {
-                      const n = Math.max(
-                        0,
-                        Math.min(8, Math.round(Number(e.currentTarget.value) || 0)),
-                      );
+                    onValue={(raw) => {
+                      const n = Math.max(0, Math.min(8, Math.round(Number(raw) || 0)));
                       set({ manors: n === 1 ? undefined : n, nearManor: undefined });
                     }}
                   />
@@ -664,14 +652,11 @@ export function ActionRow(props: Props) {
             <>
               <label class="field">
                 <HelpText k="row.count" />
-                <input
+                <LiveNumber
                   class="small"
-                  type="number"
                   min={1}
                   value={a.count}
-                  onChange={(e) =>
-                    set({ count: Math.max(1, Math.round(Number(e.currentTarget.value) || 1)) })
-                  }
+                  onValue={(raw) => set({ count: Math.max(1, Math.round(Number(raw) || 1)) })}
                 />
               </label>
               <label class="field">
@@ -715,13 +700,12 @@ export function ActionRow(props: Props) {
           {a.do === "power" && (
             <label class="field" style={{ flex: 1 }}>
               <HelpText k="row.powerNote" />
-              <input
-                type="text"
+              <LiveText
                 value={a.note ?? ""}
                 maxLength={120}
                 placeholder={t("row.powerNoteExample")}
                 data-testid="row-power-note"
-                onChange={(e) => set({ note: e.currentTarget.value.trim() || undefined })}
+                onValue={(raw) => set({ note: raw.trim() || undefined })}
               />
             </label>
           )}
@@ -745,17 +729,16 @@ export function ActionRow(props: Props) {
                       </option>
                     ))}
                   </select>
-                  <input
+                  <LiveNumber
                     class="small"
-                    type="number"
                     min={1}
                     value={Object.values(a.lose ?? {})[0] ?? 1}
-                    onChange={(e) => {
+                    onValue={(raw) => {
                       const u = Object.keys(a.lose ?? {})[0];
                       if (u)
                         set({
                           lose: {
-                            [u]: Math.max(1, Math.round(Number(e.currentTarget.value) || 1)),
+                            [u]: Math.max(1, Math.round(Number(raw) || 1)),
                           },
                         });
                     }}
@@ -764,13 +747,12 @@ export function ActionRow(props: Props) {
               </label>
               <label class="field">
                 <HelpText k="row.gainFavor" />
-                <input
+                <LiveNumber
                   class="small"
-                  type="number"
                   min={0}
                   value={a.gainFavor ?? 0}
-                  onChange={(e) => {
-                    const v = Number(e.currentTarget.value);
+                  onValue={(raw) => {
+                    const v = Number(raw);
                     set({ gainFavor: v > 0 ? v : undefined });
                   }}
                 />
@@ -778,13 +760,12 @@ export function ActionRow(props: Props) {
               {(["food", "wood", "gold"] as const).map((r) => (
                 <label class={`field res-${r}`} key={r}>
                   {t(`res.${r}`)}
-                  <input
+                  <LiveNumber
                     class="small"
-                    type="number"
                     min={0}
                     value={a.gainResource?.[r] ?? 0}
-                    onChange={(e) => {
-                      const v = Number(e.currentTarget.value);
+                    onValue={(raw) => {
+                      const v = Number(raw);
                       const next = { ...(a.gainResource ?? {}) };
                       if (v > 0) next[r] = v;
                       else delete next[r];
@@ -795,11 +776,10 @@ export function ActionRow(props: Props) {
               ))}
               <label class="field" style={{ flex: 1 }}>
                 <HelpText k="row.note" />
-                <input
-                  type="text"
+                <LiveText
                   value={a.note ?? ""}
                   maxLength={120}
-                  onChange={(e) => set({ note: e.currentTarget.value || undefined })}
+                  onValue={(raw) => set({ note: raw || undefined })}
                 />
               </label>
             </>

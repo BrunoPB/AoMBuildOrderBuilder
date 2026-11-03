@@ -6,6 +6,7 @@ import { formatClock, parseClock } from "../../engine/time.ts";
 import type { PantheonId } from "../../data/schema.ts";
 import type { ProductionSpan, SimResult, SimWarning, Snapshot } from "../../engine/types.ts";
 import { useApp } from "../context.tsx";
+import { fixedTime } from "./order.ts";
 import { EntityIcon } from "../icon.tsx";
 import { Svg } from "../svg.tsx";
 
@@ -21,24 +22,34 @@ export function makeScale(end: number, trackPx: number): Scale {
   };
 }
 
-/** Shortest timeline shown (s), so a build just started is not stretched over a few seconds. */
-const MIN_VIEW = 480;
-/** Room after the last thing the build does (s), like the simulation's tail. */
-const VIEW_MARGIN = 30;
+/** Shortest timeline shown (s), for a build with almost nothing in it yet. */
+const MIN_VIEW = 60;
+/** Room after the build's last moment (s), so its last mark is not on the edge. */
+const VIEW_MARGIN = 10;
 
-/** How long the timeline is: up to the last thing the build does (action starts and ends,
- *  finished production) plus a margin, at least MIN_VIEW. Not the simulation's own end: with an
- *  action that never happens it runs on to its safety limit. `times`: the actions' times. */
-export function viewEnd(
-  result: SimResult | undefined,
-  times: readonly (number | undefined)[] = [],
-) {
+/** When each action starts: its simulated start, or its asked time when it has not started. */
+export function actionTimes(build: Build, result?: SimResult): (number | undefined)[] {
+  return build.actions.map((a, i) => result?.actions[i]?.startedAt ?? fixedTime(a.when));
+}
+
+/** How long the timeline is, the same in every view: up to the build's end (when its last action
+ *  and job are done) plus a margin. With an action that never happens the simulation runs on to
+ *  its safety limit, so then it is up to the last thing the build does. */
+export function viewEnd(build: Build, result?: SimResult) {
+  const times = actionTimes(build, result);
+  const settled =
+    result !== undefined &&
+    (result.buildEnd < result.endTime || result.actions.every((o) => o.status === "done"));
   const content = [
     ...times,
-    ...(result?.actions.flatMap((o) => [o.startedAt, o.completedAt]) ?? []),
-    ...(result?.production.spans.map((s) => s.end ?? s.start) ?? []),
+    ...(settled
+      ? [result.buildEnd]
+      : [
+          ...(result?.actions.flatMap((o) => [o.startedAt, o.completedAt]) ?? []),
+          ...(result?.production.spans.map((s) => s.end ?? s.start) ?? []),
+        ]),
   ].reduce<number>((m, t) => (t !== undefined && t > m ? t : m), 0);
-  return Math.max(MIN_VIEW, content + VIEW_MARGIN);
+  return Math.max(MIN_VIEW, Math.ceil(content) + VIEW_MARGIN);
 }
 
 /** Tick step (s) so labels stay readable at the current width. */
@@ -289,12 +300,14 @@ function SpanBar({
 }) {
   const { t, data, locale } = useApp();
   const name = (id: string) => entityName(data, build.pantheon, id, locale);
-  const stop = s.end ?? scale.end;
+  /** What runs on after the build's end is cut there. */
+  if (s.start >= scale.end) return null;
+  const stop = Math.min(s.end ?? scale.end, scale.end);
   const px = (stop - s.start) * scale.pxPerSec;
   const label = spanLabel(s, name, t, scale.end) + hint;
   return (
     <span
-      class={`gantt-bar tl-bar ${SPAN_KIND[s.kind]} ${s.end === undefined ? "open" : ""} ${compact ? "compact" : ""} ${"onPointerDown" in handle ? "movable" : ""}`}
+      class={`gantt-bar tl-bar ${SPAN_KIND[s.kind]} ${s.end === undefined || s.end > scale.end ? "open" : ""} ${compact ? "compact" : ""} ${"onPointerDown" in handle ? "movable" : ""}`}
       /* a bar starting right at the end stays inside the track (8 px: its padding and border) */
       style={{
         left: `min(${scale.pct(s.start)}, calc(100% - 8px))`,

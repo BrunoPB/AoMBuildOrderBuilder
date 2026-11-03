@@ -216,6 +216,20 @@ export function nextActionId(build: Build): string {
   return `a${i}`;
 }
 
+/** Every action with an id, so each row keeps its own state (open details, the field being typed
+ *  in) when the list is reordered. Undefined when they all have one. */
+export function withIds(actions: readonly Action[]): Action[] | undefined {
+  if (actions.every((a) => a.id)) return undefined;
+  const used = new Set(actions.map((a) => a.id));
+  let n = 1;
+  return actions.map((a) => {
+    if (a.id) return a;
+    while (used.has(`a${n}`)) n++;
+    used.add(`a${n}`);
+    return { ...a, id: `a${n}` };
+  });
+}
+
 /** Palette action kinds by group, most common first; god-specific actions last. */
 export const PALETTE_GROUPS: { id: string; kinds: ActionKind[] }[] = [
   { id: "economy", kinds: ["move", "train", "build", "research", "age"] },

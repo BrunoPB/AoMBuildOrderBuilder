@@ -23,11 +23,23 @@ function niceMax(v: number): number {
   return (f <= 1 ? 1 : f <= 2 ? 2 : f <= 5 ? 5 : 10) * exp;
 }
 
-function Chart({ series, lines, testid }: { series: Snapshot[]; lines: Line[]; testid: string }) {
+type ChartProps = { series: Snapshot[]; end: number };
+
+/** `end`: the timeline's length, so every view shows the same span of the build. */
+function Chart({
+  series: all,
+  end,
+  lines: allLines,
+  testid,
+}: ChartProps & { lines: Line[]; testid: string }) {
   const { locale } = useApp();
   const [hover, setHover] = useState<number | null>(null);
+  const shown = all.findIndex((s) => s.t > end);
+  const count = shown < 0 ? all.length : shown;
+  const series = all.slice(0, count);
+  const lines = allLines.map((l) => ({ ...l, values: l.values.slice(0, count) }));
   if (series.length < 2) return null;
-  const tMax = series.at(-1)!.t;
+  const tMax = end;
   const yMax = niceMax(Math.max(...lines.flatMap((l) => l.values)));
   const x = (t: number) => PAD.l + (t / Math.max(tMax, 1)) * (W - PAD.l - PAD.r);
   const y = (v: number) => H - PAD.b - (v / yMax) * (H - PAD.t - PAD.b);
@@ -102,7 +114,7 @@ function Chart({ series, lines, testid }: { series: Snapshot[]; lines: Line[]; t
   );
 }
 
-export function ResourceChart({ series }: { series: Snapshot[] }) {
+export function ResourceChart({ series, end }: ChartProps) {
   const { t } = useApp();
   const lines: Line[] = (["food", "wood", "gold", "favor"] as const).map((r) => ({
     key: r,
@@ -111,10 +123,10 @@ export function ResourceChart({ series }: { series: Snapshot[] }) {
     values: series.map((s) => s.resources[r]),
     label: t(`res.${r}`),
   }));
-  return <Chart series={series} lines={lines} testid="chart-resources" />;
+  return <Chart series={series} end={end} lines={lines} testid="chart-resources" />;
 }
 
-export function PopChart({ series }: { series: Snapshot[] }) {
+export function PopChart({ series, end }: ChartProps) {
   const { t } = useApp();
   const lines: Line[] = [
     {
@@ -134,5 +146,5 @@ export function PopChart({ series }: { series: Snapshot[] }) {
       label: t("result.cap"),
     },
   ];
-  return <Chart series={series} lines={lines} testid="chart-pop" />;
+  return <Chart series={series} end={end} lines={lines} testid="chart-pop" />;
 }

@@ -6,10 +6,12 @@ import { formatClock } from "../../engine/time.ts";
 import type { SimResult } from "../../engine/types.ts";
 import { text } from "../../i18n/index.ts";
 import { useApp } from "../context.tsx";
+import { EDITING_ATTR } from "../fields.tsx";
 import { EntityIcon, Tip, HelpText, useHelp } from "../icon.tsx";
 import { Svg } from "../svg.tsx";
 import { PopChart, ResourceChart } from "./charts.tsx";
 import { actionIcons } from "./labels.ts";
+import { viewEnd } from "./timeline.tsx";
 import { LEVEL_ICON, WarningCard } from "./warning-card.tsx";
 
 const RES = ["food", "wood", "gold", "favor"] as const;
@@ -24,7 +26,9 @@ export function focusAction(index: number | undefined, tries = 10): void {
     return;
   }
   row.scrollIntoView({ behavior: "smooth", block: "center" });
-  row.focus({ preventScroll: true });
+  /** A field being typed in keeps the focus (its action just moved because of what was typed). */
+  const editing = row.querySelector<HTMLElement>(`[${EDITING_ATTR}]`);
+  (editing ?? row).focus({ preventScroll: true });
   row.classList.remove("flash");
   void row.offsetWidth;
   row.classList.add("flash");
@@ -617,17 +621,18 @@ export function Matchups({
   );
 }
 
-export function Charts({ result }: { result: SimResult }) {
+export function Charts({ build, result }: { build: Build; result: SimResult }) {
+  const end = viewEnd(build, result);
   return (
     <div class="panel">
       <h3>
         <HelpText k="result.resources" />
       </h3>
-      <ResourceChart series={result.series} />
+      <ResourceChart series={result.series} end={end} />
       <h3 style={{ marginTop: "12px" }}>
         <HelpText k="result.population" />
       </h3>
-      <PopChart series={result.series} />
+      <PopChart series={result.series} end={end} />
     </div>
   );
 }

@@ -10,7 +10,7 @@ import { EntityIcon, HelpText, Tip, useHelp } from "../icon.tsx";
 import { KIND_ICON, Svg } from "../svg.tsx";
 import { ActionRow } from "./action-row.tsx";
 import { ACTION_MIME, nextActionId, startState } from "./labels.ts";
-import { fixedTime, moveWithTime, placeByTime, plannedTime } from "./order.ts";
+import { moveWithTime, placeByTime, plannedTime } from "./order.ts";
 import { LEVEL_ICON } from "./warning-card.tsx";
 import { AutoTag, EntityIconByIcon, focusAction } from "./result.tsx";
 import {
@@ -23,6 +23,7 @@ import {
   useFloatTip,
   useWidth,
   viewEnd,
+  actionTimes,
 } from "./timeline.tsx";
 
 /** The "Events" checkbox (units ready, buildings done… between the actions); hidden for now. */
@@ -176,7 +177,7 @@ export function ActionList({
   const [boxRef, boxWidth] = useWidth<HTMLDivElement>();
   const setActions = (actions: Action[]) => update({ ...build, actions });
   /** When each action really starts (what its row shows); its asked time before simulating. */
-  const times = build.actions.map((a, i) => result?.actions[i]?.startedAt ?? fixedTime(a.when));
+  const times = actionTimes(build, result);
   const move = (from: number, to: number) => {
     if (to < 0 || to >= build.actions.length || from === to) return;
     setActions(moveWithTime(build.actions, times, from, to));
@@ -203,7 +204,7 @@ export function ActionList({
   };
   const milestoneIds = new Set((build.milestones ?? []).map((m) => m.atAction));
 
-  const end = viewEnd(result, times);
+  const end = viewEnd(build, result);
   const width = boxWidth || 800;
   /** Narrow screens put the track under the label instead of beside it. */
   const stacked = width < 600;

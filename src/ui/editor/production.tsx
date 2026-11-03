@@ -34,7 +34,7 @@ export function ProductionChart({ build, result }: { build: Build; result: SimRe
     setTip({ text, x, y: r.top });
   };
   const { lanes, spans } = result.production;
-  const end = viewEnd(result);
+  const end = viewEnd(build, result);
   const fit = zoomPref === 0;
   const zoom = fit
     ? Math.max(0.2, ((boxWidth || 800) - FIT_LABEL - 28) / Math.max(end, 1))
@@ -110,7 +110,8 @@ export function ProductionChart({ build, result }: { build: Build; result: SimRe
           {hover !== null && <span class="gantt-cursor" style={{ left: `${hover * zoom}px` }} />}
         </div>
         {lanes.map((lane) => {
-          const laneSpans = spans.filter((s) => s.lane === lane.uid);
+          /** What runs on after the build's end is cut there, like the rest of the views. */
+          const laneSpans = spans.filter((s) => s.lane === lane.uid && s.start < end);
           return (
             <div class="gantt-row" key={lane.uid} data-testid="production-lane">
               <div class="gantt-label">
@@ -129,13 +130,13 @@ export function ProductionChart({ build, result }: { build: Build; result: SimRe
                   />
                 ))}
                 {laneSpans.map((s, i) => {
-                  const stop = s.end ?? end;
+                  const stop = Math.min(s.end ?? end, end);
                   const w = Math.max(2, (stop - s.start) * zoom);
                   const heldW = s.held !== undefined ? (stop - s.held) * zoom : 0;
                   return (
                     <span
                       key={i}
-                      class={`gantt-bar ${KIND_CLASS[s.kind]} ${s.end === undefined ? "open" : ""}`}
+                      class={`gantt-bar ${KIND_CLASS[s.kind]} ${s.end === undefined || s.end > end ? "open" : ""}`}
                       style={{ left: `${s.start * zoom}px`, width: `${w}px` }}
                       tabIndex={0}
                       role="img"

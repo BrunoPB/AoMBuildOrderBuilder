@@ -15,7 +15,7 @@ import { FoodChain } from "./food-chain.tsx";
 import { ProductionChart } from "./production.tsx";
 import { BuildActions } from "../build-actions.tsx";
 import { useHistory } from "./history.ts";
-import { addIndex, nextActionId } from "./labels.ts";
+import { addIndex, nextActionId, withIds } from "./labels.ts";
 import { Palette } from "./palette.tsx";
 import {
   Charts,
@@ -25,6 +25,7 @@ import {
   WarningsButton,
   WarningsDrawer,
 } from "./result.tsx";
+import { focusedFieldTag, LiveNumber, LiveText } from "../fields.tsx";
 
 function SettingsPanel({
   build,
@@ -62,15 +63,14 @@ function SettingsPanel({
       >
         <label class="field">
           <HelpText k="editor.efficiency" />
-          <input
-            type="number"
+          <LiveNumber
             step="0.01"
             min="0.1"
             max="1.5"
             placeholder={String(d.efficiency)}
             value={s.efficiency ?? ""}
             data-testid="setting-efficiency"
-            onChange={(e) => set({ efficiency: num(e.currentTarget.value) })}
+            onValue={(raw) => set({ efficiency: num(raw) })}
           />
         </label>
         <label class="field">
@@ -89,27 +89,25 @@ function SettingsPanel({
         {favor?.type === "oracles" && (
           <label class="field">
             <HelpText k="editor.oracleRate" />
-            <input
-              type="number"
+            <LiveNumber
               step="0.1"
               min={favor.min}
               max={favor.max}
               placeholder={String(favor.defaultRate)}
               value={s.oracleRate ?? ""}
-              onChange={(e) => set({ oracleRate: num(e.currentTarget.value) })}
+              onValue={(raw) => set({ oracleRate: num(raw) })}
             />
           </label>
         )}
         {favor?.type === "combat" && (
           <label class="field">
             <HelpText k="editor.norseFavor" />
-            <input
-              type="number"
+            <LiveNumber
               step="0.5"
               min="0"
               placeholder={String(d.norseFavorPerMinute)}
               value={s.norseFavorPerMinute ?? ""}
-              onChange={(e) => set({ norseFavorPerMinute: num(e.currentTarget.value) })}
+              onValue={(raw) => set({ norseFavorPerMinute: num(raw) })}
             />
           </label>
         )}
@@ -375,43 +373,45 @@ export function Editor({ id }: { id: string }) {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
-  /** "After" actions follow their anchor in time; when it moves they move in the list too. Capped,
-   *  in case a move keeps shifting the times (reset by every edit of the player). */
+  /** Fixes the editor applies by itself, all in one save so none undoes another:
+   *  - imported builds may have actions without ids (rows need one to keep their state);
+   *  - version 5 builds set food amounts per source; now each food chain item has its own;
+   *  - version 4 builds ended auto queues at a time; now they run for a duration from their start;
+   *  - "after" actions follow their anchor in time: when it moves they move in the list too.
+   *    Capped, in case a move keeps shifting the times (reset by every edit of the player). */
   const drifts = useRef(0);
   useEffect(() => {
     const result = sim.result;
-    if (readonly || !result || !build || drifts.current >= 50) return;
-    const actions = placeDrifted(build.actions, result.actions);
-    if (!actions) return;
-    drifts.current++;
-    api.saveBuild({ ...build, actions });
-  }, [sim.result]);
-
-  /** Version 5 builds set food amounts per source; now each food chain item has its own. */
-  useEffect(() => {
-    if (readonly || !build?.settings?.sourceAmounts) return;
-    const { sourceAmounts, ...settings } = build.settings;
-    const chain = (settings.foodChain ?? data.common.defaults.foodChain).map((item) => {
-      const amount = typeof item === "string" ? sourceAmounts[item] : undefined;
-      return amount ? { source: item as SourceId, amount } : item;
-    });
-    api.saveBuild({ ...build, settings: { ...settings, foodChain: chain } });
-  }, [build?.settings?.sourceAmounts]);
-
-  /** Version 4 builds ended auto queues at a time; now they run for a duration from their start. */
-  useEffect(() => {
-    const result = sim.result;
-    if (readonly || !result || !build) return;
-    let changed = false;
-    const actions = build.actions.map((a, i) => {
-      const start = result.actions[i]?.startedAt;
-      if (a.do !== "train" || !a.until || start === undefined) return a;
-      changed = true;
-      const duration = Math.round(parseClock(a.until) - start);
-      return { ...a, until: undefined, duration: duration > 0 ? duration : undefined };
-    });
-    if (changed) api.saveBuild({ ...build, actions });
-  }, [sim.result]);
+    if (readonly || !build) return;
+    let next = build;
+    const ids = withIds(next.actions);
+    if (ids) next = { ...next, actions: ids };
+    if (next.settings?.sourceAmounts) {
+      const { sourceAmounts, ...settings } = next.settings;
+      const chain = (settings.foodChain ?? data.common.defaults.foodChain).map((item) => {
+        const amount = typeof item === "string" ? sourceAmounts[item] : undefined;
+        return amount ? { source: item as SourceId, amount } : item;
+      });
+      next = { ...next, settings: { ...settings, foodChain: chain } };
+    }
+    if (result) {
+      let until = false;
+      const actions = next.actions.map((a, i) => {
+        const start = result.actions[i]?.startedAt;
+        if (a.do !== "train" || !a.until || start === undefined) return a;
+        until = true;
+        const duration = Math.round(parseClock(a.until) - start);
+        return { ...a, until: undefined, duration: duration > 0 ? duration : undefined };
+      });
+      if (until) next = { ...next, actions };
+      const drifted = drifts.current < 50 ? placeDrifted(next.actions, result.actions) : undefined;
+      if (drifted) {
+        drifts.current++;
+        next = { ...next, actions: drifted };
+      }
+    }
+    if (next !== build) api.saveBuild(next);
+  }, [build, sim.result]);
 
   if (!build) {
     return (
@@ -427,7 +427,7 @@ export function Editor({ id }: { id: string }) {
   const update = (next: Build, tag?: string) => {
     if (readonly) return;
     drifts.current = 0;
-    history.record(build, tag);
+    history.record(build, tag ?? focusedFieldTag());
     api.saveBuild({ ...next, updatedAt: new Date().toISOString() });
   };
   const undo = () => {
@@ -462,15 +462,14 @@ export function Editor({ id }: { id: string }) {
             </a>
           </Tip>
           {god && <EntityIcon id={god.id} pantheon={build.pantheon} size={30} />}
-          <input
-            type="text"
+          <LiveText
             class="name-input"
             aria-label={t("editor.name")}
             data-testid="build-name"
             value={build.name}
             maxLength={80}
             disabled={readonly}
-            onInput={(e) => update({ ...build, name: e.currentTarget.value || build.name }, "name")}
+            onValue={(raw) => update({ ...build, name: raw.trim() ? raw : build.name }, "name")}
           />
           {readonly && (
             <Tip label={t("editor.readonly")} focusable>
@@ -596,7 +595,7 @@ export function Editor({ id }: { id: string }) {
         <div class="stack" data-testid="result">
           <Milestones build={build} result={result} />
           <ProductionChart build={build} result={result} />
-          <Charts result={result} />
+          <Charts build={build} result={result} />
         </div>
       )}
 

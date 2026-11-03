@@ -5,6 +5,8 @@ import type { Action } from "../../src/engine/build.ts";
 import type { SimResult } from "../../src/engine/types.ts";
 import { addIndex } from "../../src/ui/editor/labels.ts";
 import { viewEnd } from "../../src/ui/editor/timeline.tsx";
+import { simulate } from "../../src/engine/simulate.ts";
+import { PRESETS } from "../../src/presets/index.ts";
 import { newBuild, onlyStartActions } from "../../src/ui/sim.ts";
 
 const data = loadGameData(readRawData());
@@ -34,17 +36,34 @@ describe("where a palette action goes", () => {
 });
 
 describe("timeline length", () => {
-  const result = (times: number[], open = false) =>
+  const event: Action = { when: "asap", do: "event", note: "" };
+  const build = (n: number) => ({ ...newBuild(data, "x"), actions: Array<Action>(n).fill(event) });
+  const result = (times: number[], settled: boolean, open = false) =>
     ({
-      actions: times.map((t) => ({ startedAt: t, completedAt: t })),
+      actions: times.map((t) => ({ startedAt: t, completedAt: t, status: "done" })),
       production: { spans: open ? [{ start: 100 }] : [], lanes: [] },
-      endTime: 900,
+      buildEnd: settled ? 367 : 900,
+      endTime: settled ? 397 : 900,
     }) as unknown as SimResult;
-  it("follows what the build does, not a simulation run to its safety limit", () => {
-    expect(viewEnd(result([0, 600]))).toBe(630);
+  it("ends with the build: its last action or job done", () => {
+    expect(viewEnd(build(2), result([0, 349], true))).toBe(377);
   });
-  it("shows at least 8 minutes", () => {
-    expect(viewEnd(result([0, 20], true))).toBe(480);
-    expect(viewEnd(undefined, [30])).toBe(480);
+  it("with an action that never happens, up to the last thing the build does", () => {
+    const r = result([0, 600], false);
+    r.actions.push({ index: 2, status: "pending", waited: 0 });
+    expect(viewEnd(build(3), r)).toBe(610);
+  });
+  it("a build with almost nothing in it still shows a minute", () => {
+    expect(viewEnd(build(0))).toBe(60);
+  });
+  it("a job still running when the simulation stops counts from its start", () => {
+    const r = result([5], false, true);
+    r.actions.push({ index: 1, status: "pending", waited: 0 });
+    expect(viewEnd(build(2), r)).toBe(110);
+  });
+  it("the Krush preset ends where its build ends", () => {
+    const krush = PRESETS.find((b) => b.id === "preset:krush")!;
+    const r = simulate(data, krush);
+    expect(viewEnd(krush, r)).toBe(Math.ceil(r.buildEnd) + 10);
   });
 });

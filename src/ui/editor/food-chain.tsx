@@ -5,6 +5,7 @@ import { text } from "../../i18n/index.ts";
 import { useApp } from "../context.tsx";
 import { EntityIcon, HelpText, Tip, useHelp } from "../icon.tsx";
 import { Svg } from "../svg.tsx";
+import { LiveNumber } from "../fields.tsx";
 
 type Drag = { from: "chain"; index: number } | { from: "pool"; id: SourceId };
 
@@ -141,9 +142,8 @@ export function FoodChain({
               </span>
             </Tip>
             {!endless(src) && (
-              <input
+              <LiveNumber
                 class="chain-amount num"
-                type="number"
                 min={1}
                 step={50}
                 disabled={readonly}
@@ -152,9 +152,9 @@ export function FoodChain({
                 value={typeof chain[i] === "string" ? "" : (chain[i] as { amount: number }).amount}
                 data-testid={`${testid(i)}-amount`}
                 draggable={false}
-                onDragStart={(e) => e.preventDefault()}
-                onKeyDown={(e) => e.stopPropagation()}
-                onChange={(e) => setAmount(i, e.currentTarget.value)}
+                onDragStart={(e: DragEvent) => e.preventDefault()}
+                onKeyDown={(e: KeyboardEvent) => e.stopPropagation()}
+                onValue={(raw) => setAmount(i, raw)}
               />
             )}
             {!readonly && chain.length > 1 && (

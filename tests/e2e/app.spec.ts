@@ -704,6 +704,27 @@ test("an 'after' action follows its anchor in the list when the anchor moves", a
     .toBe(true);
 });
 
+test("typing a delay that moves the action keeps the field being typed in", async ({ page }) => {
+  await page.goto("/#/view/preset%3Akrush");
+  await page.getByTestId("build-header").getByTestId("build-menu").click();
+  await page.getByTestId("duplicate").click();
+  await page.getByTestId("tab-actions").click();
+  const rows = page.getByTestId("action-row");
+  const order = async () => (await rows.locator(".label-text").allTextContents()).join(" | ");
+  const power = rows.filter({ hasText: "Desconstrução" });
+  await power.locator(".label-text").click();
+  await power.getByTestId("when-mode").selectOption("after");
+  await power.getByTestId("when-after").selectOption("cl@start");
+  const before = (await order()).indexOf("Desconstrução");
+  const delay = power.getByTestId("when-delay");
+  await delay.click();
+  await delay.press("Control+a");
+  await delay.pressSequentially("240");
+  await expect.poll(async () => (await order()).indexOf("Desconstrução")).toBeGreaterThan(before);
+  await expect(delay).toBeFocused();
+  await expect(delay).toHaveValue("240");
+});
+
 test("a god power has a note on how to use it, shown with the action", async ({ page }) => {
   await page.goto("/#/view/preset%3Akrush");
   await page.getByTestId("build-header").getByTestId("build-menu").click();
@@ -745,6 +766,65 @@ test("train has a mode: fixed count or an auto queue for some time", async ({ pa
   await expect(help.locator(".tip-bubble li strong").first()).toHaveText("Quantidade fixa");
   await row.getByTestId("row-train-mode").selectOption("count");
   await expect(row).toContainText("Treinar 1 Cidadão");
+});
+
+test("typing a number applies at once, keeps the field and is one undo step", async ({ page }) => {
+  await createBuildWithActions(page);
+  const row = page.getByTestId("action-row").first();
+  await row.locator(".label-text").click();
+  const count = row.getByTestId("row-count");
+  await count.click();
+  await count.press("Control+a");
+  await count.pressSequentially("12");
+  await expect(row).toContainText("Treinar 12 Cidadãos");
+  await expect(count).toBeFocused();
+  // emptying the field to type again leaves it empty while typing
+  await count.press("Backspace");
+  await count.press("Backspace");
+  await expect(count).toHaveValue("");
+  await count.pressSequentially("4");
+  await expect(row).toContainText("Treinar 4 Cidadãos");
+  await expect(count).toBeFocused();
+  await count.press("Tab");
+  await expect(count).toHaveValue("4");
+  await page.getByTestId("undo").click();
+  await expect(row).toContainText("Treinar 1 Cidadão");
+});
+
+test("the build name can be cleared while typing a new one", async ({ page }) => {
+  await createBuildWithActions(page);
+  const name = page.getByTestId("build-name");
+  await name.click();
+  await name.press("Control+a");
+  await name.press("Backspace");
+  await expect(name).toHaveValue("");
+  await name.pressSequentially("Kronos eco");
+  await name.press("Tab");
+  await expect(name).toHaveValue("Kronos eco");
+});
+
+test("the timeline and the charts end with the build", async ({ page }) => {
+  await createBuildWithActions(page);
+  const clock = (s: string) => s.split(":").reduce((m, x) => m * 60 + Number(x), 0);
+  const last = async (texts: string[]) =>
+    Math.max(...texts.filter((x) => /^\d+:\d\d$/.test(x.trim())).map((x) => clock(x.trim())));
+  // a build that ends in a couple of minutes is not stretched over 8
+  const axis = await last(await page.locator(".tl-axis-row .tl-tick").allTextContents());
+  expect(axis).toBeLessThan(180);
+  await page.getByTestId("tab-result").click();
+  const chart = await last(
+    await page.getByTestId("chart-resources").locator("svg text").allTextContents(),
+  );
+  expect(chart).toBeLessThan(180);
+});
+
+test("another tab follows the edits made in this one", async ({ page, context }) => {
+  await createBuildWithActions(page);
+  const other = await context.newPage();
+  await other.goto(page.url().replace("#/build/", "#/view/"));
+  await expect(other.getByTestId("build-title")).toHaveText("E2E Build");
+  await page.getByTestId("build-name").fill("Renamed");
+  await expect(other.getByTestId("build-title")).toHaveText("Renamed");
 });
 
 test("the editor moves an old build's source amounts into its food chain", async ({ page }) => {

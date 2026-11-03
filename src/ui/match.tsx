@@ -9,6 +9,7 @@ import { StepChips } from "./editor/result.tsx";
 import { EntityIcon, Tip, HelpText, useHelp } from "./icon.tsx";
 import { useSimulation } from "./sim.ts";
 import { Svg } from "./svg.tsx";
+import { LiveNumber } from "./fields.tsx";
 
 function beep(ctx: AudioContext | null, freq = 880): void {
   if (!ctx) return;
@@ -212,14 +213,13 @@ export function MatchMode({ id }: { id: string }) {
         </Tip>
         <label class="field match-countdown">
           <HelpText k="match.countdown" />
-          <input
+          <LiveNumber
             class="small"
-            type="number"
             min={0}
             max={60}
             value={countdown}
-            onChange={(e) => {
-              const v = Math.max(0, Math.min(60, Math.round(Number(e.currentTarget.value) || 0)));
+            onValue={(raw) => {
+              const v = Math.max(0, Math.min(60, Math.round(Number(raw) || 0)));
               api.setPrefs({ countdown: v });
               if (!running && elapsed <= 0) setElapsed(-v);
             }}
