@@ -427,6 +427,9 @@ export function Milestones({ build, result }: { build: Build; result: SimResult 
   );
 }
 
+/** Icon of each matchup fit: check, a neutral dash, a cross. */
+export const FIT_ICON = { good: "check", neutral: "neutral", bad: "error" } as const;
+
 export function Matchups({
   build,
   readonly,
@@ -444,11 +447,34 @@ export function Matchups({
   const [dragging, setDragging] = useState<string | null>(null);
   const [over, setOver] = useState<Matchup["fit"] | "none" | null>(null);
   const list = build.matchups ?? [];
-  const setFit = (god: string, fit: Matchup["fit"] | undefined) => {
+  const [overGod, setOverGod] = useState<string | null>(null);
+  /** Puts `god` in `fit` (none: unrated), before `before` or else last of that group. */
+  const place = (god: string, fit: Matchup["fit"] | undefined, before?: string) => {
     const cur = list.find((m) => m.god === god);
-    if (cur?.fit === fit) return;
     const rest = list.filter((m) => m.god !== god);
-    onChange(fit ? [...rest, { ...cur, god, fit }] : rest);
+    if (!fit) return onChange(rest);
+    const at = before
+      ? rest.findIndex((m) => m.god === before)
+      : rest.findLastIndex((m) => m.fit === fit) + 1 || rest.length;
+    const next = [...rest];
+    next.splice(at < 0 ? rest.length : at, 0, { ...cur, god, fit });
+    onChange(next);
+  };
+  const setFit = (god: string, fit: Matchup["fit"] | undefined) => {
+    if (list.find((m) => m.god === god)?.fit === fit) return;
+    place(god, fit);
+  };
+  /** ← → move a rated god inside its group. */
+  const shift = (god: string, delta: -1 | 1) => {
+    const m = list.find((x) => x.god === god);
+    if (!m) return;
+    const group = list.filter((x) => x.fit === m.fit);
+    const k = group.indexOf(m) + delta;
+    if (k < 0 || k >= group.length) return;
+    place(god, m.fit, delta < 0 ? group[k]!.god : group[k + 1]?.god);
+    requestAnimationFrame(() =>
+      document.querySelector<HTMLElement>(`[data-testid="matchup-${god}"]`)?.focus(),
+    );
   };
   const cycle = (god: string) => {
     const order: (Matchup["fit"] | undefined)[] = [undefined, "good", "neutral", "bad"];
@@ -470,9 +496,15 @@ export function Matchups({
           },
           onDrop: (e: DragEvent) => {
             e.preventDefault();
-            if (dragging) setFit(dragging, fit === "none" ? undefined : fit);
+            if (dragging) {
+              const to = fit === "none" ? undefined : fit;
+              /** On the column (not on a god): last of the group, even within the same group. */
+              if (to && list.find((m) => m.god === dragging)?.fit === to) place(dragging, to);
+              else setFit(dragging, to);
+            }
             setDragging(null);
             setOver(null);
+            setOverGod(null);
           },
         };
   const portrait = (god: string, size: number) => {
@@ -494,7 +526,7 @@ export function Matchups({
     return (
       <Tip key={god} label={[label, help("editor.matchupGod")].filter(Boolean).join("\n")}>
         <button
-          class={`portrait-btn ${dragging === god ? "dragging" : ""}`}
+          class={`portrait-btn ${dragging === god ? "dragging" : ""} ${overGod === god && dragging !== god ? "drop-before" : ""}`}
           aria-label={label}
           draggable
           data-testid={`matchup-${god}`}
@@ -505,6 +537,28 @@ export function Matchups({
           onDragEnd={() => {
             setDragging(null);
             setOver(null);
+            setOverGod(null);
+          }}
+          /* dropped on a rated god: it goes right before it, in its group */
+          onDragOver={(e) => {
+            if (!dragging || !m) return;
+            e.preventDefault();
+            setOverGod(god);
+          }}
+          onDragLeave={() => setOverGod((x) => (x === god ? null : x))}
+          onDrop={(e) => {
+            if (!dragging || !m) return;
+            e.preventDefault();
+            e.stopPropagation();
+            if (dragging !== god) place(dragging, m.fit, god);
+            setDragging(null);
+            setOver(null);
+            setOverGod(null);
+          }}
+          onKeyDown={(e) => {
+            if (!m || (e.key !== "ArrowLeft" && e.key !== "ArrowRight")) return;
+            e.preventDefault();
+            shift(god, e.key === "ArrowLeft" ? -1 : 1);
           }}
           onClick={() => cycle(god)}
         >
@@ -534,7 +588,7 @@ export function Matchups({
             {...target(c.fit)}
           >
             <h3 class={c.fit === "good" ? "lvl-info" : ""}>
-              <Svg name={c.fit === "good" ? "check" : c.fit === "bad" ? "error" : "info"} />
+              <Svg name={FIT_ICON[c.fit]} />
               <HelpText k={`result.${c.fit}`} />
             </h3>
             <div class="portraits" style={{ "--portrait-max": `${size}px` }}>

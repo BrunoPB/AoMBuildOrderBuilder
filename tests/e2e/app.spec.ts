@@ -364,6 +364,21 @@ test("drag and drop: food chain, matchups and palette", async ({ page, isMobile 
   await page.getByTestId("matchup-zeus").dragTo(page.getByTestId("matchup-pool"));
   await expect(page.getByTestId("matchup-pool").getByTestId("matchup-zeus")).toBeVisible();
 
+  // order within a group: dropped onto a god it goes before it; ← → move it too
+  const good = page.getByTestId("matchup-col-good");
+  const order = () =>
+    good
+      .locator(".portrait-btn")
+      .evaluateAll((els) => els.map((e) => e.getAttribute("data-testid")));
+  await page.getByTestId("matchup-zeus").dragTo(good);
+  await page.getByTestId("matchup-ra").dragTo(good);
+  await expect.poll(order).toEqual(["matchup-zeus", "matchup-ra"]);
+  await page.getByTestId("matchup-ra").dragTo(page.getByTestId("matchup-zeus"));
+  await expect.poll(order).toEqual(["matchup-ra", "matchup-zeus"]);
+  await page.getByTestId("matchup-ra").focus();
+  await page.keyboard.press("ArrowRight");
+  await expect.poll(order).toEqual(["matchup-zeus", "matchup-ra"]);
+
   await page.getByTestId("tab-actions").click();
   await page.getByTestId("kind-build").click();
   await page.getByTestId("pick-manor").click();

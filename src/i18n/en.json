@@ -438,7 +438,7 @@
   "editor.matchupPool": "Unrated gods",
   "editor.clearMinorLater": "Removing this age up also removes the later ages ({ages}). Continue?",
   "help.editor.chainItem": "Drag to change the priority (or use ← →). Drag it down, out of the list, to remove it.",
-  "help.editor.matchupGod": "Drag to a column or click to change the rating.",
+  "help.editor.matchupGod": "Changes the rating or the order:\n• **Click**: changes the rating.\n• **Drag to a column**: goes to its end.\n• **Drag onto another god** or use **← →**: changes the order within the group.",
   "help.editor.minorChosen": "Picked. Click again to remove it (the build does not reach this age).",
   "help.editor.minorPick": "Click to pick this minor god when aging up.",
   "tl.workers": "Villagers",

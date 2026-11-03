@@ -438,7 +438,7 @@
   "editor.matchupPool": "Deuses sem avaliação",
   "editor.clearMinorLater": "Remover a subida de idade também remove as idades seguintes ({ages}). Continuar?",
   "help.editor.chainItem": "Arraste para mudar a prioridade (ou use ← →). Arraste para baixo, fora da lista, para remover.",
-  "help.editor.matchupGod": "Arraste para uma coluna ou clique para trocar a avaliação.",
+  "help.editor.matchupGod": "Muda a avaliação ou a ordem:\n• **Clique**: troca a avaliação.\n• **Arraste para uma coluna**: vai para o fim dela.\n• **Arraste sobre outro deus** ou use **← →**: muda a ordem dentro do grupo.",
   "help.editor.minorChosen": "Escolhido. Clique de novo para tirar (a build não chega a essa idade).",
   "help.editor.minorPick": "Clique para escolher este deus menor ao subir de idade.",
   "tl.workers": "Aldeões",

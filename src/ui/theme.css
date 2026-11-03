@@ -3464,3 +3464,8 @@ textarea {
 .matchup-chip-label {
   margin-right: 2px;
 }
+
+/* a god dragged over another goes right before it */
+.portrait-btn.drop-before {
+  box-shadow: -4px 0 0 var(--accent);
+}

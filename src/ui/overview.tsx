@@ -15,6 +15,7 @@ import {
   AutoTag,
   Charts,
   EntityIconByIcon,
+  FIT_ICON,
   focusAction,
   Milestones,
   WarningsButton,
@@ -177,10 +178,7 @@ function MatchupStrip({ build }: { build: Build }) {
           <div key={fit} class={`matchup-chip ${fit}`} data-testid={`overview-matchups-${fit}`}>
             <Tip label={[t(`result.${fit}`), help(`result.${fit}`)].filter(Boolean).join("\n")}>
               <span class="row matchup-chip-label">
-                <Svg
-                  name={fit === "good" ? "check" : fit === "bad" ? "error" : "info"}
-                  label={t(`result.${fit}`)}
-                />
+                <Svg name={FIT_ICON[fit]} label={t(`result.${fit}`)} />
               </span>
             </Tip>
             {items.map((m) => (
