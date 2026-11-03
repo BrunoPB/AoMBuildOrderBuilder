@@ -535,7 +535,7 @@ export function Matchups({
               <HelpText k={`result.${c.fit}`} />
             </h3>
             <div class="portraits">
-              {c.items.map((m) => portrait(m.god, 36))}
+              {c.items.map((m) => portrait(m.god, 52))}
               {!readonly && c.items.length === 0 && (
                 <span class="drop-hint" aria-hidden="true">
                   <Svg name="plus" />
@@ -553,7 +553,7 @@ export function Matchups({
           data-testid="matchup-pool"
           {...target("none")}
         >
-          {unset.map((g) => portrait(g.id, 28))}
+          {unset.map((g) => portrait(g.id, 36))}
         </div>
       )}
     </div>

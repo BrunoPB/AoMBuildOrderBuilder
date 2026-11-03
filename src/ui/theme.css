@@ -942,15 +942,19 @@ details.collapsible > summary::-webkit-details-marker {
   color: var(--res);
 }
 
+/* one row per fit (good, neutral, bad): the name on the left, big portraits beside it */
 .matchups {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 8px;
 }
 
 .matchup-col {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
   border-radius: 8px;
-  padding: 6px;
+  padding: 8px;
   border: 1px solid var(--border);
 }
 
@@ -966,7 +970,7 @@ details.collapsible > summary::-webkit-details-marker {
 
 .matchup-col h3 {
   font-size: 13px;
-  margin: 0 0 6px;
+  margin: 0;
 }
 
 /* ---------- dialogs & toasts ---------- */
@@ -2151,7 +2155,7 @@ textarea {
 }
 
 .matchup-col {
-  min-height: 92px;
+  min-height: 72px;
 }
 
 .matchup-pool {

@@ -697,6 +697,45 @@ test("train has a mode: fixed count or an auto queue for some time", async ({ pa
   await expect(row).toContainText("Treinar 1 Cidadão");
 });
 
+test("the editor moves an old build's source amounts into its food chain", async ({ page }) => {
+  await page.addInitScript(() => {
+    if (localStorage.getItem("aomr-bob:builds:v1")) return;
+    const now = new Date().toISOString();
+    const build = {
+      format: "aomr-bob",
+      version: 5,
+      id: "u-amounts",
+      name: "Old amounts",
+      createdAt: now,
+      updatedAt: now,
+      pantheon: "atlanteans",
+      god: "kronos",
+      type: "eco",
+      settings: { sourceAmounts: { hunt: 400 }, popReservedAt: "start" },
+      actions: [{ id: "a", when: "0:10", do: "move", count: 2, from: "idle", to: "food" }],
+    };
+    localStorage.setItem("aomr-bob:builds:v1", JSON.stringify([build]));
+  });
+  await page.goto("/#/build/u-amounts");
+  await page.getByTestId("tab-details").click();
+  await page.locator("details", { hasText: "Simulação" }).locator("summary").click();
+  await expect(page.getByTestId("chain-hunt-amount")).toHaveValue("400");
+});
+
+test("the production chart fits the width by default", async ({ page, isMobile }) => {
+  test.skip(isMobile, "the chart scrolls on a phone");
+  await page.setViewportSize({ width: 1400, height: 900 });
+  await page.goto("/#/build/preset%3Akrush");
+  await page.getByTestId("tab-result").click();
+  await expect(page.getByTestId("production-zoom-fit")).toHaveAttribute("aria-pressed", "true");
+  const gantt = page.locator(".gantt");
+  await expect
+    .poll(() => gantt.evaluate((g) => g.scrollWidth - g.clientWidth))
+    .toBeLessThanOrEqual(0);
+  await page.getByTestId("production-zoom-4").click();
+  await expect.poll(() => gantt.evaluate((g) => g.scrollWidth - g.clientWidth)).toBeGreaterThan(0);
+});
+
 test("the editor turns an old auto queue end time into a duration", async ({ page }) => {
   // stored before the app starts, so its first save does not overwrite it
   await page.addInitScript(() => {
