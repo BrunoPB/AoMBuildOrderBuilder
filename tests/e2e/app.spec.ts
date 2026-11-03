@@ -256,6 +256,26 @@ test("a warning explains the wait with the numbers behind it", async ({ page, is
   await expect(card).toContainText("Coletando");
 });
 
+test("the food chain can take a second hunt with its own amount", async ({ page }) => {
+  await page.goto("/");
+  await page.getByTestId("new-build").click();
+  await page.getByTestId("tab-details").click();
+  await page.locator("details.collapsible > summary").click();
+  const chain = page.getByTestId("food-chain").locator("li");
+  await expect(chain).toHaveCount(4);
+  // hunt is already in the chain and can still be added; farm (endless) cannot
+  await expect(page.getByTestId("pool-farm")).toHaveCount(0);
+  await page.getByTestId("pool-hunt").click();
+  await expect(chain).toHaveCount(5);
+  // it goes before the farm, which never runs out
+  await expect(chain.nth(3)).toHaveAttribute("data-testid", "chain-hunt-2");
+  await expect(chain.last()).toHaveAttribute("data-testid", "chain-farm");
+  await page.getByTestId("chain-hunt-2-amount").fill("400");
+  await page.getByTestId("chain-hunt-2-amount").press("Tab");
+  await expect(page.getByTestId("chain-hunt-2-amount")).toHaveValue("400");
+  await expect(page.getByTestId("chain-farm-amount")).toHaveCount(0);
+});
+
 test("drag and drop: food chain, matchups and palette", async ({ page, isMobile }) => {
   test.skip(isMobile, "HTML drag and drop needs a mouse");
   await page.goto("/");

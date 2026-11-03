@@ -3358,3 +3358,10 @@ textarea {
 .tip-bubble .tip-line {
   display: block;
 }
+
+/* amount of a food chain item (a second hunt can be smaller than the first) */
+.chain-amount {
+  width: 5.8em;
+  padding: 1px 4px;
+  font-size: 12px;
+}

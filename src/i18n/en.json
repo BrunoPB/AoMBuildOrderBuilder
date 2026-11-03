@@ -281,7 +281,7 @@
   "help.editor.norseFavor": "The Norse earn favor by fighting. Estimate here the favor per minute from combat.",
   "help.editor.popReserved": "When a unit starts counting toward population: when training starts or when it leaves the building (as in game).",
   "help.editor.sourceAmount": "How much food this source has near the base. When it runs out, villagers move to the next one in the chain.",
-  "help.editor.foodChain": "Order of food sources. Villagers sent to “food” use the first one that still has food. Drag to reorder.",
+  "help.editor.foodChain": "Order of food sources. Villagers sent to “food” use the first one that still has food.\n• **Drag** to reorder.\n• **Hunt, herd and berries** can come again (e.g. a second hunt), each with its own amount.\n• When one runs out, the timeline tells you to send the villagers to the next.",
   "help.editor.actions": "The build steps in order, each with its bar in time: dashed is waiting, a diamond is instant. Drag the handle to reorder, drag the bar to change the time, click to see the details.",
   "help.editor.add": "Pick the action type, then the unit, building or research. Click to add it at the end, or drag it to a position in the list.",
   "help.editor.milestones": "Key moments: time and resources at each.",
@@ -469,5 +469,10 @@
   "help.mode.play": "Follow the build during a match with a timer.",
   "help.overview.full": "Checked, shows everything:\n• timeline with villagers and events\n• production by building\n• resources and population\nUnchecked: only the ages and the order of the actions.",
   "help.match.workers": "Where the villagers should be right now according to the build, and the population. Compare with the game to spot what you forgot.",
-  "help.row.duration": "How long the auto queue stays on, in seconds, counted from when the action starts.\n• **Empty**: to the end of the build."
+  "help.row.duration": "How long the auto queue stays on, in seconds, counted from when the action starts.\n• **Empty**: to the end of the build.",
+  "step.depletedAgain": "{source} depleted → send the villagers to the next {source}",
+  "warn.sourceDepletedAgain": "{source} depleted → send the villagers to the next {source}",
+  "help.warn.sourceDepletedAgain": "This source ran out and the food chain has another one of the same kind next (e.g. a second hunt). Select the villagers and send them there.",
+  "editor.chainAmount": "Amount",
+  "help.editor.chainAgain": "Click to add it to the chain again: e.g. a second hunt, with its own amount."
 }

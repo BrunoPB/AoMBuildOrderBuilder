@@ -13,7 +13,7 @@ import {
   type SourceId,
   type Unit,
 } from "../data/schema.ts";
-import type { Action, Build, TaskTarget, TrainMode } from "./build.ts";
+import { type Action, type Build, chainSource, type TaskTarget, type TrainMode } from "./build.ts";
 import { applyCostModifiers, applyModifiers, type ModContext } from "./modifiers.ts";
 import { parseClock } from "./time.ts";
 import type {
@@ -38,7 +38,8 @@ const GATHER: ResourceId[] = ["food", "wood", "gold"];
 type AgeTo = Exclude<Age, "archaic">;
 
 type Task =
-  | { kind: "gather"; source: SourceId }
+  /** `patch`: which food chain item is being gathered (a source can be in the chain twice). */
+  | { kind: "gather"; source: SourceId; patch?: number }
   | { kind: "favor" }
   | { kind: "idle" }
   | { kind: "build"; site: number }
@@ -149,6 +150,8 @@ export type ResolvedSettings = {
   efficiency: number;
   tick: number;
   foodChain: SourceId[];
+  /** Amount of each food chain item (same order as `foodChain`). */
+  chainAmounts: number[];
   oracleRate?: number;
   norseFavorPerMinute: number;
   popReservedAt: "start" | "end";
@@ -162,7 +165,12 @@ export function resolveSettings(build: Build, data: GameData): ResolvedSettings 
   return {
     efficiency: s.efficiency ?? d.efficiency,
     tick: s.tick ?? d.tick,
-    foodChain: s.foodChain ?? d.foodChain,
+    foodChain: (s.foodChain ?? d.foodChain).map(chainSource),
+    chainAmounts: (s.foodChain ?? d.foodChain).map((item) =>
+      typeof item === "string"
+        ? (s.sourceAmounts?.[item] ?? data.sources.get(item)?.defaultAmount ?? 0)
+        : item.amount,
+    ),
     oracleRate: s.oracleRate,
     norseFavorPerMinute: s.norseFavorPerMinute ?? d.norseFavorPerMinute,
     popReservedAt: s.popReservedAt ?? d.popReservedAt,
@@ -213,6 +221,8 @@ class Simulation {
   powerReady = new Map<string, number>();
   effects: { mods: Modifier[]; trickle?: Cost; until: number }[] = [];
   remaining = new Map<SourceId, number>();
+  /** What is left in each food chain item. */
+  patches: number[] = [];
   promotions: Promotion[] = [];
   rules: Rule[] = [];
   claims = new Set<number>();
@@ -272,6 +282,9 @@ class Simulation {
     for (const [id, source] of data.sources) {
       this.remaining.set(id, this.s.sourceAmounts[id] ?? source.defaultAmount);
     }
+    this.patches = this.s.foodChain.map((id, k) =>
+      this.data.sources.get(id)?.infinite ? Infinity : this.s.chainAmounts[k]!,
+    );
     this.setupStart();
   }
 
@@ -403,9 +416,28 @@ class Simulation {
   available(source: SourceId): boolean {
     const def = this.data.sources.get(source);
     if (!def) return false;
-    return (
-      def.infinite === true || (this.remaining.get(source) ?? 0) > EPS || !this.depletes(source)
+    if (def.infinite) return true;
+    if (this.s.foodChain.includes(source)) return this.patchOf(source) !== undefined;
+    return (this.remaining.get(source) ?? 0) > EPS || !this.depletes(source);
+  }
+
+  /** First food chain item of `source` (after `after`) that still has something left. */
+  patchOf(source: SourceId, after = -1): number | undefined {
+    const k = this.s.foodChain.findIndex(
+      (s, i) => i > after && s === source && this.patches[i]! > EPS,
     );
+    return k >= 0 ? k : undefined;
+  }
+
+  /** A gather task on `source`, on its current food chain item when it is in the chain. */
+  gatherTask(source: SourceId): Task {
+    return { kind: "gather", source, patch: this.patchOf(source) };
+  }
+
+  /** Where workers go when food chain item `patch` runs out: the next item with food left. */
+  nextPatch(patch: number): Task | undefined {
+    const k = this.s.foodChain.findIndex((_, i) => i > patch && this.patches[i]! > EPS);
+    return k >= 0 ? { kind: "gather", source: this.s.foodChain[k]!, patch: k } : undefined;
   }
 
   depletes(source: SourceId): boolean {
@@ -417,7 +449,10 @@ class Simulation {
   nextSource(source: SourceId): SourceId | undefined {
     const chain = this.s.foodChain;
     const i = chain.indexOf(source);
-    if (i >= 0) return chain.slice(i + 1).find((s) => this.available(s));
+    if (i >= 0) {
+      const last = chain.lastIndexOf(source);
+      return chain.find((s, k) => k > last && this.available(s));
+    }
     let next = this.data.sources.get(source)?.fallback;
     const seen = new Set<SourceId>();
     while (next && !this.available(next) && !seen.has(next)) {
@@ -440,7 +475,7 @@ class Simulation {
     if (worker?.worker && worker.worker.gatherRates[source] === undefined) {
       this.warn("info", "warn.cannotGather", { unit: worker.id, source });
     }
-    return { kind: "gather", source };
+    return this.gatherTask(source);
   }
 
   matches(w: Worker, target: TaskTarget): boolean {
@@ -1683,7 +1718,10 @@ class Simulation {
       const origin =
         job.action ?? (job.rule !== undefined ? this.rules[job.rule]?.action : undefined);
       if (job.hunt && def?.carcass) {
-        this.remaining.set("hunt", (this.remaining.get("hunt") ?? 0) + def.carcass);
+        const hunts = this.s.foodChain.flatMap((s, k) => (s === "hunt" ? [k] : []));
+        const patch = this.patchOf("hunt") ?? hunts.at(-1);
+        if (patch !== undefined) this.patches[patch]! += def.carcass;
+        else this.remaining.set("hunt", (this.remaining.get("hunt") ?? 0) + def.carcass);
         this.emit({ kind: "hunted", unit: job.unit, food: def.carcass, action: origin, t: this.t });
         if (job.action !== undefined) {
           const st = this.states[job.action]!;
@@ -1778,7 +1816,10 @@ class Simulation {
         if (w.task.kind === "busy") {
           const resume = w.task.resume;
           w.task =
-            resume.kind === "gather" && !this.available(resume.source)
+            resume.kind === "gather" &&
+            (resume.patch !== undefined
+              ? this.patches[resume.patch]! <= EPS
+              : !this.available(resume.source))
               ? this.resolveTask(w.lastTarget)
               : resume;
         }
@@ -1799,7 +1840,11 @@ class Simulation {
 
   gather(dt: number): void {
     const mods = this.mods();
-    const bySource = new Map<SourceId, { w: Worker; amount: number }[]>();
+    /** Grouped by food chain item ("p<k>") or, outside the chain, by source. */
+    const bySource = new Map<
+      string,
+      { source: SourceId; patch?: number; w: Worker; amount: number }[]
+    >();
     for (const w of this.workers) {
       if (w.task.kind !== "gather") continue;
       const def = this.unit(w.unit);
@@ -1813,31 +1858,49 @@ class Simulation {
         resource,
       });
       const amount = (rate * this.s.efficiency * this.dropsiteFactor(source) * dt) / 60;
-      const list = bySource.get(source) ?? [];
-      list.push({ w, amount });
-      bySource.set(source, list);
+      const patch = w.task.patch;
+      const key = patch !== undefined ? `p${patch}` : source;
+      const list = bySource.get(key) ?? [];
+      list.push({ source, patch, w, amount });
+      bySource.set(key, list);
     }
-    for (const [source, list] of bySource) {
+    for (const list of bySource.values()) {
+      const { source, patch } = list[0]!;
       const resource = this.sourceResource(source);
       let total = list.reduce((sum, x) => sum + x.amount, 0);
-      if (this.depletes(source)) {
+      if (patch !== undefined && this.patches[patch]! !== Infinity) {
+        const left = this.patches[patch]!;
+        if (total >= left - EPS) {
+          total = Math.max(0, left);
+          this.patches[patch] = 0;
+          const next = this.nextPatch(patch);
+          for (const { w } of list) w.task = next ?? { kind: "idle" };
+          this.depleted(source, next?.kind === "gather" ? next.source : undefined);
+        } else {
+          this.patches[patch] = left - total;
+        }
+      } else if (patch === undefined && this.depletes(source)) {
         const left = this.remaining.get(source) ?? 0;
         if (total >= left - EPS) {
           total = Math.max(0, left);
           this.remaining.set(source, 0);
           const next = this.nextSource(source);
-          for (const { w } of list) {
-            w.task = next ? { kind: "gather", source: next } : { kind: "idle" };
-          }
-          if (next) this.warn("attention", "warn.sourceDepleted", { source, next });
-          else this.warn("attention", "warn.sourceDepletedIdle", { source });
-          this.emit({ kind: "sourceDepleted", source, next, t: this.t });
+          for (const { w } of list) w.task = next ? this.gatherTask(next) : { kind: "idle" };
+          this.depleted(source, next);
         } else {
           this.remaining.set(source, left - total);
         }
       }
       this.res[resource] += total;
     }
+  }
+
+  /** A source ran out: the player has to send its workers on (to `next`, maybe the same kind). */
+  depleted(source: SourceId, next: SourceId | undefined): void {
+    if (next === source) this.warn("attention", "warn.sourceDepletedAgain", { source });
+    else if (next) this.warn("attention", "warn.sourceDepleted", { source, next });
+    else this.warn("attention", "warn.sourceDepletedIdle", { source });
+    this.emit({ kind: "sourceDepleted", source, next, t: this.t });
   }
 
   /** Resource trickles; favor trickles also get favorRate modifiers scoped to their source. */

@@ -6,6 +6,7 @@ import {
   PantheonIdSchema,
   ResourceIdSchema,
   SourceIdSchema,
+  type SourceId,
 } from "../data/schema.ts";
 import { isClock } from "./time.ts";
 
@@ -150,10 +151,21 @@ export const ACTION_KINDS: ActionKind[] = [
   "event",
 ];
 
+/** A food source in the chain; the same source may come again (a second hunt) with its own amount. */
+export const FoodChainItemSchema = z.union([
+  SourceIdSchema,
+  z.strictObject({ source: SourceIdSchema, amount: z.number().positive() }),
+]);
+export type FoodChainItem = z.infer<typeof FoodChainItemSchema>;
+
+export function chainSource(item: FoodChainItem): SourceId {
+  return typeof item === "string" ? item : item.source;
+}
+
 export const SettingsSchema = z.strictObject({
   efficiency: z.number().positive().max(1.5).optional(),
   tick: z.number().positive().max(5).optional(),
-  foodChain: z.array(SourceIdSchema).min(1).optional(),
+  foodChain: z.array(FoodChainItemSchema).min(1).optional(),
   /** Favor/min per Atlantean Oracle (before the hero multiplier). */
   oracleRate: z.number().nonnegative().optional(),
   norseFavorPerMinute: z.number().nonnegative().optional(),

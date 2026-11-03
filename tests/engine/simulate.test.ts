@@ -59,6 +59,48 @@ describe("gathering", () => {
     expect(at(r, 20).resources.food).toBeCloseTo(240);
   });
 
+  it("a source can come again in the food chain, with its own amount (a second hunt)", () => {
+    const r = run(
+      [
+        { when: "0:00", do: "move", count: 2, from: "idle", to: "food" },
+        { when: "0:40", do: "event", note: "end" },
+      ],
+      {
+        foodChain: ["hunt", { source: "hunt", amount: 30 }, "berries"],
+        sourceAmounts: { hunt: 20 },
+      },
+    );
+    const depleted = r.events.filter((e) => e.kind === "sourceDepleted");
+    expect(depleted.map((e) => e.kind === "sourceDepleted" && [e.source, e.next])).toEqual([
+      ["hunt", "hunt"],
+      ["hunt", "berries"],
+    ]);
+    expect(r.warnings.some((w) => w.key === "warn.sourceDepletedAgain")).toBe(true);
+    // the second hunt adds its 30 food before the berries start
+    const second = depleted[1]!.t;
+    expect(at(r, Math.ceil(second)).resources.food).toBeGreaterThanOrEqual(50);
+  });
+
+  it("the chain order holds when the same source comes back later (hunt, berries, hunt)", () => {
+    const r = run(
+      [
+        { when: "0:00", do: "move", count: 2, from: "idle", to: "food" },
+        { when: "1:00", do: "event", note: "end" },
+      ],
+      {
+        foodChain: [
+          "hunt",
+          { source: "berries", amount: 20 },
+          { source: "hunt", amount: 20 },
+          "farm",
+        ],
+        sourceAmounts: { hunt: 20 },
+      },
+    );
+    const order = r.events.flatMap((e) => (e.kind === "sourceDepleted" ? [e.next] : []));
+    expect(order).toEqual(["berries", "hunt", "farm"]);
+  });
+
   it("ignores what happens after the build ends (the tail is only context)", () => {
     const r = run(
       [

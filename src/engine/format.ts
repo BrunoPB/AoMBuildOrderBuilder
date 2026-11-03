@@ -291,12 +291,14 @@ export function buildSteps(
           e.kind === "sourceDepleted" && e.t <= result.buildEnd,
       )
       .map((e) =>
-        e.next
-          ? translate(locale, "step.depleted", {
-              source: name(c, e.source),
-              next: name(c, e.next),
-            })
-          : translate(locale, "step.depletedIdle", { source: name(c, e.source) }),
+        e.next === e.source
+          ? translate(locale, "step.depletedAgain", { source: name(c, e.source) })
+          : e.next
+            ? translate(locale, "step.depleted", {
+                source: name(c, e.source),
+                next: name(c, e.next),
+              })
+            : translate(locale, "step.depletedIdle", { source: name(c, e.source) }),
       );
     if (actions.length === 0 && notices.length === 0) continue;
     steps.push({
