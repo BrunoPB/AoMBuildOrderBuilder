@@ -275,8 +275,9 @@ function SpanBar({
   return (
     <span
       class={`gantt-bar tl-bar ${SPAN_KIND[s.kind]} ${s.end === undefined ? "open" : ""} ${compact ? "compact" : ""} ${"onPointerDown" in handle ? "movable" : ""}`}
+      /* a bar starting right at the end stays inside the track (8 px: its padding and border) */
       style={{
-        left: scale.pct(s.start),
+        left: `min(${scale.pct(s.start)}, calc(100% - 8px))`,
         width: `max(3px, calc(${scale.pct(stop)} - ${scale.pct(s.start)}))`,
       }}
       tabIndex={0}
@@ -469,7 +470,7 @@ export function ActionTrack({
       {start !== undefined && (instant || spans.length === 0 || rule) && (
         <span
           class={`tl-mark kind-${rule ? "rule" : action.do} ${instant ? "diamond" : "pin"} ${readonly ? "" : "movable"}`}
-          style={{ left: scale.pct(start) }}
+          style={{ left: `min(${scale.pct(start)}, calc(100% - 9px))` }}
           tabIndex={-1}
           aria-hidden="true"
           onPointerEnter={(e) => tip.show(e.currentTarget, `${formatClock(start)}${dragTip}`)}

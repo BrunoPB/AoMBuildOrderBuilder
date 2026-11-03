@@ -79,7 +79,11 @@ function EventRow({ build, event, scale }: { build: Build; event: Event; scale: 
         )}
       </div>
       <div class="tl-track">
-        <span class="tl-dot" style={{ left: scale.pct(event.seconds) }} />
+        {/* at the very end the dot stays inside the track (half of it would stick out) */}
+        <span
+          class="tl-dot"
+          style={{ left: `min(${scale.pct(event.seconds)}, calc(100% - 4px))` }}
+        />
       </div>
     </li>
   );
