@@ -5,7 +5,7 @@
   "name": "Krush",
   "author": "Bruno",
   "createdAt": "2026-10-17T13:00:00Z",
-  "updatedAt": "2026-11-03T04:22:09.283Z",
+  "updatedAt": "2026-11-03T04:47:52.068Z",
   "pantheon": "atlanteans",
   "god": "kronos",
   "type": "rush",
@@ -41,31 +41,7 @@
   ],
   "matchups": [
     {
-      "god": "zeus",
-      "fit": "good"
-    },
-    {
-      "god": "ra",
-      "fit": "good"
-    },
-    {
-      "god": "isis",
-      "fit": "good"
-    },
-    {
-      "god": "set",
-      "fit": "good"
-    },
-    {
       "god": "loki",
-      "fit": "neutral"
-    },
-    {
-      "god": "oranos",
-      "fit": "neutral"
-    },
-    {
-      "god": "gaia",
       "fit": "neutral"
     },
     {
@@ -77,15 +53,39 @@
       "fit": "bad"
     },
     {
-      "god": "thor",
+      "god": "kronos",
+      "fit": "neutral"
+    },
+    {
+      "god": "zeus",
+      "fit": "bad"
+    },
+    {
+      "god": "gaia",
+      "fit": "good"
+    },
+    {
+      "god": "oranos",
+      "fit": "good"
+    },
+    {
+      "god": "ra",
+      "fit": "good"
+    },
+    {
+      "god": "set",
+      "fit": "good"
+    },
+    {
+      "god": "isis",
       "fit": "bad"
     },
     {
       "god": "odin",
-      "fit": "bad"
+      "fit": "neutral"
     },
     {
-      "god": "kronos",
+      "god": "thor",
       "fit": "neutral"
     }
   ],
