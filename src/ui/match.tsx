@@ -107,16 +107,13 @@ export function MatchMode({ id }: { id: string }) {
   /** The step before, dimmed: a player running a little late still sees what was due. */
   const previous = currentIndex >= 1 ? steps[currentIndex - 1] : undefined;
   const upcoming = steps.slice(currentIndex + 1, currentIndex + 4);
-  const next = upcoming[0];
 
+  /** A beep when a step becomes "now" (not when the clock is moved past it by hand). */
   useEffect(() => {
-    if (!running || !sound || !next) return;
-    const until = next.seconds - elapsed;
-    if (until <= 3 && until > 0 && lastBeep.current !== next.seconds) {
-      lastBeep.current = next.seconds;
-      beep(audio.current);
-    }
-  }, [elapsed, running, sound, next]);
+    if (!running || !sound || !current || lastBeep.current === current.seconds) return;
+    lastBeep.current = current.seconds;
+    if (elapsed - current.seconds < 1.5) beep(audio.current);
+  }, [elapsed, running, sound, current]);
 
   if (!found) {
     return (
