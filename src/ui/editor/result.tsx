@@ -31,14 +31,13 @@ export function focusAction(index: number | undefined, tries = 10): void {
   row.addEventListener("animationend", () => row.classList.remove("flash"), { once: true });
 }
 
-/** "Manual in game": a step the simulation takes by itself that the player does by hand. */
+/** A hand: a step the simulation takes by itself that the player does by hand in the game. */
 export function AutoTag({ tip = true }: { tip?: boolean }) {
   const { t } = useApp();
   const help = useHelp();
   const tag = (
     <span class="auto-tag" data-testid="auto-tag">
-      <Svg name="user" />
-      {t("step.auto")}
+      <Svg name="hand" label={t("step.auto")} />
     </span>
   );
   return tip ? (

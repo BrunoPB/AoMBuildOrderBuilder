@@ -62,6 +62,7 @@ function AgeColumns({ build, result, steps }: { build: Build; result: SimResult;
       items.push({
         t: s.seconds,
         key: `s${s.seconds}-${k}`,
+        event: true,
         node: (
           <li class={`order-row order-auto kind-${a.kind}`} data-testid="auto-step">
             <span class="num order-time">{s.t}</span>
