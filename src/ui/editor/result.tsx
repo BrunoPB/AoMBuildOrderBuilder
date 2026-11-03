@@ -75,8 +75,8 @@ export function StepChips({ build, step, large }: { build: Build; step: Step; la
         </button>
       ))}
       {step.notice && (
-        <span class="tl-notice lvl-attention row">
-          <Svg name={LEVEL_ICON.attention} /> {step.notice}
+        <span class="tl-notice lvl-delay row">
+          <Svg name={LEVEL_ICON.delay} /> {step.notice}
         </span>
       )}
     </div>
@@ -127,18 +127,17 @@ export function WarningsButton({
   const shown = shownWarnings(result);
   const errors = shown.filter((w) => w.level === "error").length;
   const delays = shown.filter((w) => w.level === "delay").length;
-  const attention = shown.filter((w) => w.level === "attention").length;
-  const label = `${t("result.warnings")}: ${errors} ${t("level.error")}, ${delays} ${t("level.delay")}, ${attention} ${t("level.attention")}`;
+  const label = `${t("result.warnings")}: ${errors} ${t("level.error")}, ${delays} ${t("level.delay")}`;
   return (
     <Tip label={label}>
       <button
-        class={`btn warn-btn ${errors ? "has-error" : delays || attention ? "has-delay" : "is-ok"}`}
+        class={`btn warn-btn ${errors ? "has-error" : delays ? "has-delay" : "is-ok"}`}
         aria-label={label}
         aria-expanded={open}
         data-testid="warnings-toggle"
         onClick={onToggle}
       >
-        {errors === 0 && delays === 0 && attention === 0 ? (
+        {errors === 0 && delays === 0 ? (
           <span class="lvl-info">
             <Svg name="check" />
           </span>
@@ -154,12 +153,6 @@ export function WarningsButton({
               <span class="lvl-delay row">
                 <Svg name="warning" />
                 <span class="num">{delays}</span>
-              </span>
-            )}
-            {attention > 0 && (
-              <span class="lvl-attention row">
-                <Svg name={LEVEL_ICON.attention} />
-                <span class="num">{attention}</span>
               </span>
             )}
           </>
@@ -242,7 +235,7 @@ export function WarningsPanel({
         {close}
       </div>
       <div class="warn-summary">
-        {(["error", "delay", "attention", "info"] as const).map((lvl) => (
+        {(["error", "delay", "info"] as const).map((lvl) => (
           <Tip
             key={lvl}
             label={[t(`level.${lvl}`), help(`level.${lvl}`)].filter(Boolean).join("\n")}

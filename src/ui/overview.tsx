@@ -83,10 +83,10 @@ function AgeColumns({ build, result, steps }: { build: Build; result: SimResult;
       key: `n${s.seconds}`,
       event: true,
       node: (
-        <li class="order-row order-notice lvl-attention">
+        <li class="order-row order-notice lvl-delay">
           <span class="num order-time">{s.t}</span>
           <span class="order-icons">
-            <Svg name="arrows" />
+            <Svg name="warning" />
           </span>
           <span class="order-text">{s.notice}</span>
         </li>

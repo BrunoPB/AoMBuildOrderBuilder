@@ -440,8 +440,7 @@ label.field > * {
 .lvl-error {
   color: var(--bad);
 }
-.lvl-delay,
-.lvl-attention {
+.lvl-delay {
   color: var(--warn);
 }
 .lvl-info {

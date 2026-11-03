@@ -78,7 +78,7 @@ export async function makePreset(
     `${build.pantheon} · ${build.god} · ${build.type} · ${build.actions.length} actions · by ${preset.author}`,
     "",
     ...(ages.length ? ["| Age | Click → reached |", "| --- | --- |", ...ages, ""] : []),
-    `Warnings: ${count("delay")} delay, ${count("attention")} attention.`,
+    `Warnings: ${count("delay")} delay.`,
     "",
     `A pull request adds it as \`src/presets/${name}.json\`; merging it publishes the build.`,
   ].join("\n");

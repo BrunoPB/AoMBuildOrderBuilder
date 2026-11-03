@@ -1,8 +1,7 @@
 import type { Age, Cost, LocalizedText, ResourceId, SourceId } from "../data/schema.ts";
 import type { TaskTarget, TrainMode } from "./build.ts";
 
-/** `attention`: something the game does not do by itself; the player must act. */
-export type WarningLevel = "info" | "attention" | "delay" | "error";
+export type WarningLevel = "info" | "delay" | "error";
 export type Params = Record<string, string | number>;
 
 /** Resources paid by an action (or a rule's action) at time t. */

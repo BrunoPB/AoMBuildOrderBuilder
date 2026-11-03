@@ -10,7 +10,6 @@ import { actionIcons, actionText } from "./labels.ts";
 export const LEVEL_ICON = {
   error: "error",
   delay: "warning",
-  attention: "arrows",
   info: "info",
 } as const satisfies Record<WarningLevel, SvgName>;
 

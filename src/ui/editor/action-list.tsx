@@ -58,9 +58,9 @@ function EventRow({ build, event, scale }: { build: Build; event: Event; scale: 
       <div class="tl-label">
         <span class="row-time num">{formatClock(event.seconds)}</span>
         {"notice" in item ? (
-          <Tip label={help("level.attention")}>
-            <span class="event-text lvl-attention">
-              <Svg name={LEVEL_ICON.attention} /> {item.notice}
+          <Tip label={help("warn.sourceDepletedIdle")}>
+            <span class="event-text lvl-delay">
+              <Svg name={LEVEL_ICON.delay} /> {item.notice}
             </span>
           </Tip>
         ) : (

@@ -450,8 +450,6 @@
   "help.tl.workers": "O que os aldeões estão fazendo ao longo do tempo, por recurso. Passe o mouse para ver os números e a população.",
   "help.tl.lanes": "Uma linha por prédio com o que ele treina, pesquisa ou constrói, no mesmo eixo de tempo.",
   "help.tl.fit": "Mostra a build inteira na largura da tela.",
-  "level.attention": "Atenção",
-  "help.level.attention": "O jogo não faz isso sozinho: você precisa agir. Ex.: a caça acabou, selecione os aldeões e mande-os para a próxima comida.",
   "step.depletedIdle": "{source} esgotou → aldeões ociosos",
   "warn.sourceDepletedIdle": "{source} esgotou → aldeões ociosos",
   "help.warn.sourceDepletedIdle": "A fonte acabou e não há outra comida disponível na cadeia: os aldeões ficam parados até você mandá-los para outra coisa.",

@@ -1891,7 +1891,7 @@ class Simulation {
   /** A source ran out. The simulation sends its workers on to `next` (maybe the same kind) by
    *  itself, an automatic step the player does by hand in the game; with no next they idle. */
   depleted(source: SourceId, next: SourceId | undefined, list: { w: Worker }[]): void {
-    if (!next) this.warn("attention", "warn.sourceDepletedIdle", { source });
+    if (!next) this.warn("delay", "warn.sourceDepletedIdle", { source });
     const units = new Map<string, number>();
     for (const { w } of list) units.set(w.unit, (units.get(w.unit) ?? 0) + 1);
     const unit = [...units].sort((a, b) => b[1] - a[1])[0]?.[0] ?? "";
