@@ -958,8 +958,23 @@ details.collapsible > summary::-webkit-details-marker {
   border: 1px solid var(--border);
 }
 
+/* as big as `--portrait-max`, but small enough that four fit on a row */
 .matchup-col .portraits {
   gap: 10px;
+  container-type: inline-size;
+}
+
+.matchup-col .portraits .icon {
+  width: clamp(56px, calc((100cqi - 62px) / 4), var(--portrait-max, 120px));
+  height: auto;
+  aspect-ratio: 1;
+}
+
+/* on a phone the fit's name goes above its portraits, which then get the whole width */
+@media (max-width: 600px) {
+  .matchup-col {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
 .matchup-col.good {

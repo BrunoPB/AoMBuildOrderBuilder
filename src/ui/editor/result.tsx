@@ -431,7 +431,7 @@ export function Matchups({
   build,
   readonly,
   onChange,
-  size = 80,
+  size = 120,
 }: {
   build: Build;
   readonly: boolean;
@@ -537,7 +537,7 @@ export function Matchups({
               <Svg name={c.fit === "good" ? "check" : c.fit === "bad" ? "error" : "info"} />
               <HelpText k={`result.${c.fit}`} />
             </h3>
-            <div class="portraits">
+            <div class="portraits" style={{ "--portrait-max": `${size}px` }}>
               {c.items.map((m) => portrait(m.god, size))}
               {!readonly && c.items.length === 0 && (
                 <span class="drop-hint" aria-hidden="true">
@@ -556,7 +556,7 @@ export function Matchups({
           data-testid="matchup-pool"
           {...target("none")}
         >
-          {unset.map((g) => portrait(g.id, Math.round(size * 0.55)))}
+          {unset.map((g) => portrait(g.id, Math.round(size * 0.4)))}
         </div>
       )}
     </div>
