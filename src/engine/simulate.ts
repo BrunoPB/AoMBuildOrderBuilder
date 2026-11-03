@@ -226,8 +226,8 @@ class Simulation {
   promotions: Promotion[] = [];
   rules: Rule[] = [];
   claims = new Set<number>();
-  /** Sites a scheduled action waits on for resources: kept for the next scheduled actions, but an
-   *  auto queue still trains there (in the game it keeps going and delays the action). */
+  /** Sites a scheduled action waits on for resources: kept for the next scheduled actions. Auto
+   *  queues ignore these and `claims`: they train whenever the building is free and the stock pays. */
   waits = new Set<number>();
   events: SimEvent[] = [];
   warnings: SimWarning[] = [];
@@ -760,6 +760,7 @@ class Simulation {
     );
   }
 
+  /** `rule`: for an auto queue, which takes any free slot (no reservation holds it back). */
   freeSite(candidates: Site[], prefer?: number, split = false, rule = false): Site | Reason {
     if (candidates.length === 0) {
       return { key: "warn.noBuilding", level: "error", params: {} };
@@ -773,7 +774,7 @@ class Simulation {
       };
     const free = ready
       .filter((s) => {
-        if ((this.claims.has(s.uid) || (!rule && this.waits.has(s.uid))) && !split) return false;
+        if (!rule && !split && (this.claims.has(s.uid) || this.waits.has(s.uid))) return false;
         const sideJobs = s.jobs.filter((j) => j.kind === "unit" && j.split).length;
         return split ? sideJobs === 0 : s.jobs.length - sideJobs < s.slots;
       })

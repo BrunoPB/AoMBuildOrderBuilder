@@ -350,6 +350,15 @@ describe("continuous rules", () => {
     expect(made()).toBe(4);
   });
 
+  it("an auto queue trains whenever it can pay, even while an age-up waits at the same building", () => {
+    // 200 food to start: the age-up (300) waits, the queue spends it on 4 citizens
+    const r = run([
+      { when: "0:00", do: "age", to: "classical", minor: "minor-a" },
+      { when: "0:00", do: "train", mode: "auto", unit: "citizen", rally: "wood", duration: 45 },
+    ]);
+    expect(r.produced.filter((p) => p.unit === "citizen").length).toBe(4);
+  });
+
   it("the duration counts from when the queue starts, not from 0:00", () => {
     const r = run([
       { when: "0:00", do: "event", gainResource: { food: 1000 } },
