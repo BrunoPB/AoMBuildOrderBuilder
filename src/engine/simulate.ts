@@ -154,7 +154,6 @@ export type ResolvedSettings = {
   chainAmounts: number[];
   oracleRate?: number;
   norseFavorPerMinute: number;
-  popReservedAt: "start" | "end";
   sourceAmounts: Partial<Record<SourceId, number>>;
   tail: number;
 };
@@ -173,7 +172,6 @@ export function resolveSettings(build: Build, data: GameData): ResolvedSettings 
     ),
     oracleRate: s.oracleRate,
     norseFavorPerMinute: s.norseFavorPerMinute ?? d.norseFavorPerMinute,
-    popReservedAt: s.popReservedAt ?? d.popReservedAt,
     sourceAmounts: s.sourceAmounts ?? {},
     tail: s.tail ?? 30,
   };
@@ -381,13 +379,6 @@ class Simulation {
   unitPop(def: Unit | undefined): number {
     if (!def) return 0;
     return Math.max(0, applyModifiers(def.pop, "pop", this.mods(), { id: def.id, tags: def.tags }));
-  }
-
-  popReserved(): number {
-    if (this.s.popReservedAt !== "start") return 0;
-    let pop = 0;
-    for (const site of this.sites) for (const j of site.jobs) if (j.kind === "unit") pop += j.pop;
-    return pop;
   }
 
   popCap(): number {
@@ -819,13 +810,6 @@ class Simulation {
       opts.rule !== undefined,
     );
     if (!("uid" in site)) return site;
-    if (
-      this.s.popReservedAt === "start" &&
-      this.popUsed() + this.popReserved() + this.unitPop(def) > this.popCap() + EPS
-    ) {
-      this.claims.add(site.uid);
-      return { key: "warn.popCapped", level: "delay", params: { unit: def.id } };
-    }
     const cost = this.unitCost(def);
     const missing = this.afford(cost);
     if (missing) {
@@ -1479,7 +1463,7 @@ class Simulation {
     }
     const hero = this.unit(def.promotion.to);
     const extraPop = (this.unitPop(hero) - this.unitPop(def)) * n;
-    if (extraPop > 0 && this.popUsed() + this.popReserved() + extraPop > this.popCap() + EPS) {
+    if (extraPop > 0 && this.popUsed() + extraPop > this.popCap() + EPS) {
       return this.block(i, {
         key: "warn.popCapped",
         level: "delay",
@@ -1709,11 +1693,9 @@ class Simulation {
   finishJob(job: Job): boolean {
     if (job.kind === "unit") {
       const def = this.unit(job.unit);
-      if (
-        this.s.popReservedAt === "end" &&
-        def &&
-        this.popUsed() + this.unitPop(def) > this.popCap() + EPS
-      ) {
+      /** As in the game, a unit counts in the population when it leaves the building: with no
+       *  room it waits there. */
+      if (def && this.popUsed() + this.unitPop(def) > this.popCap() + EPS) {
         job.heldSince ??= this.t;
         return false;
       }

@@ -74,7 +74,6 @@
     "efficiency": 0.92,
     "tick": 1,
     "foodChain": ["hunt", "herd", "berries", "farm"],
-    "popReservedAt": "end",
     "norseFavorPerMinute": 0,
     "secondBuilderEfficiency": 0.6,
     "extraBuilderEfficiency": 0.3

@@ -11,7 +11,7 @@ import {
 import { isClock } from "./time.ts";
 
 export const BUILD_FORMAT = "aomr-bob";
-export const BUILD_VERSION = 5;
+export const BUILD_VERSION = 6;
 
 export const BUILD_TYPES = ["rush", "eco", "timing", "water", "other"] as const;
 export const BuildTypeSchema = z.enum(BUILD_TYPES);
@@ -171,8 +171,7 @@ export const SettingsSchema = z.strictObject({
   /** Favor/min per Atlantean Oracle (before the hero multiplier). */
   oracleRate: z.number().nonnegative().optional(),
   norseFavorPerMinute: z.number().nonnegative().optional(),
-  popReservedAt: z.enum(["start", "end"]).optional(),
-  /** Override the amount of each source (e.g. a bigger hunt). */
+  /** Version 5 amount of each source; the editor moves food ones into `foodChain` items. */
   sourceAmounts: z.partialRecord(SourceIdSchema, z.number().positive()).optional(),
   /** Seconds to simulate after the last action; default 30. */
   tail: z.number().nonnegative().optional(),

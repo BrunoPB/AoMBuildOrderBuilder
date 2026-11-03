@@ -228,9 +228,10 @@ describe("queues and population", () => {
       { when: "1:30", do: "build", building: "manor", builder: { from: "idle" } },
     ]);
     const citizens = r.produced.filter((p) => p.unit === "citizen").map((p) => p.t);
-    expect(citizens).toEqual([10, 20, 30, 40, 50, 60, 70, 120]);
-    expect(r.warnings.find((w) => w.key === "warn.popCapped")?.params.waited).toBe(40);
-    expect(at(r, 120).popCap).toBe(20);
+    // as in the game, the 8th is trained but waits in the building until the house is done
+    expect(citizens).toEqual([10, 20, 30, 40, 50, 60, 70, 110]);
+    expect(r.warnings.find((w) => w.key === "warn.popCapped")?.params.waited).toBe(30);
+    expect(at(r, 110).popCap).toBe(20);
   });
 
   it("frees population when units are lost", () => {
@@ -434,14 +435,11 @@ describe("trickles, caps and pop modifiers", () => {
 
 describe("population counted when units leave the building", () => {
   it("holds a finished unit inside the building until there is room", () => {
-    const r = run(
-      [
-        { when: "0:00", do: "event", gainResource: { food: 1000 } },
-        { when: "0:00", do: "train", unit: "citizen", count: 8 },
-        { when: "1:30", do: "build", building: "manor", builder: { from: "idle" } },
-      ],
-      { popReservedAt: "end" },
-    );
+    const r = run([
+      { when: "0:00", do: "event", gainResource: { food: 1000 } },
+      { when: "0:00", do: "train", unit: "citizen", count: 8 },
+      { when: "1:30", do: "build", building: "manor", builder: { from: "idle" } },
+    ]);
     const citizens = r.produced.filter((p) => p.unit === "citizen").map((p) => p.t);
     expect(citizens).toEqual([10, 20, 30, 40, 50, 60, 70, 110]);
     expect(r.warnings.find((w) => w.key === "warn.popCapped")?.params.waited).toBe(30);
@@ -487,14 +485,11 @@ describe("production spans", () => {
   });
 
   it("marks a unit held inside the building by the population cap", () => {
-    const r = run(
-      [
-        { when: "0:00", do: "event", gainResource: { food: 1000 } },
-        { when: "0:00", do: "train", unit: "citizen", count: 8 },
-        { when: "1:30", do: "build", building: "manor", builder: { from: "idle" } },
-      ],
-      { popReservedAt: "end" },
-    );
+    const r = run([
+      { when: "0:00", do: "event", gainResource: { food: 1000 } },
+      { when: "0:00", do: "train", unit: "citizen", count: 8 },
+      { when: "1:30", do: "build", building: "manor", builder: { from: "idle" } },
+    ]);
     const last = r.production.spans.filter((s) => s.kind === "unit").at(-1)!;
     expect(last).toMatchObject({ start: 70, held: 80, end: 110 });
   });

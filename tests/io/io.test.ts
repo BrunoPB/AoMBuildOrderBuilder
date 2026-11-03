@@ -92,8 +92,14 @@ describe("storage", () => {
     expect(new Store(storage).loadBuilds()).toEqual([krush]);
   });
 
+  it("migrates version 5: population always counts at the end of training (no setting)", () => {
+    const old = { ...krush, version: 5, settings: { popReservedAt: "start", efficiency: 0.9 } };
+    const r = migrateBuild(old);
+    expect(r.ok && r.build.settings).toEqual({ efficiency: 0.9 });
+  });
+
   it("validates versions on load", () => {
-    expect(migrateBuild({ ...krush, version: 6 })).toMatchObject({ ok: false, newer: 6 });
+    expect(migrateBuild({ ...krush, version: 7 })).toMatchObject({ ok: false, newer: 7 });
     expect(migrateBuild({ ...krush, version: 0 }).ok).toBe(false);
   });
 

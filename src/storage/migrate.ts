@@ -35,6 +35,11 @@ const migrations: Record<number, (b: Record<string, unknown>) => Record<string, 
       ? (b.actions as Record<string, unknown>[]).map(durationV5)
       : b.actions,
   }),
+  /** Population always counts when a unit leaves the building, as in the game: no setting. */
+  5: (b) => {
+    const { popReservedAt: _pop, ...settings } = (b.settings ?? {}) as Record<string, unknown>;
+    return b.settings === undefined ? b : { ...b, settings };
+  },
 };
 
 const clock = (v: unknown) =>

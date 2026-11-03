@@ -1,5 +1,9 @@
 # Data changelog
 
+## 2026-11-03 — population always counts at the end of training
+
+- `common.json` `defaults.popReservedAt` removed: a unit always counts in the population when it leaves the building, as in the game (it waits there with no room). Builds lose the setting (migration to version 6).
+
 ## 2026-11-02 — default food chain
 
 - `common.json` `defaults.foodChain`: hunt → herd → berries → farm (was hunt → berries → farm), as the owner asked. Builds without their own food chain now take the herd after the hunt.

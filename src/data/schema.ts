@@ -408,7 +408,6 @@ export const CommonSchema = z.strictObject({
     efficiency: z.number().positive().max(1.5),
     tick: z.number().positive(),
     foodChain: z.array(SourceIdSchema).min(1),
-    popReservedAt: z.enum(["start", "end"]),
     norseFavorPerMinute: z.number().nonnegative(),
     /** Share of the 2nd builder's rate that counts (game: buildingefficiency). */
     secondBuilderEfficiency: z.number().nonnegative().optional(),

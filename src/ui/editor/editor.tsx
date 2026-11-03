@@ -35,7 +35,7 @@ function SettingsPanel({
   readonly: boolean;
   onChange: (s: Settings) => void;
 }) {
-  const { t, data, locale } = useApp();
+  const { data } = useApp();
   const s = build.settings ?? {};
   const d = data.common.defaults;
   const favor = data.pantheons.get(build.pantheon)?.def.favor;
@@ -113,39 +113,6 @@ function SettingsPanel({
             />
           </label>
         )}
-        <label class="field">
-          <HelpText k="editor.popReserved" />
-          <select
-            value={s.popReservedAt ?? d.popReservedAt}
-            onChange={(e) => set({ popReservedAt: e.currentTarget.value as "start" | "end" })}
-          >
-            <option value="start">{t("editor.popStart")}</option>
-            <option value="end">{t("editor.popEnd")}</option>
-          </select>
-        </label>
-        {(["hunt", "berries", "herd"] as SourceId[])
-          .filter((x) => data.sources.has(x))
-          .map((x) => (
-            <label class="field" key={x}>
-              <HelpText
-                k="editor.sourceAmount"
-                params={{ source: text(locale, data.sources.get(x)!.name) }}
-              />
-              <input
-                type="number"
-                min="1"
-                placeholder={String(data.sources.get(x)!.defaultAmount)}
-                value={s.sourceAmounts?.[x] ?? ""}
-                onChange={(e) => {
-                  const v = num(e.currentTarget.value);
-                  const next = { ...(s.sourceAmounts ?? {}) };
-                  if (v) next[x] = v;
-                  else delete next[x];
-                  set({ sourceAmounts: Object.keys(next).length ? next : undefined });
-                }}
-              />
-            </label>
-          ))}
         <FoodChain
           build={build}
           chain={chain}
@@ -405,6 +372,17 @@ export function Editor({ id }: { id: string }) {
     drifts.current++;
     api.saveBuild({ ...build, actions });
   }, [sim.result]);
+
+  /** Version 5 builds set food amounts per source; now each food chain item has its own. */
+  useEffect(() => {
+    if (readonly || !build?.settings?.sourceAmounts) return;
+    const { sourceAmounts, ...settings } = build.settings;
+    const chain = (settings.foodChain ?? data.common.defaults.foodChain).map((item) => {
+      const amount = typeof item === "string" ? sourceAmounts[item] : undefined;
+      return amount ? { source: item as SourceId, amount } : item;
+    });
+    api.saveBuild({ ...build, settings: { ...settings, foodChain: chain } });
+  }, [build?.settings?.sourceAmounts]);
 
   /** Version 4 builds ended auto queues at a time; now they run for a duration from their start. */
   useEffect(() => {

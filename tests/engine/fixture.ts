@@ -21,7 +21,6 @@ export function testData(overrides: { oracleRate?: number; favorCap?: number } =
         efficiency: 1,
         tick: 1,
         foodChain: ["hunt", "berries", "farm"],
-        popReservedAt: "start",
         norseFavorPerMinute: 0,
       },
       meta,
