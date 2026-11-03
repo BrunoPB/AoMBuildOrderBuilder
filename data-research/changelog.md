@@ -1,5 +1,9 @@
 # Data changelog
 
+## 2026-11-02 — default food chain
+
+- `common.json` `defaults.foodChain`: hunt → herd → berries → farm (was hunt → berries → farm), as the owner asked. Builds without their own food chain now take the herd after the hunt.
+
 ## 2026-11-02 — no more reserve window
 
 - `common.json` `defaults.affordableWindow` removed: the "train when affordable" mode it served is gone (auto queues end at their own time).

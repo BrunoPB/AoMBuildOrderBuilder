@@ -73,7 +73,7 @@
   "defaults": {
     "efficiency": 0.92,
     "tick": 1,
-    "foodChain": ["hunt", "berries", "farm"],
+    "foodChain": ["hunt", "herd", "berries", "farm"],
     "popReservedAt": "end",
     "norseFavorPerMinute": 0,
     "secondBuilderEfficiency": 0.6,
@@ -83,6 +83,6 @@
     "source": "SPEC.md (project owner)",
     "checkedAt": "2026-10-17",
     "confidence": "medium",
-    "note": "Simulation defaults. Population counts when a unit leaves the building (owner, measured): a unit that finishes with the population full waits inside the building and blocks its queue. Builder efficiencies from major_gods.xml (buildingefficiency 0.6, extrabuildingefficiency 0.3), game files 19.17020."
+    "note": "Simulation defaults. Food chain hunt → herd → berries → farm: owner, 2026-11-02. Population counts when a unit leaves the building (owner, measured): a unit that finishes with the population full waits inside the building and blocks its queue. Builder efficiencies from major_gods.xml (buildingefficiency 0.6, extrabuildingefficiency 0.3), game files 19.17020."
   }
 }

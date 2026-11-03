@@ -250,8 +250,9 @@ test("a warning explains the wait with the numbers behind it", async ({ page, is
   else await item.hover();
   const card = page.locator(".wd-card:visible").filter({ hasText: "Custo" });
   await expect(card).toBeVisible();
+  // the Heroic age costs 800 food; the rest follows the simulation
   await expect(card).toContainText("800");
-  await expect(card).toContainText("562");
+  await expect(card).toContainText("Faltavam");
   await expect(card).toContainText("Coletando");
 });
 
@@ -268,7 +269,7 @@ test("drag and drop: food chain, matchups and palette", async ({ page, isMobile 
   await page.getByTestId("chain-berries").dragTo(page.getByTestId("chain-hunt"));
   await expect(chain.first()).toHaveAttribute("data-testid", "chain-berries");
   await page.getByTestId("chain-farm").dragTo(page.getByTestId("food-pool"));
-  await expect(chain).toHaveCount(2);
+  await expect(chain).toHaveCount(3);
 
   await page.getByTestId("matchup-zeus").dragTo(page.getByTestId("matchup-col-good"));
   await expect(page.getByTestId("matchup-col-good").getByTestId("matchup-zeus")).toBeVisible();
