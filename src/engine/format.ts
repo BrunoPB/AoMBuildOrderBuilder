@@ -299,7 +299,16 @@ export function buildSteps(
   const steps: Step[] = [];
   for (const [second, events] of [...groups].sort((a, b) => a[0] - b[0])) {
     const snap = snapshotAt(result.series, second);
-    const actions = events.map((e) => describe(c, e)).filter((a): a is StepAction => a !== null);
+    const actions = events
+      .map((e) => {
+        const step = describe(c, e);
+        const a = e.action !== undefined ? build.actions[e.action] : undefined;
+        /** A power's note says how to use it: the player needs it right when casting. */
+        return step && e.kind === "power" && a?.do === "power" && a.note
+          ? { ...step, text: `${step.text} · ${a.note}` }
+          : step;
+      })
+      .filter((a): a is StepAction => a !== null);
     const notices = events
       .filter(
         (e): e is Extract<SimEvent, { kind: "sourceDepleted" }> =>

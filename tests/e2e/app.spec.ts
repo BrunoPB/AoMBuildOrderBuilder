@@ -567,6 +567,22 @@ test("a new time is placed by when the other actions really start", async ({ pag
   await expect(rows.last()).toContainText("1 Cidadão de comida → ouro");
 });
 
+test("a god power has a note on how to use it, shown with the action", async ({ page }) => {
+  await page.goto("/#/view/preset%3Akrush");
+  await page.getByTestId("build-header").getByTestId("build-menu").click();
+  await page.getByTestId("duplicate").click();
+  await page.getByTestId("tab-actions").click();
+  const power = page.getByTestId("action-row").filter({ hasText: "Desconstrução" });
+  await power.locator(".label-text").click();
+  await power.getByTestId("row-power-note").fill("no Templo inimigo");
+  await power.getByTestId("row-power-note").press("Tab");
+  await expect(power.locator(".label-text").first()).toContainText(
+    "Desconstrução → Templo · no Templo inimigo",
+  );
+  await page.getByTestId("open-view").first().click();
+  await expect(page.getByTestId("order-list")).toContainText("no Templo inimigo");
+});
+
 test("train has a mode: fixed count or an auto queue for some time", async ({ page }) => {
   await createBuildWithActions(page);
   await expect(page.getByTestId("kind-stopTrain")).toHaveCount(0);

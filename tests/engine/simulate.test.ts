@@ -122,6 +122,15 @@ describe("gathering", () => {
     expect(steps.some((s) => s.notice)).toBe(false);
   });
 
+  it("a power's note (how to use it) goes with its step", () => {
+    const build = testBuild([
+      { when: "0:00", do: "power", power: "bounty", note: "on a citizen gathering gold" },
+    ]);
+    const steps = buildSteps(data, build, simulate(data, build), "en");
+    const power = steps.flatMap((s) => s.actions).find((a) => a.kind === "power")!;
+    expect(power.text).toMatch(/ · on a citizen gathering gold$/);
+  });
+
   it("ignores what happens after the build ends (the tail is only context)", () => {
     const r = run(
       [

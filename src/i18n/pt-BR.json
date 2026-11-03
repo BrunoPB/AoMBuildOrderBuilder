@@ -474,5 +474,8 @@
   "step.auto": "manual no jogo",
   "help.step.auto": "Passo automático: o simulador já faz isso sozinho quando a fonte acaba, por isso não está na lista de ações.\n• **No jogo** os aldeões não vão sozinhos: selecione-os e mande-os você.\n• A simulação considera que você fez isso na hora.",
   "editor.events": "Eventos",
-  "help.editor.events": "Mostra entre as ações o que acontece sozinho: unidades prontas, prédios concluídos, Eras alcançadas.\n• Os passos automáticos (✋, ex.: caça esgotou) aparecem sempre: no jogo você precisa fazê-los."
+  "help.editor.events": "Mostra entre as ações o que acontece sozinho: unidades prontas, prédios concluídos, Eras alcançadas.\n• Os passos automáticos (✋, ex.: caça esgotou) aparecem sempre: no jogo você precisa fazê-los.",
+  "row.powerNote": "Como usar",
+  "help.row.powerNote": "Uma observação de como usar o poder, mostrada junto da ação na build e no Modo partida.\n• Ex.: em qual unidade, prédio ou lugar.",
+  "row.powerNoteExample": "ex.: num cidadão coletando ouro"
 }

@@ -107,6 +107,8 @@ export const ActionSchema = z.discriminatedUnion("do", [
     do: z.literal("power"),
     power: z.string(),
     target: z.string().optional(),
+    /** How to use it (e.g. "on a citizen gathering gold"): shown with the action. */
+    note: z.string().max(120).optional(),
   }),
   z.strictObject({ ...base, do: z.literal("timeShift"), building: z.string() }),
   z.strictObject({ ...base, do: z.literal("promote"), unit: z.string(), count }),

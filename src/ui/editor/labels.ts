@@ -127,10 +127,12 @@ export function actionText(c: Ctx, a: Action): string {
         from: targetLabel(c, a.from),
         to: targetLabel(c, a.to),
       });
-    case "power":
-      return a.target
+    case "power": {
+      const base = a.target
         ? t("step.powerOn", { power: n(c, a.power), target: n(c, a.target) })
         : t("step.power", { power: n(c, a.power) });
+      return a.note ? `${base} · ${a.note}` : base;
+    }
     case "timeShift":
       return `${t("action.timeShift")}: ${n(c, a.building)}`;
     case "promote":

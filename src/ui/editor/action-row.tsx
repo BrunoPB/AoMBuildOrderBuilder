@@ -711,6 +711,19 @@ export function ActionRow(props: Props) {
               </select>
             </label>
           )}
+          {a.do === "power" && (
+            <label class="field" style={{ flex: 1 }}>
+              <HelpText k="row.powerNote" />
+              <input
+                type="text"
+                value={a.note ?? ""}
+                maxLength={120}
+                placeholder={t("row.powerNoteExample")}
+                data-testid="row-power-note"
+                onChange={(e) => set({ note: e.currentTarget.value.trim() || undefined })}
+              />
+            </label>
+          )}
           {a.do === "event" && (
             <>
               <label class="field">
