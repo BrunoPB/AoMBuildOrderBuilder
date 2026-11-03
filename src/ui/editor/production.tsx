@@ -6,8 +6,12 @@ import type { ProductionSpan, SimResult } from "../../engine/types.ts";
 import { useApp, useViewPref } from "../context.tsx";
 import { EntityIcon, HelpText, Tip, useHelp } from "../icon.tsx";
 import { Svg } from "../svg.tsx";
+import { useWidth } from "./timeline.tsx";
 
-const ZOOMS = [1, 2, 4] as const;
+/** Pixels per second; 0 fits the whole build in the available width. */
+const ZOOMS = [0, 2, 4] as const;
+/** Width of the building names column when the chart fits the width. */
+const FIT_LABEL = 170;
 const KIND_CLASS: Record<ProductionSpan["kind"], string> = {
   unit: "kind-train",
   research: "kind-research",
@@ -20,7 +24,8 @@ const KIND_CLASS: Record<ProductionSpan["kind"], string> = {
 export function ProductionChart({ build, result }: { build: Build; result: SimResult }) {
   const { t, data, locale } = useApp();
   const help = useHelp();
-  const [zoom, setZoom] = useViewPref<number>("production.zoom", 2, ZOOMS);
+  const [zoomPref, setZoom] = useViewPref<number>("production.zoom", 0, ZOOMS);
+  const [boxRef, boxWidth] = useWidth<HTMLDivElement>();
   const [hover, setHover] = useState<number | null>(null);
   const [tip, setTip] = useState<{ text: string; x: number; y: number } | null>(null);
   const showTip = (el: Element, text: string) => {
@@ -30,7 +35,11 @@ export function ProductionChart({ build, result }: { build: Build; result: SimRe
   };
   const { lanes, spans } = result.production;
   const end = Math.max(result.endTime, ...spans.map((s) => s.end ?? s.start));
-  const width = Math.ceil(end * zoom) + 24;
+  const fit = zoomPref === 0;
+  const zoom = fit
+    ? Math.max(0.2, ((boxWidth || 800) - FIT_LABEL - 28) / Math.max(end, 1))
+    : zoomPref;
+  const width = Math.floor(end * zoom) + 24;
   const name = (id: string, n = 1) => entityName(data, build.pantheon, id, locale, n);
   const ticks: number[] = [];
   for (let s = 0; s <= end; s += 30) ticks.push(s);
@@ -59,25 +68,26 @@ export function ProductionChart({ build, result }: { build: Build; result: SimRe
           <Svg name="hammer" />
           <HelpText k="production.title" />
         </h3>
-        <div class="row" role="group" aria-label={t("production.zoom")}>
-          <Svg name="clock" />
+        <div class="segmented" role="group" aria-label={t("production.zoom")}>
           {ZOOMS.map((z) => (
-            <Tip key={z} label={help("production.zoom") || t("production.zoom")}>
+            <Tip key={z} label={help(z ? "production.zoom" : "tl.fit")}>
               <button
                 class="chip"
-                aria-pressed={zoom === z}
-                aria-label={`${t("production.zoom")} ${z}×`}
+                aria-pressed={zoomPref === z}
+                aria-label={z ? `${t("production.zoom")} ${z}×` : t("tl.fit")}
                 onClick={() => setZoom(z)}
-                data-testid={`zoom-${z}`}
+                data-testid={`production-zoom-${z || "fit"}`}
               >
-                {z}×
+                {z ? `${z}×` : <Svg name="fit" />}
               </button>
             </Tip>
           ))}
         </div>
       </div>
       <div
+        ref={boxRef}
         class="gantt"
+        style={fit ? { gridTemplateColumns: `${FIT_LABEL}px auto` } : undefined}
         onPointerLeave={() => setHover(null)}
         onPointerMove={(e) => {
           const track = (e.currentTarget as HTMLElement).querySelector(".gantt-track");

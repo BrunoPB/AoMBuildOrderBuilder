@@ -80,7 +80,12 @@ function Chart({ series, lines, testid }: { series: Snapshot[]; lines: Line[]; t
         {h && hover !== null && (
           <g>
             <line class="axis" x1={x(h.t)} x2={x(h.t)} y1={PAD.t} y2={H - PAD.b} />
-            <text x={Math.min(x(h.t) + 4, W - 120)} y={PAD.t + 10}>
+            {/* right of the cursor in the left half, left of it in the right half: never cut */}
+            <text
+              x={x(h.t) < W / 2 ? x(h.t) + 4 : x(h.t) - 4}
+              y={PAD.t + 10}
+              text-anchor={x(h.t) < W / 2 ? "start" : "end"}
+            >
               {formatClock(h.t)} · {lines.map((l) => fmt.format(l.values[hover] ?? 0)).join(" / ")}
             </text>
           </g>
