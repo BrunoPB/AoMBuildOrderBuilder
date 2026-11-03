@@ -286,7 +286,7 @@
   "help.editor.matchups": "How the build fares against each god. Drag the portraits between columns, or click to change the rating.",
   "help.palette.allAges": "Shows items of every age. Use the icons to filter by age.",
   "help.action.train": "Trains units at a building. The cost is paid when each unit starts.\n**Mode**:\n• **fixed count**: N units\n• **auto queue**: nonstop for the time in **For**",
-  "help.action.train.auto": "Auto queue: the building trains the unit nonstop while resources last.\n• Spends whatever is available, even if other actions are delayed.\n• Stays on for the time in **For** (or to the end of the build).",
+  "help.action.train.auto": "Auto queue: the building trains the unit nonstop while resources last.\n• Spends whatever is available, even if other actions are delayed.\n• Keeps training even while an action at the same building waits for resources (e.g. an age-up), as in the game: that action starts only when the queue lets it.\n• Stays on for the time in **For** (or to the end of the build).",
   "help.action.build": "Builds a building with one or more villagers.",
   "help.action.research": "Researches a technology at a building.",
   "help.action.age": "Ages up, choosing the minor god.",

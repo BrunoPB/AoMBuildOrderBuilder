@@ -286,7 +286,7 @@
   "help.editor.matchups": "Como a build se sai contra cada deus. Arraste os retratos entre as colunas, ou clique para trocar a avaliação.",
   "help.palette.allAges": "Mostra itens de todas as Eras. Use os ícones para filtrar por Era.",
   "help.action.train": "Treina unidades num prédio. O custo é pago quando cada unidade começa.\n**Modo**:\n• **quantidade fixa**: N unidades\n• **fila automática**: sem parar pelo tempo em **Por**",
-  "help.action.train.auto": "Fila automática: o prédio treina a unidade sem parar enquanto houver recursos.\n• Gasta o que estiver disponível, mesmo que atrase outras ações.\n• Fica ligada pelo tempo em **Por** (ou até o fim da build).",
+  "help.action.train.auto": "Fila automática: o prédio treina a unidade sem parar enquanto houver recursos.\n• Gasta o que estiver disponível, mesmo que atrase outras ações.\n• Continua treinando mesmo quando uma ação no mesmo prédio espera recursos (ex.: subir de Era), como no jogo: a ação só começa quando a fila deixar.\n• Fica ligada pelo tempo em **Por** (ou até o fim da build).",
   "help.action.build": "Constrói um prédio com um ou mais aldeões.",
   "help.action.research": "Pesquisa uma tecnologia num prédio.",
   "help.action.age": "Sobe de Era escolhendo o deus menor.",

@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { loadGameData } from "../../src/data/load.ts";
 import { readRawData } from "../../src/data/raw-node.ts";
 import { compareWithReference, type ReferenceMatch } from "../../src/engine/reference.ts";
+import { simulate } from "../../src/engine/simulate.ts";
 import { readPresets } from "../../src/presets/node.ts";
 import fixture from "../fixtures/krush.json";
 
@@ -35,5 +36,24 @@ describe("Krush preset against the measured match (reference)", () => {
   it("produces a value for most reference rows and runs without errors", () => {
     expect(rows.filter((r) => r.diff !== undefined).length).toBeGreaterThan(rows.length / 2);
     expect(result.warnings.filter((w) => w.level === "error")).toEqual([]);
+  });
+});
+
+describe("an auto queue and an action waiting at the same building", () => {
+  it("the queue keeps training while the Heroic age-up waits for food (as in the game)", () => {
+    const long = structuredClone(build);
+    const queue = long.actions.find(
+      (a) => a.do === "train" && a.mode === "auto" && a.unit === "citizen",
+    )!;
+    (queue as { duration?: number }).duration = 376;
+    const r = simulate(data, long);
+    const heroic = r.events.find((e) => e.kind === "ageStart" && e.age === "heroic")!;
+    const index = long.actions.indexOf(queue);
+    const waited = r.warnings.find(
+      (w) => w.action === long.actions.findIndex((a) => a.do === "age" && a.to === "heroic"),
+    );
+    const wanted = heroic.t - Number(waited?.params.waited ?? 0);
+    const citizens = r.events.filter((e) => e.kind === "unitReady" && e.action === index);
+    expect(citizens.some((e) => e.t > wanted + 30 && e.t < heroic.t)).toBe(true);
   });
 });

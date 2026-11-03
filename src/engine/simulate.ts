@@ -226,6 +226,9 @@ class Simulation {
   promotions: Promotion[] = [];
   rules: Rule[] = [];
   claims = new Set<number>();
+  /** Sites a scheduled action waits on for resources: kept for the next scheduled actions, but an
+   *  auto queue still trains there (in the game it keeps going and delays the action). */
+  waits = new Set<number>();
   events: SimEvent[] = [];
   warnings: SimWarning[] = [];
   series: Snapshot[] = [];
@@ -757,7 +760,7 @@ class Simulation {
     );
   }
 
-  freeSite(candidates: Site[], prefer?: number, split = false): Site | Reason {
+  freeSite(candidates: Site[], prefer?: number, split = false, rule = false): Site | Reason {
     if (candidates.length === 0) {
       return { key: "warn.noBuilding", level: "error", params: {} };
     }
@@ -770,7 +773,7 @@ class Simulation {
       };
     const free = ready
       .filter((s) => {
-        if (this.claims.has(s.uid) && !split) return false;
+        if ((this.claims.has(s.uid) || (!rule && this.waits.has(s.uid))) && !split) return false;
         const sideJobs = s.jobs.filter((j) => j.kind === "unit" && j.split).length;
         return split ? sideJobs === 0 : s.jobs.length - sideJobs < s.slots;
       })
@@ -781,7 +784,9 @@ class Simulation {
   }
 
   claim(candidates: Site[]): void {
-    const site = candidates.find((s) => s.state === "ready" && !this.claims.has(s.uid));
+    const site = candidates.find(
+      (s) => s.state === "ready" && !this.claims.has(s.uid) && !this.waits.has(s.uid),
+    );
     if (site) this.claims.add(site.uid);
   }
 
@@ -806,7 +811,12 @@ class Simulation {
     if (excluded) return excluded;
     const req = this.requirement(def.requires, def.age);
     if (req) return req;
-    const site = this.freeSite(candidates, opts.prefer, def.splitQueue === true);
+    const site = this.freeSite(
+      candidates,
+      opts.prefer,
+      def.splitQueue === true,
+      opts.rule !== undefined,
+    );
     if (!("uid" in site)) return site;
     if (
       this.s.popReservedAt === "start" &&
@@ -818,7 +828,7 @@ class Simulation {
     const cost = this.unitCost(def);
     const missing = this.afford(cost);
     if (missing) {
-      this.claims.add(site.uid);
+      this.waits.add(site.uid);
       return this.noResource(cost, missing);
     }
     this.pay(cost);
@@ -1014,7 +1024,7 @@ class Simulation {
         } else {
           this.block(i, { ...result, level: "info" });
         }
-        this.claim(this.trainSites(def, at));
+        if (result.key !== "warn.noResource") this.claim(this.trainSites(def, at));
         return;
       }
       st.site = result.uid;
@@ -1202,7 +1212,7 @@ class Simulation {
     const cost = applyCostModifiers(def.cost, mods, { id: def.id, tags: def.tags });
     const missing = this.afford(cost);
     if (missing) {
-      this.claims.add(site.uid);
+      this.waits.add(site.uid);
       return this.block(i, this.noResource(cost, missing));
     }
     this.pay(cost);
@@ -1269,7 +1279,7 @@ class Simulation {
     if (!("uid" in site)) return this.block(i, site);
     const missing = this.afford(def.cost);
     if (missing) {
-      this.claims.add(site.uid);
+      this.waits.add(site.uid);
       return this.block(i, this.noResource(def.cost, missing));
     }
     this.pay(def.cost);
@@ -2037,6 +2047,7 @@ class Simulation {
       if (step > 0) this.advance(tick);
       this.completions();
       this.claims.clear();
+      this.waits.clear();
       this.build.actions.forEach((a, i) => {
         const st = this.states[i]!;
         if (st.status === "done") return;
