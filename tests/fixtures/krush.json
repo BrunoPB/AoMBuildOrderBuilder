@@ -1,6 +1,6 @@
 {
-  "preset": "preset:krush",
-  "source": "SPEC.md section 16: one real match measured by the owner. Reference only; the game files are the truth.",
+  "build": "krush-build.json",
+  "source": "SPEC.md section 16: one real match measured by the owner, playing the build in krush-build.json (the first Krush preset). Reference only; the game files are the truth.",
   "tolerance": 10,
   "milestones": {
     "classicalClick": "1:55",

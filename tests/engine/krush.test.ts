@@ -3,7 +3,8 @@ import { loadGameData } from "../../src/data/load.ts";
 import { readRawData } from "../../src/data/raw-node.ts";
 import { compareWithReference, type ReferenceMatch } from "../../src/engine/reference.ts";
 import { simulate } from "../../src/engine/simulate.ts";
-import { readPresets } from "../../src/presets/node.ts";
+import { BuildSchema } from "../../src/engine/build.ts";
+import played from "../fixtures/krush-build.json";
 import fixture from "../fixtures/krush.json";
 
 // The Krush times were measured in one real match: a reference, not the truth (the game files are).
@@ -11,11 +12,12 @@ import fixture from "../fixtures/krush.json";
 // (economy-dependent) is reported by `npm run compare:krush`.
 const ref = fixture as unknown as ReferenceMatch;
 const data = loadGameData(readRawData());
-const build = readPresets().find((b) => b.id === ref.preset)!;
+// the build played in that match (the first Krush preset), not the current preset
+const build = BuildSchema.parse(played);
 const { result, rows } = compareWithReference(data, build, ref);
 const rowOf = (label: string) => rows.find((r) => r.label === label)!;
 
-describe("Krush preset against the measured match (reference)", () => {
+describe("Krush as played in the measured match (reference)", () => {
   for (const label of [
     "Classical click",
     "Classical reached",

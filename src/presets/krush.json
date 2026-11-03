@@ -5,20 +5,21 @@
   "name": "Krush",
   "author": "Bruno",
   "createdAt": "2026-10-17T13:00:00Z",
-  "updatedAt": "2026-10-18T18:00:00Z",
+  "updatedAt": "2026-11-03T04:22:09.283Z",
   "pantheon": "atlanteans",
   "god": "kronos",
   "type": "rush",
   "objective": {
     "pt-BR": "Clássica rápida com Prometeu, Contraquartel na frente com Time Shift e pressão de Turmas; Heroica com Rheia.",
-    "en": "Fast Classical with Prometheus, forward Counter-Barracks via Time Shift and Turma pressure; Heroic with Rheia."
+    "en": "Fast Classical with Prometheus, forward Temple via Time Shift and pressure. Heroic with Rheia to close the game with Behemoths."
   },
   "end": {
     "pt-BR": "Heroica com Rheia (2 Behemoths grátis) e pressão de Turmas na base inimiga.",
-    "en": "Heroic with Rheia (2 free Behemoths) and Turma pressure on the enemy base."
+    "en": "Final Behemoths raid to destroy the base."
   },
   "settings": {
-    "tick": 1
+    "tick": 1,
+    "foodChain": ["hunt", "hunt", "hunt", "herd", "berries", "farm"]
   },
   "milestones": [
     {
@@ -27,24 +28,6 @@
       "label": {
         "pt-BR": "Clique na Clássica",
         "en": "Classical click"
-      }
-    },
-    {
-      "id": "counter-barracks",
-      "atAction": "cb",
-      "on": "end",
-      "label": {
-        "pt-BR": "Contraquartel pronto",
-        "en": "Counter-Barracks ready"
-      }
-    },
-    {
-      "id": "forward",
-      "atAction": "ts2",
-      "on": "end",
-      "label": {
-        "pt-BR": "Contraquartel na frente",
-        "en": "Forward Counter-Barracks"
       }
     },
     {
@@ -100,6 +83,10 @@
     {
       "god": "odin",
       "fit": "bad"
+    },
+    {
+      "god": "kronos",
+      "fit": "neutral"
     }
   ],
   "actions": [
@@ -136,13 +123,6 @@
       "count": 2,
       "from": "gold",
       "to": "food"
-    },
-    {
-      "id": "dc",
-      "when": "1:30",
-      "do": "power",
-      "power": "deconstruction",
-      "target": "temple"
     },
     {
       "id": "cl",
@@ -184,6 +164,13 @@
       "then": "wood"
     },
     {
+      "id": "dc",
+      "when": "2:50",
+      "do": "power",
+      "power": "deconstruction",
+      "target": "temple"
+    },
+    {
       "id": "c2",
       "when": {
         "after": "cl"
@@ -194,17 +181,6 @@
       "rally": "wood"
     },
     {
-      "id": "pr",
-      "when": {
-        "after": "cl"
-      },
-      "do": "train",
-      "unit": "promethean",
-      "mode": "auto",
-      "at": "temple",
-      "duration": 200
-    },
-    {
       "id": "o1",
       "when": {
         "after": "cl"
@@ -213,22 +189,40 @@
       "unit": "oracle"
     },
     {
-      "id": "cb",
-      "when": "3:05",
-      "do": "build",
-      "building": "counter-barracks",
-      "builder": {
-        "from": "hunt"
+      "id": "pr",
+      "when": {
+        "after": "cl"
       },
-      "then": "food"
+      "do": "train",
+      "unit": "promethean",
+      "count": 1,
+      "at": "temple"
     },
     {
-      "id": "ts2",
+      "id": "a39",
       "when": {
-        "after": "cb"
+        "after": "cl"
       },
-      "do": "timeShift",
-      "building": "counter-barracks"
+      "note": "Start rading",
+      "do": "event"
+    },
+    {
+      "id": "a27",
+      "when": "asap",
+      "do": "train",
+      "unit": "promethean",
+      "count": 1,
+      "at": "temple"
+    },
+    {
+      "id": "a26",
+      "when": "asap",
+      "do": "build",
+      "building": "military-barracks",
+      "builder": {
+        "from": "wood"
+      },
+      "then": "wood"
     },
     {
       "id": "auto",
@@ -236,34 +230,35 @@
       "do": "train",
       "unit": "citizen",
       "mode": "auto",
-      "duration": 240,
+      "duration": 191,
       "rally": "food"
     },
     {
+      "id": "a24",
+      "when": "asap",
+      "do": "timeShift",
+      "building": "military-barracks"
+    },
+    {
+      "id": "a25",
+      "when": "asap",
+      "do": "train",
+      "unit": "murmillo",
+      "count": 1
+    },
+    {
       "id": "o2",
-      "when": "3:25",
+      "when": "asap",
       "do": "promote",
       "unit": "oracle"
     },
     {
-      "id": "tu",
-      "when": {
-        "after": "ts2"
-      },
+      "id": "a30",
+      "when": "asap",
       "do": "train",
-      "unit": "turma",
-      "mode": "auto",
-      "at": "counter-barracks",
-      "duration": 151
-    },
-    {
-      "id": "r1",
-      "when": "4:25",
-      "note": "raid",
-      "do": "event",
-      "lose": {
-        "turma": 2
-      }
+      "unit": "promethean",
+      "count": 1,
+      "at": "temple"
     },
     {
       "id": "m2",
@@ -271,19 +266,23 @@
       "do": "build",
       "building": "manor",
       "builder": {
-        "from": "hunt"
+        "from": "wood"
       },
-      "then": "gold"
+      "then": "wood"
     },
     {
-      "id": "r2",
-      "when": "4:50",
-      "note": "raid",
-      "do": "event",
-      "lose": {
-        "turma": 2,
-        "promethean": 1
-      }
+      "id": "a28",
+      "when": "asap",
+      "do": "train",
+      "unit": "murmillo",
+      "count": 1
+    },
+    {
+      "id": "a29",
+      "when": "asap",
+      "do": "train",
+      "unit": "murmillo",
+      "count": 1
     },
     {
       "id": "ar",
@@ -291,13 +290,16 @@
       "do": "build",
       "building": "armory",
       "builder": {
-        "new": "auto"
+        "from": "wood"
       },
-      "then": "food"
+      "then": "gold"
     },
     {
       "id": "g2",
-      "when": "5:40",
+      "when": {
+        "after": "ar",
+        "on": "start"
+      },
       "do": "move",
       "count": 1,
       "from": "wood",
@@ -309,24 +311,85 @@
       "do": "build",
       "building": "manor",
       "builder": {
-        "new": "auto"
+        "from": "wood"
       },
-      "then": "gold"
-    },
-    {
-      "id": "g3",
-      "when": "7:25",
-      "do": "move",
-      "count": 1,
-      "from": "food",
-      "to": "gold"
+      "then": "wood"
     },
     {
       "id": "h1",
-      "when": "7:40",
+      "when": "asap",
       "do": "age",
       "to": "heroic",
       "minor": "rheia"
+    },
+    {
+      "id": "a35",
+      "when": {
+        "after": "h1",
+        "on": "start"
+      },
+      "do": "train",
+      "unit": "citizen",
+      "mode": "auto",
+      "rally": "gold"
+    },
+    {
+      "id": "a36",
+      "when": {
+        "after": "h1",
+        "on": "start"
+      },
+      "do": "move",
+      "count": 1,
+      "from": "gold",
+      "to": "wood"
+    },
+    {
+      "id": "a34",
+      "when": "asap",
+      "do": "build",
+      "building": "economic-guild",
+      "builder": {
+        "from": "wood"
+      },
+      "then": "wood"
+    },
+    {
+      "id": "a37",
+      "when": "asap",
+      "do": "research",
+      "research": "theft-of-fire"
+    },
+    {
+      "id": "a32",
+      "when": "asap",
+      "do": "train",
+      "unit": "promethean",
+      "count": 2
+    },
+    {
+      "id": "a33",
+      "when": "asap",
+      "do": "train",
+      "unit": "murmillo",
+      "count": 2
+    },
+    {
+      "id": "a38",
+      "when": {
+        "after": "h1"
+      },
+      "note": "On a citizen gathering gold",
+      "do": "power",
+      "power": "valor"
+    },
+    {
+      "id": "a31",
+      "when": {
+        "after": "h1"
+      },
+      "note": "Finishing Raid with Behemoths",
+      "do": "event"
     }
   ]
 }

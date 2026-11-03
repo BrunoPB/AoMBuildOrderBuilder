@@ -1,14 +1,17 @@
-/** Prints the Krush preset simulation next to the times measured in a real match (reference only). */
+/** Prints the simulation of the Krush build played in a real match next to the times measured
+ *  there (reference only). */
 import { readFileSync } from "node:fs";
 import { loadGameData } from "../src/data/load.ts";
 import { readRawData } from "../src/data/raw-node.ts";
 import { compareWithReference, type ReferenceMatch } from "../src/engine/reference.ts";
-import { readPresets } from "../src/presets/node.ts";
+import { BuildSchema } from "../src/engine/build.ts";
 
 const ref = JSON.parse(
   readFileSync(new URL("../tests/fixtures/krush.json", import.meta.url), "utf8"),
 ) as ReferenceMatch;
-const build = readPresets().find((b) => b.id === ref.preset)!;
+const build = BuildSchema.parse(
+  JSON.parse(readFileSync(new URL(`../tests/fixtures/${ref.build}`, import.meta.url), "utf8")),
+);
 const { rows } = compareWithReference(loadGameData(readRawData()), build, ref);
 
 console.log("| Milestone | Measured | Simulated | Diff (s) |\n|---|---|---|---|");

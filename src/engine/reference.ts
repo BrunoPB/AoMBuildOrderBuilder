@@ -6,7 +6,8 @@ import type { SimResult } from "./types.ts";
 
 /** Times measured in a real match, used only as a reference (never as truth). */
 export type ReferenceMatch = {
-  preset: string;
+  /** File (next to the reference) with the build that was played. */
+  build: string;
   milestones: Record<string, string | string[]>;
   autoCitizens: string[];
   prometheans: string[];

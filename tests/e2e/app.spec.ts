@@ -1,6 +1,20 @@
 import { expect, test } from "@playwright/test";
 import { readFileSync } from "node:fs";
 
+/** The first Krush preset (played in the measured match), saved as the player's own build
+ *  "u-ref": it has waits and asked times that the current preset no longer has. */
+const referenceBuild = {
+  ...JSON.parse(readFileSync(new URL("../fixtures/krush-build.json", import.meta.url), "utf8")),
+  id: "u-ref",
+};
+async function openReferenceBuild(page: import("@playwright/test").Page) {
+  await page.addInitScript((build) => {
+    if (localStorage.getItem("aomr-bob:builds:v1")) return;
+    localStorage.setItem("aomr-bob:builds:v1", JSON.stringify([build]));
+  }, referenceBuild);
+  await page.goto("/#/build/u-ref");
+}
+
 test.beforeEach(async ({ page }) => {
   await page.addInitScript(() => {
     if (!sessionStorage.getItem("e2e-init")) {
@@ -290,7 +304,7 @@ test("shows the starting units and sends idle ones to work", async ({ page }) =>
 });
 
 test("a warning explains the wait with the numbers behind it", async ({ page, isMobile }) => {
-  await page.goto("/#/build/preset%3Akrush");
+  await openReferenceBuild(page);
   await page.getByTestId("warnings-toggle").click();
   // the Heroic age: the longest wait for food
   const item = page
@@ -380,7 +394,7 @@ test("a picked minor god can be removed", async ({ page }) => {
 });
 
 test("warnings drawer jumps to the action", async ({ page, isMobile }) => {
-  await page.goto("/#/build/preset%3Akrush");
+  await openReferenceBuild(page);
   await page.getByTestId("warnings-toggle").click();
   const item = page.getByTestId("warnings").locator(".warn-item").first();
   await expect(item).toContainText("3:38");
@@ -600,9 +614,7 @@ test("a new fixed time moves the action to its place in the list", async ({ page
 
 test("a new time is placed by when the other actions really start", async ({ page }) => {
   // Heroic is asked at 7:40 but starts at 8:53 (waiting for food): 8:00 still comes before it
-  await page.goto("/#/view/preset%3Akrush");
-  await page.getByTestId("build-header").getByTestId("build-menu").click();
-  await page.getByTestId("duplicate").click();
+  await openReferenceBuild(page);
   await page.getByTestId("tab-actions").click();
   const rows = page.getByTestId("action-row");
   const villager = rows.filter({ hasText: "1 Cidadão de comida → ouro" });
