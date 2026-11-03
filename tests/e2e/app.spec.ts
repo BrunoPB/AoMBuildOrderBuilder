@@ -570,6 +570,19 @@ test("a new time is placed by when the other actions really start", async ({ pag
   await expect(rows.last()).toContainText("1 Cidadão de comida → ouro");
 });
 
+test("an action set to start after another goes to its place in the list", async ({ page }) => {
+  await page.goto("/#/view/preset%3Akrush");
+  await page.getByTestId("build-header").getByTestId("build-menu").click();
+  await page.getByTestId("duplicate").click();
+  await page.getByTestId("tab-actions").click();
+  const rows = page.getByTestId("action-row");
+  const power = rows.filter({ hasText: "Desconstrução" });
+  await power.locator(".label-text").click();
+  await power.getByTestId("when-mode").selectOption("after");
+  await power.getByTestId("when-after").selectOption("h1");
+  await expect(rows.last()).toContainText("Desconstrução");
+});
+
 test("a god power has a note on how to use it, shown with the action", async ({ page }) => {
   await page.goto("/#/view/preset%3Akrush");
   await page.getByTestId("build-header").getByTestId("build-menu").click();

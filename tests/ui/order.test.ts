@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { Action } from "../../src/engine/build.ts";
-import { moveWithTime, placeByTime } from "../../src/ui/editor/order.ts";
+import { moveWithTime, placeByTime, plannedTime } from "../../src/ui/editor/order.ts";
 
 const at = (id: string, when: string): Action => ({ id, when, do: "event", note: "" });
 const ids = (list: Action[]) => list.map((a) => a.id);
@@ -43,5 +43,16 @@ describe("action order by time", () => {
     ];
     const moved = moveWithTime(mixed, [10, 12, 40], 1, 2);
     expect(moved[2]!.when).toBe("asap");
+  });
+
+  it("an action after another is planned at that one's start or end plus the delay", () => {
+    const outcomes = [{ startedAt: 10, completedAt: 40 }, { startedAt: 30 }];
+    const after = (on?: "start", delay?: number): Action => ({
+      ...at("b", "0:00"),
+      when: { after: "a", ...(on ? { on } : {}), ...(delay ? { delay } : {}) },
+    });
+    expect(plannedTime(after(), list, outcomes)).toBe(40);
+    expect(plannedTime(after("start", 5), list, outcomes)).toBe(15);
+    expect(plannedTime({ ...at("b", "0:00"), when: "asap" }, list, outcomes)).toBeUndefined();
   });
 });

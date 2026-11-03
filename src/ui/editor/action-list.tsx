@@ -10,7 +10,7 @@ import { EntityIcon, HelpText, Tip, useHelp } from "../icon.tsx";
 import { KIND_ICON, Svg } from "../svg.tsx";
 import { ActionRow } from "./action-row.tsx";
 import { ACTION_MIME, nextActionId, startState } from "./labels.ts";
-import { fixedTime, moveWithTime, placeByTime } from "./order.ts";
+import { fixedTime, moveWithTime, placeByTime, plannedTime } from "./order.ts";
 import { LEVEL_ICON } from "./warning-card.tsx";
 import { AutoTag, EntityIconByIcon, focusAction } from "./result.tsx";
 import {
@@ -176,14 +176,17 @@ export function ActionList({
     setActions(actions);
     requestAnimationFrame(() => focusAction(at));
   };
-  /** Replaces action i, keeping the list in time order when its fixed time changed. */
+  /** Replaces action i, keeping the list in time order when its time changed (a fixed time, or
+   *  "after" another action: that one's simulated time plus the delay). */
   const change = (i: number, next: Action) => {
     const prev = build.actions[i]!;
     const actions = [...build.actions];
     actions[i] = next;
-    if (next.when === prev.when || fixedTime(next.when) === undefined) return setActions(actions);
+    const own =
+      next.when === prev.when ? undefined : plannedTime(next, build.actions, result?.actions ?? []);
+    if (own === undefined) return setActions(actions);
     actions[i] = { ...next, id: next.id ?? nextActionId(build) };
-    const placed = placeByTime(actions, times, i);
+    const placed = placeByTime(actions, times, i, own);
     setActions(placed.actions);
     if (placed.index !== i) requestAnimationFrame(() => focusAction(placed.index));
   };

@@ -8,6 +8,21 @@ export function fixedTime(w: When): number | undefined {
 
 type Times = readonly (number | undefined)[];
 
+/** When an action is planned to start: its fixed time, or for "after" the other action's
+ *  start/end (as simulated) plus the delay; undefined for asap, always or not known yet. */
+export function plannedTime(
+  a: Action,
+  actions: readonly Action[],
+  outcomes: readonly ({ startedAt?: number; completedAt?: number } | undefined)[],
+): number | undefined {
+  const fixed = fixedTime(a.when);
+  if (fixed !== undefined || typeof a.when !== "object") return fixed;
+  const { after, on, delay } = a.when;
+  const o = outcomes[actions.findIndex((x) => x.id === after)];
+  const base = on === "start" ? o?.startedAt : o?.completedAt;
+  return base === undefined ? undefined : base + (delay ?? 0);
+}
+
 function neighbours(order: number[], at: number, times: Times) {
   let prev: number | undefined;
   let next: number | undefined;
@@ -16,14 +31,14 @@ function neighbours(order: number[], at: number, times: Times) {
   return { prev, next };
 }
 
-/** Action `i` got a new fixed time: move it after the last action that happens no later.
- *  `times[k]`: when action k happens (fixed time, else simulated start; undefined if unknown). */
+/** Action `i` got a new time (`own`, its fixed time by default): move it after the last action
+ *  that happens no later. `times[k]`: when action k happens (undefined if unknown). */
 export function placeByTime(
   actions: Action[],
   times: Times,
   i: number,
+  own = fixedTime(actions[i]!.when),
 ): { actions: Action[]; index: number } {
-  const own = fixedTime(actions[i]!.when);
   if (own === undefined) return { actions, index: i };
   const all = actions.map((_, k) => k);
   const { prev, next } = neighbours(all, i, times);
