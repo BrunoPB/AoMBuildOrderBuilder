@@ -201,6 +201,14 @@ export function ageRank(age: Age): number {
   return AGES.indexOf(age);
 }
 
+/** Where a palette action goes: last, but before the age ups at the end of the list (picked in
+ *  the Gods tab, they usually come after what the player adds). */
+export function addIndex(actions: readonly Action[]): number {
+  let k = actions.length;
+  while (k > 0 && actions[k - 1]!.do === "age") k--;
+  return k;
+}
+
 export function nextActionId(build: Build): string {
   const used = new Set(build.actions.map((a) => a.id));
   let i = build.actions.length + 1;

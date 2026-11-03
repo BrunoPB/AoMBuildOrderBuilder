@@ -1,7 +1,7 @@
 import { useMemo } from "preact/hooks";
 import type { GameData } from "../data/load.ts";
 import type { Locale, PantheonId } from "../data/schema.ts";
-import { BUILD_VERSION, type Build } from "../engine/build.ts";
+import { type Action, BUILD_VERSION, type Build } from "../engine/build.ts";
 import { buildSteps, type Step } from "../engine/format.ts";
 import { simulate } from "../engine/simulate.ts";
 import type { SimResult } from "../engine/types.ts";
@@ -25,13 +25,27 @@ export function useSimulation(data: GameData, build: Build | undefined, locale: 
   );
 }
 
+/** What a build starts with: the villagers idle at 0:00 sent to food (nearly every build does
+ *  this first). */
+export function startActions(data: GameData, build: Build): Action[] {
+  const idle = simulate(data, { ...build, actions: [], settings: {} }).series[0]?.alloc.idle ?? 0;
+  return idle > 0
+    ? [{ id: "a1", when: "0:00", do: "move", count: idle, from: "idle", to: "food" }]
+    : [];
+}
+
+/** True when the build has only what startActions gives it (nothing of the player's yet). */
+export function onlyStartActions(data: GameData, build: Build): boolean {
+  return JSON.stringify(build.actions) === JSON.stringify(startActions(data, build));
+}
+
 export function newBuild(data: GameData, name: string, efficiency?: number): Build {
   const pantheon: PantheonId = data.pantheons.has("atlanteans")
     ? "atlanteans"
     : ([...data.pantheons.keys()][0] ?? "atlanteans");
   const god = data.pantheons.get(pantheon)?.def.gods[0] ?? "kronos";
   const now = new Date().toISOString();
-  return {
+  const build: Build = {
     format: "aomr-bob",
     version: BUILD_VERSION,
     id: newBuildId(),
@@ -44,6 +58,7 @@ export function newBuild(data: GameData, name: string, efficiency?: number): Bui
     settings: efficiency ? { efficiency } : {},
     actions: [],
   };
+  return { ...build, actions: startActions(data, build) };
 }
 
 export function duplicateBuild(build: Build, suffix: string): Build {

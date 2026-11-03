@@ -6,7 +6,7 @@ import type { ProductionSpan, SimResult } from "../../engine/types.ts";
 import { useApp, useViewPref } from "../context.tsx";
 import { EntityIcon, HelpText, Tip, useHelp } from "../icon.tsx";
 import { Svg } from "../svg.tsx";
-import { useWidth } from "./timeline.tsx";
+import { useWidth, viewEnd } from "./timeline.tsx";
 
 /** Pixels per second; 0 fits the whole build in the available width. */
 const ZOOMS = [0, 2, 4] as const;
@@ -34,7 +34,7 @@ export function ProductionChart({ build, result }: { build: Build; result: SimRe
     setTip({ text, x, y: r.top });
   };
   const { lanes, spans } = result.production;
-  const end = Math.max(result.endTime, ...spans.map((s) => s.end ?? s.start));
+  const end = viewEnd(result);
   const fit = zoomPref === 0;
   const zoom = fit
     ? Math.max(0.2, ((boxWidth || 800) - FIT_LABEL - 28) / Math.max(end, 1))

@@ -22,6 +22,7 @@ import {
   type Scale,
   useFloatTip,
   useWidth,
+  viewEnd,
 } from "./timeline.tsx";
 
 /** The "Events" checkbox (units ready, buildings done… between the actions); hidden for now. */
@@ -202,13 +203,7 @@ export function ActionList({
   };
   const milestoneIds = new Set((build.milestones ?? []).map((m) => m.atAction));
 
-  const spans = result?.production.spans ?? [];
-  const end = Math.max(
-    60,
-    result?.endTime ?? 0,
-    ...spans.map((x) => x.end ?? x.start),
-    ...times.map((x) => x ?? 0),
-  );
+  const end = viewEnd(result, times);
   const width = boxWidth || 800;
   /** Narrow screens put the track under the label instead of beside it. */
   const stacked = width < 600;

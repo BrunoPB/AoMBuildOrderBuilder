@@ -32,6 +32,11 @@ async function createBuildWithActions(page: import("@playwright/test").Page) {
   await page.getByTestId("build-name").fill("E2E Build");
   await expect(page.getByTestId("god-kronos")).toBeVisible();
   await page.getByTestId("next-stage").click();
+  // a new build starts with its idle villagers sent to food: removed to start from scratch
+  await expect(page.getByTestId("action-row")).toHaveCount(1);
+  await page.getByTestId("action-row").locator(".label-text").click();
+  await page.getByTestId("row-remove").click();
+  await expect(page.getByTestId("action-row")).toHaveCount(0);
   await page.getByTestId("kind-train").click();
   await page.getByTestId("pick-citizen").click();
   await page.getByTestId("kind-build").click();
@@ -291,16 +296,24 @@ test("match mode shows the next 3 steps and where the villagers should be", asyn
   await expect(eco).toBeInViewport();
 });
 
-test("shows the starting units and sends idle ones to work", async ({ page }) => {
+test("a new build starts with its idle villagers sent to food; new actions go before age ups", async ({
+  page,
+}) => {
   await page.goto("/");
   await page.getByTestId("new-build").click();
+  // nothing of the player's yet: it opens at the gods, with the age ups picked there
+  await page.getByTestId("minor-prometheus").click();
   await page.getByTestId("next-stage").click();
   const start = page.getByTestId("start-row");
   await expect(start).toContainText("275");
-  await expect(page.getByTestId("start-idle")).toContainText("2");
-  await page.getByTestId("kind-move").click();
-  await expect(page.getByTestId("action-row").first()).toContainText("2 Cidadãos de ocioso");
+  const rows = page.getByTestId("action-row");
+  await expect(rows.first()).toContainText("2 Cidadãos de ocioso → comida");
   await expect(page.getByTestId("start-idle")).toHaveCount(0);
+  await page.getByTestId("kind-build").click();
+  await page.getByTestId("pick-manor").click();
+  await expect(rows).toHaveCount(3);
+  await expect(rows.nth(1)).toContainText("Construir Mansão");
+  await expect(rows.last()).toContainText("Pesquisar Clássica");
 });
 
 test("a warning explains the wait with the numbers behind it", async ({ page, isMobile }) => {
@@ -384,11 +397,14 @@ test("drag and drop: food chain, matchups and palette", async ({ page, isMobile 
   await page.getByTestId("pick-manor").click();
   await page.getByTestId("kind-train").click();
   await page.getByTestId("pick-citizen").dragTo(page.getByTestId("action-row").first());
+  // the start move, the manor and the citizen dropped on the first row
   const rows = page.getByTestId("action-row");
-  await expect(rows).toHaveCount(2);
-  await expect(rows.first()).toContainText("Cidadão");
+  await expect(rows).toHaveCount(3);
+  await expect(rows.first()).toContainText("Treinar 1 Cidadão");
   await page.getByTestId("kind-move").dragTo(page.getByTestId("action-row").nth(1));
-  await expect(rows.nth(1)).toContainText("ocioso");
+  await expect(rows).toHaveCount(4);
+  await expect(rows.nth(1)).toHaveClass(/kind-move/);
+  await expect(rows.nth(2)).toContainText("ocioso");
 });
 
 test("a picked minor god can be removed", async ({ page }) => {
@@ -405,7 +421,9 @@ test("a picked minor god can be removed", async ({ page }) => {
   await expect(page.getByTestId("minor-prometheus")).toHaveAttribute("aria-pressed", "false");
   await expect(page.getByTestId("minor-rheia")).toHaveAttribute("aria-pressed", "false");
   await page.getByTestId("tab-actions").click();
-  await expect(page.getByTestId("action-row")).toHaveCount(0);
+  // only the start move is left
+  await expect(page.getByTestId("action-row")).toHaveCount(1);
+  await expect(page.getByTestId("action-row")).toContainText("ocioso");
 });
 
 test("warnings drawer jumps to the action", async ({ page, isMobile }) => {
@@ -544,8 +562,8 @@ test("Egyptian palette offers Empower, and summons only for Set", async ({ page 
   await expect(page.getByTestId("kind-summon")).toBeVisible();
   await page.getByTestId("kind-empower").click();
   await page.getByTestId("pick-town-center").click();
-  await expect(page.getByTestId("action-row")).toHaveCount(1);
-  await expect(page.getByTestId("action-row").first()).toContainText("Fortalecer");
+  await expect(page.getByTestId("action-row")).toHaveCount(2);
+  await expect(page.getByTestId("action-row").last()).toContainText("Fortalecer");
 });
 
 test("undo and redo changes in the build", async ({ page }) => {

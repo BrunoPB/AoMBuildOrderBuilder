@@ -8,14 +8,14 @@ import { navigate } from "../app.tsx";
 import { useApp, useViewPref } from "../context.tsx";
 import { GlobalTools } from "../global-tools.tsx";
 import { EntityIcon, Tip, HelpText, useHelp } from "../icon.tsx";
-import { duplicateBuild, useSimulation } from "../sim.ts";
+import { duplicateBuild, onlyStartActions, startActions, useSimulation } from "../sim.ts";
 import { Svg } from "../svg.tsx";
 import { ActionList } from "./action-list.tsx";
 import { FoodChain } from "./food-chain.tsx";
 import { ProductionChart } from "./production.tsx";
 import { BuildActions } from "../build-actions.tsx";
 import { useHistory } from "./history.ts";
-import { nextActionId } from "./labels.ts";
+import { addIndex, nextActionId } from "./labels.ts";
 import { Palette } from "./palette.tsx";
 import {
   Charts,
@@ -140,13 +140,24 @@ function GodPicker({
   const { t, data, locale } = api;
   const changePantheon = async (id: PantheonId) => {
     if (id === build.pantheon) return;
-    if (build.actions.length && (await api.confirm(t("editor.changePantheon"))) !== "yes") return;
+    if (
+      build.actions.length &&
+      !onlyStartActions(data, build) &&
+      (await api.confirm(t("editor.changePantheon"))) !== "yes"
+    )
+      return;
     const god = data.pantheons.get(id)?.def.gods[0] ?? build.god;
-    onChange({ ...build, pantheon: id, god, actions: [], milestones: [] });
+    const next = { ...build, pantheon: id, god, milestones: [] };
+    onChange({ ...next, actions: startActions(data, next) });
   };
   const changeGod = (id: string) => {
     const g = data.gods.get(id);
     if (!g) return;
+    /** A god may start with more villagers: an untouched start follows it. */
+    if (onlyStartActions(data, build)) {
+      const next = { ...build, god: id };
+      return onChange({ ...next, actions: startActions(data, next) });
+    }
     const actions = build.actions.map((a) =>
       a.do === "age" && !g.minors[a.to].includes(a.minor)
         ? { ...a, minor: g.minors[a.to][0] ?? a.minor }
@@ -309,7 +320,10 @@ export function Editor({ id }: { id: string }) {
   const { t, data, locale } = api;
   const found = api.findBuild(id);
   const build = found?.build;
-  const [firstStage] = useState<Stage>(build?.actions.length ? "actions" : "gods");
+  /** A build with nothing of the player's yet starts at picking the gods. */
+  const [firstStage] = useState<Stage>(
+    build && !onlyStartActions(data, build) ? "actions" : "gods",
+  );
   const [stage, setStage] = useViewPref<Stage>(
     `editor.stage.${id}`,
     firstStage,
@@ -565,11 +579,11 @@ export function Editor({ id }: { id: string }) {
                   build={build}
                   idle={result?.series.find((x) => x.t >= 5)?.alloc.idle ?? 0}
                   onAdd={(a) => {
-                    update({
-                      ...build,
-                      actions: [...build.actions, { ...a, id: nextActionId(build) }],
-                    });
-                    requestAnimationFrame(() => focusAction(build.actions.length));
+                    const at = addIndex(build.actions);
+                    const actions = [...build.actions];
+                    actions.splice(at, 0, { ...a, id: nextActionId(build) });
+                    update({ ...build, actions });
+                    requestAnimationFrame(() => focusAction(at));
                   }}
                 />
               )

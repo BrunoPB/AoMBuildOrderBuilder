@@ -21,6 +21,26 @@ export function makeScale(end: number, trackPx: number): Scale {
   };
 }
 
+/** Shortest timeline shown (s), so a build just started is not stretched over a few seconds. */
+const MIN_VIEW = 480;
+/** Room after the last thing the build does (s), like the simulation's tail. */
+const VIEW_MARGIN = 30;
+
+/** How long the timeline is: up to the last thing the build does (action starts and ends,
+ *  finished production) plus a margin, at least MIN_VIEW. Not the simulation's own end: with an
+ *  action that never happens it runs on to its safety limit. `times`: the actions' times. */
+export function viewEnd(
+  result: SimResult | undefined,
+  times: readonly (number | undefined)[] = [],
+) {
+  const content = [
+    ...times,
+    ...(result?.actions.flatMap((o) => [o.startedAt, o.completedAt]) ?? []),
+    ...(result?.production.spans.map((s) => s.end ?? s.start) ?? []),
+  ].reduce<number>((m, t) => (t !== undefined && t > m ? t : m), 0);
+  return Math.max(MIN_VIEW, content + VIEW_MARGIN);
+}
+
 /** Tick step (s) so labels stay readable at the current width. */
 export function tickStep(pxPerSec: number): number {
   for (const s of [30, 60, 120, 300, 600]) if (s * pxPerSec >= 56) return s;
