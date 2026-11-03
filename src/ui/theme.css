@@ -2373,6 +2373,11 @@ textarea {
   padding-left: 3px;
 }
 
+.tl-tick.end {
+  transform: translateX(-100%);
+  padding-right: 3px;
+}
+
 .tl-strip .tl-label {
   font-size: 12px;
   color: var(--muted);
@@ -2962,6 +2967,10 @@ textarea {
     flex: 1;
     min-height: 0;
     overflow: auto;
+  }
+  /* fitted to the width: nothing may scroll sideways */
+  html.workspace .tl:not(.zoomed) {
+    overflow-x: hidden;
   }
   html.workspace .tl .tl-head,
   html.workspace .tl.zoomed .tl-head {

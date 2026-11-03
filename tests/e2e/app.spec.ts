@@ -692,6 +692,7 @@ test("on desktop only the timeline scrolls, not the page", async ({ page, isMobi
     return {
       page: document.documentElement.scrollHeight - window.innerHeight,
       inner: tl.scrollHeight - tl.clientHeight,
+      sideways: tl.scrollWidth - tl.clientWidth,
       width: tl.getBoundingClientRect().width / window.innerWidth,
       trackStarts: new Set(
         [...tl.querySelectorAll(".tl-row > .tl-track")].map((e) => e.getBoundingClientRect().x),
@@ -700,6 +701,7 @@ test("on desktop only the timeline scrolls, not the page", async ({ page, isMobi
   });
   expect(sizes.page).toBeLessThanOrEqual(1);
   expect(sizes.inner).toBeGreaterThan(0);
+  expect(sizes.sideways).toBe(0);
   expect(sizes.width).toBeGreaterThan(0.95);
   expect(sizes.trackStarts).toBe(1);
 });

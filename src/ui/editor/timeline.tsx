@@ -98,7 +98,12 @@ export function Axis({ scale, hover }: { scale: Scale; hover?: number | null }) 
   return (
     <div class="tl-axis" aria-hidden="true">
       {ticks.map((s) => (
-        <span key={s} class="tl-tick num" style={{ left: scale.pct(s) }}>
+        <span
+          key={s}
+          /* a label too close to the end is right-aligned so it never sticks out of the track */
+          class={`tl-tick num ${(scale.end - s) * scale.pxPerSec < 24 ? "end" : ""}`}
+          style={{ left: scale.pct(s) }}
+        >
           {formatClock(s)}
         </span>
       ))}
