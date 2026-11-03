@@ -16,7 +16,6 @@ import {
   Charts,
   EntityIconByIcon,
   focusAction,
-  Matchups,
   Milestones,
   WarningsButton,
   WarningsDrawer,
@@ -163,6 +162,43 @@ function AgeColumns({ build, result, steps }: { build: Build; result: SimResult;
   );
 }
 
+/** Good, neutral and bad matchups in the header: what decides whether to play the build. */
+function MatchupStrip({ build }: { build: Build }) {
+  const { t, data, locale } = useApp();
+  const help = useHelp();
+  const list = build.matchups ?? [];
+  if (list.length === 0) return null;
+  return (
+    <div class="matchup-strip" data-testid="overview-matchups">
+      {(["good", "neutral", "bad"] as const).map((fit) => {
+        const items = list.filter((m) => m.fit === fit);
+        if (items.length === 0) return null;
+        return (
+          <div key={fit} class={`matchup-chip ${fit}`} data-testid={`overview-matchups-${fit}`}>
+            <Tip label={[t(`result.${fit}`), help(`result.${fit}`)].filter(Boolean).join("\n")}>
+              <span class="row matchup-chip-label">
+                <Svg
+                  name={fit === "good" ? "check" : fit === "bad" ? "error" : "info"}
+                  label={t(`result.${fit}`)}
+                />
+              </span>
+            </Tip>
+            {items.map((m) => (
+              <EntityIcon
+                key={m.god}
+                id={m.god}
+                pantheon={data.gods.get(m.god)?.pantheon ?? build.pantheon}
+                size={40}
+                detail={m.why ? text(locale, m.why) : undefined}
+              />
+            ))}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 /** A build at a glance: the whole timeline, resources and workers, with nothing to edit. */
 export function Overview({ id }: { id: string }) {
   const api = useApp();
@@ -244,6 +280,7 @@ export function Overview({ id }: { id: string }) {
             )}
           </div>
         )}
+        <MatchupStrip build={build} />
       </header>
 
       {sim.error && (
@@ -255,9 +292,6 @@ export function Overview({ id }: { id: string }) {
       {result && !full && (
         <div class="stack overview-simple">
           <AgeColumns build={build} result={result} steps={sim.steps} />
-          {(build.matchups?.length ?? 0) > 0 && (
-            <Matchups build={build} readonly size={96} onChange={() => undefined} />
-          )}
         </div>
       )}
 
@@ -275,9 +309,6 @@ export function Overview({ id }: { id: string }) {
           </div>
           <ProductionChart build={build} result={result} />
           <Charts result={result} />
-          {(build.matchups?.length ?? 0) > 0 && (
-            <Matchups build={build} readonly onChange={() => undefined} />
-          )}
         </div>
       )}
 

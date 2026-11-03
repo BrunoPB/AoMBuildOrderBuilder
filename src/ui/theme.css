@@ -3432,3 +3432,35 @@ textarea {
 .order-auto {
   border-left-style: dashed;
 }
+
+/* overview header: the build's matchups, small enough to sit beside each other */
+.matchup-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.matchup-chip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px 4px 6px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+.matchup-chip.good {
+  background: var(--ok-bg);
+}
+.matchup-chip.neutral {
+  background: var(--surface-2);
+}
+.matchup-chip.bad {
+  background: var(--bad-bg);
+}
+
+.matchup-chip-label {
+  margin-right: 2px;
+}
