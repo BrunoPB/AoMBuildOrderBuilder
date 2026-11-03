@@ -24,6 +24,9 @@ import {
   useWidth,
 } from "./timeline.tsx";
 
+/** The "Events" checkbox (units ready, buildings done… between the actions); hidden for now. */
+const SHOW_EVENTS_TOGGLE = false;
+
 /** Seconds per pixel choices; 0 fits the whole build in the available width. */
 const ZOOMS = [0, 2, 4] as const;
 
@@ -159,8 +162,11 @@ export function ActionList({
 }) {
   const { t } = useApp();
   const help = useHelp();
-  /** Off: only automatic steps stay between the actions (the player still has to do them). */
-  const [events, setEvents] = useViewPref<boolean>("actions.events", true);
+  /** Off: only automatic steps stay between the actions (the player still has to do them). The
+   *  start and end marks on each action's track say enough, so the checkbox is hidden for now
+   *  and events stay off; SHOW_EVENTS_TOGGLE brings it back. */
+  const [eventsPref, setEvents] = useViewPref<boolean>("actions.events", false);
+  const events = SHOW_EVENTS_TOGGLE && eventsPref;
   const [lanesOpen, setLanesOpen] = useViewPref<boolean>("actions.lanes", false);
   const [zoom, setZoom] = useViewPref<number>("actions.zoom", 0, ZOOMS);
   const [dragFrom, setDragFrom] = useState<number | null>(null);
@@ -269,7 +275,7 @@ export function ActionList({
               </Tip>
             ))}
           </div>
-          {result && (
+          {SHOW_EVENTS_TOGGLE && result && (
             <label class="switch">
               <input
                 type="checkbox"

@@ -48,8 +48,8 @@ for (const locale of ["pt-BR", "en"] as const) {
     const word = locale === "pt-BR" ? "Treinar 1 Cidadão" : "Train 1 Citizen";
     await expect(page.locator("ol.actions-list")).toContainText(word);
     await expect(page.getByTestId("action-row").first()).toContainText("0:00");
-    const timeline = page.getByTestId("timeline");
-    await expect(timeline.getByTestId("timeline-row").first()).toBeVisible();
+    // side events (units ready…) are off: the action tracks show starts and ends
+    await expect(page.getByTestId("timeline").getByTestId("timeline-row")).toHaveCount(0);
     await page.getByTestId("warnings-toggle").click();
     await expect(page.getByTestId("warnings")).toBeVisible();
     await page.getByTestId("warnings-close").click();
@@ -698,8 +698,6 @@ test("train has a mode: fixed count or an auto queue for some time", async ({ pa
   await row.getByTestId("row-duration").fill("90");
   await row.getByTestId("row-duration").press("Tab");
   await expect(row).toContainText("Produção automática de Cidadãos por 1:30");
-  // the queue's end shows as an event
-  await expect(page.locator("ol.actions-list")).toContainText("Fim da produção automática");
   // the mode explanation is a bulleted list
   const help = row.locator(".action-details .tip.help").filter({ hasText: "Modo" });
   await help.hover();
@@ -875,31 +873,15 @@ test("on desktop only the timeline scrolls, not the page", async ({ page, isMobi
   expect(sizes.trackStarts).toBe(1);
 });
 
-test("events can be hidden, but automatic steps stay; the choice is remembered", async ({
+test("side events are off and their checkbox hidden; automatic steps still show", async ({
   page,
 }) => {
   await page.goto("/#/build/preset%3Akrush");
   await page.getByTestId("tab-actions").click();
   const timeline = page.getByTestId("timeline");
-  await expect(page.getByTestId("show-events")).toBeChecked();
-  await expect(timeline.getByTestId("timeline-row").first()).toBeVisible();
-  await page.getByTestId("show-events").uncheck();
+  await expect(page.getByTestId("show-events")).toHaveCount(0);
   await expect(timeline.getByTestId("timeline-row")).toHaveCount(0);
   await expect(timeline.getByTestId("auto-step").first()).toBeVisible();
-  await page.reload();
-  await page.getByTestId("tab-actions").click();
-  await expect(page.getByTestId("show-events")).not.toBeChecked();
-  await expect(timeline.getByTestId("timeline-row")).toHaveCount(0);
-});
-
-test("at the same second an event comes before the actions", async ({ page }) => {
-  await page.goto("/#/build/preset%3Akrush");
-  await page.getByTestId("tab-actions").click();
-  const rows = await page.locator("ol.actions-list > .tl-row").allTextContents();
-  const age = rows.findIndex((r) => r.includes("2:55") && r.includes("Clássica ✓"));
-  const firstAction = rows.findIndex((r) => r.includes("2:55") && r.includes("Treinar 1 Cidadão"));
-  expect(age).toBeGreaterThanOrEqual(0);
-  expect(firstAction).toBeGreaterThan(age);
 });
 
 test("hovering an event row highlights it like an action row", async ({ page, isMobile }) => {

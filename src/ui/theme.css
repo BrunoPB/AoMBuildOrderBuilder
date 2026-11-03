@@ -954,8 +954,12 @@ details.collapsible > summary::-webkit-details-marker {
   align-items: center;
   gap: 8px;
   border-radius: 8px;
-  padding: 8px;
+  padding: 6px 8px;
   border: 1px solid var(--border);
+}
+
+.matchup-col .portraits {
+  gap: 10px;
 }
 
 .matchup-col.good {

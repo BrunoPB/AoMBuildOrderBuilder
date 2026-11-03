@@ -431,10 +431,13 @@ export function Matchups({
   build,
   readonly,
   onChange,
+  size = 80,
 }: {
   build: Build;
   readonly: boolean;
   onChange: (m: Matchup[]) => void;
+  /** Portrait size of the rated gods (the unrated pool is smaller). */
+  size?: number;
 }) {
   const { t, data, locale } = useApp();
   const help = useHelp();
@@ -535,7 +538,7 @@ export function Matchups({
               <HelpText k={`result.${c.fit}`} />
             </h3>
             <div class="portraits">
-              {c.items.map((m) => portrait(m.god, 52))}
+              {c.items.map((m) => portrait(m.god, size))}
               {!readonly && c.items.length === 0 && (
                 <span class="drop-hint" aria-hidden="true">
                   <Svg name="plus" />
@@ -553,7 +556,7 @@ export function Matchups({
           data-testid="matchup-pool"
           {...target("none")}
         >
-          {unset.map((g) => portrait(g.id, 36))}
+          {unset.map((g) => portrait(g.id, Math.round(size * 0.55)))}
         </div>
       )}
     </div>

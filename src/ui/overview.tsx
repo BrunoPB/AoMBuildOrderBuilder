@@ -255,6 +255,9 @@ export function Overview({ id }: { id: string }) {
       {result && !full && (
         <div class="stack overview-simple">
           <AgeColumns build={build} result={result} steps={sim.steps} />
+          {(build.matchups?.length ?? 0) > 0 && (
+            <Matchups build={build} readonly size={64} onChange={() => undefined} />
+          )}
         </div>
       )}
 
