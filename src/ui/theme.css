@@ -3365,3 +3365,35 @@ textarea {
   padding: 1px 4px;
   font-size: 12px;
 }
+
+/* a step the simulation takes by itself but the player does by hand in the game */
+.auto-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex: none;
+  padding: 0 6px;
+  border: 1px dashed var(--kind, var(--border));
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 18px;
+  white-space: nowrap;
+  color: var(--kind, var(--muted));
+}
+
+.auto-tag .svg-icon {
+  width: 11px;
+  height: 11px;
+}
+
+.tl-list .event-row.auto-step {
+  border-left-style: solid;
+  border-left-color: var(--kind);
+  color: var(--text);
+}
+
+.tl-chip.auto-step,
+.order-auto {
+  border-left-style: dashed;
+}

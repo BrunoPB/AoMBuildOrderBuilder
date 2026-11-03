@@ -12,7 +12,7 @@ import { ActionRow } from "./action-row.tsx";
 import { ACTION_MIME, nextActionId, startState } from "./labels.ts";
 import { fixedTime, moveWithTime, placeByTime } from "./order.ts";
 import { LEVEL_ICON } from "./warning-card.tsx";
-import { EntityIconByIcon, focusAction } from "./result.tsx";
+import { AutoTag, EntityIconByIcon, focusAction } from "./result.tsx";
 import {
   ActionTrack,
   Axis,
@@ -51,7 +51,10 @@ function EventRow({ build, event, scale }: { build: Build; event: Event; scale: 
   const { item } = event;
   const kind = "notice" in item ? "notice" : item.kind;
   return (
-    <li class={`event-row tl-row kind-${kind}`} data-testid="timeline-row">
+    <li
+      class={`event-row tl-row kind-${kind} ${"auto" in item && item.auto ? "auto-step" : ""}`}
+      data-testid={"auto" in item && item.auto ? "auto-step" : "timeline-row"}
+    >
       <div class="tl-label">
         <span class="row-time num">{formatClock(event.seconds)}</span>
         {"notice" in item ? (
@@ -71,6 +74,7 @@ function EventRow({ build, event, scale }: { build: Build; event: Event; scale: 
               {item.text}
             </span>
             {item.to && <EntityIcon id={item.to} pantheon={build.pantheon} size={20} tip={false} />}
+            {item.auto && <AutoTag />}
           </span>
         )}
       </div>

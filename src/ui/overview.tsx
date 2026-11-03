@@ -12,7 +12,9 @@ import { ActionList } from "./editor/action-list.tsx";
 import { actionIcons, actionTarget, actionText } from "./editor/labels.ts";
 import { ProductionChart } from "./editor/production.tsx";
 import {
+  AutoTag,
   Charts,
+  EntityIconByIcon,
   focusAction,
   Matchups,
   Milestones,
@@ -55,6 +57,25 @@ function AgeColumns({ build, result, steps }: { build: Build; result: SimResult;
     };
   });
   for (const s of steps) {
+    s.actions.forEach((a, k) => {
+      if (!a.auto) return;
+      items.push({
+        t: s.seconds,
+        key: `s${s.seconds}-${k}`,
+        node: (
+          <li class={`order-row order-auto kind-${a.kind}`} data-testid="auto-step">
+            <span class="num order-time">{s.t}</span>
+            <span class="order-icons">
+              {a.icons.slice(0, 2).map((icon, j) => (
+                <EntityIconByIcon key={j} icon={icon} build={build} size={36} />
+              ))}
+            </span>
+            <span class="order-text">{a.text}</span>
+            <AutoTag />
+          </li>
+        ),
+      });
+    });
     if (!s.notice) continue;
     items.push({
       t: s.seconds,

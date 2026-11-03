@@ -22,6 +22,7 @@ Build order builder/simulator for Age of Mythology: Retold. Full requirements: t
 
 - Pure, deterministic, tick 1 s (works with 0.1 s). Per tick: completions → scheduled actions (build order order; `asap` = after the previous action started) → continuous rules → snapshot.
 - Costs are paid when an action starts; never negative; waiting produces `delay` warnings (`info` for `asap` actions: they have no planned time to miss). Missing requirements produce `error` warnings.
+- A food source that runs out sends its workers to the next one in the food chain on its own. It is an **automatic step** (`StepAction.auto`, tagged "manual in game") in the order, not a warning, since the player does it by hand; only running out with nothing next warns.
 - The build ends when every action is done (`buildEnd`); the `tail` after it is only context, so warnings there are dropped (errors kept).
 - `train` with `mode: "auto"` is the building's auto queue: it trains whenever the building is free and the stock pays, for its own `duration` (seconds from its start) or to the end of the build. There is no stop action.
 - Presets must simulate without `error` warnings. The Krush times (`tests/fixtures/krush.json`) come from one real match: a **reference**, never a source of truth. Never tune data or add engine knobs just to match them; compare with `npm run compare:krush`.

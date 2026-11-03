@@ -99,6 +99,10 @@ test("opens a preset in the overview and duplicates it to edit", async ({ page }
   await expect(page.getByTestId("overview")).toBeVisible();
   await expect(page.getByTestId("palette")).toHaveCount(0);
   await expect(page.getByTestId("order-list")).toContainText("Clássica");
+  // a food source running out is an automatic step, done by hand in the game
+  const auto = page.getByTestId("order-list").getByTestId("auto-step").first();
+  await expect(auto).toContainText("Caça esgotou");
+  await expect(auto.getByTestId("auto-tag")).toHaveText("manual no jogo");
   const header = page.getByTestId("build-header");
   await expect(header.getByTestId("open-edit")).toHaveCount(0);
   await header.getByTestId("build-menu").click();

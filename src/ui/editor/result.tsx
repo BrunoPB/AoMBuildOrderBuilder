@@ -31,16 +31,38 @@ export function focusAction(index: number | undefined, tries = 10): void {
   row.addEventListener("animationend", () => row.classList.remove("flash"), { once: true });
 }
 
+/** "Manual in game": a step the simulation takes by itself that the player does by hand. */
+export function AutoTag({ tip = true }: { tip?: boolean }) {
+  const { t } = useApp();
+  const help = useHelp();
+  const tag = (
+    <span class="auto-tag" data-testid="auto-tag">
+      <Svg name="user" />
+      {t("step.auto")}
+    </span>
+  );
+  return tip ? (
+    <Tip label={help("step.auto")} focusable>
+      {tag}
+    </Tip>
+  ) : (
+    tag
+  );
+}
+
 export function StepChips({ build, step, large }: { build: Build; step: Step; large?: boolean }) {
+  const help = useHelp();
   return (
     <div class="tl-actions">
       {step.actions.map((a, i) => (
         <button
           key={i}
           type="button"
-          class={`tl-chip kind-${a.kind}`}
+          class={`tl-chip kind-${a.kind} ${a.auto ? "auto-step" : ""}`}
           onClick={() => focusAction(a.action)}
-          title={a.byLabel ? `${a.text} (${a.byLabel})` : a.text}
+          title={[a.byLabel ? `${a.text} (${a.byLabel})` : a.text, a.auto ? help("step.auto") : ""]
+            .filter(Boolean)
+            .join("\n")}
         >
           {a.icons.map((icon, k) => (
             <EntityIconByIcon key={k} icon={icon} build={build} size={large ? 40 : 24} />
@@ -50,6 +72,7 @@ export function StepChips({ build, step, large }: { build: Build; step: Step; la
           {a.to && (
             <EntityIcon id={a.to} pantheon={build.pantheon} size={large ? 40 : 24} tip={false} />
           )}
+          {a.auto && <AutoTag tip={false} />}
         </button>
       ))}
       {step.notice && (
@@ -81,6 +104,7 @@ export function EntityIconByIcon({
     ...data.powers.values(),
     ...data.common.ages,
     ...data.resources,
+    ...data.sources.values(),
   ];
   const match = all.find((e) => e.icon === icon);
   return <EntityIcon id={match?.id ?? icon} pantheon={build.pantheon} size={size} tip={false} />;

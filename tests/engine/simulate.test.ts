@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { buildSteps } from "../../src/engine/format.ts";
 import { simulate } from "../../src/engine/simulate.ts";
 import type { Build } from "../../src/engine/build.ts";
 import { testBuild, testData } from "./fixture.ts";
@@ -49,13 +50,14 @@ describe("gathering", () => {
       ],
       { sourceAmounts: { hunt: 20 } },
     );
+    // an automatic step (done by hand in the game), not a warning
+    expect(r.warnings.some((w) => w.key.startsWith("warn.sourceDepleted"))).toBe(false);
     expect(
-      r.warnings.some(
-        (w) =>
-          w.key === "warn.sourceDepleted" && w.level === "attention" && w.params.source === "hunt",
+      r.events.some(
+        (e) =>
+          e.kind === "sourceDepleted" && e.next === "berries" && e.count === 2 && e.unit !== "",
       ),
     ).toBe(true);
-    expect(r.events.some((e) => e.kind === "sourceDepleted" && e.next === "berries")).toBe(true);
     expect(at(r, 20).resources.food).toBeCloseTo(240);
   });
 
@@ -75,7 +77,6 @@ describe("gathering", () => {
       ["hunt", "hunt"],
       ["hunt", "berries"],
     ]);
-    expect(r.warnings.some((w) => w.key === "warn.sourceDepletedAgain")).toBe(true);
     // the second hunt adds its 30 food before the berries start
     const second = depleted[1]!.t;
     expect(at(r, Math.ceil(second)).resources.food).toBeGreaterThanOrEqual(50);
@@ -101,6 +102,26 @@ describe("gathering", () => {
     expect(order).toEqual(["berries", "hunt", "farm"]);
   });
 
+  it("a depleted source becomes an automatic step in the order (manual in the game)", () => {
+    const build = testBuild(
+      [
+        { when: "0:00", do: "move", count: 2, from: "idle", to: "food" },
+        { when: "0:40", do: "event", note: "end" },
+      ],
+      {
+        foodChain: ["hunt", { source: "hunt", amount: 30 }, "berries"],
+        sourceAmounts: { hunt: 20 },
+      },
+    );
+    const steps = buildSteps(data, build, simulate(data, build), "en");
+    const auto = steps.flatMap((s) => s.actions.filter((a) => a.auto));
+    expect(auto.map((a) => a.kind)).toEqual(["move", "move"]);
+    expect(auto[0]!.text).toMatch(/next/);
+    expect(auto[1]!.text).toMatch(/→ berries/);
+    expect(auto.every((a) => a.action === undefined)).toBe(true);
+    expect(steps.some((s) => s.notice)).toBe(false);
+  });
+
   it("ignores what happens after the build ends (the tail is only context)", () => {
     const r = run(
       [
@@ -112,6 +133,19 @@ describe("gathering", () => {
     expect(r.buildEnd).toBe(5);
     expect(r.events.some((e) => e.kind === "sourceDepleted" && e.t > 5)).toBe(true);
     expect(r.warnings.filter((w) => w.t > r.buildEnd)).toEqual([]);
+    const steps = buildSteps(
+      data,
+      testBuild(
+        [
+          { when: "0:00", do: "move", count: 2, from: "idle", to: "food" },
+          { when: "0:05", do: "event", note: "end" },
+        ],
+        { sourceAmounts: { hunt: 20 }, tail: 30 },
+      ),
+      r,
+      "en",
+    );
+    expect(steps.some((s) => s.seconds > 5 && s.actions.some((a) => a.auto))).toBe(false);
   });
 });
 

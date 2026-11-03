@@ -1875,7 +1875,7 @@ class Simulation {
           this.patches[patch] = 0;
           const next = this.nextPatch(patch);
           for (const { w } of list) w.task = next ?? { kind: "idle" };
-          this.depleted(source, next?.kind === "gather" ? next.source : undefined);
+          this.depleted(source, next?.kind === "gather" ? next.source : undefined, list);
         } else {
           this.patches[patch] = left - total;
         }
@@ -1886,7 +1886,7 @@ class Simulation {
           this.remaining.set(source, 0);
           const next = this.nextSource(source);
           for (const { w } of list) w.task = next ? this.gatherTask(next) : { kind: "idle" };
-          this.depleted(source, next);
+          this.depleted(source, next, list);
         } else {
           this.remaining.set(source, left - total);
         }
@@ -1895,12 +1895,14 @@ class Simulation {
     }
   }
 
-  /** A source ran out: the player has to send its workers on (to `next`, maybe the same kind). */
-  depleted(source: SourceId, next: SourceId | undefined): void {
-    if (next === source) this.warn("attention", "warn.sourceDepletedAgain", { source });
-    else if (next) this.warn("attention", "warn.sourceDepleted", { source, next });
-    else this.warn("attention", "warn.sourceDepletedIdle", { source });
-    this.emit({ kind: "sourceDepleted", source, next, t: this.t });
+  /** A source ran out. The simulation sends its workers on to `next` (maybe the same kind) by
+   *  itself, an automatic step the player does by hand in the game; with no next they idle. */
+  depleted(source: SourceId, next: SourceId | undefined, list: { w: Worker }[]): void {
+    if (!next) this.warn("attention", "warn.sourceDepletedIdle", { source });
+    const units = new Map<string, number>();
+    for (const { w } of list) units.set(w.unit, (units.get(w.unit) ?? 0) + 1);
+    const unit = [...units].sort((a, b) => b[1] - a[1])[0]?.[0] ?? "";
+    this.emit({ kind: "sourceDepleted", source, next, count: list.length, unit, t: this.t });
   }
 
   /** Resource trickles; favor trickles also get favorRate modifiers scoped to their source. */

@@ -26,6 +26,8 @@ export type StepAction = {
   by?: string;
   byLabel?: string;
   action?: number;
+  /** Done by the simulation on its own (not in the build), but by hand in the game. */
+  auto?: boolean;
 };
 
 export type Step = {
@@ -249,7 +251,18 @@ function describe(c: Ctx, e: SimEvent): StepAction | null {
     case "note":
       return { ...base, kind: "event", icons: [], text: e.text };
     case "sourceDepleted":
-      return null;
+      if (!e.next) return null;
+      return {
+        kind: "move",
+        auto: true,
+        icons: [icon(c, e.source), icon(c, e.next)],
+        text: t(e.next === e.source ? "step.shiftAgain" : "step.shift", {
+          source: name(c, e.source),
+          count: e.count,
+          worker: name(c, e.unit, e.count),
+          next: name(c, e.next).toLocaleLowerCase(c.locale),
+        }),
+      };
   }
 }
 
@@ -276,6 +289,8 @@ export function buildSteps(
   const c: Ctx = { data, pantheon: build.pantheon, locale };
   const groups = new Map<number, SimEvent[]>();
   for (const e of result.events) {
+    /** After the build's end the food runs on only as context: no step to take. */
+    if (e.kind === "sourceDepleted" && e.t > result.buildEnd) continue;
     const second = Math.round(e.t);
     const list = groups.get(second) ?? [];
     list.push(e);
@@ -288,18 +303,9 @@ export function buildSteps(
     const notices = events
       .filter(
         (e): e is Extract<SimEvent, { kind: "sourceDepleted" }> =>
-          e.kind === "sourceDepleted" && e.t <= result.buildEnd,
+          e.kind === "sourceDepleted" && !e.next,
       )
-      .map((e) =>
-        e.next === e.source
-          ? translate(locale, "step.depletedAgain", { source: name(c, e.source) })
-          : e.next
-            ? translate(locale, "step.depleted", {
-                source: name(c, e.source),
-                next: name(c, e.next),
-              })
-            : translate(locale, "step.depletedIdle", { source: name(c, e.source) }),
-      );
+      .map((e) => translate(locale, "step.depletedIdle", { source: name(c, e.source) }));
     if (actions.length === 0 && notices.length === 0) continue;
     steps.push({
       t: formatClock(second),

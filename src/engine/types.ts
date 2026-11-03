@@ -58,7 +58,8 @@ export type SimEvent = { t: number; action?: number } & (
   | { kind: "lose"; units: Record<string, number> }
   | { kind: "gain"; cost: Cost }
   | { kind: "note"; text: string }
-  | { kind: "sourceDepleted"; source: SourceId; next?: SourceId }
+  /** `count` workers (mostly `unit`) were on it and go to `next` (or idle). */
+  | { kind: "sourceDepleted"; source: SourceId; next?: SourceId; count: number; unit: string }
 );
 export type EventKind = SimEvent["kind"];
 
