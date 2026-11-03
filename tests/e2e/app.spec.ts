@@ -314,6 +314,13 @@ test("a new build starts with its idle villagers sent to food; new actions go be
   await expect(rows).toHaveCount(3);
   await expect(rows.nth(1)).toContainText("Construir Mansão");
   await expect(rows.last()).toContainText("Pesquisar Clássica");
+  // who builds is always the player's pick (no "automatic"): a villager from wood by default
+  await rows.nth(1).locator(".label-text").click();
+  await expect(rows.nth(1).getByTestId("row-builder")).toHaveValue("from");
+  await expect(
+    rows.nth(1).getByTestId("row-builder").locator("option", { hasText: "Automático" }),
+  ).toHaveCount(0);
+  await expect(rows.nth(1)).toContainText("de madeira");
 });
 
 test("a warning explains the wait with the numbers behind it", async ({ page, isMobile }) => {

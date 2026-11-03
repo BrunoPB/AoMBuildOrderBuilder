@@ -532,17 +532,18 @@ export function ActionRow(props: Props) {
               <label class="field">
                 <HelpText k="row.builder" ctx={ctx} />
                 <select
-                  value={a.builder ? Object.keys(a.builder)[0] : "auto"}
+                  value={a.builder ? Object.keys(a.builder)[0] : ""}
+                  data-testid="row-builder"
                   onChange={(e) => {
                     const m = e.currentTarget.value;
-                    if (m === "auto") set({ builder: undefined });
-                    else if (m === "from") set({ builder: { from: "food" } });
+                    if (m === "from") set({ builder: { from: "food" } });
                     else if (m === "new") set({ builder: { new: trainSources.at(-1)?.id ?? "" } });
                     else if (m === "unit") set({ builder: { unit: soldiers[0]?.id ?? "" } });
                     else set({ builder: { same: buildSources.at(-1)?.id ?? "" } });
                   }}
                 >
-                  <option value="auto">{t("row.builderAuto")}</option>
+                  {/* the player picks who builds, as in the game; old builds may have none */}
+                  {!a.builder && <option value="" disabled />}
                   <option value="from">{t("row.builderFrom")}</option>
                   <option value="new" disabled={trainSources.length === 0}>
                     {t("row.builderNew")}

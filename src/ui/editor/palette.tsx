@@ -147,7 +147,13 @@ export function Palette({
       case "promote":
         return { when: "asap", do: "promote", unit: o.id };
       case "build":
-        return { when: "asap", do: "build", building: o.id };
+        /* who builds is the player's choice: idle villagers when there are, else one from wood */
+        return {
+          when: "asap",
+          do: "build",
+          building: o.id,
+          builder: { from: idle > 0 ? "idle" : "wood" },
+        };
       case "timeShift":
         return { when: "asap", do: "timeShift", building: o.id };
       case "empower":
