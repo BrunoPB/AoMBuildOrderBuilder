@@ -402,7 +402,7 @@
   "editor.startIdle.other": "{count} starting villagers are idle: use Move (from idle).",
   "warn.idleUntilEnd.one": "{count} villager stayed idle until the end",
   "warn.idleUntilEnd.other": "{count} villagers stayed idle until the end",
-  "help.production.zoom": "Time scale: the higher, the wider the bars.",
+  "help.production.zoom": "Zoom from the whole build on screen: 2× makes everything twice as wide (half the build fits on screen), 4× four times.",
   "palette.group.economy": "Economy",
   "palette.group.god": "God",
   "palette.group.other": "Other",

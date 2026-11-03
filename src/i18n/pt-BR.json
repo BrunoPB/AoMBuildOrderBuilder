@@ -402,7 +402,7 @@
   "editor.startIdle.other": "{count} aldeões iniciais estão ociosos: use Mover (de ocioso).",
   "warn.idleUntilEnd.one": "{count} aldeão ficou ocioso até o fim",
   "warn.idleUntilEnd.other": "{count} aldeões ficaram ociosos até o fim",
-  "help.production.zoom": "Escala do tempo: quanto maior, mais largas as barras.",
+  "help.production.zoom": "Zoom a partir da build inteira na tela: 2× deixa tudo duas vezes mais largo (metade da build cabe na tela), 4× quatro vezes.",
   "palette.group.economy": "Economia",
   "palette.group.god": "Do deus",
   "palette.group.other": "Outros",

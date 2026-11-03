@@ -37,9 +37,9 @@ export function ProductionChart({ build, result }: { build: Build; result: SimRe
   const end = viewEnd(build, result);
   const stop = buildStop(build, result);
   const fit = zoomPref === 0;
-  const zoom = fit
-    ? Math.max(0.2, ((boxWidth || 800) - FIT_LABEL - 28) / Math.max(end, 1))
-    : zoomPref;
+  /** 2× and 4×: twice and four times as wide as the whole build fitted to the screen. */
+  const fitZoom = Math.max(0.2, ((boxWidth || 800) - FIT_LABEL - 28) / Math.max(end, 1));
+  const zoom = fit ? fitZoom : fitZoom * zoomPref;
   const width = Math.floor(end * zoom) + 24;
   const name = (id: string, n = 1) => entityName(data, build.pantheon, id, locale, n);
   const ticks: number[] = [];

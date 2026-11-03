@@ -210,7 +210,9 @@ export function ActionList({
   /** Narrow screens put the track under the label instead of beside it. */
   const stacked = width < 600;
   const labelPx = stacked ? 0 : Math.min(380, Math.round(width * 0.4));
-  const trackPx = zoom ? Math.ceil(end * zoom) : Math.max(120, width - labelPx - 2);
+  /** 2× and 4×: twice and four times as wide as the whole build fitted to the screen. */
+  const fitPx = Math.max(120, width - labelPx - 2);
+  const trackPx = zoom ? Math.ceil(fitPx * zoom) : fitPx;
   const scale = makeScale(end, trackPx, buildStop(build, result));
   const minute = 60 * scale.pxPerSec;
 

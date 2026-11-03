@@ -862,8 +862,34 @@ test("the production chart fits the width by default", async ({ page, isMobile }
   await expect
     .poll(() => gantt.evaluate((g) => g.scrollWidth - g.clientWidth))
     .toBeLessThanOrEqual(0);
+  // 2× and 4× are relative to the whole build fitted to the screen
+  const track = page.locator(".gantt-track.gantt-axis");
+  const fitWidth = await track.evaluate((e) => e.getBoundingClientRect().width);
   await page.getByTestId("production-zoom-4").click();
   await expect.poll(() => gantt.evaluate((g) => g.scrollWidth - g.clientWidth)).toBeGreaterThan(0);
+  const wide = await track.evaluate((e) => e.getBoundingClientRect().width);
+  expect(wide / fitWidth).toBeGreaterThan(3.8);
+  expect(wide / fitWidth).toBeLessThan(4.2);
+});
+
+test("timeline zoom 2× is twice the whole build fitted to the screen", async ({
+  page,
+  isMobile,
+}) => {
+  test.skip(isMobile, "the timeline is stacked on a phone");
+  await page.setViewportSize({ width: 1400, height: 900 });
+  await page.goto("/#/build/preset%3Akrush");
+  await page.getByTestId("tab-actions").click();
+  await page.getByTestId("zoom-fit").click();
+  const axis = page.locator(".tl-axis-row .tl-track");
+  const fitWidth = await axis.evaluate((e) => e.getBoundingClientRect().width);
+  await page.getByTestId("zoom-2").click();
+  await expect
+    .poll(async () => (await axis.evaluate((e) => e.getBoundingClientRect().width)) / fitWidth)
+    .toBeGreaterThan(1.9);
+  expect((await axis.evaluate((e) => e.getBoundingClientRect().width)) / fitWidth).toBeLessThan(
+    2.1,
+  );
 });
 
 test("the editor turns an old auto queue end time into a duration", async ({ page }) => {
