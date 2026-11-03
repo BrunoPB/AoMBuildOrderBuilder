@@ -6,7 +6,7 @@ import type { ProductionSpan, SimResult } from "../../engine/types.ts";
 import { useApp, useViewPref } from "../context.tsx";
 import { EntityIcon, HelpText, Tip, useHelp } from "../icon.tsx";
 import { Svg } from "../svg.tsx";
-import { useWidth, viewEnd } from "./timeline.tsx";
+import { buildStop, useWidth, viewEnd } from "./timeline.tsx";
 
 /** Pixels per second; 0 fits the whole build in the available width. */
 const ZOOMS = [0, 2, 4] as const;
@@ -35,6 +35,7 @@ export function ProductionChart({ build, result }: { build: Build; result: SimRe
   };
   const { lanes, spans } = result.production;
   const end = viewEnd(build, result);
+  const stop = buildStop(build, result);
   const fit = zoomPref === 0;
   const zoom = fit
     ? Math.max(0.2, ((boxWidth || 800) - FIT_LABEL - 28) / Math.max(end, 1))
@@ -54,7 +55,7 @@ export function ProductionChart({ build, result }: { build: Build; result: SimRe
             ? t("production.shift")
             : name(s.id);
     const until = s.end === undefined ? t("production.running") : formatClock(s.end);
-    const dur = Math.round((s.end ?? end) - s.start);
+    const dur = Math.round((s.end ?? stop) - s.start);
     const lines = [what, `${formatClock(s.start)} → ${until} (${dur} s)`];
     if (s.held !== undefined) lines.push(t("production.held", { t: formatClock(s.held) }));
     return lines.join("\n");
@@ -111,7 +112,7 @@ export function ProductionChart({ build, result }: { build: Build; result: SimRe
         </div>
         {lanes.map((lane) => {
           /** What runs on after the build's end is cut there, like the rest of the views. */
-          const laneSpans = spans.filter((s) => s.lane === lane.uid && s.start < end);
+          const laneSpans = spans.filter((s) => s.lane === lane.uid && s.start < stop);
           return (
             <div class="gantt-row" key={lane.uid} data-testid="production-lane">
               <div class="gantt-label">
@@ -130,13 +131,13 @@ export function ProductionChart({ build, result }: { build: Build; result: SimRe
                   />
                 ))}
                 {laneSpans.map((s, i) => {
-                  const stop = Math.min(s.end ?? end, end);
-                  const w = Math.max(2, (stop - s.start) * zoom);
-                  const heldW = s.held !== undefined ? (stop - s.held) * zoom : 0;
+                  const until = Math.min(s.end ?? stop, stop);
+                  const w = Math.max(2, (until - s.start) * zoom);
+                  const heldW = s.held !== undefined ? Math.max(0, until - s.held) * zoom : 0;
                   return (
                     <span
                       key={i}
-                      class={`gantt-bar ${KIND_CLASS[s.kind]} ${s.end === undefined || s.end > end ? "open" : ""}`}
+                      class={`gantt-bar ${KIND_CLASS[s.kind]} ${s.end === undefined || s.end > stop ? "open" : ""}`}
                       style={{ left: `${s.start * zoom}px`, width: `${w}px` }}
                       tabIndex={0}
                       role="img"

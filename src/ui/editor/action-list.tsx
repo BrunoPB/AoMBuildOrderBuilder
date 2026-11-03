@@ -19,6 +19,7 @@ import {
   BuildingLanes,
   EconomyStrip,
   makeScale,
+  buildStop,
   type Scale,
   useFloatTip,
   useWidth,
@@ -210,7 +211,7 @@ export function ActionList({
   const stacked = width < 600;
   const labelPx = stacked ? 0 : Math.min(380, Math.round(width * 0.4));
   const trackPx = zoom ? Math.ceil(end * zoom) : Math.max(120, width - labelPx - 2);
-  const scale = makeScale(end, trackPx);
+  const scale = makeScale(end, trackPx, buildStop(build, result));
   const minute = 60 * scale.pxPerSec;
 
   /** Vertical line through every row at the mouse position, with its time on the axis.

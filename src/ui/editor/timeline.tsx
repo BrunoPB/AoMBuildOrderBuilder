@@ -10,13 +10,15 @@ import { fixedTime } from "./order.ts";
 import { EntityIcon } from "../icon.tsx";
 import { Svg } from "../svg.tsx";
 
-/** Seconds → position on the track, as a percentage of the timeline length. */
-export type Scale = { end: number; pct: (t: number) => string; pxPerSec: number };
+/** Seconds → position on the track, as a percentage of the timeline length. `stop`: the build's
+ *  end (before the margin), where whatever is still running is cut. */
+export type Scale = { end: number; stop: number; pct: (t: number) => string; pxPerSec: number };
 
-export function makeScale(end: number, trackPx: number): Scale {
+export function makeScale(end: number, trackPx: number, stop = end): Scale {
   const len = Math.max(end, 1);
   return {
     end: len,
+    stop: Math.min(stop, len),
     pct: (t: number) => `${(Math.min(Math.max(t, 0), len) / len) * 100}%`,
     pxPerSec: trackPx / len,
   };
@@ -32,10 +34,10 @@ export function actionTimes(build: Build, result?: SimResult): (number | undefin
   return build.actions.map((a, i) => result?.actions[i]?.startedAt ?? fixedTime(a.when));
 }
 
-/** How long the timeline is, the same in every view: up to the build's end (when its last action
- *  and job are done) plus a margin. With an action that never happens the simulation runs on to
- *  its safety limit, so then it is up to the last thing the build does. */
-export function viewEnd(build: Build, result?: SimResult) {
+/** The build's end, the same in every view: when its last action and job are done. Auto queues
+ *  without a duration, and anything still running, stop there. With an action that never happens
+ *  the simulation runs on to its safety limit, so then it is the last thing the build does. */
+export function buildStop(build: Build, result?: SimResult): number {
   const times = actionTimes(build, result);
   const settled =
     result !== undefined &&
@@ -49,7 +51,12 @@ export function viewEnd(build: Build, result?: SimResult) {
           ...(result?.production.spans.map((s) => s.end ?? s.start) ?? []),
         ]),
   ].reduce<number>((m, t) => (t !== undefined && t > m ? t : m), 0);
-  return Math.max(MIN_VIEW, Math.ceil(content) + VIEW_MARGIN);
+  return content;
+}
+
+/** How long the timeline is: the build's end plus a margin, so its last mark is not on the edge. */
+export function viewEnd(build: Build, result?: SimResult): number {
+  return Math.max(MIN_VIEW, Math.ceil(buildStop(build, result)) + VIEW_MARGIN);
 }
 
 /** Tick step (s) so labels stay readable at the current width. */
@@ -301,13 +308,13 @@ function SpanBar({
   const { t, data, locale } = useApp();
   const name = (id: string) => entityName(data, build.pantheon, id, locale);
   /** What runs on after the build's end is cut there. */
-  if (s.start >= scale.end) return null;
-  const stop = Math.min(s.end ?? scale.end, scale.end);
+  if (s.start >= scale.stop) return null;
+  const stop = Math.min(s.end ?? scale.stop, scale.stop);
   const px = (stop - s.start) * scale.pxPerSec;
-  const label = spanLabel(s, name, t, scale.end) + hint;
+  const label = spanLabel(s, name, t, scale.stop) + hint;
   return (
     <span
-      class={`gantt-bar tl-bar ${SPAN_KIND[s.kind]} ${s.end === undefined || s.end > scale.end ? "open" : ""} ${compact ? "compact" : ""} ${"onPointerDown" in handle ? "movable" : ""}`}
+      class={`gantt-bar tl-bar ${SPAN_KIND[s.kind]} ${s.end === undefined || s.end > scale.stop ? "open" : ""} ${compact ? "compact" : ""} ${"onPointerDown" in handle ? "movable" : ""}`}
       /* a bar starting right at the end stays inside the track (8 px: its padding and border) */
       style={{
         left: `min(${scale.pct(s.start)}, calc(100% - 8px))`,
@@ -336,7 +343,7 @@ function SpanBar({
       {s.held !== undefined && (
         <span
           class="gantt-held"
-          style={{ width: `${((stop - s.held) / Math.max(stop - s.start, 1)) * 100}%` }}
+          style={{ width: `${(Math.max(0, stop - s.held) / Math.max(stop - s.start, 1)) * 100}%` }}
         />
       )}
     </span>
@@ -425,7 +432,7 @@ export function ActionTrack({
         : action.until
           ? parseClock(action.until)
           : undefined;
-  const ruleEnd = Math.min(until ?? scale.end, scale.end);
+  const ruleEnd = Math.min(until ?? scale.stop, scale.stop);
 
   const handle = readonly
     ? {}

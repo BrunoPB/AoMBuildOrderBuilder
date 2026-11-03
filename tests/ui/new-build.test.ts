@@ -4,7 +4,7 @@ import { readRawData } from "../../src/data/raw-node.ts";
 import type { Action } from "../../src/engine/build.ts";
 import type { SimResult } from "../../src/engine/types.ts";
 import { addIndex } from "../../src/ui/editor/labels.ts";
-import { viewEnd } from "../../src/ui/editor/timeline.tsx";
+import { buildStop, viewEnd } from "../../src/ui/editor/timeline.tsx";
 import { simulate } from "../../src/engine/simulate.ts";
 import { PRESETS } from "../../src/presets/index.ts";
 import { newBuild, onlyStartActions } from "../../src/ui/sim.ts";
@@ -65,5 +65,7 @@ describe("timeline length", () => {
     const krush = PRESETS.find((b) => b.id === "preset:krush")!;
     const r = simulate(data, krush);
     expect(viewEnd(krush, r)).toBe(Math.ceil(r.buildEnd) + 10);
+    // auto queues without a duration and running jobs stop at the build's end, not the margin
+    expect(buildStop(krush, r)).toBe(r.buildEnd);
   });
 });
