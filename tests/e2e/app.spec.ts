@@ -706,6 +706,23 @@ test("on desktop only the timeline scrolls, not the page", async ({ page, isMobi
   expect(sizes.trackStarts).toBe(1);
 });
 
+test("events can be hidden, but automatic steps stay; the choice is remembered", async ({
+  page,
+}) => {
+  await page.goto("/#/build/preset%3Akrush");
+  await page.getByTestId("tab-actions").click();
+  const timeline = page.getByTestId("timeline");
+  await expect(page.getByTestId("show-events")).toBeChecked();
+  await expect(timeline.getByTestId("timeline-row").first()).toBeVisible();
+  await page.getByTestId("show-events").uncheck();
+  await expect(timeline.getByTestId("timeline-row")).toHaveCount(0);
+  await expect(timeline.getByTestId("auto-step").first()).toBeVisible();
+  await page.reload();
+  await page.getByTestId("tab-actions").click();
+  await expect(page.getByTestId("show-events")).not.toBeChecked();
+  await expect(timeline.getByTestId("timeline-row")).toHaveCount(0);
+});
+
 test("at the same second an event comes before the actions", async ({ page }) => {
   await page.goto("/#/build/preset%3Akrush");
   await page.getByTestId("tab-actions").click();

@@ -472,5 +472,7 @@
   "step.shift": "{source} depleted: {count} {worker} → {next}",
   "step.shiftAgain": "{source} depleted: {count} {worker} → next {source}",
   "step.auto": "manual in game",
-  "help.step.auto": "Automatic step: the simulator does this by itself when the source runs out, so it is not in the action list.\n• **In the game** villagers do not move by themselves: select them and send them.\n• The simulation assumes you did it right away."
+  "help.step.auto": "Automatic step: the simulator does this by itself when the source runs out, so it is not in the action list.\n• **In the game** villagers do not move by themselves: select them and send them.\n• The simulation assumes you did it right away.",
+  "editor.events": "Events",
+  "help.editor.events": "Shows between the actions what happens on its own: units ready, buildings done, ages reached.\n• Automatic steps (✋, e.g. hunt depleted) always show: in the game you have to do them."
 }

@@ -155,6 +155,8 @@ export function ActionList({
 }) {
   const { t } = useApp();
   const help = useHelp();
+  /** Off: only automatic steps stay between the actions (the player still has to do them). */
+  const [events, setEvents] = useViewPref<boolean>("actions.events", true);
   const [lanesOpen, setLanesOpen] = useViewPref<boolean>("actions.lanes", false);
   const [zoom, setZoom] = useViewPref<number>("actions.zoom", 0, ZOOMS);
   const [dragFrom, setDragFrom] = useState<number | null>(null);
@@ -223,6 +225,7 @@ export function ActionList({
   const placed = new Map<number, Event[]>();
   if (result) {
     for (const e of sideEvents(steps)) {
+      if (!events && !("auto" in e.item && e.item.auto)) continue;
       const own = "action" in e.item ? e.item.action : undefined;
       let at = -1;
       result.actions.forEach((o, i) => {
@@ -258,6 +261,17 @@ export function ActionList({
               </Tip>
             ))}
           </div>
+          {result && (
+            <label class="switch">
+              <input
+                type="checkbox"
+                checked={events}
+                data-testid="show-events"
+                onChange={(e) => setEvents(e.currentTarget.checked)}
+              />
+              <HelpText k="editor.events" />
+            </label>
+          )}
         </div>
       </div>
       <div
