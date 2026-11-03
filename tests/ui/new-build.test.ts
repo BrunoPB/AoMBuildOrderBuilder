@@ -46,12 +46,12 @@ describe("timeline length", () => {
       endTime: settled ? 397 : 900,
     }) as unknown as SimResult;
   it("ends with the build: its last action or job done", () => {
-    expect(viewEnd(build(2), result([0, 349], true))).toBe(377);
+    expect(viewEnd(build(2), result([0, 349], true))).toBe(367);
   });
   it("with an action that never happens, up to the last thing the build does", () => {
     const r = result([0, 600], false);
     r.actions.push({ index: 2, status: "pending", waited: 0 });
-    expect(viewEnd(build(3), r)).toBe(610);
+    expect(viewEnd(build(3), r)).toBe(600);
   });
   it("a build with almost nothing in it still shows a minute", () => {
     expect(viewEnd(build(0))).toBe(60);
@@ -59,13 +59,13 @@ describe("timeline length", () => {
   it("a job still running when the simulation stops counts from its start", () => {
     const r = result([5], false, true);
     r.actions.push({ index: 1, status: "pending", waited: 0 });
-    expect(viewEnd(build(2), r)).toBe(110);
+    expect(viewEnd(build(2), r)).toBe(100);
   });
   it("the Krush preset ends where its build ends", () => {
     const krush = PRESETS.find((b) => b.id === "preset:krush")!;
     const r = simulate(data, krush);
-    expect(viewEnd(krush, r)).toBe(Math.ceil(r.buildEnd) + 10);
-    // auto queues without a duration and running jobs stop at the build's end, not the margin
+    expect(viewEnd(krush, r)).toBe(Math.ceil(r.buildEnd));
+    // auto queues without a duration and running jobs stop at the build's end
     expect(buildStop(krush, r)).toBe(r.buildEnd);
   });
 });

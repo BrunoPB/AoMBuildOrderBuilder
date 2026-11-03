@@ -11,7 +11,7 @@ import { EntityIcon } from "../icon.tsx";
 import { Svg } from "../svg.tsx";
 
 /** Seconds → position on the track, as a percentage of the timeline length. `stop`: the build's
- *  end (before the margin), where whatever is still running is cut. */
+ *  end, where whatever is still running is cut (the timeline is rounded up to a whole second). */
 export type Scale = { end: number; stop: number; pct: (t: number) => string; pxPerSec: number };
 
 export function makeScale(end: number, trackPx: number, stop = end): Scale {
@@ -26,8 +26,6 @@ export function makeScale(end: number, trackPx: number, stop = end): Scale {
 
 /** Shortest timeline shown (s), for a build with almost nothing in it yet. */
 const MIN_VIEW = 60;
-/** Room after the build's last moment (s), so its last mark is not on the edge. */
-const VIEW_MARGIN = 10;
 
 /** When each action starts: its simulated start, or its asked time when it has not started. */
 export function actionTimes(build: Build, result?: SimResult): (number | undefined)[] {
@@ -54,9 +52,10 @@ export function buildStop(build: Build, result?: SimResult): number {
   return content;
 }
 
-/** How long the timeline is: the build's end plus a margin, so its last mark is not on the edge. */
+/** How long the timeline is: up to the build's end, with nothing after it (an empty stretch at the
+ *  end looks like something missing). */
 export function viewEnd(build: Build, result?: SimResult): number {
-  return Math.max(MIN_VIEW, Math.ceil(buildStop(build, result)) + VIEW_MARGIN);
+  return Math.max(MIN_VIEW, Math.ceil(buildStop(build, result)));
 }
 
 /** Tick step (s) so labels stay readable at the current width. */
