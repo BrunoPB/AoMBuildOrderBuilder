@@ -583,6 +583,30 @@ test("an action set to start after another goes to its place in the list", async
   await expect(rows.last()).toContainText("Desconstrução");
 });
 
+test("an 'after' action follows its anchor in the list when the anchor moves", async ({ page }) => {
+  await page.goto("/#/view/preset%3Akrush");
+  await page.getByTestId("build-header").getByTestId("build-menu").click();
+  await page.getByTestId("duplicate").click();
+  await page.getByTestId("tab-actions").click();
+  const rows = page.getByTestId("action-row");
+  const order = async () => (await rows.locator(".label-text").allTextContents()).join(" | ");
+  const power = rows.filter({ hasText: "Desconstrução" });
+  await power.locator(".label-text").click();
+  await power.getByTestId("when-mode").selectOption("after");
+  await power.getByTestId("when-after").selectOption("cl@start");
+  await power.locator(".label-text").first().click();
+  const classical = rows.filter({ hasText: "Pesquisar Clássica" });
+  await classical.locator(".label-text").click();
+  await classical.getByTestId("when-time").fill("2:20");
+  await classical.getByTestId("when-time").press("Tab");
+  await expect
+    .poll(async () => {
+      const list = await order();
+      return list.indexOf("Desconstrução") > list.indexOf("Construir Mansão (de madeira)");
+    })
+    .toBe(true);
+});
+
 test("a god power has a note on how to use it, shown with the action", async ({ page }) => {
   await page.goto("/#/view/preset%3Akrush");
   await page.getByTestId("build-header").getByTestId("build-menu").click();

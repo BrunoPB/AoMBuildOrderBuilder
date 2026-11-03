@@ -71,3 +71,20 @@ export function moveWithTime(actions: Action[], times: Times, from: number, to: 
   if (t !== own) out[to] = { ...moved, when: formatClock(t) } as Action;
   return out;
 }
+
+/** An "after" action whose simulated start drifted out of the list's time order (its anchor moved),
+ *  put back in place; null when every one is in order. One move per call: the next simulation
+ *  tells where the others stand. */
+export function placeDrifted(
+  actions: Action[],
+  outcomes: readonly ({ startedAt?: number } | undefined)[],
+): Action[] | null {
+  const times = actions.map((a, k) => outcomes[k]?.startedAt ?? fixedTime(a.when));
+  for (let i = 0; i < actions.length; i++) {
+    const own = outcomes[i]?.startedAt;
+    if (typeof actions[i]!.when !== "object" || own === undefined) continue;
+    const placed = placeByTime(actions, times, i, own);
+    if (placed.index !== i) return placed.actions;
+  }
+  return null;
+}

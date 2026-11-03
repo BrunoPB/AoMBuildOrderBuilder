@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "preact/hooks";
 import { type PantheonId, SOURCE_IDS, type SourceId } from "../../data/schema.ts";
 import { type Action, BUILD_TYPES, type Build, type Settings } from "../../engine/build.ts";
 import { parseClock } from "../../engine/time.ts";
+import { placeDrifted } from "./order.ts";
 import { text } from "../../i18n/index.ts";
 import { navigate } from "../app.tsx";
 import { useApp, useViewPref } from "../context.tsx";
@@ -393,6 +394,18 @@ export function Editor({ id }: { id: string }) {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
+  /** "After" actions follow their anchor in time; when it moves they move in the list too. Capped,
+   *  in case a move keeps shifting the times (reset by every edit of the player). */
+  const drifts = useRef(0);
+  useEffect(() => {
+    const result = sim.result;
+    if (readonly || !result || !build || drifts.current >= 50) return;
+    const actions = placeDrifted(build.actions, result.actions);
+    if (!actions) return;
+    drifts.current++;
+    api.saveBuild({ ...build, actions });
+  }, [sim.result]);
+
   /** Version 4 builds ended auto queues at a time; now they run for a duration from their start. */
   useEffect(() => {
     const result = sim.result;
@@ -421,6 +434,7 @@ export function Editor({ id }: { id: string }) {
 
   const update = (next: Build, tag?: string) => {
     if (readonly) return;
+    drifts.current = 0;
     history.record(build, tag);
     api.saveBuild({ ...next, updatedAt: new Date().toISOString() });
   };

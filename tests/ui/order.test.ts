@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { Action } from "../../src/engine/build.ts";
-import { moveWithTime, placeByTime, plannedTime } from "../../src/ui/editor/order.ts";
+import { moveWithTime, placeByTime, placeDrifted, plannedTime } from "../../src/ui/editor/order.ts";
 
 const at = (id: string, when: string): Action => ({ id, when, do: "event", note: "" });
 const ids = (list: Action[]) => list.map((a) => a.id);
@@ -54,5 +54,18 @@ describe("action order by time", () => {
     expect(plannedTime(after(), list, outcomes)).toBe(40);
     expect(plannedTime(after("start", 5), list, outcomes)).toBe(15);
     expect(plannedTime({ ...at("b", "0:00"), when: "asap" }, list, outcomes)).toBeUndefined();
+  });
+
+  it("an 'after' action whose time drifted goes back in order; others stay", () => {
+    const drifted: Action[] = [
+      at("a", "0:10"),
+      { ...at("p", "0:00"), when: { after: "a", delay: 50 } },
+      at("c", "0:40"),
+      at("d", "1:30"),
+    ];
+    const outcomes = [{ startedAt: 10 }, { startedAt: 60 }, { startedAt: 40 }, { startedAt: 90 }];
+    expect(ids(placeDrifted(drifted, outcomes)!)).toEqual(["a", "c", "p", "d"]);
+    const ordered = [drifted[0]!, drifted[2]!, drifted[1]!, drifted[3]!];
+    expect(placeDrifted(ordered, [outcomes[0], outcomes[2], outcomes[1], outcomes[3]])).toBeNull();
   });
 });
