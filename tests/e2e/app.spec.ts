@@ -202,6 +202,7 @@ test("match mode clock runs, shifts and resets", async ({ page }) => {
   await expect(clock).toHaveText("0:06", { timeout: 3000 });
   await page.getByTestId("match-toggle").click();
   await expect(page.getByTestId("match-current")).toContainText("0:00");
+  await expect(page.getByTestId("match-previous")).toHaveCount(0);
   const next = (await page
     .getByTestId("match-next")
     .locator(".step-time")
@@ -211,6 +212,8 @@ test("match mode clock runs, shifts and resets", async ({ page }) => {
   for (let k = 0; k < Math.ceil((m * 60 + sec - 5) / 5); k++)
     await page.getByTestId("match-plus").click();
   await expect(page.getByTestId("match-current")).toContainText(next);
+  // the step just gone by stays on screen, dimmed
+  await expect(page.getByTestId("match-previous")).toContainText("0:00");
   await page.getByTestId("match-reset").click();
   await expect(clock).toHaveText("0:00");
 });

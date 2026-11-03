@@ -477,5 +477,7 @@
   "help.editor.events": "Mostra entre as ações o que acontece sozinho: unidades prontas, prédios concluídos, Eras alcançadas.\n• Os passos automáticos (✋, ex.: caça esgotou) aparecem sempre: no jogo você precisa fazê-los.",
   "row.powerNote": "Como usar",
   "help.row.powerNote": "Uma observação de como usar o poder, mostrada junto da ação na build e no Modo partida.\n• Ex.: em qual unidade, prédio ou lugar.",
-  "row.powerNoteExample": "ex.: num cidadão coletando ouro"
+  "row.powerNoteExample": "ex.: num cidadão coletando ouro",
+  "match.previous": "Anterior",
+  "help.match.previous": "O passo que acabou de passar: se você está um pouco atrasado, ele ainda está aqui."
 }

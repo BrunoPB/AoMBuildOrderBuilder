@@ -1089,6 +1089,19 @@ details.collapsible > summary::-webkit-details-marker {
   background: var(--surface);
 }
 
+.match-step.past {
+  padding: 8px 14px;
+  opacity: 0.6;
+}
+
+.match-step.past .match-step-head {
+  margin-bottom: 4px;
+}
+
+.match-step.past .tl-chip {
+  font-size: 15px;
+}
+
 .match-step.now {
   padding: 16px;
   border: 3px solid var(--accent);

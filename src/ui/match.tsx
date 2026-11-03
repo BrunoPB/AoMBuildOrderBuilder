@@ -104,6 +104,8 @@ export function MatchMode({ id }: { id: string }) {
   const now = Math.floor(elapsed);
   const currentIndex = steps.reduce((acc, s, i) => (s.seconds <= now ? i : acc), -1);
   const current = currentIndex >= 0 ? steps[currentIndex] : undefined;
+  /** The step before, dimmed: a player running a little late still sees what was due. */
+  const previous = currentIndex >= 1 ? steps[currentIndex - 1] : undefined;
   const upcoming = steps.slice(currentIndex + 1, currentIndex + 4);
   const next = upcoming[0];
 
@@ -216,6 +218,17 @@ export function MatchMode({ id }: { id: string }) {
       </div>
       <div class="match-body">
         <div class="match-steps">
+          {previous && (
+            <section class="match-step past" data-testid="match-previous">
+              <div class="row match-step-head">
+                <span class="match-step-label">
+                  <HelpText k="match.previous" />
+                </span>
+                <span class="step-time num">{previous.t}</span>
+              </div>
+              <StepChips build={build} step={previous} />
+            </section>
+          )}
           <section class="match-step now" data-testid="match-current">
             <div class="row match-step-head">
               <span class="match-step-label">
