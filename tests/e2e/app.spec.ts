@@ -550,6 +550,23 @@ test("a new fixed time moves the action to its place in the list", async ({ page
   await expect(rows.last()).toContainText("Treinar 1 Cidadão");
 });
 
+test("a new time is placed by when the other actions really start", async ({ page }) => {
+  // Heroic is asked at 7:40 but starts at 8:53 (waiting for food): 8:00 still comes before it
+  await page.goto("/#/view/preset%3Akrush");
+  await page.getByTestId("build-header").getByTestId("build-menu").click();
+  await page.getByTestId("duplicate").click();
+  await page.getByTestId("tab-actions").click();
+  const rows = page.getByTestId("action-row");
+  const villager = rows.filter({ hasText: "1 Cidadão de comida → ouro" });
+  await villager.locator(".label-text").click();
+  await villager.getByTestId("when-time").fill("8:00");
+  await villager.getByTestId("when-time").press("Tab");
+  await expect(rows.last()).toContainText("Pesquisar Heroica");
+  await villager.getByTestId("when-time").fill("9:30");
+  await villager.getByTestId("when-time").press("Tab");
+  await expect(rows.last()).toContainText("1 Cidadão de comida → ouro");
+});
+
 test("train has a mode: fixed count or an auto queue for some time", async ({ page }) => {
   await createBuildWithActions(page);
   await expect(page.getByTestId("kind-stopTrain")).toHaveCount(0);

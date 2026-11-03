@@ -164,7 +164,8 @@ export function ActionList({
   const [tip, tipNode] = useFloatTip();
   const [boxRef, boxWidth] = useWidth<HTMLDivElement>();
   const setActions = (actions: Action[]) => update({ ...build, actions });
-  const times = build.actions.map((a, i) => fixedTime(a.when) ?? result?.actions[i]?.startedAt);
+  /** When each action really starts (what its row shows); its asked time before simulating. */
+  const times = build.actions.map((a, i) => result?.actions[i]?.startedAt ?? fixedTime(a.when));
   const move = (from: number, to: number) => {
     if (to < 0 || to >= build.actions.length || from === to) return;
     setActions(moveWithTime(build.actions, times, from, to));
