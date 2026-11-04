@@ -13,7 +13,14 @@ import {
   type SourceId,
   type Unit,
 } from "../data/schema.ts";
-import { type Action, type Build, chainSource, type TaskTarget, type TrainMode } from "./build.ts";
+import {
+  type Action,
+  type Build,
+  chainSource,
+  type TaskTarget,
+  type TrainMode,
+  type When,
+} from "./build.ts";
 import { applyCostModifiers, applyModifiers, type ModContext } from "./modifiers.ts";
 import { parseClock } from "./time.ts";
 import type {
@@ -638,12 +645,6 @@ class Simulation {
   eligible(i: number): boolean {
     const a = this.build.actions[i]!;
     const w = a.when;
-    if (w === "always") return true;
-    if (w === "asap") {
-      if (i === 0) return true;
-      const prev = this.states[i - 1]!;
-      return prev.startedAt !== undefined || prev.status === "done";
-    }
     if (typeof w === "string") return this.t + EPS >= parseClock(w);
     const target = this.idIndex.get(w.after);
     if (target === undefined) {
@@ -704,7 +705,7 @@ class Simulation {
         this.warnings.push({
           t: round(this.t),
           // asap has no planned time to miss: it starts when it can, so the wait is not a delay
-          level: this.build.actions[i]!.when === "asap" ? "info" : "delay",
+          level: isAsap(this.build.actions[i]!.when) ? "info" : "delay",
           key: st.reason.key,
           params: { ...(first ?? st).reason!.params, waited },
           action: i,
@@ -2017,11 +2018,7 @@ class Simulation {
   run(): SimResult {
     const tick = this.s.tick;
     const fixed = this.build.actions
-      .map((a) =>
-        typeof a.when === "string" && a.when !== "asap" && a.when !== "always"
-          ? parseClock(a.when)
-          : 0,
-      )
+      .map((a) => (typeof a.when === "string" ? parseClock(a.when) : 0))
       .reduce((m, v) => Math.max(m, v), 0);
     const hardCap = Math.min(fixed + 900, 3600);
     let settledAt: number | undefined;
@@ -2114,6 +2111,10 @@ class Simulation {
       buildEnd: round(buildEnd),
     };
   }
+}
+
+function isAsap(w: When): boolean {
+  return typeof w === "object" && w.asap === true;
 }
 
 export function simulate(data: GameData, build: Build): SimResult {

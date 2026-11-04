@@ -1,15 +1,69 @@
 import type { Action, When } from "../../engine/build.ts";
 import { formatClock, parseClock } from "../../engine/time.ts";
 
-/** Seconds of a fixed-time action ("m:ss"); undefined for asap, always and "after". */
+/** Seconds of a fixed-time action ("m:ss"); undefined for one that waits on another action. */
 export function fixedTime(w: When): number | undefined {
-  return typeof w === "string" && w !== "asap" && w !== "always" ? parseClock(w) : undefined;
+  return typeof w === "string" ? parseClock(w) : undefined;
+}
+
+/** What the palette gives a new action: "as soon as possible", from the start of the action that
+ *  will be right before it (set by insertAction, once its place is known). */
+export const ASAP_PREVIOUS: When = { after: "", on: "start", asap: true };
+
+/** "As soon as possible" for an action placed at `at`: from when the action before it starts;
+ *  with nothing before it, at 0:00. */
+export function asapAfter(actions: readonly Action[], at: number): When {
+  const prev = actions[at - 1];
+  return prev?.id ? { after: prev.id, on: "start", asap: true } : "0:00";
+}
+
+/** Removes the actions `drop` picks. One that waited on a removed action waits on what that one
+ *  waited on, or, when it had a fixed time, on the action before it (from its start), or on that
+ *  time when there is none. */
+export function removeActions(
+  actions: readonly Action[],
+  drop: (a: Action, i: number) => boolean,
+): Action[] {
+  const removed = new Map<string, When>();
+  actions.forEach((a, i) => {
+    if (!drop(a, i) || !a.id) return;
+    const prev = actions.slice(0, i).findLast((x, k) => x.id && !drop(x, k));
+    removed.set(
+      a.id,
+      typeof a.when === "object"
+        ? { after: a.when.after, ...(a.when.on ? { on: a.when.on } : {}) }
+        : prev
+          ? { after: prev.id!, on: "start" }
+          : a.when,
+    );
+  });
+  const resolve = (w: When, seen = new Set<string>()): When => {
+    if (typeof w !== "object" || !removed.has(w.after) || seen.has(w.after)) return w;
+    seen.add(w.after);
+    const to = removed.get(w.after)!;
+    if (typeof to === "string") return formatClock(parseClock(to) + (w.delay ?? 0));
+    return resolve(
+      {
+        after: to.after,
+        ...(to.on ? { on: to.on } : {}),
+        ...(w.delay ? { delay: w.delay } : {}),
+        ...(w.asap ? { asap: true as const } : {}),
+      },
+      seen,
+    );
+  };
+  return actions
+    .filter((a, i) => !drop(a, i))
+    .map((a) => {
+      const when = resolve(a.when);
+      return when === a.when ? a : ({ ...a, when } as Action);
+    });
 }
 
 type Times = readonly (number | undefined)[];
 
-/** When an action is planned to start: its fixed time, or for "after" the other action's
- *  start/end (as simulated) plus the delay; undefined for asap, always or not known yet. */
+/** When an action is planned to start: its fixed time, or the other action's start/end (as
+ *  simulated) plus the delay (for asap, the earliest it can start); undefined when not known yet. */
 export function plannedTime(
   a: Action,
   actions: readonly Action[],

@@ -186,9 +186,10 @@ describe("payment", () => {
   });
 
   it("an asap action that waits for resources starts when it can, without a delay", () => {
+    // asap from the end of the move (an instant action: its end is its start)
     const r = run([
-      { when: "0:00", do: "move", count: 2, from: "idle", to: "food" },
-      { id: "cl", when: "asap", do: "age", to: "classical", minor: "minor-a" },
+      { id: "mv", when: "0:00", do: "move", count: 2, from: "idle", to: "food" },
+      { id: "cl", when: { after: "mv", asap: true }, do: "age", to: "classical", minor: "minor-a" },
     ]);
     expect(r.ageTimes.classical?.clicked).toBe(50);
     const wait = r.warnings.find((w) => w.key === "warn.noResource");
@@ -279,8 +280,8 @@ describe("modifiers", () => {
 
   it("flags low-confidence data", () => {
     const r = run([
-      { when: "0:00", do: "build", building: "barracks", builder: { from: "idle" } },
-      { when: "asap", do: "train", unit: "soldier" },
+      { id: "b", when: "0:00", do: "build", building: "barracks", builder: { from: "idle" } },
+      { when: { after: "b", on: "start", asap: true }, do: "train", unit: "soldier" },
     ]);
     expect(r.warnings.some((w) => w.key === "warn.lowConfidenceData" && w.action === 1)).toBe(true);
   });
@@ -312,7 +313,7 @@ describe("age ups, powers and promotions", () => {
       { id: "m", when: "0:00", do: "build", building: "manor", builder: { from: "idle" } },
       { id: "b", when: { after: "m" }, do: "build", building: "barracks", builder: { same: "m" } },
       { id: "ts", when: { after: "b" }, do: "timeShift", building: "barracks" },
-      { when: "asap", do: "train", unit: "soldier" },
+      { when: { after: "ts", on: "start", asap: true }, do: "train", unit: "soldier" },
     ]);
     expect(r.actions[2]!.completedAt).toBe(30);
     expect(r.actions[3]!.completedAt).toBe(50);
@@ -387,8 +388,13 @@ describe("errors and determinism", () => {
   it("is deterministic and works with a 0.1 s tick", () => {
     const actions: Build["actions"] = [
       { when: "0:00", do: "move", count: 2, from: "idle", to: "food" },
-      { when: "0:00", do: "train", unit: "citizen", count: 2 },
-      { when: "asap", do: "age", to: "classical", minor: "minor-a" },
+      { id: "tr", when: "0:00", do: "train", unit: "citizen", count: 2 },
+      {
+        when: { after: "tr", on: "start", asap: true },
+        do: "age",
+        to: "classical",
+        minor: "minor-a",
+      },
     ];
     expect(run(actions)).toEqual(run(actions));
     const fine = run(actions, { tick: 0.1 });

@@ -9,8 +9,8 @@ import { useApp, useViewPref } from "../context.tsx";
 import { EntityIcon, HelpText, Tip, useHelp } from "../icon.tsx";
 import { KIND_ICON, Svg } from "../svg.tsx";
 import { ActionRow } from "./action-row.tsx";
-import { ACTION_MIME, nextActionId, startState } from "./labels.ts";
-import { moveWithTime, placeByTime, plannedTime } from "./order.ts";
+import { ACTION_MIME, insertAction, nextActionId, startState } from "./labels.ts";
+import { moveWithTime, placeByTime, plannedTime, removeActions } from "./order.ts";
 import { LEVEL_ICON } from "./warning-card.tsx";
 import { AutoTag, EntityIconByIcon, focusAction } from "./result.tsx";
 import {
@@ -184,9 +184,7 @@ export function ActionList({
     setActions(moveWithTime(build.actions, times, from, to));
   };
   const insert = (at: number, added: Action) => {
-    const actions = [...build.actions];
-    actions.splice(at, 0, { ...added, id: nextActionId(build) });
-    setActions(actions);
+    setActions(insertAction(build, at, added));
     requestAnimationFrame(() => focusAction(at));
   };
   /** Replaces action i, keeping the list in time order when its time changed (a fixed time, or
@@ -391,7 +389,7 @@ export function ActionList({
                     const removed = build.actions[i];
                     update({
                       ...build,
-                      actions: build.actions.filter((_, k) => k !== i),
+                      actions: removeActions(build.actions, (_, k) => k === i),
                       milestones: (build.milestones ?? []).filter(
                         (m) => m.atAction !== removed?.id,
                       ),

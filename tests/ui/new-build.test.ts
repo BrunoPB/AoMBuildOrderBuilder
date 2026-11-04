@@ -24,8 +24,8 @@ describe("a new build", () => {
 describe("where a palette action goes", () => {
   const a = (id: string, age = false): Action =>
     age
-      ? { id, when: "asap", do: "age", to: "classical", minor: "zeus" }
-      : { id, when: "asap", do: "event", note: "" };
+      ? { id, when: "0:00", do: "age", to: "classical", minor: "zeus" }
+      : { id, when: "0:00", do: "event", note: "" };
   it("before the age ups at the end of the list", () => {
     expect(addIndex([a("m"), a("c", true), a("h", true)])).toBe(1);
   });
@@ -36,7 +36,7 @@ describe("where a palette action goes", () => {
 });
 
 describe("timeline length", () => {
-  const event: Action = { when: "asap", do: "event", note: "" };
+  const event: Action = { when: "0:00", do: "event", note: "" };
   const build = (n: number) => ({ ...newBuild(data, "x"), actions: Array<Action>(n).fill(event) });
   const result = (times: number[], settled: boolean, open = false) =>
     ({

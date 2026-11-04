@@ -6,6 +6,7 @@ import { useApp, useViewPref } from "../context.tsx";
 import { EntityIcon, Tip, HelpText, useHelp, useLabel } from "../icon.tsx";
 import { KIND_ICON, Svg } from "../svg.tsx";
 import { ACTION_MIME, ageRank, chosenMinors, PALETTE_GROUPS } from "./labels.ts";
+import { ASAP_PREVIOUS } from "./order.ts";
 
 type Option = { id: string; age?: Age; detail?: string };
 
@@ -143,29 +144,34 @@ export function Palette({
   const actionFor = (o: Option): Action | undefined => {
     switch (current) {
       case "train":
-        return { when: "asap", do: "train", unit: o.id, count: 1 };
+        return { when: ASAP_PREVIOUS, do: "train", unit: o.id, count: 1 };
       case "promote":
-        return { when: "asap", do: "promote", unit: o.id };
+        return { when: ASAP_PREVIOUS, do: "promote", unit: o.id };
       case "build":
         /* who builds is the player's choice: idle villagers when there are, else one from wood */
         return {
-          when: "asap",
+          when: ASAP_PREVIOUS,
           do: "build",
           building: o.id,
           builder: { from: idle > 0 ? "idle" : "wood" },
         };
       case "timeShift":
-        return { when: "asap", do: "timeShift", building: o.id };
+        return { when: ASAP_PREVIOUS, do: "timeShift", building: o.id };
       case "empower":
-        return { when: "asap", do: "empower", by: empowerSources[0]!.unit, building: o.id };
+        return { when: ASAP_PREVIOUS, do: "empower", by: empowerSources[0]!.unit, building: o.id };
       case "summon":
-        return { when: "asap", do: "summon", unit: o.id, count: 1, hunt: true };
+        return { when: ASAP_PREVIOUS, do: "summon", unit: o.id, count: 1, hunt: true };
       case "research":
-        return { when: "asap", do: "research", research: o.id };
+        return { when: ASAP_PREVIOUS, do: "research", research: o.id };
       case "power":
-        return { when: "asap", do: "power", power: o.id };
+        return { when: ASAP_PREVIOUS, do: "power", power: o.id };
       case "age":
-        return { when: "asap", do: "age", to: o.age as Exclude<Age, "archaic">, minor: o.id };
+        return {
+          when: ASAP_PREVIOUS,
+          do: "age",
+          to: o.age as Exclude<Age, "archaic">,
+          minor: o.id,
+        };
     }
     return undefined;
   };
@@ -174,9 +180,9 @@ export function Palette({
   const immediate = (k: ActionKind): Action | undefined => {
     if (k === "move")
       return idle > 0
-        ? { when: "asap", do: "move", count: idle, from: "idle", to: "food" }
-        : { when: "asap", do: "move", count: 1, from: "food", to: "wood" };
-    if (k === "event") return { when: "asap", do: "event", note: "" };
+        ? { when: ASAP_PREVIOUS, do: "move", count: idle, from: "idle", to: "food" }
+        : { when: ASAP_PREVIOUS, do: "move", count: 1, from: "food", to: "wood" };
+    if (k === "event") return { when: ASAP_PREVIOUS, do: "event", note: "" };
     return undefined;
   };
 

@@ -1,6 +1,6 @@
 {
   "format": "aomr-bob",
-  "version": 6,
+  "version": 7,
   "id": "reference:krush",
   "name": "Krush",
   "author": "Bruno",
@@ -201,8 +201,8 @@
       "do": "train",
       "unit": "promethean",
       "mode": "auto",
-      "at": "temple",
-      "duration": 200
+      "duration": 200,
+      "at": "temple"
     },
     {
       "id": "o1",
@@ -253,8 +253,8 @@
       "do": "train",
       "unit": "turma",
       "mode": "auto",
-      "at": "counter-barracks",
-      "duration": 151
+      "duration": 151,
+      "at": "counter-barracks"
     },
     {
       "id": "r1",

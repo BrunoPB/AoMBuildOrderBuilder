@@ -20,7 +20,8 @@ Build order builder/simulator for Age of Mythology: Retold. Full requirements: t
 
 ## Simulator (src/engine)
 
-- Pure, deterministic, tick 1 s (works with 0.1 s). Per tick: completions → scheduled actions (build order order; `asap` = after the previous action started) → continuous rules → snapshot.
+- Pure, deterministic, tick 1 s (works with 0.1 s). Per tick: completions → scheduled actions (build order order) → continuous rules → snapshot.
+- `when`: a fixed time, or another action's start/end: `after` starts right then (+ delay), `asap` as soon as it can from then. New actions are `asap` from the start of the action before them; removing an action re-anchors the ones that waited on it.
 - Costs are paid when an action starts; never negative; waiting produces `delay` warnings (`info` for `asap` actions: they have no planned time to miss). Missing requirements produce `error` warnings.
 - A food source that runs out sends its workers to the next one in the food chain on its own. It is an **automatic step** (`StepAction.auto`, tagged "manual in game") in the order, not a warning, since the player does it by hand; only running out with nothing next warns.
 - The build ends when every action is done (`buildEnd`); the `tail` after it is only context, so warnings there are dropped (errors kept).

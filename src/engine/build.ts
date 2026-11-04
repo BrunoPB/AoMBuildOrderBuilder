@@ -11,7 +11,7 @@ import {
 import { isClock } from "./time.ts";
 
 export const BUILD_FORMAT = "aomr-bob";
-export const BUILD_VERSION = 6;
+export const BUILD_VERSION = 7;
 
 export const BUILD_TYPES = ["rush", "eco", "timing", "water", "other"] as const;
 export const BuildTypeSchema = z.enum(BUILD_TYPES);
@@ -21,15 +21,18 @@ export type BuildType = z.infer<typeof BuildTypeSchema>;
 export const TaskTargetSchema = z.union([ResourceIdSchema, SourceIdSchema, z.literal("idle")]);
 export type TaskTarget = z.infer<typeof TaskTargetSchema>;
 
+/** A fixed time, or a moment of another action: when it ends (default) or, with `on: "start"`,
+ *  when it starts.
+ *  - "after" (no `asap`): starts right at that moment plus `delay`; waiting is a delay.
+ *  - `asap`: starts as soon as it can from that moment (resources, a free building); waiting is
+ *    expected, not a delay. */
 export const WhenSchema = z.union([
-  z.literal("asap"),
-  z.literal("always"),
   z.string().refine(isClock, "expected m:ss"),
-  /** After another action finishes (default) or, with `on: "start"`, after it starts. */
   z.strictObject({
     after: z.string(),
     on: z.literal("start").optional(),
     delay: z.number().nonnegative().optional(),
+    asap: z.literal(true).optional(),
   }),
 ]);
 export type When = z.infer<typeof WhenSchema>;

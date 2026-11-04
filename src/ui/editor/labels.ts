@@ -3,6 +3,7 @@ import type { GameData } from "../../data/load.ts";
 import { AGES, type Age, type Locale, type PantheonId, SOURCE_IDS } from "../../data/schema.ts";
 import type { Action, ActionKind, Build, TaskTarget } from "../../engine/build.ts";
 import { formatClock } from "../../engine/time.ts";
+import { asapAfter } from "./order.ts";
 import { translate } from "../../i18n/index.ts";
 import { KIND_ICON } from "../svg.tsx";
 
@@ -214,6 +215,17 @@ export function nextActionId(build: Build): string {
   let i = build.actions.length + 1;
   while (used.has(`a${i}`)) i++;
   return `a${i}`;
+}
+
+/** The actions with `added` put at `at`, with a new id; one that comes from the palette starts as
+ *  soon as possible from the start of the action now before it. */
+export function insertAction(build: Build, at: number, added: Action): Action[] {
+  const actions = withIds(build.actions) ?? [...build.actions];
+  const id = nextActionId({ ...build, actions });
+  const when =
+    typeof added.when === "object" && added.when.after === "" ? asapAfter(actions, at) : added.when;
+  actions.splice(at, 0, { ...added, id, when } as Action);
+  return actions;
 }
 
 /** Every action with an id, so each row keeps its own state (open details, the field being typed

@@ -1,6 +1,6 @@
 {
   "format": "aomr-bob",
-  "version": 6,
+  "version": 7,
   "id": "preset:krush",
   "name": "Krush",
   "author": "Bruno",
@@ -208,7 +208,11 @@
     },
     {
       "id": "a27",
-      "when": "asap",
+      "when": {
+        "after": "a39",
+        "on": "start",
+        "asap": true
+      },
       "do": "train",
       "unit": "promethean",
       "count": 1,
@@ -216,7 +220,11 @@
     },
     {
       "id": "a26",
-      "when": "asap",
+      "when": {
+        "after": "a27",
+        "on": "start",
+        "asap": true
+      },
       "do": "build",
       "building": "military-barracks",
       "builder": {
@@ -235,26 +243,42 @@
     },
     {
       "id": "a24",
-      "when": "asap",
+      "when": {
+        "after": "auto",
+        "on": "start",
+        "asap": true
+      },
       "do": "timeShift",
       "building": "military-barracks"
     },
     {
       "id": "a25",
-      "when": "asap",
+      "when": {
+        "after": "a24",
+        "on": "start",
+        "asap": true
+      },
       "do": "train",
       "unit": "murmillo",
       "count": 1
     },
     {
       "id": "o2",
-      "when": "asap",
+      "when": {
+        "after": "a25",
+        "on": "start",
+        "asap": true
+      },
       "do": "promote",
       "unit": "oracle"
     },
     {
       "id": "a30",
-      "when": "asap",
+      "when": {
+        "after": "o2",
+        "on": "start",
+        "asap": true
+      },
       "do": "train",
       "unit": "promethean",
       "count": 1,
@@ -272,14 +296,22 @@
     },
     {
       "id": "a28",
-      "when": "asap",
+      "when": {
+        "after": "m2",
+        "on": "start",
+        "asap": true
+      },
       "do": "train",
       "unit": "murmillo",
       "count": 1
     },
     {
       "id": "a29",
-      "when": "asap",
+      "when": {
+        "after": "a28",
+        "on": "start",
+        "asap": true
+      },
       "do": "train",
       "unit": "murmillo",
       "count": 1
@@ -317,7 +349,11 @@
     },
     {
       "id": "h1",
-      "when": "asap",
+      "when": {
+        "after": "m3",
+        "on": "start",
+        "asap": true
+      },
       "do": "age",
       "to": "heroic",
       "minor": "rheia"
@@ -346,7 +382,11 @@
     },
     {
       "id": "a34",
-      "when": "asap",
+      "when": {
+        "after": "a36",
+        "on": "start",
+        "asap": true
+      },
       "do": "build",
       "building": "economic-guild",
       "builder": {
@@ -356,20 +396,32 @@
     },
     {
       "id": "a37",
-      "when": "asap",
+      "when": {
+        "after": "a34",
+        "on": "start",
+        "asap": true
+      },
       "do": "research",
       "research": "theft-of-fire"
     },
     {
       "id": "a32",
-      "when": "asap",
+      "when": {
+        "after": "a37",
+        "on": "start",
+        "asap": true
+      },
       "do": "train",
       "unit": "promethean",
       "count": 2
     },
     {
       "id": "a33",
-      "when": "asap",
+      "when": {
+        "after": "a32",
+        "on": "start",
+        "asap": true
+      },
       "do": "train",
       "unit": "murmillo",
       "count": 2

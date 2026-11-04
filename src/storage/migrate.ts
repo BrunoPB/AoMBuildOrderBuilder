@@ -40,7 +40,30 @@ const migrations: Record<number, (b: Record<string, unknown>) => Record<string, 
     const { popReservedAt: _pop, ...settings } = (b.settings ?? {}) as Record<string, unknown>;
     return b.settings === undefined ? b : { ...b, settings };
   },
+  /** "As soon as possible" waited on the previous action in the list; now it names the action it
+   *  waits on: that same one, from its start. "Always" is gone: it starts at 0:00. */
+  6: (b) => ({
+    ...b,
+    actions: Array.isArray(b.actions) ? asapV7(b.actions as Record<string, unknown>[]) : b.actions,
+  }),
 };
+
+function asapV7(list: Record<string, unknown>[]): Record<string, unknown>[] {
+  const used = new Set(list.map((a) => a.id).filter((id) => typeof id === "string" && id));
+  let n = 1;
+  const actions = list.map((a) => {
+    if (typeof a.id === "string" && a.id) return a;
+    while (used.has(`a${n}`)) n++;
+    used.add(`a${n}`);
+    return { ...a, id: `a${n}` };
+  });
+  return actions.map((a, i) => {
+    if (a.when === "always") return { ...a, when: "0:00" };
+    if (a.when !== "asap") return a;
+    const prev = actions[i - 1];
+    return { ...a, when: prev ? { after: prev.id, on: "start", asap: true } : "0:00" };
+  });
+}
 
 const clock = (v: unknown) =>
   typeof v === "string" && /^\d+:\d\d$/.test(v)

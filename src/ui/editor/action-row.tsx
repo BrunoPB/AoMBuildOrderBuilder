@@ -50,17 +50,12 @@ type Props = {
   };
 };
 
-const MODE_ICON = { time: "pin", after: "link", always: "repeat", asap: "" } as const;
-const MODE_LABEL = {
-  time: "row.atTime",
-  after: "row.after",
-  always: "row.always",
-  asap: "row.asap",
-} as const;
+const MODE_ICON = { time: "pin", after: "link", asap: "" } as const;
+const MODE_LABEL = { time: "row.atTime", after: "row.after", asap: "row.asap" } as const;
 
-function whenMode(w: When): "time" | "asap" | "after" | "always" {
-  if (w === "asap" || w === "always") return w;
-  return typeof w === "string" ? "time" : "after";
+function whenMode(w: When): "time" | "asap" | "after" {
+  if (typeof w === "string") return "time";
+  return w.asap ? "asap" : "after";
 }
 
 function TargetSelect({
@@ -160,11 +155,30 @@ export function ActionRow(props: Props) {
   const name = (id: string) =>
     text(locale, p?.units.get(id)?.name ?? p?.buildings.get(id)?.name ?? { en: id, "pt-BR": id });
 
+  /** Actions to wait on from their start: those that last (the start of an instant one is its end),
+   *  plus the one already picked. */
+  const startAnchors = others.filter(
+    (x) =>
+      hasDuration(x) ||
+      (typeof a.when === "object" && a.when.on === "start" && a.when.after === x.id),
+  );
+  /** "After" and "as soon as possible" both wait on another action: switching keeps which one
+   *  (by default the action before this one, from its start; or the first other one). */
   const setWhen = (m: string) => {
-    if (m === "asap" || m === "always") return set({ when: m });
     if (m === "time") return set({ when: formatClock(outcome?.startedAt ?? 0) });
-    const prev = others.filter((x) => build.actions.indexOf(x) < index).at(-1) ?? others[0];
-    if (prev?.id) set({ when: { after: prev.id } });
+    const w = a.when;
+    const prev = others.filter((x) => build.actions.indexOf(x) < index).at(-1);
+    const anchor =
+      typeof w === "object"
+        ? { after: w.after, ...(w.on ? { on: w.on } : {}) }
+        : prev?.id
+          ? { after: prev.id, on: "start" as const }
+          : others[0]?.id
+            ? { after: others[0].id }
+            : undefined;
+    if (!anchor) return;
+    const delay = typeof w === "object" && w.delay ? { delay: w.delay } : {};
+    set({ when: m === "asap" ? { ...anchor, asap: true } : { ...anchor, ...delay } });
   };
 
   const times = [
@@ -292,11 +306,12 @@ export function ActionRow(props: Props) {
                   onChange={(e) => setWhen(e.currentTarget.value)}
                 >
                   <option value="time">{t("row.atTime")}</option>
-                  <option value="asap">{t("row.asap")}</option>
+                  <option value="asap" disabled={others.length === 0}>
+                    {t("row.asap")}
+                  </option>
                   <option value="after" disabled={others.length === 0}>
                     {t("row.after")}
                   </option>
-                  <option value="always">{t("row.always")}</option>
                 </select>
               </Tip>
               {mode === "time" && (
@@ -315,21 +330,22 @@ export function ActionRow(props: Props) {
                   }}
                 />
               )}
-              {mode === "after" && typeof a.when === "object" && (
+              {typeof a.when === "object" && (
                 <>
                   <select
                     value={a.when.on === "start" ? `${a.when.after}@start` : a.when.after}
                     disabled={readonly}
-                    aria-label={t("row.after")}
+                    aria-label={t(MODE_LABEL[mode])}
                     data-testid="when-after"
                     onChange={(e) => {
                       const [after, on] = e.currentTarget.value.split("@");
-                      const { delay } = a.when as { delay?: number };
+                      const { delay, asap } = a.when as { delay?: number; asap?: true };
                       set({
                         when: {
                           after: after!,
                           ...(on === "start" ? { on: "start" as const } : {}),
                           ...(delay ? { delay } : {}),
+                          ...(asap ? { asap } : {}),
                         },
                       });
                     }}
@@ -341,9 +357,9 @@ export function ActionRow(props: Props) {
                         </option>
                       ))}
                     </optgroup>
-                    {others.some(hasDuration) && (
+                    {startAnchors.length > 0 && (
                       <optgroup label={t("row.afterStart")}>
-                        {others.filter(hasDuration).map((x) => (
+                        {startAnchors.map((x) => (
                           <option key={x.id} value={`${x.id}@start`}>
                             {build.actions.indexOf(x) + 1}. {actionText(c, x)}
                           </option>
@@ -351,21 +367,23 @@ export function ActionRow(props: Props) {
                       </optgroup>
                     )}
                   </select>
-                  <LiveNumber
-                    class="small"
-                    min={0}
-                    aria-label={t("row.delay")}
-                    data-testid="when-delay"
-                    disabled={readonly}
-                    value={a.when.delay ?? 0}
-                    onValue={(raw) => {
-                      const delay = Number(raw);
-                      const { after, on } = a.when as { after: string; on?: "start" };
-                      set({
-                        when: { after, ...(on ? { on } : {}), ...(delay > 0 ? { delay } : {}) },
-                      });
-                    }}
-                  />
+                  {mode === "after" && (
+                    <LiveNumber
+                      class="small"
+                      min={0}
+                      aria-label={t("row.delay")}
+                      data-testid="when-delay"
+                      disabled={readonly}
+                      value={a.when.delay ?? 0}
+                      onValue={(raw) => {
+                        const delay = Number(raw);
+                        const { after, on } = a.when as { after: string; on?: "start" };
+                        set({
+                          when: { after, ...(on ? { on } : {}), ...(delay > 0 ? { delay } : {}) },
+                        });
+                      }}
+                    />
+                  )}
                 </>
               )}
               <span class="action-times num">{times}</span>

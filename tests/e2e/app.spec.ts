@@ -644,12 +644,38 @@ test("a new fixed time moves the action to its place in the list", async ({ page
   const rows = page.getByTestId("action-row");
   const first = rows.first();
   await expect(first).toContainText("Treinar 1 Cidadão");
+  // the manor waits on the citizen (as soon as possible from its start), the move on the manor
   await first.locator(".label-text").click();
   await first.getByTestId("when-mode").selectOption("time");
   await first.getByTestId("when-time").fill("1:00");
   await first.getByTestId("when-time").press("Tab");
-  await expect(rows.first()).not.toContainText("Treinar 1 Cidadão");
-  await expect(rows.last()).toContainText("Treinar 1 Cidadão");
+  // so they follow it to 1:00, and it stays first
+  await expect(rows.first()).toContainText("Treinar 1 Cidadão");
+  await expect(rows.nth(1).locator(".row-time")).toContainText("1:00");
+  await rows.first().locator(".label-text").click();
+  const move = rows.last();
+  await move.locator(".label-text").click();
+  await move.getByTestId("when-mode").selectOption("time");
+  await move.getByTestId("when-time").fill("0:10");
+  await move.getByTestId("when-time").press("Tab");
+  await expect(rows.first().locator(".row-time")).toContainText("0:10");
+});
+
+test("'as soon as possible' and 'after' both name the action they wait on", async ({ page }) => {
+  await createBuildWithActions(page);
+  const manor = page.getByTestId("action-row").nth(1);
+  await manor.locator(".label-text").click();
+  const mode = manor.getByTestId("when-mode");
+  // no "always"; a new action is as soon as possible from the start of the one before it
+  await expect(mode.locator("option")).toHaveCount(3);
+  await expect(mode).toHaveValue("asap");
+  await expect(manor.getByTestId("when-after")).toHaveValue(/@start$/);
+  await expect(manor.getByTestId("when-after").locator("option:checked")).toContainText("Cidadão");
+  await expect(manor.getByTestId("when-delay")).toHaveCount(0);
+  // "after" keeps the action it waits on and adds a delay
+  await mode.selectOption("after");
+  await expect(manor.getByTestId("when-after").locator("option:checked")).toContainText("Cidadão");
+  await expect(manor.getByTestId("when-delay")).toBeVisible();
 });
 
 test("a new time is placed by when the other actions really start", async ({ page }) => {

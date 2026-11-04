@@ -99,7 +99,7 @@ describe("storage", () => {
   });
 
   it("validates versions on load", () => {
-    expect(migrateBuild({ ...krush, version: 7 })).toMatchObject({ ok: false, newer: 7 });
+    expect(migrateBuild({ ...krush, version: 8 })).toMatchObject({ ok: false, newer: 8 });
     expect(migrateBuild({ ...krush, version: 0 }).ok).toBe(false);
   });
 
@@ -117,9 +117,19 @@ describe("storage", () => {
     };
     const r = migrateBuild(v1);
     expect(r.ok && r.build.actions).toEqual([
-      { when: "0:00", do: "train", mode: "auto", unit: "citizen", rally: "food", duration: 300 },
       {
-        when: "always",
+        id: "a1",
+        when: "0:00",
+        do: "train",
+        mode: "auto",
+        unit: "citizen",
+        rally: "food",
+        duration: 300,
+      },
+      {
+        id: "a2",
+        // "always" is gone: from the start
+        when: "0:00",
         do: "train",
         mode: "auto",
         unit: "turma",
@@ -151,7 +161,12 @@ describe("storage", () => {
       { id: "b", when: "0:00", do: "train", mode: "auto", unit: "citizen", duration: 240 },
       // a stop without a fixed time cannot become a time: the queue runs to the end
       { id: "c", when: "0:00", do: "train", mode: "auto", unit: "oracle" },
-      { id: "x", when: "asap", do: "event", note: "after the stop" },
+      {
+        id: "x",
+        when: { after: "c", on: "start", asap: true },
+        do: "event",
+        note: "after the stop",
+      },
     ]);
     expect(r.ok && r.build.milestones).toEqual([]);
   });
@@ -168,9 +183,16 @@ describe("storage", () => {
     };
     const r = migrateBuild(v4);
     expect(r.ok && r.build.actions).toEqual([
-      { when: "1:00", do: "train", mode: "auto", unit: "citizen", duration: 150 },
+      { id: "a1", when: "1:00", do: "train", mode: "auto", unit: "citizen", duration: 150 },
       // the start is only known after simulating: the editor converts it
-      { when: "asap", do: "train", mode: "auto", unit: "turma", until: "5:00" },
+      {
+        id: "a2",
+        when: { after: "a1", on: "start", asap: true },
+        do: "train",
+        mode: "auto",
+        unit: "turma",
+        until: "5:00",
+      },
     ]);
   });
 
@@ -185,7 +207,28 @@ describe("storage", () => {
     const r = migrateBuild(v2);
     expect(r.ok && r.build.settings).toEqual({ efficiency: 0.9 });
     expect(r.ok && r.build.actions).toEqual([
-      { when: "always", do: "train", mode: "auto", unit: "turma" },
+      { id: "a1", when: "0:00", do: "train", mode: "auto", unit: "turma" },
+    ]);
+  });
+
+  it("'as soon as possible' names the action it waits on: the one before it, from its start", () => {
+    const v6 = {
+      ...krush,
+      version: 6,
+      actions: [
+        { when: "asap", do: "event", note: "first" },
+        { id: "b", when: "0:30", do: "event", note: "" },
+        { when: "asap", do: "event", note: "" },
+        { when: "always", do: "event", note: "" },
+      ],
+      milestones: [],
+    };
+    const r = migrateBuild(v6);
+    expect(r.ok && r.build.actions.map((a) => [a.id, a.when])).toEqual([
+      ["a1", "0:00"],
+      ["b", "0:30"],
+      ["a2", { after: "b", on: "start", asap: true }],
+      ["a3", "0:00"],
     ]);
   });
 

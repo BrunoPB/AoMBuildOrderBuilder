@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "preact/hooks";
 import { type PantheonId, SOURCE_IDS, type SourceId } from "../../data/schema.ts";
 import { type Action, BUILD_TYPES, type Build, type Settings } from "../../engine/build.ts";
 import { parseClock } from "../../engine/time.ts";
-import { placeDrifted } from "./order.ts";
+import { ASAP_PREVIOUS, placeDrifted, removeActions } from "./order.ts";
 import { text } from "../../i18n/index.ts";
 import { navigate } from "../app.tsx";
 import { useApp, useViewPref } from "../context.tsx";
@@ -15,7 +15,7 @@ import { FoodChain } from "./food-chain.tsx";
 import { ProductionChart } from "./production.tsx";
 import { BuildActions } from "../build-actions.tsx";
 import { useHistory } from "./history.ts";
-import { addIndex, nextActionId, withIds } from "./labels.ts";
+import { addIndex, insertAction, withIds } from "./labels.ts";
 import { Palette } from "./palette.tsx";
 import {
   Charts,
@@ -172,10 +172,12 @@ function GodPicker({
     } else {
       onChange({
         ...build,
-        actions: [
-          ...build.actions,
-          { id: nextActionId(build), when: "asap", do: "age", to: age, minor },
-        ],
+        actions: insertAction(build, build.actions.length, {
+          when: ASAP_PREVIOUS,
+          do: "age",
+          to: age,
+          minor,
+        }),
       });
     }
   };
@@ -195,7 +197,9 @@ function GodPicker({
     const ids = new Set(drop.map((a) => a.id).filter(Boolean));
     onChange({
       ...build,
-      actions: build.actions.filter((a) => !drop.includes(a as Extract<Action, { do: "age" }>)),
+      actions: removeActions(build.actions, (a) =>
+        drop.includes(a as Extract<Action, { do: "age" }>),
+      ),
       milestones: (build.milestones ?? []).filter((m) => !ids.has(m.atAction)),
     });
   };
@@ -579,9 +583,7 @@ export function Editor({ id }: { id: string }) {
                   idle={result?.series.find((x) => x.t >= 5)?.alloc.idle ?? 0}
                   onAdd={(a) => {
                     const at = addIndex(build.actions);
-                    const actions = [...build.actions];
-                    actions.splice(at, 0, { ...a, id: nextActionId(build) });
-                    update({ ...build, actions });
+                    update({ ...build, actions: insertAction(build, at, a) });
                     requestAnimationFrame(() => focusAction(at));
                   }}
                 />
