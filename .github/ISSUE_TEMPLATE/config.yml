@@ -1,1 +1,5 @@
 blank_issues_enabled: false
+contact_links:
+  - name: Dúvidas e conversas / Questions and discussions
+    url: https://github.com/BrunoPB/AoMBuildOrderBuilder/discussions
+    about: Perguntas sobre o app ou sobre builds, e ideias ainda soltas. / Questions about the app or builds, and loose ideas.
