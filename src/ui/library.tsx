@@ -10,6 +10,7 @@ import {
   newBuildId,
   parseImport,
 } from "../io/files.ts";
+import { REPO_URL } from "../io/proposal.ts";
 import { text } from "../i18n/index.ts";
 import { navigate } from "./app.tsx";
 import { BuildActions } from "./build-actions.tsx";
@@ -322,6 +323,43 @@ export function Library() {
           </div>
         )}
       </section>
+
+      <OpenSource />
     </div>
+  );
+}
+
+/** Invites players to the project on GitHub: the code, and issues for bugs and ideas. */
+function OpenSource() {
+  const { t } = useApp();
+  const help = useHelp();
+  const links = [
+    { k: "oss.repo", href: REPO_URL, icon: "star", primary: true },
+    { k: "oss.issue", href: `${REPO_URL}/issues/new/choose`, icon: "pencil" },
+  ];
+  return (
+    <section class="panel oss" data-testid="open-source">
+      <h2>
+        <Svg name="code" />
+        {t("oss.title")}
+      </h2>
+      <p>{t("oss.text")}</p>
+      <div class="row">
+        {links.map((l) => (
+          <Tip key={l.k} label={help(l.k)}>
+            <a
+              class={`btn ${l.primary ? "primary" : ""}`}
+              href={l.href}
+              target="_blank"
+              rel="noopener"
+              data-testid={l.k.replace(".", "-")}
+            >
+              <Svg name={l.icon} />
+              {t(l.k)}
+            </a>
+          </Tip>
+        ))}
+      </div>
+    </section>
   );
 }

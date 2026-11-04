@@ -3689,3 +3689,17 @@ textarea {
 .milestone-add .moment-placeholder {
   white-space: nowrap;
 }
+
+.oss {
+  margin-top: 24px;
+}
+
+.oss p {
+  margin: 0 0 10px;
+  max-width: 70ch;
+  color: var(--muted);
+}
+
+.oss a.btn {
+  text-decoration: none;
+}

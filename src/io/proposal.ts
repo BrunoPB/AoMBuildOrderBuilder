@@ -7,6 +7,7 @@ import { decodeBuild } from "./share.ts";
 
 /** GitHub repository that receives proposals for standard builds. */
 export const REPO = "BrunoPB/AoMBuildOrderBuilder";
+export const REPO_URL = `https://github.com/${REPO}`;
 export const PROPOSAL_TEMPLATE = "propose-build.yml";
 
 /** A share link (or a bare share code) inside free text, such as an issue body. */
@@ -23,7 +24,7 @@ export function proposalUrl(build: Build, link: string): string {
     title: `[Build] ${build.name}`,
     link,
   });
-  return `https://github.com/${REPO}/issues/new?${q.toString()}`;
+  return `${REPO_URL}/issues/new?${q.toString()}`;
 }
 
 export type Proposal =

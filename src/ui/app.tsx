@@ -11,6 +11,7 @@ import { Library } from "./library.tsx";
 import { MatchMode } from "./match.tsx";
 import { Overview } from "./overview.tsx";
 import { SharedBuild } from "./shared.tsx";
+import { REPO_URL } from "../io/proposal.ts";
 import { SHARED_ID } from "../io/share.ts";
 import { SettingsPage } from "./settings.tsx";
 import { Svg } from "./svg.tsx";
@@ -229,7 +230,11 @@ export function App({ data }: { data: GameData }) {
         <footer class="legal">
           <p class="reference">{api.t("footer.reference")}</p>
           <p>
-            {api.t("footer.fan")} {api.t("footer.legal")}
+            {api.t("footer.fan")}{" "}
+            <a href={REPO_URL} target="_blank" rel="noopener" data-testid="footer-source">
+              {api.t("footer.source")}
+            </a>
+            . {api.t("footer.legal")}
           </p>
         </footer>
         <div class="toasts" aria-live="polite">

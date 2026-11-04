@@ -7,6 +7,7 @@
   "footer.legal": "Age of Mythology © Microsoft Corporation. This site is not affiliated with or endorsed by Microsoft.",
   "footer.fan": "Non-profit fan project.",
   "footer.reference": "* Results are a reference, not an exact measurement: Oracle favor, villager walking time and other factors vary from match to match.",
+  "footer.source": "Open source on GitHub",
   "storage.unavailable": "Could not save in the browser. Export your builds so you don't lose them.",
   "loading": "Loading…",
   "error.data": "Could not load the game data",
@@ -20,6 +21,10 @@
   "library.filters": "Filters",
   "library.all": "All",
   "library.noMatch": "Nothing matches these filters",
+  "oss.title": "Open source",
+  "oss.text": "This app is free, made by players, and all of its code is on GitHub. Found a bug, have an idea or want to help with the code or the game numbers? Come along.",
+  "oss.repo": "See on GitHub",
+  "oss.issue": "Suggest or report",
   "card.open": "Open",
   "card.duplicate": "Duplicate",
   "card.duplicateToEdit": "Duplicate to edit",
@@ -480,5 +485,7 @@
   "help.row.powerNote": "A note on how to use the power, shown with the action in the build and in Match mode.\n• E.g. on which unit, building or place.",
   "row.powerNoteExample": "e.g. on a citizen gathering gold",
   "match.previous": "Previous",
-  "help.match.previous": "The step that just went by: if you are running a little late, it is still here."
+  "help.match.previous": "The step that just went by: if you are running a little late, it is still here.",
+  "help.oss.repo": "Code, game data and project history. A star helps other players find it.",
+  "help.oss.issue": "Opens a GitHub issue: a wrong number, something that does not work or a new idea."
 }

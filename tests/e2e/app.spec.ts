@@ -167,6 +167,16 @@ test("a share link opens the build for anyone, who can save a copy", async ({ pa
   await expect(page.getByTestId("share-error")).toBeVisible();
 });
 
+test("the home page and the footer point to the project on GitHub", async ({ page }) => {
+  await page.goto("/");
+  const box = page.getByTestId("open-source");
+  await expect(box).toBeVisible();
+  const repo = "https://github.com/BrunoPB/AoMBuildOrderBuilder";
+  await expect(box.getByTestId("oss-repo")).toHaveAttribute("href", repo);
+  await expect(box.getByTestId("oss-issue")).toHaveAttribute("href", `${repo}/issues/new/choose`);
+  await expect(page.getByTestId("footer-source")).toHaveAttribute("href", repo);
+});
+
 test("an own build can be proposed as standard on GitHub, a preset cannot", async ({
   page,
   context,

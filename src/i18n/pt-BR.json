@@ -7,6 +7,7 @@
   "footer.legal": "Age of Mythology © Microsoft Corporation. Este site não é afiliado nem endossado pela Microsoft.",
   "footer.fan": "Projeto de fã, sem fins lucrativos.",
   "footer.reference": "* Os resultados são uma referência, não uma medição exata: favor dos Oráculos, deslocamento dos aldeões e outros fatores variam de partida para partida.",
+  "footer.source": "Código aberto no GitHub",
   "storage.unavailable": "Não foi possível salvar no navegador. Exporte suas builds para não perdê-las.",
   "loading": "Carregando…",
   "error.data": "Erro ao carregar os dados do jogo",
@@ -20,6 +21,10 @@
   "library.filters": "Filtros",
   "library.all": "Todos",
   "library.noMatch": "Nada com esses filtros",
+  "oss.title": "Código aberto",
+  "oss.text": "Este app é gratuito, feito por jogadores, e todo o código está no GitHub. Achou um erro, tem uma ideia ou quer ajudar com o código ou os números do jogo? Chega mais.",
+  "oss.repo": "Ver no GitHub",
+  "oss.issue": "Sugerir ou reportar",
   "card.open": "Abrir",
   "card.duplicate": "Duplicar",
   "card.duplicateToEdit": "Duplicar para editar",
@@ -480,5 +485,7 @@
   "help.row.powerNote": "Uma observação de como usar o poder, mostrada junto da ação na build e no Modo partida.\n• Ex.: em qual unidade, prédio ou lugar.",
   "row.powerNoteExample": "ex.: num cidadão coletando ouro",
   "match.previous": "Anterior",
-  "help.match.previous": "O passo que acabou de passar: se você está um pouco atrasado, ele ainda está aqui."
+  "help.match.previous": "O passo que acabou de passar: se você está um pouco atrasado, ele ainda está aqui.",
+  "help.oss.repo": "Código, dados do jogo e histórico do projeto. Uma estrela ajuda o projeto a ser encontrado.",
+  "help.oss.issue": "Abre uma issue no GitHub: um erro nos números, algo que não funciona ou uma ideia nova."
 }
