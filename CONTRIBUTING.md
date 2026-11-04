@@ -12,6 +12,8 @@ Thanks for helping! This is a fan-made, open source build order builder and simu
 - **Propose a standard build**: in the app, open your build → **…** menu → **Propose as standard build**. A bot checks it and opens a pull request.
 - **Write code**: pick an issue (look for `good first issue` and `help wanted`), say in it that you are on it, then open a pull request.
 
+Anything else, or something you would rather not post in public: [brunopenabaeta@gmail.com](mailto:brunopenabaeta@gmail.com).
+
 ## Running the project
 
 Node 22+ and npm.

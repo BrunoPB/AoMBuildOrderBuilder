@@ -37,8 +37,6 @@ Since 2026-10-18 (owner decision) the game installation is the absolute source o
 | Favor cap | None | Owner (Greeks) and game files (all cultures). |
 | Start | 4 Sentry Towers for every pantheon | Owner; random map scripts place 4 SentryTower per player. |
 
-
-
 ## Icons
 
 Since 2026-10-18 every icon is taken from the installed game (`game/ui/UITextureCache4K.bar`, DDS → WebP) by `scripts/game-icons.py`; `src/data/icons.json` records the path of each one inside the game. Icons are game assets © Microsoft, used as fan content under the Game Content Usage Rules.

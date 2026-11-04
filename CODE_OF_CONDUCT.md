@@ -18,4 +18,4 @@ This is a community of Age of Mythology players. Everyone is welcome, whatever t
 
 ## Enforcement
 
-Maintainers may edit or remove comments, issues and pull requests, and block people who break these rules. To report a problem privately, contact the maintainer through the e-mail on the [maintainer's GitHub profile](https://github.com/BrunoPB).
+Maintainers may edit or remove comments, issues and pull requests, and block people who break these rules. To report a problem privately, e-mail the maintainer at [brunopenabaeta@gmail.com](mailto:brunopenabaeta@gmail.com).
