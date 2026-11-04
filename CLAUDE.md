@@ -33,6 +33,7 @@ Build order builder/simulator for Age of Mythology: Retold. Full requirements: t
 - Visual, not textual: game icons everywhere, short labels (1–3 words), explanations only in tooltips (hover, focus and touch).
 - Colors carry meaning (green ok, yellow attention, red problem) and are never the only signal. Numbers in monospace.
 - Every view follows the build at once: fields apply while typing (`LiveNumber`/`LiveText`), timelines and charts share one end (`viewEnd`: the build's end), other tabs reload on `storage` events.
+- Pointing at another action's start or end (after/asap, milestones…) always uses `MomentPicker` (`src/ui/editor/moment-picker.tsx`): time order, grouped by age, search, start/end filter, keyboard.
 - No horizontal scroll from 360 px up; keyboard navigation and visible focus; `alt`/`aria-label` on every icon.
 - At the same second, events (age reached, building done, source depleted…) are listed before actions, since actions may depend on them; an action's own effects stay right after it.
 - Footer keeps the Microsoft fan-content notice.

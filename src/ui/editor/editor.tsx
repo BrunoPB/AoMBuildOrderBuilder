@@ -595,7 +595,11 @@ export function Editor({ id }: { id: string }) {
 
       {stage === "result" && result && (
         <div class="stack" data-testid="result">
-          <Milestones build={build} result={result} />
+          <Milestones
+            build={build}
+            result={result}
+            onChange={readonly ? undefined : (milestones) => update({ ...build, milestones })}
+          />
           <ProductionChart build={build} result={result} />
           <Charts build={build} result={result} />
         </div>

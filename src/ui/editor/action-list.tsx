@@ -368,6 +368,7 @@ export function ActionList({
                   index={i}
                   action={a}
                   outcome={result?.actions[i]}
+                  result={result}
                   warnings={warnings}
                   readonly={readonly}
                   isMilestone={!!a.id && milestoneIds.has(a.id)}
@@ -413,7 +414,7 @@ export function ActionList({
                       actions,
                       milestones: exists
                         ? list.filter((m) => m.atAction !== actionId)
-                        : [...list, { id: actionId, atAction: actionId }],
+                        : [...list, { id: actionId, atAction: actionId, on: "end" }],
                     });
                   }}
                   drag={{

@@ -911,7 +911,7 @@ details.collapsible > summary::-webkit-details-marker {
 
 .milestones {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
   gap: 8px;
 }
 
@@ -3468,4 +3468,224 @@ textarea {
 /* a god dragged over another goes right before it */
 .portrait-btn.drop-before {
   box-shadow: -4px 0 0 var(--accent);
+}
+
+/* ---------- moment picker: an action's start or end, from a list that can be long ---------- */
+.moment-picker {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 38px;
+  min-width: 0;
+  max-width: 100%;
+  width: min(100%, 380px);
+  padding: 3px 6px 3px 0;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  overflow: hidden;
+}
+.moment-picker:hover:not(:disabled),
+.moment-picker.open {
+  border-color: var(--accent);
+}
+.moment-picker:disabled {
+  cursor: default;
+  opacity: 0.8;
+}
+.moment-picker > .moment {
+  flex: 1;
+}
+.moment-picker.empty {
+  padding-left: 8px;
+  border-style: dashed;
+}
+.moment-placeholder {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+  font-weight: 600;
+}
+.moment-chevron {
+  display: inline-flex;
+  color: var(--muted);
+  transform: rotate(90deg);
+}
+.moment-picker.open .moment-chevron {
+  transform: rotate(-90deg);
+}
+
+/* one moment: time, starts/ends badge, icons, text, place in the build order */
+.moment {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  padding-left: 6px;
+  border-left: 4px solid var(--kind, var(--border));
+  align-self: stretch;
+}
+.moment.never {
+  opacity: 0.6;
+}
+.moment-time {
+  flex: none;
+  min-width: 3.2em;
+  font-weight: 700;
+}
+.moment-badge {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+}
+.moment-badge .svg-icon {
+  width: 13px;
+  height: 13px;
+}
+.moment-badge.end {
+  background: color-mix(in srgb, var(--ok) 22%, transparent);
+  color: var(--ok);
+}
+.moment-badge.start {
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  color: var(--accent);
+}
+.moment-icons {
+  flex: none;
+  display: inline-flex;
+  gap: 2px;
+}
+.moment-text {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.moment-n {
+  flex: none;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.moment-panel {
+  position: fixed;
+  z-index: 300;
+  display: flex;
+  flex-direction: column;
+  max-height: min(440px, 70vh);
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: 0 10px 30px rgb(0 0 0 / 0.28);
+  overflow: hidden;
+}
+.moment-search {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 8px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface-2);
+}
+.moment-search input {
+  flex: 1 1 160px;
+  min-width: 0;
+}
+.moment-list {
+  list-style: none;
+  margin: 0;
+  padding: 4px 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.moment-group {
+  position: sticky;
+  top: -4px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px 4px;
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.moment-option {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 36px;
+  margin: 1px 6px;
+  padding: 2px 28px 2px 0;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.moment-option.active {
+  background: var(--surface-2);
+  outline: 2px solid color-mix(in srgb, var(--accent) 45%, transparent);
+  outline-offset: -2px;
+}
+.moment-option.selected {
+  background: color-mix(in srgb, var(--accent) 14%, var(--surface));
+  font-weight: 600;
+}
+.moment-option.taken {
+  cursor: default;
+  opacity: 0.45;
+}
+.moment-option > .moment {
+  flex: 1;
+}
+.moment-picked {
+  position: absolute;
+  right: 8px;
+  display: inline-flex;
+  color: var(--accent);
+}
+.moment-empty {
+  padding: 12px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.milestone-head {
+  gap: 4px;
+  flex-wrap: nowrap;
+  min-width: 0;
+}
+.milestone-label {
+  flex: 1;
+  min-width: 0;
+}
+.milestone-remove {
+  margin-left: auto;
+  min-height: 26px;
+  min-width: 26px;
+  padding: 2px;
+}
+.milestone-add {
+  border-style: dashed;
+  background: transparent;
+  justify-content: center;
+}
+.milestone-add .moment-picker {
+  width: 100%;
+  min-height: 52px;
+}
+.milestone-add .moment-placeholder {
+  white-space: nowrap;
 }

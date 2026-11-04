@@ -2,7 +2,7 @@ import type { ComponentChildren } from "preact";
 import { useState } from "preact/hooks";
 import type { Action, Build, TaskTarget, When } from "../../engine/build.ts";
 import { formatClock, isClock } from "../../engine/time.ts";
-import type { ActionOutcome, SimWarning } from "../../engine/types.ts";
+import type { ActionOutcome, SimResult, SimWarning } from "../../engine/types.ts";
 import { warningText } from "../../engine/format.ts";
 import { text } from "../../i18n/index.ts";
 import { useApp } from "../context.tsx";
@@ -14,20 +14,21 @@ import {
   actionKind,
   actionKindIcon,
   actionText,
-  doneText,
-  hasDuration,
   targetLabel,
   taskTargets,
   actionTarget,
   isGatherer,
 } from "./labels.ts";
 import { LiveNumber, LiveText } from "../fields.tsx";
+import { MomentPicker } from "./moment-picker.tsx";
 
 type Props = {
   build: Build;
   index: number;
   action: Action;
   outcome?: ActionOutcome;
+  /** The whole simulation: the moment picker shows when every other action happens. */
+  result?: SimResult;
   warnings: SimWarning[];
   readonly: boolean;
   isMilestone: boolean;
@@ -155,13 +156,6 @@ export function ActionRow(props: Props) {
   const name = (id: string) =>
     text(locale, p?.units.get(id)?.name ?? p?.buildings.get(id)?.name ?? { en: id, "pt-BR": id });
 
-  /** Actions to wait on from their start: those that last (the start of an instant one is its end),
-   *  plus the one already picked. */
-  const startAnchors = others.filter(
-    (x) =>
-      hasDuration(x) ||
-      (typeof a.when === "object" && a.when.on === "start" && a.when.after === x.id),
-  );
   /** "After" and "as soon as possible" both wait on another action: switching keeps which one
    *  (by default the action before this one, from its start; or the first other one). */
   const setWhen = (m: string) => {
@@ -332,41 +326,27 @@ export function ActionRow(props: Props) {
               )}
               {typeof a.when === "object" && (
                 <>
-                  <select
-                    value={a.when.on === "start" ? `${a.when.after}@start` : a.when.after}
+                  <MomentPicker
+                    build={build}
+                    result={props.result}
+                    value={{ id: a.when.after, on: a.when.on === "start" ? "start" : "end" }}
+                    exclude={a.id}
                     disabled={readonly}
-                    aria-label={t(MODE_LABEL[mode])}
-                    data-testid="when-after"
-                    onChange={(e) => {
-                      const [after, on] = e.currentTarget.value.split("@");
+                    placeholder={t("picker.choose")}
+                    ariaLabel={t(MODE_LABEL[mode])}
+                    testid="when-after"
+                    onPick={(m) => {
                       const { delay, asap } = a.when as { delay?: number; asap?: true };
                       set({
                         when: {
-                          after: after!,
-                          ...(on === "start" ? { on: "start" as const } : {}),
+                          after: m.id,
+                          ...(m.on === "start" ? { on: "start" as const } : {}),
                           ...(delay ? { delay } : {}),
                           ...(asap ? { asap } : {}),
                         },
                       });
                     }}
-                  >
-                    <optgroup label={t("row.afterDone")}>
-                      {others.map((x) => (
-                        <option key={x.id} value={x.id}>
-                          {build.actions.indexOf(x) + 1}. {doneText(c, x)}
-                        </option>
-                      ))}
-                    </optgroup>
-                    {startAnchors.length > 0 && (
-                      <optgroup label={t("row.afterStart")}>
-                        {startAnchors.map((x) => (
-                          <option key={x.id} value={`${x.id}@start`}>
-                            {build.actions.indexOf(x) + 1}. {actionText(c, x)}
-                          </option>
-                        ))}
-                      </optgroup>
-                    )}
-                  </select>
+                  />
                   {mode === "after" && (
                     <LiveNumber
                       class="small"

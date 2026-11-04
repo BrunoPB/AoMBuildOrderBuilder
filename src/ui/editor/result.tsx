@@ -1,6 +1,6 @@
 import type { ComponentChildren } from "preact";
 import { useState } from "preact/hooks";
-import type { Build, Matchup } from "../../engine/build.ts";
+import type { Build, Matchup, Milestone } from "../../engine/build.ts";
 import { type Step, warningText } from "../../engine/format.ts";
 import { formatClock } from "../../engine/time.ts";
 import type { SimResult } from "../../engine/types.ts";
@@ -10,7 +10,8 @@ import { EDITING_ATTR } from "../fields.tsx";
 import { EntityIcon, Tip, HelpText, useHelp } from "../icon.tsx";
 import { Svg } from "../svg.tsx";
 import { PopChart, ResourceChart } from "./charts.tsx";
-import { actionIcons } from "./labels.ts";
+import { actionIcons, actionTarget, actionText, doneText } from "./labels.ts";
+import { type Moment, MomentPicker } from "./moment-picker.tsx";
 import { viewEnd } from "./timeline.tsx";
 import { LEVEL_ICON, WarningCard } from "./warning-card.tsx";
 
@@ -359,11 +360,25 @@ function ResLine({ resources }: { resources?: Record<string, number> }) {
   );
 }
 
-export function Milestones({ build, result }: { build: Build; result: SimResult }) {
-  const { t, locale } = useApp();
+/** Times and stock at the moments that matter: each age reached (its click only in the tooltip)
+ *  and the moments the player picked (an action's end, like a building done, or its start). */
+export function Milestones({
+  build,
+  result,
+  onChange,
+}: {
+  build: Build;
+  result: SimResult;
+  /** Absent: read only. */
+  onChange?: (milestones: Milestone[]) => void;
+}) {
+  const { t, data, locale } = useApp();
   const help = useHelp();
+  const c = { data, pantheon: build.pantheon, locale };
+  const worker = data.pantheons.get(build.pantheon)?.def.workers[0];
   const at = (sec?: number) =>
     sec === undefined ? undefined : result.series.find((s) => s.t >= sec)?.resources;
+  const list = build.milestones ?? [];
   const cards: {
     key: string;
     icons: string[];
@@ -371,40 +386,54 @@ export function Milestones({ build, result }: { build: Build; result: SimResult 
     t?: number;
     resources?: Record<string, number>;
     help?: string;
+    id?: string;
   }[] = [];
   for (const age of ["classical", "heroic", "mythic"] as const) {
     const times = result.ageTimes[age];
     if (!times) continue;
+    const reached = times.reached !== undefined;
     cards.push({
-      key: `${age}-c`,
+      key: age,
       icons: [age],
-      label: t("result.clicked"),
-      help: help("result.clicked"),
-      t: times.clicked,
-      resources: at(times.clicked),
+      label: t(reached ? "result.reached" : "result.clicked"),
+      help: [
+        help(reached ? "result.reached" : "result.clicked"),
+        reached ? t("result.clickedAt", { t: formatClock(times.clicked) }) : "",
+      ]
+        .filter(Boolean)
+        .join("\n"),
+      t: times.reached ?? times.clicked,
+      resources: at(times.reached ?? times.clicked),
     });
-    if (times.reached !== undefined) {
-      cards.push({
-        key: `${age}-r`,
-        icons: [age],
-        label: t("result.reached"),
-        help: help("result.reached"),
-        t: times.reached,
-        resources: at(times.reached),
-      });
-    }
   }
-  for (const m of result.milestones) {
+  result.milestones.forEach((m, k) => {
     const a = build.actions[m.action];
+    const on = list[k]?.on ?? "start";
     cards.push({
       key: `m-${m.id}`,
-      icons: a ? actionIcons(a).slice(0, 2) : [],
-      label: m.label ? text(locale, m.label) : m.id,
+      id: m.id,
+      icons: a
+        ? [...actionIcons(a, worker).slice(0, 2), actionTarget(a)].filter((x): x is string => !!x)
+        : [],
+      label: m.label
+        ? text(locale, m.label)
+        : a
+          ? on === "end"
+            ? doneText(c, a)
+            : actionText(c, a)
+          : m.id,
+      help: t(on === "end" ? "row.afterDone" : "row.afterStart"),
       t: m.t,
       resources: m.resources,
     });
-  }
-  if (cards.length === 0) return null;
+  });
+  if (cards.length === 0 && !onChange) return null;
+  const taken = (x: Moment) => list.some((m) => m.atAction === x.id && (m.on ?? "start") === x.on);
+  const nextId = () => {
+    let n = list.length + 1;
+    while (list.some((m) => m.id === `m${n}`)) n++;
+    return `m${n}`;
+  };
   return (
     <div class="panel">
       <h3>
@@ -412,20 +441,47 @@ export function Milestones({ build, result }: { build: Build; result: SimResult 
         <HelpText k="editor.milestones" />
       </h3>
       <div class="milestones" data-testid="milestones">
-        {cards.map((c) => (
-          <div class="milestone" key={c.key}>
-            <span class="row" style={{ gap: "4px" }}>
-              {c.icons.map((id) => (
+        {cards.map((card) => (
+          <div class="milestone" key={card.key} data-testid="milestone">
+            <span class="row milestone-head">
+              {card.icons.map((id) => (
                 <EntityIcon key={id} id={id} pantheon={build.pantheon} size={24} />
               ))}
-              <Tip label={c.help ?? ""} focusable>
-                <span class="action-times">{c.label}</span>
+              <Tip label={card.help ?? ""} focusable>
+                <span class="action-times milestone-label">{card.label}</span>
               </Tip>
+              {onChange && card.id && (
+                <Tip label={t("milestone.remove")}>
+                  <button
+                    class="btn icon-only milestone-remove"
+                    aria-label={`${t("milestone.remove")}: ${card.label}`}
+                    data-testid="milestone-remove"
+                    onClick={() => onChange(list.filter((m) => m.id !== card.id))}
+                  >
+                    <Svg name="x" />
+                  </button>
+                </Tip>
+              )}
             </span>
-            <span class="big">{c.t !== undefined ? formatClock(c.t) : "—"}</span>
-            <ResLine resources={c.resources} />
+            <span class="big">{card.t !== undefined ? formatClock(card.t) : "—"}</span>
+            <ResLine resources={card.resources} />
           </div>
         ))}
+        {onChange && (
+          <div class="milestone milestone-add">
+            <Tip label={help("milestone.add")}>
+              <MomentPicker
+                build={build}
+                result={result}
+                placeholder={t("milestone.add")}
+                ariaLabel={t("milestone.add")}
+                testid="milestone-add"
+                isTaken={taken}
+                onPick={(x) => onChange([...list, { id: nextId(), atAction: x.id, on: x.on }])}
+              />
+            </Tip>
+          </div>
+        )}
       </div>
     </div>
   );

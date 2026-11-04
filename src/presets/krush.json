@@ -21,24 +21,7 @@
     "tick": 1,
     "foodChain": ["hunt", "hunt", "hunt", "herd", "berries", "farm"]
   },
-  "milestones": [
-    {
-      "id": "classical-click",
-      "atAction": "cl",
-      "label": {
-        "pt-BR": "Clique na Clássica",
-        "en": "Classical click"
-      }
-    },
-    {
-      "id": "heroic-click",
-      "atAction": "h1",
-      "label": {
-        "pt-BR": "Clique na Heroica",
-        "en": "Heroic click"
-      }
-    }
-  ],
+  "milestones": [],
   "matchups": [
     {
       "god": "loki",

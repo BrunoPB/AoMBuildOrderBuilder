@@ -191,10 +191,11 @@ export type Matchup = z.infer<typeof MatchupSchema>;
 export const MilestoneSchema = z.strictObject({
   id: z.string(),
   atAction: z.string(),
-  /** Start (click) or completion of the referenced action. */
+  /** Start (click) or end of the referenced action (default: start, for old builds). */
   on: z.enum(["start", "end"]).optional(),
   label: LocalizedTextSchema.optional(),
 });
+export type Milestone = z.infer<typeof MilestoneSchema>;
 
 export const BuildSchema = z.object({
   format: z.literal(BUILD_FORMAT),

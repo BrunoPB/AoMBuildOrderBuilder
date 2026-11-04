@@ -25,6 +25,17 @@ test.beforeEach(async ({ page }) => {
   });
 });
 
+/** Picks a moment ("id" for an action's end, "id@start" for its start) in a moment picker. */
+async function pickMoment(
+  page: import("@playwright/test").Page,
+  picker: import("@playwright/test").Locator,
+  key: string,
+) {
+  await picker.click();
+  await page.locator(".moment-panel").getByTestId(`moment-${key}`).click();
+  await expect(picker).toHaveAttribute("data-value", key);
+}
+
 async function createBuildWithActions(page: import("@playwright/test").Page) {
   await page.goto("/");
   await page.getByTestId("new-build").click();
@@ -657,7 +668,8 @@ test("a new fixed time moves the action to its place in the list", async ({ page
   await move.locator(".label-text").click();
   await move.getByTestId("when-mode").selectOption("time");
   await move.getByTestId("when-time").fill("0:10");
-  await move.getByTestId("when-time").press("Tab");
+  // the row moves to its place: the key goes to the field that has the focus
+  await page.keyboard.press("Tab");
   await expect(rows.first().locator(".row-time")).toContainText("0:10");
 });
 
@@ -669,12 +681,12 @@ test("'as soon as possible' and 'after' both name the action they wait on", asyn
   // no "always"; a new action is as soon as possible from the start of the one before it
   await expect(mode.locator("option")).toHaveCount(3);
   await expect(mode).toHaveValue("asap");
-  await expect(manor.getByTestId("when-after")).toHaveValue(/@start$/);
-  await expect(manor.getByTestId("when-after").locator("option:checked")).toContainText("Cidadão");
+  await expect(manor.getByTestId("when-after")).toHaveAttribute("data-value", /@start$/);
+  await expect(manor.getByTestId("when-after")).toContainText("Cidadão");
   await expect(manor.getByTestId("when-delay")).toHaveCount(0);
   // "after" keeps the action it waits on and adds a delay
   await mode.selectOption("after");
-  await expect(manor.getByTestId("when-after").locator("option:checked")).toContainText("Cidadão");
+  await expect(manor.getByTestId("when-after")).toContainText("Cidadão");
   await expect(manor.getByTestId("when-delay")).toBeVisible();
 });
 
@@ -702,7 +714,7 @@ test("an action set to start after another goes to its place in the list", async
   const power = rows.filter({ hasText: "Desconstrução" });
   await power.locator(".label-text").click();
   await power.getByTestId("when-mode").selectOption("after");
-  await power.getByTestId("when-after").selectOption("h1");
+  await pickMoment(page, power.getByTestId("when-after"), "h1");
   await expect(rows.last()).toContainText("Desconstrução");
 });
 
@@ -716,7 +728,7 @@ test("an 'after' action follows its anchor in the list when the anchor moves", a
   const power = rows.filter({ hasText: "Desconstrução" });
   await power.locator(".label-text").click();
   await power.getByTestId("when-mode").selectOption("after");
-  await power.getByTestId("when-after").selectOption("cl@start");
+  await pickMoment(page, power.getByTestId("when-after"), "cl@start");
   await power.locator(".label-text").first().click();
   const classical = rows.filter({ hasText: "Pesquisar Clássica" });
   await classical.locator(".label-text").click();
@@ -740,7 +752,7 @@ test("typing a delay that moves the action keeps the field being typed in", asyn
   const power = rows.filter({ hasText: "Desconstrução" });
   await power.locator(".label-text").click();
   await power.getByTestId("when-mode").selectOption("after");
-  await power.getByTestId("when-after").selectOption("cl@start");
+  await pickMoment(page, power.getByTestId("when-after"), "cl@start");
   const before = (await order()).indexOf("Desconstrução");
   const delay = power.getByTestId("when-delay");
   await delay.click();
@@ -952,20 +964,65 @@ test("the editor turns an old auto queue end time into a duration", async ({ pag
   await expect(page.getByTestId("action-row").last()).toContainText("por 1:00");
 });
 
-test("'after' lists when other actions end (✓) and when they start", async ({ page }) => {
+test("the moment picker lists ends and starts in time order, by age, with search", async ({
+  page,
+}) => {
   await createBuildWithActions(page);
   const row = page.getByTestId("action-row").last();
   await row.locator(".label-text").click();
   await row.getByTestId("when-mode").selectOption("after");
   const after = row.getByTestId("when-after");
-  await expect(after.locator("optgroup")).toHaveCount(2);
-  await expect(after.locator("optgroup").first().locator("option").nth(1)).toContainText("✓");
-  const start = after.locator("optgroup").last().locator("option").first();
-  await after.selectOption((await start.getAttribute("value"))!);
-  await expect(after).toHaveValue(/@start$/);
-  await row.locator("input[type=number]").first().fill("5");
-  await row.locator("input[type=number]").first().press("Tab");
-  await expect(after).toHaveValue(/@start$/);
+  await after.click();
+  const panel = page.locator(".moment-panel");
+  await expect(panel.locator(".moment-group").first()).toContainText("Arcaica");
+  // the citizen lasts: it has a start and an end; the build's own action is not listed
+  const options = panel.locator(".moment-option");
+  await expect(options).toHaveCount(4);
+  await expect(panel.locator(".moment-option .moment-badge.start")).toHaveCount(2);
+  // search, then the keyboard: the search box has the focus
+  await page.keyboard.type("mansão");
+  await expect(options).toHaveCount(2);
+  await panel.getByTestId("picker-filter-start").click();
+  await expect(options).toHaveCount(1);
+  await panel.locator("input").press("Enter");
+  await expect(panel).toHaveCount(0);
+  await expect(after).toHaveAttribute("data-value", /@start$/);
+  await expect(after).toContainText("Mansão");
+  await row.getByTestId("when-delay").fill("5");
+  await row.getByTestId("when-delay").press("Tab");
+  await expect(after).toHaveAttribute("data-value", /@start$/);
+  // Escape closes without picking
+  await after.click();
+  await page.keyboard.press("Escape");
+  await expect(panel).toHaveCount(0);
+});
+
+test("milestones: ages when reached, and moments picked from the build", async ({ page }) => {
+  await page.goto("/#/view/preset%3Akrush");
+  await page.getByTestId("build-header").getByTestId("build-menu").click();
+  await page.getByTestId("duplicate").click();
+  await page.getByTestId("tab-result").click();
+  const cards = page.getByTestId("milestone");
+  // Classical and Heroic, when reached (the click is in the tooltip)
+  await expect(cards).toHaveCount(2);
+  await expect(cards.first()).toContainText("Chegou");
+  await expect(cards.first()).toContainText("2:55");
+  // a building done becomes a milestone, with its time and stock
+  const add = page.getByTestId("milestone-add");
+  await add.click();
+  await page.keyboard.type("quartel militar");
+  await page.locator(".moment-panel").getByTestId("picker-filter-end").click();
+  await page.locator(".moment-panel .moment-option").first().click();
+  await expect(cards).toHaveCount(3);
+  await expect(cards.last()).toContainText("Quartel Militar");
+  await expect(cards.last().locator(".big")).toHaveText(/\d+:\d\d/);
+  // a moment already a milestone cannot be picked twice
+  await add.click();
+  await page.keyboard.type("quartel militar");
+  await expect(page.locator(".moment-panel .moment-option.taken")).toHaveCount(1);
+  await page.keyboard.press("Escape");
+  await cards.last().getByTestId("milestone-remove").click();
+  await expect(cards).toHaveCount(2);
 });
 
 test("a clicked palette action scrolls into view and flashes", async ({ page, isMobile }) => {
