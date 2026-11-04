@@ -1,0 +1,337 @@
+{
+  "format": "aomr-bob",
+  "version": 7,
+  "id": "preset:proposal-test",
+  "name": "Proposal test",
+  "author": "IKazart",
+  "createdAt": "2026-11-03T11:54:55.374Z",
+  "updatedAt": "2026-11-04T03:03:54.915Z",
+  "pantheon": "atlanteans",
+  "god": "kronos",
+  "type": "eco",
+  "objective": {
+    "pt-BR": "Início sem agressão, focado na economia.",
+    "en": "Non-aggressive start."
+  },
+  "end": {
+    "pt-BR": "Pesquisa de Torres de Vigia para segurar os raids.",
+    "en": "Research of Watch Towers to avoid raids."
+  },
+  "settings": {
+    "efficiency": 0.92,
+    "foodChain": ["hunt", "hunt", "hunt", "herd", "berries", "farm"]
+  },
+  "milestones": [],
+  "matchups": [
+    {
+      "god": "ra",
+      "fit": "bad"
+    },
+    {
+      "god": "isis",
+      "fit": "bad"
+    },
+    {
+      "god": "thor",
+      "fit": "bad"
+    },
+    {
+      "god": "gaia",
+      "fit": "bad"
+    },
+    {
+      "god": "zeus",
+      "fit": "neutral"
+    },
+    {
+      "god": "set",
+      "fit": "neutral"
+    },
+    {
+      "god": "loki",
+      "fit": "neutral"
+    },
+    {
+      "god": "kronos",
+      "fit": "neutral"
+    },
+    {
+      "god": "oranos",
+      "fit": "neutral"
+    },
+    {
+      "god": "hades",
+      "fit": "good"
+    },
+    {
+      "god": "poseidon",
+      "fit": "good"
+    },
+    {
+      "god": "odin",
+      "fit": "good"
+    }
+  ],
+  "actions": [
+    {
+      "id": "a4",
+      "when": "0:00",
+      "do": "move",
+      "count": 2,
+      "from": "idle",
+      "to": "food"
+    },
+    {
+      "id": "a6",
+      "when": {
+        "after": "a4",
+        "on": "start",
+        "asap": true
+      },
+      "do": "train",
+      "unit": "citizen",
+      "count": 1,
+      "rally": "gold"
+    },
+    {
+      "id": "a8",
+      "when": "0:10",
+      "do": "build",
+      "building": "manor",
+      "builder": {
+        "from": "food"
+      },
+      "then": "food",
+      "manors": 0
+    },
+    {
+      "id": "a7",
+      "when": {
+        "after": "a8",
+        "on": "start",
+        "asap": true
+      },
+      "do": "train",
+      "unit": "citizen",
+      "count": 1,
+      "rally": "wood"
+    },
+    {
+      "id": "a5",
+      "when": {
+        "after": "a7",
+        "on": "start",
+        "asap": true
+      },
+      "do": "train",
+      "unit": "citizen",
+      "mode": "auto",
+      "rally": "food"
+    },
+    {
+      "id": "a9",
+      "when": {
+        "after": "a5",
+        "on": "start",
+        "asap": true
+      },
+      "do": "build",
+      "building": "temple",
+      "builder": {
+        "from": "wood"
+      },
+      "then": "wood"
+    },
+    {
+      "id": "a15",
+      "when": {
+        "after": "a9",
+        "on": "start",
+        "asap": true
+      },
+      "do": "train",
+      "unit": "oracle",
+      "count": 1
+    },
+    {
+      "id": "a1",
+      "when": {
+        "after": "a9",
+        "asap": true
+      },
+      "do": "age",
+      "to": "classical",
+      "minor": "prometheus"
+    },
+    {
+      "id": "a12",
+      "when": {
+        "after": "a1",
+        "on": "start"
+      },
+      "do": "move",
+      "count": 1,
+      "from": "food",
+      "to": "gold"
+    },
+    {
+      "id": "a11",
+      "when": {
+        "after": "a1",
+        "on": "start"
+      },
+      "do": "move",
+      "count": 1,
+      "from": "food",
+      "to": "wood"
+    },
+    {
+      "id": "a23",
+      "when": {
+        "after": "a1",
+        "on": "start",
+        "asap": true
+      },
+      "do": "build",
+      "building": "manor",
+      "builder": {
+        "from": "food"
+      },
+      "then": "food"
+    },
+    {
+      "id": "a10",
+      "when": {
+        "after": "a23",
+        "asap": true
+      },
+      "do": "build",
+      "building": "economic-guild",
+      "builder": {
+        "from": "food"
+      },
+      "then": "food"
+    },
+    {
+      "id": "a22",
+      "when": {
+        "after": "a10"
+      },
+      "do": "research",
+      "research": "hand-axe"
+    },
+    {
+      "id": "a16",
+      "when": {
+        "after": "a22",
+        "on": "start",
+        "asap": true
+      },
+      "do": "build",
+      "building": "military-barracks",
+      "builder": {
+        "from": "food"
+      },
+      "then": "food"
+    },
+    {
+      "id": "a17",
+      "when": {
+        "after": "a1"
+      },
+      "note": "On a citizen gathering wood",
+      "do": "power",
+      "power": "valor"
+    },
+    {
+      "id": "a27",
+      "when": {
+        "after": "a1",
+        "asap": true
+      },
+      "do": "train",
+      "unit": "promethean",
+      "mode": "auto"
+    },
+    {
+      "id": "a28",
+      "when": {
+        "after": "a27",
+        "asap": true
+      },
+      "do": "promote",
+      "unit": "oracle"
+    },
+    {
+      "id": "a26",
+      "when": {
+        "after": "a16",
+        "asap": true
+      },
+      "do": "train",
+      "unit": "murmillo",
+      "mode": "auto"
+    },
+    {
+      "id": "a18",
+      "when": {
+        "after": "a17",
+        "delay": 30
+      },
+      "note": "On a citizen gathering gold",
+      "do": "power",
+      "power": "valor"
+    },
+    {
+      "id": "a13",
+      "when": {
+        "after": "a1",
+        "asap": true
+      },
+      "do": "research",
+      "research": "theft-of-fire"
+    },
+    {
+      "id": "a24",
+      "when": {
+        "after": "a18",
+        "delay": 30
+      },
+      "note": "On a citizen gathering gold",
+      "do": "power",
+      "power": "valor"
+    },
+    {
+      "id": "a30",
+      "when": {
+        "after": "a13",
+        "asap": true
+      },
+      "do": "build",
+      "building": "manor",
+      "builder": {
+        "from": "food"
+      },
+      "then": "gold"
+    },
+    {
+      "id": "a25",
+      "when": {
+        "after": "a24",
+        "delay": 30
+      },
+      "note": "On a citizen gathering wood",
+      "do": "power",
+      "power": "valor"
+    },
+    {
+      "id": "a21",
+      "when": {
+        "after": "a30",
+        "asap": true
+      },
+      "do": "research",
+      "research": "watch-tower"
+    }
+  ]
+}
