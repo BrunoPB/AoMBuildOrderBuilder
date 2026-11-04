@@ -1,6 +1,22 @@
 # AoM Retold · Build Order Builder
 
-Static website that builds and simulates build orders for **Age of Mythology: Retold** (1v1, base game). It computes action times, population, villager allocation, resources second by second and warnings. Everything runs in the browser; builds are stored in `localStorage`.
+Build and simulate build orders for **Age of Mythology: Retold** (1v1, base game). Plan every action, and the simulator shows when it really happens: resources second by second, villagers on each resource, population, age-up times, production per building and warnings when something has to wait. Free, open source, and everything runs in the browser.
+
+**▶ [Open the app](https://brunopb.github.io/AoMBuildOrderBuilder/)**
+
+![Editor: actions on a shared timeline with villagers and resources](docs/editor.webp)
+
+![Overview of a build, age by age](docs/overview.webp)
+
+- Every game number comes from the game files, with its source recorded (`src/data`).
+- Standard builds, your own builds saved in the browser, share links, and a match mode to follow a build while you play.
+- Português and English.
+
+> **Português:** um criador e simulador de build orders para Age of Mythology: Retold, gratuito e de código aberto. Achou um erro ou tem uma ideia? [Abra uma issue](https://github.com/BrunoPB/AoMBuildOrderBuilder/issues/new/choose). Quer ajudar no código ou nos dados? Veja o [guia de contribuição](CONTRIBUTING.md).
+
+## Contributing
+
+Bug reports, wrong game numbers, ideas, standard builds and code are all welcome: see [CONTRIBUTING.md](CONTRIBUTING.md) and the [Code of Conduct](CODE_OF_CONDUCT.md).
 
 ## Requirements
 
@@ -99,5 +115,9 @@ scripts        build-api, check-data, game-icons.py, merge-powers
 data-research  research notes, sources, pending items
 tests          Vitest + Playwright
 ```
+
+## License
+
+The code is under the [MIT license](LICENSE). Game names, icons and images (`public/icons/`) are © Microsoft Corporation and are not covered by it: they are used as fan content under the [Microsoft Game Content Usage Rules](https://www.xbox.com/en-US/developers/rules).
 
 Age of Mythology © Microsoft Corporation. Non-profit fan project, not affiliated with or endorsed by Microsoft.
