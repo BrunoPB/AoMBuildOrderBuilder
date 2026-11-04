@@ -3,6 +3,16 @@
   "private": true,
   "version": "0.1.0",
   "description": "Build order builder and simulator for Age of Mythology: Retold",
+  "license": "MIT",
+  "author": "Bruno Pena Baeta (IKazart)",
+  "homepage": "https://brunopb.github.io/AoMBuildOrderBuilder/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BrunoPB/AoMBuildOrderBuilder.git"
+  },
+  "bugs": {
+    "url": "https://github.com/BrunoPB/AoMBuildOrderBuilder/issues"
+  },
   "type": "module",
   "scripts": {
     "dev": "vite",
