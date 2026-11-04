@@ -40,7 +40,9 @@ describe("static API", () => {
 
   it("serves presets that pass the build schema and absolute URLs", () => {
     const index = files.get("api/v1/presets/index.json") as { presets: { url: string }[] };
-    expect(index.presets[0]!.url).toBe("https://example.github.io/repo/api/v1/presets/krush.json");
+    expect(index.presets.map((p) => p.url)).toContain(
+      "https://example.github.io/repo/api/v1/presets/krush.json",
+    );
     expect(BuildSchema.safeParse(files.get("api/v1/presets/krush.json")).success).toBe(true);
     expect(index.presets).toHaveLength(presets.length);
   });

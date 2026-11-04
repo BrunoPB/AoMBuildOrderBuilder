@@ -1,5 +1,9 @@
 # Data changelog
 
+## 2026-11-03 — Ekronosmy preset
+
+- New preset `src/presets/ekronosmy.json` (Kronos, eco), copied from the owner's own build. Krush preset author set to IKazart, as in the owner's copy; its actions were already the same.
+
 ## 2026-11-03 — population always counts at the end of training
 
 - `common.json` `defaults.popReservedAt` removed: a unit always counts in the population when it leaves the building, as in the game (it waits there with no room). Builds lose the setting (migration to version 6).
