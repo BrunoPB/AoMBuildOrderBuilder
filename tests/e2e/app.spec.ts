@@ -183,6 +183,9 @@ test("an own build can be proposed as standard on GitHub, a preset cannot", asyn
   expect(url.searchParams.get("template")).toBe("propose-build.yml");
   expect(url.searchParams.get("title")).toBe("[Build] E2E Build");
   expect(url.searchParams.get("link")).toMatch(/#\/import\/[A-Za-z0-9_-]+$/);
+  /** The app stays open in its own tab. */
+  await page.waitForTimeout(300);
+  expect(new URL(page.url()).host).not.toBe("github.com");
 
   await page.goto("/#/view/preset%3Akrush");
   await page.getByTestId("build-header").getByTestId("build-menu").click();

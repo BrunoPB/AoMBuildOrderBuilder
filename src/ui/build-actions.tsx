@@ -65,7 +65,11 @@ export function BuildActions({
       { label: t("confirm.no"), value: "no" },
     ]);
     if (answer !== "yes") return;
-    if (!window.open(url, "_blank", "noopener")) window.location.assign(url);
+    /** "noopener" would make window.open return null even when the tab opens, so the opener is
+     *  cut by hand; only a blocked pop-up sends this tab to GitHub. */
+    const tab = window.open(url, "_blank");
+    if (tab) tab.opener = null;
+    else window.location.assign(url);
   };
   /** The link carries the whole build: whoever opens it sees it and can save a copy. */
   const copyLink = async () => {
