@@ -1,0 +1,22 @@
+name: Ideia / Idea
+description: Uma melhoria ou recurso novo. / An improvement or a new feature.
+title: "[Ideia/Idea] "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: O que você quer fazer / What you want to do
+      description: O que você está tentando fazer e o que falta ou atrapalha hoje. / What you are trying to do and what is missing or in the way today.
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: Como poderia ser / How it could work
+  - type: checkboxes
+    id: help
+    attributes:
+      label: Ajuda / Help
+      options:
+        - label: Posso ajudar a fazer isso. / I can help build it.

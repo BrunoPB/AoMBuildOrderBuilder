@@ -1,0 +1,27 @@
+name: Erro no app / Bug
+description: Algo não funciona ou aparece errado no site. / Something does not work or looks wrong on the site.
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: O que aconteceu / What happened
+      description: O que você fez, o que esperava e o que aconteceu. / What you did, what you expected and what happened instead.
+    validations:
+      required: true
+  - type: textarea
+    id: link
+    attributes:
+      label: Link da build / Build link
+      description: Se for numa build, cole o link dela (menu … → Copiar link). / If it happens in a build, paste its link (… menu → Copy link).
+  - type: input
+    id: browser
+    attributes:
+      label: Navegador e aparelho / Browser and device
+      placeholder: Chrome no Windows, Safari no iPhone… / Chrome on Windows, Safari on iPhone…
+  - type: textarea
+    id: screenshot
+    attributes:
+      label: Captura de tela / Screenshot
+      description: Arraste uma imagem aqui, se ajudar. / Drag an image here if it helps.

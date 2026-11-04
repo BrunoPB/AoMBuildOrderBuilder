@@ -1,0 +1,37 @@
+name: Número do jogo errado / Wrong game number
+description: Um custo, tempo, taxa de coleta ou efeito que não bate com o jogo. / A cost, time, gather rate or effect that does not match the game.
+title: "[Data] "
+labels: ["data"]
+body:
+  - type: input
+    id: what
+    attributes:
+      label: O quê / What
+      description: Unidade, prédio, tecnologia, poder ou deus. / Unit, building, technology, power or god.
+      placeholder: Turma — tempo de treino / Turma — train time
+    validations:
+      required: true
+  - type: input
+    id: app
+    attributes:
+      label: Valor no app / Value in the app
+    validations:
+      required: true
+  - type: input
+    id: game
+    attributes:
+      label: Valor certo / Right value
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: Fonte / Source
+      description: De onde vem o valor certo (arquivos do jogo, teste dentro do jogo, patch notes…). Vídeos e capturas ajudam. / Where the right value comes from (game files, an in-game test, patch notes…). Videos and screenshots help.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Versão do jogo / Game version
+      placeholder: "19.17020"
