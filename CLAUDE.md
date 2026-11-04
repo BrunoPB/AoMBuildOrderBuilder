@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-Build order builder/simulator for Age of Mythology: Retold. Full requirements: the owner's SPEC (v2); summary below.
+Build order builder/simulator for Age of Mythology: Retold. This file holds the project rules for people and AI assistants (see also `CONTRIBUTING.md`).
 
 ## Conventions
 
