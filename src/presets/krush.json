@@ -186,7 +186,7 @@
       "when": {
         "after": "cl"
       },
-      "note": "Start rading",
+      "note": "Start raiding",
       "do": "event"
     },
     {
