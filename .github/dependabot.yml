@@ -9,6 +9,10 @@ updates:
         dependency-type: development
       dependencies:
         dependency-type: production
+    ignore:
+      # typescript-eslint does not support TypeScript 7 yet (its peer range stops at 6).
+      - dependency-name: typescript
+        update-types: ["version-update:semver-major"]
   - package-ecosystem: github-actions
     directory: /
     schedule:
