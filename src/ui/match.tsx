@@ -23,6 +23,10 @@ function beep(ctx: AudioContext | null, freq = 880): void {
   osc.stop(ctx.currentTime + 0.25);
 }
 
+/** Steps gone by and steps after the next one kept on screen. */
+const PAST = 2;
+const AHEAD = 6;
+
 const WORK = ["food", "wood", "gold", "favor", "build", "idle"] as const;
 
 /** Where the villagers should be right now, and the population: to check the game against. */
@@ -103,16 +107,18 @@ export function MatchMode({ id }: { id: string }) {
   }, [running]);
 
   const steps = sim.steps;
-  const now = Math.floor(elapsed);
-  const currentIndex = steps.reduce((acc, s, i) => (s.seconds <= now ? i : acc), -1);
-  const current = currentIndex >= 0 ? steps[currentIndex] : undefined;
-  /** The step before, dimmed: a player running a little late still sees what was due. */
-  const previous = currentIndex >= 1 ? steps[currentIndex - 1] : undefined;
-  const upcoming = steps.slice(currentIndex + 1, currentIndex + 4);
+  /** The next step is the one to look at: the first whose time has not come yet. */
+  const ahead = steps.findIndex((s) => s.seconds > elapsed);
+  const nextIndex = ahead === -1 ? steps.length : ahead;
+  const next = steps[nextIndex];
+  /** The steps just gone by stay on screen: a player running late or doing them in another
+   *  order still sees them. */
+  const past = steps.slice(Math.max(0, nextIndex - PAST), nextIndex);
+  const later = steps.slice(nextIndex + 1, nextIndex + 1 + AHEAD);
+  const justDone = past[past.length - 1];
 
   /** A countdown for the next step: short beeps 2 s and 1 s before, a higher one when it is due.
    *  A beep whose moment the clock jumped past by hand is skipped. */
-  const next = upcoming[0];
   useEffect(() => {
     if (!running || !sound) return;
     const play = (step: number, before: number, freq: number) => {
@@ -122,12 +128,12 @@ export function MatchMode({ id }: { id: string }) {
       const late = elapsed - (step - before);
       if (late >= 0 && late < 0.9) beep(audio.current, freq);
     };
-    if (current) play(current.seconds, 0, 1320);
+    if (justDone) play(justDone.seconds, 0, 1320);
     if (!next) return;
     const until = next.seconds - elapsed;
     if (until <= 2 && until > 1) play(next.seconds, 2, 660);
     else if (until <= 1 && until > 0) play(next.seconds, 1, 660);
-  }, [elapsed, running, sound, current, next]);
+  }, [elapsed, running, sound, justDone, next]);
 
   if (!found) {
     return (
@@ -227,52 +233,66 @@ export function MatchMode({ id }: { id: string }) {
         </label>
       </div>
       <div class="match-body">
-        <div class="match-steps">
-          {previous && (
-            <section class="match-step past" data-testid="match-previous">
+        <div class="match-steps" data-testid="match-steps">
+          {past.map((step, k) => (
+            <section key={step.seconds} class="match-step past" data-testid="match-past">
+              <div class="row match-step-head">
+                {k === 0 && (
+                  <span class="match-step-label">
+                    <HelpText k="match.previous" />
+                  </span>
+                )}
+                <span class="step-time num">{step.t}</span>
+                <span class="num match-until">
+                  +{formatClock(Math.max(0, Math.floor(elapsed - step.seconds)))}
+                </span>
+              </div>
+              <StepChips build={build} step={step} />
+            </section>
+          ))}
+          {next ? (
+            <section class="match-step next" data-testid="match-next">
               <div class="row match-step-head">
                 <span class="match-step-label">
-                  <HelpText k="match.previous" />
+                  <HelpText k="match.next" />
                 </span>
-                <span class="step-time num">{previous.t}</span>
+                <span class="step-time num">{next.t}</span>
+                <Tip label={t("match.until")}>
+                  <span
+                    class={`num match-countdown-big ${next.seconds - elapsed <= 3 ? "soon" : ""}`}
+                    data-testid="match-until"
+                  >
+                    −{formatClock(Math.max(0, Math.ceil(next.seconds - elapsed)))}
+                  </span>
+                </Tip>
               </div>
-              <StepChips build={build} step={previous} />
+              <StepChips build={build} step={next} large />
+            </section>
+          ) : (
+            <section class="match-step next" data-testid="match-next">
+              <p class="match-empty">{t("match.done")}</p>
             </section>
           )}
-          <section class="match-step now" data-testid="match-current">
-            <div class="row match-step-head">
-              <span class="match-step-label">
-                <HelpText k="match.now" />
-              </span>
-              <span class="step-time num">{current?.t ?? "—"}</span>
-            </div>
-            {current ? (
-              <StepChips build={build} step={current} large />
-            ) : (
-              <p class="match-empty">{t("match.notStarted")}</p>
-            )}
-          </section>
-          <ol class="match-next" data-testid="match-next">
-            {upcoming.map((step, k) => (
-              <li key={step.seconds} class="match-step upcoming">
-                <div class="row match-step-head">
-                  {k === 0 && (
-                    <span class="match-step-label">
-                      <HelpText k="match.next" />
+          {later.length > 0 && (
+            <ol class="match-later" data-testid="match-later">
+              {later.map((step, k) => (
+                <li key={step.seconds} class="match-step upcoming">
+                  <div class="row match-step-head">
+                    {k === 0 && (
+                      <span class="match-step-label">
+                        <HelpText k="match.later" />
+                      </span>
+                    )}
+                    <span class="step-time num">{step.t}</span>
+                    <span class="num match-until">
+                      −{formatClock(Math.max(0, Math.ceil(step.seconds - elapsed)))}
                     </span>
-                  )}
-                  <span class="step-time num">{step.t}</span>
-                  <span class="num match-until">
-                    −{formatClock(Math.max(0, step.seconds - elapsed))}
-                  </span>
-                </div>
-                <StepChips build={build} step={step} large />
-              </li>
-            ))}
-            {upcoming.length === 0 && (
-              <li class="match-step upcoming match-empty">{t("match.done")}</li>
-            )}
-          </ol>
+                  </div>
+                  <StepChips build={build} step={step} />
+                </li>
+              ))}
+            </ol>
+          )}
         </div>
         <Workers s={snap} pantheon={build.pantheon} favor={favor} />
       </div>

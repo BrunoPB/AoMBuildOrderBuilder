@@ -1095,7 +1095,7 @@ details.collapsible > summary::-webkit-details-marker {
   min-width: 0;
 }
 
-.match-next {
+.match-later {
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -1112,22 +1112,48 @@ details.collapsible > summary::-webkit-details-marker {
 }
 
 .match-step.past {
-  padding: 8px 14px;
-  opacity: 0.6;
+  padding: 6px 12px;
+  opacity: 0.7;
+  background: var(--surface-2);
 }
 
 .match-step.past .match-step-head {
   margin-bottom: 4px;
 }
 
-.match-step.past .tl-chip {
-  font-size: 15px;
+.match-step.past .tl-chip,
+.match-step.upcoming .tl-chip {
+  font-size: clamp(15px, 1.8vw, 18px);
 }
 
-.match-step.now {
+.match-step.upcoming {
+  padding: 8px 12px;
+}
+
+.match-step.upcoming .match-step-head {
+  margin-bottom: 4px;
+}
+
+.match-step.next {
   padding: 16px;
   border: 3px solid var(--accent);
   box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 15%, transparent);
+}
+
+.match-step.next .match-step-label {
+  color: var(--accent);
+  font-size: 15px;
+}
+
+.match-countdown-big {
+  margin-left: auto;
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.match-countdown-big.soon {
+  color: var(--warn);
 }
 
 .match-step-head {
@@ -1158,7 +1184,7 @@ details.collapsible > summary::-webkit-details-marker {
   padding: 4px 10px 4px 4px;
 }
 
-.match-step.now .tl-chip {
+.match-step.next .tl-chip {
   font-size: clamp(18px, 2.6vw, 26px);
 }
 
@@ -1267,6 +1293,29 @@ details.collapsible > summary::-webkit-details-marker {
   }
   .match-countdown {
     margin-left: 0;
+  }
+  /* the steps gone by stay readable but small, so the next one is in view without scrolling */
+  .match-step.past {
+    padding: 4px 8px;
+  }
+  .match-step.past .match-step-head {
+    margin-bottom: 2px;
+  }
+  .match-step.past .step-time,
+  .match-step.past .match-until {
+    font-size: 14px;
+  }
+  .match-step.past .tl-actions {
+    gap: 2px;
+  }
+  .match-step.past .tl-chip {
+    font-size: 13px;
+    padding: 1px 6px 1px 2px;
+  }
+  .match-step.past .tl-chip .icon,
+  .match-step.past .tl-chip .svg-icon {
+    width: 18px;
+    height: 18px;
   }
 }
 

@@ -244,19 +244,18 @@ test("match mode clock runs, shifts and resets", async ({ page }) => {
   await page.getByTestId("match-toggle").click();
   await expect(clock).toHaveText("0:06", { timeout: 3000 });
   await page.getByTestId("match-toggle").click();
-  await expect(page.getByTestId("match-current")).toContainText("0:00");
-  await expect(page.getByTestId("match-previous")).toHaveCount(0);
-  const next = (await page
-    .getByTestId("match-next")
-    .locator(".step-time")
-    .first()
-    .textContent())!.trim();
+  // 0:00 has gone by and stays on screen; the next step is the highlighted one, with a countdown
+  await expect(page.getByTestId("match-past")).toHaveCount(1);
+  await expect(page.getByTestId("match-past")).toContainText("0:00");
+  await expect(page.getByTestId("match-until")).toBeVisible();
+  const next = (await page.getByTestId("match-next").locator(".step-time").textContent())!.trim();
   const [m, sec] = next.split(":").map(Number) as [number, number];
-  for (let k = 0; k < Math.ceil((m * 60 + sec - 5) / 5); k++)
+  for (let k = 0; k < Math.floor((m * 60 + sec - 6) / 5) + 1; k++)
     await page.getByTestId("match-plus").click();
-  await expect(page.getByTestId("match-current")).toContainText(next);
-  // the step just gone by stays on screen, dimmed
-  await expect(page.getByTestId("match-previous")).toContainText("0:00");
+  // once due it moves up with the steps gone by, and the one after it is highlighted
+  await expect(page.getByTestId("match-past")).toHaveCount(2);
+  await expect(page.getByTestId("match-past").last()).toContainText(next);
+  await expect(page.getByTestId("match-next").locator(".step-time")).not.toHaveText(next);
   await page.getByTestId("match-reset").click();
   await expect(clock).toHaveText("0:00");
 });
@@ -306,9 +305,12 @@ test("match mode counts down to each step: beeps 2 s and 1 s before, a higher on
     .toEqual([660, 660, 1320]);
 });
 
-test("match mode shows the next 3 steps and where the villagers should be", async ({ page }) => {
+test("match mode shows the next step, the 6 after it and where the villagers should be", async ({
+  page,
+}) => {
   await page.goto("/#/play/preset%3Akrush");
-  await expect(page.getByTestId("match-next").locator(".match-step")).toHaveCount(3);
+  await expect(page.getByTestId("match-next")).toBeVisible();
+  await expect(page.getByTestId("match-later").locator(".match-step")).toHaveCount(6);
   const eco = page.getByTestId("match-eco");
   await expect(eco).toBeVisible();
   await expect(page.getByTestId("match-pop")).toContainText("/");
