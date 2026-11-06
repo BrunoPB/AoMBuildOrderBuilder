@@ -34,6 +34,10 @@ export function validateRefs(build: Build, data: GameData): string[] {
         if (a.builder && "same" in a.builder)
           need(ids.has(a.builder.same), "action", a.builder.same, i);
         break;
+      case "rally":
+        need(ids.has(a.queue), "action", a.queue, i);
+        need(p.units.has(a.unit), "unit", a.unit, i);
+        break;
       case "timeShift":
         need(p.buildings.has(a.building), "building", a.building, i);
         break;

@@ -946,6 +946,8 @@ class Simulation {
     switch (a.do) {
       case "train":
         return a.mode ? this.startRule(i, a, a.mode) : this.actTrain(i, a, st);
+      case "rally":
+        return this.actRally(i, a);
       case "build":
         return this.actBuild(i, a);
       case "research":
@@ -1124,6 +1126,13 @@ class Simulation {
         level: "error",
         params: { building: def.id },
       });
+    }
+    /** The player always says who builds; without it the simulation still picks someone so the
+     *  rest of the build stays readable, but the build is wrong until it is chosen. */
+    const st = this.states[i]!;
+    if (!a.builder && !st.reported.has("builderMissing")) {
+      st.reported.add("builderMissing");
+      this.warn("error", "warn.builderMissing", { building: a.building }, i);
     }
     const builders = this.pickBuilders(i, a);
     if (!Array.isArray(builders)) return this.block(i, builders);
@@ -1525,6 +1534,31 @@ class Simulation {
     this.emit({ kind: "trainOn", mode, unit: a.unit, rally: a.rally, action: i, t: this.t });
   }
 
+  /** Points an auto queue at another resource: the units it trains from now on go there. */
+  actRally(i: number, a: Extract<Action, { do: "rally" }>): void {
+    const q = this.idIndex.get(a.queue);
+    const queue = q === undefined ? undefined : this.build.actions[q];
+    if (q === undefined || !queue)
+      return this.block(i, { key: "warn.unknownAction", level: "error", params: { id: a.queue } });
+    if (queue.do !== "train" || !queue.mode)
+      return this.block(i, { key: "warn.notAutoQueue", level: "error", params: { id: a.queue } });
+    const rule = this.rules.find((r) => r.action === q);
+    if (!rule) {
+      return this.block(i, {
+        key: "warn.waitingQueue",
+        level: this.states[q]!.status === "done" ? "error" : "info",
+        params: { id: a.queue },
+      });
+    }
+    if (!rule.active) {
+      return this.block(i, { key: "warn.queueEnded", level: "error", params: { id: a.queue } });
+    }
+    rule.rally = a.to;
+    this.emit({ kind: "rally", unit: rule.unit, to: a.to, action: i, t: this.t });
+    this.start(i);
+    this.complete(i);
+  }
+
   actEvent(i: number, a: Extract<Action, { do: "event" }>): void {
     if (a.lose) {
       const lost: Record<string, number> = {};
@@ -1708,7 +1742,10 @@ class Simulation {
           this.warn("delay", "warn.popCapped", { unit: job.unit, waited }, action);
         }
       }
-      const rally = job.rally ?? (isGatherer(def) ? "food" : undefined);
+      /** A unit of an auto queue goes where the queue points when it comes out. */
+      const rally =
+        (job.rule !== undefined ? this.rules[job.rule]?.rally : job.rally) ??
+        (isGatherer(def) ? "food" : undefined);
       const origin =
         job.action ?? (job.rule !== undefined ? this.rules[job.rule]?.action : undefined);
       if (job.hunt && def?.carcass) {

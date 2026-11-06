@@ -379,6 +379,60 @@ describe("continuous rules", () => {
   });
 });
 
+describe("auto queue rally", () => {
+  const readyTo = (r: ReturnType<typeof run>) =>
+    r.events.flatMap((e) =>
+      e.kind === "unitReady" && e.t <= r.buildEnd ? [[e.t, e.to] as const] : [],
+    );
+
+  it("a rally change sends the units the queue trains from then on elsewhere", () => {
+    const r = run([
+      { when: "0:00", do: "event", gainResource: { food: 1000 } },
+      { id: "q", when: "0:00", do: "train", mode: "auto", unit: "citizen", rally: "food" },
+      { id: "r", when: "0:25", do: "rally", queue: "q", unit: "citizen", to: "wood" },
+      { when: "0:45", do: "event", note: "end" },
+    ]);
+    // the unit started at 0:20 comes out at 0:30, after the change: it goes to wood too
+    expect(readyTo(r)).toEqual([
+      [10, "food"],
+      [20, "food"],
+      [30, "wood"],
+      [40, "wood"],
+    ]);
+    expect(r.events.some((e) => e.kind === "rally" && e.t === 25 && e.to === "wood")).toBe(true);
+    expect(r.warnings.filter((w) => w.level === "error")).toEqual([]);
+  });
+
+  it("waits for its queue to start, and is an error on anything but an auto queue", () => {
+    const waits = run([
+      { when: "0:00", do: "event", gainResource: { food: 1000 } },
+      { id: "r", when: "0:00", do: "rally", queue: "q", unit: "citizen", to: "wood" },
+      { id: "q", when: "0:15", do: "train", mode: "auto", unit: "citizen", rally: "food" },
+      { when: "0:40", do: "event", note: "end" },
+    ]);
+    // the queue comes later in the order, so the change follows it on the next tick
+    expect(waits.actions[1]!.startedAt).toBe(16);
+    expect(readyTo(waits).every(([, to]) => to === "wood")).toBe(true);
+    const wrong = run([
+      { id: "t", when: "0:00", do: "train", unit: "citizen", count: 1 },
+      { when: "0:05", do: "rally", queue: "t", unit: "citizen", to: "wood" },
+    ]);
+    expect(wrong.warnings.find((w) => w.level === "error")?.key).toBe("warn.notAutoQueue");
+  });
+});
+
+describe("builders", () => {
+  it("a construction without a chosen builder is an error, but the build goes on", () => {
+    const r = run([{ when: "0:00", do: "build", building: "manor" }]);
+    expect(r.warnings.filter((w) => w.key === "warn.builderMissing")).toHaveLength(1);
+    expect(r.actions[0]!.completedAt).toBeDefined();
+    const chosen = run([
+      { when: "0:00", do: "build", building: "manor", builder: { from: "idle" } },
+    ]);
+    expect(chosen.warnings.some((w) => w.key === "warn.builderMissing")).toBe(false);
+  });
+});
+
 describe("errors and determinism", () => {
   it("reports a missing requirement as an error", () => {
     const r = run([{ when: "0:00", do: "build", building: "armory", builder: { from: "idle" } }]);

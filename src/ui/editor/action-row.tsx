@@ -121,6 +121,11 @@ export function ActionRow(props: Props) {
     (x) =>
       x.do === "train" && Object.keys(p?.units.get(x.unit)?.worker?.gatherRates ?? {}).length > 0,
   );
+  /** Auto queues of gatherers: a rally change can point them elsewhere. */
+  const queues = others.filter(
+    (x): x is Extract<Action, { do: "train" }> =>
+      x.do === "train" && !!x.mode && isGatherer(data, build.pantheon, x.unit),
+  );
   /** "Same builder as": earlier constructions. */
   const buildSources = earlier.filter((x) => x.do === "build");
   const builderRef =
@@ -191,7 +196,7 @@ export function ActionRow(props: Props) {
     <li
       id={`action-row-${index}`}
       tabIndex={-1}
-      class={`action-row tl-row kind-${a.do === "train" && a.mode ? "rule" : a.do} ${open ? "open" : ""} ${level ? `bg-${level}` : ""} ${drag.from === index ? "dragging" : ""} ${drag.target === index && drag.from !== index ? "drop-target" : ""}`}
+      class={`action-row tl-row kind-${(a.do === "train" && a.mode) || a.do === "rally" ? "rule" : a.do} ${open ? "open" : ""} ${level ? `bg-${level}` : ""} ${drag.from === index ? "dragging" : ""} ${drag.target === index && drag.from !== index ? "drop-target" : ""}`}
       data-testid="action-row"
       onClick={(e) => {
         const el = e.target as HTMLElement;
@@ -645,6 +650,40 @@ export function ActionRow(props: Props) {
                 ))}
               </select>
             </label>
+          )}
+          {a.do === "rally" && (
+            <>
+              <label class="field">
+                <HelpText k="row.queue" />
+                <select
+                  value={a.queue}
+                  data-testid="rally-queue"
+                  onChange={(e) => {
+                    const q = queues.find((x) => x.id === e.currentTarget.value);
+                    if (q) set({ queue: q.id!, unit: q.unit });
+                  }}
+                >
+                  {queues.map((x) => (
+                    <option key={x.id} value={x.id}>
+                      {build.actions.indexOf(x) + 1}. {actionText(c, x)}
+                    </option>
+                  ))}
+                  {!queues.some((x) => x.id === a.queue) && (
+                    <option value={a.queue}>⚠ {t("row.invalidRef")}</option>
+                  )}
+                </select>
+              </label>
+              <label class="field">
+                <HelpText k="row.to" />
+                <TargetSelect
+                  build={build}
+                  unit={a.unit}
+                  value={a.to}
+                  onChange={(to) => set({ to: to ?? "food" })}
+                  testid="rally-to"
+                />
+              </label>
+            </>
           )}
           {a.do === "move" && (
             <>

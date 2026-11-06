@@ -508,7 +508,8 @@ label.field > * {
 .kind-move {
   --kind: var(--kind-move);
 }
-.kind-rule {
+.kind-rule,
+.kind-rally {
   --kind: var(--kind-rule);
 }
 .kind-event {

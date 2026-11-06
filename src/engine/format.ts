@@ -221,6 +221,14 @@ function describe(c: Ctx, e: SimEvent): StepAction | null {
         to: resourceOf(c, e.rally),
       };
     }
+    case "rally":
+      return {
+        ...base,
+        kind: "rule",
+        icons: [icon(c, e.unit)],
+        text: t("step.rally", { unit: name(c, e.unit, 2), to: targetName(c, e.to) }),
+        to: resourceOf(c, e.to),
+      };
     case "trainOff":
       return {
         ...base,

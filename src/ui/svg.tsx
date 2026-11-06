@@ -87,6 +87,7 @@ export const KIND_ICON: Record<string, string> = {
   empower: "sun",
   summon: "user",
   "train.auto": "repeat",
+  rally: "pin",
   event: "flag",
   rule: "repeat",
 };

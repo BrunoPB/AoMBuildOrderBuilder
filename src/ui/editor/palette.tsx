@@ -5,7 +5,7 @@ import { useState } from "preact/hooks";
 import { useApp, useViewPref } from "../context.tsx";
 import { EntityIcon, Tip, HelpText, useHelp, useLabel } from "../icon.tsx";
 import { KIND_ICON, Svg } from "../svg.tsx";
-import { ACTION_MIME, ageRank, chosenMinors, PALETTE_GROUPS } from "./labels.ts";
+import { ACTION_MIME, ageRank, chosenMinors, isGatherer, PALETTE_GROUPS } from "./labels.ts";
 import { ASAP_PREVIOUS } from "./order.ts";
 
 type Option = { id: string; age?: Age; detail?: string };
@@ -62,8 +62,16 @@ export function Palette({
   const summonUnits =
     p.def.summon && p.def.summon.gods.includes(build.god) ? p.def.summon.units : [];
 
-  /** Only actions this god can use (Time Shift, promotions, Empower, summons…). */
+  /** Auto queues of gatherers in the build: a "change rally" action points one elsewhere. */
+  const queues = build.actions.filter(
+    (a): a is Extract<Action, { do: "train" }> =>
+      a.do === "train" && !!a.mode && !!a.id && isGatherer(data, build.pantheon, a.unit),
+  );
+
+  /** Only actions this god can use (Time Shift, promotions, Empower, summons…), and a rally
+   *  change only once there is an auto queue to change. */
   const available = (k: ActionKind): boolean => {
+    if (k === "rally") return queues.length > 0;
     if (k === "timeShift") return god.timeShift !== undefined;
     if (k === "empower") return empowerSources.length > 0;
     if (k === "summon") return summonUnits.length > 0;
@@ -183,6 +191,11 @@ export function Palette({
         ? { when: ASAP_PREVIOUS, do: "move", count: idle, from: "idle", to: "food" }
         : { when: ASAP_PREVIOUS, do: "move", count: 1, from: "food", to: "wood" };
     if (k === "event") return { when: ASAP_PREVIOUS, do: "event", note: "" };
+    if (k === "rally") {
+      const q = queues.at(-1)!;
+      const to = (["food", "wood", "gold"] as const).find((r) => r !== (q.rally ?? "food"))!;
+      return { when: ASAP_PREVIOUS, do: "rally", queue: q.id!, unit: q.unit, to };
+    }
     return undefined;
   };
 

@@ -54,6 +54,7 @@ export type SimEvent = { t: number; action?: number } & (
   | { kind: "hunted"; unit: string; food: number }
   | { kind: "trainOn"; mode: TrainMode; unit: string; rally?: TaskTarget }
   | { kind: "trainOff"; unit: string }
+  | { kind: "rally"; unit: string; to: TaskTarget }
   | { kind: "lose"; units: Record<string, number> }
   | { kind: "gain"; cost: Cost }
   | { kind: "note"; text: string }

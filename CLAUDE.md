@@ -26,6 +26,8 @@ Build order builder/simulator for Age of Mythology: Retold. This file holds the 
 - A food source that runs out sends its workers to the next one in the food chain on its own. It is an **automatic step** (`StepAction.auto`, tagged "manual in game") in the order, not a warning, since the player does it by hand; only running out with nothing next warns.
 - The build ends when every action is done (`buildEnd`); the `tail` after it is only context, so warnings there are dropped (errors kept).
 - `train` with `mode: "auto"` is the building's auto queue: it trains whenever the building is free and the stock pays, for its own `duration` (seconds from its start) or to the end of the build. There is no stop action. No scheduled action reserves the building against it (as in the game): only a full queue, pop cap or missing resources stop it.
+- A `rally` action points a gatherer auto queue at another resource from that moment (units already training come out going there). In the game it is cancelling the queue and starting another; the build keeps it as one action.
+- Every `build` action says who builds (`builder`: from a resource, a new villager, the same builder or a soldier). Without one it is an `error`; the simulator still picks someone so the rest of the build stays readable.
 - Presets must simulate without `error` warnings. The Krush times (`tests/fixtures/krush.json`) come from one real match, playing the build in `tests/fixtures/krush-build.json` (the first Krush preset, not the current one): a **reference**, never a source of truth. Never tune data or add engine knobs just to match them; compare with `npm run compare:krush`.
 
 ## UI rules

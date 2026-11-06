@@ -381,6 +381,7 @@ export function Editor({ id }: { id: string }) {
    *  - imported builds may have actions without ids (rows need one to keep their state);
    *  - version 5 builds set food amounts per source; now each food chain item has its own;
    *  - version 4 builds ended auto queues at a time; now they run for a duration from their start;
+   *  - a rally change shows the unit of its auto queue, which may have been changed since;
    *  - "after" actions follow their anchor in time: when it moves they move in the list too.
    *    Capped, in case a move keeps shifting the times (reset by every edit of the player). */
   const drifts = useRef(0);
@@ -397,6 +398,22 @@ export function Editor({ id }: { id: string }) {
         return amount ? { source: item as SourceId, amount } : item;
       });
       next = { ...next, settings: { ...settings, foodChain: chain } };
+    }
+    const queueUnit = (id: string) => {
+      const q = next.actions.find((x) => x.id === id);
+      return q?.do === "train" ? q.unit : undefined;
+    };
+    if (
+      next.actions.some(
+        (a) => a.do === "rally" && queueUnit(a.queue) && queueUnit(a.queue) !== a.unit,
+      )
+    ) {
+      next = {
+        ...next,
+        actions: next.actions.map((a) =>
+          a.do === "rally" && queueUnit(a.queue) ? { ...a, unit: queueUnit(a.queue)! } : a,
+        ),
+      };
     }
     if (result) {
       let until = false;

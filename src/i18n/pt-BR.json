@@ -487,5 +487,15 @@
   "help.oss.issue": "Abre uma issue no GitHub: um erro nos números, algo que não funciona ou uma ideia nova.",
   "match.later": "Depois",
   "help.match.later": "As ações seguintes e quanto falta para cada uma.",
-  "match.until": "Quanto falta para a próxima ação"
+  "match.until": "Quanto falta para a próxima ação",
+  "action.rally": "Mudar destino",
+  "help.action.rally": "Muda para onde uma produção automática manda as próximas unidades (ex.: os Cidadãos param de ir para a comida e passam a ir para a madeira).\n• No jogo: cancele a fila automática e crie outra apontando para o novo recurso.\n• Quem já está treinando sai já indo para o novo destino.",
+  "step.rally": "Mudar destino: {unit} → {to}",
+  "row.queue": "Produção",
+  "help.row.queue": "Qual produção automática muda de destino.",
+  "warn.notAutoQueue": "Não é uma produção automática ({id})",
+  "warn.waitingQueue": "Esperando a produção automática começar",
+  "warn.queueEnded": "A produção automática já tinha acabado",
+  "warn.builderMissing": "Escolha quem constrói",
+  "help.warn.builderMissing": "Toda construção diz de onde sai o construtor (Tirar de…, Aldeão novo de…, Mesmo construtor de… ou Soldado). Enquanto não escolher, o simulador pega alguém sozinho só para seguir em frente."
 }

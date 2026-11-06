@@ -74,6 +74,15 @@ export const ActionSchema = z.discriminatedUnion("do", [
     rally: TaskTargetSchema.optional(),
     at: z.string().optional(),
   }),
+  /** Points an auto queue (`queue`: the id of a `train` with `mode: "auto"`) at another resource:
+   *  the units it trains from now on go to `to`. `unit` is the queue's unit, for display. */
+  z.strictObject({
+    ...base,
+    do: z.literal("rally"),
+    queue: z.string(),
+    unit: z.string(),
+    to: TaskTargetSchema,
+  }),
   z.strictObject({
     ...base,
     do: z.literal("build"),
@@ -144,6 +153,7 @@ export type Action = z.infer<typeof ActionSchema>;
 export type ActionKind = Action["do"];
 export const ACTION_KINDS: ActionKind[] = [
   "train",
+  "rally",
   "build",
   "research",
   "age",

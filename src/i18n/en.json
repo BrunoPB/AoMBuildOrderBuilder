@@ -487,5 +487,15 @@
   "help.oss.issue": "Opens a GitHub issue: a wrong number, something that does not work or a new idea.",
   "match.later": "Then",
   "help.match.later": "The actions after that and how long until each.",
-  "match.until": "Time until the next action"
+  "match.until": "Time until the next action",
+  "action.rally": "Change rally",
+  "help.action.rally": "Changes where an auto queue sends the next units (e.g. Citizens stop going to food and go to wood instead).\n• In the game: cancel the auto queue and start another one pointed at the new resource.\n• Units already in training come out going to the new place.",
+  "step.rally": "Change rally: {unit} → {to}",
+  "row.queue": "Queue",
+  "help.row.queue": "Which auto queue changes its rally.",
+  "warn.notAutoQueue": "Not an auto queue ({id})",
+  "warn.waitingQueue": "Waiting for the auto queue to start",
+  "warn.queueEnded": "The auto queue had already ended",
+  "warn.builderMissing": "Choose who builds",
+  "help.warn.builderMissing": "Every construction says where its builder comes from (Take from…, New villager from…, Same builder as… or Soldier). Until you choose, the simulator picks someone just to carry on."
 }

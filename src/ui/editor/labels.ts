@@ -31,6 +31,7 @@ export function actionKindIcon(a: Action): string {
 export function actionIcons(a: Action, worker?: string): string[] {
   switch (a.do) {
     case "train":
+    case "rally":
     case "promote":
     case "summon":
       return [a.unit];
@@ -61,7 +62,13 @@ export function actionTarget(a: Action): string | undefined {
   if (a.do === "empower") return a.building;
   if (a.do === "power") return a.target;
   const target =
-    a.do === "train" ? a.rally : a.do === "build" ? a.then : a.do === "move" ? a.to : undefined;
+    a.do === "train"
+      ? a.rally
+      : a.do === "build"
+        ? a.then
+        : a.do === "move" || a.do === "rally"
+          ? a.to
+          : undefined;
   return target === "idle" ? undefined : target;
 }
 
@@ -117,6 +124,8 @@ export function actionText(c: Ctx, a: Action): string {
       const base = `${t("step.build", { building: n(c, a.building) })}${from}`;
       return a.then ? `${base} → ${targetLabel(c, a.then)}` : base;
     }
+    case "rally":
+      return t("step.rally", { unit: n(c, a.unit, 2), to: targetLabel(c, a.to) });
     case "research":
       return t("step.research", { research: n(c, a.research) });
     case "age":
@@ -244,7 +253,7 @@ export function withIds(actions: readonly Action[]): Action[] | undefined {
 
 /** Palette action kinds by group, most common first; god-specific actions last. */
 export const PALETTE_GROUPS: { id: string; kinds: ActionKind[] }[] = [
-  { id: "economy", kinds: ["move", "train", "build", "research", "age"] },
+  { id: "economy", kinds: ["move", "train", "rally", "build", "research", "age"] },
   { id: "god", kinds: ["power", "timeShift", "promote", "empower", "summon"] },
   { id: "other", kinds: ["event"] },
 ];
